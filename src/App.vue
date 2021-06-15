@@ -1,11 +1,23 @@
 <template>
-  <router-view></router-view>
+  <router-view  v-wechat-title="$route.meta.title"></router-view>
 </template>
 
 <script>
 
 export default {
   name: 'App',
+  data: function () {
+    return {
+    }
+  },
+  created() {
+    console.log(this.$route)
+  },
+  mounted() {
+    
+  },
+  watch: {
+  }
 }
 </script>
 

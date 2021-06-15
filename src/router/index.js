@@ -6,10 +6,6 @@ import {
 import MainMenus from './mainMenus/index.js'
 
 const routes = [{
-    path: "/index",
-    component: () => import('@/components/HelloWorld.vue'),
-  },
-  {
     path: "/",
     redirect: "/comprehensiveSituational",
     component: () => import('@/views/mainMenu/index.vue'),
@@ -18,8 +14,7 @@ const routes = [{
   {
     path: "",
     component: () => import('@/views/index.vue'),
-    children: [
-      {
+    children: [{
         path: '/login',
         name: 'login',
         component: () => import('@/views/login/index.vue'),
@@ -29,6 +24,10 @@ const routes = [{
           title: '登录',
           isShow: true
         }
+      },
+      {
+        path: "/index",
+        component: () => import('@/components/HelloWorld.vue'),
       },
       {
         path: '/url',
@@ -43,6 +42,15 @@ const routes = [{
       },
     ]
   },
+  // {
+  //   path: '/:pathMatch(.*)',
+  //   name: '404',
+  //   meta: {
+  //     name: '404',
+  //     title: '404'
+  //   },
+  //   component: () => import('@/views/NotFind/NotFind.vue')
+  // }
 ];
 
 const router = createRouter({
@@ -52,5 +60,7 @@ const router = createRouter({
   history: createWebHistory(),
   routes,
 });
+
+
 
 export default router

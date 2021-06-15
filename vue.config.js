@@ -4,6 +4,15 @@ module.exports = {
     // publicPath:'./', 
     publicPath: process.env.NODE_ENV === 'production' ? './' : '/',
     productionSourceMap: false, // 关闭生产环境的 source map
+    pages: {
+      index: {
+        entry: 'src/main.js',
+        template: 'src/index.html',
+        filename: 'index.html',
+        title: '智慧园区管理平台',
+        chunks: ['chunk-vendors', 'chunk-common', 'index']
+      }
+    },
     css: {
         loaderOptions: {
             postcss: {
