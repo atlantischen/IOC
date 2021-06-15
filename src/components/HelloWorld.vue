@@ -3,9 +3,9 @@
     <Left  class="left animate__animated " :class="fade?'animate__fadeOutLeft':'animate__fadeInLeft'" />
     <div class="container">
       <iframe class="box"  src="http://183.62.170.2:8110/" allowfullscreen='true' frameborder="0"></iframe>
-   </div>
-   <button class="btn" @click="handleClick">按钮</button>
-   <Right class="right animate__animated "  :class="fade?'animate__fadeOutRight':'animate__fadeInRight'" />
+    </div>
+    <button class="btn" @click="handleClick">按钮</button>
+    <Right class="right animate__animated "  :class="fade?'animate__fadeOutRight':'animate__fadeInRight'" />
   </div>
 </template>
 
