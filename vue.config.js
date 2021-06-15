@@ -1,9 +1,25 @@
-
+'use strict'
+const Timestamp = new Date().getTime();
+const CompressionPlugin = require('compression-webpack-plugin')
+const productionGzipExtensions = /\.(js|css|json|txt|html|ico|svg)(\?.*)?$/i
 module.exports = {
     lintOnSave: false,
     // publicPath:'./', 
     publicPath: process.env.NODE_ENV === 'production' ? './' : '/',
     productionSourceMap: false, // 关闭生产环境的 source map
+    configureWebpack: {
+      plugins: [
+        new CompressionPlugin({
+          test: productionGzipExtensions, // 需要压缩的文件正则
+          threshold: 10240, // 文件大小大于这个值时启用压缩
+          deleteOriginalAssets: true // 压缩后保留原文件
+        })
+      ],
+      output: { // 输出重构  打包编译后的 文件名称  【模块名称.版本号.时间戳】
+        filename: `[name].${process.env.VUE_APP_Version}.${Timestamp}.js`,
+        chunkFilename: `[name].${process.env.VUE_APP_Version}.${Timestamp}.js`
+      }
+    },
     pages: {
       index: {
         entry: 'src/main.js',
