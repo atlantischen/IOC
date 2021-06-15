@@ -1,4 +1,15 @@
 export default [{
+    path: 'homePage',
+    name: 'wisdomContentCouplet0',
+    component: () => import('@/views/mainMenu/wisdomContentCouplet/homePage/index.vue'),
+    meta: {
+      icon: 'icon-zonghe',
+      name: '',
+      title: '',
+      isShow: true
+    }
+  },
+  {
     path: 'deviceControl',
     name: 'deviceControl',
     component: () => import('@/views/mainMenu/wisdomContentCouplet/deviceControl/index.vue'),

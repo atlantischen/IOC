@@ -1,23 +1,71 @@
 'use strict'
+const path = require('path')
+var webpack = require('webpack')
 const Timestamp = new Date().getTime();
-const CompressionPlugin = require('compression-webpack-plugin')
-const productionGzipExtensions = /\.(js|css|json|txt|html|ico|svg)(\?.*)?$/i
+const CompressionWebpackPlugin = require('compression-webpack-plugin')
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
+const productionGzipExtensions = ['js', 'css']
 module.exports = {
     lintOnSave: false,
     // publicPath:'./', 
+    outputDir: 'dist',
     publicPath: process.env.NODE_ENV === 'production' ? './' : '/',
     productionSourceMap: false, // 关闭生产环境的 source map
-    configureWebpack: {
-      plugins: [
-        new CompressionPlugin({
-          test: productionGzipExtensions, // 需要压缩的文件正则
-          threshold: 10240, // 文件大小大于这个值时启用压缩
-          deleteOriginalAssets: true // 压缩后保留原文件
+    devServer: {
+      port: 9000,
+      host: '0.0.0.0',
+      https: false,
+      headers: {
+        'Access-Control-Allow-Origin': '*'
+      },
+      hotOnly: false,
+      disableHostCheck: true,
+      proxy: null, // 设置代理
+      open: true // 配置自动启动浏览器
+    },
+    configureWebpack: config => {
+      config.optimization = {
+        minimizer: [
+          new UglifyJsPlugin({
+            uglifyOptions: {
+              output: { // 删除注释
+                comments: false
+              },
+              compress: {
+                //warnings: false, // 若打包错误，则注释这行
+                drop_debugger: true,
+                drop_console: true,
+                pure_funcs: ['console.log']
+              }
+            },
+            sourceMap: false,
+            parallel: true
+          })
+        ]
+      }
+      config.output.filename = `js/[name].${process.env.VUE_APP_Version}.${Timestamp}.js`
+      config.output.chunkFilename = `js/[name].${process.env.VUE_APP_Version}.${Timestamp}.js`
+      const pluginsPro = [
+        new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
+        new CompressionWebpackPlugin({
+          filename: '[path].gz[query]',
+          algorithm: 'gzip',
+          test: new RegExp('\\.(' + productionGzipExtensions.join('|') + ')$'),
+          threshold: 10240,
+          minRatio: 0.8
+        }),
+        new webpack.optimize.LimitChunkCountPlugin({
+          maxChunks: 5,
+          minChunkSize: 100
         })
-      ],
-      output: { // 输出重构  打包编译后的 文件名称  【模块名称.版本号.时间戳】
-        filename: `[name].${process.env.VUE_APP_Version}.${Timestamp}.js`,
-        chunkFilename: `[name].${process.env.VUE_APP_Version}.${Timestamp}.js`
+      ]
+      if (process.env.NODE_ENV === 'production') {
+        if (process.env.VUE_APP_FLAG === 'pro') {
+          config.plugins.push = [...pluginsPro]
+        } else {
+        }
+      } else {
+        // dev 开发环境
       }
     },
     pages: {

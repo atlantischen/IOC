@@ -1,14 +1,13 @@
-
 <template>
   <!-- 综合态势 -->
-  <div class="comprehensiveSituational">
-    <router-view></router-view>
+  <div class="one">
+    综合态势
   </div>
 </template>
 
 <script>
 export default {
-  name: 'comprehensiveSituational',
+  name: 'one',
   data(){
     return{
     }

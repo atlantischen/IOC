@@ -1,4 +1,15 @@
 export default [{
+    path: 'homePage',
+    name: 'convenientParking0',
+    component: () => import('@/views/mainMenu/convenientParking/homePage/index.vue'),
+    meta: {
+      icon: 'icon-zonghe',
+      name: '',
+      title: '',
+      isShow: true
+    }
+  },
+  {
     path: 'parkingBDA',
     name: 'parkingBDA',
     component: () => import('@/views/mainMenu/convenientParking/parkingBDA/index.vue'),

@@ -1,4 +1,15 @@
 export default [{
+    path: 'homePage',
+    name: 'homePage',
+    component: () => import('@/views/mainMenu/greenEnergyEfficiency/homePage/index.vue'),
+    meta: {
+      icon: 'icon-zonghe',
+      name: '',
+      title: '',
+      isShow: true
+    }
+  },
+  {
     path: 'energyEfficiencyBDA',
     name: 'energyEfficiencyBDA',
     component: () => import('@/views/mainMenu/greenEnergyEfficiency/energyEfficiencyBDA/index.vue'),

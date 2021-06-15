@@ -1,4 +1,15 @@
 export default [{
+    path: 'homePage',
+    name: 'theParkBusiness0',
+    component: () => import('@/views/mainMenu/theParkBusiness/homePage/index.vue'),
+    meta: {
+      icon: 'icon-zonghe',
+      name: '',
+      title: '',
+      isShow: true
+    }
+  },
+  {
     path: 'cateringBDA',
     name: 'cateringBDA',
     component: () => import('@/views/mainMenu/theParkBusiness/cateringBDA/index.vue'),

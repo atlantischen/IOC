@@ -1,4 +1,14 @@
-export default [
+export default [{
+    path: 'homePage',
+    name: 'comprehensiveSituational0',
+    component: () => import('@/views/mainMenu/comprehensiveSituational/homePage/index.vue'),
+    meta: {
+      icon: 'icon-zonghe',
+      name: '',
+      title: '',
+      isShow: true
+    }
+  },
   {
     path: 'theParkSearch',
     name: 'theParkSearch',

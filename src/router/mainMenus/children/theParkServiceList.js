@@ -1,4 +1,15 @@
 export default [{
+    path: 'homePage',
+    name: 'theParkService0',
+    component: () => import('@/views/mainMenu/theParkService/homePage/index.vue'),
+    meta: {
+      icon: 'icon-zonghe',
+      name: '',
+      title: '',
+      isShow: true
+    }
+  },
+  {
     path: 'visitorBDA',
     name: 'visitorBDA',
     component: () => import('@/views/mainMenu/theParkService/visitorBDA/index.vue'),

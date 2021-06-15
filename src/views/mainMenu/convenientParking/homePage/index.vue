@@ -1,14 +1,13 @@
-
 <template>
-  <!-- 综合态势 -->
-  <div class="comprehensiveSituational">
-    <router-view></router-view>
+  <!-- -- -->
+  <div class="homePage">
+    --
   </div>
 </template>
 
 <script>
 export default {
-  name: 'comprehensiveSituational',
+  name: 'homePage',
   data(){
     return{
     }

@@ -1,4 +1,14 @@
-export default [
+export default [{
+    path: 'homePage',
+    name: 'industryInvestment0',
+    component: () => import('@/views/mainMenu/industryInvestment/homePage/index.vue'),
+    meta: {
+      icon: 'icon-zonghe',
+      name: '',
+      title: '',
+      isShow: true
+    }
+  },
   {
     path: 'attractInvestmentBDA',
     name: 'attractInvestmentBDA',

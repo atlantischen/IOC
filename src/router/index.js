@@ -7,12 +7,12 @@ import MainMenus from './mainMenus/index.js'
 
 const routes = [{
     path: "/",
-    redirect: "/comprehensiveSituational",
+    // redirect: "/comprehensiveSituational",
     component: () => import('@/views/mainMenu/index.vue'),
     children: [...MainMenus]
   },
   {
-    path: "",
+    // path: "",
     component: () => import('@/views/index.vue'),
     children: [{
         path: '/login',
@@ -42,15 +42,15 @@ const routes = [{
       },
     ]
   },
-  // {
-  //   path: '/:pathMatch(.*)',
-  //   name: '404',
-  //   meta: {
-  //     name: '404',
-  //     title: '404'
-  //   },
-  //   component: () => import('@/views/NotFind/NotFind.vue')
-  // }
+  {
+    path: '/:pathMatch(.*)',
+    name: '404',
+    meta: {
+      name: '404',
+      title: '404'
+    },
+    component: () => import('@/views/404.vue')
+  }
 ];
 
 const router = createRouter({

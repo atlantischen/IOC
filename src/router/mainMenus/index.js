@@ -9,7 +9,7 @@ import wisdomContentCoupletList from './children/wisdomContentCoupletList'
 export default [
   {
     path: 'comprehensiveSituational',
-    // redirect: "comprehensiveSituational/theParkSearch",
+    redirect: "/comprehensiveSituational/homePage",
     name: 'comprehensiveSituational',
     component: () => import('@/views/mainMenu/comprehensiveSituational/index.vue'),
     meta: {
@@ -21,8 +21,8 @@ export default [
     children: [...comprehensiveSituationalList]
   },
   {
-    path: 'industryInvestment',
-    // redirect: "industryInvestment/theParkSearch",
+    path: '/industryInvestment',
+    redirect: "/industryInvestment/homePage",
     name: 'industryInvestment',
     component: () => import('@/views/mainMenu/industryInvestment/index.vue'),
     meta: {
@@ -34,8 +34,8 @@ export default [
     children: [...industryInvestmentList]
   },
   {
-    path: 'thePublicSpace',
-    // redirect: "thePublicSpace/meetingBDA",
+    path: '/thePublicSpace',
+    redirect: "/thePublicSpace/homePage",
     name: 'thePublicSpace',
     component: () => import('@/views/mainMenu/thePublicSpace/index.vue'),
     meta: {
@@ -47,8 +47,8 @@ export default [
     children: [...thePublicSpaceList]
   },
   {
-    path: 'theParkService',
-    // redirect: "theParkService/visitorBDA",
+    path: '/theParkService',
+    redirect: "/theParkService/homePage",
     name: 'theParkService',
     component: () => import('@/views/mainMenu/theParkService/index.vue'),
     meta: {
@@ -60,8 +60,8 @@ export default [
     children: [...theParkServiceList]
   },
   {
-    path: 'theParkBusiness',
-    // redirect: "theParkBusiness/cateringBDA",
+    path: '/theParkBusiness',
+    redirect: "/theParkBusiness/homePage",
     name: 'theParkBusiness',
     component: () => import('@/views/mainMenu/theParkBusiness/index.vue'),
     meta: {
@@ -73,8 +73,8 @@ export default [
     children: [...theParkBusinessList]
   },
   {
-    path: 'convenientParking',
-    // redirect: "convenientParking/parkingBDA",
+    path: '/convenientParking',
+    redirect: "/convenientParking/homePage",
     name: 'convenientParking',
     component: () => import('@/views/mainMenu/convenientParking/index.vue'),
     meta: {
@@ -86,8 +86,8 @@ export default [
     children: [...convenientParkingList]
   },
   {
-    path: 'greenEnergyEfficiency',
-    // redirect: "greenEnergyEfficiency/energyEfficiencyBDA",
+    path: '/greenEnergyEfficiency',
+    redirect: "/greenEnergyEfficiency/homePage",
     name: 'greenEnergyEfficiency',
     component: () => import('@/views/mainMenu/greenEnergyEfficiency/index.vue'),
     meta: {
@@ -99,8 +99,8 @@ export default [
     children: [...greenEnergyEfficiencyList]
   },
   {
-    path: 'wisdomContentCouplet',
-    // redirect: "wisdomContentCouplet/deviceControl",
+    path: '/wisdomContentCouplet',
+    redirect: "/wisdomContentCouplet/homePage",
     name: 'wisdomContentCouplet',
     component: () => import('@/views/mainMenu/wisdomContentCouplet/index.vue'),
     meta: {

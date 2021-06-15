@@ -1,4 +1,15 @@
 export default [{
+    path: 'homePage',
+    name: 'thePublicSpace0',
+    component: () => import('@/views/mainMenu/thePublicSpace/homePage/index.vue'),
+    meta: {
+      icon: 'icon-zonghe',
+      name: '',
+      title: '',
+      isShow: true
+    }
+  },
+  {
     path: 'meetingBDA',
     name: 'meetingBDA',
     component: () => import('@/views/mainMenu/thePublicSpace/meetingBDA/index.vue'),
