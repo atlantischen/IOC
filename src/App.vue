@@ -1,28 +1,21 @@
 <template>
-  <HelloWorld />
+  <router-view></router-view>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+
 
 export default {
   name: 'App',
-  components: {
-    HelloWorld
-  }
 }
 </script>
 
 <style>
-html,body{
-  width: 100%;
-  height: 100%;
-  margin: 0;
-  padding: 0;
-}
+
 #app {
- width: 100%;
-  height: 100%;
+ width: 100%/* 1920/80 */ /* 1920/80 */;
+ height: 100% /* 1080/80 */ /* 1080/80 */;
+ min-width: 13.5rem /* 1080/80 */;
   /* font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
