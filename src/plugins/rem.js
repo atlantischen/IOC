@@ -71,8 +71,8 @@
   function refreshRem(){
       var width = docEl.getBoundingClientRect().width;
       //根据项目的适配范围设置
-      if (width / dpr < 1920) {
-          width = 1920 * dpr;
+      if (width / dpr < 960) {
+          width = 960 * dpr;
       } else if (width / dpr > 5760) {
           width = 5760 * dpr;
       }

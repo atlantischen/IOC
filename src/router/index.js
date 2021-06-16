@@ -1,18 +1,3 @@
-// import {createRouter,createWebHistory } from 'vue-router'
-
-// const routes = [
-//   {
-//     path: '/',
-//     name: 'index',
-//     component: ()=>import('@/views/index.vue')
-//   },
- 
-// ]
-
-// const router = createRouter({
-//     history: createWebHistory(process.env.BASE_URL),
-//     routes
-//   })
 import {
   createRouter,
   createWebHashHistory,
@@ -27,7 +12,7 @@ const routes = [{
     children: [...MainMenus]
   },
   {
-    // path: "/index",
+    // path: "",
     component: () => import('@/views/index.vue'),
     children: [{
         path: '/login',
@@ -42,7 +27,7 @@ const routes = [{
       },
       {
         path: "/index",
-        component: () => import('../views/home.vue'),
+        component: () => import('@/views/mainMenu/theParkBusiness/homePage/index.vue'),
       },
       {
         path: '/url',

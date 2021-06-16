@@ -1,27 +1,27 @@
 <template>
   <div class="hello">
-    qweqeqweqeqeqeqeqeqe
-    <!-- <IOCLeft  class="left animate__animated " :class="fade?'animate__fadeOutLeft':'animate__fadeInLeft'" />
+    <Left  class="left animate__animated " :class="fade?'animate__fadeOutLeft':'animate__fadeInLeft'" />
     <div class="container">
-      <iframe class="box"  src="http://172.21.70.246:8110/" allowfullscreen='true' frameborder="0"></iframe>
+      <iframe class="box"  src="http://183.62.170.2:8110/" allowfullscreen='true' frameborder="0"></iframe>
     </div>
     <button class="btn" @click="handleClick">按钮</button>
-    <IOCRight class="right animate__animated "  :class="fade?'animate__fadeOutRight':'animate__fadeInRight'" /> -->
+    <Right class="right animate__animated "  :class="fade?'animate__fadeOutRight':'animate__fadeInRight'" />
   </div>
 </template>
 
 <script>
-
+import Left from './left.vue'
+import Right from './right.vue'
 export default {
-  name: 'HomePage',
+  name: 'HelloWorld',
   data(){
     return{
       fade:false
     }
   },
   components:{
-    // Left,
-    // Right
+    Left,
+    Right
   },
   methods:{
       handleClick(){

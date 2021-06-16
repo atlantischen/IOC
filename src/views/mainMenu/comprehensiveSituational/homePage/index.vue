@@ -16,9 +16,9 @@ export default {
   },
   components:{ },
   mounted() {
-    // aaa().then(r=>{
-    //   console.log(r)
-    // })
+    aaa().then(r=>{
+      console.log(r)
+    })
     // axios('/meun').then(req => {
     //   console.log('xxxxxxxxx', req)
     // })
