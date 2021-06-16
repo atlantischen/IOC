@@ -1,12 +1,12 @@
 <template>
-  <div class="index">
-    <!-- <router-view></router-view> -->
+  <div class="login">
+    login
   </div>
 </template>
 
 <script>
 export default {
-  name: 'index',
+  name: 'login',
   data () {
     return {
     }

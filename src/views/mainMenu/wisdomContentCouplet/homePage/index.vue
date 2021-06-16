@@ -1,17 +1,19 @@
 <template>
-  <div class="index">
-    <!-- <router-view></router-view> -->
+  <!-- -- -->
+  <div class="homePage">
+    --
   </div>
 </template>
 
 <script>
 export default {
-  name: 'index',
-  data () {
-    return {
+  name: 'homePage',
+  data(){
+    return{
     }
   },
-  methods: {
+  components:{ },
+  methods:{
   }
 }
 </script>

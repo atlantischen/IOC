@@ -1,6 +1,6 @@
 <template>
   <div class="ioc_right animate__animated" :class="fade?'animate__fadeOutRight':'animate__fadeInRight'">
-
+      <slot></slot>
   </div>
 </template>
 

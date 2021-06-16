@@ -1,14 +1,87 @@
-const path = require('path')
 function resolve(dir){
 
     return path.join(__dirname,dir)//path.join(__dirname)设置绝对路径
 
 }
+'use strict'
+const path = require('path')
+var webpack = require('webpack')
+const Timestamp = new Date().getTime();
+const CompressionWebpackPlugin = require('compression-webpack-plugin')
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
+const productionGzipExtensions = ['js', 'css']
 module.exports = {
     lintOnSave: false,
     // publicPath:'./', 
+    outputDir: 'dist',
     publicPath: process.env.NODE_ENV === 'production' ? './' : '/',
     productionSourceMap: false, // 关闭生产环境的 source map
+    devServer: {
+      port: 9000,
+      host: '0.0.0.0',
+      https: false,
+      headers: {
+        'Access-Control-Allow-Origin': '*'
+      },
+      hotOnly: false,
+      disableHostCheck: true,
+      proxy: null, // 设置代理
+      open: true // 配置自动启动浏览器
+    },
+    configureWebpack: config => {
+      config.optimization = {
+        minimizer: [
+          new UglifyJsPlugin({
+            uglifyOptions: {
+              output: { // 删除注释
+                comments: false
+              },
+              compress: {
+                //warnings: false, // 若打包错误，则注释这行
+                drop_debugger: true,
+                drop_console: true,
+                pure_funcs: ['console.log']
+              }
+            },
+            sourceMap: false,
+            parallel: true
+          })
+        ]
+      }
+      config.output.filename = `js/[name].${process.env.VUE_APP_Version}.${Timestamp}.js`
+      config.output.chunkFilename = `js/[name].${process.env.VUE_APP_Version}.${Timestamp}.js`
+      const pluginsPro = [
+        new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
+        new CompressionWebpackPlugin({
+          filename: '[path].gz[query]',
+          algorithm: 'gzip',
+          test: new RegExp('\\.(' + productionGzipExtensions.join('|') + ')$'),
+          threshold: 10240,
+          minRatio: 0.8
+        }),
+        new webpack.optimize.LimitChunkCountPlugin({
+          maxChunks: 5,
+          minChunkSize: 100
+        })
+      ]
+      if (process.env.NODE_ENV === 'production') {
+        if (process.env.VUE_APP_FLAG === 'pro') {
+          config.plugins.push = [...pluginsPro]
+        } else {
+        }
+      } else {
+        // dev 开发环境
+      }
+    },
+    pages: {
+      index: {
+        entry: 'src/main.js',
+        template: 'src/index.html',
+        filename: 'index.html',
+        title: '智慧园区管理平台',
+        chunks: ['chunk-vendors', 'chunk-common', 'index']
+      }
+    },
     css: {
         loaderOptions: {
             postcss: {

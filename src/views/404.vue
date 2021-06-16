@@ -1,12 +1,12 @@
 <template>
-  <div class="index">
-    <!-- <router-view></router-view> -->
+  <div class="noFound">
+    404
   </div>
 </template>
 
 <script>
 export default {
-  name: 'index',
+  name: '404',
   data () {
     return {
     }
