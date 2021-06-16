@@ -21,7 +21,7 @@ export default [
     children: [...comprehensiveSituationalList]
   },
   {
-    path: '/industryInvestment',
+    path: 'industryInvestment',
     redirect: "/industryInvestment/homePage",
     name: 'industryInvestment',
     component: () => import('@/views/mainMenu/industryInvestment/index.vue'),
@@ -34,7 +34,7 @@ export default [
     children: [...industryInvestmentList]
   },
   {
-    path: '/thePublicSpace',
+    path: 'thePublicSpace',
     redirect: "/thePublicSpace/homePage",
     name: 'thePublicSpace',
     component: () => import('@/views/mainMenu/thePublicSpace/index.vue'),
@@ -47,7 +47,7 @@ export default [
     children: [...thePublicSpaceList]
   },
   {
-    path: '/theParkService',
+    path: 'theParkService',
     redirect: "/theParkService/homePage",
     name: 'theParkService',
     component: () => import('@/views/mainMenu/theParkService/index.vue'),
@@ -60,7 +60,7 @@ export default [
     children: [...theParkServiceList]
   },
   {
-    path: '/theParkBusiness',
+    path: 'theParkBusiness',
     redirect: "/theParkBusiness/homePage",
     name: 'theParkBusiness',
     component: () => import('@/views/mainMenu/theParkBusiness/index.vue'),
@@ -73,7 +73,7 @@ export default [
     children: [...theParkBusinessList]
   },
   {
-    path: '/convenientParking',
+    path: 'convenientParking',
     redirect: "/convenientParking/homePage",
     name: 'convenientParking',
     component: () => import('@/views/mainMenu/convenientParking/index.vue'),
@@ -86,7 +86,7 @@ export default [
     children: [...convenientParkingList]
   },
   {
-    path: '/greenEnergyEfficiency',
+    path: 'greenEnergyEfficiency',
     redirect: "/greenEnergyEfficiency/homePage",
     name: 'greenEnergyEfficiency',
     component: () => import('@/views/mainMenu/greenEnergyEfficiency/index.vue'),
@@ -99,7 +99,7 @@ export default [
     children: [...greenEnergyEfficiencyList]
   },
   {
-    path: '/wisdomContentCouplet',
+    path: 'wisdomContentCouplet',
     redirect: "/wisdomContentCouplet/homePage",
     name: 'wisdomContentCouplet',
     component: () => import('@/views/mainMenu/wisdomContentCouplet/index.vue'),

@@ -6,6 +6,8 @@
 </template>
 
 <script>
+import { aaa } from '@/api/mockApi'
+import axios from 'axios'
 export default {
   name: 'one',
   data(){
@@ -13,6 +15,14 @@ export default {
     }
   },
   components:{ },
+  mounted() {
+    aaa().then(r=>{
+      console.log(r)
+    })
+    // axios('/meun').then(req => {
+    //   console.log('xxxxxxxxx', req)
+    // })
+  },
   methods:{
   }
 }
