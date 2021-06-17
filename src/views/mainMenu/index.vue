@@ -13,7 +13,7 @@
 <script>
 export default {
   name: "MainMenu",
-  data() {
+  data () {
     return {};
   },
   methods: {},
@@ -32,8 +32,7 @@ export default {
   height: 100%;
 }
 .comEntry {
-  position: absolute;
-  color: red;
-  background: #000;
+  // position: absolute;
+  // background: #000;
 }
 </style>

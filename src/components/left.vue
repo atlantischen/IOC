@@ -98,7 +98,7 @@
 </template>
 
 <script>
-import '../assets/css/iocPage.less'
+import '@/assets/css/iocPage.less'
 import * as echarts from 'echarts';
 export default {
     data(){
@@ -659,7 +659,7 @@ export default {
                       fontSize: 14,
                       align: 'left',
                       backgroundColor: {
-                        image: require('../assets/img/ioc_gpd.png')
+                        image: require('@/assets/img/ioc_gpd.png')
                       }
                     },
                     b: {
@@ -668,7 +668,7 @@ export default {
                       fontSize: 14,
                       align: 'left',
                       backgroundColor: {
-                        image: require('../assets/img/ioc_xf.png')
+                        image: require('@/assets/img/ioc_xf.png')
                       }
                     },
                     c: {
@@ -677,7 +677,7 @@ export default {
                       fontSize: 14,
                       align: 'left',
                       backgroundColor: {
-                        image: require('../assets/img/ioc_gps.png')
+                        image: require('@/assets/img/ioc_gps.png')
                       }
                     },
                     d: {
@@ -686,7 +686,7 @@ export default {
                       fontSize: 14,
                       align: 'left',
                       backgroundColor: {
-                        image: require('../assets/img/ioc_gpd.png')
+                        image: require('@/assets/img/ioc_gpd.png')
                       }
                     }
                   }
