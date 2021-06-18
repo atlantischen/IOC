@@ -1,9 +1,7 @@
 
-
 <template>
   <!-- 产业招商 -->
   <div class="industryInvestment">
-    产业招商
     <router-view></router-view>
   </div>
 </template>

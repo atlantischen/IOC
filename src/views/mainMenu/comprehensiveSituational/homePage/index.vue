@@ -1,5 +1,5 @@
 <template>
-  <!-- 综合态势 -->
+  <!-- 综合态势home -->
   <div>
     <LeftRight>
     <template #left>

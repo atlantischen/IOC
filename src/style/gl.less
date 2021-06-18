@@ -21,7 +21,13 @@
   overflow-x: hidden;
   overflow-y: auto;
 }
-
+span {
+  display: inline-block;
+}
+img[src=""],img:not([src]){
+  // opacity:0;
+  border: 0
+}
 // 超出变省略号
 // 单行的：
 .LineBeyond {
@@ -44,22 +50,31 @@ i {
   font-style: normal;
 }
 
-.flex(@direction, @align, @justify ) {
+.flex(@direction, @align, @justify, @wrap ) {
   display: flex;
   flex-direction: @direction;
   align-items: @align;
   justify-content: @justify;
+  flex-wrap: @wrap;
 }
-
+.ioc_img(@w,@r) {
+  width: @w;
+  height: @w;
+  border-radius: @r;
+}
 .x_c {
-  .flex(unset, center, center);
+  .flex(unset, center, center, unset);
 }
 
 .y_c {
-  .flex(column, center, center);
+  .flex(column, center, center, unset);
 }
 
-// 
+.x_rap {
+  .flex(unset, center, center, wrap);
+}
+
+//
 .datas_s() {
   font-size: 20px;
   font-family: 'BYfont';
