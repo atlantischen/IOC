@@ -1,4 +1,5 @@
 @textColor: rgba(255, 255, 255, 0.7);
+@_blue: #4396f3;
 
 * {
   -webkit-user-select: none;
@@ -7,26 +8,23 @@
   user-select: none;
 }
 // 隐藏滚动条
-// 火狐不支持修改
 .hd_bar::-webkit-bar {
-  display: none;
-  /* Chrome Safari */
+  display: none; /* Chrome Safari 火狐不支持修改*/
 }
 
 .hd_scrollbar {
-  scrollbar-width: none;
-  /* firefox */
-  -ms-overflow-style: none;
-  /* IE 10+ */
+  scrollbar-width: none; /* firefox */
+  -ms-overflow-style: none; /* IE 10+ */
   overflow-x: hidden;
   overflow-y: auto;
 }
 span {
   display: inline-block;
 }
-img[src=""],img:not([src]){
+img[src=''],
+img:not([src]) {
   // opacity:0;
-  border: 0
+  border: 0;
 }
 // 超出变省略号
 // 单行的：
@@ -49,18 +47,13 @@ img[src=""],img:not([src]){
 i {
   font-style: normal;
 }
-
+// 布局
 .flex(@direction, @align, @justify, @wrap ) {
   display: flex;
   flex-direction: @direction;
   align-items: @align;
   justify-content: @justify;
   flex-wrap: @wrap;
-}
-.ioc_img(@w,@r) {
-  width: @w;
-  height: @w;
-  border-radius: @r;
 }
 .x_c {
   .flex(unset, center, center, unset);
@@ -69,23 +62,72 @@ i {
 .y_c {
   .flex(column, center, center, unset);
 }
-
+// x轴可换行
 .x_rap {
   .flex(unset, center, center, wrap);
 }
+.x_sa_rap {
+  .flex(unset, center, space-around, wrap);
+}
+.x_fs_rap {
+  .flex(unset, center, flex-start, wrap);
+}
 
-//
+// x左对齐
+.x_left {
+  .flex(unset, center, flex-start, wrap);
+}
+// 图片
+.ioc_img(@w,@h,@r) {
+  width: @w;
+  height: @h;
+  border-radius: @r;
+  // object-fit: contain;
+}
+// 背景渐变
+.gradient_bg(@d,@from,@to) {
+  // filter: progid:DXImageTransform.Microsoft.Gradient(gradientType=0,startColorStr=@from,endColorStr=@to);
+  // background: -webkit-gradient(
+  //   linear,
+  //   0% 0%,
+  //   0% 100%,
+  //   from(#ffffff),
+  //   to(#fcf8f3)
+  // );
+  background: -moz-linear-gradient(@d, @from 0%, @to);
+  background: -webkit-linear-gradient(@d, @from 0%, @to);
+  background: -o-linear-gradient(@d, @from 0%, @to);
+  background: -ms-linear-gradient(@d, @from 0%, @to);
+}
+.gradient_bg(@d,@from,@to) {
+  background: linear-gradient(to @d, @from 0%, @to 100%);
+}
+.gradient(@d,@from,@to) when (@d = right) {
+  .gradient_bg(left, @from, @to);
+  .gradient_bg(@d, @from, @to);
+}
+.gradient(@d,@from,@to) when (@d = top) {
+  .gradient_bg(bottom, @from, @to);
+  .gradient_bg(@d, @from, @to);
+}
+.gradient(@d,@from,@to) when (@d = bottom) {
+  .gradient_bg(top, @from, @to);
+  .gradient_bg(@d, @from, @to);
+}
+.gradient(@d,@from,@to) when (@d = left) {
+  .gradient_bg(right, @from, @to);
+  .gradient_bg(@d, @from, @to);
+}
+
+// 数据统一
 .datas_s() {
+  color: #fff;
   font-size: 20px;
   font-family: 'BYfont';
   letter-spacing: 2px;
 }
-
+// 文本统一
 .text_s() {
   font-size: 12px;
   color: @textColor;
 }
-
-// .animate__animated{
-//   transform: translateY(-50%) !important;
-// }

@@ -36,6 +36,7 @@ export default {
   margin: 15px 0;
 }
 .leftRightPart {
+  color: #fff;
   .com_ {
     position: fixed;
     top: 50%;
