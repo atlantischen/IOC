@@ -453,6 +453,7 @@ export default {
           },
           axisLabel: {
             fontSize: 12,
+            padding: [20, 0, 0, -20],
             rotate: -20,
             interval: 0,
             margin: 10,
@@ -784,6 +785,7 @@ export default {
           },
           axisLabel: {
             fontSize: 12,
+            padding: [20, 0, 0, -20],
             rotate: -20,
             interval: 0,
             margin: 10,

@@ -43,11 +43,25 @@
           <div class="selectBuilding">
             <span> 栋座： </span>
             <div>
-              <ul class="x_sa_rap" >
-                <li v-for="(t, i) in buldingList" :key="i"  :class="{'actived':selectedNum==t.id}" @click.stop="selectBuldingFun('B', t.id)">{{t.bulding}}</li>
+              <ul class="x_sa_rap">
+                <li
+                  v-for="(t, i) in buldingList"
+                  :key="i"
+                  :class="{ actived: selectedNum == t.id }"
+                  @click.stop="selectBuldingFun('B', t.id)"
+                >
+                  {{ t.bulding }}
+                </li>
               </ul>
               <ul class="x_sa_rap">
-                <li v-for="(t, i) in buldingList[selectedNum-1].nums" :key="i"  :class="{'actived':selectedNum2==t.name}" @click.stop="selectBuldingFun('', t.name)">{{t.name}}座</li>
+                <li
+                  v-for="(t, i) in buldingList[selectedNum - 1].nums"
+                  :key="i"
+                  :class="{ actived: selectedNum2 == t.name }"
+                  @click.stop="selectBuldingFun('', t.name)"
+                >
+                  {{ t.name }}座
+                </li>
               </ul>
             </div>
           </div>
@@ -133,7 +147,7 @@ export default {
       ],
       selectedNum: 1,
       selectedNum2: 'A',
-      buldingList:[
+      buldingList: [
         {
           bulding: '1栋',
           id: 1,
@@ -232,7 +246,7 @@ export default {
     this.FocusIndustryFun()
   },
   methods: {
-    selectBuldingFun(key, val){
+    selectBuldingFun (key, val) {
       switch (key) {
         case 'B':
           this.selectedNum = val
@@ -408,19 +422,23 @@ export default {
             avoidLabelOverlap: true,
             maxAngle: 145,
             label: {
-              formatter: '{name|{c}%}\n{time|{b}}',
+              // minMargin: 10,
+              // alignTo: 'edge',
+              // edgeDistance: 10,
+              // lineHeight: 10,
+              formatter: '{a|{c}%}\n{b|{b}}',
               padding: [0, -45, 0, 0],
               rich: {
-                name: {
+                a: {
                   width: 100,
                   fontSize: 12,
-                  // padding: [5, 0],
+                  // padding: [2, 0],
                   color: 'rgb(255,255,255,.7)',
                 },
-                time: {
+                b: {
                   width: 100,
                   fontSize: 12,
-            lineHeight:14,
+                  lineHeight: 14,
                   // padding: [1, 0],
                   color: 'rgb(255,255,255,.7)',
                 },
@@ -555,7 +573,7 @@ export default {
     height: 145px;
     img {
       .ioc_img(100px,64px, 5px);
-      margin:0 5px 10px;
+      margin: 0 5px 10px;
       &:nth-child(3n) {
         margin-right: 0;
       }

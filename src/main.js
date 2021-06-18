@@ -17,6 +17,8 @@ import './plugins/rem.js'
 import './assets/css/reset.css' //公共样式重置
 import './style/animation.less' 
 import './style/index.less' //公共样式文件
+import './assets/font/iconfont/iconfont.css'
+import './assets/font/iconfont/iconfont.js'
 import 'animate.css' //引入动画
 const app = createApp(App)
 app.component('LeftRight', LeftRight)
