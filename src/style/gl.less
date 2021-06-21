@@ -7,25 +7,32 @@
   -ms-user-select: none;
   user-select: none;
 }
+
 // 隐藏滚动条
 .hd_bar::-webkit-bar {
-  display: none; /* Chrome Safari 火狐不支持修改*/
+  display: none;
+  /* Chrome Safari 火狐不支持修改*/
 }
 
 .hd_scrollbar {
-  scrollbar-width: none; /* firefox */
-  -ms-overflow-style: none; /* IE 10+ */
+  scrollbar-width: none;
+  /* firefox */
+  -ms-overflow-style: none;
+  /* IE 10+ */
   overflow-x: hidden;
   overflow-y: auto;
 }
+
 span {
   display: inline-block;
 }
+
 img[src=''],
 img:not([src]) {
   // opacity:0;
   border: 0;
 }
+
 // 超出变省略号
 // 单行的：
 .LineBeyond {
@@ -47,6 +54,7 @@ img:not([src]) {
 i {
   font-style: normal;
 }
+
 // 布局
 .flex(@direction, @align, @justify, @wrap ) {
   display: flex;
@@ -55,9 +63,11 @@ i {
   justify-content: @justify;
   flex-wrap: @wrap;
 }
+
 .x_c {
   .flex(unset, center, center, unset);
 }
+
 .x_c() {
   .flex(unset, center, center, unset);
 }
@@ -70,9 +80,11 @@ i {
 .x_rap {
   .flex(unset, center, center, wrap);
 }
+
 .x_sa_rap {
   .flex(unset, center, space-around, wrap);
 }
+
 .x_fs_rap {
   .flex(unset, center, flex-start, wrap);
 }
@@ -81,15 +93,21 @@ i {
 .x_left {
   .flex(unset, center, flex-start, wrap);
 }
+.x_left() {
+  .flex(unset, center, flex-start, wrap);
+}
+
+
 // 图片
-.ioc_img(@w,@h,@r) {
+.ioc_img(@w, @h, @r) {
   width: @w;
   height: @h;
   border-radius: @r;
   // object-fit: contain;
 }
+
 // 背景渐变
-.gradient_bg(@d,@from,@to) {
+.gradient_bg(@d, @from, @to) {
   // filter: progid:DXImageTransform.Microsoft.Gradient(gradientType=0,startColorStr=@from,endColorStr=@to);
   // background: -webkit-gradient(
   //   linear,
@@ -103,55 +121,64 @@ i {
   background: -o-linear-gradient(@d, @from 0%, @to);
   background: -ms-linear-gradient(@d, @from 0%, @to);
 }
-.gradient_bg(@d,@from,@to) {
+
+.gradient_bg(@d, @from, @to) {
   background: linear-gradient(to @d, @from 0%, @to 100%);
 }
-.gradient(@d,@from,@to) when (@d = right) {
+
+.gradient(@d, @from, @to) when (@d =right) {
   .gradient_bg(left, @from, @to);
   .gradient_bg(@d, @from, @to);
 }
-.gradient(@d,@from,@to) when (@d = top) {
+
+.gradient(@d, @from, @to) when (@d =top) {
   .gradient_bg(bottom, @from, @to);
   .gradient_bg(@d, @from, @to);
 }
-.gradient(@d,@from,@to) when (@d = bottom) {
+
+.gradient(@d, @from, @to) when (@d =bottom) {
   .gradient_bg(top, @from, @to);
   .gradient_bg(@d, @from, @to);
 }
-.gradient(@d,@from,@to) when (@d = left) {
+
+.gradient(@d, @from, @to) when (@d =left) {
   .gradient_bg(right, @from, @to);
   .gradient_bg(@d, @from, @to);
 }
 
 // 数据统一
-.datas_s() {
+.datas_s(@fontSize: 20px) {
   color: #fff;
-  font-size: 20px;
+  font-size: @fontSize;
   font-family: 'BYfont';
   letter-spacing: 2px;
 }
+
 // 文本统一
-.text_s() {
-  font-size: 12px;
+.text_s(@fontSize: 12px) {
+  font-size: @fontSize;
   color: @textColor;
 }
 
 // 单选
-.SpaceRadioGroup > .radioGroup {
+.SpaceRadioGroup>.radioGroup {
   .el-radio__label {
     color: #fff;
     font-size: 14px;
   }
+
   .el-radio__inner {
     width: 16px;
     height: 16px;
     background: transparent;
   }
+
   .el-radio__inner::after {
     width: 8px;
     height: 8px;
     background: #4394f3;
   }
+
   .el-radio__input.is-checked .el-radio__inner {
     border-color: #4394f3;
   }

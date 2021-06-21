@@ -1,5 +1,5 @@
 <template>
-  <router-view  v-wechat-title="$route.meta.title"></router-view>
+  <router-view v-wechat-title="$route.meta.title"></router-view>
 </template>
 
 <script>
@@ -10,11 +10,16 @@ export default {
     return {
     }
   },
-  created() {
+  created () {
     // console.log(this.$route)
   },
-  mounted() {
-    
+  mounted () {
+    window.addEventListener("message", function (e) {
+        var action = e.data.action;
+        //action = "dsfasdf"
+        // showpage
+        e.data.arg ="iochome";
+    });
   },
   watch: {
   }
@@ -25,7 +30,7 @@ export default {
 #app {
   width: 100%;
   height: 100%;
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+  font-family: 'Microsoft YaHei', Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
