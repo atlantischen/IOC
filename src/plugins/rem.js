@@ -54,19 +54,19 @@
         scale = 1 / dpr;
     }
 
-    docEl.setAttribute('data-dpr', dpr);
-    if (!metaEl) {
-        metaEl = doc.createElement('meta');
-        metaEl.setAttribute('name', 'viewport');
-        metaEl.setAttribute('content', 'initial-scale=' + scale + ', maximum-scale=' + scale + ', minimum-scale=' + scale + ', user-scalable=no');
-        if (docEl.firstElementChild) {
-            docEl.firstElementChild.appendChild(metaEl);
-        } else {
-            var wrap = doc.createElement('div');
-            wrap.appendChild(metaEl);
-            doc.write(wrap.innerHTML);
-        }
-    }
+  function refreshRem(){
+      var width = docEl.getBoundingClientRect().width;
+      //根据项目的适配范围设置
+      if (width / dpr < 1920) {
+          width = 1920 * dpr;
+      } else if (width / dpr > 5760) {
+          width = 5760 * dpr;
+      }
+      //根据设计稿宽度设置1rem代表多少像素，
+      rem = (width / 24) ;
+      docEl.style.fontSize = rem + 'px';
+      flexible.rem = win.rem = rem;
+  }
 
     function refreshRem() {
         var width = docEl.getBoundingClientRect().width;

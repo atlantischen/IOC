@@ -1,23 +1,18 @@
+import { createStore } from 'vuex'
 
-import {
-  createStore
-} from 'vuex'
-import comState from './modules/comState.js'
 export default createStore({
   state: {
-    userInfo: {
-    },
-    aa:''
+      unitySendData:{},
+      debugData:{}
+      
   },
   mutations: {
-    SET_RightMenu (state, value) {
-      state.aa = value
-    }
+      setData(state,payload){
+          state.unitySendData=payload
+      }
   },
-  actions: {},
-  getters: {
+  actions: {
   },
   modules: {
-    comState: comState,
   }
 })

@@ -82,7 +82,9 @@ module.exports = {
         chunks: ['chunk-vendors', 'chunk-common', 'index']
       }
     },
-    css: {
+    css: {  
+      extract: false, // 是否使用css分离插件 ExtractTextPlugin
+	    sourceMap: true, // 开启 CSS source maps?
         loaderOptions: {
             postcss: {
                 plugins: [

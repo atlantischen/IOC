@@ -54,7 +54,7 @@ export default {
   methods: {
     handleOpen: function(val) {
       // this.$router.replace(val)
-      window.open(val)
+      window.open(val);
       this.htmlSrc = val;
       // console.log(val)
     },
@@ -62,7 +62,7 @@ export default {
       console.log(val);
     },
     toPath: function(val) {
-      window.open(val.indexPath[0]+'/'+val.index)
+      window.open(val.indexPath[0] + "/" + val.index);
       this.htmlSrc = val.indexPath[0] + "/" + val.index;
       // this.$router.replace(val.indexPath[0]+'/'+val.index)
       // console.log(val)
