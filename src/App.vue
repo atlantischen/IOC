@@ -14,12 +14,12 @@ export default {
     // console.log(this.$route)
   },
   mounted () {
-    window.addEventListener("message", function (e) {
-        var action = e.data.action;
-        //action = "dsfasdf"
-        // showpage
-        e.data.arg ="iochome";
-    });
+    // window.addEventListener("message", function (e) {
+    //     var action = e.data.action;
+    //     //action = "dsfasdf"
+    //     // showpage
+    //     e.data.arg ="iochome";
+    // });
   },
   watch: {
   }

@@ -4,12 +4,21 @@ import {
   createWebHistory
 } from "vue-router"
 import MainMenus from './mainMenus/index.js'
+import MainMenus2 from './mainMenus/index2.js'
 
 const routes = [{
-    path: "/",
-    // redirect: "/comprehensiveSituational",
+    path: "",
+    name: "mainMenu",
+    redirect: "/comprehensiveSituational/homePage",
     component: () => import('@/views/mainMenu/index.vue'),
     children: [...MainMenus]
+  },
+  {
+    path: "/debug",
+    name: 'debug',
+    redirect: "/debug/comprehensiveSituational/homePage",
+    component: () => import('@/views/mainMenu/debug.vue'),
+    children: [...MainMenus2]
   },
   {
     // path: "",
@@ -52,7 +61,7 @@ const routes = [{
     component: () => import('@/views/404.vue')
   }
 ];
-
+console.log(routes)
 const router = createRouter({
   // hash
   // history: createWebHashHistory(),

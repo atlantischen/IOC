@@ -1,9 +1,18 @@
 <template>
   <div class="leftRightPart">
-    <div @click="handleClick ()" class="z_left com_  ioc_animated" :class="fade?'fadeOutLeft0':'fadeInLeft0'" >
+    <div
+      class="z_left com_  ioc_animated"
+      :class="fade ? 'fadeOutLeft0' : 'fadeInLeft0'"
+    >
       <slot name="left"></slot>
     </div>
-    <div @click="handleClick ()" class="y_right com_ ioc_animated "  :class="fade?'fadeOutRight0':'fadeInRight0'">
+    <div class="c_center">
+      <slot name="center"></slot>
+    </div>
+    <div
+      class="y_right com_ ioc_animated "
+      :class="fade ? 'fadeOutRight0' : 'fadeInRight0'"
+    >
       <slot name="right"></slot>
     </div>
   </div>
@@ -11,40 +20,46 @@
 
 <script>
 export default {
-  name: 'leftRightPart',
-  data () {
+  name: "leftRightPart",
+  data() {
     return {
-      fade: false
-    }
+      fade: false,
+    };
   },
   components: {},
   mounted() {
     // console.log(this.$store)
-    document.onclick = function () { this.handleClick() }
+    // document.onclick = function() {
+    //   this.handleClick();
+    // };
   },
   methods: {
-    handleClick () {
-      this.fade = !this.fade
-    }
-  }
-}
+    handleClick() {
+      this.fade = !this.fade;
+    },
+  },
+};
 </script>
 
-<style lang='less'>
+<style lang="less">
 @import "~@/style/gl.less";
 .tittle {
   margin: 15px 0;
 }
 .leftRightPart {
   color: #fff;
-  .com_ {
+  .com_() {
     position: fixed;
+    z-index: 100;
+  }
+  .com_ {
+    .com_();
     top: 50%;
     width: 344px;
     min-height: 500px;
     transform: translateY(-50%);
     -webkit-transform: translateY(-50%);
-    background: rgba(0, 0, 0, 0.7);
+    // background: rgba(0, 0, 0, 0.7);
     z-index: 100;
   }
   .z_left {
@@ -52,6 +67,15 @@ export default {
   }
   .y_right {
     right: 46px;
+  }
+  .c_center {
+    .com_();
+    top: 125px;
+    left: 50%;
+    transform: translate(-50%, 0%);
+    -webkit-transform: translate(-50%, 0%);
+    min-width: 0;
+    min-height: 0;
   }
 }
 </style>
