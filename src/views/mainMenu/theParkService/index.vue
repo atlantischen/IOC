@@ -3,7 +3,6 @@
 <template>
   <!-- 园区服务 -->
   <div class="TheParkService">
-    园区服务
     <router-view></router-view>
   </div>
 </template>

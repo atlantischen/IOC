@@ -2,11 +2,11 @@
   <div id="MainMenu">
     <iframe
       id="iframe3D"
-      src="http://172.21.70.246:8110/"
+      :src="url"
       allowfullscreen="true"
       frameborder="0"
     ></iframe>
-    <router-view  v-if="isShow" class="comEntry"></router-view>
+    <router-view v-if="isShow" class="comEntry"></router-view>
   </div>
 </template>
 
@@ -15,33 +15,64 @@ export default {
   name: "MainMenu",
   data() {
     return {
-      isShow:false
+      isShow: false,
+      url:''
     };
   },
-  computed:{
-    getUnityData(){
+  computed: {
+    getUnityData() {
       return this.$store.state.unitySendData;
-    }
+    },
   },
-  watch:{
-    getUnityData(val){
-      if(val.action.indexOf('/') === 0){
-       this.$router.push(val.action)
+  watch: {
+    getUnityData(val) {
+      // debugger;
+      let res =val
+      if (res.action.indexOf("/") === 0) {
+        console.log(res.action,'我进来了！！！');
+          this.$router.push(res.action);
+       }
       }
-    }
   },
-  created(){
-       window.addEventListener("message", (event) => {
-          this.$store.commit('setData',event.data);
-          if(event.data.data === "IOCHOME") {
-              console.log('页面显示');
-                this.isShow= true
-          } 
-       })
-       
+  created() {
+     if (window.vuplex) {
+          this.addMessageListener();
+        } else {
+          window.addEventListener('vuplexready', this.addMessageListener);
+     };
+    window.addEventListener("message", (event) => {
+       let res = JSON.parse(event.data)
+        this.$store.commit("setData", res);
+        if (res.data === "IOCHOME") {
+          
+          this.isShow = true;
+        }
+      });
+    if(this.getQueryString('debug')){
+      this.url='';
+      window.debug = true;
+      console.log('我是debug!!!!!!!!!!!');
+    }else{
+      this.url='http://172.21.70.246:8110/' 
+    };
+    console.log ("123");
   },
-  methods: {},
-
+  methods: {
+     getQueryString(name) {
+      var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+      var r = window.location.search.substr(1).match(reg);
+      if (r != null) return unescape(r[2]); return null;
+      },
+    addMessageListener(){
+      window.vuplex.addEventListener('message', (event) =>{
+          let res = JSON.parse(event.data)
+            this.$store.commit("setData", res);
+            if(res&& res.lenght !=0){
+                 this.isShow= true
+            }
+          });
+        }
+  },
 };
 </script>
 

@@ -1,4 +1,6 @@
-import { createApp } from 'vue'
+import {
+  createApp
+} from 'vue'
 import App from './App.vue'
 import router from './router/index'
 import store from './store'
@@ -9,9 +11,9 @@ import {EleResize} from 'assets/js/echarts'
 import locale from 'element-plus/lib/locale/lang/zh-cn'
 import 'dayjs/locale/zh-cn'
 import VueWechatTitle from 'vue-wechat-title'
-
 import IOCLeft from './components/IOCLeft.vue'
 import IOCRight from './components/IOCRight.vue'
+import LeftRight from './components/leftRightPart.vue'
 
 import 'lib-flexible'
 import './plugins/rem.js'
@@ -24,6 +26,15 @@ app.config.globalProperties.$EleResize = EleResize;
 app.component('IOCLeft', IOCLeft)
 app.component('IOCRight', IOCRight)
 app.use(ElementPlus, { locale })
+app.use(VueWechatTitle)
+
+import './assets/font/iconfont/iconfont.css'
+import './assets/font/iconfont/iconfont.js'
+import 'animate.css' //引入动画
+app.component('LeftRight', LeftRight)
+app.use(ElementPlus, {
+  locale
+})
 app.use(VueWechatTitle)
 app.use(router)
 app.use(store)

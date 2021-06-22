@@ -1,6 +1,6 @@
 <template>
   <div class="noFound">
-    404
+    404...
   </div>
 </template>
 
@@ -17,4 +17,8 @@ export default {
 </script>
 
 <style lang='less' scoped>
+.noFound{
+  font-size: .625rem /* 50/80 */;
+  font-weight: bold;
+}
 </style>

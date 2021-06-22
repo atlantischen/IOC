@@ -1,5 +1,5 @@
 <template>
-  <router-view    v-wechat-title="$route.meta.title"></router-view>
+  <router-view v-wechat-title="$route.meta.title"></router-view>
 </template>
 
 <script>
@@ -44,14 +44,11 @@ export default {
 </script>
 
 <style>
-html,body{
+#app {
   width: 100%;
   height: 100%;
-  margin: 0;
-  padding: 0;
-}
-#app {
-  width: 100% /* 1920/80 */;
-  height: 100% /* 1080/80 */;
+  font-family: 'Microsoft YaHei', Avenir, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 </style>
