@@ -6,7 +6,7 @@
         <div class="tittle">园区情况</div>
         <div class="parkCase">
           <div id="parkCaseEchart1"></div>
-          <div id="parkCaseEchart2">
+          <div id="parkCaseEchart2" >
             <div v-for="(t, i) in 3" :key="i" :id="`minEchart${i}`"></div>
           </div>
         </div>
@@ -27,10 +27,10 @@
         <div class="tittle">园区产值</div>
         <div id="outputValueEchart"></div>
       </template>
-      <template #center>
-        <CenterDatas :list="centerDatasList" />
-        <SearchBox class="SearchBoxClass" :text="'搜园区建筑、搜企业、搜商家'" />
-        <TipBox :text="'搜园区建筑、搜企业、搜商家'" />
+      <template #center >
+        <CenterDatas :list="centerDatasList" v-show="false" />
+        <SearchBox v-show="false" class="SearchBoxClass" :text="'搜园区建筑、搜企业、搜商家'" />
+        <TipBox v-show="false" />
       </template>
       <template #right>
         <div class="tittle">能耗态势</div>
