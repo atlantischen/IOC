@@ -4,7 +4,7 @@ import {
   createWebHistory
 } from "vue-router"
 import MainMenus from './mainMenus/index.js'
-import MainMenus2 from './mainMenus/index2.js'
+// import MainMenus2 from './mainMenus/index2.js'
 
 const routes = [{
     path: "",
@@ -13,13 +13,13 @@ const routes = [{
     component: () => import('@/views/mainMenu/index.vue'),
     children: [...MainMenus]
   },
-  {
-    path: "/debug",
-    name: 'debug',
-    redirect: "/debug/comprehensiveSituational/homePage",
-    component: () => import('@/views/mainMenu/debug.vue'),
-    children: [...MainMenus2]
-  },
+  // {
+  //   path: "/debug",
+  //   name: 'debug',
+  //   redirect: "/debug/comprehensiveSituational/homePage",
+  //   component: () => import('@/views/mainMenu/debug.vue'),
+  //   children: [...MainMenus2]
+  // },
   {
     // path: "",
     component: () => import('@/views/index.vue'),
