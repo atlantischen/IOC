@@ -7,13 +7,16 @@
         <div class="energy_total">
           <div class="energy_box"></div>
           <div class="content">
-            <span class="font_text">43.24</span>
+            <span class="font_text">
+            <NumCounter :value='43.24'></NumCounter>
+            </span>
             <span>TCE</span>
             <div>总能耗</div>
           </div>
           <div class="percentage">
             <img src="../../../../assets/img/1.png" alt="" />
-            <span>13.22%</span>
+            <span>
+            <NumCounter :value='13.22'></NumCounter>%</span>
           </div>
         </div>
       </div>
@@ -22,19 +25,25 @@
           <li >
             <img src="../../../../assets/img/electirc.png" alt="" />
             <div class="energy_consumption_desc">
-              <span class="font_text">304376.75</span>
+              <span class="font_text">
+                 <NumCounter :value='304376.75'></NumCounter>
+                </span>
               <span>KWH</span>
               <div>电耗能</div>
             </div>
             <div class="percentage">
               <img src="../../../../assets/img/1.png" alt="" />
-              <span class="font_text">14.53%</span>
+              <span class="font_text">
+                14.53%</span>
             </div>
           </li>
            <li >
             <img src="../../../../assets/img/water.png" alt="" />
             <div class="energy_consumption_desc">
-              <span class="font_text">48.52</span>
+              <span class="font_text">
+                 <NumCounter :value='48.52'></NumCounter>
+
+                </span>
               <span>T</span>
               <div>水耗能</div>
             </div>
@@ -46,7 +55,10 @@
            <li >
             <img src="../../../../assets/img/gas.png" alt="" />
             <div class="energy_consumption_desc">
-              <span class="font_text">63.28</span>
+              <span class="font_text">
+                 <NumCounter :value='63.28'></NumCounter>
+
+                </span>
               <span>m³</span>
               <div>气耗能</div>
             </div>
@@ -83,7 +95,8 @@
                 <i :style="'width:' + i.percentage + '%'"></i>
                 <div>
                   <span>今日用电量：</span>
-                  <span class="font_text">{{ i.kwh }}</span>
+                  <span class="font_text">
+                 <NumCounter :value='i.kwh '></NumCounter></span>
                   <span>kW.h</span>
                 </div>
                
@@ -103,7 +116,9 @@
             <div id="KPI"></div>
             <div class="KPI_desc">
               <span>本月电能耗</span>
-              <span class="font_text">43.24</span>
+              <span class="font_text">
+              <NumCounter :value='43.24'></NumCounter>
+</span>
               <span>KW.H</span>
             </div>
         </div>
@@ -115,7 +130,10 @@
                 <i :style="'width:90%'"></i>
                 <div>
                   <span>本月电能耗：</span>
-                  <span class="font_text">304376.75</span>
+                  <span class="font_text">
+              <NumCounter :value='304376.75'></NumCounter>
+
+                    </span>
                   <span>KW.H</span>
                 </div>
               
@@ -128,7 +146,9 @@
                 <i :style="'width:80%'"></i>
                 <div>
                   <span>本月电能耗：</span>
-                  <span class="font_text">48.52</span>
+                  <span class="font_text">
+              <NumCounter :value='48.52'></NumCounter>
+                    </span>
                   <span>T</span>
                 </div>
               
@@ -141,7 +161,8 @@
                 <i :style="'width:70%'"></i>
                 <div>
                   <span>本月电能耗：</span>
-                  <span class="font_text">63.28</span>
+                  <span class="font_text">
+              <NumCounter :value=' 63.28'></NumCounter></span>
                   <span>m³</span>
                 </div>
               
@@ -156,7 +177,6 @@
 
 <script>
 import * as echarts from "echarts";
-import { EleResize } from "assets/js/echarts";
 export default {
   name: "homePage",
   data() {
@@ -201,17 +221,7 @@ export default {
     };
   },
   methods: {
-    drawLine(dom, option) {
-      // 基于准备好的dom，初始化echarts实例
-      let myChart = echarts.init(document.getElementById(dom));
-      let resizeDiv = document.getElementById(dom);
-      // 绘制图表
-      myChart.setOption(option);
-      let listener = function() {
-        myChart.resize();
-      };
-      EleResize.on(resizeDiv, listener);
-    },
+
     trendInit() {
       var dom = "today_energy";
       var option = {
@@ -453,7 +463,7 @@ export default {
           },
         ],
       };
-      this.drawLine(dom, option);
+      this.$redomEchart(dom, option);
     },
     KPIint() {
       var dom = "KPI";
@@ -512,7 +522,7 @@ export default {
           },
         ],
       };
-      this.drawLine(dom, option);
+       this.$redomEchart(dom, option);
     },
   },
   mounted() {
@@ -577,6 +587,10 @@ export default {
         padding-left: 0.25rem /* 20/80 */ /* 9/80 */;
         left: 2.5rem /* 200/80 */ /* 248/80 */;
         top: 0.6125rem /* 49/80 */;
+        &>span{
+          display: flex;
+        }
+
       }
     }
   }
@@ -680,6 +694,7 @@ export default {
             }
             &>div{
               color: #fff;
+              white-space: nowrap;
               
              &>span:nth-child(1){
               // display: block;

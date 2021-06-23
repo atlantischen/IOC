@@ -33,7 +33,7 @@ export default {
 <style lang='less'>
 @import "~@/style/gl.less";
 .tittle {
-  margin: 15px 0;
+  // margin: 15px 0;
 }
 .leftRightPart {
   color: #fff;

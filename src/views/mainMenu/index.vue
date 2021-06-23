@@ -15,7 +15,7 @@ export default {
   name: "MainMenu",
   data() {
     return {
-      isShow: false,
+      isShow: true,
       url:''
     };
   },
@@ -42,6 +42,7 @@ export default {
      };
     window.addEventListener("message", (event) => {
        let res = JSON.parse(event.data)
+      //  let res = (event.data)
         this.$store.commit("setData", res);
         if (res.data === "IOCHOME") {
           

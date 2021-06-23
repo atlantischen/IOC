@@ -64,7 +64,7 @@
         </div>
       </div>
       <div class="store_img">
-        <ul>
+        <ul class="scroll">
           <li v-for="(item, index) in imgList" :key="index">
             <img :src="item" alt="" />
           </li>
@@ -72,11 +72,21 @@
       </div>
       <div class="store_wait">
         <div class="tittle" @click="handleFullScreen">待入驻商家</div>
-        <ul>
+        <el-carousel class="swiper" indicator-position="outside"  :interval="3000">
+          <el-carousel-item v-for="item in 3" :key="item">
+          <ul>
           <li v-for="(item, index) in waitList" :key="index">
             <img :src="item" alt="" />
           </li>
         </ul>
+          </el-carousel-item>
+        </el-carousel>
+        <!-- <ul>
+
+          <li v-for="(item, index) in waitList" :key="index">
+            <img :src="item" alt="" />
+          </li>
+        </ul> -->
       </div>
     </IOCRight>
   </div>
@@ -102,6 +112,15 @@ export default {
         require("../../../../assets/img/99.png"),
         require("../../../../assets/img/100.png"),
         require("../../../../assets/img/101.png"),
+          require("../../../../assets/img/94.png"),
+        require("../../../../assets/img/95.png"),
+        require("../../../../assets/img/96.png"),
+        require("../../../../assets/img/97.png"),
+        require("../../../../assets/img/98.png"),
+        require("../../../../assets/img/99.png"),
+        require("../../../../assets/img/100.png"),
+        require("../../../../assets/img/101.png"),
+        
       ],
       waitList: [
         require("../../../../assets/img/入驻商家1.png"),
@@ -118,17 +137,6 @@ export default {
     // Right
   },
   methods: {
-    drawLine(dom, option) {
-      // 基于准备好的dom，初始化echarts实例
-      let myChart = echarts.init(document.getElementById(dom));
-      let resizeDiv = document.getElementById(dom);
-      // 绘制图表
-      myChart.setOption(option);
-      let listener = function() {
-        myChart.resize();
-      };
-      EleResize.on(resizeDiv, listener);
-    },
     meetEchartInit() {
       var dom = "store";
       var option = {
@@ -191,7 +199,7 @@ export default {
           },
         ],
       };
-      this.drawLine(dom, option);
+       this.$redomEchart(dom, option);
     },
     AssetsAndEquipment() {
       var dom = "store_top";
@@ -310,7 +318,7 @@ export default {
           },
         ],
       };
-      this.drawLine(dom, option);
+       this.$redomEchart(dom, option);
     },
   },
   created() {},
@@ -419,6 +427,11 @@ export default {
   }
   .store_img {
     ul {
+      height: 4.15rem /* 332/80 */;
+      width: 3.875rem /* 310/80 */ /* 330/80 */;
+    margin: 0 auto;
+
+      overflow: auto;
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
@@ -436,6 +449,12 @@ export default {
     }
   }
   .store_wait {
+    .swiper{
+      // height: 2.5rem /* 200/80 */;
+      /deep/.el-carousel__container{
+        height: 1.65rem /* 132/80 */ !important;
+      }
+    }
     ul {
       display: flex;
       justify-content: center;

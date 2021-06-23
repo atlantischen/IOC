@@ -20,7 +20,8 @@ export default {
             screenfull.toggle();
        },
        event(event){
-          if(event.data.action == "fullscreen") {
+         let res = JSON.parse(event.data)
+          if(res.action == "fullscreen") {
               this.handleFullScreen()
           }
        }

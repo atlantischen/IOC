@@ -5,19 +5,23 @@
       <div class="park">
         <div class="tittle">车位情况</div>
         <ul>
-          <li v-for="(item, index) in 3" :key="index">
-            <div class="floor">B{{ index + 1 }}</div>
+          <li v-for="(item, index) in parkList" :key="index">
+            <div class="floor">{{item.floor}}</div>
             <div class="present">
               <span>在场车位</span>
-              <span>532</span>
+              <span class="font_text">
+               <NumCounter :value='item.presencePark'></NumCounter>
+               </span>
             </div>
             <div class="free">
               <span>空余车位</span>
-              <span>532</span>
+              <span class="font_text">
+               <NumCounter :value='item.freePark'></NumCounter></span>
             </div>
             <div class="total">
               <span>总车位</span>
-              <span>532</span>
+              <span class="font_text">
+               <NumCounter :value='item.totalPark'></NumCounter></span>
             </div>
           </li>
         </ul>
@@ -27,6 +31,7 @@
         <div id="park_time"></div>
       </div>
     </IOCLeft>
+    <Tips :list="list"></Tips>
     <!-- <div class="box"> eqweqe</div> -->
     <IOCRight>
       <div class="revenue_total">
@@ -43,30 +48,57 @@
 
 <script>
 import * as echarts from "echarts";
-import { EleResize } from "assets/js/echarts";
 export default {
   name: "homePage",
   data() {
-    return {};
+    return {
+      list:[
+        {
+          num:2465,
+          describe:'总车位数'
+        },
+         {
+          num:2084,
+          describe:'在场车辆'
+        },
+         {
+          num:381,
+          describe:'剩余车位'
+        },
+      ],
+      parkList:[
+        {
+          floor:'B1',
+          presencePark:553,
+          freePark:72,
+          totalPark:625
+
+        },
+         {
+          floor:'B2',
+          presencePark:755,
+          freePark:101,
+          totalPark:856
+
+         },
+         {
+          floor:'B3',
+          presencePark:903,
+          freePark:63,
+          totalPark:966
+
+        }
+      ]
+    };
   },
   components: {},
   methods: {
-    drawLine(dom, option) {
-      // 基于准备好的dom，初始化echarts实例
-      let myChart = echarts.init(document.getElementById(dom));
-      let resizeDiv = document.getElementById(dom);
-      // 绘制图表
-      myChart.setOption(option);
-      let listener = function () {
-        myChart.resize();
-      };
-      EleResize.on(resizeDiv, listener);
-    },
+ 
     AssetsAndEquipment() {
       var dom = "park_time";
       var option = {
         title: {
-          text: "{a|停车数量合计：}{b|" + 301 + "}{c|辆}",
+          text: "{a|停车数量合计：}{b|" + 1369 +  "}{c|辆}",
           left: "0",
           top: "10",
           // subtext: '会议数',
@@ -84,7 +116,7 @@ export default {
               b: {
                 fontSize: 20,
                 color: "ffff",
-                fontFamily: "font00",
+                fontFamily: "BYfont",
               },
               c: {
                 fontSize: 12,
@@ -213,7 +245,7 @@ export default {
           },
         ],
       };
-      this.drawLine(dom, option);
+       this.$redomEchart(dom, option);
     },
     revenueInit() {
       var dom = "revenue_total";
@@ -237,7 +269,7 @@ export default {
               b: {
                 fontSize: 20,
                 color: "ffff",
-                fontFamily: "font00",
+                fontFamily: "BYfont",
               },
               c: {
                 fontSize: 12,
@@ -394,7 +426,7 @@ export default {
           },
         ],
       };
-      this.drawLine(dom, option);
+       this.$redomEchart(dom, option);
     },
     trendInit() {
       var dom = "car_trend";
@@ -606,7 +638,7 @@ export default {
           },
         ],
       };
-      this.drawLine(dom, option);
+     this.$redomEchart(dom, option);
     },
   },
   mounted() {
@@ -655,8 +687,6 @@ export default {
       }
       span:nth-child(2) {
         font-size: 0.25rem /* 20/80 */;
-        font-family: BY-Forvi-[C]3.00;
-        font-weight: bold;
         color: #ffffff;
         line-height: 0.3125rem /* 25/80 */;
         text-align: center;
