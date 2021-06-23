@@ -1,7 +1,7 @@
 <template>
   <!-- 综合态势home -->
   <div>
-    <LeftRight>
+    <LeftRight v-show="!isShowRIght">
       <template #left>
         <div class="theParkIsAll">
           <div class="tittle">园区情况</div>
@@ -40,8 +40,9 @@
         <SearchBox
           class="SearchBoxClass"
           :text="'搜园区建筑、搜企业、搜商家'"
+          @search="clickSwitch"
         />
-        <TipBox v-show="false" />
+        <TipBox v-show="true" />
       </template>
       <template #right>
         <div class="tittle">能耗态势</div>
@@ -79,18 +80,22 @@
         </div>
       </template>
     </LeftRight>
+    <RightContent v-show="isShowRIght" />
   </div>
 </template>
 
 <script>
+import RightContent from './components/rightContent.vue'
 import * as echarts from "echarts";
 import { redomEchart } from "@/utils/methods";
 import { aaa } from "@/api/mockApi";
 import axios from "axios";
 export default {
   name: "zhts",
+  components: { RightContent },
   data () {
     return {
+      isShowRIght: false,
       centerDatasList: [
         {
           name: "园区总人数",
@@ -180,6 +185,9 @@ export default {
     this.equipmentSituationFun();
   },
   methods: {
+    clickSwitch () {
+      // this.isShowRIght = !this.isShowRIght
+    },
     // 园区情况
     parkCaseFun () {
       var datas = [

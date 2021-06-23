@@ -105,13 +105,17 @@ i {
 
 // position
 .tran_xy(@left,@top,@x,@y) {
-  position: absolute;
   left: @left;
   top: @top;
   transform: translate(@x, @y);
   -webkit-transform: translate(@x, @y);
 }
 .p_x_c {
+  position: absolute;
+  .tran_xy(50%, unset, -50%, 0);
+}
+.p_x_c2 {
+  position: relative;
   .tran_xy(50%, unset, -50%, 0);
 }
 

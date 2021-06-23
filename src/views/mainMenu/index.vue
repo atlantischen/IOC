@@ -1,11 +1,11 @@
 <template>
   <div id="MainMenu">
-    <!-- <iframe
+    <iframe
       id="iframe3D"
       :src="url"
       allowfullscreen="true"
       frameborder="0"
-    ></iframe> -->
+    ></iframe>
     <router-view v-if="isShow" class="comEntry"></router-view>
   </div>
 </template>
@@ -15,7 +15,7 @@ export default {
   name: "MainMenu",
   data () {
     return {
-      isShow: true,
+      isShow: false,
       url: "",
     };
   },
