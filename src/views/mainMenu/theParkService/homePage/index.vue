@@ -835,21 +835,21 @@ export default {
   .popularServices_time {
     display: flex;
     justify-content: flex-end;
-    padding-right: .1rem /* 8/80 */;
+    padding-right: 0.1rem /* 8/80 */;
     .dropDown {
-      margin-left: .375rem /* 30/80 */;
+      margin-left: 0.375rem /* 30/80 */;
     }
   }
 }
 .totalServicesAll {
   .totalServices_time {
     width: 100%;
-    padding-right: .1rem /* 8/80 */;
+    padding-right: 0.1rem /* 8/80 */;
   }
 }
 .serviceSystemAll {
   position: absolute;
-  top: .375rem /* 30/80 */;
+  top: 0.375rem /* 30/80 */;
   left: 50%;
   transform: translate(-50%, 0%);
   -webkit-transform: translate(-50%, 0%);
@@ -859,18 +859,20 @@ export default {
     background: url("~@/assets/img/datas/zh_bg.png") center no-repeat;
     background-size: cover;
     .serviceSystem_content {
+      position: relative;
       .center_text {
         width: 2.5rem /* 200/80 */;
         height: 2.5rem /* 200/80 */;
         position: absolute;
-        top: 2.5rem /* 200/80 */;
-        left: 4.8125rem /* 385/80 */;
+        top: 1.25rem /* 100/80 */;
+        left: 3.5625rem /* 285/80 */;
         font-family: "BYfont";
         text-align: center;
-        font-size: .5375rem /* 43/80 */;
+        font-size: 0.5375rem /* 43/80 */;
         &::after {
           .turnAround(5s);
           content: "";
+          left: -1.625rem /* 130/80 */;
           position: absolute;
           width: 5.6875rem /* 455/80 */;
           height: 5.6875rem /* 455/80 */;

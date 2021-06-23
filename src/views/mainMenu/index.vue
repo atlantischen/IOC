@@ -1,11 +1,11 @@
 <template>
   <div id="MainMenu">
-    <iframe
+    <!-- <iframe
       id="iframe3D"
       :src="url"
       allowfullscreen="true"
       frameborder="0"
-    ></iframe>
+    ></iframe> -->
     <router-view v-if="isShow" class="comEntry"></router-view>
   </div>
 </template>
@@ -13,19 +13,19 @@
 <script>
 export default {
   name: "MainMenu",
-  data() {
+  data () {
     return {
       isShow: true,
       url: "",
     };
   },
   computed: {
-    getUnityData() {
+    getUnityData () {
       return this.$store.state.unitySendData;
     },
   },
   watch: {
-    getUnityData(val) {
+    getUnityData (val) {
       // debugger;
       let res = val;
       if (res.action.indexOf("/") === 0) {
@@ -34,7 +34,7 @@ export default {
       }
     },
   },
-  created() {
+  created () {
     if (window.vuplex) {
       this.addMessageListener();
     } else {
@@ -57,13 +57,13 @@ export default {
     console.log("123");
   },
   methods: {
-    getQueryString(name) {
+    getQueryString (name) {
       var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
       var r = window.location.search.substr(1).match(reg);
       if (r != null) return unescape(r[2]);
       return null;
     },
-    addMessageListener() {
+    addMessageListener () {
       window.vuplex.addEventListener("message", (event) => {
         let res = JSON.parse(event.data);
         this.$store.commit("setData", res);
@@ -82,6 +82,7 @@ export default {
   position: relative;
   width: 100%;
   height: 100%;
+  background: #000;
 }
 #iframe3D {
   // position: absolute;
@@ -91,6 +92,5 @@ export default {
 .comEntry {
   // position: absolute;
   // color: red;
-  // background: #000;
 }
 </style>

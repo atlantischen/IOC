@@ -5,8 +5,10 @@
       <template #left>
         <div class="tittle">园区情况</div>
         <div class="parkCase">
-          <div id="parkCaseEchart1"></div>
-          <div id="parkCaseEchart2" >
+          <div class="parkCaseEchartAll">
+            <div v-for="(t, i) in 2" :key="i" :id="`parkCaseEchart${i}`"></div>
+          </div>
+          <div class="parkCaseEchartAll2">
             <div v-for="(t, i) in 3" :key="i" :id="`minEchart${i}`"></div>
           </div>
         </div>
@@ -27,9 +29,13 @@
         <div class="tittle">园区产值</div>
         <div id="outputValueEchart"></div>
       </template>
-      <template #center >
+      <template #center>
         <CenterDatas :list="centerDatasList" v-show="false" />
-        <SearchBox v-show="false" class="SearchBoxClass" :text="'搜园区建筑、搜企业、搜商家'" />
+        <SearchBox
+          v-show="false"
+          class="SearchBoxClass"
+          :text="'搜园区建筑、搜企业、搜商家'"
+        />
         <TipBox v-show="false" />
       </template>
       <template #right>
@@ -78,7 +84,7 @@ import { aaa } from "@/api/mockApi";
 import axios from "axios";
 export default {
   name: "zhts",
-  data() {
+  data () {
     return {
       centerDatasList: [
         {
@@ -153,7 +159,7 @@ export default {
     };
   },
   components: {},
-  mounted() {
+  mounted () {
     // aaa().then(r=>{
     //   console.log(r)
     // })
@@ -170,58 +176,160 @@ export default {
   },
   methods: {
     // 园区情况
-    parkCaseFun() {
-      var option = {
-        grid: {
-          x: -30,
-          y: 5,
-          x2: 60,
-          y2: 20,
-        },
-        xAxis: {
-          show: false,
-          type: "category",
-        },
-        yAxis: {
-          show: false,
-          type: "value",
-        },
-        series: [
+    parkCaseFun () {
+      var datas = [
+        [
           {
-            data: [23, 34],
-            type: "bar",
-            barWidth: 16,
-            color: "#1e3957",
-            showBackground: true,
-            itemStyle: {
-              barBorderRadius: [0, 0, 5, 5],
-            },
-            backgroundStyle: {
-              color: "#4396f3",
-              barBorderRadius: 5,
-            },
-            label: {
-              show: true,
-              position: "right",
-              normal: {
-                // color: '#000',
-                // show: true,
-                // position: [0, '-24px'],
-                // textStyle: {
-                //   fontSize: 16
-                // },
-                // formatter: function (a, b) {
-                //   return a.name
-                // }
-              },
-            },
-            barGap: "0%",
+            data: [158],
+            name: '待入驻企业'
+          },
+          {
+            data: [28],
+            name: '已入驻企业'
           },
         ],
-      };
-      redomEchart("parkCaseEchart1", option);
+        [
+          {
+            data: [36],
+            name: '装修中企业'
+          },
+          {
+            data: [132],
+            name: '已办公企业'
+          },
+        ]
+      ]
+      for (var i = 0; i < datas.length; i++) {
+        var option = {
+          grid: {
+            x: -20,
+            y: 10,
+            x2: 60,
+            y2: 10,
+          },
+          xAxis: {
+            show: false,
+            type: "category",
+          },
+          yAxis: {
+            show: false,
+            type: "value",
+          },
+          series: [
+            {
+              name: '',
+              data: '',
+              type: "bar",
+              stack: 'total',
+              barWidth: 16,
+              color: "#1e3957",
+              showBackground: true,
+              itemStyle: {
+                barBorderRadius: [0, 0, 5, 5]
+              },
+              backgroundStyle: {
+                color: "#4396f3",
+                barBorderRadius: 5,
+              },
+              label: {
+                show: true,
+                position: 'bottom',
+                distance: -70,
+                textBorderColor: '#ffffff00',
+                textBorderWidth: 0,
+                align: 'left',
+                rotate: 0,
+                formatter: '{a| {c}} \n{b|}\n {name|{a}}',
+                fontSize: 16,
+                rich: {
+                  a: {
+                    padding: [3, 10],
+                    color: '#fff',
+                    fontFamily: 'BYfont',
+                    fontSize: 20,
+                  },
+                  b: {
+                    width: 100,
+                    height: 1,
+                    padding: [0, 0, 0, -10],
+                    backgroundColor: {
+                      image: require('@/assets/img/echart/e_line.png'),
+                      repeat: 'no-repeat'
+                    },
+                  },
+                  name: {
+                    padding: [5, 10],
+                    color: 'rgb(255,255,255,.7)'
+                  }
+                }
+              },
+              labelLine: {
+                show: false
+              },
+            },
+            {
+              name: '',
+              data: '',
+              type: "bar",
+              stack: 'total',
+              barWidth: 16,
+              color: "#4396f3",
+              itemStyle: {
+                barBorderRadius: [5, 5, 0, 0],
+              },
+              backgroundStyle: {
+                color: "#4396f3",
+                barBorderRadius: 5,
+              },
+              label: {
+                show: true,
+                position: 'top',
+                distance: -70,
+                textBorderColor: '#ffffff00',
+                textBorderWidth: 0,
+                align: 'left',
+                rotate: 0,
+                formatter: '{a| {c}} \n{b|}\n {name|{a}}',
+                fontSize: 16,
+                rich: {
+                  a: {
+                    padding: [3, 10],
+                    color: '#fff',
+                    fontFamily: 'BYfont',
+                    fontSize: 20,
+                  },
+                  b: {
+                    width: 100,
+                    height: 1,
+                    padding: [0, 0, 0, -10],
+                    backgroundColor: {
+                      image: require('@/assets/img/echart/e_line.png'),
+                      repeat: 'no-repeat'
+                    },
+                  },
+                  name: {
+                    padding: [5, 10],
+                    color: 'rgb(255,255,255,.7)'
+                  }
+                }
+              },
+              labelLine: {
+                show: false
+              },
+            },
+          ],
+        };
+        for (var j = 0; j < datas[i].length; j++) {
+          option.series[j] = {
+            ...option.series[j],
+            ...datas[i][j],
+          }
+          // option.series[0].label.distance = -datas[i][j].data[0]
+        }
+        redomEchart("parkCaseEchart" + i, option);
+      }
     },
-    parkCaseFun2() {
+    parkCaseFun2 () {
       var datas = [23, 34, 45],
         imgs = [
           require("@/assets/img/echart/e_mj.png"),
@@ -306,7 +414,7 @@ export default {
                 },
               ],
               itemStyle: {
-                color: function() {
+                color: function () {
                   let obj = {
                     type: "linear",
                     x: 0, //右
@@ -446,7 +554,7 @@ export default {
       }
     },
     // 人行态势
-    pedestrianPostureFun() {
+    pedestrianPostureFun () {
       var names = ["办公人员", "访客"],
         xData = ["05:00", "06:00", "07:00", "08:00", "09:00", "10:00"],
         datas = [
@@ -598,18 +706,18 @@ export default {
       redomEchart("pedestrianPostureEchart", option);
     },
     // 园区产值
-    outputValueFun() {
+    outputValueFun () {
       var optionName = [
-          "新能源",
-          "新材料",
-          "生物医药",
-          "智能制造",
-          "信息技术",
-          "文化创意",
-          "现代服务",
-          "节能环保",
-          "商家",
-        ],
+        "新能源",
+        "新材料",
+        "生物医药",
+        "智能制造",
+        "信息技术",
+        "文化创意",
+        "现代服务",
+        "节能环保",
+        "商家",
+      ],
         datas = [43, 34, 32, 34, 35, 32, 20, 20, 8];
       var option = {
         title: {
@@ -646,7 +754,7 @@ export default {
           right: 8,
           y: "center",
           data: optionName,
-          formatter: function(name) {
+          formatter: function (name) {
             return "{a|" + name + "}";
           },
           textStyle: {
@@ -699,7 +807,7 @@ export default {
       redomEchart("outputValueEchart", option);
     },
     // 能耗态势
-    energyTrendFun() {
+    energyTrendFun () {
       for (var i = 0; i < this.energyTrendData.length; i++) {
         var option = {
           xAxis: {
@@ -809,7 +917,7 @@ export default {
       }
     },
     // 车行态势
-    carSituationFun() {
+    carSituationFun () {
       var names = ["进", "出"],
         xData = ["00:00", "02:00", "04:00", "06:00", "08:00", "10:00", "12:00"],
         datas = [
@@ -961,7 +1069,7 @@ export default {
       redomEchart("carSituationEchart", option);
     },
     // 设备态势
-    equipmentSituationFun() {
+    equipmentSituationFun () {
       var names = ["正常", "故障"];
       var option = {
         tooltip: {},
@@ -1080,11 +1188,17 @@ export default {
   width: 100%;
   height: 160px;
 }
+#parkCaseEchart0,
 #parkCaseEchart1 {
+  width: 50%;
+  height: 190px;
+}
+.parkCaseEchartAll {
+  display: flex;
   width: 60%;
   height: 190px;
 }
-#parkCaseEchart2 {
+.parkCaseEchartAll2 {
   width: 40%;
   height: 190px;
 }
@@ -1104,7 +1218,7 @@ export default {
   width: 100%;
   height: 160px;
 }
-.SearchBoxClass{
+.SearchBoxClass {
   width: 6.25rem /* 500/80 */;
 }
 .parkCase {
