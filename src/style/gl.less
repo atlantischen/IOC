@@ -104,15 +104,15 @@ i {
 }
 
 // position
-.tran_xy(@left,@top,@x,@y){
+.tran_xy(@left,@top,@x,@y) {
   position: absolute;
   left: @left;
   top: @top;
   transform: translate(@x, @y);
   -webkit-transform: translate(@x, @y);
 }
-.p_x_c{
-  .tran_xy(50%,unset,-50%,0);
+.p_x_c {
+  .tran_xy(50%, unset, -50%, 0);
 }
 
 // 图片
@@ -178,7 +178,7 @@ i {
 }
 
 // 单选
-.SpaceRadioGroup>.radioGroup {
+.SpaceRadioGroup > .radioGroup {
   .el-radio__label {
     color: #fff;
     font-size: 14px;
@@ -202,7 +202,7 @@ i {
 }
 
 // 下拉
-.el-dropdown__popper.el-popper[role=tooltip] {
+.el-dropdown__popper.el-popper[role='tooltip'] {
   border: none;
   background: rgba(30, 57, 87, 0.7) !important;
 }
@@ -212,12 +212,12 @@ i {
 }
 
 .el-dropdown-menu__item {
-  color: @textColor ;
+  color: @textColor;
 }
 
 .el-dropdown-menu__item {
   &:hover {
-    color: @textColor ;
+    color: @textColor;
     background: rgba(151, 200, 255, 0.5) !important;
   }
   &.is-checed {
@@ -225,7 +225,6 @@ i {
     background: #4394f3;
   }
 }
-
 
 .el-popper__arrow {
   display: none;

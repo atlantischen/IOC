@@ -3,13 +3,19 @@
   <div>
     <LeftRight>
       <template #left>
-        <div class="tittle">园区情况</div>
-        <div class="parkCase">
-          <div class="parkCaseEchartAll">
-            <div v-for="(t, i) in 2" :key="i" :id="`parkCaseEchart${i}`"></div>
-          </div>
-          <div class="parkCaseEchartAll2">
-            <div v-for="(t, i) in 3" :key="i" :id="`minEchart${i}`"></div>
+        <div class="theParkIsAll">
+          <div class="tittle">园区情况</div>
+          <div class="parkCase">
+            <div class="parkCaseEchartAll">
+              <div
+                v-for="(t, i) in 2"
+                :key="i"
+                :id="`parkCaseEchart${i}`"
+              ></div>
+            </div>
+            <div class="parkCaseEchartAll2">
+              <div v-for="(t, i) in 3" :key="i" :id="`minEchart${i}`"></div>
+            </div>
           </div>
         </div>
         <div class="tittle">人行态势</div>
@@ -32,7 +38,6 @@
       <template #center>
         <CenterDatas :list="centerDatasList" v-show="false" />
         <SearchBox
-          v-show="false"
           class="SearchBoxClass"
           :text="'搜园区建筑、搜企业、搜商家'"
         />
@@ -1188,26 +1193,35 @@ export default {
   width: 100%;
   height: 160px;
 }
-#parkCaseEchart0,
-#parkCaseEchart1 {
-  width: 50%;
-  height: 190px;
+// 园区情况
+.theParkIsAll {
+  .parkCase {
+    width: 100%;
+    height: 190px;
+    display: flex;
+  }
+  #parkCaseEchart0,
+  #parkCaseEchart1 {
+    width: 50%;
+    height: 190px;
+  }
+  .parkCaseEchartAll {
+    display: flex;
+    width: 60%;
+    height: 190px;
+  }
+  .parkCaseEchartAll2 {
+    width: 40%;
+    height: 190px;
+  }
+  #minEchart0,
+  #minEchart1,
+  #minEchart2 {
+    width: 100%;
+    height: 33%;
+  }
 }
-.parkCaseEchartAll {
-  display: flex;
-  width: 60%;
-  height: 190px;
-}
-.parkCaseEchartAll2 {
-  width: 40%;
-  height: 190px;
-}
-#minEchart0,
-#minEchart1,
-#minEchart2 {
-  width: 100%;
-  height: 33%;
-}
+
 #energyTrendEchart0,
 #energyTrendEchart1 {
   width: 100%;
@@ -1221,11 +1235,8 @@ export default {
 .SearchBoxClass {
   width: 6.25rem /* 500/80 */;
 }
-.parkCase {
-  width: 100%;
-  height: 190px;
-  display: flex;
-}
+
+// 人行态势
 .pedestrianPosture {
   .pp_top {
     width: 100%;

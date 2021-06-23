@@ -76,16 +76,7 @@
           <div class="environment_tip">
             空气质量指数AQI <i class="iconfont icon-wenti"></i>
           </div>
-          <div class="airQuality">
-            <!-- <el-progress
-              :text-inside="true"
-              :stroke-width="8"
-              :percentage="50"
-              status="exception"
-            ></el-progress> -->
-            <img src="" alt="" />
-          </div>
-          <div></div>
+          <div id="airQualityEchart"></div>
           <span class="environment_tip">
             <span>温馨提示: </span>
             <p>空气质量很好，可以外出活动，呼吸新鲜空气，拥抱大自然。</p>
@@ -104,7 +95,7 @@ import { getWeather } from "@/api/com";
 import { redomEchart } from "@/utils/methods";
 export default {
   name: "homePage",
-  data() {
+  data () {
     return {
       centerDatasList: [
         {
@@ -125,32 +116,32 @@ export default {
     };
   },
   components: {},
-  created() {
+  created () {
     getWeather({ city: "深圳" }).then((r) => {
       this.weatherDatas = r.data.data;
       console.log(r);
     });
   },
-  mounted() {
+  mounted () {
     this.industrySpaceFun([76.16, 9.62, 5.93, 8.29]);
     this.SpatialDistributionFun();
     this.siteUsageTop5Fun();
     this.floorSpaceFun();
+    this.airQualityFun();
     this.temperatureTrendFun();
   },
   methods: {
     //
-    selectSpaceRadio(val) {
+    selectSpaceRadio (val) {
       this.spaceRadio = val;
       if (val == 0) {
-        this.industrySpaceFun([5.93, 8.29, 76.16, 9.62]);
-      } else {
         this.industrySpaceFun([76.16, 9.62, 5.93, 8.29]);
+      } else {
+        this.industrySpaceFun([5.93, 8.29, 76.16, 9.62]);
       }
     },
     // 产业空间
-    industrySpaceFun(d) {
-      var ii = 0;
+    industrySpaceFun (d) {
       var optionName = ["200平以下", "200~500平", "500~1000平", "1000平以上"],
         datas = d;
       var option = {
@@ -189,8 +180,12 @@ export default {
           left: "45%",
           y: "center",
           data: optionName,
-          formatter: function(name) {
-            return "{a|" + name + "}" + datas[ii++] + "%";
+          formatter: function (name) {
+            var index = 0;
+            optionName.forEach(function (value, i) {
+              if (value == name) index = i
+            });
+            return "{a|" + name + "}" + datas[index] + "%";
           },
           textStyle: {
             color: "#fff",
@@ -235,17 +230,17 @@ export default {
       redomEchart("industrySpaceEchart", option);
     },
     // 产业空间分布
-    SpatialDistributionFun() {
-      var ii = 0;
+    SpatialDistributionFun () {
+      var ii = -1;
       var optionName = [
-          "新能源、新材料",
-          "智能制造",
-          "信息技术",
-          "生物医药",
-          "文化创意",
-          "现代服务",
-          "节能环保",
-        ],
+        "新能源、新材料",
+        "智能制造",
+        "信息技术",
+        "生物医药",
+        "文化创意",
+        "现代服务",
+        "节能环保",
+      ],
         datas = [23.46, 24.29, 32.26, 1.2, 12.8, 3.25, 2.74];
       var option = {
         title: {
@@ -279,8 +274,12 @@ export default {
           left: "45%",
           y: "center",
           data: optionName,
-          formatter: function(name) {
-            return "{a|" + name + "}" + datas[ii++] + "%";
+          formatter: function (name) {
+            var index = 0;
+            optionName.forEach(function (value, i) {
+              if (value == name) index = i
+            });
+            return "{a|" + name + "}" + datas[index] + "%";
           },
           textStyle: {
             color: "#fff",
@@ -333,7 +332,7 @@ export default {
       redomEchart("spatialDistributionEchart", option);
     },
     // 场地使用top5
-    siteUsageTop5Fun() {
+    siteUsageTop5Fun () {
       var names = [],
         xAxisNams = [
           "14F会议室",
@@ -430,15 +429,104 @@ export default {
               ]),
             },
             data: [78, 60, 55, 38, 27],
-          },
+          }
         ],
       };
       redomEchart("siteUsageTop5Echart", option);
     },
+    // 环境空间
+    airQualityFun () {
+      var datas = [53, 300]
+      var option = {
+        grid: {
+          left: "0",
+          top: "30",
+          right: "0",
+          bottom: "0",
+          containLabel: true
+        },
+        xAxis: {
+          type: 'value',
+          splitLine: { show: false },
+          axisLabel: { show: false },
+          axisTick: { show: false },
+          axisLine: { show: false }
+        },
+        yAxis: {
+          type: 'category',
+          axisTick: { show: false },
+          axisLine: { show: false },
+          axisLabel: {
+            show: false,
+          }
+        },
+        series: [
+          {
+            name: "条",
+            type: "bar",
+            barWidth: 8,
+            data: [datas[0]],
+            barCategoryGap: 20,
+            itemStyle: {
+              normal: {
+                barBorderRadius: 10,
+                color: '#ffffff00',
+                color: 'pink',
+              }
+            },
+            label: {
+              show: true,
+              position: 'right',
+              fontSize: 14,
+              offset: [-25, -25],
+              formatter: '{a| {c}}',
+              rich: {
+                a: {
+                  width: 20,
+                  height: 15,
+                  padding: [8, 10, 5],
+                  color: '#000',
+                  backgroundColor: {
+                    // color: 'red',
+                    image: require('@/assets/img/echart/e_wd_tip.png'),
+                    // repeat: 'no-repeat'
+                  },
+                }
+              }
+            },
+            z: 1
+          },
+          {
+            name: "背景",
+            type: "bar",
+            stack: 'one',
+            barGap: "-100%",
+            barWidth: 10,
+            data: [datas[1]],
+            itemStyle: {
+              normal: {
+                barBorderRadius: 10,
+                color: new echarts.graphic.LinearGradient(
+                  0, 0, 1, 0,
+                  [
+                    { offset: 0, color: '#00ffff' },
+                    { offset: 0.2, color: 'yellow' },
+                    { offset: 0.4, color: 'orange' },
+                    { offset: 0.6, color: 'red' },
+                    { offset: 0.8, color: '#990056' },
+                    { offset: 1, color: '#7b0128' },
+                  ]
+                )
+              }
+            }
+          },
+        ]
+      };
+      redomEchart("airQualityEchart", option);
+    },
     // 场地空间
-    floorSpaceFun() {
-      var ii = 0,
-        optionName = ["多功能演播厅", "云平台广场", "会议室", "运动中心"],
+    floorSpaceFun () {
+      var optionName = ["多功能演播厅", "云平台广场", "会议室", "运动中心"],
         datas = [59.6, 21.43, 10.37, 8.6];
       var option = {
         title: [
@@ -496,8 +584,12 @@ export default {
           left: "50%",
           top: "35%",
           data: optionName,
-          formatter: function(name) {
-            return "{a|" + name + "}" + datas[ii++] + "%";
+          formatter: function (name) {
+            var index = 0;
+            optionName.forEach(function (value, i) {
+              if (value == name) index = i
+            })
+            return "{a|" + name + "}" + datas[index] + "%";
           },
           textStyle: {
             color: "#fff",
@@ -515,18 +607,45 @@ export default {
           itemHeight: 6,
           itemGap: 12,
         },
-        color: ["#cda857", "#4396f3", "#0ff", "#236390"],
+        // color: ["#cda857", "#4396f3", "#0ff", "#236390"],
+        color: ["rgba(30, 57, 87, 0.5)", "#cda857", "#4396f3", "#0ff"],
         series: [
+          {
+            name: "",
+            type: "pie",
+            radius: ["0", "45%"],
+            center: ["20%", "50%"],
+            startAngle: -45,
+            color: 'rgba(30, 57, 87, 0.3)',
+            avoidLabelOverlap: false,
+            animationType: 'scale',
+            label: {
+              show: false,
+            },
+            labelLine: {
+              show: false,
+            },
+            data: [100],
+          },
           {
             name: "",
             type: "pie",
             radius: ["0", "65%"],
             center: ["20%", "50%"],
-            roseType: "area",
-            // startAngle:-0,
+            // roseType: 'area', //radius
+            startAngle: -45,
             itemStyle: {
-              borderRadius: 8,
+              normal: {
+                // borderWidth: 2,
+                // borderColor: 'rgba(0, 0, 0, 0)',
+                // opacity: 0.75,
+                shadowBlur: 20,
+                shadowOffsetX: 0,
+                shadowOffsetY: 7,
+                shadowColor: 'rgba(0, 0, 0, 0.5)'
+              }
             },
+            animationType: 'scale',
             avoidLabelOverlap: false,
             label: {
               show: false,
@@ -539,7 +658,7 @@ export default {
         ],
       };
       for (var i = 0; i < optionName.length; i++) {
-        option.series[0].data[i] = {
+        option.series[1].data[i] = {
           value: datas[i],
           name: optionName[i],
         };
@@ -547,7 +666,7 @@ export default {
       redomEchart("floorSpaceEchart", option);
     },
     // 今日气温趋势
-    temperatureTrendFun() {
+    temperatureTrendFun () {
       var names = [],
         xData = [
           "0h",
@@ -710,7 +829,7 @@ export default {
         };
       }
       redomEchart("temperatureTrendEchart", option);
-    },
+    }
   },
 };
 </script>
@@ -790,8 +909,10 @@ export default {
       }
     }
   }
-  .airQuality {
-    padding: 20px 0;
+  #airQualityEchart {
+    width: 100%;
+    height: 50px;
+    margin: 10px 0;
   }
   .environment_tip {
     display: flex;

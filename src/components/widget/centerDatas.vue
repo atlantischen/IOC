@@ -16,20 +16,20 @@ export default {
       default: () => [],
     },
   },
-  data() {
+  data () {
     return {
       fade: false,
     };
   },
   components: {},
-  mounted() {
+  mounted () {
     // console.log(this.$store)
     // document.onclick = function() {
     //   this.handleClick();
     // };
   },
   methods: {
-    handleClick() {
+    handleClick () {
       this.fade = !this.fade;
     },
   },
@@ -42,7 +42,7 @@ export default {
   width: 100%;
   height: 100%;
   li {
-    padding: 0 30px;
+    padding: 0 40px;
     span {
       white-space: nowrap;
       &:first-child {

@@ -46,7 +46,7 @@
       <template #center>
         <div class="serviceSystemAll" v-show="true">
           <div class="serviceSystem_bg">
-            <ul class="serviceSystem_content ">
+            <ul class="serviceSystem_content">
               <div class="center_text p_xy_c x_c">
                 {{ serviceSystemDatas.name }}
               </div>
@@ -61,7 +61,7 @@
                 <img class="ss_img" :src="item.src" alt="" />
                 <span class="ss_name">{{ item.name }}</span>
                 <ul
-                  class="min_box "
+                  class="min_box"
                   v-show="actvedNum == i + 1"
                   :class="
                     i < serviceSystemDatas.list.length / 2
@@ -100,7 +100,7 @@ import * as echarts from "echarts";
 import { redomEchart } from "@/utils/methods";
 export default {
   name: "homePage",
-  data() {
+  data () {
     return {
       ssTimer: null,
       actvedNum: 8,
@@ -281,21 +281,21 @@ export default {
     };
   },
   components: {},
-  mounted() {
+  mounted () {
     this.setIntervalFun();
     this.popularServiceFun();
     this.totalServicesFun();
     this.distributionServicesFun();
   },
-  beforeDestroy() {
+  beforeDestroy () {
     this.clearIntervalfun();
   },
   methods: {
-    clearIntervalfun() {
+    clearIntervalfun () {
       clearInterval(this.ssTimer);
       this.ssTimer = null;
     },
-    setIntervalFun() {
+    setIntervalFun () {
       this.ssTimer = setInterval(() => {
         this.actvedNum--;
         if (this.actvedNum == 0) {
@@ -303,7 +303,7 @@ export default {
         }
       }, 1000);
     },
-    hoverItem(val, i) {
+    hoverItem (val, i) {
       switch (val) {
         case "hover":
           this.clearIntervalfun();
@@ -314,19 +314,19 @@ export default {
           break;
       }
     },
-    changePSMonths(val) {
+    changePSMonths (val) {
       console.log(val);
       this.popularServiceFun();
     },
-    changePSYears(val) {
+    changePSYears (val) {
       console.log(val);
       this.popularServiceFun();
     },
-    changePSYears2(val) {
+    changePSYears2 (val) {
       console.log(val);
       this.popularServiceFun();
     },
-    popularServiceFun() {
+    popularServiceFun () {
       var names = [],
         xAxisNams = [
           "车位申请",
@@ -462,7 +462,7 @@ export default {
       };
       redomEchart("popularServiceEchart", option);
     },
-    totalServicesFun() {
+    totalServicesFun () {
       var names = [],
         xData = [
           "1月",
@@ -633,33 +633,23 @@ export default {
       }
       redomEchart("totalServicesEchart", option);
     },
-    distributionServicesFun() {
-      var j = 0;
+    distributionServicesFun () {
+      var j = 0, colors = [
+        "#00ffff",
+        "#cd9a57",
+        "#97c8ff",
+        "#456af3",
+        "#1e3957",
+        "#c7d392",
+        "#9a866a",
+        "#c9a555",
+        "#fff",
+      ]
       var optionName = ["个人服务", "基础服务", "企业服务", "新材料"],
         datas = [26.86, 47.55, 21.45, 5.41];
       var option = {
-        title: {
-          show: false,
-          text: 2483,
-          link: "",
-          target: null,
-          subtext: "",
-          sublink: "",
-          subtarget: null,
-          left: "48%",
-          bottom: "38%",
-          textAlign: "center",
-          itemGap: 6,
-          textStyle: {
-            fontFamily: "BYfont",
-            fontSize: 24,
-            color: "#fff",
-            fontWeight: 550,
-          },
-          subtextStyle: {
-            fontSize: 12,
-            color: "rgb(255,255,255,.7)",
-          },
+        grid: {
+          containLabel: true,
         },
         legend: {
           selectedMode: false,
@@ -668,7 +658,7 @@ export default {
           left: "50%",
           y: "center",
           data: optionName,
-          formatter: function(name) {
+          formatter: function (name) {
             return "{a|" + name + "}" + datas[j++] + "%";
           },
           textStyle: {
@@ -687,53 +677,48 @@ export default {
           itemHeight: 6,
           itemGap: 18,
         },
-        color: [
-          "#00ffff",
-          "#cd9a57",
-          "#97c8ff",
-          "#456af3",
-          "#1e3957",
-          "#c7d392",
-          "#9a866a",
-          "#c9a555",
-          "#fff",
-        ],
         series: [
           {
             name: "",
             type: "pie",
             radius: ["40%", "55%"],
             center: ["50%", "50%"],
-            avoidLabelOverlap: true,
+            // avoidLabelOverlap: true,
             startAngle: 160,
             label: {
-              // minMargin: 10,
-              // alignTo: 'edge',
-              // edgeDistance: 10,
-              // lineHeight: 10,
-              formatter: "{a|{c}%}\n{b|{b}}",
-              padding: [0, -45, 0, 0],
+              padding: [0, -55, 0, -55],
+              formatter: "{a|{c}%}\n{b|{b}}\n{hr|}",
               rich: {
+                hr: {
+                  backgroundColor: 'auto',
+                  borderRadius: 100,
+                  width: 6,
+                  height: 6,
+                  // margin: [200, 3, 0, -16],
+                  shadowColor: '#1c1b3a',
+                  shadowBlur: 1,
+                  shadowOffsetX: '0',
+                  shadowOffsetY: '2',
+                },
                 a: {
                   width: 100,
                   fontSize: 12,
+                  padding: [5, 0],
                   color: "rgb(255,255,255,.7)",
                 },
                 b: {
                   width: 100,
                   fontSize: 12,
-                  lineHeight: 14,
+                  padding: [2, 0],
                   color: "rgb(255,255,255,.7)",
                 },
               },
             },
-            itemStyle: {
-              borderColor: "rgb(0,0,0,.9)",
-              borderWidth: 6,
-            },
             labelLine: {
-              length: 20,
-              length2: 45,
+              normal: {
+                length: 20,
+                length2: 70
+              }
             },
             data: [],
           },
@@ -744,16 +729,28 @@ export default {
             data: [100],
             itemStyle: {
               color: "#0e1c36",
-            },
+            }
           },
         ],
       };
+      option.series[0].data = []
       for (var i = 0; i < optionName.length; i++) {
-        option.series[0].data[i] = {
-          value: datas[i],
-          name: optionName[i],
-          selected: i == optionName.length - 1,
-        };
+        option.series[0].data.push(
+          {
+            value: datas[i],
+            name: optionName[i],
+            selected: i == optionName.length - 1,
+            itemStyle: {
+              color: colors[i],
+            }
+          }, {
+          value: 2,
+          itemStyle: {
+            color: "#ffffff00",
+          },
+          label: { show: false }
+        }
+        )
       }
       redomEchart("distributionServicesEchart", option);
     },

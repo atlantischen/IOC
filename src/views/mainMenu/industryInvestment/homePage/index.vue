@@ -110,7 +110,7 @@ import * as echarts from "echarts";
 import { redomEchart } from "@/utils/methods";
 export default {
   name: "homePage",
-  data() {
+  data () {
     return {
       centerDatasList: [
         {
@@ -262,12 +262,12 @@ export default {
     };
   },
   components: {},
-  mounted() {
+  mounted () {
     this.rentalAndSaleFun();
     this.FocusIndustryFun();
   },
   methods: {
-    selectBuldingFun(key, val) {
+    selectBuldingFun (key, val) {
       switch (key) {
         case "B":
           this.selectedNum = val;
@@ -277,7 +277,7 @@ export default {
           break;
       }
     },
-    rentalAndSaleFun() {
+    rentalAndSaleFun () {
       var j = 0;
       var optionName = ["已售", "已租", "开放"],
         datas = [63.2, 21.5, 15.3];
@@ -316,7 +316,7 @@ export default {
           left: "50%",
           y: "center",
           data: optionName,
-          formatter: function(name) {
+          formatter: function (name) {
             return "{a|" + name + "}" + datas[j++] + "%";
           },
           textStyle: {
@@ -361,19 +361,19 @@ export default {
       }
       redomEchart("rentalAndSaleEchart", option);
     },
-    FocusIndustryFun() {
+    FocusIndustryFun () {
       var j = 0;
       var optionName = [
-          "商家",
-          "信息技术",
-          "智能制造",
-          "新材料",
-          "新能源",
-          "文化创意",
-          "现代服务",
-          "节能环保",
-          "生物医药",
-        ],
+        "商家",
+        "信息技术",
+        "智能制造",
+        "新材料",
+        "新能源",
+        "文化创意",
+        "现代服务",
+        "节能环保",
+        "生物医药",
+      ],
         datas = [32.05, 19.23, 12.82, 9.62, 6.41, 8.33, 5.13, 3.2, 3.21];
       var option = {
         title: {
@@ -410,7 +410,7 @@ export default {
           left: "50%",
           y: "center",
           data: optionName,
-          formatter: function(name) {
+          formatter: function (name) {
             return "{a|" + name + "}" + datas[j++] + "%";
           },
           textStyle: {
@@ -454,12 +454,12 @@ export default {
               // edgeDistance: 10,
               // lineHeight: 10,
               formatter: "{a|{c}%}\n{b|{b}}",
-              padding: [0, -45, 0, 0],
+              padding: [0, -45, 0, -45],
               rich: {
                 a: {
                   width: 100,
                   fontSize: 12,
-                  // padding: [2, 0],
+                  padding: [2, 0],
                   color: "rgb(255,255,255,.7)",
                 },
                 b: {
