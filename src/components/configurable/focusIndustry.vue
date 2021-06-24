@@ -1,14 +1,14 @@
 <template>
-  <div class="theParkOutputValAll">
+  <div class="FocusIndustryAll">
     <div class="tittle">{{ title }}</div>
-    <div :id="'outputValueEchart_' + ids"></div>
+    <div :id="'focusIndustryEchart_' + ids"></div>
   </div>
 </template>
 
 <script>
 import { redomEchart, uuid } from "@/utils/methods";
 export default {
-  name: "theParkOutputValAll",
+  name: "theParkIsAll",
   props: {
     _data: {
       type: Object
@@ -21,25 +21,25 @@ export default {
     }
   },
   mounted () {
-    this.outputValueFun(this.datas)
+    this.FocusIndustryFun(this.datas)
   },
   methods: {
-    // 园区产值
-    outputValueFun (val) {
-      const { optionName, datas } = val
+    FocusIndustryFun (val) {
+      var j = 0;
+      const { optionName, datas, subtext, total } = val
       var option = {
         title: {
           show: true,
-          text: 164,
+          text: total,
           link: "",
           target: null,
-          subtext: "税收总数\n(亿元)",
+          subtext: subtext,
           sublink: "",
           subtarget: null,
-          left: "22%",
-          bottom: "32%",
+          left: "48%",
+          bottom: "38%",
           textAlign: "center",
-          // backgroundColor:
+          // backgroundColor: 'rgba(0,0,0,0)',
           // borderColor: '#ccc',
           // borderWidth: 0,
           // padding: 5,
@@ -52,25 +52,28 @@ export default {
           },
           subtextStyle: {
             fontSize: 12,
-            color: "#fff",
+            color: "rgb(255,255,255,.7)",
           },
         },
         legend: {
           selectedMode: false,
-          show: true,
+          show: false,
           orient: "vertical", // 'horizontal'
-          right: 8,
+          left: "50%",
           y: "center",
           data: optionName,
           formatter: function (name) {
-            return "{a|" + name + "}";
+            return "{a|" + name + "}" + datas[j++] + "%";
           },
           textStyle: {
             color: "#fff",
             fontSize: 12,
             padding: [0, 15, 0, 2],
             rich: {
-              a: {},
+              a: {
+                width: 40,
+                color: "rgb(255,255,255,.7)",
+              },
             },
           },
           icon: "circle",
@@ -80,11 +83,11 @@ export default {
         },
         color: [
           "#4396f3",
-          "#95c7ff",
+          "#97c8ff",
           "#456af3",
-          "#0ff",
-          "#236390",
-          "#ffdd8d",
+          "#00ffff",
+          "#1e3957",
+          "#c7d392",
           "#9a866a",
           "#c9a555",
           "#fff",
@@ -93,14 +96,37 @@ export default {
           {
             name: "",
             type: "pie",
-            radius: ["62%", "80%"],
-            center: ["23%", "50%"],
-            avoidLabelOverlap: false,
+            radius: ["50%", "65%"],
+            center: ["50%", "50%"],
+            avoidLabelOverlap: true,
+            maxAngle: 145,
             label: {
-              show: false,
+              // minMargin: 10,
+              // alignTo: 'edge',
+              // edgeDistance: 10,
+              // lineHeight: 10,
+              formatter: "{a|{c}%}\n{b|{b}}",
+              padding: [0, -45, 0, -45],
+              rich: {
+                a: {
+                  width: 100,
+                  fontSize: 12,
+                  padding: [2, 0],
+                  color: "rgb(255,255,255,.7)",
+                },
+                b: {
+                  width: 100,
+                  fontSize: 12,
+                  lineHeight: 14,
+                  // padding: [1, 0],
+                  color: "rgb(255,255,255,.7)",
+                },
+              },
             },
             labelLine: {
-              show: false,
+              length: 20,
+              length2: 45,
+              // maxSurfaceAngle: 80
             },
             data: [],
           },
@@ -112,19 +138,18 @@ export default {
           name: optionName[i],
         };
       }
-      redomEchart("outputValueEchart_" + this.ids, option);
-    },
+      redomEchart("focusIndustryEchart_" + this.ids, option);
+    }
   }
 };
 </script>
 
 <style lang="less" scoped>
 @import "~@/style/gl.less";
-.theParkOutputValAll {
-  #outputValueEchart,
-  [id^="outputValueEchart_"] {
-    width: 100%;
-    height: 2rem /* 160/80 */;
-  }
+// 聚焦产业
+#focusIndustryEchart_,
+[id^="focusIndustryEchart_"] {
+  width: 100%;
+  height: 190px;
 }
 </style>

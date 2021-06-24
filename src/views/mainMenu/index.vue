@@ -15,7 +15,7 @@ export default {
   name: "MainMenu",
   data () {
     return {
-      isShow: true,
+      isShow: false,
       url: "",
     };
   },
@@ -82,7 +82,6 @@ export default {
   position: relative;
   width: 100%;
   height: 100%;
-  background: #000;
 }
 #iframe3D {
   // position: absolute;

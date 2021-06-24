@@ -10,8 +10,10 @@ import * as echarts from 'echarts';
  */
 export function redomEchart(dom, option) {
   let resizeDiv = document.getElementById(dom)
-  let myChart = echarts.init(resizeDiv)
-  myChart.setOption(option)
+  let myChart = null
+  myChart = echarts.init(resizeDiv)
+  myChart.clear()
+  myChart.setOption(option, true)
   console.log(EleResize)
   let listener = function () {
     console.log('resize')

@@ -37,16 +37,16 @@ export default {
   methods: {
     // 人行态势
     pedestrianPostureFun (val) {
-      var names = val.names, xData = val.xData, datas = val.datas, smooth = val.smooth
+      const { names, xData, datas, smooth } = val
       var option = {
         tooltip: {
           // show: false,
           // trigger: 'item',
           trigger: "axis",
           axisPointer: {
-            lineStyle: {
-              color: "transparent",
-            },
+            // lineStyle: {
+            //   color: "transparent",
+            // },
           },
         },
         color: ["#fff", "#ffb400"],
@@ -54,7 +54,7 @@ export default {
           x: 10,
           y: 30,
           x2: 30,
-          y2: 10,
+          y2: -10,
           containLabel: true,
         },
         legend: {
@@ -74,6 +74,10 @@ export default {
         xAxis: {
           type: "category",
           name: "时间",
+          nameTextStyle: {
+            // lineHeight: 56,
+            // verticalAlign: "bottom"
+          },
           data: xData,
           axisTick: {
             show: false,

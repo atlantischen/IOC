@@ -35,7 +35,7 @@ export default {
   methods: {
     // 设备态势
     equipmentSituationFun (val) {
-      var names = val.names, xAxisName = val.xAxisName, datas = val.datas
+      const { names, xAxisName, datas } = val
       var option = {
         tooltip: {},
         grid: {
@@ -160,12 +160,12 @@ export default {
       display: flex;
       align-items: center;
       justify-content: space-around;
-      padding-bottom: 20px;
+      padding-bottom: 0.25rem /* 20/80 */;
       li {
-        width: 65px;
-        height: 65px;
-        margin: 0 10px;
-        border: 1px solid rgba(67, 149, 243, 0.4);
+        width: 0.8125rem /* 65/80 */;
+        height: 0.8125rem /* 65/80 */;
+        margin: 0 0.125rem /* 10/80 */;
+        border: 0.0125rem /* 1/80 */ solid rgba(67, 149, 243, 0.4);
         border-radius: 50%;
         background: rgba(30, 57, 87, 0.5);
         span:nth-child(1) {
