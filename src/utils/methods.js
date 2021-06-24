@@ -1,4 +1,6 @@
-import { EleResize } from '@/assets/js/echarts'
+import {
+  EleResize
+} from '@/assets/js/echarts'
 import * as echarts from 'echarts';
 /**
  * @author

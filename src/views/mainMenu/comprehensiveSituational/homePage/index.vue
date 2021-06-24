@@ -40,7 +40,7 @@
         <SearchBox
           class="SearchBoxClass"
           :text="'搜园区建筑、搜企业、搜商家'"
-          @search="clickSwitch"
+          @_search="clickSwitch"
         />
         <TipBox v-show="true" />
       </template>
@@ -80,7 +80,7 @@
         </div>
       </template>
     </LeftRight>
-    <RightContent v-show="isShowRIght" />
+    <RightContent v-show="isShowRIght" @_c="clickSwitch" />
   </div>
 </template>
 
@@ -91,8 +91,8 @@ import { redomEchart } from "@/utils/methods";
 import { aaa } from "@/api/mockApi";
 import axios from "axios";
 export default {
-  name: "zhts",
   components: { RightContent },
+  name: "zhts",
   data () {
     return {
       isShowRIght: false,
@@ -168,7 +168,6 @@ export default {
       },
     };
   },
-  components: {},
   mounted () {
     // aaa().then(r=>{
     //   console.log(r)
@@ -185,8 +184,8 @@ export default {
     this.equipmentSituationFun();
   },
   methods: {
-    clickSwitch () {
-      // this.isShowRIght = !this.isShowRIght
+    clickSwitch (val) {
+      this.isShowRIght = !this.isShowRIght
     },
     // 园区情况
     parkCaseFun () {
