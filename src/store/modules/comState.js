@@ -3,10 +3,9 @@ export default {
     isShowLR: false, // 展示左右信息框
   },
   mutations: {
-    SET_ISSHOWLR (state, value) {
+    SET_ISSHOWLR(state, value) {
       state.isShowLR = value
     }
   },
-  actions: {
-  }
+  actions: {}
 }

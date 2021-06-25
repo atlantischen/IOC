@@ -1,18 +1,17 @@
-import { createStore } from 'vuex'
+import {
+  createStore
+} from 'vuex'
 
 export default createStore({
   state: {
-      unitySendData:{},
-      debugData:{}
-      
+    unitySendData: {},
+  
   },
   mutations: {
-      setData(state,payload){
-          state.unitySendData=payload
-      }
+    setData(state, payload) {
+      state.unitySendData = payload
+    }
   },
-  actions: {
-  },
-  modules: {
-  }
+  actions: {},
+  modules: {}
 })

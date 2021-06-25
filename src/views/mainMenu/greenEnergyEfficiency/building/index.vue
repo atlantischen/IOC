@@ -58,9 +58,14 @@ ul{
     left: 50%;
     transform: translateX(-50%);
     li{
-        width: 200px;
-        height: .625rem /* 50/80 */;
-        background-color: red;
+        width: 1.675rem /* 134/80 */;
+        height: .775rem /* 62/80 */ /* 50/80 */;
+        background-image: url('../../../../assets/img/mr_button.png');
+        background-repeat: no-repeat;
+        text-align: center;
+        line-height: .775rem;
+        font-size: .25rem /* 20/80 */;
+        color: #fff;
     }
 }
 </style>

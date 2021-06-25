@@ -1,6 +1,6 @@
 <template>
   <div class="searchBox p_x_c">
-    <el-input class="searchInput" :placeholder="text" v-model="input2">
+    <el-input class="searchInput" :placeholder="text" v-model="inputVal">
       <template #append>
         <span v-show="!ishowIcon">{{ bt_text }}</span>
         <el-button
@@ -33,14 +33,16 @@ export default {
       default: true,
     },
   },
-  data () {
-    return {};
-  },
   components: {},
+  data () {
+    return {
+      inputVal: ''
+    };
+  },
   mounted () { },
   methods: {
-    clickHandle (val) {
-      emit('search')
+    clickHandle () {
+      this.$emit("_search", this.inputVal)
     },
   },
 };

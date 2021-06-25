@@ -14,27 +14,9 @@
     <IOCRight>
       <div class="equipment_comparison">
         <div class="tittle">设备对比分析</div>
-        <div class="date">
-          <div class="year">
-            2021
-            <select name="2020" id="2020">
-              <option value="2021">2021</option>
-              <option value="2020">2020</option>
-              <option value="2019">2019</option>
-            </select>
-          </div>
-          <div class="month">
-            5月
-            <select name="2020" id="2020">
-              <option value="2021">12月</option>
-              <option value="2020">12月</option>
-              <option value="2019">12月</option>
-              <option value="2019">12月</option>
-              <option value="2019">12月</option>
-              <option value="2019">12月</option>
-              <option value="2019">12月</option>
-            </select>
-          </div>
+        <div class="select">
+            <DropDown :list="yearsList" name="label" @_cg="changePSYears" />
+            <DropDown :list="momthsList" name="label" @_cg="changePSYears" />
         </div>
         <div id="equipment_comparison"></div>
         <ul class="equipment_title">
@@ -83,12 +65,57 @@ export default {
           num:21,
           describe:'告警设备数'
         }
-      ]
+      ],
+        yearsList: [
+        {
+          label: "2021",
+          value: 2021,
+        },
+        {
+          label: "2020",
+          value: 2020,
+        },
+        {
+          label: "2019",
+          value: 2019,
+        },
+      ],
+      momthsList: [
+        {
+          label: "6月",
+          value: 6,
+        },
+        {
+          label: "5月",
+          value: 5,
+        },
+        {
+          label: "4月",
+          value: 4,
+        },
+        {
+          label: "3月",
+          value: 3,
+        },
+        {
+          label: "2月",
+          value: 2,
+        },
+        {
+          label: "1月",
+          value: 1,
+        },
+      ],
     };
   },
   components: {},
   methods: {
+     changePSMonths (val) {
+      console.log(val);
+    // this.AssetsAndEquipment();
 
+      // this.popularServiceFun();
+    },
     equipmentInit() {
       var dom = "equipment";
       var option = {
@@ -525,7 +552,7 @@ export default {
     }
   }
   .equipment_faulty {
-    margin-top: 1rem /* 80/80 */ /* 90/80 */;
+    margin-top: .7125rem /* 57/80 */ /* 80/80 */ /* 90/80 */;
     #equipment_faulty {
       width: 100%;
       height: 3.125rem /* 250/80 */ /* 500/80 */ /* 200/80 */ /* 150/80 */;
@@ -560,7 +587,7 @@ export default {
     }
   }
   .equipment_warning {
-    margin-top: .625rem /* 50/80 */ /* 60/80 */ /* 40/80 */ /* 80/80 */;
+    margin-top: .375rem /* 30/80 */ /* 50/80 */ /* 60/80 */ /* 40/80 */ /* 80/80 */;
     #equipment_warning {
       width: 100%;
       height: 3.75rem /* 300/80 */;

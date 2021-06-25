@@ -28,6 +28,10 @@
       </div>
       <div class="park_time">
         <div class="tittle">停车时长统计</div>
+         <div class="select">
+            <DropDown :list="yearsList" name="label" @_cg="changePSYears" />
+            <DropDown :list="momthsList" name="label" @_cg="changePSYears" />
+        </div>
         <div id="park_time"></div>
       </div>
     </IOCLeft>
@@ -36,10 +40,18 @@
     <IOCRight>
       <div class="revenue_total">
         <div class="tittle">营收总览</div>
+         <div class="select">
+            <DropDown :list="yearsList" name="label" @_cg="changePSYears" />
+        </div>
         <div id="revenue_total"></div>
       </div>
       <div class="car_trend">
         <div class="tittle">车辆进出场走势统计</div>
+         <div class="select">
+            <DropDown :list="yearsList" name="label" @_cg="changePSYears" />
+            <DropDown :list="momthsList" name="label" @_cg="changePSYears" />
+            <DropDown :list="dateList" name="label" @_cg="changePSYears" />
+        </div>
         <div id="car_trend"></div>
       </div>
     </IOCRight>
@@ -88,12 +100,80 @@ export default {
           totalPark:966
 
         }
+      ],
+       yearsList: [
+        {
+          label: "2021",
+          value: 2021,
+        },
+        {
+          label: "2020",
+          value: 2020,
+        },
+        {
+          label: "2019",
+          value: 2019,
+        },
+      ],
+      momthsList: [
+        {
+          label: "6月",
+          value: 6,
+        },
+        {
+          label: "5月",
+          value: 5,
+        },
+        {
+          label: "4月",
+          value: 4,
+        },
+        {
+          label: "3月",
+          value: 3,
+        },
+        {
+          label: "2月",
+          value: 2,
+        },
+        {
+          label: "1月",
+          value: 1,
+        },
+      ],
+      dateList:[
+        {
+          label: "24日",
+          value: 6,
+        },
+        {
+          label: "23日",
+          value: 5,
+        },
+        {
+          label: "21日",
+          value: 4,
+        },
+        {
+          label: "20日",
+          value: 3,
+        },
+        {
+          label: "19日",
+          value: 2,
+        },
+        {
+          label: "18日",
+          value: 1,
+        },
       ]
     };
   },
   components: {},
   methods: {
- 
+   changePSMonths (val) {
+      console.log(val);
+    },
     AssetsAndEquipment() {
       var dom = "park_time";
       var option = {
@@ -130,8 +210,8 @@ export default {
         grid: {
           top: "70",
           left: "0",
-          right: "30",
-          bottom: "50",
+          right: "0",
+          bottom: "0",
           containLabel: true,
         },
         tooltip: {
@@ -694,10 +774,11 @@ export default {
     }
   }
   .park_time {
-    margin-top: 0.375rem /* 30/80 */;
+    margin-top: .5375rem /* 43/80 */ /* 30/80 */;
     #park_time {
       width: 4.75rem /* 250/80 */;
       height: 3.5rem /* 280/80 */ /* 300/80 */ /* 160/80 */;
+      margin-top: .2125rem /* 17/80 */ /* 33/80 *//* 43/80 */;
     }
   }
   #revenue_total {

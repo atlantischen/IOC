@@ -15,7 +15,7 @@ export default {
   name: "MainMenu",
   data () {
     return {
-      isShow: false,
+      isShow: true,
       url:''
     };
   },
@@ -73,6 +73,14 @@ export default {
       });
     },
   },
+   beforeDestroy() {
+        const self = this;
+        window.removeEventListener("message", () => {
+            // self.init();
+        });
+    },
+
+
 };
 </script>
 

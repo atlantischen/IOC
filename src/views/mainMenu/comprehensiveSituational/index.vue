@@ -9,12 +9,12 @@
 <script>
 export default {
   name: 'comprehensiveSituational',
-  data(){
-    return{
+  data () {
+    return {
     }
   },
-  components:{ },
-  methods:{
+  components: {},
+  methods: {
   }
 }
 </script>

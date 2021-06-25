@@ -7,6 +7,11 @@
       </div>
       <div class="store_top">
         <div class="tittle">热门商家TOP5</div>
+        <div class="select">
+            <DropDown :list="yearsList" name="label" @_cg="changePSYears" />
+            <DropDown :list="momthsList" name="label" @_cg="changePSMonths" />
+        </div>
+    
         <div id="store_top"></div>
       </div>
       <div class="store_discount">
@@ -130,6 +135,46 @@ export default {
         require("../../../../assets/img/入驻商家5.png"),
         require("../../../../assets/img/入驻商家6.png"),
       ],
+       yearsList: [
+        {
+          label: "2021",
+          value: 2021,
+        },
+        {
+          label: "2020",
+          value: 2020,
+        },
+        {
+          label: "2019",
+          value: 2019,
+        },
+      ],
+      momthsList: [
+        {
+          label: "6月",
+          value: 6,
+        },
+        {
+          label: "5月",
+          value: 5,
+        },
+        {
+          label: "4月",
+          value: 4,
+        },
+        {
+          label: "3月",
+          value: 3,
+        },
+        {
+          label: "2月",
+          value: 2,
+        },
+        {
+          label: "1月",
+          value: 1,
+        },
+      ],
     };
   },
   components: {
@@ -137,6 +182,18 @@ export default {
     // Right
   },
   methods: {
+     changePSMonths (val) {
+      console.log(val);
+    this.AssetsAndEquipment();
+
+      // this.popularServiceFun();
+    },
+    changePSYears (val) {
+      console.log(val);
+    this.AssetsAndEquipment();
+
+      // this.popularServiceFun();
+    },
     meetEchartInit() {
       var dom = "store";
       var option = {
@@ -352,6 +409,7 @@ export default {
       width: 100%;
       height: 2.5rem /* 200/80 */;
     }
+   
   }
   .store_discount {
     color: #ffffff;
