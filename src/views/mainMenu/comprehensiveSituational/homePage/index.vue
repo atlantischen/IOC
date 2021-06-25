@@ -72,6 +72,7 @@ export default {
           type: 'PedestrianPosture',
           datas: {
             smooth: false,
+            unit: ["时间", "人"],
             names: ["办公人员", "访客"],
             xData: ["05:00", "06:00", "07:00", "08:00", "09:00", "10:00"],
             datas: [
@@ -149,6 +150,7 @@ export default {
           datas: {
             smooth: true,
             names: ["进", "出"],
+            unit: ["时间", "辆"],
             xData: ["00:00", "02:00", "04:00", "06:00", "08:00", "10:00", "12:00"],
             datas: [
               [7, 9, 3, 14, 9, 36, 23],

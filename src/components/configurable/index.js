@@ -8,17 +8,19 @@ import CurrentTrends from './currentTrends.vue'
 import FocusIndustry from './focusIndustry.vue'
 import CompaniesList from './companiesList.vue'
 import EnterprisesSettled from './enterprisesSettled.vue'
+import InvestmentSituation from './investmentSituation.vue'
 
 const configurable = {
   TheParkIs, // 园区情况
   PedestrianPosture, // 人行态势
-  TheParkOutputVal,
-  EnergyTrend, // 
+  TheParkOutputVal, // 园区产值
+  EnergyTrend, // 能耗态势
   EquipmentSituation, // 设备态势
   FavorablePolicy, // 优惠政策
   CurrentTrends, // 前言动态
   FocusIndustry, // 聚焦产业
   CompaniesList, // 企业列表
   EnterprisesSettled, // 待入驻企业
+  InvestmentSituation, // 招商情况
 }
 export default configurable

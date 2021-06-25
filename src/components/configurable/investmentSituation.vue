@@ -1,15 +1,7 @@
 <template>
-  <div class="pedestrianPostureAll">
+  <div class="investmentSituationAll">
     <div class="tittle">{{ title }}</div>
-    <div class="pedestrianPosture">
-      <ul class="pp_top">
-        <li class="y_c" v-for="(item, i) in datas.datas2" :key="i">
-          <span>{{ item.value }}</span>
-          <span>{{ item.name }}</span>
-        </li>
-      </ul>
-      <div :id="'pedestrianPostureEchart_' + ids"></div>
-    </div>
+    <div :id="'pedestrianPostureEchart_' + ids"></div>
   </div>
 </template>
 
@@ -17,7 +9,7 @@
 import * as echarts from "echarts";
 import { redomEchart, uuid } from "@/utils/methods";
 export default {
-  name: "pedestrianPostureAll",
+  name: "investmentSituationAll",
   props: {
     _data: {
       type: Object
@@ -147,7 +139,7 @@ export default {
         ],
         series: [],
       };
-      var color = ["#97c8ff", "#ffdd8d"],
+      var color = ["#fff", "#ffdd8d"],
         _data = [],
         _data2 = [],
         Linear = {
@@ -184,17 +176,17 @@ export default {
           name: names[j],
           type: "line",
           smooth: smooth,
-          areaStyle: {
-            normal: {
-              color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
-                ...Linear[j],
-              ]),
-            },
-          },
+          // areaStyle: {
+          //   normal: {
+          //     color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+          //       ...Linear[j],
+          //     ]),
+          //   },
+          // },
           itemStyle: {
             normal: {
               lineStyle: {
-                width: 0.5,
+                width: 0.8,
               },
             },
           },
@@ -202,7 +194,6 @@ export default {
           data: j == 0 ? _data : _data2,
         };
       }
-      option.xAxis.data.push("时间");
       redomEchart('pedestrianPostureEchart_' + this.ids, option);
     },
   }
@@ -212,11 +203,11 @@ export default {
 <style lang="less" scoped>
 @import "~@/style/gl.less";
 // 人行态势
-.pedestrianPostureAll {
+.investmentSituationAll {
   #pedestrianPostureEchart_,
   [id^="pedestrianPostureEchart_"] {
     width: 100%;
-    height: 2.125rem /* 170/80 */;
+    height: 2.75rem /* 220/80 */;
   }
   .pedestrianPosture {
     .pp_top {

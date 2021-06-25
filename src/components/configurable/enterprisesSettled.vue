@@ -42,10 +42,10 @@ export default {
 .enterprisesSettled {
   .enterprisesList {
     width: 100%;
-    height: 145px;
+    height: 1.8125rem /* 145/80 */;
     img {
-      .ioc_img(100px, 64px, 5px);
-      margin: 0 5px 10px;
+      .ioc_img(1.25rem /* 100/80 */, .8rem /* 64/80 */, .0625rem /* 5/80 */);
+      margin: 0 0.0625rem /* 5/80 */ 0.125rem /* 10/80 */;
       &:nth-child(3n) {
         margin-right: 0;
       }

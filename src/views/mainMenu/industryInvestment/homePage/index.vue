@@ -166,6 +166,22 @@ export default {
                 name: "中国建设银行",
                 src: require("@/assets/img/datas/qy_zgjsyh.png"),
               },
+              {
+                name: "升华集团",
+                src: require("@/assets/img/datas/qy_shjt.png"),
+              },
+              {
+                name: "一博科技",
+                src: require("@/assets/img/datas/qy_ybkj.png"),
+              },
+              {
+                name: "华夏视科集团",
+                src: require("@/assets/img/datas/qy_hx.png"),
+              },
+              {
+                name: "中国建设银行",
+                src: require("@/assets/img/datas/qy_zgjsyh.png"),
+              },
             ],
           }
         },
@@ -324,7 +340,7 @@ export default {
   #rentalAndSaleEchart_,
   [id^="rentalAndSaleEchart_"] {
     width: 100%;
-    height: 160px;
+    height: 2rem /* 160/80 */;
   }
 }
 </style>

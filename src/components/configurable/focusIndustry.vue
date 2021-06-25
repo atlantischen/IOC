@@ -150,6 +150,6 @@ export default {
 #focusIndustryEchart_,
 [id^="focusIndustryEchart_"] {
   width: 100%;
-  height: 190px;
+  height: 2.375rem /* 190/80 */;
 }
 </style>
