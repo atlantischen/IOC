@@ -1,5 +1,5 @@
 <template>
-  <ul class="box">
+  <ul class="box ioc_animated fadeInDownTop">
       <ul>
           <li v-for="(item,index) in list" :key="index">
               <div class="font_text">

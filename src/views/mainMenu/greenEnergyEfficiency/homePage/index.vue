@@ -5,7 +5,9 @@
       <div class="energy">
         <div class="tittle">本月能耗总览</div>
         <div class="energy_total">
-          <div class="energy_box"></div>
+          <div class="energy_box">
+            <div class="wave"></div>
+          </div>
           <div class="content">
             <span class="font_text">
             <NumCounter :value='43.24'></NumCounter>
@@ -526,6 +528,7 @@ export default {
     },
   },
   mounted() {
+
     this.trendInit();
     this.KPIint();
   },
@@ -545,16 +548,56 @@ export default {
         background-repeat: no-repeat;
         overflow: hidden;
         position: relative;
+          // animation: water-wave linear infinite;
 
-        &::before {
-          content: "";
+        .wave {
           width: 1.05rem /* 84/80 */;
-          height: 0.625rem /* 50/80 */;
+          height: 1.05rem /* 84/80 */;
           position: absolute;
-          left: 0.175rem /* 14/80 */ /* 24/80 */ /* 14/80 */;
-          bottom: 0.1875rem /* 15/80 */ /* 48/80 */ /* 15/80 */ /* 25/80 */
-            /* 15/80 */;
-          background-image: url("../../../../assets/img/16.png");
+          border-radius: 50%;
+          left: 0.175rem;
+          bottom: 0.1875rem;
+          overflow: hidden;
+          animation: water-wave linear infinite;
+
+          &::before{
+            position: absolute;
+            content:'';
+            top: 50%;
+            left: -50%;
+            // background: linear-gradient(to bottom right, #4695ED, #0C192A);
+            background: rgba(70, 149, 237, .6);
+            opacity: .7;
+            width: 200% /* 160/80 */ /* 84/80 */;
+            height: 200% /* 84/80 */;
+            border-radius: 35%;
+            animation: inherit;
+            animation-duration: 7s;
+          }
+          
+          
+          //  position: absolute;
+          //   top: 50%;
+          //   left: -50%;
+          //   background: red;
+          //   opacity: .7;
+          //   width: 2rem /* 160/80 */ /* 84/80 */;
+          //   height: 2rem /* 84/80 */;
+          //   border-radius: 35%;
+          //   animation: inherit;
+          //   animation-duration: 7s;
+          // content: "";
+          // width: 1.05rem /* 84/80 */;
+          // height: 0.625rem /* 50/80 */;
+          // position: absolute;
+          // left: 0.175rem /* 14/80 */ /* 24/80 */ /* 14/80 */;
+          // bottom: 0.1875rem /* 15/80 */ /* 48/80 */ /* 15/80 */ /* 25/80 */
+          //   /* 15/80 */;
+          // background-image: url("../../../../assets/img/16.png");
+        }
+         @keyframes  water-wave{
+            0% {transform: rotate(0deg);}
+            100% {transform: rotate(360deg);}
         }
         // background-size: 1.3125rem /* 105/80 */ 2.2375rem /* 179/80 */ ;
       }

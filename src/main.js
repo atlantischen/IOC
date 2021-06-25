@@ -20,10 +20,15 @@ import Tips from './components/tips.vue'  //提示组件
 import NumCounter from './components/numCounter.vue'  //数字累加组件
 
 import LeftRight from './components/leftRightPart.vue'
+import DropDown from './components/widget/dropDown.vue'
+import CenterDatas from './components/widget/centerDatas.vue'
+import SearchBox from './components/widget/searchBox.vue'
+import TipBox from './components/widget/tipBox.vue'
 
 import 'lib-flexible'
 import './plugins/rem.js'
 import './assets/css/reset.css' //公共样式重置
+// import './style/base.less' //公共样式重置
 import './style/animation.less' 
 import './style/index.less' //公共样式文件
 import 'animate.css' //引入动画
@@ -41,6 +46,10 @@ import './assets/font/iconfont/iconfont.css'
 import './assets/font/iconfont/iconfont.js'
 import 'animate.css' //引入动画
 app.component('LeftRight', LeftRight)
+app.component('DropDown', DropDown)
+app.component('CenterDatas', CenterDatas)
+app.component('SearchBox', SearchBox)
+app.component('TipBox', TipBox)
 app.use(ElementPlus, {
   locale
 })

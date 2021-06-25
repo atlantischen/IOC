@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import screenfull from 'screenfull'
+import screenfull from "screenfull";
 export default {
   name: 'App',
   data: function () {
@@ -27,28 +27,23 @@ export default {
        }
 
   },
-  created() {
 
-  },
+  created() {},
   mounted() {
-      window.addEventListener("message", this.event,true);
-
-    
-     
+    window.addEventListener("message", this.event, true);
   },
-  beforeDestory(){
-    window.removeEventListener("message", this.event,true);
+  beforeDestory() {
+    window.removeEventListener("message", this.event, true);
   },
-  watch: {
-  }
-}
+  watch: {},
+};
 </script>
 
 <style>
 #app {
   width: 100%;
   height: 100%;
-  font-family: 'Microsoft YaHei', Avenir, Helvetica, Arial, sans-serif;
+  font-family: "Microsoft YaHei", Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }

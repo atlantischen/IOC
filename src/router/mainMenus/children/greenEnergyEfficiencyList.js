@@ -30,5 +30,49 @@ export default [{
       title: '充电桩',
       isShow: true
     }
+  },
+  {
+    path: 'building',
+    name: 'building',
+    component: () => import('@/views/mainMenu/greenEnergyEfficiency/building/index.vue'),
+    meta: {
+      icon: 'icon-zonghe',
+      name: '整栋',
+      title: '整栋',
+      isShow: true
+    },
+    children:[
+      {
+        path: 'codesource',
+        name: 'codesource',
+        component: () => import('@/views/mainMenu/greenEnergyEfficiency/building/codesource.vue'),
+      },
+      {
+        path: 'airConditioner',
+        name: 'airConditioner',
+        component: () => import('@/views/mainMenu/greenEnergyEfficiency/building/airConditioner.vue'),
+      },
+      {
+        path: 'elevator',
+        name: 'elevator',
+        component: () => import('@/views/mainMenu/greenEnergyEfficiency/building/elevator.vue'),
+      },
+      {
+        path: 'lighting',
+        name: 'lighting',
+        component: () => import('@/views/mainMenu/greenEnergyEfficiency/building/lighting.vue'),
+      },
+      {
+        path: 'primaryAirSystem',
+        name: 'primaryAirSystem',
+        component: () => import('@/views/mainMenu/greenEnergyEfficiency/building/primaryAirSystem.vue'),
+      },
+      {
+        path: 'watersupply',
+        name: 'watersupply',
+        component: () => import('@/views/mainMenu/greenEnergyEfficiency/building/watersupply.vue'),
+      },
+
+    ]
   }
 ]

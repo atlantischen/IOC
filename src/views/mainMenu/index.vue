@@ -13,36 +13,34 @@
 <script>
 export default {
   name: "MainMenu",
-  data() {
+  data () {
     return {
-      isShow: true,
+      isShow: false,
       url:''
     };
   },
   computed: {
-    getUnityData() {
+    getUnityData () {
       return this.$store.state.unitySendData;
     },
   },
   watch: {
-    getUnityData(val) {
+    getUnityData (val) {
       // debugger;
-      let res =val
+      let res = val;
       if (res.action.indexOf("/") === 0) {
-        console.log(res.action,'我进来了！！！');
-          this.$router.push(res.action);
-       }
+        this.$router.push(res.action);
       }
+    },
   },
-  created() {
-     if (window.vuplex) {
-          this.addMessageListener();
-        } else {
-          window.addEventListener('vuplexready', this.addMessageListener);
-     };
+  created () {
+    if (window.vuplex) {
+      this.addMessageListener();
+    } else {
+      window.addEventListener("vuplexready", this.addMessageListener);
+    }
     window.addEventListener("message", (event) => {
        let res = JSON.parse(event.data)
-      //  let res = (event.data)
         this.$store.commit("setData", res);
         if (res.data === "IOCHOME") {
           
@@ -52,27 +50,28 @@ export default {
     if(this.getQueryString('debug')){
       this.url='';
       window.debug = true;
-      console.log('我是debug!!!!!!!!!!!');
-    }else{
-      this.url='http://172.21.70.246:8110/' 
-    };
-    console.log ("123");
+      console.log("我是debug!!!!!!!!!!!");
+    } else {
+      this.url = "http://172.21.70.246:8110";
+    }
+    console.log("123");
   },
   methods: {
-     getQueryString(name) {
+    getQueryString (name) {
       var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
       var r = window.location.search.substr(1).match(reg);
-      if (r != null) return unescape(r[2]); return null;
-      },
-    addMessageListener(){
-      window.vuplex.addEventListener('message', (event) =>{
-          let res = JSON.parse(event.data)
-            this.$store.commit("setData", res);
-            if(res&& res.lenght !=0){
-                 this.isShow= true
-            }
-          });
+      if (r != null) return unescape(r[2]);
+      return null;
+    },
+    addMessageListener () {
+      window.vuplex.addEventListener("message", (event) => {
+        let res = JSON.parse(event.data);
+        this.$store.commit("setData", res);
+        if (res && res.lenght != 0) {
+          this.isShow = true;
         }
+      });
+    },
   },
 };
 </script>
@@ -90,8 +89,6 @@ export default {
   height: 100%;
 }
 .comEntry {
-  // position: absolute;
-  // color: red;
-  // background: #000;
+
 }
 </style>
