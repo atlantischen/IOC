@@ -58,7 +58,7 @@
         var width = docEl.getBoundingClientRect().width;
         //根据项目的适配范围设置
         if (width / dpr < 1920) {
-            width = 1920 * dpr;
+            width = width * dpr;
         } else if (width / dpr > 5760) {
             width = 5760 * dpr;
         }
@@ -68,19 +68,6 @@
         flexible.rem = win.rem = rem;
     }
 
-    function refreshRem() {
-        var width = docEl.getBoundingClientRect().width;
-        //根据项目的适配范围设置
-        if (width / dpr < 960) {
-            width = 960 * dpr;
-        } else if (width / dpr > 5760) {
-            width = 5760 * dpr;
-        }
-        //根据设计稿宽度设置1rem代表多少像素，
-        rem = (width / 24);
-        docEl.style.fontSize = rem + 'px';
-        flexible.rem = win.rem = rem;
-    }
 
     win.addEventListener('resize', function () {
         clearTimeout(tid);

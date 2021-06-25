@@ -38,6 +38,6 @@ export function uuid() {
   uuid[14] = '4'
   uuid[19] = hexDigits.substr((uuid[19] & 0x3) | 0x8, 1)
   uuid[8] = uuid[13] = uuid[18] = uuid[23] = '-'
-  // return 'u' + uuid.join('').replaceAll('-', '')
+  // return 'u' + uuid.join('').replace('-', '')
   return 'u' + uuid.join('')
 }

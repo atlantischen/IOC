@@ -5,7 +5,7 @@ import {
 export default createStore({
   state: {
     unitySendData: {},
-    debugData: {}
+  
   },
   mutations: {
     setData(state, payload) {

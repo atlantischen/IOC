@@ -1,9 +1,6 @@
-
-
 <template>
   <!-- 绿色能效 -->
   <div class="greenEnergyEfficiency">
-    绿色能效
     <router-view></router-view>
   </div>
 </template>

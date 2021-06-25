@@ -7,6 +7,11 @@
       </div>
       <div class="store_top">
         <div class="tittle">热门商家TOP5</div>
+        <div class="select">
+            <DropDown :list="yearsList" name="label" @_cg="changePSYears" />
+            <DropDown :list="momthsList" name="label" @_cg="changePSMonths" />
+        </div>
+    
         <div id="store_top"></div>
       </div>
       <div class="store_discount">
@@ -64,7 +69,7 @@
         </div>
       </div>
       <div class="store_img">
-        <ul>
+        <ul class="scroll">
           <li v-for="(item, index) in imgList" :key="index">
             <img :src="item" alt="" />
           </li>
@@ -72,11 +77,21 @@
       </div>
       <div class="store_wait">
         <div class="tittle" @click="handleFullScreen">待入驻商家</div>
-        <ul>
+        <el-carousel class="swiper" indicator-position="outside"  :interval="3000">
+          <el-carousel-item v-for="item in 3" :key="item">
+          <ul>
           <li v-for="(item, index) in waitList" :key="index">
             <img :src="item" alt="" />
           </li>
         </ul>
+          </el-carousel-item>
+        </el-carousel>
+        <!-- <ul>
+
+          <li v-for="(item, index) in waitList" :key="index">
+            <img :src="item" alt="" />
+          </li>
+        </ul> -->
       </div>
     </IOCRight>
   </div>
@@ -102,6 +117,15 @@ export default {
         require("../../../../assets/img/99.png"),
         require("../../../../assets/img/100.png"),
         require("../../../../assets/img/101.png"),
+          require("../../../../assets/img/94.png"),
+        require("../../../../assets/img/95.png"),
+        require("../../../../assets/img/96.png"),
+        require("../../../../assets/img/97.png"),
+        require("../../../../assets/img/98.png"),
+        require("../../../../assets/img/99.png"),
+        require("../../../../assets/img/100.png"),
+        require("../../../../assets/img/101.png"),
+        
       ],
       waitList: [
         require("../../../../assets/img/入驻商家1.png"),
@@ -111,6 +135,46 @@ export default {
         require("../../../../assets/img/入驻商家5.png"),
         require("../../../../assets/img/入驻商家6.png"),
       ],
+       yearsList: [
+        {
+          label: "2021",
+          value: 2021,
+        },
+        {
+          label: "2020",
+          value: 2020,
+        },
+        {
+          label: "2019",
+          value: 2019,
+        },
+      ],
+      momthsList: [
+        {
+          label: "6月",
+          value: 6,
+        },
+        {
+          label: "5月",
+          value: 5,
+        },
+        {
+          label: "4月",
+          value: 4,
+        },
+        {
+          label: "3月",
+          value: 3,
+        },
+        {
+          label: "2月",
+          value: 2,
+        },
+        {
+          label: "1月",
+          value: 1,
+        },
+      ],
     };
   },
   components: {
@@ -118,16 +182,17 @@ export default {
     // Right
   },
   methods: {
-    drawLine(dom, option) {
-      // 基于准备好的dom，初始化echarts实例
-      let myChart = echarts.init(document.getElementById(dom));
-      let resizeDiv = document.getElementById(dom);
-      // 绘制图表
-      myChart.setOption(option);
-      let listener = function() {
-        myChart.resize();
-      };
-      EleResize.on(resizeDiv, listener);
+     changePSMonths (val) {
+      console.log(val);
+    this.AssetsAndEquipment();
+
+      // this.popularServiceFun();
+    },
+    changePSYears (val) {
+      console.log(val);
+    this.AssetsAndEquipment();
+
+      // this.popularServiceFun();
     },
     meetEchartInit() {
       var dom = "store";
@@ -191,7 +256,7 @@ export default {
           },
         ],
       };
-      this.drawLine(dom, option);
+       this.$redomEchart(dom, option);
     },
     AssetsAndEquipment() {
       var dom = "store_top";
@@ -310,7 +375,7 @@ export default {
           },
         ],
       };
-      this.drawLine(dom, option);
+       this.$redomEchart(dom, option);
     },
   },
   created() {},
@@ -344,6 +409,7 @@ export default {
       width: 100%;
       height: 2.5rem /* 200/80 */;
     }
+   
   }
   .store_discount {
     color: #ffffff;
@@ -419,6 +485,11 @@ export default {
   }
   .store_img {
     ul {
+      height: 4.15rem /* 332/80 */;
+      width: 3.875rem /* 310/80 */ /* 330/80 */;
+    margin: 0 auto;
+
+      overflow: auto;
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
@@ -436,6 +507,12 @@ export default {
     }
   }
   .store_wait {
+    .swiper{
+      // height: 2.5rem /* 200/80 */;
+      /deep/.el-carousel__container{
+        height: 1.65rem /* 132/80 */ !important;
+      }
+    }
     ul {
       display: flex;
       justify-content: center;

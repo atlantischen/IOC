@@ -5,36 +5,53 @@
       <div class="park">
         <div class="tittle">车位情况</div>
         <ul>
-          <li v-for="(item, index) in 3" :key="index">
-            <div class="floor">B{{ index + 1 }}</div>
+          <li v-for="(item, index) in parkList" :key="index">
+            <div class="floor">{{item.floor}}</div>
             <div class="present">
               <span>在场车位</span>
-              <span>532</span>
+              <span class="font_text">
+               <NumCounter :value='item.presencePark'></NumCounter>
+               </span>
             </div>
             <div class="free">
               <span>空余车位</span>
-              <span>532</span>
+              <span class="font_text">
+               <NumCounter :value='item.freePark'></NumCounter></span>
             </div>
             <div class="total">
               <span>总车位</span>
-              <span>532</span>
+              <span class="font_text">
+               <NumCounter :value='item.totalPark'></NumCounter></span>
             </div>
           </li>
         </ul>
       </div>
       <div class="park_time">
         <div class="tittle">停车时长统计</div>
+         <div class="select">
+            <DropDown :list="yearsList" name="label" @_cg="changePSYears" />
+            <DropDown :list="momthsList" name="label" @_cg="changePSYears" />
+        </div>
         <div id="park_time"></div>
       </div>
     </IOCLeft>
+    <Tips :list="list"></Tips>
     <!-- <div class="box"> eqweqe</div> -->
     <IOCRight>
       <div class="revenue_total">
         <div class="tittle">营收总览</div>
+         <div class="select">
+            <DropDown :list="yearsList" name="label" @_cg="changePSYears" />
+        </div>
         <div id="revenue_total"></div>
       </div>
       <div class="car_trend">
         <div class="tittle">车辆进出场走势统计</div>
+         <div class="select">
+            <DropDown :list="yearsList" name="label" @_cg="changePSYears" />
+            <DropDown :list="momthsList" name="label" @_cg="changePSYears" />
+            <DropDown :list="dateList" name="label" @_cg="changePSYears" />
+        </div>
         <div id="car_trend"></div>
       </div>
     </IOCRight>
@@ -43,30 +60,125 @@
 
 <script>
 import * as echarts from "echarts";
-import { EleResize } from "assets/js/echarts";
 export default {
   name: "homePage",
   data() {
-    return {};
+    return {
+      list:[
+        {
+          num:2465,
+          describe:'总车位数'
+        },
+         {
+          num:2084,
+          describe:'在场车辆'
+        },
+         {
+          num:381,
+          describe:'剩余车位'
+        },
+      ],
+      parkList:[
+        {
+          floor:'B1',
+          presencePark:553,
+          freePark:72,
+          totalPark:625
+
+        },
+         {
+          floor:'B2',
+          presencePark:755,
+          freePark:101,
+          totalPark:856
+
+         },
+         {
+          floor:'B3',
+          presencePark:903,
+          freePark:63,
+          totalPark:966
+
+        }
+      ],
+       yearsList: [
+        {
+          label: "2021",
+          value: 2021,
+        },
+        {
+          label: "2020",
+          value: 2020,
+        },
+        {
+          label: "2019",
+          value: 2019,
+        },
+      ],
+      momthsList: [
+        {
+          label: "6月",
+          value: 6,
+        },
+        {
+          label: "5月",
+          value: 5,
+        },
+        {
+          label: "4月",
+          value: 4,
+        },
+        {
+          label: "3月",
+          value: 3,
+        },
+        {
+          label: "2月",
+          value: 2,
+        },
+        {
+          label: "1月",
+          value: 1,
+        },
+      ],
+      dateList:[
+        {
+          label: "24日",
+          value: 6,
+        },
+        {
+          label: "23日",
+          value: 5,
+        },
+        {
+          label: "21日",
+          value: 4,
+        },
+        {
+          label: "20日",
+          value: 3,
+        },
+        {
+          label: "19日",
+          value: 2,
+        },
+        {
+          label: "18日",
+          value: 1,
+        },
+      ]
+    };
   },
   components: {},
   methods: {
-    drawLine(dom, option) {
-      // 基于准备好的dom，初始化echarts实例
-      let myChart = echarts.init(document.getElementById(dom));
-      let resizeDiv = document.getElementById(dom);
-      // 绘制图表
-      myChart.setOption(option);
-      let listener = function () {
-        myChart.resize();
-      };
-      EleResize.on(resizeDiv, listener);
+   changePSMonths (val) {
+      console.log(val);
     },
     AssetsAndEquipment() {
       var dom = "park_time";
       var option = {
         title: {
-          text: "{a|停车数量合计：}{b|" + 301 + "}{c|辆}",
+          text: "{a|停车数量合计：}{b|" + 1369 +  "}{c|辆}",
           left: "0",
           top: "10",
           // subtext: '会议数',
@@ -84,7 +196,7 @@ export default {
               b: {
                 fontSize: 20,
                 color: "ffff",
-                fontFamily: "font00",
+                fontFamily: "BYfont",
               },
               c: {
                 fontSize: 12,
@@ -98,8 +210,8 @@ export default {
         grid: {
           top: "70",
           left: "0",
-          right: "30",
-          bottom: "50",
+          right: "0",
+          bottom: "0",
           containLabel: true,
         },
         tooltip: {
@@ -213,7 +325,7 @@ export default {
           },
         ],
       };
-      this.drawLine(dom, option);
+       this.$redomEchart(dom, option);
     },
     revenueInit() {
       var dom = "revenue_total";
@@ -237,7 +349,7 @@ export default {
               b: {
                 fontSize: 20,
                 color: "ffff",
-                fontFamily: "font00",
+                fontFamily: "BYfont",
               },
               c: {
                 fontSize: 12,
@@ -394,7 +506,7 @@ export default {
           },
         ],
       };
-      this.drawLine(dom, option);
+       this.$redomEchart(dom, option);
     },
     trendInit() {
       var dom = "car_trend";
@@ -606,7 +718,7 @@ export default {
           },
         ],
       };
-      this.drawLine(dom, option);
+     this.$redomEchart(dom, option);
     },
   },
   mounted() {
@@ -655,8 +767,6 @@ export default {
       }
       span:nth-child(2) {
         font-size: 0.25rem /* 20/80 */;
-        font-family: BY-Forvi-[C]3.00;
-        font-weight: bold;
         color: #ffffff;
         line-height: 0.3125rem /* 25/80 */;
         text-align: center;
@@ -664,10 +774,11 @@ export default {
     }
   }
   .park_time {
-    margin-top: 0.375rem /* 30/80 */;
+    margin-top: .5375rem /* 43/80 */ /* 30/80 */;
     #park_time {
       width: 4.75rem /* 250/80 */;
       height: 3.5rem /* 280/80 */ /* 300/80 */ /* 160/80 */;
+      margin-top: .2125rem /* 17/80 */ /* 33/80 *//* 43/80 */;
     }
   }
   #revenue_total {

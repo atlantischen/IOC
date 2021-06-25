@@ -15,8 +15,8 @@ export default {
   name: "MainMenu",
   data () {
     return {
-      isShow: true,
-      url: "",
+      isShow: false,
+      url: ''
     };
   },
   computed: {
@@ -29,7 +29,6 @@ export default {
       // debugger;
       let res = val;
       if (res.action.indexOf("/") === 0) {
-        console.log(res.action, "我进来了！！！");
         this.$router.push(res.action);
       }
     },
@@ -41,18 +40,19 @@ export default {
       window.addEventListener("vuplexready", this.addMessageListener);
     }
     window.addEventListener("message", (event) => {
-      let res = JSON.parse(event.data);
+      let res = JSON.parse(event.data)
       this.$store.commit("setData", res);
       if (res.data === "IOCHOME") {
+
         this.isShow = true;
       }
     });
-    if (this.getQueryString("debug")) {
-      this.url = "";
+    if (this.getQueryString('debug')) {
+      this.url = '';
       window.debug = true;
       console.log("我是debug!!!!!!!!!!!");
     } else {
-      this.url = "http://172.21.70.246:8110/";
+      this.url = "http://172.21.70.246:8110";
     }
     console.log("123");
   },
@@ -73,6 +73,14 @@ export default {
       });
     },
   },
+  beforeDestroy () {
+    const self = this;
+    window.removeEventListener("message", () => {
+      // self.init();
+    });
+  },
+
+
 };
 </script>
 
@@ -89,7 +97,5 @@ export default {
   height: 100%;
 }
 .comEntry {
-  // position: absolute;
-  // color: red;
 }
 </style>
