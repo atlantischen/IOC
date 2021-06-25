@@ -4,8 +4,8 @@ export default [{
     component: () => import('@/views/mainMenu/theParkBusiness/homePage/index.vue'),
     meta: {
       icon: 'icon-zonghe',
-      name: '',
-      title: '',
+      name: '园区商业',
+      title: '园区商业',
       isShow: true
     }
   },

@@ -9,6 +9,8 @@ import FocusIndustry from './focusIndustry.vue'
 import CompaniesList from './companiesList.vue'
 import EnterprisesSettled from './enterprisesSettled.vue'
 import InvestmentSituation from './investmentSituation.vue'
+import ShapeOfMountain from './shapeOfMountain.vue'
+import WaterPolo from './waterPolo.vue'
 
 const configurable = {
   TheParkIs, // 园区情况
@@ -22,5 +24,7 @@ const configurable = {
   CompaniesList, // 企业列表
   EnterprisesSettled, // 待入驻企业
   InvestmentSituation, // 招商情况
+  ShapeOfMountain, // 象形柱图
+  WaterPolo, // 水球图
 }
 export default configurable

@@ -4,8 +4,8 @@ export default [{
     component: () => import('@/views/mainMenu/greenEnergyEfficiency/homePage/index.vue'),
     meta: {
       icon: 'icon-zonghe',
-      name: '',
-      title: '',
+      name: '绿色能效',
+      title: '绿色能效',
       isShow: true
     }
   },

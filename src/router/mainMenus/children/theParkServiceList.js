@@ -4,8 +4,8 @@ export default [{
     component: () => import('@/views/mainMenu/theParkService/homePage/index.vue'),
     meta: {
       icon: 'icon-zonghe',
-      name: '',
-      title: '',
+      name: '园区服务',
+      title: '园区服务',
       isShow: true
     }
   },

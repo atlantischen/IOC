@@ -12,7 +12,7 @@
           :text="'搜园区建筑、搜企业、搜商家'"
           @_search="clickSwitch"
         />
-        <TipBox v-show="true" />
+        <TipBox :_data="tipList" @close="showTipBoxHandle" />
       </template>
       <template #right>
         <Allcom :_Info="rightInfo" />
@@ -201,6 +201,7 @@ export default {
         }
       ],
       isShowRIght: false,
+      isShowTipBox: true,
       centerDatasList: [
         {
           name: "园区总人数",
@@ -218,6 +219,11 @@ export default {
           name: "设备异常数",
           val: 16,
         },
+      ],
+      tipList: [
+        {
+          text: '告警！2021-04-30 15:00{李玲}在{公寓广场}发生了{黑名单告警}'
+        }
       ]
     };
   },
@@ -230,6 +236,8 @@ export default {
     // })
   },
   methods: {
+    showTipBoxHandle (val) {
+    },
     clickSwitch (val) {
       this.isShowRIght = !this.isShowRIght
     }
