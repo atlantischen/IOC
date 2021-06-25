@@ -17,7 +17,6 @@
 
 <script>
 import * as echarts from "echarts";
-import { redomEchart } from "@/utils/methods";
 export default {
   name: "rightContent",
   data () {

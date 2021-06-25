@@ -62,7 +62,7 @@ export default {
     min-height: 6.25rem /* 500/80 */;
     transform: translateY(-50%);
     -webkit-transform: translateY(-50%);
-    background: rgba(0, 0, 0, 0.7);
+    // background: rgba(0, 0, 0, 0.7);
     z-index: 100;
   }
   .z_left {

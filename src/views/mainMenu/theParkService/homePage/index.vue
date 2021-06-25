@@ -97,7 +97,6 @@
 
 <script>
 import * as echarts from "echarts";
-import { redomEchart } from "@/utils/methods";
 export default {
   name: "homePage",
   data () {
@@ -460,7 +459,7 @@ export default {
           },
         ],
       };
-      redomEchart("popularServiceEchart", option);
+      this.$redomEchart("popularServiceEchart", option);
     },
     totalServicesFun () {
       var names = [],
@@ -631,7 +630,7 @@ export default {
           },
         };
       }
-      redomEchart("totalServicesEchart", option);
+      this.$redomEchart("totalServicesEchart", option);
     },
     distributionServicesFun () {
       var j = 0, colors = [
@@ -753,7 +752,7 @@ export default {
         }
         )
       }
-      redomEchart("distributionServicesEchart", option);
+      this.$redomEchart("distributionServicesEchart", option);
     },
   },
 };

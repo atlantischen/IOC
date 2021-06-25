@@ -6,31 +6,33 @@
         <div class="tittle">车位情况</div>
         <ul>
           <li v-for="(item, index) in parkList" :key="index">
-            <div class="floor">{{item.floor}}</div>
+            <div class="floor">{{ item.floor }}</div>
             <div class="present">
               <span>在场车位</span>
               <span class="font_text">
-               <NumCounter :value='item.presencePark'></NumCounter>
-               </span>
+                <NumCounter :value="item.presencePark"></NumCounter>
+              </span>
             </div>
             <div class="free">
               <span>空余车位</span>
               <span class="font_text">
-               <NumCounter :value='item.freePark'></NumCounter></span>
+                <NumCounter :value="item.freePark"></NumCounter
+              ></span>
             </div>
             <div class="total">
               <span>总车位</span>
               <span class="font_text">
-               <NumCounter :value='item.totalPark'></NumCounter></span>
+                <NumCounter :value="item.totalPark"></NumCounter
+              ></span>
             </div>
           </li>
         </ul>
       </div>
       <div class="park_time">
         <div class="tittle">停车时长统计</div>
-         <div class="select">
-            <DropDown :list="yearsList" name="label" @_cg="changePSYears" />
-            <DropDown :list="momthsList" name="label" @_cg="changePSYears" />
+        <div class="select">
+          <DropDown :list="yearsList" name="label" @_cg="changePSYears" />
+          <DropDown :list="momthsList" name="label" @_cg="changePSYears" />
         </div>
         <div id="park_time"></div>
       </div>
@@ -40,17 +42,17 @@
     <IOCRight>
       <div class="revenue_total">
         <div class="tittle">营收总览</div>
-         <div class="select">
-            <DropDown :list="yearsList" name="label" @_cg="changePSYears" />
+        <div class="select">
+          <DropDown :list="yearsList" name="label" @_cg="changePSYears" />
         </div>
         <div id="revenue_total"></div>
       </div>
       <div class="car_trend">
         <div class="tittle">车辆进出场走势统计</div>
-         <div class="select">
-            <DropDown :list="yearsList" name="label" @_cg="changePSYears" />
-            <DropDown :list="momthsList" name="label" @_cg="changePSYears" />
-            <DropDown :list="dateList" name="label" @_cg="changePSYears" />
+        <div class="select">
+          <DropDown :list="yearsList" name="label" @_cg="changePSYears" />
+          <DropDown :list="momthsList" name="label" @_cg="changePSYears" />
+          <DropDown :list="dateList" name="label" @_cg="changePSYears" />
         </div>
         <div id="car_trend"></div>
       </div>
@@ -62,46 +64,46 @@
 import * as echarts from "echarts";
 export default {
   name: "homePage",
-  data() {
+  data () {
     return {
-      list:[
+      list: [
         {
-          num:2465,
-          describe:'总车位数'
+          num: 2465,
+          describe: '总车位数'
         },
-         {
-          num:2084,
-          describe:'在场车辆'
+        {
+          num: 2084,
+          describe: '在场车辆'
         },
-         {
-          num:381,
-          describe:'剩余车位'
+        {
+          num: 381,
+          describe: '剩余车位'
         },
       ],
-      parkList:[
+      parkList: [
         {
-          floor:'B1',
-          presencePark:553,
-          freePark:72,
-          totalPark:625
+          floor: 'B1',
+          presencePark: 553,
+          freePark: 72,
+          totalPark: 625
 
         },
-         {
-          floor:'B2',
-          presencePark:755,
-          freePark:101,
-          totalPark:856
+        {
+          floor: 'B2',
+          presencePark: 755,
+          freePark: 101,
+          totalPark: 856
 
-         },
-         {
-          floor:'B3',
-          presencePark:903,
-          freePark:63,
-          totalPark:966
+        },
+        {
+          floor: 'B3',
+          presencePark: 903,
+          freePark: 63,
+          totalPark: 966
 
         }
       ],
-       yearsList: [
+      yearsList: [
         {
           label: "2021",
           value: 2021,
@@ -141,7 +143,7 @@ export default {
           value: 1,
         },
       ],
-      dateList:[
+      dateList: [
         {
           label: "24日",
           value: 6,
@@ -171,14 +173,14 @@ export default {
   },
   components: {},
   methods: {
-   changePSMonths (val) {
+    changePSMonths (val) {
       console.log(val);
     },
-    AssetsAndEquipment() {
+    AssetsAndEquipment () {
       var dom = "park_time";
       var option = {
         title: {
-          text: "{a|停车数量合计：}{b|" + 1369 +  "}{c|辆}",
+          text: "{a|停车数量合计：}{b|" + 1369 + "}{c|辆}",
           left: "0",
           top: "10",
           // subtext: '会议数',
@@ -325,9 +327,9 @@ export default {
           },
         ],
       };
-       this.$redomEchart(dom, option);
+      this.$redomEchart(dom, option);
     },
-    revenueInit() {
+    revenueInit () {
       var dom = "revenue_total";
       var option = {
         title: {
@@ -374,7 +376,7 @@ export default {
           trigger: "axis",
         },
         legend: {
-          top:50,
+          top: 50,
           right: 0,
           data: ["临时卡", "月卡"],
           textStyle: {
@@ -506,9 +508,9 @@ export default {
           },
         ],
       };
-       this.$redomEchart(dom, option);
+      this.$redomEchart(dom, option);
     },
-    trendInit() {
+    trendInit () {
       var dom = "car_trend";
       var option = {
         grid: {
@@ -718,10 +720,10 @@ export default {
           },
         ],
       };
-     this.$redomEchart(dom, option);
+      this.$redomEchart(dom, option);
     },
   },
-  mounted() {
+  mounted () {
     this.AssetsAndEquipment();
     this.revenueInit();
     this.trendInit();
@@ -774,22 +776,22 @@ export default {
     }
   }
   .park_time {
-    margin-top: .5375rem /* 43/80 */ /* 30/80 */;
+    margin-top: 0.5375rem /* 43/80 */ /* 30/80 */;
     #park_time {
       width: 4.75rem /* 250/80 */;
       height: 3.5rem /* 280/80 */ /* 300/80 */ /* 160/80 */;
-      margin-top: .2125rem /* 17/80 */ /* 33/80 *//* 43/80 */;
+      margin-top: 0.2125rem /* 17/80 */ /* 33/80 */;
     }
   }
   #revenue_total {
-    width: 4.375rem /* 350/80 */ /* 300/80 */ /* 320/80 */ /* 300/80 */ /* 400/80 */
-      /* 200/80 */ /* 250/80 */;
+    width: 4.375rem /* 350/80 */ /* 300/80 */ /* 320/80 */ /* 300/80 */
+      /* 400/80 */ /* 200/80 */ /* 250/80 */;
     height: 3.5rem /* 280/80 */ /* 300/80 */ /* 160/80 */;
   }
   .car_trend {
     margin-top: 0.375rem /* 30/80 */;
     #car_trend {
-      width: 4.375rem  /* 300/80 */ /* 320/80 */ /* 300/80 */ /* 400/80 */
+      width: 4.375rem /* 300/80 */ /* 320/80 */ /* 300/80 */ /* 400/80 */
         /* 200/80 */ /* 250/80 */;
       height: 3.5rem /* 280/80 */ /* 300/80 */ /* 160/80 */;
     }

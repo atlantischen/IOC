@@ -19,7 +19,6 @@
 
 <script>
 import * as echarts from "echarts";
-import { redomEchart } from "@/utils/methods";
 export default {
   name: "homePage",
   data () {
@@ -328,7 +327,7 @@ export default {
           name: optionName[i],
         };
       }
-      redomEchart("rentalAndSaleEchart_", option);
+      this.$redomEchart("rentalAndSaleEchart_", option);
     },
   },
 };

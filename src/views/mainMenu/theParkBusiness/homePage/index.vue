@@ -8,10 +8,9 @@
       <div class="store_top">
         <div class="tittle">热门商家TOP5</div>
         <div class="select">
-            <DropDown :list="yearsList" name="label" @_cg="changePSYears" />
-            <DropDown :list="momthsList" name="label" @_cg="changePSMonths" />
+          <DropDown :list="yearsList" name="label" @_cg="changePSYears" />
+          <DropDown :list="momthsList" name="label" @_cg="changePSMonths" />
         </div>
-    
         <div id="store_top"></div>
       </div>
       <div class="store_discount">
@@ -77,13 +76,17 @@
       </div>
       <div class="store_wait">
         <div class="tittle" @click="handleFullScreen">待入驻商家</div>
-        <el-carousel class="swiper" indicator-position="outside"  :interval="3000">
+        <el-carousel
+          class="swiper"
+          indicator-position="outside"
+          :interval="3000"
+        >
           <el-carousel-item v-for="item in 3" :key="item">
-          <ul>
-          <li v-for="(item, index) in waitList" :key="index">
-            <img :src="item" alt="" />
-          </li>
-        </ul>
+            <ul>
+              <li v-for="(item, index) in waitList" :key="index">
+                <img :src="item" alt="" />
+              </li>
+            </ul>
           </el-carousel-item>
         </el-carousel>
         <!-- <ul>
@@ -102,7 +105,7 @@ import * as echarts from "echarts";
 import { EleResize } from "assets/js/echarts";
 export default {
   name: "HomePage",
-  data() {
+  data () {
     return {
       //   isShow:true,
       fade: false,
@@ -117,7 +120,7 @@ export default {
         require("../../../../assets/img/99.png"),
         require("../../../../assets/img/100.png"),
         require("../../../../assets/img/101.png"),
-          require("../../../../assets/img/94.png"),
+        require("../../../../assets/img/94.png"),
         require("../../../../assets/img/95.png"),
         require("../../../../assets/img/96.png"),
         require("../../../../assets/img/97.png"),
@@ -125,7 +128,7 @@ export default {
         require("../../../../assets/img/99.png"),
         require("../../../../assets/img/100.png"),
         require("../../../../assets/img/101.png"),
-        
+
       ],
       waitList: [
         require("../../../../assets/img/入驻商家1.png"),
@@ -135,7 +138,7 @@ export default {
         require("../../../../assets/img/入驻商家5.png"),
         require("../../../../assets/img/入驻商家6.png"),
       ],
-       yearsList: [
+      yearsList: [
         {
           label: "2021",
           value: 2021,
@@ -182,19 +185,19 @@ export default {
     // Right
   },
   methods: {
-     changePSMonths (val) {
+    changePSMonths (val) {
       console.log(val);
-    this.AssetsAndEquipment();
+      this.AssetsAndEquipment();
 
       // this.popularServiceFun();
     },
     changePSYears (val) {
       console.log(val);
-    this.AssetsAndEquipment();
+      this.AssetsAndEquipment();
 
       // this.popularServiceFun();
     },
-    meetEchartInit() {
+    meetEchartInit () {
       var dom = "store";
       var option = {
         tooltip: {
@@ -227,7 +230,7 @@ export default {
             fontSize: 12,
             opacity: 0.7,
           },
-          formatter: function(name) {
+          formatter: function (name) {
             var i = 0;
             i += 1;
             return name + "  " + "29.2%";
@@ -256,9 +259,9 @@ export default {
           },
         ],
       };
-       this.$redomEchart(dom, option);
+      this.$redomEchart(dom, option);
     },
-    AssetsAndEquipment() {
+    AssetsAndEquipment () {
       var dom = "store_top";
       var option = {
         title: {
@@ -319,7 +322,7 @@ export default {
             type: "value",
             splitNumber: 2,
             axisLabel: {
-              formatter: function(value) {
+              formatter: function (value) {
                 return value;
               },
             },
@@ -375,12 +378,12 @@ export default {
           },
         ],
       };
-       this.$redomEchart(dom, option);
+      this.$redomEchart(dom, option);
     },
   },
-  created() {},
-  destroyed() {},
-  mounted() {
+  created () { },
+  destroyed () { },
+  mounted () {
     this.meetEchartInit();
     this.AssetsAndEquipment();
 
@@ -409,7 +412,6 @@ export default {
       width: 100%;
       height: 2.5rem /* 200/80 */;
     }
-   
   }
   .store_discount {
     color: #ffffff;
@@ -487,7 +489,7 @@ export default {
     ul {
       height: 4.15rem /* 332/80 */;
       width: 3.875rem /* 310/80 */ /* 330/80 */;
-    margin: 0 auto;
+      margin: 0 auto;
 
       overflow: auto;
       display: flex;
@@ -507,9 +509,9 @@ export default {
     }
   }
   .store_wait {
-    .swiper{
+    .swiper {
       // height: 2.5rem /* 200/80 */;
-      /deep/.el-carousel__container{
+      /deep/.el-carousel__container {
         height: 1.65rem /* 132/80 */ !important;
       }
     }

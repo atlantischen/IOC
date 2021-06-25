@@ -6,7 +6,6 @@
 </template>
 
 <script>
-import { redomEchart, uuid } from "@/utils/methods";
 export default {
   name: "theParkIsAll",
   props: {
@@ -17,7 +16,7 @@ export default {
   data () {
     return {
       ...this._data,
-      ids: uuid()
+      ids: this.$uuid()
     }
   },
   mounted () {
@@ -138,7 +137,7 @@ export default {
           name: optionName[i],
         };
       }
-      redomEchart("focusIndustryEchart_" + this.ids, option);
+      this.$redomEchart("focusIndustryEchart_" + this.ids, option);
     }
   }
 };

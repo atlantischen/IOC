@@ -25,7 +25,6 @@
 <script>
 import RightContent from './components/rightContent.vue'
 import * as echarts from "echarts";
-import { redomEchart, renderHtml } from "@/utils/methods";
 import { aaa } from "@/api/mockApi";
 import axios from "axios";
 export default {

@@ -15,20 +15,20 @@
       <div class="equipment_comparison">
         <div class="tittle">设备对比分析</div>
         <div class="select">
-            <DropDown :list="yearsList" name="label" @_cg="changePSYears" />
-            <DropDown :list="momthsList" name="label" @_cg="changePSYears" />
+          <DropDown :list="yearsList" name="label" @_cg="changePSYears" />
+          <DropDown :list="momthsList" name="label" @_cg="changePSYears" />
         </div>
         <div id="equipment_comparison"></div>
         <ul class="equipment_title">
-          <li >
+          <li>
             <div class="font_text">15</div>
             <div>故障数量</div>
           </li>
-           <li >
+          <li>
             <div class="font_text">67</div>
             <div>预警数量</div>
           </li>
-           <li >
+          <li>
             <div class="font_text">36</div>
             <div>报警数量</div>
           </li>
@@ -46,27 +46,27 @@
 import * as echarts from "echarts";
 export default {
   name: "homePage",
-  data() {
+  data () {
     return {
-      list:[
+      list: [
         {
-          num:33526,
-          describe:'设备总数'
+          num: 33526,
+          describe: '设备总数'
         },
-         {
-          num:33423,
-          describe:'在线设备数'
+        {
+          num: 33423,
+          describe: '在线设备数'
         },
-         {
-          num:104,
-          describe:'离线设备数'
+        {
+          num: 104,
+          describe: '离线设备数'
         },
-         {
-          num:21,
-          describe:'告警设备数'
+        {
+          num: 21,
+          describe: '告警设备数'
         }
       ],
-        yearsList: [
+      yearsList: [
         {
           label: "2021",
           value: 2021,
@@ -110,13 +110,13 @@ export default {
   },
   components: {},
   methods: {
-     changePSMonths (val) {
+    changePSMonths (val) {
       console.log(val);
-    // this.AssetsAndEquipment();
+      // this.AssetsAndEquipment();
 
       // this.popularServiceFun();
     },
-    equipmentInit() {
+    equipmentInit () {
       var dom = "equipment";
       var option = {
         grid: {
@@ -173,7 +173,7 @@ export default {
             type: "value",
             splitNumber: 2,
             axisLabel: {
-              formatter: function(value) {
+              formatter: function (value) {
                 return value;
               },
             },
@@ -231,7 +231,7 @@ export default {
       };
       this.$redomEchart(dom, option);
     },
-    equipmentFaultyInit() {
+    equipmentFaultyInit () {
       var dom = "equipment_faulty";
       var datas = [
         [
@@ -247,7 +247,7 @@ export default {
 
       var option = {
 
-        series: datas.map(function(data, idx) {
+        series: datas.map(function (data, idx) {
           var top = idx * 33.3;
           return {
             type: "pie",
@@ -289,7 +289,7 @@ export default {
               length2: 120,
               maxSurfaceAngle: 80,
             },
-            labelLayout: function(params) {
+            labelLayout: function (params) {
               var isLeft = params.labelRect.x < myChart.getWidth() / 2;
               var points = params.labelLinePoints;
               // Update the end point.
@@ -308,7 +308,7 @@ export default {
       this.$redomEchart(dom, option);
 
     },
-    equipmentWarningInit() {
+    equipmentWarningInit () {
       var dom = "equipment_warning";
       var option = {
         grid: {
@@ -374,7 +374,7 @@ export default {
             type: "value",
             splitNumber: 2,
             axisLabel: {
-              formatter: function(value) {
+              formatter: function (value) {
                 return value;
               },
             },
@@ -430,10 +430,10 @@ export default {
           },
         ],
       };
-            this.$redomEchart(dom, option);
+      this.$redomEchart(dom, option);
 
     },
-    equipmentComparisonInit() {
+    equipmentComparisonInit () {
       var dom = "equipment_comparison";
       var data = [-2.54, 4.74, 2.54];
       var option = {
@@ -515,8 +515,8 @@ export default {
                   formatter: "{img1|}{c}%",
                   rich: {
                     img1: {
-                      width:17,
-                      height:27,
+                      width: 17,
+                      height: 27,
                       backgroundColor: {
                         image: item > 0 ? "/1.png" : "/2.png",
                       },
@@ -533,7 +533,7 @@ export default {
 
     },
   },
-  mounted() {
+  mounted () {
     this.equipmentInit();
     this.equipmentFaultyInit();
     this.equipmentWarningInit();
@@ -552,7 +552,7 @@ export default {
     }
   }
   .equipment_faulty {
-    margin-top: .7125rem /* 57/80 */ /* 80/80 */ /* 90/80 */;
+    margin-top: 0.7125rem /* 57/80 */ /* 80/80 */ /* 90/80 */;
     #equipment_faulty {
       width: 100%;
       height: 3.125rem /* 250/80 */ /* 500/80 */ /* 200/80 */ /* 150/80 */;
@@ -566,15 +566,14 @@ export default {
     }
     #equipment_comparison {
       width: 100%;
-      height:2.25rem /* 180/80 */ /* 200/80 *//* 150/80 */ /* 100/80 */ /* 200/80 */ /* 220/80 */
-        /* 250/80 */ /* 300/80 */;
+      height: 2.25rem /* 180/80 */ /* 200/80 */ /* 250/80 */ /* 300/80 */;
     }
   }
   .equipment_title {
     color: #fff;
     display: flex;
     justify-content: space-around;
-    margin-top: .25rem /* 20/80 */;
+    margin-top: 0.25rem /* 20/80 */;
     & > li > {
       text-align: center;
       & > div:nth-child(1) {
@@ -587,7 +586,7 @@ export default {
     }
   }
   .equipment_warning {
-    margin-top: .375rem /* 30/80 */ /* 50/80 */ /* 60/80 */ /* 40/80 */ /* 80/80 */;
+    margin-top: 0.375rem /* 30/80 */;
     #equipment_warning {
       width: 100%;
       height: 3.75rem /* 300/80 */;

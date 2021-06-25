@@ -17,7 +17,6 @@
 </template>
 
 <script>
-import { redomEchart, uuid } from "@/utils/methods";
 export default {
   name: "theParkIsAll",
   props: {
@@ -28,7 +27,7 @@ export default {
   data () {
     return {
       ...this._data,
-      ids: uuid()
+      ids: this.$uuid()
     }
   },
   mounted () {
@@ -166,7 +165,7 @@ export default {
           }
           // option.series[0].label.distance = -datas[i][j].data[0]
         }
-        redomEchart("parkCaseEchart_" + i + this.ids, option);
+        this.$redomEchart("parkCaseEchart_" + i + this.ids, option);
       }
     },
     parkCaseFun2 (val) {
@@ -389,7 +388,7 @@ export default {
             },
           ],
         };
-        redomEchart("minEchart_" + i + this.ids, option);
+        this.$redomEchart("minEchart_" + i + this.ids, option);
       }
     }
   }

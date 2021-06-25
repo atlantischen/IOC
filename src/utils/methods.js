@@ -8,7 +8,7 @@ import * as echarts from 'echarts';
  * @param {val  bool}
  * @returns {handle}
  */
-export function redomEchart(dom, option) {
+var redomEchart = function redomEchart(dom, option) {
   let resizeDiv = document.getElementById(dom)
   let myChart = null
   myChart = echarts.init(resizeDiv)
@@ -29,7 +29,7 @@ export function redomEchart(dom, option) {
  * @param {val  bool}
  * @returns {handle}
  */
-export function uuid() {
+var uuid = function uuid() {
   var uuid = []
   var hexDigits = '0123456789abcdefghijklmnopqrstuvwxyz'
   for (var i = 0; i < 36; i++) {
@@ -41,3 +41,8 @@ export function uuid() {
   // return 'u' + uuid.join('').replace('-', '')
   return 'u' + uuid.join('')
 }
+const fun = {
+  redomEchart,
+  uuid
+}
+export default fun

@@ -15,7 +15,6 @@
 
 <script>
 import * as echarts from "echarts";
-import { redomEchart, uuid } from "@/utils/methods";
 export default {
   name: "pedestrianPostureAll",
   props: {
@@ -26,7 +25,7 @@ export default {
   data () {
     return {
       ...this._data,
-      ids: uuid()
+      ids: this.$uuid()
     }
   },
   created () {
@@ -203,7 +202,7 @@ export default {
         };
       }
       option.xAxis.data.push("时间");
-      redomEchart('pedestrianPostureEchart_' + this.ids, option);
+      this.$redomEchart('pedestrianPostureEchart_' + this.ids, option);
     },
   }
 };

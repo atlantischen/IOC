@@ -7,7 +7,6 @@
 
 <script>
 import * as echarts from "echarts";
-import { redomEchart, uuid } from "@/utils/methods";
 export default {
   name: "investmentSituationAll",
   props: {
@@ -18,7 +17,7 @@ export default {
   data () {
     return {
       ...this._data,
-      ids: uuid()
+      ids: this.$uuid()
     }
   },
   created () {
@@ -194,7 +193,7 @@ export default {
           data: j == 0 ? _data : _data2,
         };
       }
-      redomEchart('pedestrianPostureEchart_' + this.ids, option);
+      this.$redomEchart('pedestrianPostureEchart_' + this.ids, option);
     },
   }
 };

@@ -7,7 +7,6 @@
 
 <script>
 import * as echarts from "echarts";
-import { redomEchart, uuid } from "@/utils/methods";
 export default {
   name: "shapeOfMountainAll",
   props: {
@@ -18,7 +17,7 @@ export default {
   data () {
     return {
       ...this._data,
-      ids: uuid()
+      ids: this.$uuid()
     }
   },
   created () {
@@ -152,7 +151,7 @@ export default {
           }
         ]
       }
-      redomEchart('shapeOfMountainEchart_' + this.ids, option);
+      this.$redomEchart('shapeOfMountainEchart_' + this.ids, option);
     },
   }
 };

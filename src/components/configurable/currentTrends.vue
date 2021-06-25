@@ -16,7 +16,6 @@
 
 <script>
 import * as echarts from "echarts";
-import { redomEchart, uuid } from "@/utils/methods";
 export default {
   name: "theParkOutputValAll",
   props: {
@@ -27,7 +26,7 @@ export default {
   data () {
     return {
       ...this._data,
-      ids: uuid()
+      ids: this.$uuid()
     }
   },
   mounted () {

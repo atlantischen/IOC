@@ -14,7 +14,6 @@
 <script>
 import * as echarts from "echarts";
 import 'echarts-liquidfill';
-import { redomEchart, uuid } from "@/utils/methods";
 export default {
   name: "waterPoloAll",
   props: {
@@ -164,7 +163,7 @@ export default {
             }
           ]
         };
-        redomEchart('waterPoloEchart_' + i + this.ids, option);
+        this.$redomEchart('waterPoloEchart_' + i + this.ids, option);
       }
     }
   }
