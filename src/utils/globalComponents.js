@@ -9,6 +9,7 @@ import DropDown from '../components/widget/dropDown.vue'
 import CenterDatas from '../components/widget/centerDatas.vue' // 中间数据
 import SearchBox from '../components/widget/searchBox.vue' // 搜索框
 import TipBox from '../components/widget/tipBox.vue' // 提示框
+import RightAlert from '../components/rightAlert.vue' // 右侧警告框
 
 const global = {
   ...configurable,
@@ -21,6 +22,7 @@ const global = {
   DropDown,
   CenterDatas,
   SearchBox,
-  TipBox
+  TipBox,
+  RightAlert
 }
 export default global

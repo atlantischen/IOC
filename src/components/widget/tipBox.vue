@@ -10,35 +10,35 @@
 </template>
 
 <script>
-import { SendMessageToUnity } from '@/utils/unity.js'
+import { SendMessageToUnity } from "@/utils/unity.js";
 export default {
   name: "tipBox",
   props: {
     _data: {
-      typeof: Array
+      typeof: Array,
     },
     show: {
-      type: Object
-    }
+      type: Object,
+    },
   },
-  data () {
+  data() {
     return {
-      isShow: true
+      isShow: true,
     };
   },
-  watch () {
-    this.isShow = this.show
+  watch() {
+    this.isShow = this.show;
   },
   components: {},
-  mounted () { },
+  mounted() {},
   methods: {
-    clickItem () {
-      console.log('22')
-      SendMessageToUnity('unityFun', 0)
+    clickItem() {
+      console.log("22");
+      SendMessageToUnity("unityFun", 0);
     },
-    closeTip () {
-      this.isShow = !this.isShow
-      emit('close', this.isShow)
+    closeTip() {
+      this.isShow = !this.isShow;
+      emit("close", this.isShow);
     },
   },
 };
