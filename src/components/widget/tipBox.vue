@@ -33,7 +33,7 @@ export default {
   mounted() {},
   methods: {
     clickItem() {
-      console.log("22");
+      console.log("查看告警位置");
       SendMessageToUnity("unityFun", 0);
     },
     closeTip() {

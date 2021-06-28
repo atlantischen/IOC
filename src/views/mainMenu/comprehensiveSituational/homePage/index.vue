@@ -11,6 +11,7 @@
           class="SearchBoxClass"
           :text="'搜园区建筑、搜企业、搜商家'"
           @_search="clickSwitch"
+          @_input="clickSwitch"
         />
         <TipBox :_data="tipList" @close="showTipBoxHandle" />
       </template>
@@ -18,7 +19,7 @@
         <Allcom :_Info="rightInfo" />
       </template>
     </LeftRight>
-    <RightContent v-show="isShowRIght" @_c="clickSwitch" />
+    <RightContent v-show="isShowRIght" :inputVal="inputVal" @_c="clickSwitch" />
     <AlarmAck />
   </div>
 </template>
@@ -34,6 +35,7 @@ export default {
   name: "zhts",
   data() {
     return {
+      inputVal: null,
       // 左侧组件info
       leftInfo: [
         {
@@ -248,6 +250,7 @@ export default {
     showTipBoxHandle(val) {},
     clickSwitch(val) {
       this.isShowRIght = !this.isShowRIght;
+      this.inputVal = val;
     },
   },
 };

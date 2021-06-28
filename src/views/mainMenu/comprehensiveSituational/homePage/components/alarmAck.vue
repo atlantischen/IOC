@@ -31,7 +31,6 @@
             <el-button type="primary" @click="submitForm('ruleForm')"
               >确认警报</el-button
             >
-            <!-- <el-button @click="resetForm('ruleForm')">重置</el-button> -->
           </el-form-item>
         </el-form>
       </div>
@@ -65,7 +64,6 @@ export default {
         type: [{ required: true, message: "请输入报警类型", trigger: "blur" }],
         because: [
           {
-            type: "date",
             required: true,
             message: "请输入报警原因",
             trigger: "blur",
@@ -73,7 +71,6 @@ export default {
         ],
         handler: [
           {
-            type: "date",
             required: true,
             message: "请输入处理人",
             trigger: "blur",
@@ -92,7 +89,7 @@ export default {
       this.$refs[formName].validate((valid) => {
         if (valid) {
           this.sureAlarmFun();
-          this.$message.success('已确认警报！')
+          this.$message.success("已确认警报！");
           this.resetForm("ruleForm");
         } else {
           return false;
@@ -104,6 +101,15 @@ export default {
     },
     sureAlarmFun() {
       this.isFade = !this.isFade;
+      if (this.isFade) {
+        this.ruleForm = {
+          name: "中心广场摄像机",
+          type: "物品偷盗",
+          because: "摄像头侦测报警",
+          handler: "梁海山",
+          result: "已派人通知查看",
+        };
+      }
     },
   },
 };

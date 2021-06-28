@@ -1,6 +1,11 @@
 <template>
   <div class="searchBox p_x_c">
-    <el-input class="searchInput" :placeholder="text" v-model="inputVal">
+    <el-input
+      class="searchInput"
+      @input="inputFun"
+      :placeholder="text"
+      v-model="inputVal"
+    >
       <template #append>
         <span v-show="!ishowIcon">{{ bt_text }}</span>
         <el-button
@@ -10,6 +15,7 @@
         ></el-button>
       </template>
     </el-input>
+    <slot></slot>
   </div>
 </template>
 
@@ -32,17 +38,28 @@ export default {
       type: Boolean,
       default: true,
     },
+    inputV: {
+      type: String,
+    },
   },
   components: {},
-  data () {
+  data() {
     return {
-      inputVal: ''
+      inputVal: "",
     };
   },
-  mounted () { },
+  watch: {
+    inputVal() {
+      return this.inputV;
+    },
+  },
+  mounted() {},
   methods: {
-    clickHandle () {
-      this.$emit("_search", this.inputVal)
+    clickHandle() {
+      this.$emit("_search", this.inputVal);
+    },
+    inputFun() {
+      this.$emit("_input", this.inputVal);
     },
   },
 };
@@ -63,6 +80,7 @@ export default {
     border-radius: 6px;
     overflow: hidden;
     .el-input__inner {
+      color: rgba(255, 255, 255, 1);
       background: transparent;
       border: none;
       &::placeholder {
