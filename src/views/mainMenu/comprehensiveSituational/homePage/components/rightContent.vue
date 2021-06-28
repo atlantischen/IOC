@@ -11,10 +11,10 @@
           @_search="searchList"
         >
           <div
-            class="SearchBoxList stretch_all"
+            class="SearchBoxList stretch_all "
             :class="{ SearchBoxList0: isShowList }"
           >
-            <ul>
+            <ul class="bigBar">
               <li
                 class="x_left"
                 v-for="(item, i) in slist"
@@ -46,6 +46,56 @@
       <template #center></template>
       <template #right></template>
     </LeftRight>
+    <!-- 黑名单 -->
+    <div class="rightBtn" v-show="!isFade" @click="showBlackListFun"></div>
+    <RightAlert :fade="isFade" class="rightblacklist">
+      <div class="allBlacklist">
+        <el-table
+          class="BlacklistTable"
+          :data="tableData"
+          style="width:100%;"
+          :header-cell-style="{ 'text-align': 'center' }"
+          :cell-style="{ 'text-align': 'center' }"
+          border
+        >
+          <el-table-column
+            prop="date"
+            label="姓名"
+            width="60"
+            show-overflow-tooltip
+          >
+            <template #header>
+              <i class="el-icon-arrow-right" @click="showBlackListFun"></i>
+            </template>
+            <template #default="{row}">
+              <div
+                class="blacklist_img"
+                :style="
+                  row.src
+                    ? 'background: url(' + row.src + ') center #000;'
+                    : 'background-color:#fff;'
+                "
+              ></div>
+            </template>
+          </el-table-column>
+          <el-table-column prop="name" label="姓名" show-overflow-tooltip>
+          </el-table-column>
+          <el-table-column prop="info" label="拉黑事由" show-overflow-tooltip>
+          </el-table-column>
+          <el-table-column prop="" label="操作">
+            <template #default="scope">
+              <span class="zhuizong" @click="zhuizongFun(scope.row)">追踪</span>
+            </template>
+          </el-table-column>
+        </el-table>
+        <el-pagination
+          small
+          class="qx_pagination"
+          layout="prev, pager, next"
+          :total="50"
+        ></el-pagination>
+      </div>
+    </RightAlert>
   </div>
 </template>
 
@@ -57,6 +107,7 @@ export default {
   },
   data() {
     return {
+      isFade: false,
       inputV: "",
       isShowList: false,
       slist: [
@@ -91,6 +142,93 @@ export default {
           src: require("@/assets/img/datas/qy_sysdwyy.png"),
         },
       ],
+      tableData: [
+        {
+          src: require("@/assets/img/datas/qy_sysdwyy.png"),
+          name: "李玲",
+          info: "涉嫌诈骗",
+        },
+        {
+          src: require("@/assets/img/datas/qy_sysdwyy.png"),
+          name: "陈新",
+          info: "逃避缴费",
+        },
+        {
+          src: require("@/assets/img/datas/qy_sysdwyy.png"),
+          name: "韦孟",
+          info: "从事传销活动",
+        },
+        {
+          src: require("@/assets/img/datas/qy_sysdwyy.png"),
+          name: "李建华",
+          info: "散播谣言",
+        },
+        {
+          src: require("@/assets/img/datas/qy_sysdwyy.png"),
+          name: "肖海辉",
+          info: "涉嫌诈骗",
+        },
+        {
+          src: require("@/assets/img/datas/qy_sysdwyy.png"),
+          name: "徐高鹏",
+          info: "逃避缴费",
+        },
+        {
+          src: require("@/assets/img/datas/qy_sysdwyy.png"),
+          name: "韦炳佐",
+          info: "从事传销活动",
+        },
+        {
+          src: require("@/assets/img/datas/qy_sysdwyy.png"),
+          name: "瞿德志",
+          info: "散播谣言",
+        },
+        {
+          src: require("@/assets/img/datas/qy_sysdwyy.png"),
+          name: "陈荣",
+          info: "涉嫌诈骗",
+        },
+        {
+          src: require("@/assets/img/datas/qy_sysdwyy.png"),
+          name: "周志军",
+          info: "逃避缴费",
+        },
+        {
+          src: require("@/assets/img/datas/qy_sysdwyy.png"),
+          name: "张颖",
+          info: "从事传销活动",
+        },
+        {
+          src: require("@/assets/img/datas/qy_sysdwyy.png"),
+          name: "杨靓",
+          info: "散播谣言",
+        },
+        {
+          src: require("@/assets/img/datas/qy_sysdwyy.png"),
+          name: "徐清",
+          info: "涉嫌诈骗",
+        },
+        {
+          src: require("@/assets/img/datas/qy_sysdwyy.png"),
+          name: "方明",
+          info: "逃避缴费",
+        },
+        {
+          src: require("@/assets/img/datas/qy_sysdwyy.png"),
+          name: "李景",
+          info: "从事传销活动",
+        },
+        {
+          src: require("@/assets/img/datas/qy_sysdwyy.png"),
+          name: "廖明",
+          info: "散播谣言",
+        },
+        {
+          src: require("@/assets/img/datas/qy_sysdwyy.png"),
+          name: "顾宇",
+          info: "从事传销活动",
+        },
+      ],
     };
   },
   watch: {
@@ -100,11 +238,17 @@ export default {
   },
   mounted() {},
   methods: {
+    showBlackListFun() {
+      this.isFade = !this.isFade;
+    },
     searchList() {
       this.isShowList = !this.isShowList;
       console.log("222");
     },
     searchOneItem(val) {
+      console.log(val);
+    },
+    zhuizongFun(val) {
       console.log(val);
     },
     back() {
@@ -129,7 +273,7 @@ export default {
     overflow: hidden;
     ul {
       height: 5.5rem /* 440/80 */;
-      overflow-y: auto;
+      // overflow-y: auto;
       .s_img {
         width: 1rem /* 80/80 */;
         height: 1rem /* 80/80 */;
@@ -161,6 +305,67 @@ export default {
   }
   .SearchBoxList0 {
     height: 6.25rem /* 500/80 */;
+  }
+  .rightBtn {
+    position: fixed;
+    right: 0;
+    top: 30%;
+    width: 0.125rem /* 10/80 */;
+    height: 2.5rem /* 200/80 */;
+    background: rgba(0, 0, 0, 0.2);
+    z-index: 103;
+    cursor: pointer;
+    &:hover {
+      background: rgba(0, 0, 0, 0.8);
+    }
+  }
+  .rightblacklist {
+    width: 4.5rem /* 360/80 */;
+    right: 0;
+    z-index: 102;
+  }
+  .allBlacklist {
+    width: 100%;
+    height: 9.375rem /* 750/80 */;
+    background: #fff;
+    .blacklist_img {
+      width: 0.375rem /* 30/80 */;
+      height: 0.375rem /* 30/80 */;
+      border-radius: 50%;
+    }
+    .el-icon-arrow-right {
+      font-size: 0.25rem /* 20/80 */;
+      cursor: pointer;
+    }
+    :deep(.BlacklistTable) {
+      font-size: 12px;
+      background-color: transparent;
+      th,
+      tr,
+      .el-table__expanded-cell {
+        background-color: transparent;
+      }
+      td,
+      th {
+        padding: 0.1rem /* 8/80 */ 0;
+      }
+      td {
+        padding: 0.05rem /* 4/80 */ 0;
+      }
+      .zhuizong {
+        color: #031ef9;
+        cursor: pointer;
+      }
+    }
+    :deep(.qx_pagination) {
+      float: right;
+      padding: 0.0625rem /* 5/80 */ 0;
+      .el-pager li,
+      .btn-next,
+      .btn-prev {
+        background-color: transparent;
+      }
+    }
   }
 }
 </style>

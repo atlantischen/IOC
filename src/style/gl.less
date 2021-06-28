@@ -250,3 +250,21 @@ i {
   height: 4px;
   border-radius: 2px;
 }
+// big滚动条样式
+.bigBar{
+  overflow-y: hidden;
+}
+.bigBar:hover{    
+  overflow-y: auto;
+}
+.bigBar::-webkit-scrollbar {
+  width: .075rem /* 6/80 */;
+  height: .075rem /* 6/80 */;
+}
+
+.bigBar::-webkit-scrollbar-thumb {
+  background: rgba(70, 149, 239, 0.3);
+  width: .075rem /* 6/80 */;
+  height: .075rem /* 6/80 */;
+  border-radius: 2px;
+}
