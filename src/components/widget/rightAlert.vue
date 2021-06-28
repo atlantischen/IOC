@@ -25,6 +25,7 @@ export default {
       this.outClass = "fadeOutRight0";
     },
   },
+  mounted() {},
 };
 </script>
 

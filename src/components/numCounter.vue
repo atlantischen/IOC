@@ -27,7 +27,6 @@ export default {
         } else {
           obj.innerHTML = Math.floor(progress * (end - start) + start);
         }
-
         if (progress < 1) {
           window.requestAnimationFrame(step);
         }

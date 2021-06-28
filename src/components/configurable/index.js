@@ -11,6 +11,7 @@ import EnterprisesSettled from './enterprisesSettled.vue'
 import InvestmentSituation from './investmentSituation.vue'
 import ShapeOfMountain from './shapeOfMountain.vue'
 import WaterPolo from './waterPolo.vue'
+import ScatterDiagram from './scatterDiagram.vue'
 
 const configurable = {
   TheParkIs, // 园区情况
@@ -26,5 +27,6 @@ const configurable = {
   InvestmentSituation, // 招商情况
   ShapeOfMountain, // 象形柱图
   WaterPolo, // 水球图
+  ScatterDiagram, // 散点
 }
 export default configurable

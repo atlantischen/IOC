@@ -12,7 +12,6 @@
 </template>
 
 <script>
-import * as echarts from "echarts";
 import 'echarts-liquidfill';
 export default {
   name: "waterPoloAll",
@@ -24,7 +23,7 @@ export default {
   data () {
     return {
       ...this._data,
-      ids: uuid()
+      ids: this.$uuid()
     }
   },
   created () {

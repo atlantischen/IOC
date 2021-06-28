@@ -21,23 +21,23 @@ export default {
   name: "theParkIsAll",
   props: {
     _data: {
-      type: Object
-    }
+      type: Object,
+    },
   },
-  data () {
+  data() {
     return {
       ...this._data,
-      ids: this.$uuid()
-    }
+      ids: this.$uuid(),
+    };
   },
-  mounted () {
-    this.parkCaseFun(this.datas.datas1)
-    this.parkCaseFun2(this.datas.datas2)
+  mounted() {
+    this.parkCaseFun(this.datas.datas1);
+    this.parkCaseFun2(this.datas.datas2);
   },
   methods: {
     // 园区情况
-    parkCaseFun (datas) {
-      var datas = datas
+    parkCaseFun(datas) {
+      var datas = datas;
       for (var i = 0; i < datas.length; i++) {
         var option = {
           grid: {
@@ -56,15 +56,15 @@ export default {
           },
           series: [
             {
-              name: '',
-              data: '',
+              name: "",
+              data: "",
               type: "bar",
-              stack: 'total',
+              stack: "total",
               barWidth: 16,
               color: "#1e3957",
               showBackground: true,
               itemStyle: {
-                barBorderRadius: [0, 0, 5, 5]
+                barBorderRadius: [0, 0, 5, 5],
               },
               backgroundStyle: {
                 color: "#4396f3",
@@ -72,19 +72,19 @@ export default {
               },
               label: {
                 show: true,
-                position: 'bottom',
+                position: "bottom",
                 distance: -70,
-                textBorderColor: '#ffffff00',
+                textBorderColor: "#ffffff00",
                 textBorderWidth: 0,
-                align: 'left',
+                align: "left",
                 rotate: 0,
-                formatter: '{a| {c}} \n{b|}\n {name|{a}}',
+                formatter: "{a| {c}} \n{b|}\n {name|{a}}",
                 fontSize: 16,
                 rich: {
                   a: {
                     padding: [3, 10],
-                    color: '#fff',
-                    fontFamily: 'BYfont',
+                    color: "#fff",
+                    fontFamily: "BYfont",
                     fontSize: 20,
                   },
                   b: {
@@ -92,25 +92,25 @@ export default {
                     height: 1,
                     padding: [0, 0, 0, -10],
                     backgroundColor: {
-                      image: require('@/assets/img/echart/e_line.png'),
-                      repeat: 'no-repeat'
+                      image: require("@/assets/img/echart/e_line.png"),
+                      repeat: "no-repeat",
                     },
                   },
                   name: {
                     padding: [5, 10],
-                    color: 'rgb(255,255,255,.7)'
-                  }
-                }
+                    color: "rgb(255,255,255,.7)",
+                  },
+                },
               },
               labelLine: {
-                show: false
+                show: false,
               },
             },
             {
-              name: '',
-              data: '',
+              name: "",
+              data: "",
               type: "bar",
-              stack: 'total',
+              stack: "total",
               barWidth: 16,
               color: "#4396f3",
               itemStyle: {
@@ -122,19 +122,19 @@ export default {
               },
               label: {
                 show: true,
-                position: 'top',
+                position: "top",
                 distance: -70,
-                textBorderColor: '#ffffff00',
+                textBorderColor: "#ffffff00",
                 textBorderWidth: 0,
-                align: 'left',
+                align: "left",
                 rotate: 0,
-                formatter: '{a| {c}} \n{b|}\n {name|{a}}',
+                formatter: "{a| {c}} \n{b|}\n {name|{a}}",
                 fontSize: 16,
                 rich: {
                   a: {
                     padding: [3, 10],
-                    color: '#fff',
-                    fontFamily: 'BYfont',
+                    color: "#fff",
+                    fontFamily: "BYfont",
                     fontSize: 20,
                   },
                   b: {
@@ -142,18 +142,18 @@ export default {
                     height: 1,
                     padding: [0, 0, 0, -10],
                     backgroundColor: {
-                      image: require('@/assets/img/echart/e_line.png'),
-                      repeat: 'no-repeat'
+                      image: require("@/assets/img/echart/e_line.png"),
+                      repeat: "no-repeat",
                     },
                   },
                   name: {
                     padding: [5, 10],
-                    color: 'rgb(255,255,255,.7)'
-                  }
-                }
+                    color: "rgb(255,255,255,.7)",
+                  },
+                },
               },
               labelLine: {
-                show: false
+                show: false,
               },
             },
           ],
@@ -162,19 +162,20 @@ export default {
           option.series[j] = {
             ...option.series[j],
             ...datas[i][j],
-          }
+          };
           // option.series[0].label.distance = -datas[i][j].data[0]
         }
         this.$redomEchart("parkCaseEchart_" + i + this.ids, option);
       }
     },
-    parkCaseFun2 (val) {
-      var datas = val.datas, names = val.names,
+    parkCaseFun2(val) {
+      var datas = val.datas,
+        names = val.names,
         imgs = [
           require("@/assets/img/echart/e_mj.png"),
           require("@/assets/img/echart/e_yz.png"),
           require("@/assets/img/echart/e_qz.png"),
-        ]
+        ];
       for (var i = 0; i < datas.length; i++) {
         var option = {
           title: [
@@ -252,7 +253,7 @@ export default {
                 },
               ],
               itemStyle: {
-                color: function () {
+                color: function() {
                   let obj = {
                     type: "linear",
                     x: 0, //右
@@ -390,8 +391,8 @@ export default {
         };
         this.$redomEchart("minEchart_" + i + this.ids, option);
       }
-    }
-  }
+    },
+  },
 };
 </script>
 

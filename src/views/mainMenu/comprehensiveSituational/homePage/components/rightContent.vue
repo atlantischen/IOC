@@ -12,7 +12,7 @@
         >
           <div
             class="SearchBoxList stretch_all "
-            :class="{ SearchBoxList0: isShowList }"
+            :class="{ 'SearchBoxList0': isShowList }"
           >
             <ul class="bigBar">
               <li
