@@ -91,11 +91,16 @@ export default {
         },
         xAxis: {
           type: "category",
-          name: unit[0],
+          name: '{a|' + unit[0] + '}', nameGap: 20,
           nameTextStyle: {
-            // lineHeight: 56,
-            // verticalAlign: "bottom"
+            rich: {
+              a: {
+                padding: [-30, 0, 0, -40],
+                color: '#fff'
+              }
+            }
           },
+          boundaryGap: true,
           data: xData,
           axisTick: {
             show: false,
@@ -106,11 +111,12 @@ export default {
             },
           },
           axisLabel: {
+            width: '50',
             fontSize: 12,
-            padding: [20, 0, 0, -20],
-            rotate: -20,
+            padding: [15, 0, 0, -30],
+            rotate: -35,
             interval: 0,
-            margin: 10,
+            margin: 20,
             textStyle: {
               color: "#fff",
             },
@@ -201,7 +207,7 @@ export default {
           data: j == 0 ? _data : _data2,
         };
       }
-      option.xAxis.data.push("时间");
+      // option.xAxis.data.push("");
       this.$redomEchart('pedestrianPostureEchart_' + this.ids, option);
     },
   }
