@@ -13,9 +13,8 @@ const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 const productionGzipExtensions = ['js', 'css']
 module.exports = {
   lintOnSave: false,
-  // publicPath:'./', 
   outputDir: 'dist',
-  publicPath: process.env.NODE_ENV === 'production' ? './' : '/',
+  publicPath: '/',
   productionSourceMap: false, // 关闭生产环境的 source map
   devServer: {
     port: 9000,

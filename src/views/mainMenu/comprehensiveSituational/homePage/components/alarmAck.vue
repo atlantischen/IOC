@@ -10,7 +10,7 @@
           :rules="rules"
           ref="ruleForm"
           label-width="100px"
-          class="demo-ruleForm alarmAckForm mniBar"
+          class="demo-ruleForm alarmAckForm bigBar"
         >
           <el-form-item label="警报对象：" prop="name">
             <el-input v-model="ruleForm.name"></el-input>
@@ -177,13 +177,13 @@ export default {
       }
       .el-textarea__inner {
         color: rgba(255, 255, 255, 0.7);
-        border: 1px solid #4396f3;
+        border: 1px solid rgba(67, 149, 243, 0.5);
         background: transparent;
         border-radius: 0;
       }
       .el-input__inner {
         color: rgba(255, 255, 255, 0.7);
-        border: 1px solid #4396f3;
+        border: 1px solid rgba(67, 149, 243, 0.5);
         height: 0.4375rem /* 35/80 */;
         background: transparent;
         border-radius: 0;

@@ -8,12 +8,16 @@ import * as echarts from "echarts";
 
 import ElementPlus from 'element-plus';
 import 'element-plus/lib/theme-chalk/index.css'
+import {
+  SendMessageToUnity
+} from './utils/unity'
 
 import locale from 'element-plus/lib/locale/lang/zh-cn'
 import 'dayjs/locale/zh-cn'
 import VueWechatTitle from 'vue-wechat-title'
 
 const app = createApp(App)
+app.config.globalProperties.$SendMessageToUnity = SendMessageToUnity;
 app.use(ElementPlus, {
   locale
 })
@@ -38,10 +42,6 @@ for (var key in globalComponents) {
 for (var key in globalMethods) {
   app.config.globalProperties[`$${key}`] = globalMethods[key]
 }
-app.use(VueWechatTitle)
-app.use(ElementPlus, {
-  locale
-})
 app.use(router)
 app.use(store)
 app.mount('#app')

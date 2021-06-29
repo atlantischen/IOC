@@ -10,7 +10,6 @@
 </template>
 
 <script>
-import { SendMessageToUnity } from "@/utils/unity.js";
 export default {
   name: "tipBox",
   props: {
@@ -21,24 +20,25 @@ export default {
       type: Object,
     },
   },
-  data() {
+  data () {
     return {
       isShow: true,
     };
   },
-  watch() {
+  watch () {
     this.isShow = this.show;
   },
   components: {},
-  mounted() {},
+  mounted () { },
   methods: {
-    clickItem() {
+    clickItem () {
+      this.$SendMessageToUnity("OnWarningNoticesBarClick");
       console.log("查看告警位置");
-      SendMessageToUnity("unityFun", 0);
     },
-    closeTip() {
+    closeTip () {
       this.isShow = !this.isShow;
-      emit("close", this.isShow);
+      this.$SendMessageToUnity("PopUpWarningNoticesBar", { isOpen: false });
+      // this.$emit("close", this.isShow);
     },
   },
 };
@@ -47,6 +47,7 @@ export default {
 <style lang="less">
 @import "~@/style/gl.less";
 .tipBox {
+  position: relative;
   top: 0.875rem /* 70/80 */ !important;
   // min-width: 8.125rem /* 650/80 */;
   width: 8.75rem /* 700/80 */;

@@ -6,7 +6,7 @@
         <div class="tittle">车位情况</div>
         <ul>
           <li v-for="(item, index) in parkList" :key="index">
-            <div class="floor">{{ item.floor }}</div>
+            <div class="floor" @click="handleClick">{{ item.floor }}</div>
             <div class="present">
               <span>在场车位</span>
               <span class="font_text">
@@ -175,6 +175,18 @@ export default {
   methods: {
     changePSMonths (val) {
       console.log(val);
+    },
+
+    postMessageToUnity (data) {
+
+    },
+
+    handleClick () {
+      // console.log(this.$SendMessageToUnity());
+      this.$SendMessageToUnity("gan", { wocao: true, fuckyou: "123" });
+      this.$SendMessageToUnity("gan2", {});
+      // this.$SendMessageToUnity("nimei",{wocao:true,fuckyou:"456"});
+      // console.log(window.iframe.contentWindow,'iframe');
     },
     AssetsAndEquipment () {
       var dom = "park_time";
@@ -658,7 +670,7 @@ export default {
                 color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
                   {
                     offset: 0,
-                    color: "rgba(255, 255, 255, 1)",
+                    color: "rgba(255, 255, 255, .3)",
                   },
                   {
                     offset: 1,
@@ -708,7 +720,7 @@ export default {
                 color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
                   {
                     offset: 0,
-                    color: "rgba(255, 180, 0, 1)",
+                    color: "rgba(255, 180, 0, .3)",
                   },
                   {
                     offset: 1,

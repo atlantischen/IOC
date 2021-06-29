@@ -120,7 +120,7 @@
               <span>本月电能耗</span>
               <span class="font_text">
               <NumCounter :value='43.24'></NumCounter>
-</span>
+          </span>
               <span>KW.H</span>
             </div>
         </div>
@@ -403,7 +403,7 @@ export default {
                 color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
                   {
                     offset: 0,
-                    color: "rgba(255, 255, 255, 1)",
+                    color: "rgba(255, 255, 255, .3)",
                   },
                   {
                     offset: 1,
@@ -453,7 +453,7 @@ export default {
                 color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
                   {
                     offset: 0,
-                    color: "rgba(255, 180, 0, 1)",
+                    color: "rgba(255, 180, 0, .3)",
                   },
                   {
                     offset: 1,
@@ -476,7 +476,7 @@ export default {
 
         series: [
           {
-            name: "访问来源",
+            // name: "访问来源",
             type: "pie",
             radius: ["90%", "75%"],
             center: ["25%", "53%"],
@@ -487,26 +487,29 @@ export default {
               show: false,
               position: "center",
               formatter: "{d}%",
+              rich:{
+                d:{
+                  fontSize: 50,
+                  color:'#fff',
+                  fontFamily: "BYfont",
+                  
+                }
+              }
+              
             },
-            emphasis: {
-              label: {
-                show: true,
-                fontSize: "20",
-                fontWeight: "bold",
-              },
-            },
-            labelLine: {
-              show: false,
-            },
+            
+         
             data: [
               {
-                value: 200,
-                name: "直接访问",
+                value: 500,
+                name: "已使用",
+                width: 40,
                 selected: true, //默认选中第一块
                 label: {
                   show: true, //默认显示第一块
                   fontSize: "20",
                   fontWeight: "bold",
+                  color:'#fff'
                 },
                 itemStyle: {
                   color: "#CDA857",
@@ -518,7 +521,7 @@ export default {
                 itemStyle: {
                   color: "#1E3957",
                 },
-                name: "邮件营销",
+                name: "总数",
               },
             ],
           },

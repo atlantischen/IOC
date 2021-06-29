@@ -199,6 +199,9 @@ export default {
     },
     meetEchartInit () {
       var dom = "store";
+      var data = [29.09, 12.73, 25.45,14.55,10.91,7.27];
+      var lable=['餐饮','健康','娱乐','教育','文化','购物'];
+
       var option = {
         tooltip: {
           trigger: "item",
@@ -233,8 +236,9 @@ export default {
           formatter: function (name) {
             var i = 0;
             i += 1;
-            return name + "  " + "29.2%";
+            return name + "  " + data[lable.indexOf(name)];
           },
+          data:lable
         },
         series: [
           {

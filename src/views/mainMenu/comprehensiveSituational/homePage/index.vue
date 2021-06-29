@@ -13,7 +13,7 @@
           @_search="clickSwitch"
           @_input="clickSwitch"
         />
-        <TipBox :_data="tipList" @close="showTipBoxHandle" />
+        <TipBox :_data="tipList" />
       </template>
       <template #right>
         <Allcom :_Info="rightInfo" />
@@ -33,7 +33,7 @@ import axios from "axios";
 export default {
   components: { RightContent, AlarmAck },
   name: "zhts",
-  data() {
+  data () {
     return {
       inputVal: null,
       // 左侧组件info
@@ -234,11 +234,12 @@ export default {
       tipList: [
         {
           text: "告警！2021-04-30 15:00{李玲}在{公寓广场}发生了{黑名单告警}",
-        },
+        }
       ],
     };
   },
-  mounted() {
+  mounted () {
+    this.$SendMessageToUnity("PopUpWarningNoticesBar", { isOpen: true });
     // aaa().then(r=>{
     //   console.log(r)
     // })
@@ -247,8 +248,8 @@ export default {
     // })
   },
   methods: {
-    showTipBoxHandle(val) {},
-    clickSwitch(val) {
+    showTipBoxHandle (val) { },
+    clickSwitch (val) {
       this.isShowRIght = !this.isShowRIght;
       this.inputVal = val;
     },

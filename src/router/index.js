@@ -14,11 +14,11 @@ const routes = [{
     children: [...MainMenus]
   },
   // {
-  //   path: "/debug",
-  //   name: 'debug',
-  //   redirect: "/debug/comprehensiveSituational/homePage",
-  //   component: () => import('@/views/mainMenu/debug.vue'),
-  //   children: [...MainMenus2]
+  //   path: "/empty",
+  //   name: 'empty',
+  //   // redirect: "/debug/comprehensiveSituational/homePage",
+  //   component: () => import('@/views/mainMenu/empty.vue'),
+  
   // },
   {
     // path: "",

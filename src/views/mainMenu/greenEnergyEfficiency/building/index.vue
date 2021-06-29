@@ -1,8 +1,8 @@
 <template>
   <!-- 绿色能效 -->
   <div class="container ">
-      <ul class="title ioc_animated fadeInDownTop">
-          <li v-for="item in list" :key="item" @click="handleClick(item.path)">{{item.name}}</li>
+      <ul class="title">
+          <li   :class="activeIndex===index?'active':''" v-for="(item,index) in list" :key="index" @click="handleClick(item.path,index)">{{item.name}}</li>
       </ul>
     <router-view></router-view>
   </div>
@@ -13,6 +13,8 @@ export default {
   name: 'building',
   data(){
     return{
+    activeIndex:0,
+    imgCdnUrl:require('../../../../assets/img/ly_bj.png'),
      list: [
         {
           path: "/greenEnergyEfficiency/building/codesource",
@@ -43,7 +45,8 @@ export default {
   },
   components:{ },
   methods:{
-    handleClick(path){
+    handleClick(path,index){
+      this.activeIndex=index
       this.$router.push(path)
     }
   }
@@ -54,18 +57,27 @@ export default {
 ul{
     position: fixed;
     display: flex;
-    top: 1rem /* 80/80 */;
-    left: 50%;
-    transform: translateX(-50%);
+    flex-direction: column;
+    top: 50% /* 80/80 */;
+    left:6.125rem /* 490/80 *//* 500/80 */;
+    transform: translateY(-50%);
     li{
-        width: 1.675rem /* 134/80 */;
-        height: .775rem /* 62/80 */ /* 50/80 */;
-        background-image: url('../../../../assets/img/mr_button.png');
+        width: 1.025rem /* 82/80 */;
+        height:.4625rem /* 37/80 */;
+        margin-bottom: .375rem /* 30/80 */;
+        background-image: url('../../../../assets/img/ly_bj1.png');
         background-repeat: no-repeat;
         text-align: center;
-        line-height: .775rem;
-        font-size: .25rem /* 20/80 */;
+        line-height: .4625rem;
+        font-size: .175rem /* 14/80 */ /* 20/80 */;
         color: #fff;
+    }
+    li:last-child{
+      margin-bottom: 0;
+    }
+    .active{
+        background-image: url('../../../../assets/img/ly_bj.png');
+
     }
 }
 </style>
