@@ -1,6 +1,7 @@
 <template>
   <!-- 综合态势home -->
-  <div>
+  <div class="zhts_Home">
+    <RightContent v-show="isShowRIght" :inputVal="inputVal" @_c="clickSwitch" />
     <LeftRight v-show="!isShowRIght">
       <template #left>
         <Allcom :_Info="leftInfo" />
@@ -19,13 +20,12 @@
         <Allcom :_Info="rightInfo" />
       </template>
     </LeftRight>
-    <RightContent v-show="isShowRIght" :inputVal="inputVal" @_c="clickSwitch" />
     <AlarmAck />
   </div>
 </template>
 
 <script>
-import AlarmAck from "./components/alarmAck.vue";
+import AlarmAck from "@/views/mainMenu/comprehensiveSituational/homePage/components/alarmAck.vue";
 import RightContent from "./components/rightContent.vue";
 import * as echarts from "echarts";
 import { aaa } from "@/api/mockApi";
@@ -238,8 +238,11 @@ export default {
       ],
     };
   },
+  created () {
+  },
   mounted () {
     this.$SendMessageToUnity("PopUpWarningNoticesBar", { isOpen: true });
+    console.log("=================PopUpWarningNoticesBar, { isOpen: true })")
     // aaa().then(r=>{
     //   console.log(r)
     // })
@@ -247,11 +250,14 @@ export default {
     //   console.log('xxxxxxxxx', req)
     // })
   },
+  destroyed () {
+  },
   methods: {
     showTipBoxHandle (val) { },
     clickSwitch (val) {
-      this.isShowRIght = !this.isShowRIght;
+      console.log(val)
       this.inputVal = val;
+      this.isShowRIght = !this.isShowRIght;
     },
   },
 };
@@ -259,7 +265,9 @@ export default {
 
 <style lang="less" scoped>
 @import "~@/style/gl.less";
-
+.zhts_Home {
+  // position: relative;
+}
 .SearchBoxClass {
   width: 6.25rem /* 500/80 */;
 }

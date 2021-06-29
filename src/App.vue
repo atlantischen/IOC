@@ -11,28 +11,28 @@ export default {
 
     }
   },
-  methods:{
-       handleFullScreen() {
-            if (!screenfull.isEnabled) {
-                this.$message.info("您的浏览器版本过低，不支持全屏浏览");
-                return false;
-            }
-            screenfull.toggle();
-       },
-       event(event){
-         let res = JSON.parse(event.data)
-          if(res.action == "fullscreen") {
-              this.handleFullScreen()
-          }
-       }
-
+  methods: {
+    handleFullScreen () {
+      if (!screenfull.isEnabled) {
+        this.$message.info("您的浏览器版本过低，不支持全屏浏览");
+        return false;
+      }
+      screenfull.toggle();
+    },
+    event (event) {
+      let res
+      if (event) res = JSON.parse(event.data)
+      if (res.action == "fullscreen") {
+        this.handleFullScreen()
+      }
+    }
   },
 
-  created() {},
-  mounted() {
+  created () { },
+  mounted () {
     window.addEventListener("message", this.event, true);
   },
-  beforeDestory() {
+  beforeDestory () {
     window.removeEventListener("message", this.event, true);
   },
   watch: {},

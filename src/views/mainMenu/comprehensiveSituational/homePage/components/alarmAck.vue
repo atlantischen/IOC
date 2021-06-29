@@ -1,49 +1,53 @@
 <template>
   <!-- 警报确认 -->
-  <div class="alarmAck">
-    <button class="testBtn" @click="sureAlarmFun">警报确认</button>
-    <RightAlert :fade="isFade" class="sureAlarm">
-      <p class="formTitle">警报确认</p>
-      <div>
-        <el-form
-          :model="ruleForm"
-          :rules="rules"
-          ref="ruleForm"
-          label-width="100px"
-          class="demo-ruleForm alarmAckForm bigBar"
-        >
-          <el-form-item label="警报对象：" prop="name">
-            <el-input v-model="ruleForm.name"></el-input>
-          </el-form-item>
-          <el-form-item label="警报类型：" prop="type">
-            <el-input v-model="ruleForm.type"></el-input>
-          </el-form-item>
-          <el-form-item label="报警原因：" prop="because">
-            <el-input
-              type="textarea"
-              :rows="3"
-              v-model="ruleForm.because"
-            ></el-input>
-          </el-form-item>
-          <el-form-item label="处理人：" prop="handler">
-            <el-input v-model="ruleForm.handler"></el-input>
-          </el-form-item>
-          <el-form-item label="处理结果：" prop="result">
-            <el-input
-              type="textarea"
-              :rows="3"
-              v-model="ruleForm.result"
-            ></el-input>
-          </el-form-item>
-        </el-form>
-      </div>
-      <div class="form_bt x_c">
-        <el-button
-          class="formBtn"
-          type="primary"
-          @click="submitForm('ruleForm')"
-          >确认警报</el-button
-        >
+  <div>
+    <button class="testBtn" v-if="false" @click="sureAlarmFun()">
+      警报确认
+    </button>
+    <RightAlert :fade="isFade" v-show="isFade" class="sureAlarm">
+      <div class="sureAlarm_box">
+        <p class="formTitle">警报确认</p>
+        <div>
+          <el-form
+            :model="ruleForm"
+            :rules="rules"
+            ref="ruleForm"
+            label-width="100px"
+            class="demo-ruleForm alarmAckForm bigBar"
+          >
+            <el-form-item label="警报对象：" prop="name">
+              <el-input v-model="ruleForm.name"></el-input>
+            </el-form-item>
+            <el-form-item label="警报类型：" prop="type">
+              <el-input v-model="ruleForm.type"></el-input>
+            </el-form-item>
+            <el-form-item label="报警原因：" prop="because">
+              <el-input
+                type="textarea"
+                :rows="3"
+                v-model="ruleForm.because"
+              ></el-input>
+            </el-form-item>
+            <el-form-item label="处理人：" prop="handler">
+              <el-input v-model="ruleForm.handler"></el-input>
+            </el-form-item>
+            <el-form-item label="处理结果：" prop="result">
+              <el-input
+                type="textarea"
+                :rows="3"
+                v-model="ruleForm.result"
+              ></el-input>
+            </el-form-item>
+          </el-form>
+        </div>
+        <div class="form_bt x_c">
+          <el-button
+            class="formBtn"
+            type="primary"
+            @click="submitForm('ruleForm')"
+            >确认警报</el-button
+          >
+        </div>
       </div>
     </RightAlert>
   </div>
@@ -94,7 +98,10 @@ export default {
     };
   },
   components: {},
-  mounted () { },
+  mounted () {
+    console.log(this.$store.state)
+    window.addEventListener("message", this.sureAlarmFun, true);
+  },
   methods: {
     submitForm (formName) {
       this.$refs[formName].validate((valid) => {
@@ -110,8 +117,13 @@ export default {
     resetForm (formName) {
       this.$refs[formName].resetFields();
     },
-    sureAlarmFun () {
-      this.isFade = !this.isFade;
+    sureAlarmFun (v) {
+      // OnAlarmProcessingBtnClick
+      // console.log(v)
+      // console.log(this.$store.state.unitySendData)
+      if (this.$store.state.unitySendData.action == 'OnAlarmProcessingBtnClick') {
+        this.isFade = !this.isFade;
+      }
       if (this.isFade) {
         this.ruleForm = {
           name: "中心广场摄像机",
@@ -128,17 +140,20 @@ export default {
 
 <style lang="less" scoped>
 @import "~@/style/gl.less";
-.alarmAck {
-  .testBtn {
-    position: fixed;
-    right: 0;
-    top: 0;
-    z-index: 101;
-  }
-  .sureAlarm {
-    width: 4.25rem /* 340/80 */;
-    height: 6.25rem /* 500/80 */;
-    right: 0.25rem /* 20/80 */;
+.testBtn {
+  position: fixed;
+  right: 0;
+  top: 0;
+  z-index: 101;
+}
+.sureAlarm {
+  width: 4.25rem /* 340/80 */;
+  height: 6.25rem /* 500/80 */;
+  right: 0;
+  z-index: 101;
+  .sureAlarm_box {
+    height: 100%;
+    width: 100%;
     overflow: hidden;
     color: #fff;
     background: #0a131f;
@@ -148,7 +163,6 @@ export default {
     -webkit-box-shadow: inset 0 5px 15px 0.1px rgb(67, 150, 243, 0.5);
     border-radius: 0px 0px 5px 5px;
     padding: 0.125rem /* 10/80 */ 0 0.125rem /* 10/80 */ 0.25rem /* 20/80 */;
-    z-index: 101;
     .formTitle {
       font-size: 0.2rem /* 16/80 */;
       padding: 10px 0;

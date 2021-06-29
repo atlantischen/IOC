@@ -32,7 +32,6 @@ export default {
       if (res.action.indexOf("/") === 0) {
         this.$router.push(res.action);
       } else {
-
       }
     },
   },
@@ -50,7 +49,6 @@ export default {
       } else if (res.action === "hide") {
         // this.$routr.push('/empty')
         this.isShow = false;
-
       }
     });
     if (this.getQueryString('debug')) {
@@ -90,7 +88,6 @@ export default {
           //   // this.$routr.push('/empty')
           //      this.isShow = false;
           // }
-
         }
       });
     },

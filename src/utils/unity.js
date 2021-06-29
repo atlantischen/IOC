@@ -38,6 +38,9 @@ function sendMessageToUnity(fun,m_Param='' ) {
 // }
 
 export function SendMessageToUnity(action, data) {
+  if (!window.vuplex) {
+    return this.$message.info('通讯失败！')
+  }
   if (window.debug) {
     window.vuplex.postMessage(JSON.stringify({
       action,
@@ -48,7 +51,10 @@ export function SendMessageToUnity(action, data) {
         type: "w2u",
         sysname: "System/WebEventListen",
         func: "message",
-        text: JSON.stringify(data)
+        text: JSON.stringify({
+          action,
+          arg: JSON.stringify(data)
+        })
       },
       '*');
   }

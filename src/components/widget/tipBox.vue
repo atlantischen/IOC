@@ -31,13 +31,16 @@ export default {
   components: {},
   mounted () { },
   methods: {
+    // 点击警告框3D出现警告位置
     clickItem () {
-      this.$SendMessageToUnity("OnWarningNoticesBarClick");
-      console.log("查看告警位置");
+      this.$SendMessageToUnity("OnWarningNoticesBarClick", {});
+      console.log("=================OnWarningNoticesBarClick")
     },
+    // 关闭警告
     closeTip () {
       this.isShow = !this.isShow;
       this.$SendMessageToUnity("PopUpWarningNoticesBar", { isOpen: false });
+      console.log("=================PopUpWarningNoticesBar, { isOpen: false })")
       // this.$emit("close", this.isShow);
     },
   },

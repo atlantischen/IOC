@@ -15,17 +15,17 @@ export default {
       type: Boolean,
     },
   },
-  data() {
+  data () {
     return {
       outClass: "fadeOutRight1",
     };
   },
   watch: {
-    fade() {
+    fade () {
       this.outClass = "fadeOutRight0";
     },
   },
-  mounted() {},
+  mounted () { },
 };
 </script>
 
