@@ -9,6 +9,7 @@ import * as echarts from "echarts";
 import ElementPlus from 'element-plus';
 import 'element-plus/lib/theme-chalk/index.css'
 import {redomEchart} from '@/utils/methods.js'
+import {SendMessageToUnity} from './utils/unity'
 
 import locale from 'element-plus/lib/locale/lang/zh-cn'
 import 'dayjs/locale/zh-cn'
@@ -25,6 +26,7 @@ import SearchBox from './components/widget/searchBox.vue'
 import TipBox from './components/widget/tipBox.vue'
 const app = createApp(App)
 app.config.globalProperties.$redomEchart = redomEchart;
+app.config.globalProperties.$SendMessageToUnity = SendMessageToUnity;
 app.component('IOCLeft', IOCLeft)
 app.component('IOCRight', IOCRight)
 app.component('Tips', Tips)

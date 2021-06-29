@@ -1,16 +1,15 @@
 <template>
-  <ul class="box ioc_animated fadeInDownTop">
+  <div class="box ioc_animated fadeInDownTop">
       <ul>
           <li v-for="(item,index) in list" :key="index">
               <div class="font_text">
                      <NumCounter :value='item.num'></NumCounter>
-
               </div>
               <div>{{item.describe}}</div>
 
           </li>
       </ul>
-  </ul>
+  </div>
 </template>
 
 <script>
@@ -45,6 +44,7 @@ export default {
     color: #fff;
     ul{
         display: flex;
+        
         &>li{
             margin-right: .5rem /* 60/80 *//* 70/80 */ /* 56/80 */;
             &>div:nth-child(1){

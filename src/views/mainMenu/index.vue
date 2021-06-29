@@ -2,6 +2,7 @@
   <div id="MainMenu">
     <iframe
       id="iframe3D"
+      ref="iframe"
       :src="url"
       allowfullscreen="true"
       frameborder="0"
@@ -30,6 +31,8 @@ export default {
       let res = val;
       if (res.action.indexOf("/") === 0) {
         this.$router.push(res.action);
+      } else {
+
       }
     },
   },
@@ -40,21 +43,29 @@ export default {
       window.addEventListener("vuplexready", this.addMessageListener);
     }
     window.addEventListener("message", (event) => {
-       let res = JSON.parse(event.data)
+        let res = JSON.parse(event.data)
         this.$store.commit("setData", res);
         if (res.data === "IOCHOME") {
-          
           this.isShow = true;
+        }else if(res.action === "hide"){
+          // this.$routr.push('/empty')
+          this.isShow = false;
+
         }
       });
     if(this.getQueryString('debug')){
+      console.log('我是debug!!');
       this.url='';
+      // console.log(window.debug,'debug');
       window.debug = true;
-      console.log("我是debug!!!!!!!!!!!");
     } else {
       this.url = "http://172.21.70.246:8110";
     }
-    console.log("123");
+    // console.log("123");
+  },
+  mounted(){
+    window.iframe=this.$refs.iframe
+
   },
   methods: {
     getQueryString (name) {
@@ -65,20 +76,26 @@ export default {
     },
     addMessageListener () {
       window.vuplex.addEventListener("message", (event) => {
+        console.log(event.data);
         let res = JSON.parse(event.data);
-        this.$store.commit("setData", res);
+        this.$store.commit("setData", res)
         if (res && res.lenght != 0) {
-          this.isShow = true;
+          if(res.action == "hide"){
+              this.isShow = false;
+          } else{
+             this.isShow = true;
+          }
+        // if(res.action === "hide"){
+        //   console.log('我是测试~~~~·');
+        //   // this.$routr.push('/empty')
+        //      this.isShow = false;
+        // }
+
         }
       });
     },
   },
-   beforeDestroy() {
-        const self = this;
-        window.removeEventListener("message", () => {
-            // self.init();
-        });
-    },
+
 
 
 };
