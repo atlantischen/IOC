@@ -11,67 +11,71 @@
           class="SearchBoxClass"
           :text="'搜园区建筑、搜企业、搜商家'"
           @_search="clickSwitch"
+          @_input="clickSwitch"
         />
-        <TipBox v-show="true" />
+        <TipBox :_data="tipList" @close="showTipBoxHandle" />
       </template>
       <template #right>
         <Allcom :_Info="rightInfo" />
       </template>
     </LeftRight>
-    <RightContent v-show="isShowRIght" @_c="clickSwitch" />
+    <RightContent v-show="isShowRIght" :inputVal="inputVal" @_c="clickSwitch" />
+    <AlarmAck />
   </div>
 </template>
 
 <script>
-import RightContent from './components/rightContent.vue'
+import AlarmAck from "./components/alarmAck.vue";
+import RightContent from "./components/rightContent.vue";
 import * as echarts from "echarts";
-import { redomEchart, renderHtml } from "@/utils/methods";
 import { aaa } from "@/api/mockApi";
 import axios from "axios";
 export default {
-  components: { RightContent },
+  components: { RightContent, AlarmAck },
   name: "zhts",
-  data () {
+  data() {
     return {
+      inputVal: null,
       // 左侧组件info
       leftInfo: [
         {
-          title: '园区情况',
-          type: 'TheParkIs',
+          title: "园区情况",
+          type: "TheParkIs",
           datas: {
             datas1: [
               [
                 {
                   data: [158],
-                  name: '待入驻企业'
+                  name: "待入驻企业",
                 },
                 {
                   data: [28],
-                  name: '已入驻企业'
+                  name: "已入驻企业",
                 },
               ],
               [
                 {
                   data: [36],
-                  name: '装修中企业'
+                  name: "装修中企业",
                 },
                 {
                   data: [132],
-                  name: '已办公企业'
+                  name: "已办公企业",
                 },
-              ]
+              ],
             ],
             datas2: {
               datas: [23, 34, 45],
-              names: ["占地面积", "绿化率", "入驻率"]
-            }
-          }
+              names: ["占地面积", "绿化率", "入驻率"],
+            },
+          },
         },
         {
-          title: '人行态势',
-          type: 'PedestrianPosture',
+          title: "人行态势",
+          type: "PedestrianPosture",
           datas: {
             smooth: false,
+            unit: ["时间", "人"],
             names: ["办公人员", "访客"],
             xData: ["05:00", "06:00", "07:00", "08:00", "09:00", "10:00"],
             datas: [
@@ -80,19 +84,19 @@ export default {
             ],
             datas2: [
               {
-                name: '今日总人流量',
-                value: 28264
+                name: "今日总人流量",
+                value: 28264,
               },
               {
-                name: '今日总访客',
-                value: 289
+                name: "今日总访客",
+                value: 289,
               },
-            ]
-          }
+            ],
+          },
         },
         {
-          title: '园区产值',
-          type: 'TheParkOutputVal',
+          title: "园区产值",
+          type: "TheParkOutputVal",
           datas: {
             optionName: [
               "新能源",
@@ -103,27 +107,27 @@ export default {
               "文化创意",
               "现代服务",
               "节能环保",
-              "商家"
+              "商家",
             ],
             datas: [43, 34, 32, 34, 35, 32, 20, 20, 8],
             datas2: [
               {
-                name: '今日总人流量',
-                value: 28264
+                name: "今日总人流量",
+                value: 28264,
               },
               {
-                name: '今日总访客',
-                value: 289
+                name: "今日总访客",
+                value: 289,
               },
-            ]
-          }
+            ],
+          },
         },
       ],
       // 右侧
       rightInfo: [
         {
-          title: '能耗态势',
-          type: 'EnergyTrend',
+          title: "能耗态势",
+          type: "EnergyTrend",
           datas: {
             energyTrendData: [
               {
@@ -141,15 +145,24 @@ export default {
                 yearPower: 62583,
               },
             ],
-          }
+          },
         },
         {
-          title: '车行态势',
-          type: 'PedestrianPosture',
+          title: "车行态势",
+          type: "PedestrianPosture",
           datas: {
             smooth: true,
             names: ["进", "出"],
-            xData: ["00:00", "02:00", "04:00", "06:00", "08:00", "10:00", "12:00"],
+            unit: ["时间", "辆"],
+            xData: [
+              "00:00",
+              "02:00",
+              "04:00",
+              "06:00",
+              "08:00",
+              "10:00",
+              "12:00",
+            ],
             datas: [
               [7, 9, 3, 14, 9, 36, 23],
               [10, 15, 12, 23, 20, 45, 36],
@@ -168,11 +181,11 @@ export default {
                 name: "在场车辆",
               },
             ],
-          }
+          },
         },
         {
-          title: '设备态势',
-          type: 'equipmentSituation',
+          title: "设备态势",
+          type: "equipmentSituation",
           datas: {
             equipmentSDatas: [
               {
@@ -194,11 +207,12 @@ export default {
             ],
             names: ["正常", "故障"],
             xAxisName: ["安防", "能耗", "网络", "消防"],
-            datas: [12530, 23440, 24520, 23440]
-          }
-        }
+            datas: [12530, 23440, 24520, 23440],
+          },
+        },
       ],
       isShowRIght: false,
+      isShowTipBox: true,
       centerDatasList: [
         {
           name: "园区总人数",
@@ -216,10 +230,15 @@ export default {
           name: "设备异常数",
           val: 16,
         },
-      ]
+      ],
+      tipList: [
+        {
+          text: "告警！2021-04-30 15:00{李玲}在{公寓广场}发生了{黑名单告警}",
+        },
+      ],
     };
   },
-  mounted () {
+  mounted() {
     // aaa().then(r=>{
     //   console.log(r)
     // })
@@ -228,9 +247,11 @@ export default {
     // })
   },
   methods: {
-    clickSwitch (val) {
-      this.isShowRIght = !this.isShowRIght
-    }
+    showTipBoxHandle(val) {},
+    clickSwitch(val) {
+      this.isShowRIght = !this.isShowRIght;
+      this.inputVal = val;
+    },
   },
 };
 </script>

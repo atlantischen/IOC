@@ -47,7 +47,7 @@ export default {
 <style lang="less">
 @import "~@/style/gl.less";
 .tittle {
-  // margin: 15px 0;
+  margin: 0.1875rem /* 15/80 */ 0;
 }
 .leftRightPart {
   color: #fff;
@@ -58,22 +58,22 @@ export default {
   .com_ {
     .com_();
     top: 50%;
-    width: 344px;
-    min-height: 500px;
+    width: 4.3rem /* 344/80 */;
+    min-height: 6.25rem /* 500/80 */;
     transform: translateY(-50%);
     -webkit-transform: translateY(-50%);
     // background: rgba(0, 0, 0, 0.7);
     z-index: 100;
   }
   .z_left {
-    left: 46px;
+    left: 0.575rem /* 46/80 */;
   }
   .y_right {
-    right: 46px;
+    right: 0.575rem /* 46/80 */;
   }
   .c_center {
     .com_();
-    top: 125px;
+    top: 1.5625rem /* 125/80 */;
     left: 50%;
     transform: translateX(-50%);
     -webkit-transform: translateX(-50%);

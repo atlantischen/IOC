@@ -4,8 +4,8 @@ export default [{
     component: () => import('@/views/mainMenu/comprehensiveSituational/homePage/index.vue'),
     meta: {
       icon: 'icon-zonghe',
-      name: '',
-      title: '',
+      name: '综合态势',
+      title: '综合态势',
       isShow: true
     }
   },

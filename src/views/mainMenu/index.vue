@@ -17,7 +17,7 @@ export default {
   data () {
     return {
       isShow: true,
-      url:''
+      url: ''
     };
   },
   computed: {
@@ -97,7 +97,6 @@ export default {
   },
 
 
-
 };
 </script>
 
@@ -114,6 +113,5 @@ export default {
   height: 100%;
 }
 .comEntry {
-
 }
 </style>

@@ -1,28 +1,45 @@
 <template>
-  <div class="p_x_c2 tipBox">
+  <div class="p_x_c2 tipBox" v-if="isShow" @click="clickItem">
     <div class="tipBox_text x_c" :class="'tipBox_warn'">
-      <p>告警！2021-04-30 15:00{李玲}在{公寓广场}发生了{黑名单告警}</p>
-      <i class="el-icon-circle-close" @close="closeTip"></i>
+      <div class="pList">
+        <p v-for="(item, i) in _data" :key="i">{{ item.text }}</p>
+      </div>
+      <i class="el-icon-circle-close" @click.stop="closeTip"></i>
     </div>
   </div>
 </template>
 
 <script>
+import { SendMessageToUnity } from "@/utils/unity.js";
 export default {
   name: "tipBox",
   props: {
-    text: {
-      type: String,
-      default: "请输入...",
+    _data: {
+      typeof: Array,
+    },
+    show: {
+      type: Object,
     },
   },
-  data () {
-    return {};
+  data() {
+    return {
+      isShow: true,
+    };
+  },
+  watch() {
+    this.isShow = this.show;
   },
   components: {},
-  mounted () { },
+  mounted() {},
   methods: {
-    closeTip () { },
+    clickItem() {
+      console.log("查看告警位置");
+      SendMessageToUnity("unityFun", 0);
+    },
+    closeTip() {
+      this.isShow = !this.isShow;
+      emit("close", this.isShow);
+    },
   },
 };
 </script>
@@ -37,14 +54,17 @@ export default {
   line-height: 0.5rem /* 40/80 */;
   font-size: 0.225rem /* 18/80 */;
   margin: 0.25rem /* 20/80 */ 0;
+  cursor: pointer;
   .tipBox_text {
     white-space: nowrap;
     padding: 0 0.4375rem /* 35/80 */;
     width: 100%;
     background: url("~@/assets/img/tip_warn.png") center no-repeat;
     background-size: 100% 100%;
-    p {
+    .pList {
       width: 100%;
+    }
+    p {
       text-align: center;
       white-space: nowrap;
       overflow: hidden;

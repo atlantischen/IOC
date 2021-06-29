@@ -92,7 +92,6 @@
 <script>
 import * as echarts from "echarts";
 import { getWeather } from "@/api/com";
-import { redomEchart } from "@/utils/methods";
 export default {
   name: "homePage",
   data () {
@@ -227,7 +226,7 @@ export default {
           name: optionName[i],
         };
       }
-      redomEchart("industrySpaceEchart", option);
+      this.$redomEchart("industrySpaceEchart", option);
     },
     // 产业空间分布
     SpatialDistributionFun () {
@@ -329,7 +328,7 @@ export default {
           name: optionName[i],
         };
       }
-      redomEchart("spatialDistributionEchart", option);
+      this.$redomEchart("spatialDistributionEchart", option);
     },
     // 场地使用top5
     siteUsageTop5Fun () {
@@ -432,7 +431,7 @@ export default {
           }
         ],
       };
-      redomEchart("siteUsageTop5Echart", option);
+      this.$redomEchart("siteUsageTop5Echart", option);
     },
     // 环境空间
     airQualityFun () {
@@ -522,7 +521,7 @@ export default {
           },
         ]
       };
-      redomEchart("airQualityEchart", option);
+      this.$redomEchart("airQualityEchart", option);
     },
     // 场地空间
     floorSpaceFun () {
@@ -663,7 +662,7 @@ export default {
           name: optionName[i],
         };
       }
-      redomEchart("floorSpaceEchart", option);
+      this.$redomEchart("floorSpaceEchart", option);
     },
     // 今日气温趋势
     temperatureTrendFun () {
@@ -828,7 +827,7 @@ export default {
           },
         };
       }
-      redomEchart("temperatureTrendEchart", option);
+      this.$redomEchart("temperatureTrendEchart", option);
     }
   },
 };

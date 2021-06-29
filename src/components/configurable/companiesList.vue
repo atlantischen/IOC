@@ -2,7 +2,7 @@
   <div class="companiesListAll">
     <div class="tittle">{{ title }}</div>
     <div class="companiesList">
-      <div class="selectBuilding">
+      <div class="selectBuilding" v-if="datas.buldingList">
         <span> 栋座： </span>
         <div>
           <ul class="x_sa_rap">
@@ -27,33 +27,25 @@
           </ul>
         </div>
       </div>
-      <div class="companiesImgsList x_fs_rap">
-        <img
-          v-for="(t, i) in datas.companiesImgsListDatas"
-          :key="i"
-          :src="t.src"
-          alt=""
-        />
-        <img
-          v-for="(t, i) in datas.companiesImgsListDatas"
-          :key="i"
-          :src="t.src"
-          alt=""
-        />
-        <img
-          v-for="(t, i) in datas.companiesImgsListDatas"
-          :key="i"
-          :src="t.src"
-          alt=""
-        />
-      </div>
+      <ul
+        class="companiesImgsList mniBar"
+        :class="datas.buldingList ? '' : 'companiesImgsList' + datas.listCols"
+      >
+        <li class="x_fs_rap">
+          <img
+            v-for="(t, i) in datas.companiesImgsListDatas"
+            :key="i"
+            :src="t.src"
+            :alt="t.name"
+          />
+        </li>
+      </ul>
     </div>
   </div>
 </template>
 
 <script>
 import * as echarts from "echarts";
-import { redomEchart, uuid } from "@/utils/methods";
 export default {
   name: "theParkOutputValAll",
   props: {
@@ -64,7 +56,7 @@ export default {
   data () {
     return {
       ...this._data,
-      ids: uuid()
+      ids: this.$uuid()
     }
   },
   mounted () {
@@ -90,7 +82,7 @@ export default {
 // 企业列表
 .companiesListAll {
   .companiesList {
-    font-size: 16px;
+    font-size: 0.2rem /* 16/80 */;
     .selectBuilding > span {
       width: 20%;
     }
@@ -99,33 +91,42 @@ export default {
     }
     .selectBuilding {
       display: flex;
-      padding: 0 20px;
+      padding: 0 0.25rem /* 20/80 */;
       ul {
         display: flex;
-        padding: 0 0 10px 0;
+        padding: 0 0 0.125rem /* 10/80 */ 0;
         li {
-          min-width: 55px;
+          min-width: 0.6875rem /* 55/80 */;
           background: rgba(30, 57, 87, 0.5);
-          border-radius: 5px;
-          padding: 3px 10px;
+          border-radius: 0.0625rem /* 5/80 */;
+          padding: 0.0375rem /* 3/80 */ 0.125rem /* 10/80 */;
           text-align: center;
         }
         .actived {
-          border: 1px solid #4396f3;
+          border: 0.0125rem /* 1/80 */ solid #4396f3;
         }
       }
     }
     .companiesImgsList {
       width: 100%;
-      height: 180px;
+      height: 2.25rem /* 180/80 */;
       overflow-y: auto;
+      li {
+        width: 100%;
+      }
       img {
-        .ioc_img(150px, 80px, 5px);
-        margin: 0 5px 10px;
+        .ioc_img(1.875rem /* 150/80 */, 1rem /* 80/80 */, .0625rem /* 5/80 */);
+        margin: 0 0.125rem /* 10/80 */ 0.125rem /* 10/80 */;
         &:nth-child(2n) {
           margin-right: 0;
         }
       }
+    }
+    .companiesImgsList3 {
+      height: 3.375rem /* 270/80 */;
+    }
+    .companiesImgsList4 {
+      height: 4.5rem /* 360/80 */;
     }
   }
 }

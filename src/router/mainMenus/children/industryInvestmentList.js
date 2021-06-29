@@ -4,8 +4,8 @@ export default [{
     component: () => import('@/views/mainMenu/industryInvestment/homePage/index.vue'),
     meta: {
       icon: 'icon-zonghe',
-      name: '',
-      title: '',
+      name: '产业招商',
+      title: '产业招商',
       isShow: true
     }
   },

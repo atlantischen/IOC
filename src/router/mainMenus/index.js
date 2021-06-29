@@ -6,8 +6,7 @@ import theParkBusinessList from './children/theParkBusinessList'
 import convenientParkingList from './children/convenientParkingList'
 import greenEnergyEfficiencyList from './children/greenEnergyEfficiencyList'
 import wisdomContentCoupletList from './children/wisdomContentCoupletList'
-export default [
-  {
+export default [{
     path: 'comprehensiveSituational',
     redirect: "/comprehensiveSituational/homePage",
     name: 'comprehensiveSituational',

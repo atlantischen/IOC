@@ -4,8 +4,8 @@ export default [{
     component: () => import('@/views/mainMenu/convenientParking/homePage/index.vue'),
     meta: {
       icon: 'icon-zonghe',
-      name: '',
-      title: '',
+      name: '便捷停车',
+      title: '便捷停车',
       isShow: true
     }
   },

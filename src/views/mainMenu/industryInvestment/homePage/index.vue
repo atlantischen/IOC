@@ -19,7 +19,6 @@
 
 <script>
 import * as echarts from "echarts";
-import { redomEchart } from "@/utils/methods";
 export default {
   name: "homePage",
   data () {
@@ -150,6 +149,22 @@ export default {
               },
             ],
             companiesImgsListDatas: [
+              {
+                name: "升华集团",
+                src: require("@/assets/img/datas/qy_shjt.png"),
+              },
+              {
+                name: "一博科技",
+                src: require("@/assets/img/datas/qy_ybkj.png"),
+              },
+              {
+                name: "华夏视科集团",
+                src: require("@/assets/img/datas/qy_hx.png"),
+              },
+              {
+                name: "中国建设银行",
+                src: require("@/assets/img/datas/qy_zgjsyh.png"),
+              },
               {
                 name: "升华集团",
                 src: require("@/assets/img/datas/qy_shjt.png"),
@@ -312,7 +327,7 @@ export default {
           name: optionName[i],
         };
       }
-      redomEchart("rentalAndSaleEchart_", option);
+      this.$redomEchart("rentalAndSaleEchart_", option);
     },
   },
 };
@@ -324,7 +339,7 @@ export default {
   #rentalAndSaleEchart_,
   [id^="rentalAndSaleEchart_"] {
     width: 100%;
-    height: 160px;
+    height: 2rem /* 160/80 */;
   }
 }
 </style>

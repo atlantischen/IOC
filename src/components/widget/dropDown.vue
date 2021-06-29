@@ -52,13 +52,13 @@ export default {
 
 .dropDown {
   .el-dropdown-link {
-    font-size: 12px;
+    font-size: 0.15rem /* 12/80 */;
     color: rgba(255, 255, 255, 0.8);
     i {
       background: rgba(30, 57, 87, 0.7);
-      padding: 2px 6px;
-      margin-left: 8px;
-      border-radius: 2px;
+      padding: 0.025rem /* 2/80 */ 0.075rem /* 6/80 */;
+      margin-left: 0.1rem /* 8/80 */;
+      border-radius: 0.025rem /* 2/80 */;
       cursor: pointer;
     }
   }

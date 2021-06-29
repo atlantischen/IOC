@@ -4,7 +4,7 @@ export default [{
     component: () => import('@/views/mainMenu/wisdomContentCouplet/homePage/index.vue'),
     meta: {
       icon: 'icon-zonghe',
-      name: '',
+      name: '智慧物联',
       title: '',
       isShow: true
     }

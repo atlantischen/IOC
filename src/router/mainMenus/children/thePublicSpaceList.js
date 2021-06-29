@@ -4,8 +4,8 @@ export default [{
     component: () => import('@/views/mainMenu/thePublicSpace/homePage/index.vue'),
     meta: {
       icon: 'icon-zonghe',
-      name: '',
-      title: '',
+      name: '公共空间',
+      title: '公共空间',
       isShow: true
     }
   },

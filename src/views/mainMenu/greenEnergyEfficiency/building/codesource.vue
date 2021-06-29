@@ -59,7 +59,7 @@
       <div class="tittle">新风控制</div>
       <ul class="scroll">
         <li v-for="item in 12" :key="item">
-          <span>2020-12-31         14:04</span>
+          <span>2020-12-31 14:04</span>
           <span>B1-水房1#</span>
         </li>
       </ul>
@@ -71,13 +71,13 @@
 import * as echarts from "echarts";
 
 export default {
-  data() {
+  data () {
     return {
       activeIndex: 1,
     };
   },
   methods: {
-    changeBtn(val) {
+    changeBtn (val) {
       console.log(val);
       this.activeIndex = val;
       if (val == 1) {
@@ -118,7 +118,7 @@ export default {
         );
       }
     },
-    RealTotalPower() {
+    RealTotalPower () {
       var y = [0, 25, 50, 75];
       var dom = "RealTotalPower";
       var option = {
@@ -292,7 +292,7 @@ export default {
               distance: -90,
               color: "#fff",
               fontSize: "12",
-              formatter: function(_) {
+              formatter: function (_) {
                 return "实时访客: " + _.value;
               },
             },
@@ -315,7 +315,7 @@ export default {
       };
       this.$redomEchart(dom, option);
     },
-    ElectricityStatistics(data, data2, yData) {
+    ElectricityStatistics (data, data2, yData) {
       let { name, splitNumber, min, max, interval } = yData;
       var dom = "ElectricityStatistics";
 
@@ -466,7 +466,7 @@ export default {
       this.$redomEchart(dom, option);
     },
   },
-  mounted() {
+  mounted () {
     this.RealTotalPower();
     this.ElectricityStatistics(
       ["1", "4", "7", "11", "14", "17", "21", "24", "27", "31"],
@@ -513,7 +513,7 @@ export default {
   }
   .TodayToSee {
     display: flex;
-    padding: .25rem /* 20/80 */ /* 30/80 */;
+    padding: 0.25rem /* 20/80 */ /* 30/80 */;
     position: relative;
     // border-bottom: 1px dashed #fff;
     &::before {
@@ -592,7 +592,7 @@ export default {
   .btn {
     & > ul {
       display: flex;
-      margin-top: .25rem /* 20/80 */;
+      margin-top: 0.25rem /* 20/80 */;
       justify-content: flex-end;
       // position: absolute;
       // right: 0;
@@ -609,36 +609,35 @@ export default {
         line-height: 0.325rem;
       }
       .active {
-        color: #4396F3;
-        border-color: #4396F3;
+        color: #4396f3;
+        border-color: #4396f3;
       }
     }
   }
 }
-.new_air{
-  margin-top: .4375rem /* 35/80 */ /* 45/80 */ /* 15/80 */;
-  &>ul{
+.new_air {
+  margin-top: 0.4375rem /* 35/80 */ /* 45/80 */ /* 15/80 */;
+  & > ul {
     display: flex;
     justify-content: flex-end;
     flex-wrap: wrap;
     height: 4.425rem /* 354/80 */ /* 474/80 */ /* 466/80 */;
     overflow: auto;
-    margin-top: .3125rem /* 25/80 *//* 15/80 */;
+    margin-top: 0.3125rem /* 25/80 */;
 
-    &>li{
+    & > li {
       width: 1.875rem /* 150/80 */;
-      height: 1.375rem /* 110/80 *//* 100/80 */;
-      background-color:rgba(67, 150, 243, .25);  
-      color: #fff;  
-      margin: 0 .1rem /* 8/80 */ .1rem /* 8/80 */ 0;
-      padding: .125rem /* 10/80 */;
+      height: 1.375rem /* 110/80 */;
+      background-color: rgba(67, 150, 243, 0.25);
+      color: #fff;
+      margin: 0 0.1rem /* 8/80 */ 0.1rem /* 8/80 */ 0;
+      padding: 0.125rem /* 10/80 */;
       box-sizing: border-box;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
       align-items: flex-end;
-  }
-
+    }
   }
 }
 </style>

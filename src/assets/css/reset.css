@@ -93,16 +93,6 @@ iframe {
 }
 
 .el-dropdown-menu::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.871);
-  border-radius: 10px;
-}
-
-.el-dropdown-menu::-webkit-scrollbar {
-  width: 5px;
-  height: 5px;
-}
-
-.el-dropdown-menu::-webkit-scrollbar-thumb {
   background: rgba(0, 0, 0, 0.451);
   border-radius: 15px;
 }
