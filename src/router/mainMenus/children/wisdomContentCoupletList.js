@@ -5,7 +5,7 @@ export default [{
     meta: {
       icon: 'icon-zonghe',
       name: '智慧物联',
-      title: '',
+      title: '智慧物联',
       isShow: true
     }
   },

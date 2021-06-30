@@ -43,7 +43,7 @@
       <div class="btn">
         <ul>
           <li :class="{ active: activeIndex === 1 }" @click="changeBtn(1)">
-            近30天
+            近7天
           </li>
           <li :class="{ active: activeIndex === 2 }" @click="changeBtn(2)">
             近12月
@@ -601,16 +601,16 @@ export default {
         width: 0.75rem /* 60/80 */ /* 76/80 */;
         margin-right: 0.0625rem /* 5/80 */;
         height: 0.325rem /* 26/80 */;
-        border: 1px solid #ffffff;
-        border-radius: 0.1625rem /* 13/80 */;
+        background-color: rgba(35, 61, 89, .5);
+        border: 1px solid transparent;
+        border-radius: .05rem /* 4/80 */ /* 13/80 */;
         font-size: 0.175rem /* 14/80 */;
         color: #fff;
         text-align: center;
         line-height: 0.325rem;
       }
       .active {
-        color: #4396f3;
-        border-color: #4396f3;
+        border: 1px solid #4396f3;
       }
     }
   }

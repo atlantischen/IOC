@@ -48,8 +48,18 @@ export default {
     handleClick(path,index){
       this.activeIndex=index
       this.$router.push(path)
+     
     }
-  }
+  },
+   watch: {
+    $route (to,from) {
+    
+        
+    
+      }
+     
+    
+  },
 }
 </script>
 
@@ -66,6 +76,7 @@ ul{
         height:.4625rem /* 37/80 */;
         margin-bottom: .375rem /* 30/80 */;
         background-image: url('../../../../assets/img/ly_bj1.png');
+        background-size: contain;
         background-repeat: no-repeat;
         text-align: center;
         line-height: .4625rem;
@@ -77,6 +88,8 @@ ul{
     }
     .active{
         background-image: url('../../../../assets/img/ly_bj.png');
+        background-size: contain;
+
 
     }
 }
