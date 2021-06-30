@@ -28,7 +28,8 @@ export default {
     }
   },
 
-  created () { },
+  created () {
+  },
   mounted () {
     window.addEventListener("message", this.event, true);
   },
@@ -36,8 +37,8 @@ export default {
     window.removeEventListener("message", this.event, true);
   },
   watch: {
-    'route':{
-      
+    'route': {
+
     }
   },
 };
