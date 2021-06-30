@@ -6,7 +6,7 @@
         <div class="tittle">车位情况</div>
         <ul>
           <li v-for="(item, index) in parkList" :key="index">
-            <div class="floor" @click="handleClick">{{item.floor}}</div>
+            <div class="floor" @click="handleClick">{{ item.floor }}</div>
             <div class="present">
               <span>在场车位</span>
               <span class="font_text">
@@ -177,10 +177,11 @@ export default {
       console.log(val);
     },
 
-    postMessageToUnity(data) {
+    postMessageToUnity (data) {
 
     },
 
+<<<<<<< HEAD
   handleClick(){
 
     this.$SendMessageToUnity("gan",{wocao:true,fuckyou:"123"});
@@ -188,6 +189,16 @@ export default {
 
    },
     AssetsAndEquipment() {
+=======
+    handleClick () {
+      // console.log(this.$SendMessageToUnity());
+      this.$SendMessageToUnity("gan", { wocao: true, fuckyou: "123" });
+      this.$SendMessageToUnity("gan2", {});
+      // this.$SendMessageToUnity("nimei",{wocao:true,fuckyou:"456"});
+      // console.log(window.iframe.contentWindow,'iframe');
+    },
+    AssetsAndEquipment () {
+>>>>>>> da362ede28b920561e62895f650fd396085c53d8
       var dom = "park_time";
       var option = {
         title: {

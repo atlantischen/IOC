@@ -1,6 +1,7 @@
 <template>
   <!-- 综合态势home -->
-  <div>
+  <div class="zhts_Home">
+    <RightContent v-show="isShowRIght" :inputVal="inputVal" @_c="clickSwitch" />
     <LeftRight v-show="!isShowRIght">
       <template #left>
         <Allcom :_Info="leftInfo" />
@@ -13,19 +14,18 @@
           @_search="clickSwitch"
           @_input="clickSwitch"
         />
-        <TipBox :_data="tipList" @close="showTipBoxHandle" />
+        <TipBox :_data="tipList" />
       </template>
       <template #right>
         <Allcom :_Info="rightInfo" />
       </template>
     </LeftRight>
-    <RightContent v-show="isShowRIght" :inputVal="inputVal" @_c="clickSwitch" />
     <AlarmAck />
   </div>
 </template>
 
 <script>
-import AlarmAck from "./components/alarmAck.vue";
+import AlarmAck from "@/views/mainMenu/comprehensiveSituational/homePage/components/alarmAck.vue";
 import RightContent from "./components/rightContent.vue";
 import * as echarts from "echarts";
 import { aaa } from "@/api/mockApi";
@@ -33,7 +33,7 @@ import axios from "axios";
 export default {
   components: { RightContent, AlarmAck },
   name: "zhts",
-  data() {
+  data () {
     return {
       inputVal: null,
       // 左侧组件info
@@ -234,11 +234,15 @@ export default {
       tipList: [
         {
           text: "告警！2021-04-30 15:00{李玲}在{公寓广场}发生了{黑名单告警}",
-        },
+        }
       ],
     };
   },
-  mounted() {
+  created () {
+  },
+  mounted () {
+    this.$SendMessageToUnity("PopUpWarningNoticesBar", { isOpen: true });
+    console.log("=================PopUpWarningNoticesBar, { isOpen: true })")
     // aaa().then(r=>{
     //   console.log(r)
     // })
@@ -246,11 +250,14 @@ export default {
     //   console.log('xxxxxxxxx', req)
     // })
   },
+  destroyed () {
+  },
   methods: {
-    showTipBoxHandle(val) {},
-    clickSwitch(val) {
-      this.isShowRIght = !this.isShowRIght;
+    showTipBoxHandle (val) { },
+    clickSwitch (val) {
+      console.log(val)
       this.inputVal = val;
+      this.isShowRIght = !this.isShowRIght;
     },
   },
 };
@@ -258,7 +265,9 @@ export default {
 
 <style lang="less" scoped>
 @import "~@/style/gl.less";
-
+.zhts_Home {
+  // position: relative;
+}
 .SearchBoxClass {
   width: 6.25rem /* 500/80 */;
 }

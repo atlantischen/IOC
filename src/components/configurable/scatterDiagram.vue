@@ -22,18 +22,18 @@ export default {
       type: Object,
     },
   },
-  data() {
+  data () {
     return {
       ...this._data,
       ids: this.$uuid(),
     };
   },
-  created() {},
-  mounted() {
+  created () { },
+  mounted () {
     this.scatterDiagramFun(this.datas);
   },
   methods: {
-    scatterDiagramFun(val) {
+    scatterDiagramFun (val) {
       let { xAxisD, names, title } = val;
       var data = [
         [
@@ -70,35 +70,7 @@ export default {
           },
         },
         tooltip: {
-          trigger: "axis",
-          axisPointer: {
-            type: "line",
-            lineStyle: {
-              type: "dashed",
-              width: 0.5,
-              color: "rgba(255,255,255,0.8)",
-            },
-          },
-          backgroundColor: "rgba(0,0,0,0.8)",
-          borderWidth: 1,
-          borderColor: "#4396f3",
-          padding: [5, 10],
-          extraCssText: "box-shadow:inset 0 0 8px rgba(67, 149, 243, 0.6);",
-          textStyle: {
-            color: "#fff",
-          },
-          formatter: (params) => {
-            console.log(params);
-            let dataStr = `<p style="font-weight:bold;text-align:center;">${params[0].data[3]}</p>`;
-            params.forEach((item) => {
-              dataStr += `<div style="text-align:left;">
-                  <p>${item.seriesName}:</p>
-                  <span>企业数量：${item.data[2]}</span>
-                  <div>产业占比：${item.data[2]}</div>
-                </div>`;
-            });
-            return dataStr;
-          },
+          show: false,
         },
         legend: {
           left: "10%",
@@ -120,7 +92,16 @@ export default {
           containLabel: true,
         },
         xAxis: {
-          name: "万元",
+          name: '{a|万元}',
+          nameTextStyle: {
+            rich: {
+              a: {
+                padding: [-60, 0, 0, -40],
+                color: '#fff'
+              }
+            }
+          },
+          boundaryGap: true,
           min: 100,
           data: xAxisD,
           axisTick: {
@@ -137,7 +118,7 @@ export default {
           },
           axisLabel: {
             fontSize: 12,
-            padding: [20, 0, 0, -20],
+            padding: [15, 0, 0, -15],
             rotate: -20,
             interval: 0,
             margin: 10,
@@ -148,6 +129,9 @@ export default {
         },
         yAxis: {
           name: "万元",
+          nameTextStyle: {
+            padding: [5, 0, 0, -40],
+          },
           min: 1000,
           splitNumber: 6,
           axisTick: {
@@ -174,18 +158,53 @@ export default {
             name: names[0],
             data: data[0],
             type: "scatter",
-            symbolSize: function(data) {
+            symbolSize: function (data) {
               return Math.sqrt(data[2]);
             },
             emphasis: {
               focus: "series",
-              // label: {
-              //   show: true,
-              //   formatter: function(param) {
-              //     return param.data[3];
-              //   },
-              //   position: "top",
-              // },
+              label: {
+                show: true,
+                axisPointer: {
+                  type: "line",
+                  lineStyle: {
+                    type: "dashed",
+                    width: 0.5,
+                    color: "rgba(255,255,255,0.8)",
+                  },
+                },
+                backgroundColor: "rgba(0,0,0,0.8)",
+                borderWidth: 1,
+                borderRadius: [5, 5],
+                borderColor: "#4396f3",
+                padding: [5, 10],
+                extraCssText:
+                  "box-shadow:inset 0 0 8px rgba(67, 149, 243, 0.6);",
+                textStyle: {
+                  color: "#fff",
+                },
+                formatter: (params) => {
+                  return (
+                    "{a|" +
+                    params.data[3] +
+                    "}\n" +
+                    "{b|企业数量：" +
+                    params.data[2] +
+                    "}\n{b|" +
+                    "产业占比：" +
+                    params.data[2] +
+                    "}"
+                  );
+                },
+                rich: {
+                  a: {
+                    textAlign: "center",
+                  },
+                  b: {
+                    padding: [0, 0, 10, 0],
+                  },
+                },
+              },
             },
             itemStyle: {
               // shadowBlur: 10,
@@ -211,19 +230,54 @@ export default {
             name: names[1],
             data: data[1],
             type: "scatter",
-            symbolSize: function(data) {
+            symbolSize: function (data) {
               // return Math.sqrt(data[2]) / 5e2;
               return Math.sqrt(data[2]);
             },
             emphasis: {
               focus: "series",
-              // label: {
-              //   show: true,
-              //   formatter: function(param) {
-              //     return param.data[3];
-              //   },
-              //   position: "top",
-              // },
+              label: {
+                show: true,
+                axisPointer: {
+                  type: "line",
+                  lineStyle: {
+                    type: "dashed",
+                    width: 0.5,
+                    color: "rgba(255,255,255,0.8)",
+                  },
+                },
+                backgroundColor: "rgba(0,0,0,0.8)",
+                borderWidth: 1,
+                borderRadius: [5, 5],
+                borderColor: "#4396f3",
+                padding: [5, 10],
+                extraCssText:
+                  "box-shadow:inset 0 0 8px rgba(67, 149, 243, 0.6);",
+                textStyle: {
+                  color: "#fff",
+                },
+                formatter: (params) => {
+                  return (
+                    "{a|" +
+                    params.data[3] +
+                    "}\n" +
+                    "{b|企业数量：" +
+                    params.data[2] +
+                    "}\n{b|" +
+                    "产业占比：" +
+                    params.data[2] +
+                    "}"
+                  );
+                },
+                rich: {
+                  a: {
+                    textAlign: "center",
+                  },
+                  b: {
+                    padding: [0, 0, 10, 0],
+                  },
+                },
+              },
             },
             itemStyle: {
               // shadowBlur: 10,
@@ -260,7 +314,7 @@ export default {
   .sd_top {
     width: 100%;
     display: flex;
-    padding: 0.0625rem /* 5/80 */ 0.3125rem /* 25/80 */ 0.1875rem /* 15/80 */;
+    padding: 0.0625rem /* 5/80 */ 0.3125rem /* 25/80 */ 0.25rem /* 20/80 */;
     li {
       flex: 1;
       span:nth-child(1) {

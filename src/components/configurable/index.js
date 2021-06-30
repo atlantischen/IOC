@@ -9,6 +9,7 @@ import FocusIndustry from './focusIndustry.vue'
 import CompaniesList from './companiesList.vue'
 import EnterprisesSettled from './enterprisesSettled.vue'
 import InvestmentSituation from './investmentSituation.vue'
+import LeaseSummary from './leaseSummary.vue'
 import ShapeOfMountain from './shapeOfMountain.vue'
 import WaterPolo from './waterPolo.vue'
 import ScatterDiagram from './scatterDiagram.vue'
@@ -25,6 +26,7 @@ const configurable = {
   CompaniesList, // 企业列表
   EnterprisesSettled, // 待入驻企业
   InvestmentSituation, // 招商情况
+  LeaseSummary, // 租赁概括
   ShapeOfMountain, // 象形柱图
   WaterPolo, // 水球图
   ScatterDiagram, // 散点

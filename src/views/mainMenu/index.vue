@@ -32,7 +32,6 @@ export default {
       if (res.action.indexOf("/") === 0) {
         this.$router.push(res.action);
       } else {
-
       }
     },
   },
@@ -43,6 +42,7 @@ export default {
       window.addEventListener("vuplexready", this.addMessageListener);
     }
     window.addEventListener("message", (event) => {
+<<<<<<< HEAD
         console.log(event.data,'data');
         let res = JSON.parse(event.data)
         this.$store.commit("setData", res);
@@ -56,14 +56,29 @@ export default {
     if(this.getQueryString('debug')){
       console.log('我是debug!!');
       this.url='';
+=======
+      let res = JSON.parse(event.data)
+      this.$store.commit("setData", res);
+      if (res.data === "IOCHOME") {
+        this.isShow = true;
+      } else if (res.action === "hide") {
+        // this.$routr.push('/empty')
+        this.isShow = false;
+      }
+    });
+    if (this.getQueryString('debug')) {
+      console.log('我是debug!!');
+      this.url = '';
+      // console.log(window.debug,'debug');
+>>>>>>> da362ede28b920561e62895f650fd396085c53d8
       window.debug = true;
     } else {
       this.url = "http://172.21.70.246:8110";
     }
     // console.log("123");
   },
-  mounted(){
-    window.iframe=this.$refs.iframe
+  mounted () {
+    window.iframe = this.$refs.iframe
 
   },
   methods: {
@@ -79,17 +94,16 @@ export default {
         let res = JSON.parse(event.data);
         this.$store.commit("setData", res)
         if (res && res.lenght != 0) {
-          if(res.action == "hide"){
-              this.isShow = false;
-          } else{
-             this.isShow = true;
+          if (res.action == "hide") {
+            this.isShow = false;
+          } else {
+            this.isShow = true;
           }
-        // if(res.action === "hide"){
-        //   console.log('我是测试~~~~·');
-        //   // this.$routr.push('/empty')
-        //      this.isShow = false;
-        // }
-
+          // if(res.action === "hide"){
+          //   console.log('我是测试~~~~·');
+          //   // this.$routr.push('/empty')
+          //      this.isShow = false;
+          // }
         }
       });
     },

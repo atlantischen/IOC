@@ -37,19 +37,26 @@ function sendMessageToUnity(fun,m_Param='' ) {
 //      } 
 // }
 
-export  function SendMessageToUnity(action,data) {
-  if(window.debug){
-    window.vuplex.postMessage( JSON.stringify( {
+export function SendMessageToUnity(action, data) {
+  if (window.debug) {
+    window.vuplex.postMessage(JSON.stringify({
       action,
-      arg:JSON.stringify(data),
+      arg: JSON.stringify(data),
     }));
   } else {
-     window.iframe.contentWindow.postMessage({
-       type:"w2u", 
-       sysname:"System/WebEventListen",
-       func:"message",
-       text: JSON.stringify(data)},
-       '*');
+    // if (!window.iframe) {
+    //   return this.$message.info('通讯失败！')
+    // }
+    window.iframe.contentWindow.postMessage({
+        type: "w2u",
+        sysname: "System/WebEventListen",
+        func: "message",
+        text: JSON.stringify({
+          action,
+          arg: !data ? "{}" : JSON.stringify(data)
+        })
+      },
+      '*');
   }
 
 }

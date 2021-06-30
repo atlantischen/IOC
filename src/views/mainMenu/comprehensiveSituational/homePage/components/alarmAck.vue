@@ -1,38 +1,53 @@
 <template>
   <!-- 警报确认 -->
-  <div class="alarmAck">
-    <button class="testBtn" @click="sureAlarmFun">警报确认</button>
-    <RightAlert :fade="isFade" class="sureAlarm">
-      <div>
-        <el-form
-          :model="ruleForm"
-          :rules="rules"
-          ref="ruleForm"
-          label-width="100px"
-          class="demo-ruleForm alarmAckForm"
-        >
-          <p class="formTitle">警报确认</p>
-          <el-form-item label="警报对象" prop="name">
-            <el-input v-model="ruleForm.name"></el-input>
-          </el-form-item>
-          <el-form-item label="警报类型" prop="type">
-            <el-input v-model="ruleForm.type"></el-input>
-          </el-form-item>
-          <el-form-item label="报警原因" prop="because">
-            <el-input type="textarea" v-model="ruleForm.because"></el-input>
-          </el-form-item>
-          <el-form-item label="处理人" prop="handler">
-            <el-input v-model="ruleForm.handler"></el-input>
-          </el-form-item>
-          <el-form-item label="处理结果" prop="result">
-            <el-input type="textarea" v-model="ruleForm.result"></el-input>
-          </el-form-item>
-          <el-form-item>
-            <el-button type="primary" @click="submitForm('ruleForm')"
-              >确认警报</el-button
-            >
-          </el-form-item>
-        </el-form>
+  <div>
+    <button class="testBtn" v-if="false" @click="sureAlarmFun()">
+      警报确认
+    </button>
+    <RightAlert :fade="isFade" v-show="isFade" class="sureAlarm">
+      <div class="sureAlarm_box">
+        <p class="formTitle">警报确认</p>
+        <div>
+          <el-form
+            :model="ruleForm"
+            :rules="rules"
+            ref="ruleForm"
+            label-width="100px"
+            class="demo-ruleForm alarmAckForm bigBar"
+          >
+            <el-form-item label="警报对象：" prop="name">
+              <el-input v-model="ruleForm.name"></el-input>
+            </el-form-item>
+            <el-form-item label="警报类型：" prop="type">
+              <el-input v-model="ruleForm.type"></el-input>
+            </el-form-item>
+            <el-form-item label="报警原因：" prop="because">
+              <el-input
+                type="textarea"
+                :rows="3"
+                v-model="ruleForm.because"
+              ></el-input>
+            </el-form-item>
+            <el-form-item label="处理人：" prop="handler">
+              <el-input v-model="ruleForm.handler"></el-input>
+            </el-form-item>
+            <el-form-item label="处理结果：" prop="result">
+              <el-input
+                type="textarea"
+                :rows="3"
+                v-model="ruleForm.result"
+              ></el-input>
+            </el-form-item>
+          </el-form>
+        </div>
+        <div class="form_bt x_c">
+          <el-button
+            class="formBtn"
+            type="primary"
+            @click="submitForm('ruleForm')"
+            >确认警报</el-button
+          >
+        </div>
       </div>
     </RightAlert>
   </div>
@@ -41,7 +56,7 @@
 <script>
 export default {
   name: "alarmAck",
-  data() {
+  data () {
     return {
       isFade: false,
       ruleForm: {
@@ -83,9 +98,12 @@ export default {
     };
   },
   components: {},
-  mounted() {},
+  mounted () {
+    console.log(this.$store.state)
+    window.addEventListener("message", this.sureAlarmFun, true);
+  },
   methods: {
-    submitForm(formName) {
+    submitForm (formName) {
       this.$refs[formName].validate((valid) => {
         if (valid) {
           this.sureAlarmFun();
@@ -96,11 +114,16 @@ export default {
         }
       });
     },
-    resetForm(formName) {
+    resetForm (formName) {
       this.$refs[formName].resetFields();
     },
-    sureAlarmFun() {
-      this.isFade = !this.isFade;
+    sureAlarmFun (v) {
+      // OnAlarmProcessingBtnClick
+      // console.log(v)
+      // console.log(this.$store.state.unitySendData)
+      if (this.$store.state.unitySendData.action == 'OnAlarmProcessingBtnClick') {
+        this.isFade = !this.isFade;
+      }
       if (this.isFade) {
         this.ruleForm = {
           name: "中心广场摄像机",
@@ -117,29 +140,67 @@ export default {
 
 <style lang="less" scoped>
 @import "~@/style/gl.less";
-.alarmAck {
-  .testBtn {
-    position: fixed;
-    right: 0;
-    top: 0;
-    z-index: 101;
-  }
-  .sureAlarm {
-    right: 0;
+.testBtn {
+  position: fixed;
+  right: 0;
+  top: 0;
+  z-index: 101;
+}
+.sureAlarm {
+  width: 4.25rem /* 340/80 */;
+  height: 6.25rem /* 500/80 */;
+  right: 0;
+  z-index: 101;
+  .sureAlarm_box {
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
     color: #fff;
-    background: #02597f;
-    z-index: 101;
-    :deep(.alarmAckForm) {
-      padding: 0.125rem /* 10/80 */ 0.375rem /* 30/80 */ 0.125rem /* 10/80 */
-        0.25rem /* 20/80 */;
-      .formTitle {
-        font-size: 0.25rem /* 20/80 */;
+    background: #0a131f;
+    border: 1px solid #4396f3;
+    box-shadow: inset 0 5px 15px 0.1px rgba(67, 149, 243, 0.5);
+    -moz-box-shadow: inset 0 5px 15px 0.1px rgb(67, 150, 243, 0.5);
+    -webkit-box-shadow: inset 0 5px 15px 0.1px rgb(67, 150, 243, 0.5);
+    border-radius: 0px 0px 5px 5px;
+    padding: 0.125rem /* 10/80 */ 0 0.125rem /* 10/80 */ 0.25rem /* 20/80 */;
+    .formTitle {
+      font-size: 0.2rem /* 16/80 */;
+      padding: 10px 0;
+    }
+    .form_bt {
+      width: 100%;
+      padding: 0.3125rem /* 25/80 */ 0 0.25rem /* 20/80 */;
+      .formBtn {
+        width: 2.5rem /* 200/80 */;
+        height: 0.25rem /* 20/80 */;
+        background: #4396f3;
       }
+    }
+    :deep(.alarmAckForm) {
+      height: 4.375rem /* 350/80 */;
+      overflow-y: auto;
+      font-size: 0.175rem /* 14/80 */;
+      padding-right: 0.375rem /* 30/80 */;
       .el-form-item__label {
+        width: 1.25rem /* 100/80 */;
+        text-align: left;
         color: #fff;
       }
+      .el-form-item {
+        margin-bottom: 10px;
+      }
+      .el-textarea__inner {
+        color: rgba(255, 255, 255, 0.7);
+        border: 1px solid rgba(67, 149, 243, 0.5);
+        background: transparent;
+        border-radius: 0;
+      }
       .el-input__inner {
-        height: 0.375rem /* 30/80 */;
+        color: rgba(255, 255, 255, 0.7);
+        border: 1px solid rgba(67, 149, 243, 0.5);
+        height: 0.4375rem /* 35/80 */;
+        background: transparent;
+        border-radius: 0;
       }
     }
   }

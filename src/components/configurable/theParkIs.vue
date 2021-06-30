@@ -24,19 +24,19 @@ export default {
       type: Object,
     },
   },
-  data() {
+  data () {
     return {
       ...this._data,
       ids: this.$uuid(),
     };
   },
-  mounted() {
+  mounted () {
     this.parkCaseFun(this.datas.datas1);
     this.parkCaseFun2(this.datas.datas2);
   },
   methods: {
     // 园区情况
-    parkCaseFun(datas) {
+    parkCaseFun (datas) {
       var datas = datas;
       for (var i = 0; i < datas.length; i++) {
         var option = {
@@ -168,7 +168,7 @@ export default {
         this.$redomEchart("parkCaseEchart_" + i + this.ids, option);
       }
     },
-    parkCaseFun2(val) {
+    parkCaseFun2 (val) {
       var datas = val.datas,
         names = val.names,
         imgs = [
@@ -207,8 +207,8 @@ export default {
             {
               type: "image",
               id: "logo",
-              left: 5,
-              top: "15%",
+              left: '2%',
+              top: "12%",
               z: 10,
               bounding: "raw",
               style: {
@@ -253,7 +253,7 @@ export default {
                 },
               ],
               itemStyle: {
-                color: function() {
+                color: function () {
                   let obj = {
                     type: "linear",
                     x: 0, //右
@@ -271,7 +271,6 @@ export default {
                       },
                     ],
                   };
-
                   // if (data >= 0 && data < 20) {
                   //   obj.colorStops[1].color = '#8ac4d4';
                   // } else if (data >= 20 && data < 40) {
