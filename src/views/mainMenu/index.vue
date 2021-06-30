@@ -16,7 +16,7 @@ export default {
   name: "MainMenu",
   data () {
     return {
-      isShow: false,
+      isShow: true,
       url: ''
     };
   },

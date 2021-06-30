@@ -38,22 +38,22 @@ function sendMessageToUnity(fun,m_Param='' ) {
 // }
 
 export function SendMessageToUnity(action, data) {
-  if (!window.vuplex) {
-    return this.$message.info('通讯失败！')
-  }
   if (window.debug) {
     window.vuplex.postMessage(JSON.stringify({
       action,
       arg: JSON.stringify(data),
     }));
   } else {
+    // if (!window.iframe) {
+    //   return this.$message.info('通讯失败！')
+    // }
     window.iframe.contentWindow.postMessage({
         type: "w2u",
         sysname: "System/WebEventListen",
         func: "message",
         text: JSON.stringify({
           action,
-          arg: JSON.stringify(data)
+          arg: !data ? "{}" : JSON.stringify(data)
         })
       },
       '*');

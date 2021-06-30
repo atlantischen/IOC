@@ -16,9 +16,15 @@
 <script>
 export default {
   name: "rentBDA",
-  data() {
+  data () {
     return {
       leftInfo: [
+        {
+          title: "租赁概括",
+          type: "LeaseSummary",
+          datas: {
+          },
+        },
         {
           title: "各类型租用统计",
           type: "shapeOfMountain",
