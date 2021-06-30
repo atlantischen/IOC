@@ -182,11 +182,10 @@ export default {
     },
 
   handleClick(){
-    // console.log(this.$SendMessageToUnity());
+
     this.$SendMessageToUnity("gan",{wocao:true,fuckyou:"123"});
     this.$SendMessageToUnity("gan2",{});
-    // this.$SendMessageToUnity("nimei",{wocao:true,fuckyou:"456"});
-    // console.log(window.iframe.contentWindow,'iframe');
+
    },
     AssetsAndEquipment() {
       var dom = "park_time";

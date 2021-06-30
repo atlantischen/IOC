@@ -548,6 +548,7 @@ export default {
         width: 1.3125rem;
         height: 2.2375rem;
         background-image: url("../../../../assets/img/871.png");
+        background-size: contain;
         background-repeat: no-repeat;
         overflow: hidden;
         position: relative;

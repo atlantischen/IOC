@@ -43,12 +43,12 @@ export default {
       window.addEventListener("vuplexready", this.addMessageListener);
     }
     window.addEventListener("message", (event) => {
+        console.log(event.data,'data');
         let res = JSON.parse(event.data)
         this.$store.commit("setData", res);
         if (res.data === "IOCHOME") {
           this.isShow = true;
         }else if(res.action === "hide"){
-          // this.$routr.push('/empty')
           this.isShow = false;
 
         }
@@ -56,7 +56,6 @@ export default {
     if(this.getQueryString('debug')){
       console.log('我是debug!!');
       this.url='';
-      // console.log(window.debug,'debug');
       window.debug = true;
     } else {
       this.url = "http://172.21.70.246:8110";

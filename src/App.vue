@@ -35,7 +35,11 @@ export default {
   beforeDestory() {
     window.removeEventListener("message", this.event, true);
   },
-  watch: {},
+  watch: {
+    'route':{
+      
+    }
+  },
 };
 </script>
 
@@ -46,5 +50,6 @@ export default {
   font-family: "Microsoft YaHei", Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  color: #fff;
 }
 </style>

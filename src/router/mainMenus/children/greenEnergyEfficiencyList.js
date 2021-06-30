@@ -46,31 +46,55 @@ export default [{
         path: 'codesource',
         name: 'codesource',
         component: () => import('@/views/mainMenu/greenEnergyEfficiency/building/codesource.vue'),
+        meta: {
+          id:0
+        
+        }
       },
       {
         path: 'airConditioner',
         name: 'airConditioner',
         component: () => import('@/views/mainMenu/greenEnergyEfficiency/building/airConditioner.vue'),
+        meta: {
+          id:1
+        
+        }
       },
       {
         path: 'elevator',
         name: 'elevator',
         component: () => import('@/views/mainMenu/greenEnergyEfficiency/building/elevator.vue'),
+        meta: {
+          id:2
+        
+        }
       },
       {
         path: 'lighting',
         name: 'lighting',
         component: () => import('@/views/mainMenu/greenEnergyEfficiency/building/lighting.vue'),
+        meta: {
+          id:3
+        
+        }
       },
       {
         path: 'primaryAirSystem',
         name: 'primaryAirSystem',
         component: () => import('@/views/mainMenu/greenEnergyEfficiency/building/primaryAirSystem.vue'),
+        meta: {
+          id:4
+        
+        }
       },
       {
         path: 'watersupply',
         name: 'watersupply',
         component: () => import('@/views/mainMenu/greenEnergyEfficiency/building/watersupply.vue'),
+        meta: {
+          id:5
+        
+        }
       },
 
     ]
