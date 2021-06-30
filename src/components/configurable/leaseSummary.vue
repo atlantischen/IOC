@@ -31,7 +31,7 @@ export default {
         xAxiasD = [9.935, 89.565],
         datas = {
           name: '园区总面积',
-          value: 99.5
+          value: 99.55
         }
       var option = {
         title: [
@@ -43,8 +43,8 @@ export default {
             subtext: datas.name,
             sublink: "",
             subtarget: null,
-            left: "50%",
-            top: "0",
+            left: "55%",
+            top: "30%",
             textAlign: "center",
             textStyle: {
               fontFamily: "BYfont",
@@ -60,26 +60,27 @@ export default {
           },
           {
             show: true,
-            text: datas.value + '万平',
+            text: datas.value + '{a|万平}',
             link: "",
             target: null,
             subtext: "",
             sublink: "",
             subtarget: null,
-            left: "75%",
-            top: "1%",
+            left: "82%",
+            top: "30%",
             textAlign: "center",
             textStyle: {
               fontFamily: "BYfont",
               fontSize: 24,
-              padding: [2, 0],
               fontWeight: 550,
-              color: "#fff"
-            },
-            subtextStyle: {
-              fontSize: 12,
-              color: "rgb(255,255,255,.7)",
-            },
+              color: "#fff",
+              rich: {
+                a: {
+                  padding: [-5, 0, 0, 5],
+                  fontSize: 14
+                }
+              }
+            }
           },
         ],
         legend: {
@@ -94,7 +95,7 @@ export default {
             optionName.forEach(function (value, i) {
               if (value == name) index = i
             })
-            return "{a|" + xAxiasD[index] + "万平}" + "\n{b|" + name + "}";
+            return "{a|" + xAxiasD[index] + "}{c|万平}" + "\n{b|" + name + "}";
           },
           textStyle: {
             color: "#fff",
@@ -104,11 +105,15 @@ export default {
               a: {
                 fontSize: 22,
                 fontFamily: 'BYfont',
-                padding: [15, 10, 0, -15],
+                padding: [15, 0, 0, -12],
               },
               b: {
                 color: "rgb(255,255,255,.7)",
                 padding: [35, 0, 0, 0],
+              },
+              c: {
+                padding: [7, 0, 0, 0],
+                fontSize: 14
               }
             },
           },
@@ -118,7 +123,7 @@ export default {
           itemGap: 70,
         },
         // color: ["#cda857", "#4396f3", "#0ff", "#236390"],
-        color: ["#cda857", "rgba(30, 57, 87, 0.5)", "#4396f3", "#0ff"],
+        color: ["#cda857", "rgba(30, 57, 87, 0.7)", "#4396f3", "#0ff"],
         series: [
           {
             name: "",
@@ -126,7 +131,7 @@ export default {
             radius: ["0", "35%"],
             center: ["20%", "35%"],
             // startAngle: -45,
-            color: 'rgba(30, 57, 87, 0.3)',
+            color: 'rgba(30, 57, 87, 1)',
             avoidLabelOverlap: false,
             animation: false,
             // animationHover: false,
@@ -174,7 +179,7 @@ export default {
         option.series[1].data[i] = {
           value: xAxiasD[i],
           name: optionName[i],
-          // selected: true
+          selected: i == 0
         };
       }
       this.$redomEchart(this.$refs["leaseSummaryEchart_" + this.ids], option);

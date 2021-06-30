@@ -473,7 +473,6 @@ export default {
         tooltip: {
           trigger: "item",
         },
-
         series: [
           {
             // name: "访问来源",

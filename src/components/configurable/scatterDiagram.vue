@@ -104,7 +104,7 @@ export default {
               }
             }
           },
-          boundaryGap: true,
+          boundaryGap: false,
           min: 100,
           data: xAxisD,
           axisTick: {

@@ -16,7 +16,7 @@ export default {
   name: "MainMenu",
   data () {
     return {
-      isShow: false,
+      isShow: true,
       url: ''
     };
   },
@@ -57,17 +57,17 @@ export default {
       // console.log(window.debug,'debug');
       window.debug = true;
     } else {
-      // this.url = 'http://183.62.170.2:8110'
       this.url = process.env.VUE_APP_UNITY
+      // this.url = 'http://183.62.170.2:8110'
     }
-   
+
   },
   mounted () {
     window.iframe = this.$refs.iframe
-   
+
   },
   methods: {
-  
+
     getQueryString (name) {
       var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
       var r = window.location.search.substr(1).match(reg);
@@ -94,7 +94,7 @@ export default {
       });
     },
   },
- 
+
 
 
 };

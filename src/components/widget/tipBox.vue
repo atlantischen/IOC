@@ -1,8 +1,12 @@
 <template>
   <div class="p_x_c2 tipBox" v-if="isShow" @click="clickItem">
     <div class="tipBox_text x_c" :class="'tipBox_warn'">
-      <div class="pList">
-        <p v-for="(item, i) in _data" :key="i">{{ item.text }}</p>
+      <div id="pList">
+        <ul>
+          <li v-for="(item, i) in _data" :key="i">{{ item.text }}</li>
+          <li v-for="(item, i) in _data" :key="i">{{ item.text }}</li>
+          <li v-for="(item, i) in _data" :key="i">{{ item.text }}</li>
+        </ul>
       </div>
       <i class="el-icon-circle-close" @click.stop="closeTip"></i>
     </div>
@@ -22,6 +26,7 @@ export default {
   },
   data () {
     return {
+      timer: null,
       isShow: true,
     };
   },
@@ -29,8 +34,34 @@ export default {
     this.isShow = this.show;
   },
   components: {},
-  mounted () { },
+  mounted () {
+    setTimeout(() => {
+      this.moveLeft()
+    }, 500);
+    document.querySelector('.tipBox_text').onmouseover = function () { this.timer = null; clearInterval(this.timer) }
+    document.querySelector('.tipBox_text').onmouseout = function () { this.moveLeft() }
+  },
+  beforeDestroy () {
+    clearInterval(this.timer)
+  },
   methods: {
+    // 警告框滑动
+    moveLeft () {
+      var _w = document.getElementById('pList').children[0], _d = 0
+      var _wc = _w.children
+      var _l = _wc.length
+      _w.appendChild(_wc[0])
+      this.timer = setInterval(() => {
+        _d--
+        if (-_d >= _w.getBoundingClientRect().width) {
+          _d = 10
+          _w.insertBefore(_wc[_l - 1], _wc[0])
+        }
+        // _w[0].style.transform = 'translateX(-' + _d + 'px)'
+        _w.style.left = _d + 'px'
+      }, 25);
+    },
+
     // 点击警告框3D出现警告位置
     clickItem () {
       this.$SendMessageToUnity("OnWarningNoticesBarClick", {});
@@ -65,8 +96,22 @@ export default {
     width: 100%;
     background: url("~@/assets/img/tip_warn.png") center no-repeat;
     background-size: 100% 100%;
-    .pList {
+    #pList {
       width: 100%;
+      overflow: hidden;
+      ul {
+        position: relative;
+        // transform: translateX(-30px);
+        // top: 0;
+        // left: 0;
+      }
+      li {
+        display: inline;
+        padding: 0 10px;
+      }
+      ul {
+        // animation: 15s wordsLoop linear infinite normal;
+      }
     }
     p {
       text-align: center;
@@ -82,4 +127,26 @@ export default {
 .tipBox_warn {
   color: #e5181e;
 }
+
+// @keyframes wordsLoop {
+//   0% {
+//     transform: translateX(0);
+//     -webkit-transform: translateX(0);
+//   }
+//   100% {
+//     transform: translateX(-100%);
+//     -webkit-transform: translateX(-100%);
+//   }
+// }
+
+// @-webkit-keyframes wordsLoop {
+//   0% {
+//     transform: translateX(0);
+//     -webkit-transform: translateX(0);
+//   }
+//   100% {
+//     transform: translateX(-100%);
+//     -webkit-transform: translateX(-100%);
+//   }
+// }
 </style>

@@ -41,6 +41,7 @@ export default {
           containLabel: true,
         },
         legend: {
+          show: false,
           data: xData,
           top: "92%",
           icon: "circle",
@@ -49,7 +50,33 @@ export default {
           }
         },
         tooltip: {
-          position: "top",
+          trigger: "axis",
+          axisPointer: {
+            type: 'line',
+            lineStyle: {
+              type: 'dashed',
+              width: 0.5,
+              color: 'rgba(255,255,255,0.8)'
+            }
+          },
+          backgroundColor: "rgba(0,0,0,0.8)",
+          borderWidth: 1,
+          borderColor: "#4396f3",
+          padding: [5, 15],
+          extraCssText: 'box-shadow:inset 0 0 8px rgba(67, 149, 243, 0.6);',
+          textStyle: {
+            color: "#fff",
+          },
+          formatter: params => {
+            let dataStr = `<p style="font-weight:bold;text-align:center;">${params[0].name}</p>`
+            params.forEach(item => {
+              dataStr += `<div>
+                <span> 数量 :  ${item.data}</span><br/>
+                <span> 占比 :  0% </span>
+                </div>`
+            })
+            return dataStr
+          }
         },
         xAxis: {
           type: "category",

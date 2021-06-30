@@ -29,7 +29,7 @@ export default {
   },
 
   beforeCreate () {
-    this.$router.push('/comprehensiveSituational/homePage')
+    if (process.env.NODE_ENV == 'production') this.$router.push('/comprehensiveSituational/homePage')
   },
   mounted () {
     window.addEventListener("message", this.event, true);
