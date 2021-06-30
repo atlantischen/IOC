@@ -6,6 +6,7 @@
         v-for="(item, i) in 3"
         :key="i"
         :id="'waterPoloEchart_' + i + ids"
+        :ref="'waterPoloEchart_' + i + ids"
       ></div>
     </div>
   </div>
@@ -162,7 +163,7 @@ export default {
             }
           ]
         };
-        this.$redomEchart('waterPoloEchart_' + i + this.ids, option);
+        this.$redomEchart(this.$refs['waterPoloEchart_' + i + this.ids], option);
       }
     }
   }

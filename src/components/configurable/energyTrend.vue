@@ -14,7 +14,10 @@
         <span>今日{{ item.text }}</span>
       </div>
       <div class="energyTrend_r">
-        <div :id="`energyTrendEchart_${i}` + ids"></div>
+        <div
+          :id="`energyTrendEchart_${i}` + ids"
+          :ref="`energyTrendEchart_${i}` + ids"
+        ></div>
       </div>
     </div>
   </div>
@@ -147,7 +150,7 @@ export default {
             },
           ],
         };
-        this.$redomEchart("energyTrendEchart_" + i + this.ids, option);
+        this.$redomEchart(this.$refs["energyTrendEchart_" + i + this.ids], option);
       }
     }
   }

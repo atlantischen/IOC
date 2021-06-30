@@ -16,7 +16,7 @@ export default {
   name: "MainMenu",
   data () {
     return {
-      isShow: true,
+      isShow: false,
       url: ''
     };
   },
@@ -57,7 +57,8 @@ export default {
       // console.log(window.debug,'debug');
       window.debug = true;
     } else {
-      this.url = "http://172.21.70.246:8110";
+      // this.url = 'http://183.62.170.2:8110'
+      this.url = process.env.VUE_APP_UNITY
     }
     // console.log("123");
   },

@@ -1,7 +1,10 @@
 <template>
   <div class="shapeOfMountainAll">
     <div class="tittle">{{ title }}</div>
-    <div :id="'shapeOfMountainEchart_' + ids"></div>
+    <div
+      :id="'shapeOfMountainEchart_' + ids"
+      :ref="'shapeOfMountainEchart_' + ids"
+    ></div>
   </div>
 </template>
 
@@ -151,7 +154,7 @@ export default {
           }
         ]
       }
-      this.$redomEchart('shapeOfMountainEchart_' + this.ids, option);
+      this.$redomEchart(this.$refs['shapeOfMountainEchart_' + this.ids], option);
     },
   }
 };

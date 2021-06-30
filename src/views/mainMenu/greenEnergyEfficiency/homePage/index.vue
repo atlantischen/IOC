@@ -10,42 +10,39 @@
           </div>
           <div class="content">
             <span class="font_text">
-            <NumCounter :value='43.24'></NumCounter>
+              <NumCounter :value="43.24"></NumCounter>
             </span>
             <span>TCE</span>
             <div>总能耗</div>
           </div>
           <div class="percentage">
             <img src="../../../../assets/img/1.png" alt="" />
-            <span>
-            <NumCounter :value='13.22'></NumCounter>%</span>
+            <span> <NumCounter :value="13.22"></NumCounter>%</span>
           </div>
         </div>
       </div>
       <div class="energy_consumption">
         <ul>
-          <li >
+          <li>
             <img src="../../../../assets/img/electirc.png" alt="" />
             <div class="energy_consumption_desc">
               <span class="font_text">
-                 <NumCounter :value='304376.75'></NumCounter>
-                </span>
+                <NumCounter :value="304376.75"></NumCounter>
+              </span>
               <span>KWH</span>
               <div>电耗能</div>
             </div>
             <div class="percentage">
               <img src="../../../../assets/img/1.png" alt="" />
-              <span class="font_text">
-                14.53%</span>
+              <span class="font_text"> 14.53%</span>
             </div>
           </li>
-           <li >
+          <li>
             <img src="../../../../assets/img/water.png" alt="" />
             <div class="energy_consumption_desc">
               <span class="font_text">
-                 <NumCounter :value='48.52'></NumCounter>
-
-                </span>
+                <NumCounter :value="48.52"></NumCounter>
+              </span>
               <span>T</span>
               <div>水耗能</div>
             </div>
@@ -54,13 +51,12 @@
               <span class="font_text">6.37%</span>
             </div>
           </li>
-           <li >
+          <li>
             <img src="../../../../assets/img/gas.png" alt="" />
             <div class="energy_consumption_desc">
               <span class="font_text">
-                 <NumCounter :value='63.28'></NumCounter>
-
-                </span>
+                <NumCounter :value="63.28"></NumCounter>
+              </span>
               <span>m³</span>
               <div>气耗能</div>
             </div>
@@ -73,7 +69,7 @@
       </div>
       <div class="today_energy">
         <div class="tittle">当日能耗趋势</div>
-        <div id="today_energy"></div>
+        <div id="today_energy" ref="today_energy"></div>
       </div>
     </IOCLeft>
     <IOCRight>
@@ -98,14 +94,21 @@
                 <div>
                   <span>今日用电量：</span>
                   <span class="font_text">
-                 <NumCounter :value='i.kwh '></NumCounter></span>
+                    <NumCounter :value="i.kwh"></NumCounter
+                  ></span>
                   <span>kW.h</span>
                 </div>
-               
               </div>
               <div class="increase">
                 <!-- <img src="../../../../assets/img/2.png" alt="" /> -->
-                <img :src="i.state===0?require('../../../../assets/img/2.png'):require('../../../../assets/img/1.png')" alt="" />
+                <img
+                  :src="
+                    i.state === 0
+                      ? require('../../../../assets/img/2.png')
+                      : require('../../../../assets/img/1.png')
+                  "
+                  alt=""
+                />
                 <span class="font_text">{{ i.increase }}%</span>
               </div>
             </li>
@@ -115,59 +118,56 @@
       <div class="KPI">
         <div class="tittle">关键指标KPI</div>
         <div class="box">
-            <div id="KPI"></div>
-            <div class="KPI_desc">
-              <span>本月电能耗</span>
-              <span class="font_text">
-              <NumCounter :value='43.24'></NumCounter>
-          </span>
-              <span>KW.H</span>
-            </div>
+          <div id="KPI" ref="KPI"></div>
+          <div class="KPI_desc">
+            <span>本月电能耗</span>
+            <span class="font_text">
+              <NumCounter :value="43.24"></NumCounter>
+            </span>
+            <span>KW.H</span>
+          </div>
         </div>
-       
-        <ul>
-          <li >
-            <img src="../../../../assets/img/electirc.png" alt="">
-            <div class="middle">
-                <i :style="'width:90%'"></i>
-                <div>
-                  <span>本月电能耗：</span>
-                  <span class="font_text">
-              <NumCounter :value='304376.75'></NumCounter>
 
-                    </span>
-                  <span>KW.H</span>
-                </div>
-              
+        <ul>
+          <li>
+            <img src="../../../../assets/img/electirc.png" alt="" />
+            <div class="middle">
+              <i :style="'width:90%'"></i>
+              <div>
+                <span>本月电能耗：</span>
+                <span class="font_text">
+                  <NumCounter :value="304376.75"></NumCounter>
+                </span>
+                <span>KW.H</span>
+              </div>
             </div>
             <div class="bottom">8.32%</div>
           </li>
-           <li >
-            <img src="../../../../assets/img/water.png" alt="">
+          <li>
+            <img src="../../../../assets/img/water.png" alt="" />
             <div class="middle">
-                <i :style="'width:80%'"></i>
-                <div>
-                  <span>本月电能耗：</span>
-                  <span class="font_text">
-              <NumCounter :value='48.52'></NumCounter>
-                    </span>
-                  <span>T</span>
-                </div>
-              
+              <i :style="'width:80%'"></i>
+              <div>
+                <span>本月电能耗：</span>
+                <span class="font_text">
+                  <NumCounter :value="48.52"></NumCounter>
+                </span>
+                <span>T</span>
+              </div>
             </div>
             <div class="bottom">4.73%</div>
           </li>
-           <li >
-            <img src="../../../../assets/img/gas.png" alt="">
+          <li>
+            <img src="../../../../assets/img/gas.png" alt="" />
             <div class="middle">
-                <i :style="'width:70%'"></i>
-                <div>
-                  <span>本月电能耗：</span>
-                  <span class="font_text">
-              <NumCounter :value=' 63.28'></NumCounter></span>
-                  <span>m³</span>
-                </div>
-              
+              <i :style="'width:70%'"></i>
+              <div>
+                <span>本月电能耗：</span>
+                <span class="font_text">
+                  <NumCounter :value="63.28"></NumCounter
+                ></span>
+                <span>m³</span>
+              </div>
             </div>
             <div class="bottom">2.54%</div>
           </li>
@@ -181,7 +181,7 @@
 import * as echarts from "echarts";
 export default {
   name: "homePage",
-  data() {
+  data () {
     return {
       dateList: [
         {
@@ -189,7 +189,7 @@ export default {
           kwh: 447.31,
           percentage: 40,
           increase: 1.02,
-          state:0,
+          state: 0,
 
         },
         {
@@ -197,7 +197,7 @@ export default {
           kwh: 5152.11,
           percentage: 50,
           increase: 2.35,
-          state:1
+          state: 1
 
         },
         {
@@ -205,7 +205,7 @@ export default {
           kwh: 25101.91,
           percentage: 60,
           increase: 5.96,
-          state:0
+          state: 0
 
         },
         {
@@ -213,19 +213,19 @@ export default {
           kwh: 729187.01,
           percentage: 70,
           increase: 3.56,
-          state:1
+          state: 1
 
         },
       ],
-      KPIList:[
-      
+      KPIList: [
+
       ]
     };
   },
   methods: {
 
-    trendInit() {
-      var dom = "today_energy";
+    trendInit () {
+      var dom = this.$refs["today_energy"];
       var option = {
         grid: {
           top: "60",
@@ -375,7 +375,7 @@ export default {
               fontSize: "12",
               distance: -90,
               padding: [0, 0, 30, 0],
-              formatter: function(_) {
+              formatter: function (_) {
                 return "进: " + _.value;
               },
             },
@@ -427,7 +427,7 @@ export default {
               distance: -90,
               color: "#fff",
               fontSize: "12",
-              formatter: function(_) {
+              formatter: function (_) {
                 return "出: " + _.value;
               },
             },
@@ -467,8 +467,8 @@ export default {
       };
       this.$redomEchart(dom, option);
     },
-    KPIint() {
-      var dom = "KPI";
+    KPIint () {
+      var dom = this.$ref["KPI"];
       var option = {
         tooltip: {
           trigger: "item",
@@ -487,18 +487,18 @@ export default {
               show: false,
               position: "center",
               formatter: "{d}%",
-              rich:{
-                d:{
+              rich: {
+                d: {
                   fontSize: 50,
-                  color:'#fff',
+                  color: '#fff',
                   fontFamily: "BYfont",
-                  
+
                 }
               }
-              
+
             },
-            
-         
+
+
             data: [
               {
                 value: 500,
@@ -509,7 +509,7 @@ export default {
                   show: true, //默认显示第一块
                   fontSize: "20",
                   fontWeight: "bold",
-                  color:'#fff'
+                  color: '#fff'
                 },
                 itemStyle: {
                   color: "#CDA857",
@@ -527,10 +527,10 @@ export default {
           },
         ],
       };
-       this.$redomEchart(dom, option);
+      this.$redomEchart(dom, option);
     },
   },
-  mounted() {
+  mounted () {
 
     this.trendInit();
     this.KPIint();
@@ -551,7 +551,7 @@ export default {
         background-repeat: no-repeat;
         overflow: hidden;
         position: relative;
-          // animation: water-wave linear infinite;
+        // animation: water-wave linear infinite;
 
         .wave {
           width: 1.05rem /* 84/80 */;
@@ -563,22 +563,21 @@ export default {
           overflow: hidden;
           animation: water-wave linear infinite;
 
-          &::before{
+          &::before {
             position: absolute;
-            content:'';
+            content: "";
             top: 50%;
             left: -50%;
             // background: linear-gradient(to bottom right, #4695ED, #0C192A);
-            background: rgba(70, 149, 237, .6);
-            opacity: .7;
+            background: rgba(70, 149, 237, 0.6);
+            opacity: 0.7;
             width: 200% /* 160/80 */ /* 84/80 */;
             height: 200% /* 84/80 */;
             border-radius: 35%;
             animation: inherit;
             animation-duration: 7s;
           }
-          
-          
+
           //  position: absolute;
           //   top: 50%;
           //   left: -50%;
@@ -598,9 +597,13 @@ export default {
           //   /* 15/80 */;
           // background-image: url("../../../../assets/img/16.png");
         }
-         @keyframes  water-wave{
-            0% {transform: rotate(0deg);}
-            100% {transform: rotate(360deg);}
+        @keyframes water-wave {
+          0% {
+            transform: rotate(0deg);
+          }
+          100% {
+            transform: rotate(360deg);
+          }
         }
         // background-size: 1.3125rem /* 105/80 */ 2.2375rem /* 179/80 */ ;
       }
@@ -633,10 +636,9 @@ export default {
         padding-left: 0.25rem /* 20/80 */ /* 9/80 */;
         left: 2.5rem /* 200/80 */ /* 248/80 */;
         top: 0.6125rem /* 49/80 */;
-        &>span{
+        & > span {
           display: flex;
         }
-
       }
     }
   }
@@ -738,23 +740,22 @@ export default {
               border-radius: 4px;
               margin-bottom: 0.0625rem /* 5/80 */;
             }
-            &>div{
+            & > div {
               color: #fff;
               white-space: nowrap;
-              
-             &>span:nth-child(1){
-              // display: block;
-              font-size: .175rem /* 14/80 */;
-              opacity: 0.7;
-              margin-bottom: .1875rem /* 15/80 */;
-            }
-            &>span:nth-child(2){
-              font-size: .25rem /* 20/80 */;
-              
-            }
-            &>span:nth-child(3){
-              margin-left: .0875rem /* 7/80 */;
-            }
+
+              & > span:nth-child(1) {
+                // display: block;
+                font-size: 0.175rem /* 14/80 */;
+                opacity: 0.7;
+                margin-bottom: 0.1875rem /* 15/80 */;
+              }
+              & > span:nth-child(2) {
+                font-size: 0.25rem /* 20/80 */;
+              }
+              & > span:nth-child(3) {
+                margin-left: 0.0875rem /* 7/80 */;
+              }
             }
             & > span {
               color: #fff;
@@ -784,78 +785,74 @@ export default {
   }
 
   .KPI {
-    .box{
-    position: relative;
-      
+    .box {
+      position: relative;
     }
     #KPI {
       width: 100%;
       height: 1.5625rem /* 125/80 */;
     }
-    .KPI_desc{
+    .KPI_desc {
       color: #fff;
       position: absolute;
       left: 60%;
       top: 50%;
       transform: translateY(-50%);
-      &>span:nth-child(1){
+      & > span:nth-child(1) {
         display: block;
-        font-size: .175rem /* 14/80 */;
+        font-size: 0.175rem /* 14/80 */;
         opacity: 0.7;
-        margin-bottom: .1875rem /* 15/80 */;
+        margin-bottom: 0.1875rem /* 15/80 */;
       }
-      &>span:nth-child(2){
-        font-size: .25rem /* 20/80 */;
-        
+      & > span:nth-child(2) {
+        font-size: 0.25rem /* 20/80 */;
       }
-      &>span:nth-child(3){
-        margin-left: .0875rem /* 7/80 */;
+      & > span:nth-child(3) {
+        margin-left: 0.0875rem /* 7/80 */;
       }
     }
-    &>ul{
-      &>li{
+    & > ul {
+      & > li {
         display: flex;
         width: 100%;
         margin-bottom: 0.125rem;
-        margin-top: .25rem /* 20/80 */;
-        img{
-          width: .5rem /* 40/80 */;
-          height: .5rem /* 40/80 */;
+        margin-top: 0.25rem /* 20/80 */;
+        img {
+          width: 0.5rem /* 40/80 */;
+          height: 0.5rem /* 40/80 */;
         }
-        .middle{
+        .middle {
           display: flex;
           flex-direction: column;
           width: 100%;
           justify-content: center;
-          margin-left: .25rem /* 20/80 */;
+          margin-left: 0.25rem /* 20/80 */;
 
-          &>i{
-             height: 8px;
-              display: inline-block;
-              background: linear-gradient(90deg, #1e3957, #4395f3);
-              border-radius: 4px;
-              margin-bottom: 0.0625rem /* 5/80 */;
+          & > i {
+            height: 8px;
+            display: inline-block;
+            background: linear-gradient(90deg, #1e3957, #4395f3);
+            border-radius: 4px;
+            margin-bottom: 0.0625rem /* 5/80 */;
           }
-          &>div{
+          & > div {
             color: #fff;
-            &>span:nth-child(1){
-              font-size: .175rem /* 14/80 */;
+            & > span:nth-child(1) {
+              font-size: 0.175rem /* 14/80 */;
               opacity: 0.7;
             }
-            &>span:nth-child(2){
-              font-size: .2rem /* 16/80 */;
+            & > span:nth-child(2) {
+              font-size: 0.2rem /* 16/80 */;
             }
-            &>span:nth-child(3){
-              font-size: .15rem /* 12/80 */;
-              margin-left: .0625rem /* 5/80 */;
+            & > span:nth-child(3) {
+              font-size: 0.15rem /* 12/80 */;
+              margin-left: 0.0625rem /* 5/80 */;
               opacity: 0.7;
             }
-         
           }
-        
         }
-        .bottom{
-          font-size: .175rem /* 14/80 */;
+        .bottom {
+          font-size: 0.175rem /* 14/80 */;
           color: #fff;
         }
       }

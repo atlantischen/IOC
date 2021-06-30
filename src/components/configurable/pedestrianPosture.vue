@@ -8,7 +8,10 @@
           <span>{{ item.name }}</span>
         </li>
       </ul>
-      <div :id="'pedestrianPostureEchart_' + ids"></div>
+      <div
+        :id="'pedestrianPostureEchart_' + ids"
+        :ref="'pedestrianPostureEchart_' + ids"
+      ></div>
     </div>
   </div>
 </template>
@@ -208,7 +211,7 @@ export default {
         };
       }
       // option.xAxis.data.push("");
-      this.$redomEchart('pedestrianPostureEchart_' + this.ids, option);
+      this.$redomEchart(this.$refs['pedestrianPostureEchart_' + this.ids], option);
     },
   }
 };

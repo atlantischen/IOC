@@ -9,7 +9,10 @@
         <span>{{ item.name }}</span>
       </li>
     </ul>
-    <div :id="'scatterDiagramEchart_' + ids"></div>
+    <div
+      :id="'scatterDiagramEchart_' + ids"
+      :ref="'scatterDiagramEchart_' + ids"
+    ></div>
   </div>
 </template>
 
@@ -301,7 +304,7 @@ export default {
           },
         ],
       };
-      this.$redomEchart("scatterDiagramEchart_" + this.ids, option);
+      this.$redomEchart(this.$refs["scatterDiagramEchart_" + this.ids], option);
     },
   },
 };

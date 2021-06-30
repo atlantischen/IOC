@@ -40,7 +40,7 @@
             <DropDown :list="yearsList" name="label" @_cg="changePSYears" />
             <DropDown :list="momthsList" name="label" @_cg="changePSMonths" />
           </div>
-          <div id="popularServiceEchart"></div>
+          <div id="popularServiceEchart" ref="popularServiceEchart"></div>
         </div>
       </template>
       <template #center>
@@ -84,11 +84,14 @@
           <div class="totalServices_time x_right">
             <DropDown :list="yearsList" name="label" @_cg="changePSYears2" />
           </div>
-          <div id="totalServicesEchart"></div>
+          <div id="totalServicesEchart" ref="totalServicesEchart"></div>
         </div>
         <div class="distributionServicesAll">
           <div class="tittle">各服务办理分布</div>
-          <div id="distributionServicesEchart"></div>
+          <div
+            id="distributionServicesEchart"
+            ref="distributionServicesEchart"
+          ></div>
         </div>
       </template>
     </LeftRight>
@@ -459,7 +462,7 @@ export default {
           },
         ],
       };
-      this.$redomEchart("popularServiceEchart", option);
+      this.$redomEchart(this.$refs["popularServiceEchart"], option);
     },
     totalServicesFun () {
       var names = [],
@@ -630,7 +633,7 @@ export default {
           },
         };
       }
-      this.$redomEchart("totalServicesEchart", option);
+      this.$redomEchart(this.$refs["totalServicesEchart"], option);
     },
     distributionServicesFun () {
       var j = 0, colors = [
@@ -752,7 +755,7 @@ export default {
         }
         )
       }
-      this.$redomEchart("distributionServicesEchart", option);
+      this.$redomEchart(this.$refs["distributionServicesEchart"], option);
     },
   },
 };

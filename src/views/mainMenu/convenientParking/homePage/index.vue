@@ -34,7 +34,7 @@
           <DropDown :list="yearsList" name="label" @_cg="changePSYears" />
           <DropDown :list="momthsList" name="label" @_cg="changePSYears" />
         </div>
-        <div id="park_time"></div>
+        <div id="park_time" ref="park_time"></div>
       </div>
     </IOCLeft>
     <Tips :list="list"></Tips>
@@ -45,7 +45,7 @@
         <div class="select">
           <DropDown :list="yearsList" name="label" @_cg="changePSYears" />
         </div>
-        <div id="revenue_total"></div>
+        <div id="revenue_total" ref="revenue_total"></div>
       </div>
       <div class="car_trend">
         <div class="tittle">车辆进出场走势统计</div>
@@ -54,7 +54,7 @@
           <DropDown :list="momthsList" name="label" @_cg="changePSYears" />
           <DropDown :list="dateList" name="label" @_cg="changePSYears" />
         </div>
-        <div id="car_trend"></div>
+        <div id="car_trend" ref="car_trend"></div>
       </div>
     </IOCRight>
   </div>
@@ -189,7 +189,7 @@ export default {
       // console.log(window.iframe.contentWindow,'iframe');
     },
     AssetsAndEquipment () {
-      var dom = "park_time";
+      var dom = this.$refs["park_time"]
       var option = {
         title: {
           text: "{a|停车数量合计：}{b|" + 1369 + "}{c|辆}",
@@ -342,7 +342,7 @@ export default {
       this.$redomEchart(dom, option);
     },
     revenueInit () {
-      var dom = "revenue_total";
+      var dom = this.$refs["revenue_total"]
       var option = {
         title: {
           text: "{a|停车场营收合计：}{b|" + "2.496.852" + "}{c|元}",
@@ -523,7 +523,7 @@ export default {
       this.$redomEchart(dom, option);
     },
     trendInit () {
-      var dom = "car_trend";
+      var dom = this.$refs["car_trend"];
       var option = {
         grid: {
           top: "60",

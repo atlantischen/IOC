@@ -1,7 +1,10 @@
 <template>
   <div class="LeaseSummaryAll">
     <div class="tittle">{{ title }}</div>
-    <div :id="'leaseSummaryEchart_' + ids"></div>
+    <div
+      :id="'leaseSummaryEchart_' + ids"
+      :ref="'leaseSummaryEchart_' + ids"
+    ></div>
   </div>
 </template>
 
@@ -24,19 +27,23 @@ export default {
   },
   methods: {
     leaseSummaryFun (val) {
-      var optionName = ["多功能演播厅", "云平台广场", "会议室", "运动中心"],
-        datas = [59.6, 21.43, 10.37, 8.6];
+      var optionName = ["空置产业空间", "已租产业空间"],
+        xAxiasD = [9.935, 89.565],
+        datas = {
+          name: '园区总面积',
+          value: 99.5
+        }
       var option = {
         title: [
           {
             show: true,
-            text: "12",
+            text: "",
             link: "",
             target: null,
-            subtext: "今日预定次数",
+            subtext: datas.name,
             sublink: "",
             subtarget: null,
-            right: "18%",
+            left: "50%",
             top: "0",
             textAlign: "center",
             textStyle: {
@@ -53,21 +60,21 @@ export default {
           },
           {
             show: true,
-            text: "284",
+            text: datas.value + '万平',
             link: "",
             target: null,
-            subtext: "累计预定次数",
+            subtext: "",
             sublink: "",
             subtarget: null,
-            right: "-7%",
-            top: "0",
+            left: "75%",
+            top: "1%",
             textAlign: "center",
             textStyle: {
               fontFamily: "BYfont",
               fontSize: 24,
               padding: [2, 0],
               fontWeight: 550,
-              color: "#fff",
+              color: "#fff"
             },
             subtextStyle: {
               fontSize: 12,
@@ -78,44 +85,51 @@ export default {
         legend: {
           selectedMode: false,
           show: true,
-          orient: "vertical", // 'horizontal'
-          left: "50%",
-          top: "35%",
+          orient: "horizontal", // 'vertical'
+          left: "0",
+          bottom: "-10%",
           data: optionName,
           formatter: function (name) {
             var index = 0;
             optionName.forEach(function (value, i) {
               if (value == name) index = i
             })
-            return "{a|" + name + "}" + datas[index] + "%";
+            return "{a|" + xAxiasD[index] + "万平}" + "\n{b|" + name + "}";
           },
           textStyle: {
             color: "#fff",
             fontSize: 12,
-            padding: [0, 15, 0, 2],
+            // padding: [0, 40, 0, 2],
             rich: {
               a: {
-                color: "rgb(255,255,255,.7)",
-                padding: [0, 10, 0, 0],
+                fontSize: 22,
+                fontFamily: 'BYfont',
+                padding: [15, 10, 0, -15],
               },
+              b: {
+                color: "rgb(255,255,255,.7)",
+                padding: [35, 0, 0, 0],
+              }
             },
           },
           icon: "circle",
           itemWidth: 6,
           itemHeight: 6,
-          itemGap: 12,
+          itemGap: 70,
         },
         // color: ["#cda857", "#4396f3", "#0ff", "#236390"],
-        color: ["rgba(30, 57, 87, 0.5)", "#cda857", "#4396f3", "#0ff"],
+        color: ["#cda857", "rgba(30, 57, 87, 0.5)", "#4396f3", "#0ff"],
         series: [
           {
             name: "",
             type: "pie",
-            radius: ["0", "45%"],
-            center: ["20%", "50%"],
-            startAngle: -45,
+            radius: ["0", "35%"],
+            center: ["20%", "35%"],
+            // startAngle: -45,
             color: 'rgba(30, 57, 87, 0.3)',
             avoidLabelOverlap: false,
+            animation: false,
+            // animationHover: false,
             animationType: 'scale',
             label: {
               show: false,
@@ -128,10 +142,11 @@ export default {
           {
             name: "",
             type: "pie",
-            radius: ["0", "65%"],
-            center: ["20%", "50%"],
+            radius: ["0", "55%"],
+            center: ["20%", "35%"],
             // roseType: 'area', //radius
-            startAngle: -45,
+            // startAngle: -45,
+            animation: false,
             itemStyle: {
               normal: {
                 // borderWidth: 2,
@@ -157,11 +172,12 @@ export default {
       };
       for (var i = 0; i < optionName.length; i++) {
         option.series[1].data[i] = {
-          value: datas[i],
+          value: xAxiasD[i],
           name: optionName[i],
+          // selected: true
         };
       }
-      this.$redomEchart("leaseSummaryEchart_" + this.ids, option);
+      this.$redomEchart(this.$refs["leaseSummaryEchart_" + this.ids], option);
     }
   }
 };
@@ -173,6 +189,6 @@ export default {
 #leaseSummaryEchart_,
 [id^="leaseSummaryEchart_"] {
   width: 100%;
-  height: 2.375rem /* 190/80 */;
+  height: 3.125rem /* 250/80 */;
 }
 </style>

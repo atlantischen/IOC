@@ -1,7 +1,10 @@
 <template>
   <div class="theParkOutputValAll">
     <div class="tittle">{{ title }}</div>
-    <div :id="'outputValueEchart_' + ids"></div>
+    <div
+      :id="'outputValueEchart_' + ids"
+      :ref="'outputValueEchart_' + ids"
+    ></div>
   </div>
 </template>
 
@@ -111,7 +114,7 @@ export default {
           name: optionName[i],
         };
       }
-      this.$redomEchart("outputValueEchart_" + this.ids, option);
+      this.$redomEchart(this.$refs["outputValueEchart_" + this.ids], option);
     },
   }
 };

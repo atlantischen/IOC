@@ -1,7 +1,10 @@
 <template>
   <div class="FocusIndustryAll">
     <div class="tittle">{{ title }}</div>
-    <div :id="'focusIndustryEchart_' + ids"></div>
+    <div
+      :id="'focusIndustryEchart_' + ids"
+      :ref="'focusIndustryEchart_' + ids"
+    ></div>
   </div>
 </template>
 
@@ -137,7 +140,7 @@ export default {
           name: optionName[i],
         };
       }
-      this.$redomEchart("focusIndustryEchart_" + this.ids, option);
+      this.$redomEchart(this.$refs["focusIndustryEchart_" + this.ids], option);
     }
   }
 };

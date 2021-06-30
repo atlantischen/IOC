@@ -15,15 +15,18 @@
               >
             </el-radio-group>
           </div>
-          <div id="industrySpaceEchart"></div>
+          <div id="industrySpaceEchart" ref="industrySpaceEchart"></div>
         </div>
         <div class="spatialDistributionAll">
           <div class="tittle">产业空间分布</div>
-          <div id="spatialDistributionEchart"></div>
+          <div
+            id="spatialDistributionEchart"
+            ref="spatialDistributionEchart"
+          ></div>
         </div>
         <div class="siteUsageTop5">
           <div class="tittle">场地使用TOP5</div>
-          <div id="siteUsageTop5Echart"></div>
+          <div id="siteUsageTop5Echart" ref="siteUsageTop5Echart"></div>
         </div>
       </template>
       <template #center>
@@ -32,7 +35,7 @@
       <template #right>
         <div class="floorSpace">
           <div class="tittle">场地空间</div>
-          <div id="floorSpaceEchart"></div>
+          <div id="floorSpaceEchart" ref="floorSpaceEchart"></div>
         </div>
         <div class="environmentalSpace">
           <div class="tittle">环境空间</div>
@@ -76,14 +79,14 @@
           <div class="environment_tip">
             空气质量指数AQI <i class="iconfont icon-wenti"></i>
           </div>
-          <div id="airQualityEchart"></div>
+          <div id="airQualityEchart" ref="airQualityEchart"></div>
           <span class="environment_tip">
             <span>温馨提示: </span>
             <p>空气质量很好，可以外出活动，呼吸新鲜空气，拥抱大自然。</p>
           </span>
         </div>
         <div class="tittle">今日气温趋势<i></i></div>
-        <div id="temperatureTrendEchart"></div>
+        <div id="temperatureTrendEchart" ref="temperatureTrendEchart"></div>
       </template>
     </LeftRight>
   </div>
@@ -226,7 +229,7 @@ export default {
           name: optionName[i],
         };
       }
-      this.$redomEchart("industrySpaceEchart", option);
+      this.$redomEchart(this.$refs["industrySpaceEchart"], option);
     },
     // 产业空间分布
     SpatialDistributionFun () {
@@ -328,7 +331,7 @@ export default {
           name: optionName[i],
         };
       }
-      this.$redomEchart("spatialDistributionEchart", option);
+      this.$redomEchart(this.$refs["spatialDistributionEchart"], option);
     },
     // 场地使用top5
     siteUsageTop5Fun () {
@@ -431,7 +434,7 @@ export default {
           }
         ],
       };
-      this.$redomEchart("siteUsageTop5Echart", option);
+      this.$redomEchart(this.$refs["siteUsageTop5Echart"], option);
     },
     // 环境空间
     airQualityFun () {
@@ -521,7 +524,7 @@ export default {
           },
         ]
       };
-      this.$redomEchart("airQualityEchart", option);
+      this.$redomEchart(this.$refs["airQualityEchart"], option);
     },
     // 场地空间
     floorSpaceFun () {
@@ -662,7 +665,7 @@ export default {
           name: optionName[i],
         };
       }
-      this.$redomEchart("floorSpaceEchart", option);
+      this.$redomEchart(this.$refs["floorSpaceEchart"], option);
     },
     // 今日气温趋势
     temperatureTrendFun () {
@@ -827,7 +830,7 @@ export default {
           },
         };
       }
-      this.$redomEchart("temperatureTrendEchart", option);
+      this.$redomEchart(this.$refs["temperatureTrendEchart"], option);
     }
   },
 };

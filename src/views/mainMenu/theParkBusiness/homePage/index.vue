@@ -11,7 +11,7 @@
           <DropDown :list="yearsList" name="label" @_cg="changePSYears" />
           <DropDown :list="momthsList" name="label" @_cg="changePSMonths" />
         </div>
-        <div id="store_top"></div>
+        <div id="store_top" ref="store_top"></div>
       </div>
       <div class="store_discount">
         <div class="tittle">商家优惠信息</div>
@@ -198,9 +198,9 @@ export default {
       // this.popularServiceFun();
     },
     meetEchartInit () {
-      var dom = "store";
-      var data = [29.09, 12.73, 25.45,14.55,10.91,7.27];
-      var lable=['餐饮','健康','娱乐','教育','文化','购物'];
+      var dom = this.$refs["store"];
+      var data = [29.09, 12.73, 25.45, 14.55, 10.91, 7.27];
+      var lable = ['餐饮', '健康', '娱乐', '教育', '文化', '购物'];
 
       var option = {
         tooltip: {
@@ -238,7 +238,7 @@ export default {
             i += 1;
             return name + "  " + data[lable.indexOf(name)];
           },
-          data:lable
+          data: lable
         },
         series: [
           {
@@ -266,7 +266,7 @@ export default {
       this.$redomEchart(dom, option);
     },
     AssetsAndEquipment () {
-      var dom = "store_top";
+      var dom = this.$refs["store_top"];
       var option = {
         title: {
           text: "",

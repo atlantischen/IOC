@@ -8,7 +8,10 @@
           <span>{{ item.name }}</span>
         </li>
       </ul>
-      <div :id="'equipmentSituationEchart_' + ids"></div>
+      <div
+        :id="'equipmentSituationEchart_' + ids"
+        :ref="'equipmentSituationEchart_' + ids"
+      ></div>
     </div>
   </div>
 </template>
@@ -136,7 +139,7 @@ export default {
           },
         ],
       };
-      this.$redomEchart('equipmentSituationEchart_' + this.ids, option);
+      this.$redomEchart(this.$refs['equipmentSituationEchart_' + this.ids], option);
     },
   }
 };

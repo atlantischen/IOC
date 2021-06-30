@@ -4,7 +4,7 @@
     <template #left>
       <div class="rentalAndSaleAll">
         <div class="tittle">房屋租售情况</div>
-        <div id="rentalAndSaleEchart_"></div>
+        <div id="rentalAndSaleEchart_" ref="rentalAndSaleEchart_"></div>
       </div>
       <Allcom :_Info="leftInfo" />
     </template>
@@ -327,7 +327,7 @@ export default {
           name: optionName[i],
         };
       }
-      this.$redomEchart("rentalAndSaleEchart_", option);
+      this.$redomEchart(this.$refs["rentalAndSaleEchart_"], option);
     },
   },
 };

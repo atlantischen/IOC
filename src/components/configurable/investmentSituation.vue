@@ -1,7 +1,10 @@
 <template>
   <div class="investmentSituationAll">
     <div class="tittle">{{ title }}</div>
-    <div :id="'pedestrianPostureEchart_' + ids"></div>
+    <div
+      :id="'pedestrianPostureEchart_' + ids"
+      :ref="'pedestrianPostureEchart_' + ids"
+    ></div>
   </div>
 </template>
 
@@ -193,7 +196,7 @@ export default {
           data: j == 0 ? _data : _data2,
         };
       }
-      this.$redomEchart('pedestrianPostureEchart_' + this.ids, option);
+      this.$redomEchart(this.$refs['pedestrianPostureEchart_' + this.ids], option);
     },
   }
 };

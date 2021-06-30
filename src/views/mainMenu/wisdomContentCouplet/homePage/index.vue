@@ -3,11 +3,11 @@
     <IOCLeft>
       <div class="equipment">
         <div class="tittle">设备情况</div>
-        <div id="equipment"></div>
+        <div id="equipment" ref="equipment"></div>
       </div>
       <div class="equipment_faulty">
         <div class="tittle">设备报损率分析</div>
-        <div id="equipment_faulty"></div>
+        <div id="equipment_faulty" ref="equipment_faulty"></div>
       </div>
     </IOCLeft>
     <Tips :list="list"></Tips>
@@ -18,7 +18,7 @@
           <DropDown :list="yearsList" name="label" @_cg="changePSYears" />
           <DropDown :list="momthsList" name="label" @_cg="changePSYears" />
         </div>
-        <div id="equipment_comparison"></div>
+        <div id="equipment_comparison" ref="equipment_comparison"></div>
         <ul class="equipment_title">
           <li>
             <div class="font_text">15</div>
@@ -36,7 +36,7 @@
       </div>
       <div class="equipment_warning">
         <div class="tittle">设备告警分析</div>
-        <div id="equipment_warning"></div>
+        <div id="equipment_warning" ref="equipment_warning"></div>
       </div>
     </IOCRight>
   </div>
@@ -117,7 +117,7 @@ export default {
       // this.popularServiceFun();
     },
     equipmentInit () {
-      var dom = "equipment";
+      var dom = this.$refs["equipment"];
       var option = {
         grid: {
           x: 10,
@@ -232,7 +232,7 @@ export default {
       this.$redomEchart(dom, option);
     },
     equipmentFaultyInit () {
-      var dom = "equipment_faulty";
+      var dom = this.$refs["equipment_faulty"];
       var datas = [
         [
           { name: "电梯", value: 6.3, itemStyle: { color: "#fff" } },
@@ -309,7 +309,7 @@ export default {
 
     },
     equipmentWarningInit () {
-      var dom = "equipment_warning";
+      var dom = this.$refs["equipment_warning"];
       var option = {
         grid: {
           x: 10,
@@ -434,7 +434,7 @@ export default {
 
     },
     equipmentComparisonInit () {
-      var dom = "equipment_comparison";
+      var dom = this.$refs["equipment_comparison"];
       var data = [-2.54, 4.74, 2.54];
       var option = {
         grid: {

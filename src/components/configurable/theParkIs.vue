@@ -2,21 +2,35 @@
   <div class="theParkIsAll">
     <div class="tittle">{{ title }}</div>
     <div class="parkCase">
+      <div ref="dddddd"></div>
       <div class="parkCaseEchartAll">
         <div
           v-for="(t, i) in 2"
           :key="i"
           :id="`parkCaseEchart_${i}` + ids"
+          :ref="`parkCaseEchart_${i}` + ids"
         ></div>
+        <!-- <div
+          v-for="(t, i) in 2"
+          :key="i"
+          :id="`parkCaseEchart_${i}`"
+          :ref="`parkCaseEchart_${i}`"
+        ></div> -->
       </div>
       <div class="parkCaseEchartAll2">
-        <div v-for="(t, i) in 3" :key="i" :id="`minEchart_${i}` + ids"></div>
+        <div
+          v-for="(t, i) in 3"
+          :key="i"
+          :id="`minEchart_${i}` + ids"
+          :ref="`minEchart_${i}` + ids"
+        ></div>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import * as echarts from "echarts";
 export default {
   name: "theParkIsAll",
   props: {
@@ -31,6 +45,7 @@ export default {
     };
   },
   mounted () {
+    console.log(this.$refs['dddddd'])
     this.parkCaseFun(this.datas.datas1);
     this.parkCaseFun2(this.datas.datas2);
   },
@@ -165,7 +180,11 @@ export default {
           };
           // option.series[0].label.distance = -datas[i][j].data[0]
         }
-        this.$redomEchart("parkCaseEchart_" + i + this.ids, option);
+        // let myChart = echarts.init(this.$refs["parkCaseEchart_" + i + this.ids])
+        // myChart.setOption(option, true)
+        // console.log(this.$refs["parkCaseEchart_" + i + this.ids])
+        this.$redomEchart(this.$refs["parkCaseEchart_" + i + this.ids], option);
+        // this.$redomEchart("parkCaseEchart_" + i + this.ids, option, this.$refs);
       }
     },
     parkCaseFun2 (val) {
@@ -388,7 +407,7 @@ export default {
             },
           ],
         };
-        this.$redomEchart("minEchart_" + i + this.ids, option);
+        this.$redomEchart(this.$refs["minEchart_" + i + this.ids], option);
       }
     },
   },
