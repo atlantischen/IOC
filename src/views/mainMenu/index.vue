@@ -60,13 +60,14 @@ export default {
       // this.url = 'http://183.62.170.2:8110'
       this.url = process.env.VUE_APP_UNITY
     }
-    // console.log("123");
+   
   },
   mounted () {
     window.iframe = this.$refs.iframe
-
+   
   },
   methods: {
+  
     getQueryString (name) {
       var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
       var r = window.location.search.substr(1).match(reg);
@@ -93,6 +94,7 @@ export default {
       });
     },
   },
+ 
 
 
 };

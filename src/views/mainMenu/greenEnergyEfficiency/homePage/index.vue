@@ -468,7 +468,7 @@ export default {
       this.$redomEchart(dom, option);
     },
     KPIint () {
-      var dom = this.$ref["KPI"];
+      var dom = this.$refs["KPI"];
       var option = {
         tooltip: {
           trigger: "item",

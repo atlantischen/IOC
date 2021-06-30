@@ -34,7 +34,7 @@
     </div>
     <div class="total_power">
       <div class="tittle">实时总功率</div>
-      <div id="RealTotalPower"></div>
+      <div id="RealTotalPower" ref="RealTotalPower"></div>
     </div>
   </IOCLeft>
   <IOCRight>
@@ -52,7 +52,7 @@
             近3年
           </li>
         </ul>
-        <div id="ElectricityStatistics"></div>
+        <div id="ElectricityStatistics" ref="ElectricityStatistics"></div>
       </div>
     </div>
     <div class="new_air">
@@ -120,7 +120,7 @@ export default {
     },
     RealTotalPower () {
       var y = [0, 25, 50, 75];
-      var dom = "RealTotalPower";
+      var dom = this.$refs.RealTotalPower;
       var option = {
         title: {
           text: "",
@@ -317,7 +317,9 @@ export default {
     },
     ElectricityStatistics (data, data2, yData) {
       let { name, splitNumber, min, max, interval } = yData;
-      var dom = "ElectricityStatistics";
+      // var dom = "ElectricityStatistics";
+      var dom = this.$refs.ElectricityStatistics;
+
 
       var option = {
         tooltip: {

@@ -40,7 +40,7 @@
             近3年
           </li>
         </ul>
-        <div id="ElectricityStatistics"></div>
+        <div id="ElectricityStatistics" ref="ElectricityStatistics"></div>
       </div>
     </div>
   </IOCLeft>
@@ -68,7 +68,7 @@
               <div
               class="EnergyEfficiency"
                 :id="'EnergyEfficiency' + i"
-               
+                :ref=" 'EnergyEfficiency' + i"
               ></div>
               <div class="setTemper">
                 <a @click="changeTemper('up', i)"
@@ -658,7 +658,8 @@ export default {
 
     ElectricityStatistics(data, data2, yData) {
       let { name, splitNumber, min, max, interval } = yData;
-      var dom = "ElectricityStatistics";
+      // var dom = "ElectricityStatistics";
+      var dom = this.$refs.ElectricityStatistics;
 
       var option = {
         tooltip: {
@@ -951,7 +952,7 @@ export default {
     );
     for (var i = 0; i < this.airPanelList.length; i++) {
       this.EnergyEfficiency(
-        "EnergyEfficiency" + i,
+        this.$refs["EnergyEfficiency" + i],
         this.airPanelList[i].tem.currentTem
       );
     }
