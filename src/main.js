@@ -8,7 +8,6 @@ import * as echarts from "echarts";
 
 import ElementPlus from 'element-plus';
 import 'element-plus/lib/theme-chalk/index.css'
-<<<<<<< HEAD
 
 import redomEchart from './utils/methods'
 import {SendMessageToUnity} from './utils/unity'
@@ -16,11 +15,6 @@ import IOCLeft from './components/IOCLeft.vue';
 import IOCRight from './components/IOCRight.vue';
 import Tips from './components/tips.vue';
 import NumCounter from './components/numCounter.vue';
-=======
-import {
-  SendMessageToUnity
-} from './utils/unity'
->>>>>>> da362ede28b920561e62895f650fd396085c53d8
 
 import locale from 'element-plus/lib/locale/lang/zh-cn'
 import 'dayjs/locale/zh-cn'
@@ -30,7 +24,6 @@ import './assets/iconfont/iconfont.css'
 
 
 const app = createApp(App)
-<<<<<<< HEAD
 app.config.globalProperties.$redomEchart = redomEchart;
 app.config.globalProperties.$SendMessageToUnity = SendMessageToUnity;
 app.component('IOCLeft', IOCLeft)
@@ -38,12 +31,6 @@ app.component('IOCRight', IOCRight)
 app.component('Tips', Tips)
 app.component('NumCounter', NumCounter)
 app.use(ElementPlus, { locale })
-=======
-app.config.globalProperties.$SendMessageToUnity = SendMessageToUnity;
-app.use(ElementPlus, {
-  locale
-})
->>>>>>> da362ede28b920561e62895f650fd396085c53d8
 app.use(VueWechatTitle)
 
 import 'element-plus/lib/theme-chalk/index.css'

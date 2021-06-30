@@ -25,15 +25,18 @@ export default {
       if (res.action == "fullscreen") {
         this.handleFullScreen()
       }
-    }
+    },
   },
 
-  created () { },
+    beforeCreate() { 
+        this.$router.push('/comprehensiveSituational/homePage')
+    },
   mounted () {
-    window.addEventListener("message", this.event, true);
+     window.addEventListener("message", this.event, true);
   },
   beforeDestory () {
     window.removeEventListener("message", this.event, true);
+
   },
   watch: {
     'route':{

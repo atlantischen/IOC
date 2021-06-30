@@ -19,7 +19,6 @@ var redomEchart = function redomEchart(dom, option, e) {
   myChart.setOption(option, true)
   console.log(EleResize)
   let listener = function () {
-    console.log('resize')
     myChart.resize()
   }
   EleResize.on(resizeDiv, listener)
