@@ -28,17 +28,19 @@ export default {
     },
   },
 
-  
+  beforeCreate () {
+    if (process.env.NODE_ENV == 'production') this.$router.push('/comprehensiveSituational/homePage')
+  },
   mounted () {
-     window.addEventListener("message", this.event, true);
+    window.addEventListener("message", this.event, true);
   },
   beforeDestory () {
     window.removeEventListener("message", this.event, true);
 
   },
   watch: {
-    'route':{
-      
+    'route': {
+
     }
   },
 };

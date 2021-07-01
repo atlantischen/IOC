@@ -326,7 +326,7 @@ export default {
     },
     changePSYears2 (val) {
       console.log(val);
-      this.popularServiceFun();
+      this.totalServicesFun();
     },
     popularServiceFun () {
       var names = [],
@@ -730,6 +730,10 @@ export default {
             animation: false,
             radius: ["0", "40%"],
             data: [100],
+            label: { show: false },
+            labelLine: {
+              show: false
+            },
             itemStyle: {
               color: "#0e1c36",
             }

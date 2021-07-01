@@ -18,7 +18,7 @@ const routes = [{
   //   name: 'empty',
   //   // redirect: "/debug/comprehensiveSituational/homePage",
   //   component: () => import('@/views/mainMenu/empty.vue'),
-  
+
   // },
   {
     // path: "",
@@ -70,6 +70,14 @@ const router = createRouter({
   routes,
 });
 
-
+// router.beforeEach((to, from, next) => {
+//   console.log(to)
+//   if (to.name == 'url') {
+//     router.push('/url')
+//   } else {
+//     router.push('/')
+//   }
+//   next()
+// })
 
 export default router
