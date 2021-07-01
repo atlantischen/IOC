@@ -29,22 +29,20 @@ export default {
     getUnityData(val) {
       // debugger;
       let res = val;
-      if (res.action.indexOf("/") === 0) {
-        this.$router.push(res.action);
-      } else {
-      }
+      try {
+        if (res.action.indexOf("/") === 0) {
+          this.$router.push(res.action);
+        } else {
+        }
+      } catch (e) {}
     },
   },
-<<<<<<< HEAD
+  beforeCreate() {
+    if (process.env.NODE_ENV === "production") {
+      this.$router.push("/comprehensiveSituational/homePage");
+    }
+  },
   created() {
-=======
-    beforeCreate() { 
-        // this.$router.push('/comprehensiveSituational/homePage')
-
-        
-    },
-  created () {
->>>>>>> 004bfb159a3472eaf2572d2e98f736d8f1cffb4e
     if (window.vuplex) {
       this.addMessageListener();
     } else {
@@ -66,23 +64,15 @@ export default {
       // console.log(window.debug,'debug');
       window.debug = true;
     } else {
-      // this.url = process.env.VUE_APP_UNITY
-      this.url = "http://183.62.170.2:8110";
+      this.url = process.env.VUE_APP_UNITY;
+      // this.url = "http://183.62.170.2:8110";
     }
   },
-<<<<<<< HEAD
   mounted() {
-    window.iframe = this.$refs.iframe;
-=======
-  mounted () {
-    this.$nextTick(()=>{
-    window.iframe = this.$refs.iframe
-    console.log( window.iframe);
-
-
-    })
-   
->>>>>>> 004bfb159a3472eaf2572d2e98f736d8f1cffb4e
+    this.$nextTick(() => {
+      window.iframe = this.$refs.iframe;
+      console.log(window.iframe);
+    });
   },
   methods: {
     getQueryString(name) {

@@ -38,8 +38,8 @@ export default {
     setTimeout(() => {
       this.moveLeft()
     }, 500);
-    document.querySelector('.tipBox_text').onmouseover = function () { this.timer = null; clearInterval(this.timer) }
-    document.querySelector('.tipBox_text').onmouseout = function () { this.moveLeft() }
+    // document.querySelector('.tipBox_text').onmouseover = function () { this.timer = null; clearInterval(this.timer) }
+    // document.querySelector('.tipBox_text').onmouseout = function () { this.moveLeft() }
   },
   beforeDestroy () {
     clearInterval(this.timer)
