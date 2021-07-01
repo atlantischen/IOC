@@ -44,10 +44,8 @@ export function SendMessageToUnity(action, data) {
       arg: JSON.stringify(data),
     }));
   } else {
-    // if (!window.iframe) {
-    //   return this.$message.info('通讯失败！')
-    // }
-    window.iframe.contentWindow.postMessage({
+    if (window.iframe) {
+      window.iframe.contentWindow.postMessage({
         type: "w2u",
         sysname: "System/WebEventListen",
         func: "message",
@@ -57,6 +55,10 @@ export function SendMessageToUnity(action, data) {
         })
       },
       '*');
+    }
+    console.log(window.iframe,'window.iframe');
+  
+    
   }
 
 }

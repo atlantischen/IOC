@@ -16,7 +16,7 @@ export default {
   name: "MainMenu",
   data () {
     return {
-      isShow: false,
+      isShow: true,
       url: ''
     };
   },
@@ -35,6 +35,11 @@ export default {
       }
     },
   },
+    beforeCreate() { 
+        // this.$router.push('/comprehensiveSituational/homePage')
+
+        
+    },
   created () {
     if (window.vuplex) {
       this.addMessageListener();
@@ -63,7 +68,12 @@ export default {
    
   },
   mounted () {
+    this.$nextTick(()=>{
     window.iframe = this.$refs.iframe
+    console.log( window.iframe);
+
+
+    })
    
   },
   methods: {

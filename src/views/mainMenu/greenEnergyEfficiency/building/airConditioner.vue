@@ -40,8 +40,9 @@
             近3年
           </li>
         </ul>
-        <div id="ElectricityStatistics" ref="ElectricityStatistics"></div>
       </div>
+      <div id="ElectricityStatistics" ref="ElectricityStatistics"></div>
+
     </div>
   </IOCLeft>
   <IOCRight>
@@ -1036,32 +1037,7 @@ export default {
   }
 }
 .KWH {
-  .btn {
-    & > ul {
-      display: flex;
-      margin-top: 0.25rem /* 20/80 */;
-      justify-content: flex-end;
-      // position: absolute;
-      // right: 0;
-      // top: 0;
-      & > li {
-        width: 0.75rem /* 60/80 */ /* 76/80 */;
-        margin-right: 0.0625rem /* 5/80 */;
-        height: 0.325rem /* 26/80 */;
-        background-color: rgba(35, 61, 89, 0.5);
-        border: 1px solid transparent;
-        border-radius: 0.05rem /* 4/80 */ /* 13/80 */;
-        font-size: 0.175rem /* 14/80 */;
-        color: #fff;
-        text-align: center;
-        line-height: 0.325rem;
-      }
-      .active {
-        // color: #4396f3;
-        border: 1px solid #4396f3;
-      }
-    }
-  }
+ 
 }
 // 空调面板
 .airPanel {
