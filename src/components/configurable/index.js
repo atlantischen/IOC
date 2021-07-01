@@ -13,6 +13,10 @@ import LeaseSummary from './leaseSummary.vue'
 import ShapeOfMountain from './shapeOfMountain.vue'
 import WaterPolo from './waterPolo.vue'
 import ScatterDiagram from './scatterDiagram.vue'
+import ScatterDiagram2 from './scatterDiagram2.vue'
+import ProportionOfSiteType from './proportionOfSiteType.vue'
+import SingleBarChart from './singleBarChart.vue'
+import HorizontalBarChart from './horizontalBarChart.vue'
 
 const configurable = {
   TheParkIs, // 园区情况
@@ -30,5 +34,9 @@ const configurable = {
   ShapeOfMountain, // 象形柱图
   WaterPolo, // 水球图
   ScatterDiagram, // 散点
+  ScatterDiagram2, // 单色散点(今日会议排期)
+  ProportionOfSiteType, // 饼图（场所类型占比）
+  SingleBarChart, // 单条柱状图
+  HorizontalBarChart, // 条形图（今日会议室概况）
 }
 export default configurable

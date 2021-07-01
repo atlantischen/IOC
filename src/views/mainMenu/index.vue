@@ -14,19 +14,19 @@
 <script>
 export default {
   name: "MainMenu",
-  data () {
+  data() {
     return {
       isShow: true,
-      url: ''
+      url: "",
     };
   },
   computed: {
-    getUnityData () {
+    getUnityData() {
       return this.$store.state.unitySendData;
     },
   },
   watch: {
-    getUnityData (val) {
+    getUnityData(val) {
       // debugger;
       let res = val;
       if (res.action.indexOf("/") === 0) {
@@ -35,14 +35,14 @@ export default {
       }
     },
   },
-  created () {
+  created() {
     if (window.vuplex) {
       this.addMessageListener();
     } else {
       window.addEventListener("vuplexready", this.addMessageListener);
     }
     window.addEventListener("message", (event) => {
-      let res = JSON.parse(event.data)
+      let res = JSON.parse(event.data);
       this.$store.commit("setData", res);
       if (res.data === "IOCHOME") {
         this.isShow = true;
@@ -51,34 +51,31 @@ export default {
         this.isShow = false;
       }
     });
-    if (this.getQueryString('debug')) {
-      console.log('我是debug!!');
-      this.url = '';
+    if (this.getQueryString("debug")) {
+      console.log("我是debug!!");
+      this.url = "";
       // console.log(window.debug,'debug');
       window.debug = true;
     } else {
-      this.url = process.env.VUE_APP_UNITY
-      // this.url = 'http://183.62.170.2:8110'
+      // this.url = process.env.VUE_APP_UNITY
+      this.url = "http://183.62.170.2:8110";
     }
-
   },
-  mounted () {
-    window.iframe = this.$refs.iframe
-
+  mounted() {
+    window.iframe = this.$refs.iframe;
   },
   methods: {
-
-    getQueryString (name) {
+    getQueryString(name) {
       var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
       var r = window.location.search.substr(1).match(reg);
       if (r != null) return unescape(r[2]);
       return null;
     },
-    addMessageListener () {
+    addMessageListener() {
       window.vuplex.addEventListener("message", (event) => {
         console.log(event.data);
         let res = JSON.parse(event.data);
-        this.$store.commit("setData", res)
+        this.$store.commit("setData", res);
         if (res && res.lenght != 0) {
           if (res.action == "hide") {
             this.isShow = false;
@@ -94,9 +91,6 @@ export default {
       });
     },
   },
-
-
-
 };
 </script>
 

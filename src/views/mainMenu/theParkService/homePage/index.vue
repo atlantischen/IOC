@@ -635,6 +635,7 @@ export default {
       }
       this.$redomEchart(this.$refs["totalServicesEchart"], option);
     },
+    // 各服务办理分布
     distributionServicesFun () {
       var j = 0, colors = [
         "#00ffff",

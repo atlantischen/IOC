@@ -44,9 +44,9 @@ export function SendMessageToUnity(action, data) {
       arg: JSON.stringify(data),
     }));
   } else {
-    // if (!window.iframe) {
-    //   return this.$message.info('通讯失败！')
-    // }
+    if (!window.iframe) {
+      return this.$message.info('通讯失败！')
+    }
     window.iframe.contentWindow.postMessage({
         type: "w2u",
         sysname: "System/WebEventListen",
