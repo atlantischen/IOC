@@ -16,7 +16,9 @@ import ScatterDiagram from './scatterDiagram.vue'
 import ScatterDiagram2 from './scatterDiagram2.vue'
 import ProportionOfSiteType from './proportionOfSiteType.vue'
 import SingleBarChart from './singleBarChart.vue'
+import UpBarChart from './upBarChart.vue'
 import HorizontalBarChart from './horizontalBarChart.vue'
+import PieChart from './pieChart.vue'
 
 const configurable = {
   TheParkIs, // 园区情况
@@ -37,6 +39,8 @@ const configurable = {
   ScatterDiagram2, // 单色散点(今日会议排期)
   ProportionOfSiteType, // 饼图（场所类型占比）
   SingleBarChart, // 单条柱状图
+  UpBarChart, // 上下柱状图（资产设备统计）
   HorizontalBarChart, // 条形图（今日会议室概况）
+  PieChart, // 饼图（IT资产使用概况）
 }
 export default configurable

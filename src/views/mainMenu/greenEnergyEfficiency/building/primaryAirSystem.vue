@@ -134,10 +134,6 @@ export default {
       var dom = this.$refs.ElectricityStatistics;
 
       var option = {
-        tooltip: {
-          trigger: "axis",
-          // formatter: '{b0}({a0}): {c0}<br />{b1}({a1}): {c1}%'
-        },
         color: ["#ffea00", "#0df8fc", "#fff"],
         grid: {
           top: "30",

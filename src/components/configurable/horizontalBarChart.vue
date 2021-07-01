@@ -57,11 +57,40 @@ export default {
             {
               type: "bar",
               barWidth: 22,
-              // barGap: "-100%",
-              barCategoryGap: "0%",
+              barGap: "-100%",
+              barCategoryGap: "100%",
+              animation: false,
+              hoverAnimation: false,
+              label: {
+                show: false,
+              },
+              itemStyle: {
+                normal: {
+                  barBorderRadius: 8,
+                },
+              },
+              data: [
+                {
+                  // emphasis: {
+                  //   focus: "none",
+                  // },
+                  itemStyle: {
+                    normal: {
+                      color: "#0e1c36",
+                    },
+                  },
+                  value: 100,
+                },
+              ],
+              z: 1,
+            },
+            {
+              type: "bar",
+              barWidth: 22,
+              barGap: "-100%",
+              barCategoryGap: "-100%",
               label: {
                 show: true,
-                animation: false,
                 position: "left",
                 offset: [120, -20],
                 formatter: _data[i].name + "{a| " + _data[i].value + " }",
@@ -87,19 +116,6 @@ export default {
               },
               data: [
                 {
-                  label: {
-                    show: false,
-                  },
-                  itemStyle: {
-                    normal: {
-                      color: "#0e1c36",
-                    },
-                  },
-                  value: 100,
-                  animation: false,
-                  hoverAnimation: false,
-                },
-                {
                   itemStyle: {
                     normal: {
                       color: new echarts.graphic.LinearGradient(0, 0, 1, 0, [
@@ -109,6 +125,7 @@ export default {
                     },
                   },
                   value: _data[i].value.split("%")[0],
+                  z: 1,
                 },
               ],
             },
