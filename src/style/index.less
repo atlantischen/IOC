@@ -125,6 +125,116 @@
     }
   }
 }
+
+.sliderBtn2 {
+  position: relative;
+  width: 65px;
+  height: 24px;
+  border: 1px solid #556E8F;
+  border-radius: 20px;
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+
+  &::after {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 14px;
+  }
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 30px;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: #fff;
+    box-shadow: 0px 0px 4px #000;
+    transition: all 0.1s ease-in;
+  }
+
+  &.open {
+    background: #4396F3;
+
+    &::before {
+      left: 42px;
+    }
+
+    &::after {
+      content: '生效';
+      color: #fff;
+      left: 7px;
+    }
+  }
+
+  &.close {
+    background: #4396F3;
+    // box-shadow: inset 0px 0px 5px 5px rgba(20, 52, 73, 0.871);
+
+    &::before {
+      left: 3px;
+    }
+
+    &::after {
+      content: '失效';
+      color: #fff;
+      left: 25px;
+    }
+  }
+}
+
+// 选择日期按钮
+.btn {
+  & > ul {
+    display: flex;
+    margin-top: 0.25rem /* 20/80 */;
+    justify-content: flex-end;
+    // position: absolute;
+    // right: 0;
+    // top: 0;
+    & > li {
+      width: 0.75rem /* 60/80 */ /* 76/80 */;
+      margin-right: 0.0625rem /* 5/80 */;
+      height: 0.325rem /* 26/80 */;
+      background-color: rgba(35, 61, 89, 0.5);
+      border: 1px solid transparent;
+      border-radius: 0.05rem /* 4/80 */ /* 13/80 */;
+      font-size: 0.175rem /* 14/80 */;
+      color: #fff;
+      text-align: center;
+      line-height: 0.325rem;
+    }
+    .active {
+      // color: #4396f3;
+      border: 1px solid #4396f3;
+    }
+  }
+}
+// 下拉框
+.selected {
+  // float: right;
+  display: flex;
+  justify-content: flex-end;
+
+  select {
+    width: 0.8rem /* 64/80 */;
+    height: 0.3625rem /* 29/80 */;
+    padding: 0.0625rem /* 5/80 */;
+    margin-right: 0.225rem /* 18/80 */;
+    border-radius: 0.05rem /* 4/80 */;
+    background-color: rgba(35, 61, 89, 0.6);
+    color: #fff;
+    border: none;
+  }
+  select:focus {
+    outline: none;
+  }
+}
 @import './gl.less';
 @font-face {
   font-family: 'BYfont';

@@ -35,7 +35,16 @@ export default {
       }
     },
   },
+<<<<<<< HEAD
   created() {
+=======
+    beforeCreate() { 
+        // this.$router.push('/comprehensiveSituational/homePage')
+
+        
+    },
+  created () {
+>>>>>>> 004bfb159a3472eaf2572d2e98f736d8f1cffb4e
     if (window.vuplex) {
       this.addMessageListener();
     } else {
@@ -61,8 +70,19 @@ export default {
       this.url = "http://183.62.170.2:8110";
     }
   },
+<<<<<<< HEAD
   mounted() {
     window.iframe = this.$refs.iframe;
+=======
+  mounted () {
+    this.$nextTick(()=>{
+    window.iframe = this.$refs.iframe
+    console.log( window.iframe);
+
+
+    })
+   
+>>>>>>> 004bfb159a3472eaf2572d2e98f736d8f1cffb4e
   },
   methods: {
     getQueryString(name) {
