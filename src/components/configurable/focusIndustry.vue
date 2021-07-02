@@ -4,6 +4,7 @@
     <div
       :id="'focusIndustryEchart_' + ids"
       :ref="'focusIndustryEchart_' + ids"
+      :style="'height:' + datas.eheight / 80 + 'rem;'"
     ></div>
   </div>
 </template>

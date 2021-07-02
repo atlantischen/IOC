@@ -637,6 +637,8 @@ export default {
     },
     // 各服务办理分布
     distributionServicesFun () {
+      var dom = this.$refs["distributionServicesEchart"]
+      var myChart = echarts.init(dom)
       var j = 0, colors = [
         "#00ffff",
         "#cd9a57",
@@ -747,7 +749,7 @@ export default {
           {
             value: datas[i],
             name: optionName[i],
-            selected: i == optionName.length - 1,
+            // selected: i == optionName.length - 1,
             itemStyle: {
               color: colors[i],
             }
@@ -761,6 +763,11 @@ export default {
         )
       }
       this.$redomEchart(this.$refs["distributionServicesEchart"], option);
+      myChart.dispatchAction({
+        type: 'highlight',
+        seriesIndex: 0,
+        dataIndex: 6
+      });
     },
   },
 };

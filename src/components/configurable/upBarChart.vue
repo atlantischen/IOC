@@ -21,18 +21,18 @@ export default {
       type: Object,
     },
   },
-  data() {
+  data () {
     return {
       ...this._data,
       ids: this.$uuid(),
     };
   },
-  created() {},
-  mounted() {
+  created () { },
+  mounted () {
     this.upBarChartFun(this.datas);
   },
   methods: {
-    upBarChartFun(val) {
+    upBarChartFun (val) {
       const { names, xAxisData, yAxisData, units } = val;
       var comStyle = {
         itemStyle: {
@@ -41,6 +41,35 @@ export default {
         },
       };
       var option = {
+        tooltip: {
+          show: true,
+          trigger: 'item',
+          axisPointer: {
+            type: 'line',
+            lineStyle: {
+              type: 'dashed',
+              width: 0.5,
+              color: 'rgba(255,255,255,0.8)'
+            }
+          },
+          backgroundColor: "rgba(0,0,0,0.8)",
+          borderWidth: 1,
+          borderColor: "#4396f3",
+          padding: [10, 15],
+          extraCssText: 'box-shadow:inset 0 0 8px rgba(67, 149, 243, 0.6);',
+          textStyle: {
+            color: "#fff",
+          },
+          formatter: params => {
+            console.log(params)
+            let dataStr = `<p style="font-weight:bold;font-size:.2rem;text-align:center;padding-bottom:.0625rem;">${params.name}</p>`
+            dataStr += `<div>
+                  <span style=" vertical-align: middle;margin-right:0.0625rem;width:0.15rem;height:0.12rem;border-radius:0.02rem;background:linear-gradient(to bottom, ${params.color.colorStops[0].color},${params.color.colorStops[1].color}"></span>
+                  <span> ${params.seriesName}    ${params.seriesIndex == 3 ? Math.abs(params.value) : params.value}</span>
+                </div>`
+            return dataStr
+          }
+        },
         legend: {
           data: names,
           right: 0,

@@ -211,7 +211,7 @@ export default {
           },
         },
       ],
-      isShowRIght: false,
+      isShowRIght: true,
       isShowTipBox: true,
       centerDatasList: [
         {
