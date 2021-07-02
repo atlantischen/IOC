@@ -497,7 +497,6 @@ export default {
 
             },
 
-
             data: [
               {
                 value: 500,

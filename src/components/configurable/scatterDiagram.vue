@@ -25,19 +25,19 @@ export default {
       type: Object,
     },
   },
-  data () {
+  data() {
     return {
       ...this._data,
       ids: this.$uuid(),
     };
   },
-  created () { },
-  mounted () {
+  created() {},
+  mounted() {
     this.scatterDiagramFun(this.datas);
   },
   methods: {
-    scatterDiagramFun (val) {
-      let { xAxisD, names, title } = val;
+    scatterDiagramFun(val) {
+      let { xAxisD, names, title, units } = val;
       var data = [
         [
           [120, 1200, 123, "新能源", "2021"],
@@ -95,14 +95,14 @@ export default {
           containLabel: true,
         },
         xAxis: {
-          name: '{a|万元}',
+          name: "{a|" + units[0] + "}",
           nameTextStyle: {
             rich: {
               a: {
                 padding: [-60, 0, 0, -40],
-                color: '#fff'
-              }
-            }
+                color: "#fff",
+              },
+            },
           },
           boundaryGap: false,
           min: 100,
@@ -131,7 +131,7 @@ export default {
           },
         },
         yAxis: {
-          name: "万元",
+          name: units[1],
           nameTextStyle: {
             padding: [5, 0, 0, -40],
           },
@@ -161,7 +161,7 @@ export default {
             name: names[0],
             data: data[0],
             type: "scatter",
-            symbolSize: function (data) {
+            symbolSize: function(data) {
               return Math.sqrt(data[2]);
             },
             emphasis: {
@@ -233,7 +233,7 @@ export default {
             name: names[1],
             data: data[1],
             type: "scatter",
-            symbolSize: function (data) {
+            symbolSize: function(data) {
               // return Math.sqrt(data[2]) / 5e2;
               return Math.sqrt(data[2]);
             },
@@ -317,7 +317,7 @@ export default {
   .sd_top {
     width: 100%;
     display: flex;
-    padding: 0.0625rem /* 5/80 */ 0.3125rem /* 25/80 */ 0.25rem /* 20/80 */;
+    padding: .125rem /* 10/80 */ 0.3125rem /* 25/80 */ .375rem /* 30/80 */;
     li {
       flex: 1;
       span:nth-child(1) {

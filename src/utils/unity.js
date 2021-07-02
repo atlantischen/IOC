@@ -60,5 +60,4 @@ export function SendMessageToUnity(action, data) {
   
     
   }
-
 }
