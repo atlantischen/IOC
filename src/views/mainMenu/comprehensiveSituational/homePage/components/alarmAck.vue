@@ -1,10 +1,18 @@
 <template>
   <!-- 警报确认 -->
   <div>
-    <button class="testBtn" v-if="false" @click="sureAlarmFun()">
+    <button
+      class="testBtn"
+      v-if="false"
+      @click="
+        () => {
+          isFade = !isFade;
+        }
+      "
+    >
       警报确认
     </button>
-    <RightAlert :fade="isFade" v-show="isFade" class="sureAlarm">
+    <RightAlert :fade="isFade" class="sureAlarm">
       <div class="sureAlarm_box">
         <p class="formTitle">警报确认</p>
         <div>

@@ -43,22 +43,23 @@ export default {
     },
   },
   components: {},
-  data() {
+  data () {
     return {
       inputVal: "",
     };
   },
-  watch: {
-    inputVal() {
-      return this.inputV;
-    },
+  watch () {
+    // this.inputVal = this.inputV
+    // inputVal() {
+    //   return this.inputV;
+    // },
   },
-  mounted() {},
+  mounted () { },
   methods: {
-    clickHandle() {
+    clickHandle () {
       this.$emit("_search", this.inputVal);
     },
-    inputFun() {
+    inputFun () {
       this.$emit("_input", this.inputVal);
     },
   },

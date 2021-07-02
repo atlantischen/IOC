@@ -2,7 +2,7 @@
   <!-- 绿色能效 -->
   <div class="container ">
       <ul class="title">
-          <li   :class="activeIndex===index?'active':''" v-for="(item,index) in list" :key="index" @click="handleClick(item.path,index)">{{item.name}}</li>
+          <li   :class="activeIndex===index?'active':''" v-for="(item,index) in list" :key="index" @click="handleClick(item.path,index,item.name)">{{item.name}}</li>
       </ul>
     <router-view></router-view>
   </div>
@@ -45,9 +45,10 @@ export default {
   },
   components:{ },
   methods:{
-    handleClick(path,index){
+    handleClick(path,index,name){
       this.activeIndex=index
       this.$router.push(path)
+      this.$SendMessageToUnity("OnChangePage", {"name":name});
      
     }
   },

@@ -69,7 +69,103 @@
       </div>
     </div>
   </IOCLeft>
-  <IOCRight></IOCRight>
+  <IOCRight>
+    <div class="airControl">
+      <div class="tittle">新风控制</div>
+      <div class=" NewRiskControl">
+        <div class="NewRiskControl_row">
+          <div class="NewRiskControl_row_top">
+            <span class="NewRiskTitle" >SA01_新风</span>
+            <div class="sliderBtn " :class="NewRiskData.speedStates==1?'open ':'close'" @click="closeOpen('speed')"></div>
+          </div>
+          <div class="NewRiskControl_row_ct">
+            <div class="winspeed">送风风速
+              <span :class="{'actived':NewRiskData.speed1>=1}" @click="changeWinSpeed('speed1', 1)">
+                <i class="iconfont icon-fengsu" ></i>
+              </span>
+              <span  :class="{'actived':NewRiskData.speed1>=2}" @click="changeWinSpeed('speed1', 2)">
+                <i class="iconfont icon-fengsu" ></i>
+              </span>
+              <span  :class="{'actived':NewRiskData.speed1>=3}" @click="changeWinSpeed('speed1',3)">
+                <i class="iconfont icon-fengsu" ></i>
+              </span>
+            </div>
+            <div class="winspeed">排风风速
+              <span :class="{'actived':NewRiskData.speed2>=1}" @click="changeWinSpeed('speed2', 1)">
+                <i class="iconfont icon-fengsu" ></i>
+              </span>
+              <span  :class="{'actived':NewRiskData.speed2>=2}" @click="changeWinSpeed('speed2', 2)">
+                <i class="iconfont icon-fengsu" ></i>
+              </span>
+              <span  :class="{'actived':NewRiskData.speed2>=3}" @click="changeWinSpeed('speed2', 3)">
+                <i class="iconfont icon-fengsu" ></i>
+              </span>
+            </div>
+          </div>
+        </div>
+        <div class="NewRiskControl_row">
+          <div class="NewRiskControl_row_top">
+            <span>定时开启</span>
+            <div class="sliderBtn " :class="NewRiskData.timeOpenStates==1?'open ':'close'" @click="closeOpen('open')"></div>
+          </div>
+          <div class="NewRiskControl_row_ct">
+            <div class="setReTime">
+              <span>开启时间</span>
+              <span> <input class="inputNumber"  :placeholder="NewRiskData.openTime.split(':')[0]" @input="myFunction1" type="number">时 </span>
+              <span> <input class="inputNumber" :placeholder="NewRiskData.openTime.split(':')[1]"  @input="myFunction2" type="number">分 </span>
+            </div>
+            <div class="setReDate">
+              <span>重复</span>
+              <ul class="dateList">
+                <li :class="{'actived':NewRiskData.openDate.includes(1)}" @click="changeRepeteMode( 'open', 1)">一</li>
+                <li :class="{'actived':NewRiskData.openDate.includes(2)}" @click="changeRepeteMode( 'open', 2)">二</li>
+                <li  :class="{'actived':NewRiskData.openDate.includes(3)}" @click="changeRepeteMode( 'open', 3)">三</li>
+                <li  :class="{'actived':NewRiskData.openDate.includes(4)}" @click="changeRepeteMode( 'open', 4)">四</li>
+                <li :class="{'actived':NewRiskData.openDate.includes(5)}" @click="changeRepeteMode( 'open', 5)">五</li>
+                <li :class="{'actived':NewRiskData.openDate.includes(6)}" @click="changeRepeteMode( 'open', 6)">六</li>
+                <li  :class="{'actived':NewRiskData.openDate.includes(7)}" @click="changeRepeteMode( 'open', 7)">天</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="NewRiskControl_row">
+          <div class="NewRiskControl_row_top">
+            <span>定时关闭</span>
+            <div class="sliderBtn " :class="NewRiskData.timeCloseStates==1?'open ':'close'" @click="closeOpen('close')"></div>
+          </div>
+          <div class="NewRiskControl_row_ct">
+            <div class="setReTime">
+              <span>开启时间</span>
+              <span> <input class="inputNumber"  :placeholder="NewRiskData.closeTime.split(':')[0]" @input="myFunction3" type="number">时 </span>
+              <span> <input class="inputNumber"  :placeholder="NewRiskData.closeTime.split(':')[1]" @input="myFunction4" type="number">分 </span>
+            </div>
+            <div class="setReDate">
+              <span>重复</span>
+              <ul class="dateList">
+                <li :class="{'actived':NewRiskData.closeDate.includes(1)}" @click="changeRepeteMode( 'close', 1)">一</li>
+                <li :class="{'actived':NewRiskData.closeDate.includes(2)}" @click="changeRepeteMode( 'close', 2)">二</li>
+                <li  :class="{'actived':NewRiskData.closeDate.includes(3)}" @click="changeRepeteMode( 'close', 3)">三</li>
+                <li  :class="{'actived':NewRiskData.closeDate.includes(4)}" @click="changeRepeteMode( 'close', 4)">四</li>
+                <li :class="{'actived':NewRiskData.closeDate.includes(5)}" @click="changeRepeteMode( 'close', 5)">五</li>
+                <li :class="{'actived':NewRiskData.closeDate.includes(6)}" @click="changeRepeteMode( 'close', 6)">六</li>
+                <li  :class="{'actived':NewRiskData.closeDate.includes(7)}" @click="changeRepeteMode( 'close', 7)">天</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <ul class="NewRiskControl_row NewRisk_info">
+          <li>新风量: <i>4000</i><i>m³/h</i></li>
+          <li>机外余压: <i>260</i><i>Pa</i></li>
+          <li>额定功率: <i>3000</i><i>W</i></li>
+          <li>额定电压: <i>350</i><i>W</i></li>
+          <li>噪声: <i>59</i><i>dB(A)</i></li>
+          <li>净重: <i>350</i><i>kg</i></li>
+          <li>焓回收率: <i>夏季62%</i> <i>冬季62%</i></li>
+          <li>外形尺寸: <i>2000x1400x720</i><i>mm</i></li>
+        </ul>
+      </div>
+    </div>
+  </IOCRight>
 </template>
 
 <script>
@@ -125,6 +221,18 @@ export default {
           humidity: 75,
         },
       ],
+       NewRiskData:{
+          name: 'SA01_新风',
+          speedStates: 0,
+          speed1: 2,
+          speed2: 1,
+          timeOpenStates:0,
+          openTime: '22:10',
+          openDate: [1, 2, 3, 4, 5],
+          timeCloseStates:1,
+          closeTime: '12:00',
+          closeDate: [1, 2, 3, 6],
+        }
     };
   },
   methods:{
@@ -316,6 +424,65 @@ export default {
         );
       }
     },
+      // 改变风速
+        changeWinSpeed(name, i){
+          if(name == 'speed1'){
+            this.NewRiskData.speed1 = i
+          }else{
+            this.NewRiskData.speed2= i
+          }
+        },
+        myFunction1(e){
+          let val = e.target.value
+          if(val<0 || val>24){
+            alert('请输入正确的时间（0~24）') 
+            }
+          // this.NewRiskData.openTime = (val<10?('0'+val):val)+':'+this.NewRiskData.openTime.split(':')[1]
+       
+        },
+        myFunction2(e){
+          let val = e.target.value
+          if(val<0 || val>60){alert('请输入正确的时间（0~60）')}
+          this.NewRiskData.openTime = this.NewRiskData.openTime.split(':')[0]+':'+(val<10?('0'+val):val)
+          
+        },
+        myFunction3(e){
+          let val = e.target.value
+          if(val<0 || val>24){alert('请输入正确的时间（0~24）')}
+          this.NewRiskData.closeTime = (val<10?('0'+val):val)+':'+this.NewRiskData.closeTime.split(':')[1]
+          
+        },
+        myFunction4(e){
+          let val = e.target.value
+          if(val<0 || val>60){alert('请输入正确的时间（0~60）')}
+          this.NewRiskData.closeTime = this.NewRiskData.closeTime.split(':')[0]+':'+(val<10?('0'+val):val)
+          
+        },
+        // 改变模式
+        changeRepeteMode(val, i) {
+          if(val == 'close'){
+            if(this.NewRiskData.closeDate.includes(i)){
+              this.NewRiskData.closeDate.splice(this.NewRiskData.closeDate.indexOf(i), 1)
+            }else{
+              this.NewRiskData.closeDate.push(i)
+            }
+          }else{
+            if(this.NewRiskData.openDate.includes(i)){
+              this.NewRiskData.openDate.splice(this.NewRiskData.openDate.indexOf(i), 1)
+            }else{
+              this.NewRiskData.openDate.push(i)
+            }
+          }
+        },
+           closeOpen(val) {
+          if(val == 'speed'){
+            this.NewRiskData.speedStates = this.NewRiskData.speedStates==1?0:1
+          }else if(val == 'open'){
+            this.NewRiskData.timeOpenStates = this.NewRiskData.timeOpenStates==1?0:1
+          }else{
+            this.NewRiskData.timeCloseStates = this.NewRiskData.timeCloseStates==1?0:1
+          }
+        },
   },
   mounted(){
      this.ElectricityStatistics(
@@ -431,5 +598,80 @@ export default {
   margin-top: 0.125rem /* 10/80 */ /* 15/80 */ /* 10/80 */;
   height:2.25rem /* 180/80 *//* 200/80 *//* 220/80 */;
 }
+}
+.airControl{
+   // 新风控制
+  .NewRiskControl{
+    .NewRiskControl_row{
+      color: #fff;
+      font-size: .175rem /* 14/80 */;
+      margin-left: .5rem /* 40/80 */;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+      padding: .1875rem /* 15/80 */ 0;
+      &:nth-child(3),&:nth-child(4){
+        padding: .3125rem /* 25/80 */ 0;
+      }
+      &:last-child{
+        border: none;
+      }
+    }
+    .NewRiskControl_row_top{
+      display: flex;
+      justify-content: space-between;
+      .NewRiskTitle{
+        font-weight: bold;
+      }
+    }
+    .NewRiskControl_row_ct{
+      padding: .125rem /* 10/80 */ 0 ;
+      .actived{
+        color: #4396F3;
+        i{
+          color: #4396F3;
+        }
+      }
+      .winspeed{
+        padding: .0625rem /* 5/80 */ 0;
+        display: flex;
+        align-items: center;
+        span{
+          margin-left: .1875rem /* 15/80 */;
+          cursor: pointer;
+          i{
+            font-size: .3rem /* 24/80 */;
+          }
+        }
+      }
+      .setReTime{
+        padding: .125rem /* 10/80 */ 0 .3125rem /* 25/80 */;
+        span{
+          padding-right: .25rem /* 20/80 */ ;
+        }
+      }
+      .setReDate{
+        display: flex;
+        justify-content: space-between;
+        .dateList{
+          display: flex;
+          li{
+            cursor: pointer;
+            padding:0 .15rem /* 12/80 */ ;
+          }
+        }
+      }
+    }
+    .NewRisk_info{
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      padding-top: .3125rem /* 25/80 */;
+      li{
+        min-width: 1.5625rem /* 125/80 */;
+        margin-right: .0625rem /* 5/80 */;
+        white-space: nowrap;
+        padding: .125rem /* 10/80 */ 0;
+      }
+    }
+  } 
 }
 </style>

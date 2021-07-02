@@ -4,6 +4,39 @@
     <LeftRight>
       <template #left>
         <button @click="back">back</button>
+        <button @click="changeFile">back2</button>
+        <div class="theSearchPath y_c">
+          <el-upload
+            class="upload-demo uploadPhoto"
+            action="#"
+            drag
+            :show-file-list="false"
+            :auto-upload="false"
+            :on-change="changeFile"
+            multiple
+          >
+            <!-- <i class="el-icon-upload"></i> -->
+            <!-- <div class="el-upload__text"> -->
+            <img class="upload_av" src="~@/assets/img/datas/sc_av.png" />
+            <img class="upload_up" src="~@/assets/img/datas/sc_up.png" />
+            <!-- </div> -->
+            <img :src="imageUrl" class="avatar" />
+          </el-upload>
+          <!-- <el-upload
+            class="uploadPhoto y_c upload-demo"
+            :show-file-list="false"
+            :auto-upload="false"
+            :on-change="changeFile"
+          >
+            <img v-if="imageUrl" :src="imageUrl" class="avatar" />
+            <div v-else>
+              <i class="el-icon-plus avatar-uploader-icon"></i>
+              <img class="upload_av" src="~@/assets/img/datas/sc_av.png" />
+              <img class="upload_up" src="~@/assets/img/datas/sc_up.png" />
+            </div>
+          </el-upload> -->
+          <button>搜寻轨迹</button>
+        </div>
         <SearchBox
           class="SearchBoxClass"
           :text="'搜园区建筑、搜企业、搜商家'"
@@ -11,10 +44,10 @@
           @_search="searchList"
         >
           <div
-            class="SearchBoxList stretch_all "
-            :class="{ 'SearchBoxList0': isShowList }"
+            class="SearchBoxList stretch_all"
+            :class="{ SearchBoxList0: isShowList }"
           >
-            <ul class="bigBar">
+            <ul class="bigBar" v-if="slist && slist.length > 0">
               <li
                 class="x_left"
                 v-for="(item, i) in slist"
@@ -30,15 +63,15 @@
                   "
                 ></div>
                 <div class="y_sa_rap">
-                  <p>
+                  <p class="LineBeyond">
                     {{ item.name || "-" }}{{ item.phone ? "-" : ""
                     }}{{ item.phone }}
                   </p>
-                  <p>{{ item.info }}</p>
-                  <p></p>
+                  <p class="LineBeyond">{{ item.info || "-" }}</p>
                 </div>
               </li>
             </ul>
+            <NoT :_text="`无关键字'${inputV}'的相关结果`" />
             <p class="resultNum">共搜索到{{ slist.length || 0 }}条结果</p>
           </div>
         </SearchBox>
@@ -49,14 +82,14 @@
     <!-- 黑名单 -->
     <div class="rightBtn" v-show="!isFade" @click="showBlackListFun"></div>
     <RightAlert :fade="isFade" class="rightblacklist">
-      <div class="allBlacklist">
+      <div class="allBlacklist bigBar">
+        <i class="rightArrow el-icon-arrow-right" @click="showBlackListFun"></i>
         <el-table
           class="BlacklistTable"
           :data="tableData"
-          style="width:100%;"
+          style="width: 100%"
           :header-cell-style="{ 'text-align': 'center' }"
           :cell-style="{ 'text-align': 'center' }"
-          border
         >
           <el-table-column
             prop="date"
@@ -65,9 +98,10 @@
             show-overflow-tooltip
           >
             <template #header>
-              <i class="el-icon-arrow-right" @click="showBlackListFun"></i>
+              <!-- <i class="el-icon-arrow-right" @click="showBlackListFun"></i> -->
+              <span> 照片</span>
             </template>
-            <template #default="{row}">
+            <template #default="{ row }">
               <div
                 class="blacklist_img"
                 :style="
@@ -84,7 +118,9 @@
           </el-table-column>
           <el-table-column prop="" label="操作">
             <template #default="scope">
-              <span class="zhuizong" @click="zhuizongFun(scope.row)">追踪</span>
+              <button class="zhuizong" @click="zhuizongFun(scope.row)">
+                追踪
+              </button>
             </template>
           </el-table-column>
         </el-table>
@@ -92,7 +128,11 @@
           small
           class="qx_pagination"
           layout="prev, pager, next"
-          :total="50"
+          @size-change="handleSizeChange"
+          @current-change="handleCurrentChange"
+          v-model:currentPage="currentPage"
+          :page-size="10"
+          :total="total"
         ></el-pagination>
       </div>
     </RightAlert>
@@ -100,17 +140,35 @@
 </template>
 
 <script>
+import { nextTick } from '@vue/runtime-core';
 export default {
   name: "rightContent",
   props: {
     inputVal: String,
   },
-  data() {
+  data () {
     return {
+      currentPage: 1,
+      total: 1,
       isFade: false,
+      imageUrl: '',
+      imageUrl2: require('@/assets/img/datas/sc_av.png'),
       inputV: "",
       isShowList: false,
-      slist: [
+      slist: [],
+      slist2: [
+        {
+          name: "面点王",
+          phone: "",
+          info: "梅龙路与金龙路交汇处",
+          src: require("@/assets/img/datas/qy_sysdwyy.png"),
+        },
+        {
+          name: "麦丹劳",
+          phone: "",
+          info: "2栋B座1088号商铺",
+          src: require("@/assets/img/datas/qy_sysdwyy.png"),
+        },
         {
           name: "陈新",
           phone: "15912345678",
@@ -123,26 +181,9 @@ export default {
           info: "海纳百川B座16F",
           src: require("@/assets/img/datas/qy_sysdwyy.png"),
         },
-        {
-          name: "公寓综合楼",
-          phone: "",
-          info: "梅龙路与金龙路交汇处",
-          src: require("@/assets/img/datas/qy_sysdwyy.png"),
-        },
-        {
-          name: "麦丹劳",
-          phone: "",
-          info: "2栋B座1088号商铺",
-          src: require("@/assets/img/datas/qy_sysdwyy.png"),
-        },
-        {
-          name: "麦丹劳",
-          phone: "",
-          info: "2栋B座1088号商铺",
-          src: require("@/assets/img/datas/qy_sysdwyy.png"),
-        },
       ],
-      tableData: [
+      tableData: [],
+      tableData2: [
         {
           src: require("@/assets/img/datas/qy_sysdwyy.png"),
           name: "李玲",
@@ -232,27 +273,60 @@ export default {
     };
   },
   watch: {
-    inputV() {
-      return this.inputVal;
-    },
+    // inputV () {
+    //   return this.inputVal;
+    // },
   },
-  mounted() {},
+  mounted () {
+    this.total = this.tableData2.length
+    this.changeDatasFun()
+  },
   methods: {
-    showBlackListFun() {
+    // 上传头像
+    changeFile (file, fileList) {
+      if (!file || !window.FileReader) return
+      var reader = new FileReader()
+      reader.readAsDataURL(file.raw)
+      reader.onload = function (e) {
+        // this.imageUrl = reader.result
+        this.imageUrl = this.imageUrl2
+        console.log(this.imageUrl)
+      }
+    },
+    // 
+    showBlackListFun () {
       this.isFade = !this.isFade;
     },
-    searchList() {
+    searchList (val) {
+      this.inputV = val
+      if (!val) {
+        return this.$message.error("请输入关键词！")
+      } else {
+        this.slist = this.slist2
+      }
       this.isShowList = !this.isShowList;
-      console.log("222");
     },
-    searchOneItem(val) {
+    searchOneItem (val) {
       console.log(val);
     },
-    zhuizongFun(val) {
+    zhuizongFun (val) {
       console.log(val);
     },
-    back() {
+    back () {
       this.$emit("_c");
+    },
+    // 模拟分页
+    changeDatasFun () {
+      let _data = JSON.parse(JSON.stringify(this.tableData2))
+      let _first = (this.currentPage - 1) * 10
+      this.tableData = _data.splice(_first, (_first + 10))
+    },
+    handleSizeChange (val) {
+      console.log(`每页 ${val} 条`);
+    },
+    handleCurrentChange (val) {
+      this.currentPage = val
+      this.changeDatasFun()
     },
   },
 };
@@ -261,50 +335,146 @@ export default {
 <style lang="less" scoped>
 @import "~@/style/gl.less";
 .rightContent {
-  .SearchBoxClass {
+  :deep(.theSearchPath) {
+    width: 2.875rem /* 230/80 */;
+    height: 3.75rem /* 300/80 */;
+    background: #0f2033;
+    padding: 0.35rem /* 28/80 */ 0.5875rem /* 47/80 */;
+    margin: 0 auto;
+    border: 0.0125rem /* 1/80 */ solid #4396f3;
+    border-radius: 0 0 0.075rem /* 6/80 */ 0.075rem /* 6/80 */;
+    .uploadPhoto {
+      position: relative;
+      width: 136px;
+      height: 190px;
+      background: #244f80;
+      margin-bottom: 0.25rem /* 20/80 */;
+      border: 1px solid #4396f3;
+      .el-upload {
+        width: 100%;
+        height: 100%;
+        .el-upload-dragger {
+          width: 100%;
+          height: 100%;
+          background-color: transparent;
+          border: 0;
+        }
+        .el-upload__text {
+        }
+      }
+      .avatar {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 136px;
+        height: 190px;
+        object-fit: contain;
+        background: #000;
+      }
+      .upload_av {
+        width: 83px;
+        height: 89px;
+        margin-top: 20%;
+      }
+      .upload_up {
+        position: absolute;
+        bottom: 0.0125rem /* 1/80 */;
+        right: 0.0125rem /* 1/80 */;
+        width: 34px;
+        height: 34px;
+      }
+    }
+    button {
+      width: 1.625rem /* 130/80 */;
+      height: 0.45rem /* 36/80 */;
+      color: #fff;
+      background: #4396f3;
+      border-radius: 0.05rem /* 4/80 */;
+    }
+  }
+  :deep(.SearchBoxClass) {
     position: relative;
+    .searchInput {
+      // width: 4.175rem /* 334/80 */;
+      border-radius: 6px 6px 6px 0px;
+      margin: 0;
+    }
+    .el-input__inner {
+      background: #0e1e30;
+      // border: 1px solid #4396f3;
+    }
+    .el-input-group__append {
+      position: relative;
+      width: 0.45rem /* 36/80 */;
+      height: 100%;
+      // padding: 0;
+      .el-button {
+        position: absolute;
+        top: 0.1375rem /* 11/80 */;
+        width: 100%;
+        padding: 0;
+      }
+    }
   }
   .SearchBoxList {
-    width: 100%;
-    position: absolute;
+    width: calc(100% - 0.55rem /* 44/80 */);
+    position: relative;
     left: 0;
-    top: 1rem /* 80/80 */;
+    // top: 0.8rem /* 64/80 */;
+    top: 0;
     height: 0;
     overflow: hidden;
+    background: #0f2033;
+    opacity: 0.9;
+    border-radius: 0px 0px 6px 6px;
+    box-shadow: inset 0 5px 15px 0.1px rgba(67, 149, 243, 0.1);
+    -moz-box-shadow: inset 0 5px 15px 0.1px rgb(67, 149, 243, 0.1);
+    -webkit-box-shadow: inset 0 5px 15px 0.1px rgb(67, 149, 243, 0.1);
+    z-index: 0;
     ul {
-      height: 5.5rem /* 440/80 */;
+      min-height: 0.625rem /* 50/80 */;
+      max-height: 4.625rem /* 370/80 */;
       // overflow-y: auto;
       .s_img {
-        width: 1rem /* 80/80 */;
-        height: 1rem /* 80/80 */;
-        border-radius: 50%;
+        width: 0.675rem /* 54/80 */;
+        height: 0.675rem /* 54/80 */;
+        border-radius: 20%;
         background-size: contain;
       }
       li {
         display: flex;
-        padding: 0.0625rem /* 5/80 */ 0.25rem /* 20/80 */;
-        margin-bottom: 0.25rem /* 20/80 */;
-        background: rgba(0, 0, 0, 0.5);
+        padding: 0.1875rem /* 15/80 */ 0.25rem /* 20/80 */;
+        border-bottom: 1px solid rgba(67, 149, 243, 0.5);
         cursor: pointer;
         & > div {
           padding-left: 0.25rem /* 20/80 */;
         }
         p {
           white-space: nowrap;
-          line-height: 0.5rem /* 40/80 */;
+          font-size: 0.175rem /* 14/80 */;
+          line-height: 0.375rem /* 30/80 */;
           &:first-child {
             font-weight: bold;
-            font-size: 0.175rem /* 14/80 */;
+          }
+          &:nth-child(2) {
+            color: rgba(255, 255, 255, 0.7);
           }
         }
       }
     }
     .resultNum {
+      width: 100%;
+      position: absolute;
+      bottom: 0;
+      // border-top: 1px solid rgba(67, 149, 243, 0.5);
+      padding: 0.1875rem /* 15/80 */ 0;
       text-align: center;
     }
   }
   .SearchBoxList0 {
-    height: 6.25rem /* 500/80 */;
+    height: 5.125rem /* 410/80 */;
+    border: 1px solid #4396f3;
+    border-top: none;
   }
   .rightBtn {
     position: fixed;
@@ -325,17 +495,29 @@ export default {
     z-index: 102;
   }
   .allBlacklist {
-    width: 100%;
-    height: 9.375rem /* 750/80 */;
-    background: #fff;
+    height: 6.25rem /* 500/80 */;
+    overflow-y: auto;
+    background: #0f2033;
+    border: 1px solid #4396f3;
+    border-radius: 10px 0px 0px 10px;
+    padding: 20px;
     .blacklist_img {
       width: 0.375rem /* 30/80 */;
       height: 0.375rem /* 30/80 */;
       border-radius: 50%;
     }
     .el-icon-arrow-right {
-      font-size: 0.25rem /* 20/80 */;
+      font-size: 0.2rem /* 16/80 */;
       cursor: pointer;
+    }
+    .rightArrow {
+      position: absolute;
+      top: 30px;
+      left: 12px;
+      z-index: 1;
+      color: #fff;
+      padding: 0.0375rem /* 3/80 */ 0;
+      background: #4396f3;
     }
     :deep(.BlacklistTable) {
       font-size: 12px;
@@ -343,7 +525,11 @@ export default {
       th,
       tr,
       .el-table__expanded-cell {
+        color: #fff;
         background-color: transparent;
+      }
+      th {
+        color: rgba(255, 255, 255, 0.7);
       }
       td,
       th {
@@ -351,19 +537,71 @@ export default {
       }
       td {
         padding: 0.05rem /* 4/80 */ 0;
+        border: none;
+      }
+      .el-table__empty-block .el-table__empty-text {
+        color: #fff;
+      }
+      .el-table__row > td {
+        border: none;
+      }
+      td,
+      th.is-leaf {
+        border-bottom: none;
+      }
+      tbody {
+        tr {
+          &:nth-child(odd) {
+            background: rgba(30, 57, 87, 0.5);
+          }
+        }
+        .el-table__row {
+          &:hover {
+            background-color: rgba(30, 57, 87, 1);
+            td {
+              background-color: transparent;
+              background-color: rgba(30, 57, 87, 1);
+            }
+          }
+        }
+      }
+      .cell {
+        white-space: nowrap;
       }
       .zhuizong {
-        color: #031ef9;
+        min-width: 50px;
+        height: 0.325rem /* 26/80 */;
+        line-height: 0.325rem /* 26/80 */;
+        padding: 0;
+        background: transparent;
+        color: #4696f3;
+        border: 1px solid #4696f3;
+        border-radius: 4px;
         cursor: pointer;
       }
     }
+    .el-table--border::after,
+    .el-table--group::after,
+    .el-table::before {
+      background: transparent;
+    }
     :deep(.qx_pagination) {
-      float: right;
-      padding: 0.0625rem /* 5/80 */ 0;
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      text-align: right;
+      padding: 0.25rem /* 20/80 */;
       .el-pager li,
       .btn-next,
       .btn-prev {
+        color: #fff;
         background-color: transparent;
+      }
+      .el-pager {
+        .active {
+          color: #fff;
+          background: #4396f3;
+        }
       }
     }
   }

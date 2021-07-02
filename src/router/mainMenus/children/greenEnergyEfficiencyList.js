@@ -2,6 +2,7 @@ export default [{
     path: 'homePage',
     name: 'homePage',
     component: () => import('@/views/mainMenu/greenEnergyEfficiency/homePage/index.vue'),
+    
     meta: {
       icon: 'icon-zonghe',
       name: '绿色能效',
@@ -35,6 +36,7 @@ export default [{
     path: 'building',
     name: 'building',
     component: () => import('@/views/mainMenu/greenEnergyEfficiency/building/index.vue'),
+    redirect: "/greenEnergyEfficiency/building/codesource",
     meta: {
       icon: 'icon-zonghe',
       name: '整栋',
