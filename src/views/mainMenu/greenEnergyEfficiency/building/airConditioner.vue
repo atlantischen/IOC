@@ -63,8 +63,8 @@
         </div>
         <div class="airPanel_ct" :class="_it.states == 1 ? '' : 'disable'">
           <div class="childBox temperature" v-show="_it.airPanelV == 1">
-            <!-- <p>当前温度：<i :style="{color:_it.tem.currentTem>_it.tem.targetTem?'red':'#fff'}"
-                      v-text="_it.tem.currentTem"></i> ℃</p> -->
+            <p>当前温度：<i :style="{color:_it.tem.currentTem>_it.tem.targetTem?'red':'#fff'}"
+                      v-text="_it.tem.currentTem"></i> ℃</p>
             <div class="showTemper">
               <div
               class="EnergyEfficiency"
@@ -75,7 +75,7 @@
                 <a @click="changeTemper('up', i)"
                   ><i class="iconfont icon-jia"></i
                 ></a>
-                <a @click="changeTemper('dowm', i)"
+                <a @click="changeTemper('down', i)"
                   ><i class="iconfont icon-jian"></i
                 ></a>
               </div>
@@ -810,7 +810,22 @@ export default {
     },
     // 改变目标温度
     changeTemper(name, i) {
-      let _d = this.airPanelList[i].tem.targetTem;
+      if(name==='up'){
+      if(this.airPanelList[i].tem.targetTem >=29) return false
+      console.log(this.airPanelList[i].tem.targetTem);
+      this.EnergyEfficiency(
+        this.$refs["EnergyEfficiency" + i],
+        this.airPanelList[i].tem.targetTem+=1
+      );
+      }else if(name ==='down'){
+        // this.airPanelList[i].tem.targetTem--
+        if(this.airPanelList[i].tem.targetTem <=0) return false
+        this.EnergyEfficiency(
+        this.$refs["EnergyEfficiency" + i],
+        this.airPanelList[i].tem.targetTem-=1
+      );
+
+      }
     },
     // 改变模式
     changeMode(val, i) {
@@ -829,6 +844,7 @@ export default {
 
     EnergyEfficiency(val, data) {
       var dom = val;
+      console.log(data,'data');
       var  option = {
               series: [
                 {
@@ -838,7 +854,7 @@ export default {
                   startAngle: 180,
                   endAngle: 0,
                   min: 0,
-                  max: 30,
+                  max: 300,
                   splitNumber: 4,
                   itemStyle: {
                     color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
@@ -848,7 +864,7 @@ export default {
                       },
                       {
                         offset: 1,
-                        color: "#0090FF",
+                        color: "red",
                       },
                     ]),
                   },
@@ -862,13 +878,12 @@ export default {
                   axisLine: {
                     lineStyle: {
                       width: 6,
-                      // color: [
-                      //     [1, 'rgba(0,0,0,0.7)']
-                      // ],
+                      color:[[1, '#E6EBF8'],[data/30, '#4396f3']],
                       shadowColor: "rgba(0, 0, 0, 0.4)",
                       shadowBlur: 8,
                       shadowOffsetX: 1,
                       shadowOffsetY: 2,
+            
                     },
                   },
                   axisTick: {
@@ -918,7 +933,6 @@ export default {
                     offsetCenter: [0, "-50%"],
                     fontSize: 20,
                     fontWeight: "500",
-                    fontFamily: "fashionFont",
                     formatter: "{value} ",
                     color: "#fff",
                     formatter: function (value) {
@@ -927,8 +941,9 @@ export default {
                   },
                   data: [
                     {
-                      value: 20,
-                      name: "当前温度:" + data + "℃",
+                      value: data,
+
+                      name: "目标温度",
                     },
                   ],
                 },
@@ -954,7 +969,7 @@ export default {
     for (var i = 0; i < this.airPanelList.length; i++) {
       this.EnergyEfficiency(
         this.$refs["EnergyEfficiency" + i],
-        this.airPanelList[i].tem.currentTem
+        this.airPanelList[i].tem.targetTem
       );
     }
   },
@@ -995,8 +1010,6 @@ export default {
   }
 }
 .cold_row_b {
-  color: #fff;
-
   .warning {
     height: 2.75rem /* 220/80 */ /* 250/80 */ /* 300/80 */;
     margin-top: 0.25rem /* 20/80 */ /* 30/80 */;

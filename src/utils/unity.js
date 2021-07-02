@@ -56,7 +56,7 @@ export function SendMessageToUnity(action, data) {
       },
       '*');
     }
-    console.log(window.iframe,'window.iframe');
+    
   
     
   }

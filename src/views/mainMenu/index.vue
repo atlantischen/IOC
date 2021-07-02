@@ -52,7 +52,6 @@ export default {
       if (res.data === "IOCHOME") {
         this.isShow = true;
       } else if (res.action === "hide") {
-        // this.$routr.push('/empty')
         this.isShow = false;
       }
     });
@@ -70,8 +69,7 @@ export default {
   mounted () {
     this.$nextTick(()=>{
     window.iframe = this.$refs.iframe
-    console.log( window.iframe);
-
+   
 
     })
    

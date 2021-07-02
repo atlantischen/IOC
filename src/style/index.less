@@ -61,10 +61,10 @@
   // 滑块开关按钮
 .sliderBtn {
   position: relative;
-  min-width: 48px;
-  height: 24px;
+  min-width: .6rem /* 48/80 */;
+  height: .3rem /* 24/80 */;
   border: 1px solid #556E8F;
-  border-radius: 20px;
+  border-radius: .25rem /* 20/80 */;
   box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
   cursor: pointer;
   overflow: hidden;
@@ -75,7 +75,7 @@
     height: 100%;
     top: 50%;
     transform: translateY(-50%);
-    font-size: 14px;
+    font-size: .175rem /* 14/80 */;
   }
 
   &::before {
@@ -83,9 +83,9 @@
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    left: 20px;
-    width: 18px;
-    height: 18px;
+    left: .25rem /* 20/80 */;
+    width: .225rem /* 18/80 */;
+    height: .225rem /* 18/80 */;
     border-radius: 50%;
     background: #fff;
     box-shadow: 0px 0px 4px #000;
@@ -96,7 +96,7 @@
     background: #4396F3;
     font-family: 'Microsoft YaHei';
     &::before {
-      left: 25px;
+      left: .3125rem /* 25/80 */;
     }
 
     &::after {
@@ -104,7 +104,7 @@
       font-family: 'Microsoft YaHei';
       color: #fff;
      
-      left: 5px;
+      left: .0625rem /* 5/80 */;
     }
   }
 
@@ -114,24 +114,24 @@
     // box-shadow: inset 0px 0px 5px 5px rgba(20, 52, 73, 0.871);
 
     &::before {
-      left: 3px;
+      left: .0375rem /* 3/80 */;
     }
 
     &::after {
       content: '关';
       font-family: 'Microsoft YaHei';
       color: #fff;
-      left: 25px;
+      left: .3125rem /* 25/80 */;
     }
   }
 }
 
 .sliderBtn2 {
   position: relative;
-  width: 65px;
-  height: 24px;
+  width: .7375rem /* 59/80 */;
+  height: .25rem /* 20/80 */;
   border: 1px solid #556E8F;
-  border-radius: 20px;
+  border-radius: .25rem /* 20/80 */;
   box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
   cursor: pointer;
 
@@ -141,7 +141,7 @@
     height: 100%;
     top: 50%;
     transform: translateY(-50%);
-    font-size: 14px;
+    font-size: .175rem /* 14/80 */;
   }
 
   &::before {
@@ -149,9 +149,9 @@
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    left: 30px;
-    width: 18px;
-    height: 18px;
+    left: .375rem /* 30/80 */;
+    width: .225rem /* 18/80 */;
+    height: .225rem /* 18/80 */;
     border-radius: 50%;
     background: #fff;
     box-shadow: 0px 0px 4px #000;
@@ -162,28 +162,29 @@
     background: #4396F3;
 
     &::before {
-      left: 42px;
+      left: .525rem /* 42/80 */;
     }
 
     &::after {
       content: '生效';
       color: #fff;
-      left: 7px;
+      left: .0875rem /* 7/80 */;
     }
   }
 
   &.close {
-    background: #4396F3;
+    background: #0e2535;
+ 
     // box-shadow: inset 0px 0px 5px 5px rgba(20, 52, 73, 0.871);
 
     &::before {
-      left: 3px;
+      left: 0/* 7/80 */ /* 3/80 */;
     }
 
     &::after {
       content: '失效';
       color: #fff;
-      left: 25px;
+      left: .3125rem /* 25/80 */;
     }
   }
 }
@@ -235,6 +236,35 @@
     outline: none;
   }
 }
+// 输入框样式
+.inputNumber {
+  width: .375rem /* 30/80 */;
+  color: #4396F3;
+  background-color: transparent;
+  padding: 1px 2px;
+  border-style: none;
+  border-bottom: 1px solid #fff;
+  outline: none;
+  text-align: center;
+
+  &::placeholder {
+    color: #4396F3;
+  }
+}
+
+.inputNumber::-webkit-outer-spin-button,
+.inputNumber::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+}
+
+.inputNumber[type="number"] {
+  -moz-appearance: textfield;
+}
+.disable {
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
 @import './gl.less';
 @font-face {
   font-family: 'BYfont';
