@@ -34,7 +34,7 @@
           <DropDown :list="yearsList" name="label" @_cg="changePSYears" />
           <DropDown :list="momthsList" name="label" @_cg="changePSYears" />
         </div>
-        <div id="park_time" ref="park_time"></div>
+        <div id="park_time"  ref="park_time"></div>
       </div>
     </IOCLeft>
     <Tips :list="list"></Tips>

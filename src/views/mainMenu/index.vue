@@ -50,6 +50,7 @@ export default {
     }
     window.addEventListener("message", (event) => {
       let res = JSON.parse(event.data);
+      console.log(res,'res');
       this.$store.commit("setData", res);
       if (res.data === "IOCHOME") {
         this.isShow = true;
