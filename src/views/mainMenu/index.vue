@@ -49,13 +49,15 @@ export default {
       window.addEventListener("vuplexready", this.addMessageListener);
     }
     window.addEventListener("message", (event) => {
-      let res = JSON.parse(event.data);
-      console.log(res,'res');
-      this.$store.commit("setData", res);
-      if (res.data === "IOCHOME") {
-        this.isShow = true;
-      } else if (res.action === "hide") {
-        this.isShow = false;
+      if ((typeof event.data == 'string' && event.data.indexOf('data') != -1) || (typeof event.data == 'object' && event.data.data != undefined)) {
+        let res = JSON.parse(event.data)
+        console.log(res, 'res');
+        this.$store.commit("setData", res);
+        if (res.data === "IOCHOME") {
+          this.isShow = true;
+        } else if (res.action === "hide") {
+          this.isShow = false;
+        }
       }
     });
     if (this.getQueryString("debug")) {
@@ -64,8 +66,8 @@ export default {
       // console.log(window.debug,'debug');
       window.debug = true;
     } else {
-      // this.url = process.env.VUE_APP_UNITY;
-      this.url = "http://183.62.170.2:8110";
+      this.url = process.env.VUE_APP_UNITY;
+      // this.url = "http://183.62.170.2:8110";
     }
   },
   mounted () {
@@ -111,7 +113,6 @@ export default {
   height: 100%;
 }
 #iframe3D {
-  // position: absolute;
   width: 100%;
   height: 100%;
 }

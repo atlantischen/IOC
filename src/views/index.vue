@@ -17,18 +17,16 @@ export default {
 </script>
 
 <style lang='less' scoped>
-.index{
+.index {
   width: 100%;
   height: 100%;
-  .container{
+  .container {
     width: 100%;
     height: 100%;
-     .box{
-    width: 100%;
-    height: 100%;
+    .box {
+      width: 100%;
+      height: 100%;
+    }
   }
-  }
- 
 }
-
 </style>

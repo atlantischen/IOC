@@ -1,9 +1,9 @@
 <template>
   <!-- 警报确认 -->
   <div>
-    <button
+    <!-- <button
       class="testBtn"
-      v-if="false"
+      v-if="true"
       @click="
         () => {
           isFade = !isFade;
@@ -11,17 +11,17 @@
       "
     >
       警报确认
-    </button>
+    </button> -->
     <RightAlert :fade="isFade" class="sureAlarm">
       <div class="sureAlarm_box">
         <p class="formTitle">警报确认</p>
-        <div>
+        <div class="alarmAckForm bigBar">
           <el-form
             :model="ruleForm"
             :rules="rules"
             ref="ruleForm"
             label-width="100px"
-            class="demo-ruleForm alarmAckForm bigBar"
+            class="demo-ruleForm"
           >
             <el-form-item label="警报对象：" prop="name">
               <el-input v-model="ruleForm.name"></el-input>
@@ -31,6 +31,7 @@
             </el-form-item>
             <el-form-item label="报警原因：" prop="because">
               <el-input
+                v-show="isFade"
                 type="textarea"
                 :rows="3"
                 v-model="ruleForm.because"
@@ -41,6 +42,7 @@
             </el-form-item>
             <el-form-item label="处理结果：" prop="result">
               <el-input
+                v-show="isFade"
                 type="textarea"
                 :rows="3"
                 v-model="ruleForm.result"
@@ -114,7 +116,8 @@ export default {
     submitForm (formName) {
       this.$refs[formName].validate((valid) => {
         if (valid) {
-          this.sureAlarmFun();
+          // this.sureAlarmFun();
+          this.isFade = !this.isFade;
           this.$message.success("已确认警报！");
           this.resetForm("ruleForm");
         } else {
@@ -197,12 +200,13 @@ export default {
       .el-form-item {
         margin-bottom: 10px;
       }
-      .el-textarea__inner {
-        color: rgba(255, 255, 255, 0.7);
-        border: 1px solid rgba(67, 149, 243, 0.5);
-        background: transparent;
-        border-radius: 0;
-      }
+      // .el-textarea__inner {
+      //   width: 100%;
+      //   color: rgba(255, 255, 255, 0.7);
+      //   border: 1px solid rgba(67, 149, 243, 0.5);
+      //   background: transparent;
+      //   border-radius: 0;
+      // }
       .el-input__inner {
         color: rgba(255, 255, 255, 0.7);
         border: 1px solid rgba(67, 149, 243, 0.5);
