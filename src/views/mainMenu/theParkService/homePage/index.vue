@@ -43,41 +43,44 @@
           <div id="popularServiceEchart" ref="popularServiceEchart"></div>
         </div>
       </template>
-      <template #center>
-        <div class="serviceSystemAll" v-show="true">
-          <div class="serviceSystem_bg">
-            <ul class="serviceSystem_content">
-              <div class="center_text p_xy_c x_c">
-                {{ serviceSystemDatas.name }}
-              </div>
-              <li
-                class="serviceSystem_box x_c"
-                v-for="(item, i) in serviceSystemDatas.list"
-                :class="['_box_' + i, { actived: actvedNum == i + 1 }]"
-                :key="i"
-                @mouseover="hoverItem('hover', i + 1)"
-                @mouseout="hoverItem('', i + 1)"
+      <template #center> </template>
+      <div
+        class="serviceSystemAll"
+        v-show="showSystem"
+        :class="{ toShow: showSystem }"
+      >
+        <div class="serviceSystem_bg">
+          <ul class="serviceSystem_content">
+            <div class="center_text p_xy_c x_c">
+              {{ serviceSystemDatas.name }}
+            </div>
+            <li
+              class="serviceSystem_box x_c"
+              v-for="(item, i) in serviceSystemDatas.list"
+              :class="['_box_' + i, { actived: actvedNum == i + 1 }]"
+              :key="i"
+              @mouseover="hoverItem('hover', i + 1)"
+              @mouseout="hoverItem('', i + 1)"
+            >
+              <img class="ss_img" :src="item.src" alt="" />
+              <span class="ss_name">{{ item.name }}</span>
+              <ul
+                class="min_box"
+                v-show="actvedNum == i + 1"
+                :class="
+                  i < serviceSystemDatas.list.length / 2
+                    ? 'min_box_l'
+                    : 'min_box_r'
+                "
               >
-                <img class="ss_img" :src="item.src" alt="" />
-                <span class="ss_name">{{ item.name }}</span>
-                <ul
-                  class="min_box"
-                  v-show="actvedNum == i + 1"
-                  :class="
-                    i < serviceSystemDatas.list.length / 2
-                      ? 'min_box_l'
-                      : 'min_box_r'
-                  "
-                >
-                  <li v-for="(_t, ii) in item.childs" :key="ii">
-                    {{ _t.name }}
-                  </li>
-                </ul>
-              </li>
-            </ul>
-          </div>
+                <li v-for="(_t, ii) in item.childs" :key="ii">
+                  {{ _t.name }}
+                </li>
+              </ul>
+            </li>
+          </ul>
         </div>
-      </template>
+      </div>
       <template #right>
         <div class="totalServicesAll">
           <div class="tittle">服务办理总数</div>
@@ -105,6 +108,7 @@ export default {
   data () {
     return {
       ssTimer: null,
+      showSystem: false,
       actvedNum: 8,
       serviceSystemDatas: {
         name: "综合服务体系",
@@ -283,6 +287,9 @@ export default {
     };
   },
   components: {},
+  created () {
+    this.showSystem = true
+  },
   mounted () {
     this.setIntervalFun();
     this.popularServiceFun();
@@ -860,9 +867,10 @@ export default {
   }
 }
 .serviceSystemAll {
-  position: absolute;
-  top: 0.375rem /* 30/80 */;
+  position: fixed;
+  // top: 0.375rem /* 30/80 */;
   left: 50%;
+  bottom: 2.75rem /* 220/80 */;
   transform: translate(-50%, 0%);
   -webkit-transform: translate(-50%, 0%);
   .serviceSystem_bg {
@@ -889,7 +897,7 @@ export default {
           width: 5.6875rem /* 455/80 */;
           height: 5.6875rem /* 455/80 */;
           background: url("~@/assets/img/datas/zh_line.png") bottom no-repeat;
-          background-size: 65% ;
+          background-size: 65%;
         }
       }
       .serviceSystem_box {

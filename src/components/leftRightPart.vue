@@ -18,6 +18,7 @@
     >
       <slot name="right"></slot>
     </div>
+    <slot></slot>
   </div>
 </template>
 
