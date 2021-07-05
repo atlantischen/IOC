@@ -889,6 +889,7 @@ export default {
           width: 5.6875rem /* 455/80 */;
           height: 5.6875rem /* 455/80 */;
           background: url("~@/assets/img/datas/zh_line.png") bottom no-repeat;
+          background-size: 65% ;
         }
       }
       .serviceSystem_box {
