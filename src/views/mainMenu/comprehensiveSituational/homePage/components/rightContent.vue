@@ -4,7 +4,6 @@
     <LeftRight>
       <template #left>
         <button @click="back">back</button>
-        <button @click="changeFile">back2</button>
         <div class="theSearchPath y_c">
           <el-upload
             class="upload-demo uploadPhoto"
@@ -15,27 +14,19 @@
             :on-change="changeFile"
             multiple
           >
-            <!-- <i class="el-icon-upload"></i> -->
-            <!-- <div class="el-upload__text"> -->
-            <img class="upload_av" src="~@/assets/img/datas/sc_av.png" />
-            <img class="upload_up" src="~@/assets/img/datas/sc_up.png" />
-            <!-- </div> -->
-            <img :src="imageUrl" class="avatar" />
+            <img
+              v-if="!imageUrl"
+              class="upload_av"
+              src="~@/assets/img/datas/sc_av.png"
+            />
+            <img
+              v-if="!imageUrl"
+              class="upload_up"
+              src="~@/assets/img/datas/sc_up.png"
+            />
+            <img v-else :src="imageUrl" class="avatar" />
           </el-upload>
-          <!-- <el-upload
-            class="uploadPhoto y_c upload-demo"
-            :show-file-list="false"
-            :auto-upload="false"
-            :on-change="changeFile"
-          >
-            <img v-if="imageUrl" :src="imageUrl" class="avatar" />
-            <div v-else>
-              <i class="el-icon-plus avatar-uploader-icon"></i>
-              <img class="upload_av" src="~@/assets/img/datas/sc_av.png" />
-              <img class="upload_up" src="~@/assets/img/datas/sc_up.png" />
-            </div>
-          </el-upload> -->
-          <button>搜寻轨迹</button>
+          <button :class="{ m_disabled: !imageUrl }">搜寻轨迹</button>
         </div>
         <SearchBox
           class="SearchBoxClass"
@@ -151,8 +142,7 @@ export default {
       currentPage: 1,
       total: 1,
       isFade: false,
-      imageUrl: '',
-      imageUrl2: require('@/assets/img/datas/sc_av.png'),
+      imageUrl: null,
       inputV: "",
       isShowList: false,
       slist: [],
@@ -284,13 +274,12 @@ export default {
   methods: {
     // 上传头像
     changeFile (file, fileList) {
+      var _that = this
       if (!file || !window.FileReader) return
       var reader = new FileReader()
       reader.readAsDataURL(file.raw)
       reader.onload = function (e) {
-        // this.imageUrl = reader.result
-        this.imageUrl = this.imageUrl2
-        console.log(this.imageUrl)
+        _that.imageUrl = reader.result
       }
     },
     // 
