@@ -2,10 +2,6 @@
   <!-- 产业招商home -->
   <LeftRight>
     <template #left>
-      <div class="rentalAndSaleAll">
-        <div class="tittle">房屋租售情况</div>
-        <div id="rentalAndSaleEchart_" ref="rentalAndSaleEchart_"></div>
-      </div>
       <Allcom :_Info="leftInfo" />
     </template>
     <template #center>
@@ -26,9 +22,24 @@ export default {
       // 左侧组件info
       leftInfo: [
         {
+          title: '房屋租售情况',
+          type: 'pieChart2',
+          datas: {
+            eHeight: null,
+            padding: null,
+            optionName: ["已售", "已租", "开放"],
+            datas: [63.2, 21.5, 15.3],
+            keyD: {
+              value: 2483,
+              name: '房源合计(套)'
+            }
+          }
+        },
+        {
           title: '优惠政策',
           type: 'favorablePolicy',
           datas: {
+            padding: null,
             favorablePolicyDatas: [
               {
                 src: require("@/assets/img/datas/zc_lh.png"),
@@ -49,7 +60,7 @@ export default {
                 src: require("@/assets/img/datas/zc_rcfc.png"),
                 title: "人才扶持政策",
                 content: "行业年会长期落户我区的，对主办方单位分别给予...",
-              },
+              }
             ],
           }
         },
@@ -57,6 +68,7 @@ export default {
           title: '前沿动态',
           type: 'currentTrends',
           datas: {
+            padding: null,
             currentTrendsDatas: [
               {
                 title: "国家产业",
@@ -79,8 +91,12 @@ export default {
           title: '聚焦产业',
           type: 'focusIndustry',
           datas: {
-            subtext: '企业合计(家)',
-            total: 2483,
+            eHeight: null,
+            padding: null,
+            keyD: {
+              name: '企业合计(家)',
+              value: 2483,
+            },
             optionName: [
               "商家",
               "信息技术",
@@ -239,107 +255,12 @@ export default {
   },
   components: {},
   mounted () {
-    this.rentalAndSaleFun();
   },
   methods: {
-    rentalAndSaleFun () {
-      var optionName = ["已售", "已租", "开放"],
-        datas = [63.2, 21.5, 15.3];
-      var option = {
-        title: {
-          show: true,
-          text: 2483,
-          link: "",
-          target: null,
-          subtext: "房源合计(套)",
-          sublink: "",
-          subtarget: null,
-          left: "22%",
-          bottom: "32%",
-          textAlign: "center",
-          // backgroundColor: 'rgba(0,0,0,0)',
-          // borderColor: '#ccc',
-          // borderWidth: 0,
-          // padding: 5,
-          itemGap: 6,
-          textStyle: {
-            fontFamily: "BYfont",
-            fontSize: 24,
-            color: "#fff",
-            fontWeight: 550,
-          },
-          subtextStyle: {
-            fontSize: 12,
-            color: "rgb(255,255,255,.7)",
-          },
-        },
-        legend: {
-          selectedMode: false,
-          show: true,
-          orient: "vertical", // 'horizontal'
-          left: "50%",
-          y: "center",
-          data: optionName,
-          formatter: function (name) {
-            var index = 0;
-            optionName.forEach(function (value, i) {
-              if (value == name) index = i
-            });
-            return "{a|" + name + "}" + datas[index] + "%";
-          },
-          textStyle: {
-            color: "#fff",
-            fontSize: 12,
-            padding: [0, 15, 0, 2],
-            rich: {
-              a: {
-                width: 40,
-                color: "rgb(255,255,255,.7)",
-              },
-            },
-          },
-          icon: "circle",
-          itemWidth: 6,
-          itemHeight: 6,
-          itemGap: 18,
-        },
-        color: ["#ffdd8d", "#4396f3", "#1e3957"],
-        series: [
-          {
-            name: "",
-            type: "pie",
-            radius: ["62%", "80%"],
-            center: ["23%", "50%"],
-            avoidLabelOverlap: false,
-            label: {
-              show: false,
-            },
-            labelLine: {
-              show: false,
-            },
-            data: [],
-          },
-        ],
-      };
-      for (var i = 0; i < optionName.length; i++) {
-        option.series[0].data[i] = {
-          value: datas[i],
-          name: optionName[i],
-        };
-      }
-      this.$redomEchart(this.$refs["rentalAndSaleEchart_"], option);
-    },
   },
 };
 </script>
 
 <style lang="less" scoped>
 @import "~@/style/gl.less";
-.rentalAndSaleAll {
-  #rentalAndSaleEchart_,
-  [id^="rentalAndSaleEchart_"] {
-    width: 100%;
-    height: 2rem /* 160/80 */;
-  }
-}
 </style>

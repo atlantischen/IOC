@@ -109,7 +109,7 @@ export default {
   },
   components: {},
   mounted () {
-    console.log(this.$store.state)
+    // console.log(this.$store.state)
     window.addEventListener("message", this.sureAlarmFun, true);
   },
   methods: {

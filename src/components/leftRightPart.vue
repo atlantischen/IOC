@@ -69,6 +69,9 @@ export default {
     left: 0.575rem /* 46/80 */;
   }
   .y_right {
+    .allcom {
+      float: right;
+    }
     right: 0.575rem /* 46/80 */;
   }
   .c_center {

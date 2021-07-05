@@ -1,14 +1,16 @@
 <template>
   <div class="currentTrendsAll">
     <div class="tittle">{{ title }}</div>
-    <ul class="currentTrends_ul">
+    <ul class="currentTrends_ul" :style="$paddingFun(datas.padding)">
       <li
         class="currentTrends_li"
         v-for="(t, i) in datas.currentTrendsDatas"
         :key="i"
       >
         <span class="LineBeyond x_c">{{ t.title }}</span>
-        <span class="Multi-lineBeyond">{{ t.content }}</span>
+        <span>
+          <p class="Multi-lineBeyond">{{ t.content }}</p>
+        </span>
       </li>
     </ul>
   </div>
@@ -45,7 +47,7 @@ export default {
   .currentTrends_ul {
     padding: 0 15px;
   }
-  li {
+  .currentTrends_li {
     display: flex;
     margin-bottom: 10px;
     span {

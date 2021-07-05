@@ -1,10 +1,11 @@
 <template>
-  <div class="FocusIndustryAll">
+  <!-- 饼图（圆环） -->
+  <div class="rentalAndSaleAll">
     <div class="tittle">{{ title }}</div>
-    <div class="focusIndustry" :style="$paddingFun(datas.padding)">
+    <div class="rentalAndSale" :style="$paddingFun(datas.padding)">
       <div
-        :id="'focusIndustryEchart_' + ids"
-        :ref="'focusIndustryEchart_' + ids"
+        :id="'rentalAndSaleEchart_' + ids"
+        :ref="'rentalAndSaleEchart_' + ids"
         :style="$eHeightFun(datas.eHeight)"
       ></div>
     </div>
@@ -12,26 +13,27 @@
 </template>
 
 <script>
+import * as echarts from "echarts";
 export default {
-  name: "theParkIsAll",
+  name: "rentalAndSale",
   props: {
     _data: {
-      type: Object
-    }
+      type: Object,
+    },
   },
   data () {
     return {
       ...this._data,
       ids: this.$uuid()
-    }
+    };
   },
+  created () { },
   mounted () {
-    this.FocusIndustryFun(this.datas)
+    this.rentalAndSaleFun(this.datas);
   },
   methods: {
-    FocusIndustryFun (val) {
-      var j = 0;
-      const { optionName, datas, keyD } = val
+    rentalAndSaleFun (val) {
+      let { optionName, datas, keyD } = val
       var option = {
         title: {
           show: true,
@@ -41,8 +43,8 @@ export default {
           subtext: keyD.name,
           sublink: "",
           subtarget: null,
-          left: "48%",
-          bottom: "38%",
+          left: "22%",
+          bottom: "32%",
           textAlign: "center",
           // backgroundColor: 'rgba(0,0,0,0)',
           // borderColor: '#ccc',
@@ -62,13 +64,17 @@ export default {
         },
         legend: {
           selectedMode: false,
-          show: false,
+          show: true,
           orient: "vertical", // 'horizontal'
           left: "50%",
           y: "center",
           data: optionName,
           formatter: function (name) {
-            return "{a|" + name + "}" + datas[j++] + "%";
+            var index = 0;
+            optionName.forEach(function (value, i) {
+              if (value == name) index = i
+            });
+            return "{a|" + name + "}" + datas[index] + "%";
           },
           textStyle: {
             color: "#fff",
@@ -86,52 +92,19 @@ export default {
           itemHeight: 6,
           itemGap: 18,
         },
-        color: [
-          "#4396f3",
-          "#97c8ff",
-          "#456af3",
-          "#00ffff",
-          "#1e3957",
-          "#c7d392",
-          "#9a866a",
-          "#c9a555",
-          "#fff",
-        ],
+        color: ["#ffdd8d", "#4396f3", "#1e3957"],
         series: [
           {
             name: "",
             type: "pie",
-            radius: ["50%", "65%"],
-            center: ["50%", "50%"],
-            avoidLabelOverlap: true,
-            maxAngle: 145,
+            radius: ["62%", "80%"],
+            center: ["23%", "50%"],
+            avoidLabelOverlap: false,
             label: {
-              // minMargin: 10,
-              // alignTo: 'edge',
-              // edgeDistance: 10,
-              // lineHeight: 10,
-              formatter: "{a|{c}%}\n{b|{b}}",
-              padding: [0, -45, 0, -45],
-              rich: {
-                a: {
-                  width: 100,
-                  fontSize: 12,
-                  padding: [2, 0],
-                  color: "rgb(255,255,255,.7)",
-                },
-                b: {
-                  width: 100,
-                  fontSize: 12,
-                  lineHeight: 14,
-                  // padding: [1, 0],
-                  color: "rgb(255,255,255,.7)",
-                },
-              },
+              show: false,
             },
             labelLine: {
-              length: 20,
-              length2: 45,
-              // maxSurfaceAngle: 80
+              show: false,
             },
             data: [],
           },
@@ -143,18 +116,23 @@ export default {
           name: optionName[i],
         };
       }
-      this.$redomEchart(this.$refs["focusIndustryEchart_" + this.ids], option);
-    }
-  }
+      this.$redomEchart(this.$refs["rentalAndSaleEchart_" + this.ids], option);
+    },
+  },
 };
 </script>
 
 <style lang="less" scoped>
 @import "~@/style/gl.less";
-// 聚焦产业
-#focusIndustryEchart_,
-[id^="focusIndustryEchart_"] {
-  width: 100%;
-  height: 2.375rem /* 190/80 */;
+//
+.rentalAndSaleAll {
+  .rentalAndSale {
+    width: 100%;
+  }
+  #rentalAndSaleEchart_,
+  [id^="rentalAndSaleEchart_"] {
+    width: 100%;
+    height: 2rem /* 160/80 */;
+  }
 }
 </style>

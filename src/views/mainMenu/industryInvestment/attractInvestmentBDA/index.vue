@@ -25,7 +25,7 @@ export default {
           title: '招商类型',
           type: 'focusIndustry',
           datas: {
-            eheight: 280,
+            eHeight: 280,
             subtext: '园区租用率',
             total: '87%',
             optionName: [

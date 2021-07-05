@@ -19,6 +19,7 @@ import SingleBarChart from './singleBarChart.vue'
 import UpBarChart from './upBarChart.vue'
 import HorizontalBarChart from './horizontalBarChart.vue'
 import PieChart from './pieChart.vue'
+import PieChart2 from './pieChart2.vue'
 
 const configurable = {
   TheParkIs, // 园区情况
@@ -41,6 +42,7 @@ const configurable = {
   SingleBarChart, // 单条柱状图
   UpBarChart, // 上下柱状图（资产设备统计）
   HorizontalBarChart, // 条形图（今日会议室概况）
-  PieChart, // 饼图（IT资产使用概况）
+  PieChart, // 饼图实心（IT资产使用概况）
+  PieChart2, // 饼图（圆环）（产业空间）
 }
 export default configurable

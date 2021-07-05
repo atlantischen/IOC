@@ -2,7 +2,6 @@
   <div class="theParkIsAll">
     <div class="tittle">{{ title }}</div>
     <div class="parkCase">
-      <div ref="dddddd"></div>
       <div class="parkCaseEchartAll">
         <div
           v-for="(t, i) in 2"
@@ -45,7 +44,6 @@ export default {
     };
   },
   mounted () {
-    console.log(this.$refs['dddddd'])
     this.parkCaseFun(this.datas.datas1);
     this.parkCaseFun2(this.datas.datas2);
   },
