@@ -61,7 +61,6 @@ const routes = [{
     component: () => import('@/views/404.vue')
   }
 ];
-console.log(routes)
 const router = createRouter({
   // hash
   // history: createWebHashHistory(),

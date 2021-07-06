@@ -45,7 +45,6 @@ export default {
     };
   },
   mounted () {
-    console.log(this.$refs['dddddd'])
     this.parkCaseFun(this.datas.datas1);
     this.parkCaseFun2(this.datas.datas2);
   },

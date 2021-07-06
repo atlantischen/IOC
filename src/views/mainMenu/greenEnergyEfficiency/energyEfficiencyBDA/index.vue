@@ -112,7 +112,7 @@ export default {
         },
         {
           name: "格瑞能源",
-          value: <span class="font_text">40</span>,
+          value: 40,
         },
         {
           name: "思码软件",

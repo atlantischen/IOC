@@ -28,8 +28,8 @@
 import AlarmAck from "@/views/mainMenu/comprehensiveSituational/homePage/components/alarmAck.vue";
 import RightContent from "./components/rightContent.vue";
 import * as echarts from "echarts";
-import { aaa } from "@/api/mockApi";
-import axios from "axios";
+// import { aaa } from "@/api/mockApi";
+// import axios from "axios";
 export default {
   components: { RightContent, AlarmAck },
   name: "zhts",

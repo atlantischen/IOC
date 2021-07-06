@@ -197,8 +197,8 @@ export default {
           orient: "horizontal",
           bottom: "0",
           icon: "circle",
-          itemWidth: 6,
-          itemHeight: 6,
+          itemWidth: 10,
+          itemHeight: 10,
           textStyle: {
             //图例文字的样式
             color: "#fff",
