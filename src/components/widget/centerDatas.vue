@@ -1,7 +1,8 @@
 <template>
   <ul class="centerData_c x_c">
     <li v-for="(item, i) in list" :key="i" class="y_c">
-      <span>{{ item.val }}</span>
+      <!-- <span>{{ item.val }}</span> -->
+      <span><NumCounter :value="item.val"></NumCounter></span>
       <span>{{ item.name }}</span>
     </li>
   </ul>

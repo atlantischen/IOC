@@ -17,18 +17,20 @@ export default {
       type: Object,
     },
   },
-  data() {
+  data () {
     return {
       ...this._data,
       ids: this.$uuid(),
     };
   },
-  created() {},
-  mounted() {
+  created () { },
+  mounted () {
     this.pieChartFun(this.datas);
   },
   methods: {
-    pieChartFun(val) {
+    pieChartFun (val) {
+      var dom = this.$refs["pieChartEchart_" + this.ids]
+      var myChart = echarts.init(dom)
       let { optionName, datas, data, nums } = val;
       var option = {
         title: [
@@ -72,9 +74,9 @@ export default {
           left: "50%",
           top: "40%",
           data: optionName,
-          formatter: function(name) {
+          formatter: function (name) {
             var index = 0;
-            optionName.forEach(function(value, i) {
+            optionName.forEach(function (value, i) {
               if (value == name) index = i;
             });
             return (
@@ -116,6 +118,11 @@ export default {
             type: "pie",
             animation: false,
             hoverAnimation: false,
+            dispatchAction: {
+              type: 'highlight',
+              // seriesIndex: 1,
+              // dataIndex: 0
+            },
             radius: ["0", "9%"],
             center: ["25%", "50%"],
             itemStyle: {
@@ -126,6 +133,11 @@ export default {
             avoidLabelOverlap: false,
             label: {
               show: false,
+            },
+            emphasis: {
+              itemStyle: {
+                color: '#fff'
+              }
             },
             labelLine: {
               show: false,
@@ -148,6 +160,11 @@ export default {
             label: {
               show: false,
             },
+            emphasis: {
+              itemStyle: {
+                color: '#fff'
+              }
+            },
             labelLine: {
               show: false,
             },
@@ -163,12 +180,12 @@ export default {
             itemStyle: {
               normal: {
                 // borderWidth: 2,
-                // borderColor: 'rgba(0, 0, 0, 0)',
+                borderColor: 'rgba(0, 0, 0, 0)',
                 // opacity: 0.75,
-                // shadowBlur: 20,
-                // shadowOffsetX: 0,
-                // shadowOffsetY: 7,
-                // shadowColor: "rgba(0, 0, 0, 0.5)",
+                shadowBlur: 10,
+                shadowOffsetX: 0,
+                shadowOffsetY: 1,
+                shadowColor: "rgba(0, 0, 0, 0.1)",
               },
             },
             animationType: "scale",
@@ -187,10 +204,15 @@ export default {
         option.series[2].data[i] = {
           value: datas[i],
           name: optionName[i],
-          // selected: i == 0,
         };
       }
-      this.$redomEchart(this.$refs["pieChartEchart_" + this.ids], option);
+
+      this.$redomEchart(dom, option);
+      myChart.dispatchAction({
+        type: 'highlight',
+        seriesIndex: 2,
+        dataIndex: 0
+      });
     },
   },
 };

@@ -2,7 +2,6 @@
   <div class="theParkIsAll">
     <div class="tittle">{{ title }}</div>
     <div class="parkCase">
-      <div ref="dddddd"></div>
       <div class="parkCaseEchartAll">
         <div
           v-for="(t, i) in 2"

@@ -6,7 +6,7 @@
       <div
         :id="'singleBarChartEchart_' + ids"
         :ref="'singleBarChartEchart_' + ids"
-        :style="'height:' + datas.eheight / 80 + 'rem;'"
+        :style="'height:' + datas.eHeight / 80 + 'rem;'"
       ></div>
     </div>
   </div>
@@ -21,18 +21,18 @@ export default {
       type: Object,
     },
   },
-  data() {
+  data () {
     return {
       ...this._data,
       ids: this.$uuid(),
     };
   },
-  created() {},
-  mounted() {
+  created () { },
+  mounted () {
     this.singleBarChartFun(this.datas);
   },
   methods: {
-    singleBarChartFun(val) {
+    singleBarChartFun (val) {
       let { xAxisD, datas, units } = val;
       var names = [];
       var option = {

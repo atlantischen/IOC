@@ -18,7 +18,6 @@ const routes = [{
   //   name: 'empty',
   //   // redirect: "/debug/comprehensiveSituational/homePage",
   //   component: () => import('@/views/mainMenu/empty.vue'),
-
   // },
   {
     // path: "",
@@ -61,6 +60,7 @@ const routes = [{
     component: () => import('@/views/404.vue')
   }
 ];
+// console.log(routes)
 const router = createRouter({
   // hash
   // history: createWebHashHistory(),

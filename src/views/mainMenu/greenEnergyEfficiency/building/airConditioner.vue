@@ -42,7 +42,6 @@
         </ul>
       </div>
       <div id="ElectricityStatistics" ref="ElectricityStatistics"></div>
-
     </div>
   </IOCLeft>
   <IOCRight>
@@ -63,13 +62,21 @@
         </div>
         <div class="airPanel_ct" :class="_it.states == 1 ? '' : 'disable'">
           <div class="childBox temperature" v-show="_it.airPanelV == 1">
-            <p>当前温度：<i :style="{color:_it.tem.currentTem>_it.tem.targetTem?'red':'#fff'}"
-                      v-text="_it.tem.currentTem"></i> ℃</p>
+            <p>
+              当前温度：<i
+                :style="{
+                  color:
+                    _it.tem.currentTem > _it.tem.targetTem ? 'red' : '#fff',
+                }"
+                v-text="_it.tem.currentTem"
+              ></i>
+              ℃
+            </p>
             <div class="showTemper">
               <div
-              class="EnergyEfficiency"
+                class="EnergyEfficiency"
                 :id="'EnergyEfficiency' + i"
-                :ref=" 'EnergyEfficiency' + i"
+                :ref="'EnergyEfficiency' + i"
               ></div>
               <div class="setTemper">
                 <a @click="changeTemper('up', i)"
@@ -157,7 +164,7 @@
 import * as echarts from "echarts";
 
 export default {
-  data() {
+  data () {
     return {
       activeIndex: 1,
       airPanelList: [
@@ -615,7 +622,7 @@ export default {
     };
   },
   methods: {
-    changeBtn(val) {
+    changeBtn (val) {
       console.log(val);
       this.activeIndex = val;
       if (val == 1) {
@@ -657,7 +664,7 @@ export default {
       }
     },
 
-    ElectricityStatistics(data, data2, yData) {
+    ElectricityStatistics (data, data2, yData) {
       let { name, splitNumber, min, max, interval } = yData;
       // var dom = "ElectricityStatistics";
       var dom = this.$refs.ElectricityStatistics;
@@ -805,152 +812,152 @@ export default {
       this.$redomEchart(dom, option);
     },
     // 改变目标温度
-    changeTemper(name, i) {
-      if(name==='up'){
-      if(this.airPanelList[i].tem.targetTem >=29) return false
-      console.log(this.airPanelList[i].tem.targetTem);
-      this.EnergyEfficiency(
-        this.$refs["EnergyEfficiency" + i],
-        this.airPanelList[i].tem.targetTem+=1
-      );
-      }else if(name ==='down'){
-        // this.airPanelList[i].tem.targetTem--
-        if(this.airPanelList[i].tem.targetTem <=0) return false
+    changeTemper (name, i) {
+      if (name === 'up') {
+        if (this.airPanelList[i].tem.targetTem >= 29) return false
+        console.log(this.airPanelList[i].tem.targetTem);
         this.EnergyEfficiency(
-        this.$refs["EnergyEfficiency" + i],
-        this.airPanelList[i].tem.targetTem-=1
-      );
+          this.$refs["EnergyEfficiency" + i],
+          this.airPanelList[i].tem.targetTem += 1
+        );
+      } else if (name === 'down') {
+        // this.airPanelList[i].tem.targetTem--
+        if (this.airPanelList[i].tem.targetTem <= 0) return false
+        this.EnergyEfficiency(
+          this.$refs["EnergyEfficiency" + i],
+          this.airPanelList[i].tem.targetTem -= 1
+        );
 
       }
     },
     // 改变模式
-    changeMode(val, i) {
+    changeMode (val, i) {
       this.airPanelList[i].mode.value = val;
     },
     // 改变风速
-    changeSpeeds(val, i) {
+    changeSpeeds (val, i) {
       this.airPanelList[i].speed.value = val;
     },
-    changeAirPanel(val, i) {
+    changeAirPanel (val, i) {
       this.airPanelList[i].airPanelV = val;
     },
-    closeOpen(val, i) {
+    closeOpen (val, i) {
       this.airPanelList[i].states = val == 1 ? 0 : 1;
     },
 
-    EnergyEfficiency(val, data) {
+    EnergyEfficiency (val, data) {
       var dom = val;
-      console.log(data,'data');
-      var  option = {
-              series: [
+      console.log(data, 'data');
+      var option = {
+        series: [
+          {
+            type: "gauge",
+            radius: "140%",
+            center: ["50%", "100%"],
+            startAngle: 180,
+            endAngle: 0,
+            min: 0,
+            max: 300,
+            splitNumber: 4,
+            itemStyle: {
+              color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
                 {
-                  type: "gauge",
-                  radius: "140%",
-                  center: ["50%", "100%"],
-                  startAngle: 180,
-                  endAngle: 0,
-                  min: 0,
-                  max: 300,
-                  splitNumber: 4,
-                  itemStyle: {
-                    color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
-                      {
-                        offset: 0,
-                        color: "#00FFFF",
-                      },
-                      {
-                        offset: 1,
-                        color: "red",
-                      },
-                    ]),
-                  },
-                  progress: {
-                    show: true,
-                    width: 6,
-                  },
-                  pointer: {
-                    show: false,
-                  },
-                  axisLine: {
-                    lineStyle: {
-                      width: 6,
-                      color:[[1, '#E6EBF8'],[data/30, '#4396f3']],
-                      shadowColor: "rgba(0, 0, 0, 0.4)",
-                      shadowBlur: 8,
-                      shadowOffsetX: 1,
-                      shadowOffsetY: 2,
-            
-                    },
-                  },
-                  axisTick: {
-                    show: false,
-                    distance: -45,
-                    splitNumber: 5,
-                    lineStyle: {
-                      width: 2,
-                      color: "#999",
-                    },
-                  },
-                  splitLine: {
-                    show: false,
-                    distance: 2,
-                    length: 8,
-                    lineStyle: {
-                      width: 1,
-                      color: "#fff",
-                      formatter: function (value) {
-                        return value;
-                      },
-                    },
-                  },
-                  axisLabel: {
-                    show: false,
-                    distance: 13,
-                    color: "#fff",
-                    fontSize: 12,
-                    formatter: function (value) {
-                      if (value != 2 && value != 6) return value + ".0";
-                    },
-                  },
-                  anchor: {
-                    show: false,
-                  },
-                  title: {
-                    offsetCenter: [0, "-10%"],
-                    fontSize: 12,
-                    color: "#fff",
-                  },
-                  detail: {
-                    valueAnimation: true,
-                    width: "60%",
-                    lineHeight: 40,
-                    height: "15%",
-                    borderRadius: 8,
-                    offsetCenter: [0, "-50%"],
-                    fontSize: 20,
-                    fontWeight: "500",
-                    formatter: "{value} ",
-                    color: "#fff",
-                    formatter: function (value) {
-                      return value;
-                    },
-                  },
-                  data: [
-                    {
-                      value: data,
-
-                      name: "目标温度",
-                    },
-                  ],
+                  offset: 0,
+                  color: "#00FFFF",
                 },
-              ],
-            };
-            
+                {
+                  offset: 1,
+                  color: "red",
+                },
+              ]),
+            },
+            progress: {
+              show: true,
+              width: 6,
+            },
+            pointer: {
+              show: false,
+            },
+            axisLine: {
+              lineStyle: {
+                width: 6,
+                color: [[1, '#E6EBF8'], [data / 30, '#4396f3']],
+                shadowColor: "rgba(0, 0, 0, 0.4)",
+                shadowBlur: 8,
+                shadowOffsetX: 1,
+                shadowOffsetY: 2,
+
+              },
+            },
+            axisTick: {
+              show: false,
+              distance: -45,
+              splitNumber: 5,
+              lineStyle: {
+                width: 2,
+                color: "#999",
+              },
+            },
+            splitLine: {
+              show: false,
+              distance: 2,
+              length: 8,
+              lineStyle: {
+                width: 1,
+                color: "#fff",
+                formatter: function (value) {
+                  return value;
+                },
+              },
+            },
+            axisLabel: {
+              show: false,
+              distance: 13,
+              color: "#fff",
+              fontSize: 12,
+              formatter: function (value) {
+                if (value != 2 && value != 6) return value + ".0";
+              },
+            },
+            anchor: {
+              show: false,
+            },
+            title: {
+              offsetCenter: [0, "-10%"],
+              fontSize: 12,
+              color: "#fff",
+            },
+            detail: {
+              valueAnimation: true,
+              width: "60%",
+              lineHeight: 40,
+              height: "15%",
+              borderRadius: 8,
+              offsetCenter: [0, "-50%"],
+              fontSize: 20,
+              fontWeight: "500",
+              formatter: "{value} ",
+              color: "#fff",
+              formatter: function (value) {
+                return value;
+              },
+            },
+            data: [
+              {
+                value: data,
+
+                name: "目标温度",
+              },
+            ],
+          },
+        ],
+      };
+
 
       this.$redomEchart(dom, option);
     },
   },
-  mounted() {
+  mounted () {
     this.ElectricityStatistics(
       ["1", "4", "7", "11", "14", "17", "21", "24", "27", "31"],
       [200, 2300, 2300, 4300, 2000, 1001, 400, 2050, 2030, 2300],
@@ -1046,7 +1053,6 @@ export default {
   }
 }
 .KWH {
- 
 }
 // 空调面板
 .airPanel {
@@ -1059,10 +1065,10 @@ export default {
   // margin: 10px 0 0 10px;
   li {
     position: relative;
-    width:2.0625rem /* 165/80 */ /* 170/80 *//* 156/80 */ /* 160/80 *//* 170/80 */;
+    width: 2.0625rem /* 165/80 */ ;
     background: rgba(255, 255, 255, 0.1);
     border-radius: 6px;
-    margin: 0 .125rem /* 10/80 */ .15rem /* 12/80 */ 0;
+    margin: 0 0.125rem /* 10/80 */ 0.15rem /* 12/80 */ 0;
     &:nth-child(2n) {
       margin-right: 0px;
     }
@@ -1072,13 +1078,13 @@ export default {
       align-items: center;
       justify-content: space-between;
       width: 100%;
-      height: .45rem /* 36/80 */;
-      padding: 0 .0625rem /* 5/80 */;
-      font-size: .15rem /* 12/80 */;
+      height: 0.45rem /* 36/80 */;
+      padding: 0 0.0625rem /* 5/80 */;
+      font-size: 0.15rem /* 12/80 */;
 
       .airPanel_tilte {
         color: #fff;
-        font-size: .175rem /* 14/80 */;
+        font-size: 0.175rem /* 14/80 */;
         font-weight: bold;
         width: 1.375rem /* 110/80 */;
       }
@@ -1094,7 +1100,7 @@ export default {
         width: 100%;
         height: 100%;
         color: #fff;
-        font-size: .15rem /* 12/80 */;
+        font-size: 0.15rem /* 12/80 */;
       }
 
       .temperature {
@@ -1102,22 +1108,22 @@ export default {
           width: 100%;
           height: 100%;
           display: flex;
-          .EnergyEfficiency{
+          .EnergyEfficiency {
             width: 1.875rem /* 150/80 */;
-            height:1rem /* 80/80 */ /* 50/80 */;
+            height: 1rem /* 80/80 */ /* 50/80 */;
           }
           .setTemper {
-            width: .375rem /* 30/80 */;
+            width: 0.375rem /* 30/80 */;
             height: 100%;
             display: flex;
             flex-direction: column;
             justify-content: space-around;
 
             a {
-              width: .3125rem /* 25/80 */;
-              height: .3125rem /* 25/80 */;
-              line-height: .3125rem /* 25/80 */;
-              border-radius: .05rem /* 4/80 */;
+              width: 0.3125rem /* 25/80 */;
+              height: 0.3125rem /* 25/80 */;
+              line-height: 0.3125rem /* 25/80 */;
+              border-radius: 0.05rem /* 4/80 */;
               text-align: center;
               background: rgba(255, 255, 255, 0.2);
             }
@@ -1129,28 +1135,28 @@ export default {
         display: flex;
 
         a {
-          width: .5875rem /* 47/80 */;
-          min-height: .75rem /* 60/80 */;
+          width: 0.5875rem /* 47/80 */;
+          min-height: 0.75rem /* 60/80 */;
           background: rgba(255, 255, 255, 0.2);
-          border-radius: .075rem /* 6/80 */;
-          padding: .125rem /* 10/80 */ 0;
+          border-radius: 0.075rem /* 6/80 */;
+          padding: 0.125rem /* 10/80 */ 0;
           text-align: center;
-          margin: .125rem /* 10/80 */ 0;
+          margin: 0.125rem /* 10/80 */ 0;
 
           &:nth-child(2) {
-            margin: .125rem /* 10/80 */ .1rem /* 8/80 */;
+            margin: 0.125rem /* 10/80 */ 0.1rem /* 8/80 */;
           }
 
           i {
             display: block;
 
             &:nth-child(1) {
-              font-size: .375rem /* 30/80 */;
-              padding-bottom: .1rem /* 8/80 */;
+              font-size: 0.375rem /* 30/80 */;
+              padding-bottom: 0.1rem /* 8/80 */;
             }
 
             &:nth-child(2) {
-              font-size: .175rem /* 14/80 */;
+              font-size: 0.175rem /* 14/80 */;
             }
           }
 
@@ -1171,15 +1177,15 @@ export default {
           display: flex;
           align-items: center;
           justify-content: center;
-          width: .45rem /* 36/80 */;
-          height: .625rem /* 50/80 */;
-          border-radius: .075rem /* 6/80 */;
+          width: 0.45rem /* 36/80 */;
+          height: 0.625rem /* 50/80 */;
+          border-radius: 0.075rem /* 6/80 */;
           background: rgba(255, 255, 255, 0.2);
-          margin-right: .0625rem /* 5/80 */;
+          margin-right: 0.0625rem /* 5/80 */;
           cursor: pointer;
           &:last-child {
             margin: 0;
-            border-radius: 0 .25rem /* 20/80 */ .25rem /* 20/80 */ 0;
+            border-radius: 0 0.25rem /* 20/80 */ 0.25rem /* 20/80 */ 0;
           }
           &.actived {
             background: #4396f3;
@@ -1188,7 +1194,7 @@ export default {
             }
           }
           i {
-            font-size: .325rem /* 26/80 */;
+            font-size: 0.325rem /* 26/80 */;
           }
         }
       }
@@ -1196,22 +1202,22 @@ export default {
 
     .airPanel_bt {
       width: 100%;
-      height: .45rem /* 36/80 */;
+      height: 0.45rem /* 36/80 */;
       display: flex;
       align-items: center;
       justify-content: space-around;
 
       a {
         display: flex;
-    
+
         align-items: center;
-        width: .625rem /* 50/80 */ /* 47/80 */;
-        height: .25rem /* 20/80 */;
+        width: 0.625rem /* 50/80 */ /* 47/80 */;
+        height: 0.25rem /* 20/80 */;
         background: rgba(255, 255, 255, 0.2);
-        border-radius: .05rem /* 4/80 */;
+        border-radius: 0.05rem /* 4/80 */;
         color: #fff;
-        font-size: .15rem /* 12/80 */;
-        padding: 0 .025rem /* 2/80 */;
+        font-size: 0.15rem /* 12/80 */;
+        padding: 0 0.025rem /* 2/80 */;
 
         &.actived {
           color: #4396f3;
@@ -1223,8 +1229,8 @@ export default {
 
         i {
           color: #fff;
-          font-size: .175rem /* 14/80 */;
-          margin-right: .025rem /* 2/80 */;
+          font-size: 0.175rem /* 14/80 */;
+          margin-right: 0.025rem /* 2/80 */;
         }
       }
     }
@@ -1233,7 +1239,7 @@ export default {
       float: right;
     }
   }
-  li:nth-child(2n){
+  li:nth-child(2n) {
     margin-right: 0;
   }
 }

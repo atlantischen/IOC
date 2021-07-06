@@ -14,19 +14,19 @@
 <script>
 export default {
   name: "MainMenu",
-  data() {
+  data () {
     return {
       isShow: true,
       url: "",
     };
   },
   computed: {
-    getUnityData() {
+    getUnityData () {
       return this.$store.state.unitySendData;
     },
   },
   watch: {
-    getUnityData(val) {
+    getUnityData (val) {
       // debugger;
       let res = val;
       try {
@@ -34,28 +34,30 @@ export default {
           this.$router.push(res.action);
         } else {
         }
-      } catch (e) {}
+      } catch (e) { }
     },
   },
-  beforeCreate() {
+  beforeCreate () {
     if (process.env.NODE_ENV === "production") {
       this.$router.push("/comprehensiveSituational/homePage");
     }
   },
-  created() {
+  created () {
     if (window.vuplex) {
       this.addMessageListener();
     } else {
       window.addEventListener("vuplexready", this.addMessageListener);
     }
     window.addEventListener("message", (event) => {
-      let res = JSON.parse(event.data);
-      console.log(res,'res');
-      this.$store.commit("setData", res);
-      if (res.data === "IOCHOME") {
-        this.isShow = true;
-      } else if (res.action === "hide") {
-        this.isShow = false;
+      if ((typeof event.data == 'string' && event.data.indexOf('data') != -1) || (typeof event.data == 'object' && event.data.data != undefined)) {
+        let res = JSON.parse(event.data)
+        console.log(res, 'res');
+        this.$store.commit("setData", res);
+        if (res.data === "IOCHOME") {
+          this.isShow = true;
+        } else if (res.action === "hide") {
+          this.isShow = false;
+        }
       }
     });
     if (this.getQueryString("debug")) {
@@ -69,21 +71,18 @@ export default {
     }
   },
   mounted () {
-    this.$nextTick(()=>{
-    window.iframe = this.$refs.iframe
-   
-
+    this.$nextTick(() => {
+      window.iframe = this.$refs.iframe
     })
-   
   },
   methods: {
-    getQueryString(name) {
+    getQueryString (name) {
       var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
       var r = window.location.search.substr(1).match(reg);
       if (r != null) return unescape(r[2]);
       return null;
     },
-    addMessageListener() {
+    addMessageListener () {
       window.vuplex.addEventListener("message", (event) => {
         console.log(event.data);
         let res = JSON.parse(event.data);
@@ -114,7 +113,6 @@ export default {
   height: 100%;
 }
 #iframe3D {
-  // position: absolute;
   width: 100%;
   height: 100%;
 }

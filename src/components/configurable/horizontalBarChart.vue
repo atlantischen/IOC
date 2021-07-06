@@ -23,18 +23,18 @@ export default {
       type: Object,
     },
   },
-  data() {
+  data () {
     return {
       ...this._data,
       ids: this.$uuid(),
     };
   },
-  created() {},
-  mounted() {
+  created () { },
+  mounted () {
     this.horizontalBarChartFun(this.datas);
   },
   methods: {
-    horizontalBarChartFun(val) {
+    horizontalBarChartFun (val) {
       var _data = val.data;
       for (var i = 0; i < _data.length; i++) {
         var option = {

@@ -9,6 +9,7 @@
 </template>
 
 <script>
+import * as echarts from "echarts";
 export default {
   name: "leaseSummary",
   props: {
@@ -27,6 +28,8 @@ export default {
   },
   methods: {
     leaseSummaryFun (val) {
+      var dom = this.$refs["leaseSummaryEchart_" + this.ids]
+      var myChart = echarts.init(dom)
       var optionName = ["空置产业空间", "已租产业空间"],
         xAxiasD = [9.935, 89.565],
         datas = {
@@ -129,7 +132,7 @@ export default {
             name: "",
             type: "pie",
             radius: ["0", "35%"],
-            center: ["20%", "35%"],
+            center: ["25%", "35%"],
             // startAngle: -45,
             color: 'rgba(30, 57, 87, 1)',
             avoidLabelOverlap: false,
@@ -148,10 +151,10 @@ export default {
             name: "",
             type: "pie",
             radius: ["0", "55%"],
-            center: ["20%", "35%"],
+            center: ["25%", "35%"],
             // roseType: 'area', //radius
             // startAngle: -45,
-            animation: false,
+            // animation: false,
             itemStyle: {
               normal: {
                 // borderWidth: 2,
@@ -179,10 +182,15 @@ export default {
         option.series[1].data[i] = {
           value: xAxiasD[i],
           name: optionName[i],
-          selected: i == 0
+          // selected: i == 0
         };
       }
-      this.$redomEchart(this.$refs["leaseSummaryEchart_" + this.ids], option);
+      this.$redomEchart(dom, option);
+      myChart.dispatchAction({
+        type: 'highlight',
+        seriesIndex: 1,
+        dataIndex: 0
+      });
     }
   }
 };

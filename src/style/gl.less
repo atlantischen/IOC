@@ -8,6 +8,10 @@
   user-select: none;
 }
 
+.m_disabled {
+  cursor: not-allowed;
+}
+
 // 隐藏滚动条
 .hd_bar::-webkit-bar {
   display: none;
@@ -29,8 +33,13 @@ span {
 
 img[src=''],
 img:not([src]) {
-  opacity:0;
+  opacity: 0;
   border: 0;
+}
+
+button {
+  border: none;
+  cursor: pointer;
 }
 
 // 超出变省略号
@@ -251,20 +260,30 @@ i {
   border-radius: 2px;
 }
 // big滚动条样式
-.bigBar{
+.bigBar {
   overflow-y: hidden;
 }
-.bigBar:hover{    
+.bigBar:hover {
   overflow-y: auto;
 }
 .bigBar::-webkit-scrollbar {
-  width: .075rem /* 6/80 */;
-  height: .075rem /* 6/80 */;
+  width: 0.075rem /* 6/80 */;
+  height: 0.075rem /* 6/80 */;
 }
 
 .bigBar::-webkit-scrollbar-thumb {
   background: rgba(70, 149, 239, 0.3);
-  width: .075rem /* 6/80 */;
-  height: .075rem /* 6/80 */;
+  width: 0.075rem /* 6/80 */;
+  height: 0.075rem /* 6/80 */;
   border-radius: 2px;
+}
+
+// 表单
+.alarmAckForm {
+  .el-textarea__inner {
+    color: rgba(255, 255, 255, 0.7);
+    border: 1px solid rgba(67, 149, 243, 0.5);
+    background: transparent;
+    border-radius: 0;
+  }
 }

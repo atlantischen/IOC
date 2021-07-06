@@ -27,7 +27,7 @@ var redomEchart = function redomEchart(dom, option, e) {
 /**
  * @author
  * @description 随机id
- * @param {val  bool}
+ * @param {val  null}
  * @returns {handle}
  */
 var uuid = function uuid() {
@@ -43,8 +43,45 @@ var uuid = function uuid() {
   // return 'u' + uuid.join('').replace('-', '')
   return 'u' + uuid.join('')
 }
+/**
+ * @author
+ * @description 统一padding
+ * @param {val  array}
+ * @returns {string}
+ */
+var paddingFun = function paddingFun(val) {
+  if (!val) {
+    return
+  }
+  let _s = ''
+  switch (true) {
+    case typeof val == 'array':
+      for (let i = 0; i < val.length; i++) {
+        _s += val[i] == 0 ? '0 ' : val[i] / 80 + 'rem '
+      }
+      return 'padding:' + _s + ';'
+    case typeof val == 'number':
+      return 'padding:' + val / 80 + 'rem;'
+    default:
+      break;
+  }
+}
+/**
+ * @author
+ * @description 统一height
+ * @param {val  number}
+ * @returns {string}
+ */
+var eHeightFun = function eHeightFun(val) {
+  if (!val) {
+    return
+  }
+  return val ? 'height:' + val / 80 + 'rem;' : ''
+}
 const fun = {
   redomEchart,
-  uuid
+  uuid,
+  paddingFun,
+  eHeightFun
 }
 export default fun

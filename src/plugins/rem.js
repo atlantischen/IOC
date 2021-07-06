@@ -2,7 +2,6 @@
 (function (win, lib) {
 
   var doc = win.document;
-  console.log(doc)
   var docEl = doc.documentElement;
   var metaEl = doc.querySelector('meta[name="viewport"]');
   var flexibleEl = doc.querySelector('meta[name="flexible"]');

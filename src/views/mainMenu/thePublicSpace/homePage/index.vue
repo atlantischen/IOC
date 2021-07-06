@@ -97,7 +97,7 @@ import * as echarts from "echarts";
 import { getWeather } from "@/api/com";
 export default {
   name: "homePage",
-  data() {
+  data () {
     return {
       centerDatasList: [
         {
@@ -118,13 +118,13 @@ export default {
     };
   },
   components: {},
-  created() {
+  created () {
     getWeather({ city: "深圳" }).then((r) => {
       this.weatherDatas = r.data.data;
       console.log(r);
     });
   },
-  mounted() {
+  mounted () {
     this.industrySpaceFun([76.16, 9.62, 5.93, 8.29]);
     this.SpatialDistributionFun();
     this.siteUsageTop5Fun();
@@ -134,7 +134,7 @@ export default {
   },
   methods: {
     //
-    selectSpaceRadio(val) {
+    selectSpaceRadio (val) {
       this.spaceRadio = val;
       if (val == 0) {
         this.industrySpaceFun([76.16, 9.62, 5.93, 8.29]);
@@ -143,7 +143,7 @@ export default {
       }
     },
     // 产业空间
-    industrySpaceFun(d) {
+    industrySpaceFun (d) {
       var optionName = ["200平以下", "200~500平", "500~1000平", "1000平以上"],
         datas = d;
       var option = {
@@ -182,9 +182,9 @@ export default {
           left: "45%",
           y: "center",
           data: optionName,
-          formatter: function(name) {
+          formatter: function (name) {
             var index = 0;
-            optionName.forEach(function(value, i) {
+            optionName.forEach(function (value, i) {
               if (value == name) index = i;
             });
             return "{a|" + name + "}" + datas[index] + "%";
@@ -232,17 +232,17 @@ export default {
       this.$redomEchart(this.$refs["industrySpaceEchart"], option);
     },
     // 产业空间分布
-    SpatialDistributionFun() {
+    SpatialDistributionFun () {
       var ii = -1;
       var optionName = [
-          "新能源、新材料",
-          "智能制造",
-          "信息技术",
-          "生物医药",
-          "文化创意",
-          "现代服务",
-          "节能环保",
-        ],
+        "新能源、新材料",
+        "智能制造",
+        "信息技术",
+        "生物医药",
+        "文化创意",
+        "现代服务",
+        "节能环保",
+      ],
         datas = [23.46, 24.29, 32.26, 1.2, 12.8, 3.25, 2.74];
       var option = {
         title: {
@@ -276,9 +276,9 @@ export default {
           left: "45%",
           y: "center",
           data: optionName,
-          formatter: function(name) {
+          formatter: function (name) {
             var index = 0;
-            optionName.forEach(function(value, i) {
+            optionName.forEach(function (value, i) {
               if (value == name) index = i;
             });
             return "{a|" + name + "}" + datas[index] + "%";
@@ -334,7 +334,7 @@ export default {
       this.$redomEchart(this.$refs["spatialDistributionEchart"], option);
     },
     // 场地使用top5
-    siteUsageTop5Fun() {
+    siteUsageTop5Fun () {
       var names = [],
         xAxisNams = [
           "14F会议室",
@@ -437,8 +437,30 @@ export default {
       this.$redomEchart(this.$refs["siteUsageTop5Echart"], option);
     },
     // 环境空间
-    airQualityFun() {
-      var datas = [53, 300];
+    airQualityFun () {
+      var datas = [53, 300],
+        colors = ["#00ffff", "yellow", "orange", "red", "#990056", "#7b0128"],
+        selectedColor = ''
+      switch (true) {
+        case datas[0] < (datas[1] / 6) * 1:
+          selectedColor = colors[0]
+          break;
+        case datas[0] < (datas[1] / 6) * 2:
+          selectedColor = colors[1]
+          break;
+        case datas[0] < (datas[1] / 6) * 3:
+          selectedColor = colors[2]
+          break;
+        case datas[0] < (datas[1] / 6) * 4:
+          selectedColor = colors[3]
+          break;
+        case datas[0] < (datas[1] / 6) * 5:
+          selectedColor = colors[4]
+          break;
+        default:
+          selectedColor = colors[5]
+          break;
+      }
       var option = {
         grid: {
           left: "0",
@@ -449,6 +471,8 @@ export default {
         },
         xAxis: {
           type: "value",
+          max: datas[1],
+          min: 0,
           splitLine: { show: false },
           axisLabel: { show: false },
           axisTick: { show: false },
@@ -466,14 +490,14 @@ export default {
           {
             name: "条",
             type: "bar",
-            barWidth: 8,
+            barWidth: 10,
+            barGap: "-100%",
+            // barCategoryGap: "100%",
             data: [datas[0]],
-            barCategoryGap: 20,
             itemStyle: {
               normal: {
-                barBorderRadius: 10,
                 color: "#ffffff00",
-                color: "pink",
+                // color: "pink",
               },
             },
             label: {
@@ -481,18 +505,24 @@ export default {
               position: "right",
               fontSize: 14,
               offset: [-25, -25],
-              formatter: "{a| {c}}",
+              formatter: "{a| {c}}\n{b| }",
               rich: {
                 a: {
                   width: 20,
                   height: 15,
-                  padding: [8, 10, 5],
+                  padding: [3, 10, 5],
                   color: "#000",
-                  backgroundColor: {
-                    // color: 'red',
-                    image: require("@/assets/img/echart/e_wd_tip.png"),
-                    // repeat: 'no-repeat'
-                  },
+                  borderRadius: 5,
+                  backgroundColor: selectedColor
+                },
+                b: {
+                  width: 1,
+                  height: 2,
+                  padding: [0.5, 0],
+                  // borderWidth: 1,
+                  // borderColor: selectedColor,
+                  align: 'center',
+                  backgroundColor: selectedColor
                 },
               },
             },
@@ -500,31 +530,118 @@ export default {
           },
           {
             name: "背景",
+            stack: '背景',
             type: "bar",
-            stack: "one",
-            barGap: "-100%",
+            animation: false,
             barWidth: 10,
-            data: [datas[1]],
+            data: [datas[1] / 6],
             itemStyle: {
               normal: {
-                barBorderRadius: 10,
-                color: new echarts.graphic.LinearGradient(0, 0, 1, 0, [
-                  { offset: 0, color: "#00ffff" },
-                  { offset: 0.2, color: "yellow" },
-                  { offset: 0.4, color: "orange" },
-                  { offset: 0.6, color: "red" },
-                  { offset: 0.8, color: "#990056" },
-                  { offset: 1, color: "#7b0128" },
-                ]),
+                barBorderRadius: [10, 0, 0, 10],
+                color: '#00ffff'
               },
             },
+            z: 0,
           },
+          {
+            name: "",
+            stack: '背景',
+            type: "bar",
+            animation: false,
+            barWidth: 10,
+            data: [datas[1] / 6],
+            itemStyle: {
+              normal: {
+                color: 'yellow'
+              },
+            },
+            z: 0,
+          },
+          {
+            name: "",
+            stack: '背景',
+            type: "bar",
+            animation: false,
+            barWidth: 10,
+            data: [datas[1] / 6],
+            itemStyle: {
+              normal: {
+                color: 'orange'
+              },
+            },
+            z: 0,
+          },
+          {
+            name: "",
+            stack: '背景',
+            type: "bar",
+            animation: false,
+            barWidth: 10,
+            data: [datas[1] / 6],
+            itemStyle: {
+              normal: {
+                color: 'red'
+              },
+            },
+            z: 0,
+          },
+          {
+            name: "",
+            stack: '背景',
+            type: "bar",
+            animation: false,
+            barWidth: 10,
+            data: [datas[1] / 6],
+            itemStyle: {
+              normal: {
+                color: '#990056'
+              },
+            },
+            z: 0,
+          },
+          {
+            name: "",
+            stack: '背景',
+            type: "bar",
+            animation: false,
+            barWidth: 10,
+            data: [datas[1] / 6],
+            itemStyle: {
+              normal: {
+                barBorderRadius: [0, 10, 10, 0],
+                color: '#7b0128'
+              },
+            },
+            z: 0,
+          },
+          // {
+          //   name: "背景",
+          //   stack: '广告',
+          //   type: "bar",
+          //   stack: "one",
+          //   // barGap: "-100%",
+          //   barWidth: 10,
+          //   data: [datas[1]],
+          //   itemStyle: {
+          //     normal: {
+          //       barBorderRadius: 10,
+          //       color: new echarts.graphic.LinearGradient(0, 0, 1, 0, [
+          //         { offset: 0, color: "#00ffff" },
+          //         { offset: 0.2, color: "yellow" },
+          //         { offset: 0.4, color: "orange" },
+          //         { offset: 0.6, color: "red" },
+          //         { offset: 0.8, color: "#990056" },
+          //         { offset: 1, color: "#7b0128" },
+          //       ]),
+          //     },
+          //   },
+          // },
         ],
       };
       this.$redomEchart(this.$refs["airQualityEchart"], option);
     },
     // 场地空间
-    floorSpaceFun() {
+    floorSpaceFun () {
       var optionName = ["多功能演播厅", "云平台广场", "会议室", "运动中心"],
         datas = [59.6, 21.43, 10.37, 8.6];
       var option = {
@@ -583,9 +700,9 @@ export default {
           left: "50%",
           top: "35%",
           data: optionName,
-          formatter: function(name) {
+          formatter: function (name) {
             var index = 0;
-            optionName.forEach(function(value, i) {
+            optionName.forEach(function (value, i) {
               if (value == name) index = i;
             });
             return "{a|" + name + "}" + datas[index] + "%";
@@ -665,7 +782,7 @@ export default {
       this.$redomEchart(this.$refs["floorSpaceEchart"], option);
     },
     // 今日气温趋势
-    temperatureTrendFun() {
+    temperatureTrendFun () {
       var names = [],
         xData = [
           "0h",

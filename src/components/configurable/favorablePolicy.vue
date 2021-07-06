@@ -1,7 +1,7 @@
 <template>
   <div class="favorablePolicyAll">
     <div class="tittle">{{ title }}</div>
-    <ul class="favorablePolicy_ul x_rap">
+    <ul class="favorablePolicy_ul x_rap" :style="$paddingFun(datas.padding)">
       <li
         class="favorablePolicy_li y_c"
         v-for="(t, i) in datas.favorablePolicyDatas"
@@ -45,10 +45,10 @@ export default {
   width: 100%;
   .favorablePolicy_ul {
     width: 100%;
-    height: 250px;
-    li {
+    justify-content: space-between;
+    .favorablePolicy_li {
       width: 47%;
-      padding: 0 10px;
+      padding: 10px;
       img {
         .ioc_img(50px, 50px, 50%);
         background: rgba(204, 204, 204, 0.5);

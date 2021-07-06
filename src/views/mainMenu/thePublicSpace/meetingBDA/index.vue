@@ -16,7 +16,7 @@
 <script>
 export default {
   name: "meetingBDA",
-  data() {
+  data () {
     return {
       // 左侧组件info
       leftInfo: [
@@ -54,7 +54,7 @@ export default {
           title: "今日会议时段",
           type: "singleBarChart",
           datas: {
-            eheight: 220,
+            eHeight: 220,
             xAxisD: [
               "08:00",
               "09:00",
