@@ -97,6 +97,8 @@ export default {
           title: "今日访客进出车辆",
           type: 'TableList',
           datas: {
+            eHeight: null,
+            padding: null,
             header: ['访客车牌', '访客姓名', '进/出场类型', '时间'],
             tabelD: [
               {

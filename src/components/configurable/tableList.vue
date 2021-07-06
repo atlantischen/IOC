@@ -1,36 +1,38 @@
 <template>
   <div class="tableListAll">
     <div class="tittle">{{ title }}</div>
-    <table
-      class="tableList"
-      :style="($paddingFun(datas.padding), $eHeightFun(datas.eHeight))"
+    <div
+      class="tableList_a"
+      :style="[$paddingFun(datas.padding), $eHeightFun(datas.eHeight)]"
     >
-      <thead>
-        <tr>
-          <th v-for="(_t, i) in datas.header" :key="i">{{ _t }}</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr v-for="(item, i) in tableData" :key="i">
-          <td>{{ item.licence }}</td>
-          <td>{{ item.ownerName }}</td>
-          <td>{{ item.type }}</td>
-          <td>{{ item.time }}</td>
-        </tr>
-      </tbody>
-    </table>
-    <el-pagination
-      small
-      class="qx_pagination"
-      :pager-count="2"
-      layout="total,slot,prev, pager, next"
-      @size-change="handleSizeChange"
-      @current-change="handleCurrentChange"
-      v-model:currentPage="currentPage"
-      :page-size="pageSize"
-      :total="total"
-      ><span class="page_slot">{{ currentPage }}/4</span></el-pagination
-    >
+      <table class="tableList">
+        <thead>
+          <tr>
+            <th v-for="(_t, i) in datas.header" :key="i">{{ _t }}</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="(item, i) in tableData" :key="i">
+            <td>{{ item.licence }}</td>
+            <td>{{ item.ownerName }}</td>
+            <td>{{ item.type }}</td>
+            <td>{{ item.time }}</td>
+          </tr>
+        </tbody>
+      </table>
+      <el-pagination
+        small
+        class="qx_pagination"
+        :pager-count="2"
+        layout="total,slot,prev, pager, next"
+        @size-change="handleSizeChange"
+        @current-change="handleCurrentChange"
+        v-model:currentPage="currentPage"
+        :page-size="pageSize"
+        :total="total"
+        ><span class="page_slot">{{ currentPage }}/4</span></el-pagination
+      >
+    </div>
   </div>
 </template>
 
@@ -95,7 +97,10 @@ export default {
 <style lang="less" scoped>
 @import "~@/style/gl.less";
 .tableListAll {
-  height: 5rem /* 400/80 */;
+  .tableList_a {
+    width: 100%;
+    height: 4.625rem /* 370/80 */;
+  }
   .tableList {
     width: 100%;
     text-align: center;

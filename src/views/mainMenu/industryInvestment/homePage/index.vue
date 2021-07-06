@@ -89,7 +89,7 @@ export default {
       rightInfo: [
         {
           title: '聚焦产业',
-          type: 'focusIndustry',
+          type: 'FocusIndustry',
           datas: {
             eHeight: null,
             padding: null,

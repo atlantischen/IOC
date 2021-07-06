@@ -33,13 +33,39 @@ export default {
   },
   methods: {
     singleBarChartFun (val) {
-      let { xAxisD, datas, units } = val;
-      var names = [];
+      let { xAxisD, datas, units, names } = val;
+      var allD = [],
+        colorRange = [
+          [
+            { offset: 0, color: "#4396f3" },
+            { offset: 1, color: "rgb(67, 150, 243, .1)" },
+          ],
+          [
+            { offset: 0, color: "#0ff" },
+            { offset: 1, color: "rgb(0, 255, 255, 0.1)" },
+          ],
+          [
+            { offset: 0, color: "rgba(255, 217, 0, 1)" },
+            { offset: 1, color: "rgba(255, 217, 0, 0.1)" },
+          ],
+        ]
+      for (let i = 0; i < datas.length; i++) {
+        allD[i] = {
+          name: names[i],
+          barWidth: 14 / (datas.length > 1 ? datas.length * 2 / 3 : datas.length),
+          barGap: "0",
+          itemStyle: {
+            color: new echarts.graphic.LinearGradient(0, 0, 0, 1, colorRange[i]),
+          },
+          data: datas[i]
+        }
+      }
+
       var option = {
         tooltip: {},
         grid: {
           x: 10,
-          y: 30,
+          y: 40,
           x2: 30,
           y2: -10,
           containLabel: true,
@@ -112,20 +138,12 @@ export default {
             },
           },
         ],
-        series: [
-          {
-            name: names[0],
+        series: allD.map(e => {
+          return {
             type: "bar",
-            barWidth: 14,
-            itemStyle: {
-              color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
-                { offset: 0, color: "#4396f3" },
-                { offset: 1, color: "rgb(67, 150, 243, .1)" },
-              ]),
-            },
-            data: datas,
-          },
-        ],
+            ...e
+          }
+        })
       };
       this.$redomEchart(this.$refs["singleBarChartEchart_" + this.ids], option);
     },

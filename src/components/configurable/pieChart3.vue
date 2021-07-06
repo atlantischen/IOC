@@ -1,10 +1,10 @@
 <template>
-  <div class="FocusIndustryAll">
+  <div class="pieChart3All">
     <div class="tittle">{{ title }}</div>
-    <div class="focusIndustry" :style="$paddingFun(datas.padding)">
+    <div class="pieChart3" :style="$paddingFun(datas.padding)">
       <div
-        :id="'focusIndustryEchart_' + ids"
-        :ref="'focusIndustryEchart_' + ids"
+        :id="'pieChart3Echart_' + ids"
+        :ref="'pieChart3Echart_' + ids"
         :style="$eHeightFun(datas.eHeight)"
       ></div>
     </div>
@@ -12,6 +12,7 @@
 </template>
 
 <script>
+import * as echarts from "echarts";
 export default {
   name: "theParkIsAll",
   props: {
@@ -26,10 +27,12 @@ export default {
     }
   },
   mounted () {
-    this.FocusIndustryFun(this.datas)
+    this.pieChart3Fun(this.datas)
   },
   methods: {
-    FocusIndustryFun (val) {
+    pieChart3Fun (val) {
+      var dom = this.$refs["pieChart3Echart_" + this.ids]
+      var myChart = echarts.init(dom)
       var j = 0;
       const { optionName, datas, keyD } = val
       var option = {
@@ -44,10 +47,6 @@ export default {
           left: "48%",
           bottom: "38%",
           textAlign: "center",
-          // backgroundColor: 'rgba(0,0,0,0)',
-          // borderColor: '#ccc',
-          // borderWidth: 0,
-          // padding: 5,
           itemGap: 6,
           textStyle: {
             fontFamily: "BYfont",
@@ -62,13 +61,13 @@ export default {
         },
         legend: {
           selectedMode: false,
-          show: false,
-          orient: "vertical", // 'horizontal'
-          left: "50%",
-          y: "center",
+          show: optionName,
+          orient: "horizontal", // 'vertical'
+          left: "0",
+          y: "bottom",
           data: optionName,
           formatter: function (name) {
-            return "{a|" + name + "}" + datas[j++] + "%";
+            return "{a|" + name + "}";
           },
           textStyle: {
             color: "#fff",
@@ -84,7 +83,7 @@ export default {
           icon: "circle",
           itemWidth: 6,
           itemHeight: 6,
-          itemGap: 18,
+          itemGap: 8,
         },
         color: [
           "#4396f3",
@@ -101,18 +100,20 @@ export default {
           {
             name: "",
             type: "pie",
-            radius: ["50%", "65%"],
-            center: ["50%", "50%"],
+            radius: ["0", "60%"],
+            center: ["50%", "40%"],
             avoidLabelOverlap: true,
-            maxAngle: 145,
+            roseType: 'radius',
+            clockWise: false,
+            // maxAngle: 145,
+            startAngle: 120,
             alignTo: "edge",
             label: {
               // minMargin: 10,
               // alignTo: 'edge',
               // edgeDistance: 10,
               // lineHeight: 10,
-              formatter: "{a|{c}%}\n{b|{b}}",
-              padding: [0, -45, 0, -45],
+              formatter: "{a|{c}%}",
               rich: {
                 a: {
                   width: 100,
@@ -120,18 +121,11 @@ export default {
                   padding: [2, 0],
                   color: "rgb(255,255,255,.7)",
                 },
-                b: {
-                  width: 100,
-                  fontSize: 12,
-                  lineHeight: 14,
-                  // padding: [1, 0],
-                  color: "rgb(255,255,255,.7)",
-                },
               },
             },
             labelLine: {
-              length: 20,
-              length2: 45,
+              // length: 20,
+              length2: 20,
               // maxSurfaceAngle: 80
             },
             data: [],
@@ -144,7 +138,12 @@ export default {
           name: optionName[i],
         };
       }
-      this.$redomEchart(this.$refs["focusIndustryEchart_" + this.ids], option);
+      this.$redomEchart(dom, option);
+      // myChart.dispatchAction({
+      //   type: 'highlight',
+      //   seriesIndex: 0,
+      //   dataIndex: 0
+      // });
     }
   }
 };
@@ -153,9 +152,9 @@ export default {
 <style lang="less" scoped>
 @import "~@/style/gl.less";
 // 聚焦产业
-#focusIndustryEchart_,
-[id^="focusIndustryEchart_"] {
+#pieChart3Echart_,
+[id^="pieChart3Echart_"] {
   width: 100%;
-  height: 2.375rem /* 190/80 */;
+  height: 3.5rem /* 280/80 */;
 }
 </style>

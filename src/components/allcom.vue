@@ -5,7 +5,7 @@
       :key="i"
       :is="item.type"
       :_data="item"
-      :class="'item-id-' + i"
+      :class="'item-id-' + item.type"
       :type="1"
     />
   </div>
