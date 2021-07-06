@@ -26,8 +26,10 @@ export default {
           type: 'focusIndustry',
           datas: {
             eHeight: 280,
-            subtext: '园区租用率',
-            total: '87%',
+            keyD: {
+              name: '园区租用率',
+              value: '87%',
+            },
             optionName: [
               "零售商家",
               "信息技术",

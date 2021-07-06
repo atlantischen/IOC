@@ -1,16 +1,16 @@
 <template>
-  <div class="pedestrianPostureAll">
+  <div class="pedestrianPosture2All">
     <div class="tittle">{{ title }}</div>
-    <div class="pedestrianPosture" :style="$paddingFun(datas.padding)">
-      <ul class="pp_top" v-show="datas.datas2">
+    <div class="pedestrianPosture2" :style="$paddingFun(datas.padding)">
+      <ul class="pp_top">
         <li class="y_c" v-for="(item, i) in datas.datas2" :key="i">
           <span>{{ item.value }}</span>
           <span>{{ item.name }}</span>
         </li>
       </ul>
       <div
-        :id="'pedestrianPostureEchart_' + ids"
-        :ref="'pedestrianPostureEchart_' + ids"
+        :id="'pedestrianPosture2Echart_' + ids"
+        :ref="'pedestrianPosture2Echart_' + ids"
         :style="$eHeightFun(datas.eHeight)"
       ></div>
     </div>
@@ -20,7 +20,7 @@
 <script>
 import * as echarts from "echarts";
 export default {
-  name: "pedestrianPostureAll",
+  name: "pedestrianPosture2All",
   props: {
     _data: {
       type: Object
@@ -35,55 +35,34 @@ export default {
   created () {
   },
   mounted () {
-    this.pedestrianPostureFun(this.datas)
+    this.pedestrianPosture2Fun(this.datas)
   },
   methods: {
     // 人行态势
-    pedestrianPostureFun (val) {
+    pedestrianPosture2Fun (val) {
       const { names, xData, datas, smooth, unit } = val
-      var allD = [], color = ["#97c8ff", "#ffdd8d"], color2 = ["#fff", "#ffdd8d"],
-        Linear = [
-          [
+      var allD = [],
+        Linear = {
+          0: [
             { offset: 0, color: "rgb(255, 255, 255, 0.2)" },
             { offset: 1, color: "rgb(255, 255, 255, 0)" },
           ],
-          [
+          1: [
             { offset: 0, color: "rgb(255, 180, 0, 0.2)" },
             { offset: 1, color: "rgb(255, 221, 141, 0)" },
           ],
-        ]
-      if (!names) {
-        color = color.reverse()
-        color2 = color2.reverse()
-        Linear = Linear.reverse()
-      }
+        }
       for (var i = 0; i < datas.length; i++) {
         allD[i] = {
-          name: names ? names[i] : null,
-          smooth: smooth,
+          data: datas[i],
           areaStyle: {
+            show: false,
             normal: {
-              color: new echarts.graphic.LinearGradient(0, 0, 0, 1, Linear[i]),
+              color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+                ...Linear[i],
+              ]),
             },
-          },
-          itemStyle: {
-            normal: {
-              lineStyle: {
-                width: 0.8,
-              },
-            },
-          },
-          data: datas[i].map((e, j) => {
-            return {
-              value: e,
-              symbol: j != datas[i].length - 1 ? "none" : "",
-              itemStyle: {
-                normal: {
-                  color: color[i]
-                },
-              },
-            }
-          })
+          }
         }
       }
       var option = {
@@ -116,6 +95,7 @@ export default {
             return dataStr
           }
         },
+        color: ["#fff", "#ffb400"],
         grid: {
           x: 10,
           y: 30,
@@ -123,7 +103,6 @@ export default {
           y2: -10,
           containLabel: true,
         },
-        color: color2,
         legend: {
           show: names,
           right: 20,
@@ -198,15 +177,26 @@ export default {
             },
           },
         ],
+        color: ["#fff", "#ffdd8d"],
         series: allD.map(e => {
           return {
-            type: "line",
-            symbolSize: 6,
             ...e,
+            name: e.name,
+            type: "line",
+            smooth: smooth,
+            itemStyle: {
+              normal: {
+                lineStyle: {
+                  width: 0.5,
+                },
+              },
+            },
+            symbolSize: 6,
+            data: e.data,
           }
         })
       };
-      this.$redomEchart(this.$refs['pedestrianPostureEchart_' + this.ids], option);
+      this.$redomEchart(this.$refs['pedestrianPosture2Echart_' + this.ids], option);
     },
   }
 };
@@ -214,14 +204,13 @@ export default {
 
 <style lang="less" scoped>
 @import "~@/style/gl.less";
-// 人行态势
-.pedestrianPostureAll {
-  #pedestrianPostureEchart_,
-  [id^="pedestrianPostureEchart_"] {
+.pedestrianPosture2All {
+  #pedestrianPosture2Echart_,
+  [id^="pedestrianPosture2Echart_"] {
     width: 100%;
     height: 2.125rem /* 170/80 */;
   }
-  .pedestrianPosture {
+  .pedestrianPosture2 {
     .pp_top {
       width: 100%;
       display: flex;

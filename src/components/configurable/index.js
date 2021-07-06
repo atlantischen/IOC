@@ -20,10 +20,13 @@ import UpBarChart from './upBarChart.vue'
 import HorizontalBarChart from './horizontalBarChart.vue'
 import PieChart from './pieChart.vue'
 import PieChart2 from './pieChart2.vue'
+import ServiceSystem from './serviceSystem.vue'
+import PedestrianPosture2 from './pedestrianPosture2.vue'
+import TableList from './tableList.vue'
 
 const configurable = {
   TheParkIs, // 园区情况
-  PedestrianPosture, // 人行态势
+  PedestrianPosture, // (人行态势/近7天访客统计)
   TheParkOutputVal, // 园区产值
   EnergyTrend, // 能耗态势
   EquipmentSituation, // 设备态势
@@ -44,5 +47,8 @@ const configurable = {
   HorizontalBarChart, // 条形图（今日会议室概况）
   PieChart, // 饼图实心（IT资产使用概况）
   PieChart2, // 饼图（圆环）（产业空间）
+  ServiceSystem, // 综合服务体系
+  PedestrianPosture2, // 折线（今日访客统计）
+  TableList, // table(今日访客进出车辆)
 }
 export default configurable
