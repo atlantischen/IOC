@@ -2,6 +2,14 @@
   <!-- 条形图 -->
   <div class="horizontalBarChartAll">
     <div class="tittle">{{ title }}</div>
+    <p
+      class="horizontalBar_tp"
+      v-show="datas.datas2"
+      v-for="(_t, i) in datas.datas2"
+      :key="i"
+    >
+      {{ _t.name }}:<span><NumCounter :value="_t.value"></NumCounter></span>
+    </p>
     <div class="horizontalBarChart">
       <div
         v-show="datas.data"
@@ -71,15 +79,12 @@ export default {
               },
               data: [
                 {
-                  // emphasis: {
-                  //   focus: "none",
-                  // },
                   itemStyle: {
                     normal: {
                       color: "#0e1c36",
                     },
                   },
-                  value: 100,
+                  value: val.datas2 ? val.datas2[0].value : 100,
                 },
               ],
               z: 1,
@@ -124,7 +129,7 @@ export default {
                       ]),
                     },
                   },
-                  value: _data[i].value.split("%")[0],
+                  value: _data[i].value.indexOf('%') != -1 ? _data[i].value.split("%")[0] : _data[i].value,
                   z: 1,
                 },
               ],
@@ -147,6 +152,14 @@ export default {
 .horizontalBarChartAll {
   .horizontalBarChart {
     width: 100%;
+  }
+  .horizontalBar_tp {
+    text-align: right;
+    .text_s();
+    span {
+      .datas_s();
+      margin-left: 0.125rem /* 10/80 */;
+    }
   }
   #horizontalBarChartEchart_,
   [id^="horizontalBarChartEchart_"] {

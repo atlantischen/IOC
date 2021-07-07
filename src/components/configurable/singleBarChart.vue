@@ -3,6 +3,12 @@
   <div class="singleBarChartAll">
     <div class="tittle">{{ title }}</div>
     <div class="singleBarChart">
+      <ul class="pp_top" v-show="datas.datas2">
+        <li class="y_c" v-for="(item, i) in datas.datas2" :key="i">
+          <span><NumCounter :value="item.value"></NumCounter></span>
+          <span>{{ item.name }}</span>
+        </li>
+      </ul>
       <div
         :id="'singleBarChartEchart_' + ids"
         :ref="'singleBarChartEchart_' + ids"
@@ -35,6 +41,13 @@ export default {
     singleBarChartFun (val) {
       let { xAxisD, datas, units, names } = val;
       var allD = [],
+        showLb = {
+          width: '50',
+          padding: [15, 0, 0, -30],
+          rotate: -35,
+          interval: 0,
+          margin: 20,
+        },
         colorRange = [
           [
             { offset: 0, color: "#4396f3" },
@@ -51,7 +64,7 @@ export default {
         ]
       for (let i = 0; i < datas.length; i++) {
         allD[i] = {
-          name: names[i],
+          name: names ? names[i] : '',
           barWidth: 14 / (datas.length > 1 ? datas.length * 2 / 3 : datas.length),
           barGap: "0",
           itemStyle: {
@@ -71,7 +84,7 @@ export default {
           containLabel: true,
         },
         legend: {
-          show: names.length > 0,
+          show: names,
           right: 20,
           top: 0,
           data: names,
@@ -86,7 +99,17 @@ export default {
         xAxis: [
           {
             type: "category",
-            name: units[0] ? units[0] : "",
+            name: '{a|' + units[0] ? units[0] : "" + '}',
+            nameGap: 20,
+            nameTextStyle: {
+              rich: {
+                a: {
+                  padding: [0, 0, 0, -80],
+                  color: '#fff'
+                }
+              }
+            },
+            boundaryGap: true,
             data: xAxisD,
             axisTick: {
               show: false,
@@ -145,6 +168,11 @@ export default {
           }
         })
       };
+      if (units) {
+        for (let key in showLb) {
+          option.xAxis[0].axisLabel[key] = showLb[key]
+        }
+      }
       this.$redomEchart(this.$refs["singleBarChartEchart_" + this.ids], option);
     },
   },
@@ -162,6 +190,21 @@ export default {
   [id^="singleBarChartEchart_"] {
     width: 100%;
     height: 2.5rem /* 200/80 */;
+  }
+
+  .pp_top {
+    width: 100%;
+    display: flex;
+    padding: 0.0625rem /* 5/80 */ 0.3125rem /* 25/80 */ 0.1875rem /* 15/80 */;
+    li {
+      flex: 1;
+      span:nth-child(1) {
+        .datas_s();
+      }
+      span:nth-child(2) {
+        .text_s();
+      }
+    }
   }
 }
 </style>

@@ -59,7 +59,6 @@ export default {
   created () {
   },
   mounted () {
-    this.total = this.datas.tabelD.length
     this.changeDatasFun()
     this.setAnmationF()
   },
@@ -68,9 +67,12 @@ export default {
   },
   methods: {
     changeDatasFun () {
-      let _data = JSON.parse(JSON.stringify(this.datas.tabelD))
-      let _f = (this.currentPage - 1) * this.pageSize
-      this.tableData = _data.slice(_f, (_f + this.pageSize))
+      if (this.datas.tabelD) {
+        this.total = this.datas.tabelD.length
+        let _data = JSON.parse(JSON.stringify(this.datas.tabelD))
+        let _f = (this.currentPage - 1) * this.pageSize
+        this.tableData = _data.slice(_f, (_f + this.pageSize))
+      }
     },
     handleSizeChange (val) {
       console.log(`每页 ${val} 条`);
