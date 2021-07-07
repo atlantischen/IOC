@@ -4,7 +4,7 @@
     <div class="pedestrianPosture" :style="$paddingFun(datas.padding)">
       <ul class="pp_top" v-show="datas.datas2">
         <li class="y_c" v-for="(item, i) in datas.datas2" :key="i">
-          <span>{{ item.value }}</span>
+          <span> <NumCounter :value="item.value"></NumCounter></span>
           <span>{{ item.name }}</span>
         </li>
       </ul>
@@ -141,7 +141,8 @@ export default {
         },
         xAxis: {
           type: "category",
-          name: '{a|' + unit[0] + '}', nameGap: 20,
+          name: '{a|' + unit[0] + '}',
+          nameGap: 20,
           nameTextStyle: {
             rich: {
               a: {
