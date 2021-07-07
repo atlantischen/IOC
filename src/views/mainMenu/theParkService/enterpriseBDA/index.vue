@@ -1,6 +1,7 @@
 <template>
   <!-- 企业大数据分析 -->
   <div class="enterpriseBDA">
+    <ServiceSystem />
     <LeftRight>
       <template #left>
         <Allcom :_Info="leftInfo" />

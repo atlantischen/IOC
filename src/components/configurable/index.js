@@ -25,6 +25,7 @@ import ServiceSystem from './serviceSystem.vue'
 import PedestrianPosture2 from './pedestrianPosture2.vue'
 import TableList from './tableList.vue'
 import PyramidChart from './pyramidChart.vue'
+import WaterLevel from './waterLevel.vue'
 
 const configurable = {
   TheParkIs, // 园区情况
@@ -54,5 +55,6 @@ const configurable = {
   PedestrianPosture2, // 折线（今日访客统计）
   TableList, // table(今日访客进出车辆)
   PyramidChart, // 金字塔(本月企业服务办理TOP4)
+  WaterLevel, // 金字塔(本月企业服务办理TOP4)
 }
 export default configurable
