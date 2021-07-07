@@ -6,7 +6,7 @@
         <div class="tittle">今日分项用电分析</div>
         <ul>
           <li v-for="(item, index) in todayList" :key="index">
-            <span class="font_text">{{ item.kwh }}kwh</span>
+            <span class="font_text"><NumCounter :value="item.kwh"></NumCounter>kwh</span>
             <span>{{ item.text }}</span>
             <div>
               <div class="left">
@@ -29,6 +29,7 @@
       </div>
       <div class="month_use">
         <div class="tittle">本月建筑用电分析</div>
+        <div class="count">本月总耗计:<NumCounter class="num" :value="35723.18"></NumCounter>kwh</div>
         <div id="park_time" ref="park_time"></div>
       </div>
       <div class="TOP">
@@ -57,6 +58,8 @@
         </div>
          <div class="month_use_w">
           <div class="tittle">本月建筑用水分析</div>
+        <div class="count">月能总耗计:<NumCounter class="num" :value="9245.94"></NumCounter>m³</div>
+
           <div id="use_W" ref="use_W"></div>
       </div>
       </div>
@@ -126,38 +129,38 @@ export default {
     AssetsAndEquipment() {
       var dom = this.$refs["park_time"];
       var option = {
-        title: {
-          text: "{a|月能总耗计：}{b|" + 35723.18 + "}{c|kw.h}",
-          left: "0",
-          top: "0",
-          // subtext: '会议数',
-          subtextStyle: {
-            color: "#fff",
-          },
-          textStyle: {
-            rich: {
-              a: {
-                fontSize: 14,
-                color: "#fff",
-                fontFamily: "Microsoft YaHei",
-                opacity: 0.7,
-              },
-              b: {
-                fontSize: 20,
-                color: "ffff",
-                fontFamily: "BYfont",
-              },
-              c: {
-                fontSize: 12,
-                fontWeight: "bold",
-                padding: [0, 5],
-                color: "#fff",
-              },
-            },
-          },
-        },
+        // title: {
+        //   text: "{a|月能总耗计：}{b|" + 35723.18 + "}{c|kw.h}",
+        //   left: "0",
+        //   top: "0",
+        //   // subtext: '会议数',
+        //   subtextStyle: {
+        //     color: "#fff",
+        //   },
+        //   textStyle: {
+        //     rich: {
+        //       a: {
+        //         fontSize: 14,
+        //         color: "#fff",
+        //         fontFamily: "Microsoft YaHei",
+        //         opacity: 0.7,
+        //       },
+        //       b: {
+        //         fontSize: 20,
+        //         color: "ffff",
+        //         fontFamily: "BYfont",
+        //       },
+        //       c: {
+        //         fontSize: 12,
+        //         fontWeight: "bold",
+        //         padding: [0, 5],
+        //         color: "#fff",
+        //       },
+        //     },
+        //   },
+        // },
         grid: {
-          top: "70",
+          top: "30",
           left: "0",
           right: "0",
           bottom: "0",
@@ -495,38 +498,38 @@ export default {
      use_W() {
       var dom = this.$refs["use_W"];
       var option = {
-        title: {
-          text: "{a|月能总耗计：}{b|" + 9245.94 + "}{c|m³}",
-          left: "0",
-          top: "0",
-          // subtext: '会议数',
-          subtextStyle: {
-            color: "#fff",
-          },
-          textStyle: {
-            rich: {
-              a: {
-                fontSize: 14,
-                color: "#fff",
-                fontFamily: "Microsoft YaHei",
-                opacity: 0.7,
-              },
-              b: {
-                fontSize: 20,
-                color: "ffff",
-                fontFamily: "BYfont",
-              },
-              c: {
-                fontSize: 12,
-                fontWeight: "bold",
-                padding: [0, 5],
-                color: "#fff",
-              },
-            },
-          },
-        },
+        // title: {
+        //   text: "{a|月能总耗计：}{b|" + 9245.94 + "}{c|m³}",
+        //   left: "0",
+        //   top: "0",
+        //   // subtext: '会议数',
+        //   subtextStyle: {
+        //     color: "#fff",
+        //   },
+        //   textStyle: {
+        //     rich: {
+        //       a: {
+        //         fontSize: 14,
+        //         color: "#fff",
+        //         fontFamily: "Microsoft YaHei",
+        //         opacity: 0.7,
+        //       },
+        //       b: {
+        //         fontSize: 20,
+        //         color: "ffff",
+        //         fontFamily: "BYfont",
+        //       },
+        //       c: {
+        //         fontSize: 12,
+        //         fontWeight: "bold",
+        //         padding: [0, 5],
+        //         color: "#fff",
+        //       },
+        //     },
+        //   },
+        // },
         grid: {
-          top: "70",
+          top: "30",
           left: "0",
           right: "0",
           bottom: "0",
@@ -658,6 +661,7 @@ export default {
         flex-direction: column;
         span:first-child {
           font-size: 0.25rem /* 20/80 */;
+          display: flex;
         }
         span:last-child {
           font-size: 0.15rem /* 12/80 */;

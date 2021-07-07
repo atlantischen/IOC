@@ -27,6 +27,10 @@ import 'element-plus/lib/theme-chalk/index.css'
 import 'dayjs/locale/zh-cn'
 import globalComponents from './utils/globalComponents.js' // 所有global组件
 import globalMethods from '@/utils/methods.js' // 所有global方法
+
+
+
+
 import 'lib-flexible'
 import './plugins/rem.js'
 import './assets/css/reset.css' //公共样式重置

@@ -39,7 +39,7 @@ export default {
   },
   beforeCreate () {
     if (process.env.NODE_ENV === "production") {
-      this.$router.push("/comprehensiveSituational/homePage");
+      // this.$router.push("/comprehensiveSituational/homePage");
     }
   },
   created () {

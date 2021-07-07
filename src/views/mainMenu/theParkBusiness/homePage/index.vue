@@ -15,35 +15,19 @@
       </div>
       <div class="store_discount">
         <div class="tittle">商家优惠信息</div>
-        <ul class="outer">
-          <li>
-            <img src="../../../../assets/img/真功夫.png" alt="" />
-            <div class="content">
-              <div class="head">【真功夫】</div>
-              <div class="describe">
-                2021.06.01-2021.08.31期间，所有菜品8折优惠。
+        <div class="box">
+          <ul class="outer" :class="{ 'animate-up': animateUp }">
+            <li v-for="(item, index) in businessList" :key="index">
+              <img :src="item.src" alt="" />
+              <div class="content">
+                <div class="head">【{{ item.title }}】</div>
+                <div class="describe">
+                  {{ item.desc }}
+                </div>
               </div>
-            </div>
-          </li>
-          <li>
-            <img src="../../../../assets/img/星巴克.png" alt="" />
-            <div class="content">
-              <div class="head">【星巴克】</div>
-              <div class="describe">
-                2021年星巴克春季买一送一活动，活动时间：2021.5.12-6.15每天！下午！3:00!
-              </div>
-            </div>
-          </li>
-          <li>
-            <img src="../../../../assets/img/面点王.png" alt="" />
-            <div class="content">
-              <div class="head">【面点王】</div>
-              <div class="describe">
-                回馈新老用户，凡是在本店消费满99元可赠送20元代金券，2021.04.31前有效！
-              </div>
-            </div>
-          </li>
-        </ul>
+            </li>
+          </ul>
+        </div>
       </div>
     </IOCLeft>
     <!-- <div class="box"> eqweqe</div> -->
@@ -105,10 +89,31 @@ import * as echarts from "echarts";
 import { EleResize } from "assets/js/echarts";
 export default {
   name: "HomePage",
-  data () {
+  data() {
     return {
       //   isShow:true,
       fade: false,
+      animateUp: false,
+      timer: null,
+      businessList: [
+        {
+          src: require("../../../../assets/img/真功夫.png"),
+          title: "真功夫",
+          desc: "2021.06.01-2021.08.31期间，所有菜品8折优惠。",
+        },
+        {
+          src: require("../../../../assets/img/星巴克.png"),
+          title: "星巴克",
+          desc:
+            " 2021年星巴克春季买一送一活动，活动时间：2021.5.12-6.15每天！下午！3:00!",
+        },
+        {
+          src: require("../../../../assets/img/面点王.png"),
+          title: "面点王",
+          desc:
+            "回馈新老用户，凡是在本店消费满99元可赠送20元代金券，2021.04.31前有效！",
+        },
+      ],
       listType: ["餐饮", "娱乐", "文化", "健康", "教育", "购物"],
       listBuilding: ["1栋", "2栋", "3栋", "A座", "B座", "C座"],
       imgList: [
@@ -128,7 +133,6 @@ export default {
         require("../../../../assets/img/99.png"),
         require("../../../../assets/img/100.png"),
         require("../../../../assets/img/101.png"),
-
       ],
       waitList: [
         require("../../../../assets/img/入驻商家1.png"),
@@ -180,27 +184,33 @@ export default {
       ],
     };
   },
-  components: {
-    // Left,
-    // Right
-  },
+
   methods: {
-    changePSMonths (val) {
+    scrollAnimate() {
+      this.animateUp = true;
+      setTimeout(() => {
+        this.businessList.push(this.businessList[0]);
+        this.businessList.shift();
+        this.animateUp = false;
+      }, 500);
+    },
+    changePSMonths(val) {
       console.log(val);
       this.AssetsAndEquipment();
 
       // this.popularServiceFun();
     },
-    changePSYears (val) {
+    changePSYears(val) {
       console.log(val);
       this.AssetsAndEquipment();
 
       // this.popularServiceFun();
     },
-    meetEchartInit () {
+
+    meetEchartInit() {
       var dom = this.$refs["store"];
       var data = [29.09, 12.73, 25.45, 14.55, 10.91, 7.27];
-      var lable = ['餐饮', '健康', '娱乐', '教育', '文化', '购物'];
+      var lable = ["餐饮", "健康", "娱乐", "教育", "文化", "购物"];
 
       var option = {
         tooltip: {
@@ -233,12 +243,12 @@ export default {
             fontSize: 12,
             opacity: 0.7,
           },
-          formatter: function (name) {
+          formatter: function(name) {
             var i = 0;
             i += 1;
             return name + "  " + data[lable.indexOf(name)];
           },
-          data: lable
+          data: lable,
         },
         series: [
           {
@@ -265,7 +275,7 @@ export default {
       };
       this.$redomEchart(dom, option);
     },
-    AssetsAndEquipment () {
+    AssetsAndEquipment() {
       var dom = this.$refs["store_top"];
       var option = {
         title: {
@@ -326,7 +336,7 @@ export default {
             type: "value",
             splitNumber: 2,
             axisLabel: {
-              formatter: function (value) {
+              formatter: function(value) {
                 return value;
               },
             },
@@ -385,11 +395,14 @@ export default {
       this.$redomEchart(dom, option);
     },
   },
-  created () { },
-  destroyed () { },
-  mounted () {
+  created() {},
+  destroyed() {
+    clearInterval(this.timer);
+  },
+  mounted() {
     this.meetEchartInit();
     this.AssetsAndEquipment();
+    this.timer = setInterval(this.scrollAnimate, 2000);
 
     //   console.log(event.data);
   },
@@ -417,35 +430,46 @@ export default {
       height: 2.5rem /* 200/80 */;
     }
   }
+
   .store_discount {
     color: #ffffff;
-
-    .outer {
-      padding-left: 0.1625rem /* 13/80 */;
-      margin-top: 0.25rem /* 20/80 */;
-      & > li {
-        display: flex;
+    .box {
+      height: 3.25rem /* 260/80 */;
+      overflow: hidden;
+      .outer {
+        padding-left: 0.1625rem /* 13/80 */;
         margin-top: 0.25rem /* 20/80 */;
-        img {
-          width: 0.675rem /* 54/80 */;
-          height: 0.675rem /* 54/80 */;
-        }
-        .content {
-          margin-left: 0.175rem /* 15/80 */;
-          .head {
-            font-size: 0.175rem /* 14/80 */ /* 15/80 */;
-            opacity: 0.7;
+ 
+
+        & > li {
+          display: flex;
+          margin-top: 0.25rem /* 20/80 */;
+          img {
+            width: 0.675rem /* 54/80 */;
+            height: 0.675rem /* 54/80 */;
           }
-          .describe {
-            width: 90%;
-            //    width: 3.1rem /* 248/80 */;
-            font-size: 0.175rem /* 14/80 */;
-            font-family: Microsoft YaHei;
-            font-weight: 400;
-            line-height: 0.3rem /* 24/80 */;
+          .content {
+            margin-left: 0.175rem /* 15/80 */;
+            .head {
+              font-size: 0.175rem /* 14/80 */ /* 15/80 */;
+              opacity: 0.7;
+            }
+            .describe {
+              width: 90%;
+              //    width: 3.1rem /* 248/80 */;
+              font-size: 0.175rem /* 14/80 */;
+              font-family: Microsoft YaHei;
+              font-weight: 400;
+              line-height: 0.3rem /* 24/80 */;
+            }
           }
         }
+        
       }
+      .animate-up {
+          transition: all .5s ease-in-out;
+          transform: translateY(-1.0875rem /* 87/80 */ /* 87/80 */);
+        }
     }
   }
   .store_list {
