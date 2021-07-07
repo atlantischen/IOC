@@ -37,6 +37,11 @@ export default {
       } catch (e) { }
     },
   },
+  beforeCreate () {
+    if (process.env.NODE_ENV === "production") {
+      this.$router.push("/comprehensiveSituational/homePage");
+    }
+  },
   created () {
     if (window.vuplex) {
       this.addMessageListener();
@@ -62,7 +67,7 @@ export default {
       window.debug = true;
     } else {
       this.url = process.env.VUE_APP_UNITY;
-      this.url = "http://183.62.170.2:8110";
+      // this.url = "http://183.62.170.2:8110";
     }
   },
   mounted () {

@@ -36,7 +36,6 @@
         </div>
         <div class="count">停车数量合计:<NumCounter class="num" :value="1369"></NumCounter>辆</div>
 
-
         <div id="park_time"  ref="park_time"></div>
       </div>
     </IOCLeft>
@@ -380,12 +379,10 @@ export default {
         //   },
         // },
         grid: {
-          top: "45",
+          top: "50",
           left: "0",
-          // right: "30",
-          // bottom: "50",
           x2: 0,
-          y2: 20,
+          y2: -30,
           containLabel: true,
         },
         tooltip: {
@@ -393,7 +390,7 @@ export default {
           trigger: "axis",
         },
         legend: {
-          top: 50,
+          top: 10,
           right: 0,
           data: ["临时卡", "月卡"],
           textStyle: {
