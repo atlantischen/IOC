@@ -308,7 +308,7 @@ export default {
     changeDatasFun () {
       let _data = JSON.parse(JSON.stringify(this.tableData2))
       let _first = (this.currentPage - 1) * 10
-      this.tableData = _data.splice(_first, (_first + 10))
+      this.tableData = _data.slice(_first, (_first + 10))
     },
     handleSizeChange (val) {
       console.log(`每页 ${val} 条`);
@@ -578,20 +578,6 @@ export default {
       position: absolute;
       bottom: 0;
       right: 0;
-      text-align: right;
-      padding: 0.25rem /* 20/80 */;
-      .el-pager li,
-      .btn-next,
-      .btn-prev {
-        color: #fff;
-        background-color: transparent;
-      }
-      .el-pager {
-        .active {
-          color: #fff;
-          background: #4396f3;
-        }
-      }
     }
   }
 }

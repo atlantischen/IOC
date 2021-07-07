@@ -33,7 +33,7 @@ export default {
   },
   mounted () {
     window.addEventListener("message", this.event, true);
-    console.log(process.env.NODE_ENV,'process.env.VUE_APP_NODE_ENV');
+    console.log(process.env.NODE_ENV, 'process.env.VUE_APP_NODE_ENV');
   },
   beforeDestory () {
     window.removeEventListener("message", this.event, true);

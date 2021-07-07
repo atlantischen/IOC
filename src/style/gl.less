@@ -287,3 +287,34 @@ i {
     border-radius: 0;
   }
 }
+
+// 分页
+.qx_pagination {
+  text-align: right;
+  padding: 0.25rem /* 20/80 */;
+  .el-pager li,
+  .btn-next,
+  .btn-prev {
+    color: #fff;
+    background-color: transparent;
+  }
+  .el-pager {
+    .active {
+      color: #fff;
+      background: #4396f3;
+    }
+  }
+
+  button:disabled {
+    background-color: transparent;
+  }
+  .el-pagination__total {
+    color: @textColor;
+  }
+  .page_slot {
+    text-align: center;
+    font-weight: normal;
+    color: @textColor;
+    margin-right: 0.125rem /* 10/80 */;
+  }
+}

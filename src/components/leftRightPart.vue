@@ -71,6 +71,7 @@ export default {
   }
   .y_right {
     .allcom {
+      width: 100%;
       float: right;
     }
     right: 0.575rem /* 46/80 */;

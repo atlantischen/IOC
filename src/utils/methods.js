@@ -55,7 +55,7 @@ var paddingFun = function paddingFun(val) {
   }
   let _s = ''
   switch (true) {
-    case typeof val == 'array':
+    case typeof val == 'array' || typeof val == 'object':
       for (let i = 0; i < val.length; i++) {
         _s += val[i] == 0 ? '0 ' : val[i] / 80 + 'rem '
       }
