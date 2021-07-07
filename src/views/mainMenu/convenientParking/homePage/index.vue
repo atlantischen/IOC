@@ -22,8 +22,8 @@
             <div class="total">
               <span>总车位</span>
               <span class="font_text">
-                <NumCounter :value="item.totalPark"></NumCounter
-              ></span>
+                <NumCounter :value="item.totalPark"></NumCounter>
+                </span>
             </div>
           </li>
         </ul>
@@ -31,9 +31,12 @@
       <div class="park_time">
         <div class="tittle">停车时长统计</div>
         <div class="select">
-          <DropDown :list="yearsList" name="label" @_cg="changePSYears" />
-          <DropDown :list="momthsList" name="label" @_cg="changePSYears" />
+          <DropDown :list="yearsList" name="label"/>
+          <DropDown :list="momthsList" name="label"  />
         </div>
+        <div class="count">停车数量合计:<NumCounter class="num" :value="1369"></NumCounter>辆</div>
+
+
         <div id="park_time"  ref="park_time"></div>
       </div>
     </IOCLeft>
@@ -43,16 +46,18 @@
       <div class="revenue_total">
         <div class="tittle">营收总览</div>
         <div class="select">
-          <DropDown :list="yearsList" name="label" @_cg="changePSYears" />
+          <DropDown :list="yearsList" name="label"  />
         </div>
+        <div class="count">停车场营收合计:<NumCounter class="num" :value="2496.852"></NumCounter>元</div>
+
         <div id="revenue_total" ref="revenue_total"></div>
       </div>
       <div class="car_trend">
         <div class="tittle">车辆进出场走势统计</div>
         <div class="select">
-          <DropDown :list="yearsList" name="label" @_cg="changePSYears" />
-          <DropDown :list="momthsList" name="label" @_cg="changePSYears" />
-          <DropDown :list="dateList" name="label" @_cg="changePSYears" />
+          <DropDown :list="yearsList" name="label"  />
+          <DropDown :list="momthsList" name="label" />
+          <DropDown :list="dateList" name="label" />
         </div>
         <div id="car_trend" ref="car_trend"></div>
       </div>
@@ -191,38 +196,38 @@ export default {
     AssetsAndEquipment () {
       var dom = this.$refs["park_time"]
       var option = {
-        title: {
-          text: "{a|停车数量合计：}{b|" + 1369 + "}{c|辆}",
-          left: "0",
-          top: "10",
-          // subtext: '会议数',
-          subtextStyle: {
-            color: "#fff",
-          },
-          textStyle: {
-            rich: {
-              a: {
-                fontSize: 14,
-                color: "#fff",
-                fontFamily: "Microsoft YaHei",
-                opacity: 0.7,
-              },
-              b: {
-                fontSize: 20,
-                color: "ffff",
-                fontFamily: "BYfont",
-              },
-              c: {
-                fontSize: 12,
-                fontWeight: "bold",
-                padding: [0, 5],
-                color: "#fff",
-              },
-            },
-          },
-        },
+        // title: {
+        //   text: "{a|停车数量合计：}{b|" + 1369 + "}{c|辆}",
+        //   left: "0",
+        //   top: "10",
+        //   // subtext: '会议数',
+        //   subtextStyle: {
+        //     color: "#fff",
+        //   },
+        //   textStyle: {
+        //     rich: {
+        //       a: {
+        //         fontSize: 14,
+        //         color: "#fff",
+        //         fontFamily: "Microsoft YaHei",
+        //         opacity: 0.7,
+        //       },
+        //       b: {
+        //         fontSize: 20,
+        //         color: "ffff",
+        //         fontFamily: "BYfont",
+        //       },
+        //       c: {
+        //         fontSize: 12,
+        //         fontWeight: "bold",
+        //         padding: [0, 5],
+        //         color: "#fff",
+        //       },
+        //     },
+        //   },
+        // },
         grid: {
-          top: "70",
+          top: "30",
           left: "0",
           right: "0",
           bottom: "0",
@@ -344,38 +349,38 @@ export default {
     revenueInit () {
       var dom = this.$refs["revenue_total"]
       var option = {
-        title: {
-          text: "{a|停车场营收合计：}{b|" + "2.496.852" + "}{c|元}",
-          left: "0",
-          top: "10",
-          // subtext: '会议数',
-          subtextStyle: {
-            color: "#fff",
-          },
-          textStyle: {
-            rich: {
-              a: {
-                fontSize: 14,
-                color: "#fff",
-                fontFamily: "Microsoft YaHei",
-                opacity: 0.7,
-              },
-              b: {
-                fontSize: 20,
-                color: "ffff",
-                fontFamily: "BYfont",
-              },
-              c: {
-                fontSize: 12,
-                fontWeight: "bold",
-                padding: [0, 5],
-                color: "#fff",
-              },
-            },
-          },
-        },
+        // title: {
+        //   text: "{a|停车场营收合计：}{b|" + "2.496.852" + "}{c|元}",
+        //   left: "0",
+        //   top: "10",
+        //   // subtext: '会议数',
+        //   subtextStyle: {
+        //     color: "#fff",
+        //   },
+        //   textStyle: {
+        //     rich: {
+        //       a: {
+        //         fontSize: 14,
+        //         color: "#fff",
+        //         fontFamily: "Microsoft YaHei",
+        //         opacity: 0.7,
+        //       },
+        //       b: {
+        //         fontSize: 20,
+        //         color: "ffff",
+        //         fontFamily: "BYfont",
+        //       },
+        //       c: {
+        //         fontSize: 12,
+        //         fontWeight: "bold",
+        //         padding: [0, 5],
+        //         color: "#fff",
+        //       },
+        //     },
+        //   },
+        // },
         grid: {
-          top: "100",
+          top: "45",
           left: "0",
           // right: "30",
           // bottom: "50",

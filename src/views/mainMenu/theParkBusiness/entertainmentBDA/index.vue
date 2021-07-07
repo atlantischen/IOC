@@ -303,7 +303,6 @@ export default {
       &>li{
         display: flex;
         align-items: center;
-        margin-bottom: .375rem /* 30/80 */;
         padding-left: .15rem /* 12/80 */;
         img{
           margin: 0 .275rem /* 22/80 */ 0 .225rem /* 18/80 */;
@@ -317,9 +316,10 @@ export default {
           font-size:.175rem /* 14/80 *//* 0.14/80 */ /* 20/80 */ ;
         }
       }
-      &>li:last-child{
-        margin-bottom: 0;
+      &>li:nth-child(-n+7){
+        margin-bottom: .375rem /* 30/80 */;
       }
+
     }
   }
 }
