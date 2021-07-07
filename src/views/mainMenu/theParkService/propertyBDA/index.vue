@@ -80,31 +80,28 @@ export default {
       ],
       // 右侧
       rightInfo: [
-        {
-          title: "近7天访客统计",
-          type: "PedestrianPosture",
-          datas: {
-            eHeight: null,
-            padding: null,
-            smooth: true,
-            unit: ["日期", "人"],
-            xData: [
-              "4.13",
-              "4.14",
-              "4.15",
-              "4.16",
-              "4.17",
-              "4.18",
-              "4.19",
-            ],
-            datas: [
-              [300, 390, 300, 210, 350, 450, 320],
-            ],
-          },
-        },
-        {
-          title: "今日访客进出车辆",
-        },
+        // {
+        //   title: "工单汇总",
+        //   type: "PedestrianPosture",
+        //   datas: {
+        //     eHeight: null,
+        //     padding: null,
+        //     smooth: true,
+        //     unit: ["日期", "人"],
+        //     xData: [
+        //       "4.13",
+        //       "4.14",
+        //       "4.15",
+        //       "4.16",
+        //       "4.17",
+        //       "4.18",
+        //       "4.19",
+        //     ],
+        //     datas: [
+        //       [300, 390, 300, 210, 350, 450, 320],
+        //     ],
+        //   },
+        // },
       ],
     }
   },

@@ -16,7 +16,7 @@ export default {
   name: "MainMenu",
   data () {
     return {
-      isShow: true,
+      isShow: false,
       url: "",
     };
   },
@@ -36,11 +36,6 @@ export default {
         }
       } catch (e) { }
     },
-  },
-  beforeCreate () {
-    if (process.env.NODE_ENV === "production") {
-      // this.$router.push("/comprehensiveSituational/homePage");
-    }
   },
   created () {
     if (window.vuplex) {
