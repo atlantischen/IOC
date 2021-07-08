@@ -85,9 +85,9 @@ export default {
           title: "工单汇总",
           type: 'TableList',
           datas: {
-            eHeight: 600,
+            eHeight: 590,
             padding: null,
-            pageSize: 15,
+            pageSize: 13,
             header: {
               orderType: '工单类型',
               createrName: '工单创建人',

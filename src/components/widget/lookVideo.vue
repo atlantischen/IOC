@@ -16,9 +16,9 @@
           </video>
           <div class="videoSet">
             <!-- <i class="currentTime"> 2021年07月05日 </i> -->
-            <i class="currentTime" ref="currentTimeRef">
-              {{ $currentDate($refs.currentTimeRef) }}</i
-            >
+            <i class="currentTime" id="currentTimeRef" ref="currentTimeRef"
+              >{{ $currentDate() }}
+            </i>
             <i class="videoLocal">16楼333333</i>
             <i
               class="iconfont x_c vs_bg vs_full"
@@ -34,6 +34,7 @@
 </template>
 
 <script>
+import { nextTick } from '@vue/runtime-core';
 export default {
   name: "LookVideo",
   props: {
@@ -53,12 +54,11 @@ export default {
   data () {
     return {
       dialogVisible: false,
-      isFullscreen: false
+      isFullscreen: false,
+      timer: null
     };
   },
   components: {},
-  mounted () {
-  },
   watch: {
     Visible: {
       handler (newVal, oldVal) {
@@ -67,7 +67,21 @@ export default {
       deep: true
     }
   },
+  mounted () {
+    this.currentD()
+  },
+  beforeDestroy () {
+    clearInterval(this.timer)
+  },
   methods: {
+    currentD () {
+      this.timer = setInterval(() => {
+        if (!this.$refs.currentTimeRef) {
+          return
+        }
+        this.$refs.currentTimeRef.innerHTML = this.$currentDate()
+      }, 1000);
+    },
     openClose (val) {
       this.dialogVisible = val
       this.$emit('off', val)

@@ -4,21 +4,29 @@ import {
 import * as echarts from 'echarts';
 const moment = require('moment')
 
-var currentDate = function currentDate(dom) {
-  let _d, _a
+var currentDate = function currentDate() {
+  let _d
   switch (moment(new Date()).format('d')) {
+    case '1':
+      _d = '一'
+      break;
+    case '2':
+      _d = '二'
+      break;
+    case '3':
+      _d = '三'
+      break;
     case '4':
       _d = '四'
+      break;
+    case '5':
+      _d = '五'
+      break;
     default:
       _d = '-'
       break;
   }
-  setInterval(() => {
-    console.log(moment(new Date()).format(`YYYY年MM月DD日 星期${_d} HH:mm:ss`))
-    _a = moment(new Date()).format('YYYY年MM月DD日 星期' + _d + ' HH:mm:ss')
-  }, 1000);
-  // dom.innerHTML = _a
-  return _a
+  return moment(new Date()).format('YYYY年MM月DD日 星期' + _d + ' HH:mm:ss')
 }
 
 /**
