@@ -31,7 +31,7 @@ export default {
   components: { DataMode, VideoMode },
   data () {
     return {
-      activeName: 'first'
+      activeName: 'second'
     }
   },
   methods: {

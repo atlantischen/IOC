@@ -2,9 +2,13 @@
   <!-- 视频模式 -->
   <div class="videoMode">
     <ul class="videoMode_Box x_sb_rap">
-      <li v-for="i in 12" :key="i" @click="lookVideo(i)"></li>
+      <li
+        v-for="(item, i) in videoDatas"
+        :key="i"
+        @click="lookVideo(item)"
+      ></li>
     </ul>
-    <QDialog :Visible="Visible" @off="openCloseDialog" />
+    <LookVideo :Visible="Visible" :title="dialogTitle" @off="openCloseDialog" />
   </div>
 </template>
 
@@ -14,6 +18,7 @@ export default {
   data () {
     return {
       Visible: false,
+      dialogTitle: '',
       videoDatas: [
         {
           id: 1,
@@ -62,31 +67,7 @@ export default {
         {
           id: 12,
           local: '16楼C区铭筑'
-        },
-        {
-          id: 13,
-          local: '16楼C区铭筑'
-        },
-        {
-          id: 14,
-          local: '16楼C区铭筑'
-        },
-        {
-          id: 15,
-          local: '16楼C区铭筑'
-        },
-        {
-          id: 16,
-          local: '16楼C区铭筑'
-        },
-        {
-          id: 17,
-          local: '16楼C区铭筑'
-        },
-        {
-          id: 18,
-          local: '16楼C区铭筑'
-        },
+        }
       ]
     }
   },
@@ -96,7 +77,9 @@ export default {
       this.Visible = val
     },
     lookVideo (val) {
+      this.dialogTitle = val.local
       this.openCloseDialog(true)
+      console.log(val)
     }
   }
 }

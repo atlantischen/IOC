@@ -2,6 +2,25 @@ import {
   EleResize
 } from '@/assets/js/echarts'
 import * as echarts from 'echarts';
+const moment = require('moment')
+
+var currentDate = function currentDate(dom) {
+  let _d, _a
+  switch (moment(new Date()).format('d')) {
+    case '4':
+      _d = '四'
+    default:
+      _d = '-'
+      break;
+  }
+  setInterval(() => {
+    console.log(moment(new Date()).format(`YYYY年MM月DD日 星期${_d} HH:mm:ss`))
+    _a = moment(new Date()).format('YYYY年MM月DD日 星期' + _d + ' HH:mm:ss')
+  }, 1000);
+  dom.innerHTML = _a
+  return _a
+}
+
 /**
  * @author
  * @description echart共用方法
@@ -78,10 +97,48 @@ var eHeightFun = function eHeightFun(val) {
   }
   return val ? 'height:' + val / 80 + 'rem;' : ''
 }
+
+
+/**
+ * @author
+ * @description 全屏/取消全屏
+ * @param {val  bool}
+ * @returns {handle}
+ */
+var Fullscreen = function Fullscreen(val, bool) {
+  const element = val
+  // console.log(element);
+  if (bool) {
+    if (document.exitFullscreen) {
+      document.exitFullscreen()
+    } else if (document.webkitCancelFullScreen) {
+      document.webkitCancelFullScreen()
+    } else if (document.mozCancelFullScreen) {
+      document.mozCancelFullScreen()
+    } else if (document.msExitFullscreen) {
+      document.msExitFullscreen()
+    }
+  } else {
+    if (element.requestFullscreen) {
+      element.requestFullscreen()
+    } else if (element.webkitRequestFullScreen) {
+      element.webkitRequestFullScreen()
+    } else if (element.mozRequestFullScreen) {
+      element.mozRequestFullScreen()
+    } else if (element.msRequestFullscreen) {
+      // IE11
+      element.msRequestFullscreen()
+    }
+  }
+}
+
+
 const fun = {
+  currentDate,
   redomEchart,
   uuid,
   paddingFun,
-  eHeightFun
+  eHeightFun,
+  Fullscreen
 }
 export default fun

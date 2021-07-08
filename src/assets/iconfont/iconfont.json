@@ -6,6 +6,27 @@
   "description": "奇信智能-智慧园区管理平台",
   "glyphs": [
     {
+      "icon_id": "5203295",
+      "name": "缩小",
+      "font_class": "suoxiao",
+      "unicode": "e633",
+      "unicode_decimal": 58931
+    },
+    {
+      "icon_id": "4933360",
+      "name": "录像",
+      "font_class": "luxiang",
+      "unicode": "e740",
+      "unicode_decimal": 59200
+    },
+    {
+      "icon_id": "19657959",
+      "name": "屏幕_全屏",
+      "font_class": "fullScreen",
+      "unicode": "e627",
+      "unicode_decimal": 58919
+    },
+    {
       "icon_id": "741051",
       "name": "浏览模式",
       "font_class": "liulanmoshi",
