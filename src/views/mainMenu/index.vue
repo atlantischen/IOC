@@ -38,6 +38,7 @@ export default {
     },
   },
   beforeCreate () {
+    console.log(process.env.NODE_ENV,'process.env.NODE_ENV');
     if (process.env.NODE_ENV === "production") {
       this.$router.push("/comprehensiveSituational/homePage");
     }
@@ -63,11 +64,9 @@ export default {
     if (this.getQueryString("debug")) {
       console.log("我是debug!!");
       this.url = "";
-      // console.log(window.debug,'debug');
       window.debug = true;
     } else {
       this.url = process.env.VUE_APP_UNITY;
-      this.url = "http://183.62.170.2:8110";
     }
   },
   mounted () {
@@ -93,11 +92,6 @@ export default {
           } else {
             this.isShow = true;
           }
-          // if(res.action === "hide"){
-          //   console.log('我是测试~~~~·');
-          //   // this.$routr.push('/empty')
-          //      this.isShow = false;
-          // }
         }
       });
     },

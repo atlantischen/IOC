@@ -23,12 +23,46 @@
       </div>
       <div class="file">
         <div class="tittle">文件广播</div>
-        <audio
+        <div class="outline" >
+           <audio
+          class="dn"
           src="./忐忑-龚琳娜.mp3"
           ref="audio"
           id="video_id"
-          controls="controls"
+          :preload="audio.preload"
+          @play="onPlay" 
+          @error="onError"
+          @waiting="onWaiting"
+          @pause="onPause" 
+          @timeupdate="onTimeupdate" 
+          @loadedmetadata="onLoadedmetadata"
         ></audio>
+        <div class="audio_box">
+          <div class="tips">{{transPlayPause}}</div>
+          <div class="slider">
+             <el-slider v-model="sliderTime" :format-tooltip="formatProcessToolTip" @change="changeCurrentTime"></el-slider>
+            </div> 
+          <div class="control">
+            <span @click="startPlayOrPause">
+              <img :src="audio.playing?require('../../../../assets/img/bfz_pic.png'):require('../../../../assets/img/bf_pic.png')" alt="">
+            </span>
+            <span>
+              <img src="../../../../assets/img/ds_pic.png" alt="">
+            </span><span>
+              <img src="../../../../assets/img/kj_pic.png" alt="">
+            </span>
+            <span>
+              <img src="../../../../assets/img/yb_pic.png" alt="">
+            </span>
+            <span>
+              <img src="../../../../assets/img/sy_pic.png" alt="">
+            </span>
+            <div class="volume">
+                <el-slider  v-model="volume" :format-tooltip="formatVolumeToolTip" @change="changeVolume"></el-slider>
+            </div> 
+            
+           </div> 
+        </div>
         <div class="file_selection">
           <span>{{text}}</span>
         <div class="file_btn">
@@ -36,23 +70,67 @@
           选择文件
         </div>
         </div>
-      
         <button @click="handleStar1">开始播放</button>
         <button @click="handleStar2">停止播放</button>
         <button @click="handleStar3">暂停播放</button>
         <button @click="handleStar4">继续播放</button>
+        </div>
+       
       </div>
     </IOCLeft>
   </div>
 </template>
 
 <script>
+ function realFormatSecond(second) {
+    var secondType = typeof second
+
+    if (secondType === 'number' || secondType === 'string') {
+      second = parseInt(second)
+      var hours = Math.floor(second / 3600)
+      second = second - hours * 3600
+      var mimute = Math.floor(second / 60)
+      second = second - mimute * 60
+
+      return hours + ':' + ('0' + mimute).slice(-2) + ':' + ('0' + second).slice(-2)
+    } else {
+      return '0:00:00'
+    }
+  }
 export default {
   name: "publicBroadcast",
   data() {
     return {
       activeIndex: null,
       text:'',
+       audio: {
+          currentTime: 0,
+          maxTime: 0,
+          playing: false,
+          muted: false,
+          speed: 1,
+          waiting: true,
+          preload: 'auto'
+        },
+
+        sliderTime: 0,
+        volume: 100,
+        speeds: this.theSpeeds,
+
+        controlList: {
+          // 不显示下载
+          noDownload: false,
+          // 不显示静音
+          noMuted: false,
+          // 不显示音量条
+          noVolume: false,
+          // 不显示进度条
+          noProcess: false,
+          // 只能播放一个
+          onlyOnePlaying: false,
+          // 不要快进按钮
+          noSpeed: false
+        }
     };
   },
   components: {},
@@ -71,26 +149,137 @@ export default {
       this.onInputFileChange();
     },
     handleStar1() {
-      this.$refs.audio.play();
+      this.startPlay()
     },
     handleStar2() {
       this.$refs.audio.currentTime = 0;
-      this.$refs.audio.pause();
+      this.pausePlay();
+
     },
     handleStar3() {
-      this.$refs.audio.pause();
+      this.pausePlay();
     },
     handleStar4() {
-      this.$refs.audio.play();
+      this.startPlay()
+
     },
+     setControlList () {
+        let controlList = this.theControlList.split(' ')
+        controlList.forEach((item) => {
+          if(this.controlList[item] !== undefined){
+            this.controlList[item] = true
+          }
+        })
+      },
+      changeSpeed() {
+        let index = this.speeds.indexOf(this.audio.speed) + 1
+        this.audio.speed = this.speeds[index % this.speeds.length]
+        this.$refs.audio.playbackRate = this.audio.speed
+      },
+      startMutedOrNot() {
+        this.$refs.audio.muted = !this.$refs.audio.muted
+        this.audio.muted = this.$refs.audio.muted
+      },
+      // 音量条toolTip
+      formatVolumeToolTip(index) {
+        return '音量条: ' + index
+      },
+      // 进度条toolTip
+      formatProcessToolTip(index = 0) {
+        index = parseInt(this.audio.maxTime / 100 * index)
+        return '进度条: ' + realFormatSecond(index)
+      },
+      // 音量改变
+      changeVolume(index = 0) {
+        this.$refs.audio.volume = index / 100
+        this.volume = index
+      },
+      // 播放跳转
+      changeCurrentTime(index) {
+        this.$refs.audio.currentTime = parseInt(index / 100 * this.audio.maxTime)
+      },
+      startPlayOrPause() {
+        return this.audio.playing ? this.pausePlay() : this.startPlay()
+      },
+      // 开始播放
+      startPlay() {
+        this.$refs.audio.play()
+      },
+      // 暂停
+      pausePlay() {
+        this.$refs.audio.pause()
+      },
+      // 当音频暂停
+      onPause () {
+        this.audio.playing = false
+      },
+      // 当发生错误, 就出现loading状态
+      onError () {
+        this.audio.waiting = true
+      },
+      // 当音频开始等待
+      onWaiting (res) {
+        console.log(res)
+      },
+      // 当音频开始播放
+      onPlay (res) {
+        console.log(res)
+        this.audio.playing = true
+        this.audio.loading = false
+        if(!this.controlList.onlyOnePlaying){
+          return 
+        }
+
+        let target = res.target
+
+        let audios = document.getElementsByTagName('audio');
+
+        [...audios].forEach((item) => {
+          if(item !== target){
+            item.pause()
+          }
+        })
+      },
+      // 当timeupdate事件大概每秒一次，用来更新音频流的当前播放时间
+      onTimeupdate(res) {
+        // console.log('timeupdate')
+        // console.log(res)
+        this.audio.currentTime = res.target.currentTime
+        this.sliderTime = parseInt(this.audio.currentTime / this.audio.maxTime * 100)
+      },
+      // 当加载语音流元数据完成后，会触发该事件的回调函数
+      // 语音元数据主要是语音的长度之类的数据
+      onLoadedmetadata(res) {
+        console.log('loadedmetadata')
+        console.log(res)
+        this.audio.waiting = false
+        this.audio.maxTime = parseInt(res.target.duration)
+      }
   },
+  computed: {
+
+      transPlayPause() {
+        return !this.audio.playing ? '已停止'+realFormatSecond(this.audio.currentTime) : '播放中'+ realFormatSecond(this.audio.currentTime)
+      },
+     
+    },
 };
-</script>
+</script>el-slider__button-wrapper
 
 <style lang="less" scoped>
-.position {
-  // top: 2.25rem /* 180/80 */;
+.el-slider{
+  width: 80%;
+  margin: 0 auto;
+  /deep/.el-slider__button {
+        width: 0.266667rem;
+        height: 0.166667rem;
+        border: 0.026667rem solid #fff;
+        background-color: #4396F3;
+        border-radius: 30%;
+ 
 }
+}
+
 .play {
   .btn {
     display: flex;
@@ -119,6 +308,92 @@ export default {
 }
 
 .file {
+  .outline{
+    padding:.1875rem /* 15/80 *//* 20/80 */;
+  }
+  .dn{
+    display: none;
+  }
+  .audio_box{
+    width: 4.375rem /* 350/80 */ /* 322/80 */;
+    height: 1.525rem /* 122/80 */;
+    background: #192939;  
+    border: 1px solid #4396F3;
+    margin: 0 auto;
+    .tips{
+      height: .475rem /* 38/80 */;
+      width: 100%;
+      background: #283649;
+      padding-left: .1875rem /* 15/80 */;
+      line-height: .475rem;
+    }
+    .slider{
+      position: relative;
+      display: flex;
+      align-items: center;
+
+      
+    }
+    .slider::before{
+      content: '';
+      width: .1625rem /* 13/80 */;
+      height: .075rem /* 6/80 */;
+      position: absolute;
+      left: .0625rem /* 5/80 */;
+      background-image: url('../../../../assets/img/zb_pic.png');
+    }
+    .slider::after{
+      content: '';
+      width: .1625rem /* 13/80 */;
+      height: .075rem /* 6/80 */;
+      position: absolute;
+      right: .0625rem /* 5/80 */;
+      background-image: url('../../../../assets/img/ybtb_pic.png');
+    }
+    .control{
+      display: flex;   
+      align-items: center; 
+      height: .525rem /* 42/80 */;
+      padding: 0  0.0625rem;
+      span{
+        margin-right: .25rem /* 20/80 */;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+      }
+      span:nth-child(1){
+        img{
+          width: .475rem /* 38/80 */;
+          height: .475rem /* 38/80 */;
+        }
+        
+      }
+      span:nth-child(2){
+        img{
+          width: .1125rem /* 9/80 */ /* 38/80 */;
+          height: .1125rem /* 38/80 */;
+        }
+      }
+      span:nth-child(3),span:nth-child(4){
+        img{
+          width: .1rem /* 8/80 */ /* 9/80 */ /* 38/80 */;
+          height: .1rem /* 38/80 */;
+        }
+      }
+       span:nth-child(5){
+        img{
+          width: .175rem /* 14/80 */ /* 9/80 */ /* 38/80 */;
+          height: .1375rem /* 11/80 */ /* 38/80 */;
+        }
+      }
+      .volume{
+        width: 1.25rem /* 100/80 *//* 30/80 */;
+      }
+      
+      
+      }
+  }
   .file_selection{
   display: flex;
   margin: 0.1875rem /* 15/80 */ 0;
@@ -149,13 +424,14 @@ export default {
   }
 }
   button {
+    float: right;
     width: 0.95rem /* 76/80 */;
     height: 0.4rem /* 32/80 */;
     background: #101f32;
     border: 0px solid #4396f3;
     border-radius: 0.05rem /* 4/80 */;
     color: #fff;
-    margin-right: 0.075rem /* 6/80 */;
+    margin-left: 0.075rem /* 6/80 */;
   }
 }
 </style>
