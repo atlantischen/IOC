@@ -27,13 +27,13 @@ export default {
     },
   },
 
-  beforeCreate () {
-    if (process.env.NODE_ENV == "production")
-      this.$router.push("/comprehensiveSituational/homePage");
-  },
+  // beforeCreate () {
+  //   if (process.env.NODE_ENV == "production")
+  //     this.$router.push("/comprehensiveSituational/homePage");
+  // },
   mounted () {
     window.addEventListener("message", this.event, true);
-    console.log(process.env.NODE_ENV, 'process.env.VUE_APP_NODE_ENV');
+    
   },
   beforeDestory () {
     window.removeEventListener("message", this.event, true);
