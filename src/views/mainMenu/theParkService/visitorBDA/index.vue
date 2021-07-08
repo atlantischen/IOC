@@ -1,6 +1,7 @@
 <template>
   <!-- 访客大数据分析 -->
   <div class="visitorBDA">
+    <ServiceSystem />
     <LeftRight>
       <template #left>
         <Allcom :_Info="leftInfo" />
@@ -99,7 +100,13 @@ export default {
           datas: {
             eHeight: null,
             padding: null,
-            header: ['访客车牌', '访客姓名', '进/出场类型', '时间'],
+            pageSize: 8,
+            header: {
+              licence: '访客车牌',
+              ownerName: '访客姓名',
+              type: '进/出场类型',
+              time: '时间'
+            },
             tabelD: [
               {
                 licence: '粤B1026B',

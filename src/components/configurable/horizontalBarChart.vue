@@ -155,6 +155,7 @@ export default {
   }
   .horizontalBar_tp {
     text-align: right;
+    margin-right: 0.3125rem /* 25/80 */;
     .text_s();
     span {
       .datas_s();

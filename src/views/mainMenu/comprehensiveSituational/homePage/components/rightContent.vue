@@ -109,7 +109,7 @@
           </el-table-column>
           <el-table-column prop="" label="操作">
             <template #default="scope">
-              <button class="zhuizong" @click="zhuizongFun(scope.row)">
+              <button class="bt_df zhuizong" @click="zhuizongFun(scope.row)">
                 追踪
               </button>
             </template>
@@ -558,15 +558,7 @@ export default {
         white-space: nowrap;
       }
       .zhuizong {
-        min-width: 50px;
-        height: 0.325rem /* 26/80 */;
-        line-height: 0.325rem /* 26/80 */;
-        padding: 0;
-        background: transparent;
-        color: #4696f3;
-        border: 1px solid #4696f3;
-        border-radius: 4px;
-        cursor: pointer;
+        padding: 0 8px;
       }
     }
     .el-table--border::after,

@@ -1,6 +1,7 @@
 <template>
   <!-- 园区服务home -->
   <div class="homePage">
+    <ServiceSystem />
     <LeftRight>
       <template #left>
         <div class="serviceOverviewAll">

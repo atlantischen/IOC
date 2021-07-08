@@ -58,10 +58,17 @@ export default {
             { offset: 1, color: "rgb(0, 255, 255, 0.1)" },
           ],
           [
-            { offset: 0, color: "rgba(255, 217, 0, 1)" },
-            { offset: 1, color: "rgba(255, 217, 0, 0.1)" },
+            { offset: 0, color: "rgba(205, 168, 87, 1)" },
+            { offset: 1, color: "rgba(205, 168, 87, 0.1)" },
+          ],
+          [
+            { offset: 0, color: "rgba(226, 28, 28, 1)" },
+            { offset: 1, color: "rgba(226, 28, 28, .1)" },
           ],
         ]
+      if (names.indexOf('次要') != -1) {
+        colorRange.splice(0, 1)
+      }
       for (let i = 0; i < datas.length; i++) {
         allD[i] = {
           name: names ? names[i] : '',
@@ -168,7 +175,7 @@ export default {
           }
         })
       };
-      if (units) {
+      if (units && units[0]) {
         for (let key in showLb) {
           option.xAxis[0].axisLabel[key] = showLb[key]
         }

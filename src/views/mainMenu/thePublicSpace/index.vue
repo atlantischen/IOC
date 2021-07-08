@@ -3,7 +3,6 @@
 <template>
   <!-- 公共空间 -->
   <div class="ThePublicSpace">
-    公共空间
     <router-view></router-view>
   </div>
 </template>
@@ -11,12 +10,12 @@
 <script>
 export default {
   name: 'ThePublicSpace',
-  data(){
-    return{
+  data () {
+    return {
     }
   },
-  components:{ },
-  methods:{
+  components: {},
+  methods: {
   }
 }
 </script>

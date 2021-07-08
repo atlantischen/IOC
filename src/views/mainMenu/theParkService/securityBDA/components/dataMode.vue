@@ -1,6 +1,6 @@
 <template>
-  <!-- 物业大数据分析 -->
-  <div class="propertyBDA">
+  <!-- 数据模式 -->
+  <div class="dataMode">
     <ServiceSystem />
     <LeftRight>
       <template #left>
@@ -16,66 +16,58 @@
 
 <script>
 export default {
-  name: 'propertyBDA',
+  name: 'dataMode',
   data () {
     return {
+      activeName: 'first',
       leftInfo: [
         {
           title: "今日设备统计",
-          type: "horizontalBarChart",
+          type: "WaterLevel",
           datas: {
-            datas2: [
-              {
-                name: '设备总数',
-                value: 10900
-              }
-            ],
+            tipD: {
+              name: '告警总数:',
+              value: 224,
+              unit: '个',
+              other: '(风险指数越高，园区风险越大)'
+            },
             data: [
               {
-                name: "在线",
-                value: "9672",
+                name: "次要风险",
+                value: "172",
               },
               {
-                name: "离线",
-                value: "523",
+                name: "重要风险",
+                value: "29",
               },
               {
-                name: "告警",
-                value: "334",
-              },
-              {
-                name: "故障",
-                value: "371",
-              },
+                name: "严重风险",
+                value: "23",
+              }
             ],
           },
         },
         {
-          title: "近七天工单统计",
+          title: "近七天告警趋势",
           type: "singleBarChart",
           datas: {
-            // eHeight: 220,
+            eHeight: 250,
             xAxisD: [
-              "6.26",
-              "6.27",
-              "6.28",
-              "6.29",
-              "6.30",
-              "7.1",
-              "7.2"
+              "6.1",
+              "6.2",
+              "6.3",
+              "6.4",
+              "6.5",
+              "6.6",
+              "6.7"
             ],
-            datas2: [
-              {
-                name: '工单数',
-                value: 1067
-              },
-              {
-                name: '未处理工单数',
-                value: 129
-              },
+            names: ['次要', '重要', '严重'],
+            units: ["", "个"],
+            datas: [
+              [51, 36, 47, 34, 44, 28, 48],
+              [18, 13, 17, 31, 10, 9, 5],
+              [17, 3, 2, 11, 12, 4, 2],
             ],
-            units: ["日期", "个"],
-            datas: [[90, 190, 100, 70, 200, 100, 60]],
           },
         },
       ],
