@@ -17,7 +17,7 @@ var currentDate = function currentDate(dom) {
     console.log(moment(new Date()).format(`YYYY年MM月DD日 星期${_d} HH:mm:ss`))
     _a = moment(new Date()).format('YYYY年MM月DD日 星期' + _d + ' HH:mm:ss')
   }, 1000);
-  dom.innerHTML = _a
+  // dom.innerHTML = _a
   return _a
 }
 
