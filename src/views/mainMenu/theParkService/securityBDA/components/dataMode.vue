@@ -74,157 +74,166 @@ export default {
       // 右侧
       rightInfo: [
         {
-          title: "工单汇总",
+          title: "未解决告警",
           type: 'TableList',
           datas: {
-            eHeight: 600,
+            eHeight: 500,
             padding: null,
-            pageSize: 15,
+            pageSize: 10,
             header: {
-              orderType: '工单类型',
-              createrName: '工单创建人',
-              hdPeople: '处理人',
-              state: '状态',
+              warnLevel: '告警等级',
+              warnDevice: '告警设备',
+              warnDetail: '告警详情',
               handle: '操作',
             },
+            selectList: [
+              {
+                name: '全部',
+                value: 26
+              },
+              {
+                name: '严重',
+                value: 4
+              },
+              {
+                name: '重要',
+                value: 2
+              },
+              {
+                name: '次要',
+                value: 20
+              },
+            ],
             tabelD: [
               {
-                orderType: '物业保修',
-                createrName: '付春晖',
-                hdPeople: 'admin',
-                state: '处理中'
+                warnLevel: '严重',
+                warnDevice: 'F14-实验室非法闯入',
+                warnDetail: '非法人员闯入',
               },
               {
-                orderType: '会议室预定',
-                createrName: '陈云芳',
-                hdPeople: 'admin',
-                state: '超时'
+                warnLevel: '严重',
+                warnDevice: '周玲黑名单',
+                warnDetail: '黑名单报警',
               },
               {
-                orderType: '车位申请',
-                createrName: '夏少东',
-                hdPeople: 'admin',
-                state: '处理中'
+                warnLevel: '严重',
+                warnDevice: 'F16-1#空调故障',
+                warnDetail: '故障',
               },
               {
-                orderType: 'IT报修',
-                createrName: '曲优',
-                hdPeople: 'admin',
-                state: '完成'
+                warnLevel: '严重',
+                warnDevice: 'B1-水房-3#水机',
+                warnDetail: '故障',
               },
               {
-                orderType: '入驻办理',
-                createrName: '李志明',
-                hdPeople: 'admin',
-                state: '完成'
+                warnLevel: '重要',
+                warnDevice: 'F16-1#压力过大',
+                warnDetail: '风机压差超出',
               },
               {
-                orderType: '广告位申请',
-                createrName: '黄欣',
-                hdPeople: 'admin',
-                state: '完成'
+                warnLevel: '重要',
+                warnDevice: 'B1-水房',
+                warnDetail: '生活水箱',
               },
               {
-                orderType: '物业保修',
-                createrName: '田骄',
-                hdPeople: 'admin',
-                state: '完成'
+                warnLevel: '次要',
+                warnDevice: '15F-#温湿度传感器超...',
+                warnDetail: '送风温度超.',
               },
               {
-                orderType: 'IT报修',
-                createrName: '胡思安',
-                hdPeople: 'admin',
-                state: '完成'
+                warnLevel: '次要',
+                warnDevice: '15F-#温湿度传感器超...',
+                warnDetail: '送风温度超.',
               },
               {
-                orderType: '入驻办理',
-                createrName: '吴大坤',
-                hdPeople: 'admin',
-                state: '完成'
+                warnLevel: '次要',
+                warnDevice: '15F-#温湿度传感器超...',
+                warnDetail: '送风温度超.',
               },
               {
-                orderType: '物业保修',
-                createrName: '刘虎娣',
-                hdPeople: 'admin',
-                state: '完成'
+                warnLevel: '次要',
+                warnDevice: '15F-#温湿度传感器超...',
+                warnDetail: '送风温度超.',
               },
               {
-                orderType: '入驻办理',
-                createrName: '谭珏',
-                hdPeople: 'admin',
-                state: '完成'
+                warnLevel: '次要',
+                warnDevice: '15F-#温湿度传感器超...',
+                warnDetail: '送风温度超.',
               },
               {
-                orderType: 'IT报修',
-                createrName: '王咚咚',
-                hdPeople: 'admin',
-                state: '完成'
+                warnLevel: '次要',
+                warnDevice: '15F-#温湿度传感器超...',
+                warnDetail: '送风温度超.',
               },
               {
-                orderType: '会议室预定',
-                createrName: '蔡迪',
-                hdPeople: 'admin',
-                state: '完成'
+                warnLevel: '次要',
+                warnDevice: '15F-#温湿度传感器超...',
+                warnDetail: '送风温度超.',
               },
               {
-                orderType: '物业保修',
-                createrName: '石俊',
-                hdPeople: 'admin',
-                state: '完成'
+                warnLevel: '次要',
+                warnDevice: '15F-#温湿度传感器超...',
+                warnDetail: '送风温度超.',
               },
               {
-                orderType: '会议室预定',
-                createrName: '史娜',
-                hdPeople: 'admin',
-                state: '完成'
+                warnLevel: '次要',
+                warnDevice: '15F-#温湿度传感器超...',
+                warnDetail: '送风温度超.',
               },
               {
-                orderType: '车位申请',
-                createrName: '胡韩振',
-                hdPeople: 'admin',
-                state: '完成'
+                warnLevel: '次要',
+                warnDevice: '15F-#温湿度传感器超...',
+                warnDetail: '送风温度超.',
               },
               {
-                orderType: '会议室预定',
-                createrName: '章经信',
-                hdPeople: 'admin',
-                state: '完成'
+                warnLevel: '次要',
+                warnDevice: '15F-#温湿度传感器超...',
+                warnDetail: '送风温度超.',
               },
               {
-                orderType: '物业保修',
-                createrName: '刘生',
-                hdPeople: 'admin',
-                state: '完成'
+                warnLevel: '次要',
+                warnDevice: '15F-#温湿度传感器超...',
+                warnDetail: '送风温度超.',
               },
               {
-                orderType: '车位申请',
-                createrName: '林金',
-                hdPeople: 'admin',
-                state: '完成'
+                warnLevel: '次要',
+                warnDevice: '15F-#温湿度传感器超...',
+                warnDetail: '送风温度超.',
               },
               {
-                orderType: '物业保修',
-                createrName: '秦风明',
-                hdPeople: 'admin',
-                state: '完成'
+                warnLevel: '次要',
+                warnDevice: '15F-#温湿度传感器超...',
+                warnDetail: '送风温度超.',
               },
               {
-                orderType: '物业保修',
-                createrName: '昊岳',
-                hdPeople: 'admin',
-                state: '完成'
+                warnLevel: '次要',
+                warnDevice: '15F-#温湿度传感器超...',
+                warnDetail: '送风温度超.',
               },
               {
-                orderType: '物业保修',
-                createrName: '管简君',
-                hdPeople: 'admin',
-                state: '完成'
+                warnLevel: '次要',
+                warnDevice: '15F-#温湿度传感器超...',
+                warnDetail: '送风温度超.',
               },
               {
-                orderType: '车位申请',
-                createrName: '安吉里',
-                hdPeople: 'admin',
-                state: '完成'
+                warnLevel: '次要',
+                warnDevice: '15F-#温湿度传感器超...',
+                warnDetail: '送风温度超.',
+              },
+              {
+                warnLevel: '次要',
+                warnDevice: '15F-#温湿度传感器超...',
+                warnDetail: '送风温度超.',
+              },
+              {
+                warnLevel: '次要',
+                warnDevice: '15F-#温湿度传感器超...',
+                warnDetail: '送风温度超.',
+              },
+              {
+                warnLevel: '次要',
+                warnDevice: '15F-#温湿度传感器超...',
+                warnDetail: '送风温度超.',
               },
             ]
           }

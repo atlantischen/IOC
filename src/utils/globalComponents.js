@@ -11,6 +11,7 @@ import SearchBox from '../components/widget/searchBox.vue' // 搜索框
 import TipBox from '../components/widget/tipBox.vue' // 提示框
 import RightAlert from '../components/widget/rightAlert.vue' // 右侧警告框
 import NoT from '../components/widget/noneTing.vue' // noneTing
+import QDialog from '../components/widget/qDialog.vue' // 弹框
 
 const global = {
   ...configurable,
@@ -25,6 +26,7 @@ const global = {
   SearchBox,
   TipBox,
   RightAlert,
-  NoT
+  NoT,
+  QDialog
 }
 export default global
