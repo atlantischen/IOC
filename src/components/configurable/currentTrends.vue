@@ -34,38 +34,43 @@ export default {
       timer: null,
       OutputValList: null,
       //
-      speed: 0,
-    }
+      speed: 0
+    };
   },
   mounted () {
-    this.OutputValList = this.datas.currentTrendsDatas
-    // this.getDatas()
+    this.OutputValList = this.datas.currentTrendsDatas;
+    this.$nextTick(() => {
+      this.getDatas();
+    });
   },
-  beforeDestroy () {
-    // clearInterval(this.timer)
-  },
+  // beforeDestroy () {
+  //   clearInterval(this.timer)
+  // },
   methods: {
-    // getDatas () {
-    //   // var box = document.getElementById("currentTrendsRef");
-    //   var box = this.$refs.currentTrendsRef
-    //   console.log(box.childNodes)
-    //   console.log(box.offsetHeight)
-    //   console.log(box.children[0])
-    //   var _s = 0
-    //   this.timer = setInterval(scrol, 1000);
-    //   function scrol () {
-    //     _s += 40
-    //     box.style.transform = `translateY(-${_s}px)`;
-    //     console.log(box.scrollTop)
-    //   }
-    // }
+    getDatas () {
+      // var box = document.getElementById("currentTrendsRef");
+      // // var box = this.$refs.currentTrendsRef
+      // console.log(box.children[0].offsetTop);
+      // console.log(box.children[1].offsetTop);
+      // var _s = 0;
+      // this.timer = setInterval(scrol, 1000);
+      // function scrol () {
+      //   box.style.transform = `translateY(0)`;
+      //   setTimeout(() => {
+      //     _s += box.children[1].offsetTop - box.children[0].offsetTop
+      //     box.appendChild(box.firstElementChild)
+      //     box.style.transform = `translateY(-${_s}px)`;
+      //     // box.children[0].remove()
+      //   }, 1000);
+      // }
+    }
   }
 };
 </script>
 
 <style lang="less" scoped>
 @import "~@/style/gl.less";
-// 前言动态
+// 前沿动态
 .currentTrendsAll {
   width: 100%;
   .currentTrends_ul {

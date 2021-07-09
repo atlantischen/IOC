@@ -29,7 +29,7 @@ import './assets/css/reset.css' //公共样式重置
 import './style/animation.less'
 import './style/index.less' //公共样式文件
 import 'animate.css' //引入动画
-
+import './utils/moveIt.js'
 
 for (var key in globalComponents) {
   app.component(key, globalComponents[key])

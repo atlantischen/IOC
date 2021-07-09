@@ -12,6 +12,7 @@ import TipBox from '../components/widget/tipBox.vue' // 提示框
 import RightAlert from '../components/widget/rightAlert.vue' // 右侧警告框
 import NoT from '../components/widget/noneTing.vue' // noneTing
 import LookVideo from '../components/widget/lookVideo.vue' // 查看视频
+import MoveDialog from '../components/widget/moveDialog.vue'
 
 const global = {
   ...configurable,
@@ -27,6 +28,7 @@ const global = {
   TipBox,
   RightAlert,
   NoT,
-  LookVideo
+  LookVideo,
+  MoveDialog
 }
 export default global

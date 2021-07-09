@@ -1,5 +1,9 @@
 <template>
-  <div class="tableListAll">
+  <div
+    class="tableListAll"
+    @mouseover="hoverItem('in')"
+    @mouseout="hoverItem('out')"
+  >
     <div class="tittle">{{ title }}</div>
     <ul class="tableList_ul x_sb_rap" v-show="datas.selectList">
       <li
@@ -67,7 +71,10 @@
                 </button>
               </span>
               <span v-else-if="ii == 'handle'">
-                <button class="hd_detail bt_df" @click="getDetailFun(item)">
+                <button
+                  class="hd_detail bt_df"
+                  @click="getDetailFun(_data, item, true)"
+                >
                   详情
                 </button>
               </span>
@@ -91,11 +98,19 @@
         ></el-pagination
       >
     </div>
+    <WarnD :_data="WarnDDatas" :show="WarnDShow" @close="getDetailFun" />
+    <WorkOrderD
+      :_data="WorkOrderDDatas"
+      :show="WorkOrderDShow"
+      @close="getDetailFun"
+    />
   </div>
 </template>
 
 <script>
 import * as echarts from "echarts";
+import WarnD from './tableList_c/warnD.vue'
+import WorkOrderD from './tableList_c/workOrderD.vue'
 export default {
   name: "tableListAll",
   props: {
@@ -103,6 +118,7 @@ export default {
       type: Object
     }
   },
+  components: { WarnD, WorkOrderD },
   data () {
     return {
       ...this._data,
@@ -111,7 +127,12 @@ export default {
       total: 1,
       tableData: [],
       total_data: [],
-      s_timer: null
+      s_timer: null,
+      // detail
+      WarnDDatas: [],
+      WarnDShow: false,
+      WorkOrderDDatas: [],
+      WorkOrderDShow: false,
     }
   },
   created () {
@@ -143,8 +164,31 @@ export default {
       }
       console.log(val)
     },
-    getDetailFun (val) {
-      console.log(val)
+    getDetailFun (val, val2, bool) {
+      console.log(val, val2)
+      switch (val.title) {
+        case '未解决告警':
+          console.log('未解决告警')
+          if (this.WarnDShow && bool) {
+            this.$message.info('请先关闭告详情警窗口！')
+            return
+          }
+          this.WarnDDatas = [val, val2]
+          this.WarnDShow = bool
+          break;
+        case '工单汇总':
+          console.log('工单汇总')
+          if (this.WorkOrderDShow && bool) {
+            this.$message.info('请先关闭工单详情窗口！')
+            return
+          }
+          this.WorkOrderDDatas = [val, val2]
+          this.WorkOrderDShow = bool
+          break;
+        default:
+          this.WorkOrderDDatas = []
+          break;
+      }
     },
     changeDatasFun () {
       this.total = this.total_data.length
@@ -168,6 +212,16 @@ export default {
         }
         this.changeDatasFun()
       }, 3000);
+    },
+    hoverItem (val) {
+      switch (val) {
+        case "in":
+          this.changeDatasFun()
+          break;
+        default:
+          clearInterval(this.s_timer)
+          break;
+      }
     }
   }
 };
