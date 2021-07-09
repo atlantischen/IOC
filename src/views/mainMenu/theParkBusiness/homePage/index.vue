@@ -298,6 +298,11 @@ export default {
         tooltip: {
           // show: false,
           trigger: "axis",
+           axisPointer:{
+                lineStyle:{
+                color:'transparent'
+              }
+              }
         },
         xAxis: [
           {
@@ -360,7 +365,7 @@ export default {
         ],
         series: [
           {
-            name: "其他",
+            // name: "其他",
             type: "bar",
             barWidth: 14,
             color: "#0090FF",

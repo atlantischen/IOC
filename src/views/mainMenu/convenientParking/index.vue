@@ -3,7 +3,7 @@
 <template>
   <!-- 便捷停车 -->
   <div class="convenientParking">
-    便捷停车
+    
     <router-view></router-view>
   </div>
 </template>

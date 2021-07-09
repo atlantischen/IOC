@@ -13,7 +13,6 @@ export default {
   mounted() {
     this.animateValue(this.$refs.numberGrow, this.value, 2000);
 
-
   },
   methods: {
     animateValue(obj, end, duration) {
@@ -24,7 +23,7 @@ export default {
         const progress = Math.min((timestamp - startTimestamp) / duration, 1);
         const y = String(end).indexOf(".") + 1;
         if (y > 0) {
-          const res = (progress * (end - start) + start).toFixed(3);
+          const res = (progress * (end - start) + start).toFixed(2);
           obj.innerHTML = res;
         } else {
           obj.innerHTML = Math.floor(progress * (end - start) + start);

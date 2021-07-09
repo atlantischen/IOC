@@ -38,7 +38,6 @@ export default {
     },
   },
   beforeCreate () {
-    console.log(process.env.NODE_ENV,'process.env.NODE_ENV');
     if (process.env.NODE_ENV === "production") {
       this.$router.push("/comprehensiveSituational/homePage");
     }
@@ -52,7 +51,7 @@ export default {
     window.addEventListener("message", (event) => {
       if ((typeof event.data == 'string' && event.data.indexOf('data') != -1) || (typeof event.data == 'object' && event.data.data != undefined)) {
         let res = JSON.parse(event.data)
-        console.log(res, 'res');
+        // console.log(res, 'res');
         this.$store.commit("setData", res);
         if (res.data === "IOCHOME") {
           this.isShow = true;
