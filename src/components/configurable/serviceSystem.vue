@@ -268,7 +268,8 @@ export default {
         padding: 0 10px;
         cursor: pointer;
         &.actived {
-          background: rgba(0, 0, 255, 0.5);
+          background: url("~@/assets/img/datas/zh_box2.png") no-repeat;
+          background-size: contain;
         }
         .ss_img {
           .ioc_img(50px, 50px, 50%);

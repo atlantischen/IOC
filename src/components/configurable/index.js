@@ -34,7 +34,7 @@ const configurable = {
   EnergyTrend, // 能耗态势
   EquipmentSituation, // 设备态势
   FavorablePolicy, // 优惠政策
-  CurrentTrends, // 前言动态
+  CurrentTrends, // 前沿动态
   FocusIndustry, // (聚焦产业)
   CompaniesList, // 企业列表
   EnterprisesSettled, // 待入驻企业

@@ -1,13 +1,14 @@
 <template>
   <!-- 视频模式 -->
   <div class="videoMode">
-    <LeftRight>
-      <template #left>
-        <Allcom :_Info="leftInfo" />
-      </template>
-      <template #center> </template>
-      <template #right> </template>
-    </LeftRight>
+    <ul class="videoMode_Box x_sb_rap">
+      <li
+        v-for="(item, i) in videoDatas"
+        :key="i"
+        @click="lookVideo(item)"
+      ></li>
+    </ul>
+    <LookVideo :Visible="Visible" :title="dialogTitle" @off="openCloseDialog" />
   </div>
 </template>
 
@@ -16,46 +17,90 @@ export default {
   name: 'videoMode',
   data () {
     return {
-      activeName: 'first',
-      leftInfo: [
+      Visible: false,
+      dialogTitle: '',
+      videoDatas: [
         {
-          title: "今日设备统计",
-          type: "horizontalBarChart",
-          datas: {
-            datas2: [
-              {
-                name: '设备总数',
-                value: 10900
-              }
-            ],
-            data: [
-              {
-                name: "在线",
-                value: "9672",
-              },
-              {
-                name: "离线",
-                value: "523",
-              },
-              {
-                name: "告警",
-                value: "334",
-              },
-              {
-                name: "故障",
-                value: "371",
-              },
-            ],
-          },
+          id: 1,
+          local: '16楼C区铭筑'
         },
-      ],
+        {
+          id: 2,
+          local: '14楼A区铭筑'
+        },
+        {
+          id: 3,
+          local: '15楼D区铭筑'
+        },
+        {
+          id: 4,
+          local: '16楼C区铭筑'
+        },
+        {
+          id: 5,
+          local: '16楼C区铭筑'
+        },
+        {
+          id: 6,
+          local: '16楼C区铭筑'
+        },
+        {
+          id: 7,
+          local: '16楼C区铭筑'
+        },
+        {
+          id: 8,
+          local: '16楼C区铭筑'
+        },
+        {
+          id: 9,
+          local: '16楼C区铭筑'
+        },
+        {
+          id: 10,
+          local: '16楼C区铭筑'
+        },
+        {
+          id: 11,
+          local: '16楼C区铭筑'
+        },
+        {
+          id: 12,
+          local: '16楼C区铭筑'
+        }
+      ]
     }
   },
   components: {},
   methods: {
+    openCloseDialog (val) {
+      this.Visible = val
+    },
+    lookVideo (val) {
+      this.dialogTitle = val.local
+      this.openCloseDialog(true)
+      console.log(val)
+    }
   }
 }
 </script>
 
 <style lang='less' scoped>
+.videoMode_Box {
+  width: 20.45rem /* 1636/80 */;
+  height: 8.55rem /* 684/80 */;
+  position: fixed;
+  top: 1.875rem /* 150/80 */;
+  left: 50%;
+  transform: translate(-50%, 0%);
+  -webkit-transform: translate(-50%, 0%);
+  z-index: 108;
+  li {
+    width: 5rem /* 400/80 */;
+    height: 2.75rem /* 220/80 */;
+    background: #111;
+    border-radius: 0.0625rem /* 5/80 */;
+    cursor: pointer;
+  }
+}
 </style>

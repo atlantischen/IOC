@@ -1,18 +1,20 @@
 <template>
   <div class="currentTrendsAll">
     <div class="tittle">{{ title }}</div>
-    <ul class="currentTrends_ul" :style="$paddingFun(datas.padding)">
-      <li
-        class="currentTrends_li"
-        v-for="(t, i) in datas.currentTrendsDatas"
-        :key="i"
+    <div class="scrollTop" id="scrollTop">
+      <ul
+        class="currentTrends_ul"
+        id="currentTrendsRef"
+        :style="$paddingFun(datas.padding)"
       >
-        <span class="LineBeyond x_c">{{ t.title }}</span>
-        <span>
-          <p class="Multi-lineBeyond">{{ t.content }}</p>
-        </span>
-      </li>
-    </ul>
+        <li class="currentTrends_li" v-for="(t, i) in OutputValList" :key="i">
+          <span class="LineBeyond x_c">{{ t.title }}</span>
+          <span>
+            <p class="Multi-lineBeyond">{{ t.content }}</p>
+          </span>
+        </li>
+      </ul>
+    </div>
   </div>
 </template>
 
@@ -28,35 +30,76 @@ export default {
   data () {
     return {
       ...this._data,
-      ids: this.$uuid()
-    }
+      ids: this.$uuid(),
+      timer: null,
+      OutputValList: null,
+      //
+      speed: 0
+    };
   },
   mounted () {
-    // this.energyTrendFun(this.datas)
+    this.OutputValList = this.datas.currentTrendsDatas;
+    this.$nextTick(() => {
+      this.getDatas();
+    });
   },
+  // beforeDestroy () {
+  //   clearInterval(this.timer)
+  // },
   methods: {
+    getDatas () {
+      // var box = document.getElementById("currentTrendsRef");
+      // // var box = this.$refs.currentTrendsRef
+      // var _s = 0;
+      // let _d = box.cloneNode(true)
+      // this.timer = setInterval(scrol, 1500);
+      // function scrol () {
+      //   _d = box.cloneNode(true)
+      //   if (box.children.length > 0) {
+      //     box.children[0].parentNode.appendChild(_d.children[0])
+      //   }
+      //   setTimeout(() => {
+      //     _s += box.children[1].offsetTop - box.children[0].offsetTop
+      //     // _s = box.children[1].offsetTop - box.children[0].offsetTop
+      //     box.style.transform = `translateY(-${_s}px)`;
+      //     if (box.children.length > 0) {
+      //       _d.removeChild(_d.children[0])
+      //     }
+      //     console.log(_d)
+      //     console.log(box)
+      //   }, 0);
+      // }
+    }
   }
 };
 </script>
 
 <style lang="less" scoped>
 @import "~@/style/gl.less";
-// 前言动态
+// 前沿动态
 .currentTrendsAll {
   width: 100%;
   .currentTrends_ul {
-    padding: 0 15px;
+    // height: 2.25rem /* 180/80 */;
+    padding: 0 0.1875rem /* 15/80 */;
+    // overflow: hidden;
+    transition: all 0.5s ease;
+  }
+  .scrollTop {
+    height: 2.25rem /* 180/80 */;
+    overflow: hidden;
   }
   .currentTrends_li {
     display: flex;
-    margin-bottom: 10px;
+    height: 0.625rem /* 50/80 */;
+    margin-bottom: 0.125rem /* 10/80 */;
     span {
-      padding: 10px 5px;
+      padding: 0.125rem /* 10/80 */ 0.0625rem /* 5/80 */;
       &:first-child {
         width: 30%;
         background: #4396f3;
-        border-radius: 5px 0 0 5px;
-        font-size: 18px;
+        border-radius: 0.0625rem /* 5/80 */ 0 0 0.0625rem /* 5/80 */;
+        font-size: 0.225rem /* 18/80 */;
       }
       &:nth-child(2) {
         width: 70%;

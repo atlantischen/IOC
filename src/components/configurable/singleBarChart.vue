@@ -66,7 +66,7 @@ export default {
             { offset: 1, color: "rgba(226, 28, 28, .1)" },
           ],
         ]
-      if (names.indexOf('次要') != -1) {
+      if (names && names.indexOf('次要') != -1) {
         colorRange.splice(0, 1)
       }
       for (let i = 0; i < datas.length; i++) {
@@ -106,12 +106,12 @@ export default {
         xAxis: [
           {
             type: "category",
-            name: '{a|' + units[0] ? units[0] : "" + '}',
+            name: '{a|' + (units[0] ? units[0] : "") + '}',
             nameGap: 20,
             nameTextStyle: {
               rich: {
                 a: {
-                  padding: [0, 0, 0, -80],
+                  padding: [-25, 0, 0, -40],
                   color: '#fff'
                 }
               }

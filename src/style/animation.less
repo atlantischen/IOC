@@ -7,11 +7,15 @@
 }
 
 /*逐渐显示*/
-.toShow {
+
+.toShow(@time,@delay) {
   position: absolute;
-  animation: toShow 1.5s 0.5s;
+  animation: toShow @time @delay;
   animation-fill-mode: both !important;
   -webkit-animation-fill-mode: both !important;
+}
+.toShow {
+  .toShow(1.5s, 0.5s);
 }
 
 /* 放大效果*/

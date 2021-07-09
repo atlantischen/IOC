@@ -42,17 +42,27 @@ button {
   cursor: pointer;
 }
 // button
-
-.bt_df {
-  min-width: 0.5rem /* 40/80 */;
-  height: 0.325rem /* 26/80 */;
-  line-height: 0.325rem /* 26/80 */;
-  padding: 0 0.0625rem /* 5/80 */;
+._btn() {
+  cursor: pointer;
   background: transparent;
+  line-height: 1;
   color: #4696f3;
   border: 1px solid #4696f3;
+}
+
+.bt_df {
+  ._btn();
+  min-width: 0.5rem /* 40/80 */;
+  height: 0.325rem /* 26/80 */;
+  padding: 0 0.0625rem /* 5/80 */;
   border-radius: 4px;
-  cursor: pointer;
+}
+.bt_round {
+  ._btn();
+  min-width: 0.5rem /* 40/80 */;
+  height: 0.325rem /* 26/80 */;
+  padding: 0 0.15rem /* 12/80 */;
+  border-radius: 0.1625rem /* 13/80 */;
 }
 
 // 超出变省略号
@@ -108,6 +118,9 @@ i {
 
 .x_sa_rap {
   .flex(unset, center, space-around, wrap);
+}
+.x_sb_rap {
+  .flex(unset, center, space-between, wrap);
 }
 
 .x_fs_rap {
@@ -197,7 +210,7 @@ i {
   color: #fff;
   font-size: @fontSize;
   font-family: 'BYfont';
-  letter-spacing: 2px;
+  // letter-spacing: 2px;
 }
 
 // 文本统一
@@ -329,5 +342,78 @@ i {
     font-weight: normal;
     color: @textColor;
     margin-right: 0.125rem /* 10/80 */;
+  }
+}
+
+// color
+.y_red {
+  color: #e21c1c;
+}
+.y_yl {
+  color: #ffc659;
+}
+.y_sblue {
+  color: #00ffff;
+}
+
+.y_bd_red {
+  border-color: #e21c1c;
+  color: #e21c1c;
+}
+.y_bd_yl {
+  border-color: #ffc659;
+  color: #ffc659;
+}
+.y_bd_sblue {
+  border-color: #00ffff;
+  color: #00ffff;
+}
+
+// 弹框
+.qDialog {
+  .el-overlay {
+    overflow: hidden;
+    .el-dialog {
+      top: -6vh;
+      min-width: 3.75rem /* 300/80 */;
+      min-height: 3.75rem /* 300/80 */;
+      background: #0f1c2d;
+      overflow: hidden;
+      .el-dialog__header {
+        padding: 0.25rem /* 20/80 */ 0.25rem /* 20/80 */ 0;
+        .el-dialog__title {
+          font-size: 0.3rem /* 24/80 */;
+          color: #fff;
+        }
+        .el-dialog__headerbtn .el-dialog__close {
+          color: rgba(255, 255, 255, 0.9);
+        }
+        i {
+          font-size: 0.2875rem /* 23/80 */;
+        }
+      }
+
+      .el-dialog__body {
+        width: 100%;
+        padding: 0.25rem /* 20/80 */;
+      }
+
+      .el-table__body-wrapper::-webkit-scrollbar,
+      .el-dialog__body::-webkit-scrollbar {
+        width: 0.075rem /* 6/80 */;
+        height: 0.075rem /* 6/80 */;
+      }
+
+      .el-table__body-wrapper::-webkit-scrollbar-thumb,
+      .el-dialog__body::-webkit-scrollbar-thumb {
+        background-color: #ddd;
+        border-radius: 0.0375rem /* 3/80 */;
+      }
+
+      .el-dialog_footer {
+        font-size: 0.15rem /* 12/80 */;
+        color: #fff;
+      }
+    }
   }
 }

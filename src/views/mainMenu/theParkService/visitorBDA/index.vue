@@ -24,6 +24,7 @@ export default {
           title: "今日访客统计",
           type: "PedestrianPosture2",
           datas: {
+            eHeight: 240,
             names: ["进", "出"],
             unit: ["时间", "人"],
             xData: [
@@ -98,7 +99,7 @@ export default {
           title: "今日访客进出车辆",
           type: 'TableList',
           datas: {
-            eHeight: null,
+            eHeight: 420,
             padding: null,
             pageSize: 8,
             header: {
