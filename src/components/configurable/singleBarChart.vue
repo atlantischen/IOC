@@ -106,12 +106,12 @@ export default {
         xAxis: [
           {
             type: "category",
-            name: '{a|' + units[0] ? units[0] : "" + '}',
+            name: '{a|' + (units[0] ? units[0] : "") + '}',
             nameGap: 20,
             nameTextStyle: {
               rich: {
                 a: {
-                  padding: [0, 0, 0, -80],
+                  padding: [-25, 0, 0, -40],
                   color: '#fff'
                 }
               }

@@ -50,18 +50,24 @@ export default {
     getDatas () {
       // var box = document.getElementById("currentTrendsRef");
       // // var box = this.$refs.currentTrendsRef
-      // console.log(box.children[0].offsetTop);
-      // console.log(box.children[1].offsetTop);
       // var _s = 0;
-      // this.timer = setInterval(scrol, 1000);
+      // let _d = box.cloneNode(true)
+      // this.timer = setInterval(scrol, 1500);
       // function scrol () {
-      //   box.style.transform = `translateY(0)`;
+      //   _d = box.cloneNode(true)
+      //   if (box.children.length > 0) {
+      //     box.children[0].parentNode.appendChild(_d.children[0])
+      //   }
       //   setTimeout(() => {
       //     _s += box.children[1].offsetTop - box.children[0].offsetTop
-      //     box.appendChild(box.firstElementChild)
+      //     // _s = box.children[1].offsetTop - box.children[0].offsetTop
       //     box.style.transform = `translateY(-${_s}px)`;
-      //     // box.children[0].remove()
-      //   }, 1000);
+      //     if (box.children.length > 0) {
+      //       _d.removeChild(_d.children[0])
+      //     }
+      //     console.log(_d)
+      //     console.log(box)
+      //   }, 0);
       // }
     }
   }
