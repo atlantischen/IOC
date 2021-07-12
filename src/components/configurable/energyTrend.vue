@@ -8,7 +8,8 @@
     >
       <div class="energyTrend_l y_c">
         <span
-          ><i class="LineBeyond">{{ item.todayPower }}</i
+          ><i class="LineBeyond"
+            ><NumCounter :value="item.todayPower"></NumCounter></i
           >{{ item.unit }}</span
         >
         <span>今日{{ item.text }}</span>
@@ -175,6 +176,10 @@ export default {
       border-right: 0.00125rem /* 0.1/80 */ rgba(255, 255, 255, 0.2) dotted;
       padding-right: 0.1875rem /* 15/80 */;
       span:nth-child(1) {
+        vertical-align: text-bottom;
+        .num {
+          display: inline;
+        }
         .text_s();
         i {
           .datas_s();

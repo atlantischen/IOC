@@ -30,23 +30,30 @@
               <el-input v-model="ruleForm.type"></el-input>
             </el-form-item>
             <el-form-item label="报警原因：" prop="because">
-              <el-input
+              <textarea
+                class="bigBar"
+                runat="server"
+                rows="3"
+                v-model="ruleForm.because"
+              />
+              <!-- <el-input
                 v-show="isFade"
                 type="textarea"
                 :rows="3"
                 v-model="ruleForm.because"
-              ></el-input>
+              ></el-input> -->
             </el-form-item>
             <el-form-item label="处理人：" prop="handler">
               <el-input v-model="ruleForm.handler"></el-input>
             </el-form-item>
             <el-form-item label="处理结果：" prop="result">
-              <el-input
+              <!-- <el-input
                 v-show="isFade"
                 type="textarea"
                 :rows="3"
                 v-model="ruleForm.result"
-              ></el-input>
+              ></el-input> -->
+              <textarea class="bigBar" :rows="3" v-model="ruleForm.result" />
             </el-form-item>
           </el-form>
         </div>
@@ -207,12 +214,19 @@ export default {
       //   background: transparent;
       //   border-radius: 0;
       // }
-      .el-input__inner {
+      .el-input__inner,
+      textarea {
         color: rgba(255, 255, 255, 0.7);
         border: 1px solid rgba(67, 149, 243, 0.5);
         height: 0.4375rem /* 35/80 */;
         background: transparent;
         border-radius: 0;
+      }
+      textarea {
+        width: 100%;
+        padding: 0 15px;
+        font-size: 0.175rem /* 14/80 */;
+        resize: vertical;
       }
     }
   }

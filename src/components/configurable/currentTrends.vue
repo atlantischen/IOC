@@ -54,19 +54,17 @@ export default {
       // let _d = box.cloneNode(true)
       // this.timer = setInterval(scrol, 1500);
       // function scrol () {
-      //   _d = box.cloneNode(true)
+      //   console.log(_d.children)
+      //   console.log(box.children)
       //   if (box.children.length > 0) {
       //     box.children[0].parentNode.appendChild(_d.children[0])
       //   }
       //   setTimeout(() => {
       //     _s += box.children[1].offsetTop - box.children[0].offsetTop
-      //     // _s = box.children[1].offsetTop - box.children[0].offsetTop
       //     box.style.transform = `translateY(-${_s}px)`;
       //     if (box.children.length > 0) {
-      //       _d.removeChild(_d.children[0])
+      //       box.removeChild(_d.children[0])
       //     }
-      //     console.log(_d)
-      //     console.log(box)
       //   }, 0);
       // }
     }

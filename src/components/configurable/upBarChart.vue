@@ -61,11 +61,10 @@ export default {
             color: "#fff",
           },
           formatter: params => {
-            console.log(params)
             let dataStr = `<p style="font-weight:bold;font-size:.2rem;text-align:center;padding-bottom:.0625rem;">${params.name}</p>`
             dataStr += `<div>
                   <span style=" vertical-align: middle;margin-right:0.0625rem;width:0.15rem;height:0.12rem;border-radius:0.02rem;background:linear-gradient(to bottom, ${params.color.colorStops[0].color},${params.color.colorStops[1].color}"></span>
-                  <span> ${params.seriesName}    ${params.seriesIndex == 3 ? Math.abs(params.value) : params.value}</span>
+                  <span> ${params.seriesName ? params.seriesName + ":" : params.seriesName} ${params.value}</span>
                 </div>`
             return dataStr
           }

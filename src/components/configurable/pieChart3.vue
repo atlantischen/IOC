@@ -60,7 +60,7 @@ export default {
           },
         },
         legend: {
-          selectedMode: false,
+          selectedMode: true,
           show: optionName,
           orient: "horizontal", // 'vertical'
           left: "0",

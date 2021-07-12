@@ -115,6 +115,13 @@ export default {
                   },
                 },
               },
+              hoverAnimation: false,
+              // emphasis: {
+              //   itemStyle: {
+              //     show: false,
+              //     color: 'tran'
+              //   }
+              // },
               labelLine: {
                 show: false,
               },
@@ -210,7 +217,7 @@ export default {
                     fontSize: 24,
                     fontFamily: "BYfont",
                     fontWeight: "500",
-                    padding: [0, 5],
+                    padding: [2, 5],
                   },
                   b: {
                     color: "rgb(225,225,225,0.7)",

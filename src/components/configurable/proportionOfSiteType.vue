@@ -18,6 +18,7 @@
 </template>
 
 <script>
+import * as echarts from "echarts";
 export default {
   name: "proportionOfSiteType",
   props: {
@@ -25,20 +26,22 @@ export default {
       type: Object,
     },
   },
-  data() {
+  data () {
     return {
       ...this._data,
       ids: this.$uuid(),
     };
   },
-  created() {},
-  mounted() {
+  created () { },
+  mounted () {
     this.proportionOfSiteTypeFun(this.datas);
     this.proportionOfSiteType2Fun(this.datas);
   },
   methods: {
     // 会议室占比
-    proportionOfSiteTypeFun(val) {
+    proportionOfSiteTypeFun (val) {
+      var dom = this.$refs["proportionOfSiteTypeEchart_" + this.ids]
+      var myChart = echarts.init(dom)
       let { optionName, datas, name } = val.hys;
       var j = 0,
         colors = [
@@ -54,6 +57,26 @@ export default {
           "#fff",
         ];
       var option = {
+        tooltip: {
+          show: true,
+          trigger: 'item',
+          axisPointer: {
+            type: 'line',
+            lineStyle: {
+              type: 'dashed',
+              width: 0.5,
+              color: 'rgba(255,255,255,0.8)'
+            }
+          },
+          backgroundColor: "rgba(0,0,0,0.8)",
+          borderWidth: 1,
+          borderColor: "#4396f3",
+          padding: [10, 15],
+          extraCssText: 'box-shadow:inset 0 0 8px rgba(67, 149, 243, 0.6);',
+          textStyle: {
+            color: "#fff",
+          }
+        },
         title: [
           {
             show: true,
@@ -79,13 +102,13 @@ export default {
           containLabel: true,
         },
         legend: {
-          selectedMode: false,
+          selectedMode: true,
           show: true,
           orient: "vertical", // 'horizontal'
           left: "65%",
           y: "center",
           data: optionName,
-          formatter: function(name) {
+          formatter: function (name) {
             // return "{a|" + name + "}" + datas[j++] + "%";
             return "{a|" + name + "}";
           },
@@ -126,6 +149,9 @@ export default {
             data: [],
           },
           {
+            tooltip: {
+              show: false
+            },
             type: "pie",
             animation: false,
             radius: ["0", "60%"],
@@ -147,7 +173,7 @@ export default {
           {
             value: datas[i],
             name: optionName[i],
-            selected: i == optionName.length - 1,
+            // selected: i == optionName.length - 1,
             itemStyle: {
               color: colors[i],
             },
@@ -157,19 +183,47 @@ export default {
             itemStyle: {
               color: "#ffffff00",
             },
+            tooltip: {
+              show: false
+            },
             label: { show: false },
           }
         );
       }
       this.$redomEchart(
-        this.$refs["proportionOfSiteTypeEchart_" + this.ids],
+        dom,
         option
       );
+      myChart.dispatchAction({
+        type: 'highlight',
+        seriesIndex: 0,
+        dataIndex: 7
+      });
     },
     // 场地占比
-    proportionOfSiteType2Fun(val) {
+    proportionOfSiteType2Fun (val) {
       let { optionName, datas, name } = val.cd;
       var option = {
+        tooltip: {
+          show: true,
+          trigger: 'item',
+          axisPointer: {
+            type: 'line',
+            lineStyle: {
+              type: 'dashed',
+              width: 0.5,
+              color: 'rgba(255,255,255,0.8)'
+            }
+          },
+          backgroundColor: "rgba(0,0,0,0.8)",
+          borderWidth: 1,
+          borderColor: "#4396f3",
+          padding: [10, 15],
+          extraCssText: 'box-shadow:inset 0 0 8px rgba(67, 149, 243, 0.6);',
+          textStyle: {
+            color: "#fff",
+          }
+        },
         title: [
           {
             show: true,
@@ -195,13 +249,13 @@ export default {
           containLabel: true,
         },
         legend: {
-          selectedMode: false,
+          selectedMode: true,
           show: true,
           orient: "vertical", // 'horizontal'
           left: "65%",
           y: "center",
           data: optionName,
-          formatter: function(name) {
+          formatter: function (name) {
             // return "{a|" + name + "}" + datas[j++] + "%";
             return "{a|" + name + "}";
           },
@@ -253,6 +307,9 @@ export default {
           },
           {
             type: "pie",
+            tooltip: {
+              show: false
+            },
             animation: false,
             radius: ["0", "55%"],
             center: ["30%", "50%"],

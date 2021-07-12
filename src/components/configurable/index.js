@@ -55,6 +55,6 @@ const configurable = {
   PedestrianPosture2, // 折线（今日访客统计）
   TableList, // table(今日访客进出车辆)
   PyramidChart, // 金字塔(本月企业服务办理TOP4)
-  WaterLevel, // 金字塔(本月企业服务办理TOP4)
+  WaterLevel, //
 }
 export default configurable

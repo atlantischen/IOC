@@ -4,7 +4,9 @@
     <div class="equipmentSituation">
       <ul class="equipmentSituation_datas">
         <li class="y_c" v-for="(item, i) in datas.equipmentSDatas" :key="i">
-          <span class="LineBeyond">{{ item.value }}</span>
+          <span class="LineBeyond"
+            ><NumCounter :value="item.value"></NumCounter
+          ></span>
           <span>{{ item.name }}</span>
         </li>
       </ul>
@@ -39,7 +41,33 @@ export default {
     equipmentSituationFun (val) {
       const { names, xAxisName, datas } = val
       var option = {
-        tooltip: {},
+        tooltip: {
+          trigger: "item",
+          axisPointer: {
+            type: 'line',
+            lineStyle: {
+              type: 'dashed',
+              width: 0.5,
+              color: 'rgba(255,255,255,0.8)'
+            }
+          },
+          backgroundColor: "rgba(0,0,0,0.8)",
+          borderWidth: 1,
+          borderColor: "#4396f3",
+          padding: [5, 10],
+          extraCssText: 'box-shadow:inset 0 0 8px rgba(67, 149, 243, 0.6);',
+          textStyle: {
+            color: "#fff",
+          },
+          formatter: params => {
+            let dataStr = `<p style="font-weight:bold;font-size:.2rem;text-align:center;padding-bottom:.0625rem;">${params.name}</p>`
+            dataStr += `<div>
+                  <span style=" vertical-align: middle;margin-right:0.0625rem;width:0.15rem;height:0.12rem;border-radius:0.02rem;background:linear-gradient(to bottom, ${params.color.colorStops[0].color},${params.color.colorStops[1].color}"></span>
+                  <span> ${params.seriesName}: ${params.value}</span>
+                </div>`
+            return dataStr
+          }
+        },
         grid: {
           x: 10,
           y: 30,

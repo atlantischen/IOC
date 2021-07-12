@@ -147,6 +147,10 @@ export default {
       var optionName = ["200平以下", "200~500平", "500~1000平", "1000平以上"],
         datas = d;
       var option = {
+        tooltip: {
+          show: false,
+          // trigger: 'item',
+        },
         title: {
           show: true,
           text: "",
@@ -176,7 +180,7 @@ export default {
           },
         },
         legend: {
-          selectedMode: false,
+          selectedMode: true,
           show: true,
           orient: "vertical", // 'horizontal'
           left: "45%",
@@ -270,7 +274,7 @@ export default {
           },
         },
         legend: {
-          selectedMode: false,
+          selectedMode: true,
           show: true,
           orient: "vertical", // 'horizontal'
           left: "45%",
@@ -694,7 +698,7 @@ export default {
           },
         ],
         legend: {
-          selectedMode: false,
+          selectedMode: true,
           show: true,
           orient: "vertical", // 'horizontal'
           left: "50%",

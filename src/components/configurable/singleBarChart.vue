@@ -82,7 +82,39 @@ export default {
       }
 
       var option = {
-        tooltip: {},
+        tooltip: {
+          show: true,
+          trigger: 'axis',
+          axisPointer: {
+            type: 'line',
+            lineStyle: {
+              opacity: 0,
+              show: false,
+              type: 'dashed',
+              width: 0.5,
+              color: 'rgba(255,255,255,0.8)'
+            }
+          },
+          backgroundColor: "rgba(0,0,0,0.8)",
+          borderWidth: 1,
+          borderColor: "#4396f3",
+          padding: [10, 15],
+          extraCssText: 'box-shadow:inset 0 0 8px rgba(67, 149, 243, 0.6);',
+          textStyle: {
+            color: "#fff",
+          },
+          formatter: params => {
+            console.log(params)
+            let dataStr = `<p style="font-weight:bold;font-size:.2rem;text-align:center;padding-bottom:.0625rem;">${params[0].name}</p>`
+            params.forEach(item => {
+              dataStr += `<div>
+                    <span style=" vertical-align: middle;margin-right:0.0625rem;width:0.15rem;height:0.12rem;border-radius:0.02rem;background:linear-gradient(to bottom, ${item.color.colorStops[0].color},${item.color.colorStops[1].color}"></span>
+                    <span> ${item.seriesName ? item.seriesName + ":" : item.seriesName}  ${item.value}</span>
+                  </div>`
+            })
+            return dataStr
+          }
+        },
         grid: {
           x: 10,
           y: 40,
