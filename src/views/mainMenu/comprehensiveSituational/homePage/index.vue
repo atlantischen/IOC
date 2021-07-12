@@ -1,7 +1,7 @@
 <template>
   <!-- 综合态势home -->
   <div class="zhts_Home">
-    <RightContent v-show="isShowRIght" :inputVal="inputVal" @_c="clickSwitch" />
+    <RightContent v-show="isShowRIght" :inputVal="inputV" @_c="clickSwitch" />
     <LeftRight v-show="!isShowRIght">
       <template #left>
         <Allcom :_Info="leftInfo" />
@@ -11,6 +11,7 @@
         <SearchBox
           class="SearchBoxClass"
           :text="'搜园区建筑、搜企业、搜商家'"
+          :inputV="inputVal"
           @_search="clickSwitch"
           @_input="clickSwitch"
         />
@@ -36,6 +37,7 @@ export default {
   data () {
     return {
       inputVal: null,
+      inputV: null,
       // 左侧组件info
       leftInfo: [
         {
@@ -255,8 +257,8 @@ export default {
   methods: {
     showTipBoxHandle (val) { },
     clickSwitch (val) {
-      console.log(val)
-      this.inputVal = val;
+      this.inputVal = val
+      this.inputV = null
       this.isShowRIght = !this.isShowRIght;
     },
   },

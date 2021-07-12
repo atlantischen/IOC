@@ -495,39 +495,61 @@ export default {
             // avoidLabelOverlap: true,
             startAngle: 160,
             label: {
-              padding: [0, -55, 0, -55],
-              // formatter: "{a|{c}%}\n{b|{b}}\n{hr|}",
-              formatter: "{a|{c}%}\n{b|{b}}",
+              // padding: [0, -55, 0, -55],
+              //   // formatter: "{a|{c}%}\n{b|{b}}\n{hr|}",
+              //   formatter: "{a|{c}%}\n{b|{b}}",
+              //   rich: {
+              //     hr: {
+              //       // backgroundColor: 'auto',
+              //       // borderRadius: 100,
+              //       // width: 6,
+              //       // height: 6,
+              //       // // margin: [200, 3, 0, -16],
+              //       // shadowColor: '#1c1b3a',
+              //       // shadowBlur: 1,
+              //       // shadowOffsetX: '0',
+              //       // shadowOffsetY: '2',
+              //     },
+              //     a: {
+              //       width: 100,
+              //       fontSize: 12,
+              //       padding: [5, 0],
+              //       color: "rgb(255,255,255,.7)",
+              //     },
+              //     b: {
+              //       width: 100,
+              //       fontSize: 12,
+              //       padding: [2, 0],
+              //       color: "rgb(255,255,255,.7)",
+              //     },
+              // },
+              position: 'outer',
+              width: 0,
+              height: 0,
+              lineHeight: 0,
+              backgroundColor: 'auto',
+              padding: [4, -4, 4, -4],
+              borderRadius: 4,
+              distanceToLabelLine: 0,
+              formatter: '{top|{d}%}\n{bottom|{b}}',
+              align: 'center',
               rich: {
-                hr: {
-                  // backgroundColor: 'auto',
-                  // borderRadius: 100,
-                  // width: 6,
-                  // height: 6,
-                  // // margin: [200, 3, 0, -16],
-                  // shadowColor: '#1c1b3a',
-                  // shadowBlur: 1,
-                  // shadowOffsetX: '0',
-                  // shadowOffsetY: '2',
+                top: {
+                  verticalAlign: 'bottom',
+                  padding: [10, 10, 0, 10],
+                  align: 'center'
                 },
-                a: {
-                  width: 100,
-                  fontSize: 12,
-                  padding: [5, 0],
-                  color: "rgb(255,255,255,.7)",
-                },
-                b: {
-                  width: 100,
-                  fontSize: 12,
-                  padding: [2, 0],
-                  color: "rgb(255,255,255,.7)",
-                },
-              },
+                bottom: {
+                  padding: [0, 10, 10, 10],
+                  verticalAlign: 'top',
+                  align: 'center'
+                }
+              }
             },
             labelLine: {
               normal: {
                 length: 20,
-                length2: 70
+                length2: 50
               }
             },
             data: [],

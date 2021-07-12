@@ -44,7 +44,8 @@ export default {
         showLb = {
           width: '50',
           padding: [15, 0, 0, -30],
-          rotate: -35,
+          // rotate: -35,
+          rotate: -20,
           interval: 0,
           margin: 20,
         },
@@ -148,7 +149,7 @@ export default {
                 }
               }
             },
-            boundaryGap: true,
+            // boundaryGap: true,
             data: xAxisD,
             axisTick: {
               show: false,
@@ -160,8 +161,8 @@ export default {
             },
             axisLabel: {
               fontSize: 12,
-              padding: [40, 0, 0, -10],
-              rotate: -40,
+              padding: [40, 0, 0, -(datas[0].length > 4 ? 20 : 10)],
+              rotate: -(datas[0].length > 4 ? 20 : 40),
               textStyle: {
                 color: "#fff",
               },

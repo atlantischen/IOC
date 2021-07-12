@@ -31,9 +31,8 @@
             </el-form-item>
             <el-form-item label="报警原因：" prop="because">
               <textarea
-                class="bigBar"
-                runat="server"
-                rows="3"
+                class="bigBar inputTextarea"
+                :rows="3"
                 v-model="ruleForm.because"
               />
               <!-- <el-input
@@ -53,7 +52,11 @@
                 :rows="3"
                 v-model="ruleForm.result"
               ></el-input> -->
-              <textarea class="bigBar" :rows="3" v-model="ruleForm.result" />
+              <textarea
+                class="bigBar inputTextarea"
+                :rows="3"
+                v-model="ruleForm.result"
+              />
             </el-form-item>
           </el-form>
         </div>
@@ -85,7 +88,7 @@ export default {
       },
       rules: {
         name: [
-          { required: true, message: "请输入报警对象", trigger: "blur" },
+          { required: true, message: "请输入报警对象", trigger: ["blur", "change"] },
           {
             min: 1,
             max: 10,
@@ -93,23 +96,23 @@ export default {
             trigger: "blur",
           },
         ],
-        type: [{ required: true, message: "请输入报警类型", trigger: "blur" }],
+        type: [{ required: true, message: "请输入报警类型", trigger: ["blur", "change"] }],
         because: [
           {
             required: true,
             message: "请输入报警原因",
-            trigger: "blur",
+            trigger: ["blur", "change"],
           },
         ],
         handler: [
           {
             required: true,
             message: "请输入处理人",
-            trigger: "blur",
+            trigger: ["blur", "change"],
           },
         ],
         result: [
-          { required: true, message: "请输入处理结果", trigger: "blur" },
+          { required: true, message: "请输入处理结果", trigger: ["blur", "change"] },
         ],
       },
     };
@@ -195,7 +198,7 @@ export default {
       }
     }
     :deep(.alarmAckForm) {
-      height: 4.375rem /* 350/80 */;
+      height: 4.625rem /* 370/80 */;
       overflow-y: auto;
       font-size: 0.175rem /* 14/80 */;
       padding-right: 0.375rem /* 30/80 */;
@@ -205,7 +208,12 @@ export default {
         color: #fff;
       }
       .el-form-item {
-        margin-bottom: 10px;
+        margin-bottom: 0.25rem /* 20/80 */;
+      }
+      .el-form-item__content {
+        min-height: 0.45rem /* 36/80 */;
+        display: flex;
+        align-items: center;
       }
       // .el-textarea__inner {
       //   width: 100%;
@@ -215,15 +223,16 @@ export default {
       //   border-radius: 0;
       // }
       .el-input__inner,
-      textarea {
+      .inputTextarea {
         color: rgba(255, 255, 255, 0.7);
         border: 1px solid rgba(67, 149, 243, 0.5);
         height: 0.4375rem /* 35/80 */;
         background: transparent;
         border-radius: 0;
       }
-      textarea {
+      .inputTextarea {
         width: 100%;
+        height: 0.9rem /* 72/80 */;
         padding: 0 15px;
         font-size: 0.175rem /* 14/80 */;
         resize: vertical;

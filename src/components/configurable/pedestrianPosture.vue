@@ -40,7 +40,7 @@ export default {
   methods: {
     // 人行态势
     pedestrianPostureFun (val) {
-      const { names, xData, datas, smooth, unit } = val
+      const { names, xData, datas, smooth, unit, rightTip } = val
       var allD = [], color = ["#97c8ff", "#ffdd8d"], color2 = ["#fff", "#ffdd8d"],
         Linear = [
           [
@@ -87,6 +87,29 @@ export default {
         }
       }
       var option = {
+        title: {
+          show: rightTip,
+          text: '',
+          link: "",
+          target: null,
+          subtext: `${rightTip ? rightTip.name : ''}${rightTip ? rightTip.value : ''}`,
+          sublink: "",
+          subtarget: null,
+          right: "-10",
+          top: "-10",
+          textAlign: "center",
+          textStyle: {
+            fontFamily: "BYfont",
+            fontSize: 24,
+            padding: [2, 0],
+            fontWeight: 550,
+            color: "#fff",
+          },
+          subtextStyle: {
+            fontSize: 12,
+            color: "#fff",
+          },
+        },
         tooltip: {
           trigger: "axis",
           axisPointer: {
@@ -165,10 +188,10 @@ export default {
           axisLabel: {
             width: '50',
             fontSize: 12,
-            padding: [15, 0, 0, -30],
+            padding: [15, 0, 0, (unit[0] ? -30 : 0)],
             rotate: -35,
             interval: 0,
-            margin: 20,
+            margin: xData[0].length <= 3 ? 10 : 20,
             textStyle: {
               color: "#fff",
             },

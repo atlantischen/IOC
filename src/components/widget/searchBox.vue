@@ -48,11 +48,14 @@ export default {
       inputVal: "",
     };
   },
-  watch () {
-    // this.inputVal = this.inputV
-    // inputVal() {
-    //   return this.inputV;
-    // },
+  watch: {
+    inputV: {
+      handler (n, o) {
+        console.log(n, o)
+        this.inputVal = n
+      },
+      deep: true
+    }
   },
   mounted () { },
   methods: {

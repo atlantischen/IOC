@@ -28,10 +28,13 @@
         </div>
       </div>
       <ul
-        class="companiesImgsList mniBar"
-        :class="datas.buldingList ? '' : 'companiesImgsList' + datas.listCols"
+        class="companiesImgsList"
+        :class="[
+          datas.buldingList ? '' : 'companiesImgsList' + datas.listCols,
+          datas.buldingList ? 'mniBar' : 'companiesImgsList_over',
+        ]"
       >
-        <li class="x_fs_rap">
+        <li class="x_fs_rap" :ref="'companiesImgsListRef_' + ids">
           <img
             v-for="(t, i) in datas.companiesImgsListDatas"
             :key="i"
@@ -60,7 +63,11 @@ export default {
     }
   },
   mounted () {
-    // this.energyTrendFun(this.datas)
+    if (!this.datas.buldingList) {
+      this.$nextTick(() => {
+        this.getDatas();
+      });
+    }
   },
   methods: {
     selectBuldingFun (key, val) {
@@ -73,6 +80,9 @@ export default {
           break;
       }
     },
+    getDatas () {
+      this.$ScrolAnimationTop('companiesImgsListRef_' + this.ids, 3)
+    }
   }
 };
 </script>
@@ -127,6 +137,9 @@ export default {
     }
     .companiesImgsList4 {
       height: 4.5rem /* 360/80 */;
+    }
+    .companiesImgsList_over {
+      overflow: hidden;
     }
   }
 }

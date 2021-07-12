@@ -266,9 +266,12 @@ export default {
     };
   },
   watch: {
-    // inputV () {
-    //   return this.inputVal;
-    // },
+    inputVal: {
+      handler (n, o) {
+        this.inputV = n
+      },
+      deep: true
+    }
   },
   mounted () {
     this.total = this.tableData2.length
@@ -305,7 +308,7 @@ export default {
       console.log(val);
     },
     back () {
-      this.$emit("_c");
+      this.$emit("_c", null);
     },
     // 模拟分页
     changeDatasFun () {

@@ -26,6 +26,10 @@ import PedestrianPosture2 from './pedestrianPosture2.vue'
 import TableList from './tableList.vue'
 import PyramidChart from './pyramidChart.vue'
 import WaterLevel from './waterLevel.vue'
+import IndustrySpace from './industrySpace.vue'
+import IndustrySpace2 from './industrySpace2.vue'
+import FloorSpace from './floorSpace.vue'
+import EnvironmentalSpace from './environmentalSpace.vue'
 
 const configurable = {
   TheParkIs, // 园区情况
@@ -56,5 +60,9 @@ const configurable = {
   TableList, // table(今日访客进出车辆)
   PyramidChart, // 金字塔(本月企业服务办理TOP4)
   WaterLevel, //
+  IndustrySpace, // 饼图（圆环）（产业空间）
+  IndustrySpace2, // 饼图（实心）（产业空间分布）
+  FloorSpace, // 饼图（实心）（产地空间）
+  EnvironmentalSpace, // 环境空间
 }
 export default configurable
