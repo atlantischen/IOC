@@ -126,9 +126,16 @@ export default {
           y2: -10,
           containLabel: true,
         },
-        tooltip: {
+         tooltip: {
           // show: false,
-          trigger: "axis",
+          // trigger: 'item',  
+          trigger: 'axis',
+          axisPointer:{
+            lineStyle:{
+            color:'transparent'
+          }
+          }
+        
         },
         xAxis: [
           {
@@ -318,9 +325,16 @@ export default {
           y2: -10,
           containLabel: true,
         },
-        tooltip: {
+          tooltip: {
           // show: false,
-          trigger: "axis",
+          // trigger: 'item',  
+          trigger: 'axis',
+          axisPointer:{
+            lineStyle:{
+            color:'transparent'
+          }
+          }
+        
         },
         xAxis: [
           {
@@ -445,6 +459,17 @@ export default {
           containLabel: true,
         },
 
+  tooltip: {
+          // show: false,
+          // trigger: 'item',  
+          trigger: 'axis',
+          axisPointer:{
+            lineStyle:{
+            color:'transparent'
+          }
+          }
+        
+        },
         // grid: {
         //   left: "3%",
         //   right: "4%",

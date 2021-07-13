@@ -40,7 +40,11 @@
       </div>
     </IOCLeft>
     <Tips :list="list"></Tips>
-    <!-- <div class="box"> eqweqe</div> -->
+    <div class="search_box">
+     <LicensePlateSearch class="ioc_animated fadeInDownTop" @search="search" :searchData="searchData"></LicensePlateSearch>
+
+    </div>
+   
     <IOCRight>
       <div class="revenue_total">
         <div class="tittle">营收总览</div>
@@ -172,7 +176,10 @@ export default {
           label: "18日",
           value: 1,
         },
-      ]
+      ],
+      searchData:{
+
+      }
     };
   },
   components: {},
@@ -180,13 +187,16 @@ export default {
     changePSMonths (val) {
       console.log(val);
     },
-
+    search(val){
+      // console.log('11111111',val);
+      let value = JSON.stringify(val)
+      this.$router.push({name:'SmartParking',params:{value:value}})
+    },
     postMessageToUnity (data) {
 
     },
 
     handleClick () {
-      // console.log(this.$SendMessageToUnity());
       this.$SendMessageToUnity("gan", { wocao: true, fuckyou: "123" });
       this.$SendMessageToUnity("gan2", {});
       // this.$SendMessageToUnity("nimei",{wocao:true,fuckyou:"456"});
@@ -195,36 +205,6 @@ export default {
     AssetsAndEquipment () {
       var dom = this.$refs["park_time"]
       var option = {
-        // title: {
-        //   text: "{a|停车数量合计：}{b|" + 1369 + "}{c|辆}",
-        //   left: "0",
-        //   top: "10",
-        //   // subtext: '会议数',
-        //   subtextStyle: {
-        //     color: "#fff",
-        //   },
-        //   textStyle: {
-        //     rich: {
-        //       a: {
-        //         fontSize: 14,
-        //         color: "#fff",
-        //         fontFamily: "Microsoft YaHei",
-        //         opacity: 0.7,
-        //       },
-        //       b: {
-        //         fontSize: 20,
-        //         color: "ffff",
-        //         fontFamily: "BYfont",
-        //       },
-        //       c: {
-        //         fontSize: 12,
-        //         fontWeight: "bold",
-        //         padding: [0, 5],
-        //         color: "#fff",
-        //       },
-        //     },
-        //   },
-        // },
         grid: {
           top: "30",
           left: "0",
@@ -232,9 +212,15 @@ export default {
           bottom: "0",
           containLabel: true,
         },
-        tooltip: {
+     
+           tooltip: {
           // show: false,
           trigger: "axis",
+           axisPointer:{
+                lineStyle:{
+                color:'transparent'
+              }
+              }
         },
         xAxis: [
           {
@@ -311,7 +297,7 @@ export default {
         ],
         series: [
           {
-            name: "其他",
+            // name: "其他",
             type: "bar",
             barWidth: 14,
             color: "#0090FF",
@@ -388,6 +374,11 @@ export default {
         tooltip: {
           // show: false,
           trigger: "axis",
+           axisPointer:{
+                lineStyle:{
+                color:'transparent'
+              }
+              }
         },
         legend: {
           top: 10,
@@ -534,6 +525,17 @@ export default {
           bottom: "30",
           containLabel: true,
         },
+          tooltip: {
+          // show: false,
+          // trigger: 'item',  
+          trigger: 'axis',
+          axisPointer:{
+            lineStyle:{
+            color:'transparent'
+          }
+          }
+        
+        },
         legend: {
           right: 0,
           top: 10,
@@ -593,7 +595,7 @@ export default {
             axisLabel: {
               interval: 0,
               rotate: -30,
-              padding: [20, 30, 0, -20],
+              padding: [20, 30, 0, -10],
               // align:'right',
             },
           },
@@ -741,6 +743,7 @@ export default {
     this.AssetsAndEquipment();
     this.revenueInit();
     this.trendInit();
+   
   },
 };
 </script>
@@ -809,6 +812,13 @@ export default {
         /* 200/80 */ /* 250/80 */;
       height: 3.5rem /* 280/80 */ /* 300/80 */ /* 160/80 */;
     }
+  }
+  .search_box{
+      position: absolute;
+  left: 50%;
+  top: 2.6rem /* 208/80 */ /* 128/80 */;
+  // transform: translateX(-50%);
+ 
   }
 }
 </style>

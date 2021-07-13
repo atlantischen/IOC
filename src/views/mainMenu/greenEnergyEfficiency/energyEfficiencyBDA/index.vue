@@ -168,7 +168,14 @@ export default {
         },
         tooltip: {
           // show: false,
-          trigger: "axis",
+          // trigger: 'item',  
+          trigger: 'axis',
+          axisPointer:{
+            lineStyle:{
+            color:'transparent'
+          }
+          }
+        
         },
         xAxis: [
           {
@@ -535,9 +542,16 @@ export default {
           bottom: "0",
           containLabel: true,
         },
-        tooltip: {
+          tooltip: {
           // show: false,
-          trigger: "axis",
+          // trigger: 'item',  
+          trigger: 'axis',
+          axisPointer:{
+            lineStyle:{
+            color:'transparent'
+          }
+          }
+        
         },
         xAxis: [
           {

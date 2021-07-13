@@ -1,6 +1,6 @@
 export default [{
     path: 'homePage',
-    name: 'convenientParking0',
+    name: 'convenientParking',
     component: () => import('@/views/mainMenu/convenientParking/homePage/index.vue'),
     meta: {
       icon: 'icon-zonghe',
@@ -10,13 +10,13 @@ export default [{
     }
   },
   {
-    path: 'parkingBDA',
-    name: 'parkingBDA',
-    component: () => import('@/views/mainMenu/convenientParking/parkingBDA/index.vue'),
+    path: 'SmartParking',
+    name: 'SmartParking',
+    component: () => import('@/views/mainMenu/convenientParking/SmartParking/index.vue'),
     meta: {
       icon: 'icon-zonghe',
-      name: '停车大数据分析',
-      title: '停车大数据分析',
+      name: '智慧停车',
+      title: '智慧停车',
       isShow: true
     }
   },

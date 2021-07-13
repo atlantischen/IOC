@@ -348,7 +348,10 @@ export default {
         align-items: center;
         padding-left: .15rem /* 12/80 */;
         img{
+          width: .6rem /* 48/80 */;
+          height: .6rem /* 48/80 */;
           margin: 0 .275rem /* 22/80 */ 0 .225rem /* 18/80 */;
+
         }
         span:first-child{
           font-size:.25rem /* 20/80 */ ;

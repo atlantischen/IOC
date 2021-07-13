@@ -234,6 +234,17 @@ export default {
           bottom: "30",
           containLabel: true,
         },
+          tooltip: {
+          // show: false,
+          // trigger: 'item',  
+          trigger: 'axis',
+          axisPointer:{
+            lineStyle:{
+            color:'transparent'
+          }
+          }
+        
+        },
         legend: {
           right: 0,
           top: 10,

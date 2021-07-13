@@ -47,6 +47,7 @@ export default {
     energyTrendFun (val) {
       var _data = val.energyTrendData
       for (var i = 0; i < _data.length; i++) {
+        console.log(i,'i');
         var option = {
           xAxis: {
             show: false,
