@@ -1,3 +1,4 @@
+import comState from './modules/comState'
 import {
   createStore
 } from 'vuex'
@@ -5,7 +6,6 @@ import {
 export default createStore({
   state: {
     unitySendData: {},
-  
   },
   mutations: {
     setData(state, payload) {
@@ -13,5 +13,8 @@ export default createStore({
     }
   },
   actions: {},
-  modules: {}
+  modules: {
+    comState: comState
+  }
+
 })

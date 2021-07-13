@@ -4,9 +4,7 @@
     <template #left>
       <Allcom :_Info="leftInfo" />
     </template>
-    <template #center>
-      <CenterDatas :list="centerDatasList" />
-    </template>
+    <template #center> </template>
     <template #right>
       <Allcom :_Info="rightInfo" />
     </template>
@@ -254,6 +252,9 @@ export default {
     };
   },
   components: {},
+  created () {
+    this.$store.commit('SET_CENTERDATAS', [true, JSON.stringify(this.centerDatasList)])
+  },
   mounted () {
   },
   methods: {

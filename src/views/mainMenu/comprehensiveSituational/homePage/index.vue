@@ -15,24 +15,23 @@
           @_search="clickSwitch"
           @_input="clickSwitch"
         />
-        <TipBox :_data="tipList" />
+        <!-- <TipBox :_data="tipList" /> -->
       </template>
       <template #right>
         <Allcom :_Info="rightInfo" />
       </template>
     </LeftRight>
-    <AlarmAck />
+    <!-- <AlarmAck /> -->
   </div>
 </template>
 
 <script>
-import AlarmAck from "@/views/mainMenu/comprehensiveSituational/homePage/components/alarmAck.vue";
 import RightContent from "./components/rightContent.vue";
 import * as echarts from "echarts";
 // import { aaa } from "@/api/mockApi";
 // import axios from "axios";
 export default {
-  components: { RightContent, AlarmAck },
+  components: { RightContent },
   name: "zhts",
   data () {
     return {
@@ -243,8 +242,6 @@ export default {
   created () {
   },
   mounted () {
-    this.$SendMessageToUnity("PopUpWarningNoticesBar", { isOpen: true });
-    console.log("=================PopUpWarningNoticesBar, { isOpen: true })")
     // aaa().then(r=>{
     //   console.log(r)
     // })
@@ -271,6 +268,7 @@ export default {
   // position: relative;
 }
 .SearchBoxClass {
+  padding-top: 1rem /* 80/80 */;
   width: 6.25rem /* 500/80 */;
 }
 </style>

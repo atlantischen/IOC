@@ -210,6 +210,15 @@ var ScrolLeftARight = function ScrolLeftARight(dom, time) {
     }, _time / 2);
   }
 }
+/**
+ * @author
+ * @description 随机数
+ * @param number
+ * @returns {num}
+ */
+var randomNumer = function randomNumer(minNum, maxNum) {
+  return parseInt(Math.random() * (maxNum - minNum + 1) + minNum)
+}
 
 const fun = {
   currentDate,
@@ -219,6 +228,7 @@ const fun = {
   eHeightFun,
   Fullscreen,
   ScrolAnimationTop,
-  ScrolLeftARight
+  ScrolLeftARight,
+  randomNumer
 }
 export default fun

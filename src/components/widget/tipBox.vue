@@ -1,5 +1,10 @@
 <template>
-  <div class="p_x_c2 tipBox" v-if="isShow" @click="clickItem">
+  <div
+    class="tipBox ioc_animated"
+    :class="{ fadeInDownTop: isShow }"
+    v-if="isShow"
+    @click="clickItem"
+  >
     <div class="tipBox_text x_c" :class="'tipBox_warn'">
       <div id="pList">
         <ul>
@@ -27,13 +32,21 @@ export default {
   data () {
     return {
       timer: null,
-      isShow: true,
+      isShow: this.$store.state.comState.showWarnTip,
     };
   },
-  watch () {
-    this.isShow = this.show;
+  watch: {
+    '$store.state.comState.showWarnTip': function (n, o) {
+      this.isShow = n
+      if (this.isShow) {
+        this.$SendMessageToUnity("PopUpWarningNoticesBar", { isOpen: true });
+        console.log("=================PopUpWarningNoticesBar, { isOpen: true })")
+      }
+    }
   },
   components: {},
+  created () {
+  },
   mounted () {
     setTimeout(() => {
       this.moveLeft()
@@ -69,8 +82,9 @@ export default {
     },
     // 关闭警告
     closeTip () {
-      this.isShow = !this.isShow;
-      this.$SendMessageToUnity("PopUpWarningNoticesBar", { isOpen: false });
+      this.isShow = false
+      this.$store.commit('SET_SHOWWARNTIP', this.isShow)
+      this.$SendMessageToUnity("PopUpWarningNoticesBar", { isOpen: this.isShow });
       console.log("=================PopUpWarningNoticesBar, { isOpen: false })")
       // this.$emit("close", this.isShow);
     },
@@ -81,8 +95,11 @@ export default {
 <style lang="less">
 @import "~@/style/gl.less";
 .tipBox {
-  position: relative;
-  top: 0.875rem /* 70/80 */ !important;
+  position: fixed;
+  top: 3.125rem /* 250/80 */;
+  left: 50%;
+  transform: translateX(-50%);
+  -webkit-transform: translateX(-50%);
   // min-width: 8.125rem /* 650/80 */;
   width: 8.75rem /* 700/80 */;
   height: 0.5rem /* 40/80 */;
@@ -90,6 +107,7 @@ export default {
   font-size: 0.225rem /* 18/80 */;
   margin: 0.25rem /* 20/80 */ 0;
   cursor: pointer;
+  z-index: 200;
   .tipBox_text {
     white-space: nowrap;
     padding: 0 0.4375rem /* 35/80 */;
