@@ -4,12 +4,14 @@
     <div class="environmentalSpace" :style="$paddingFun(datas.padding)">
       <div class="weather">
         <div class="weather_l x_c">
-          <svg class="icon tianqi" aria-hidden="true">
+          <svg class="icon duoyun" aria-hidden="true">
             <use xlink:href="#icon-duoyun"></use>
           </svg>
           <span class="y_c">
-            <i><b>31</b> ℃</i>
-            <i>多云</i>
+            <i
+              ><b>{{ weatherDatas ? weatherDatas.wendu : "31" }}</b> ℃</i
+            >
+            <i>{{ weatherDatas ? weatherDatas.forecast[0].type : "多云" }}</i>
           </span>
         </div>
         <ul class="weather_r x_sa_rap">
@@ -18,7 +20,17 @@
             <i class="iconfont icon-icon-humidity"></i>
           </li>
           <li class="y_c">
-            <span>西南风（1级）</span>
+            <span
+              >{{
+                weatherDatas ? weatherDatas.forecast[0].fengxiang : "西南风"
+              }}（{{
+                weatherDatas
+                  ? weatherDatas.forecast[0].fengli
+                      .split("CDATA[")[1]
+                      .split("]]")[0]
+                  : "2级"
+              }}）</span
+            >
             <i class="iconfont icon-fengxiang"></i>
           </li>
           <li class="y_c">
@@ -68,7 +80,7 @@ export default {
     return {
       ...this._data,
       ids: this.$uuid(),
-      weatherDatas: {},
+      weatherDatas: null,
     }
   },
   created () {
@@ -306,7 +318,8 @@ export default {
       display: flex;
       align-items: flex-start;
       border-right: 0.0125rem /* 1/80 */ solid rgba(255, 255, 255, 0.3);
-      .tianqi {
+      .duoyun {
+        font-size: 0.5rem /* 40/80 */;
         width: 0.5rem /* 40/80 */;
         height: 0.5rem /* 40/80 */;
       }
@@ -336,10 +349,10 @@ export default {
           padding: 0 0 0.0625rem /* 5/80 */ 0;
           .text_s();
         }
-        &:nth-child(0),
         &:nth-child(1),
-        &:nth-child(2) {
-          margin-bottom: 0.1875rem /* 15/80 */;
+        &:nth-child(2),
+        &:nth-child(3) {
+          margin-bottom: 0.15rem /* 12/80 */;
         }
       }
       .iconfont {

@@ -132,11 +132,13 @@ export default {
           },
         ],
       };
-      for (var i = 0; i < optionName.length; i++) {
-        option.series[0].data[i] = {
-          value: datas[i],
-          name: optionName[i],
-        };
+      if (optionName) {
+        for (var i = 0; i < optionName.length; i++) {
+          option.series[0].data[i] = {
+            value: datas[i],
+            name: optionName[i],
+          };
+        }
       }
       this.$redomEchart(dom, option);
       // myChart.dispatchAction({

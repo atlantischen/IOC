@@ -52,7 +52,7 @@ export default {
         },
         {
           title: "近七天工单统计",
-          type: "singleBarChart",
+          type: "SingleBarChart",
           datas: {
             // eHeight: 220,
             xAxisD: [

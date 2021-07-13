@@ -24,8 +24,6 @@ export default {
     return {
       ...this._data,
       ids: this.$uuid(),
-
-      spaceRadio: 0,
     }
   },
   mounted () {
@@ -33,18 +31,8 @@ export default {
   },
   methods: {
     industrySpace2Fun (val) {
+      const { optionName, datas } = val
       var dom = this.$refs["industrySpace2Echart_" + this.ids]
-      var ii = -1;
-      var optionName = [
-        "新能源、新材料",
-        "智能制造",
-        "信息技术",
-        "生物医药",
-        "文化创意",
-        "现代服务",
-        "节能环保",
-      ],
-        datas = [23.46, 24.29, 32.26, 1.2, 12.8, 3.25, 2.74];
       var option = {
         title: {
           show: true,

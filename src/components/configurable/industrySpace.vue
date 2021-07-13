@@ -2,13 +2,14 @@
   <div class="IndustrySpaceAll">
     <div class="tittle">{{ title }}</div>
     <div class="SpaceRadioGroup">
-      <el-radio-group class="radioGroup" v-model="spaceRadio">
-        <el-radio :label="0" @click.stop="selectSpaceRadio(0)"
-          >空间占比</el-radio
-        >
-        <el-radio :label="1" @click.stop="selectSpaceRadio(1)"
-          >空间租售</el-radio
-        >
+      <el-radio-group
+        class="radioGroup"
+        v-model="spaceRadio"
+        @change="selectSpaceRadio"
+      >
+        <el-radio v-for="(item, i) in datas.datas" :key="i" :label="i">{{
+          item.name
+        }}</el-radio>
       </el-radio-group>
     </div>
     <div class="IndustrySpace" :style="$paddingFun(datas.padding)">
@@ -34,28 +35,19 @@ export default {
     return {
       ...this._data,
       ids: this.$uuid(),
-
       spaceRadio: 0,
     }
   },
   mounted () {
-    // this.IndustrySpaceFun(this.datas)
-    this.IndustrySpaceFun([76.16, 9.62, 5.93, 8.29])
+    this.IndustrySpaceFun(this.datas)
   },
   methods: {
-    //
-    selectSpaceRadio (val) {
-      this.spaceRadio = val;
-      if (val == 0) {
-        this.IndustrySpaceFun([76.16, 9.62, 5.93, 8.29]);
-      } else {
-        this.IndustrySpaceFun([5.93, 8.29, 76.16, 9.62]);
-      }
+    selectSpaceRadio () {
+      this.IndustrySpaceFun(this.datas)
     },
     IndustrySpaceFun (val) {
-      var dom = this.$refs["IndustrySpaceEchart_" + this.ids]
-      var optionName = ["200平以下", "200~500平", "500~1000平", "1000平以上"],
-        datas = val;
+      var dom = this.$refs["IndustrySpaceEchart_" + this.ids], xdatas = val.datas[this.spaceRadio].d
+      const { optionName } = val
       var option = {
         tooltip: {
           show: false,
@@ -66,7 +58,7 @@ export default {
           text: "",
           link: "",
           target: null,
-          subtext: "空间占比",
+          subtext: val.datas[this.spaceRadio].name,
           sublink: "",
           subtarget: null,
           left: "18%",
@@ -101,7 +93,7 @@ export default {
             optionName.forEach(function (value, i) {
               if (value == name) index = i;
             });
-            return "{a|" + name + "}" + datas[index] + "%";
+            return "{a|" + name + "}" + xdatas[index] + "%";
           },
           textStyle: {
             color: "#fff",
@@ -139,7 +131,7 @@ export default {
       };
       for (var i = 0; i < optionName.length; i++) {
         option.series[0].data[i] = {
-          value: datas[i],
+          value: xdatas[i],
           name: optionName[i],
         };
       }

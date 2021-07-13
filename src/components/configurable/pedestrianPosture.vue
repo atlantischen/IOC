@@ -1,6 +1,9 @@
 <template>
   <div class="pedestrianPostureAll">
     <div class="tittle">{{ title }}</div>
+    <div class="totalServices_time x_right" v-if="datas.yearsList">
+      <DropDown :list="datas.yearsList" name="label" @_cg="changePSYears2" />
+    </div>
     <div class="pedestrianPosture" :style="$paddingFun(datas.padding)">
       <ul class="pp_top" v-show="datas.datas2">
         <li class="y_c" v-for="(item, i) in datas.datas2" :key="i">
@@ -38,9 +41,13 @@ export default {
     this.pedestrianPostureFun(this.datas)
   },
   methods: {
+    changePSYears2 (val) {
+      console.log(val);
+      this.pedestrianPostureFun(this.datas)
+    },
     // 人行态势
     pedestrianPostureFun (val) {
-      const { names, xData, datas, smooth, unit, rightTip } = val
+      const { names, xData, datas, smooth, unit, rightTip, leftTip } = val
       var allD = [], color = ["#97c8ff", "#ffdd8d"], color2 = ["#fff", "#ffdd8d"],
         Linear = [
           [
@@ -87,7 +94,7 @@ export default {
         }
       }
       var option = {
-        title: {
+        title: [{
           show: rightTip,
           text: '',
           link: "",
@@ -109,7 +116,37 @@ export default {
             fontSize: 12,
             color: "#fff",
           },
-        },
+        }, {
+          show: leftTip,
+          text: `{c|${leftTip ? leftTip.name : ''}}{a|${leftTip ? leftTip.value : ''}}{b|${leftTip ? leftTip.unit : ''}}`,
+          link: "",
+          target: null,
+          subtext: "",
+          sublink: "",
+          subtarget: null,
+          left: "1%",
+          top: "0%",
+          textAlign: "left",
+          itemGap: 6,
+          textStyle: {
+            rich: {
+              c: {
+                fontSize: 14,
+                color: "rgb(255,255,255,.7)",
+              },
+              a: {
+                color: "#fff",
+                fontFamily: "BYfont",
+                fontSize: 20,
+              },
+              b: {
+                color: "#fff",
+                fontSize: 12,
+              },
+            },
+          },
+        }
+        ],
         tooltip: {
           trigger: "axis",
           axisPointer: {
@@ -129,7 +166,6 @@ export default {
             color: "#fff",
           },
           formatter: params => {
-            console.log(params)
             let dataStr = `<p style="font-weight:bold;text-align:center;">${params[0].name}</p>`
             params.forEach(item => {
               dataStr += `<div>
@@ -142,8 +178,8 @@ export default {
         },
         grid: {
           x: 10,
-          y: 30,
-          x2: 30,
+          y: leftTip ? 60 : 30,
+          x2: leftTip ? 10 : 30,
           y2: -10,
           containLabel: true,
         },
@@ -188,7 +224,7 @@ export default {
           axisLabel: {
             width: '50',
             fontSize: 12,
-            padding: [15, 0, 0, (unit[0] ? -30 : 0)],
+            padding: [15, 0, 0, (unit[0] ? -30 : leftTip ? -10 : 0)],
             rotate: -35,
             interval: 0,
             margin: xData[0].length <= 3 ? 10 : 20,
@@ -245,6 +281,10 @@ export default {
   [id^="pedestrianPostureEchart_"] {
     width: 100%;
     height: 2.125rem /* 170/80 */;
+  }
+  .totalServices_time {
+    width: 100%;
+    padding-right: 0.1rem /* 8/80 */;
   }
   .pedestrianPosture {
     .pp_top {

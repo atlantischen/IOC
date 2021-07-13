@@ -39,7 +39,7 @@ var currentDate = function currentDate() {
  * @returns {handle}
  */
 var redomEchart = function redomEchart(dom, option) {
-  let that = this
+  // let that = this
   // let resizeDiv = that.refs[dom] // document.getElementById(dom)
   let resizeDiv = dom
   let myChart = null

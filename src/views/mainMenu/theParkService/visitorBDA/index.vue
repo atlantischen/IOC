@@ -52,7 +52,7 @@ export default {
         },
         {
           title: "访客楼栋分布",
-          type: "singleBarChart",
+          type: "SingleBarChart",
           datas: {
             eHeight: 300,
             xAxisD: [

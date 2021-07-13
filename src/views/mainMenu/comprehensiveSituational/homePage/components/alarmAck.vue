@@ -169,7 +169,7 @@ export default {
 }
 .sureAlarm {
   width: 4.25rem /* 340/80 */;
-  height: 6.25rem /* 500/80 */;
+  height: 6.5rem /* 520/80 */;
   right: 0;
   z-index: 101;
   .sureAlarm_box {

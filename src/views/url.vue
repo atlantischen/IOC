@@ -42,26 +42,26 @@
 import mainMenus from "@/router/mainMenus/index";
 export default {
   name: "url",
-  data() {
+  data () {
     return {
       mainMenus: mainMenus,
       htmlSrc: "",
     };
   },
-  mounted() {
+  mounted () {
     console.log(mainMenus);
   },
   methods: {
-    handleOpen: function(val) {
+    handleOpen: function (val) {
       // this.$router.replace(val)
       window.open(val);
       this.htmlSrc = val;
       // console.log(val)
     },
-    handleClose: function(val) {
+    handleClose: function (val) {
       console.log(val);
     },
-    toPath: function(val) {
+    toPath: function (val) {
       window.open(val.indexPath[0] + "/" + val.index);
       this.htmlSrc = val.indexPath[0] + "/" + val.index;
       // this.$router.replace(val.indexPath[0]+'/'+val.index)

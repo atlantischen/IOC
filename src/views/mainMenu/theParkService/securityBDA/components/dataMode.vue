@@ -49,7 +49,7 @@ export default {
         },
         {
           title: "近七天告警趋势",
-          type: "singleBarChart",
+          type: "SingleBarChart",
           datas: {
             eHeight: 250,
             xAxisD: [

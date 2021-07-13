@@ -24,7 +24,6 @@ export default {
     return {
       ...this._data,
       ids: this.$uuid(),
-
       spaceRadio: 0,
     }
   },
@@ -33,16 +32,15 @@ export default {
   },
   methods: {
     floorSpaceFun (val) {
-      var optionName = ["多功能演播厅", "云平台广场", "会议室", "运动中心"],
-        datas = [59.6, 21.43, 10.37, 8.6];
+      const { optionName, datas, data2 } = val
       var option = {
         title: [
           {
-            show: true,
-            text: "12",
+            show: data2 && data2[0],
+            text: data2[0].value,
             link: "",
             target: null,
-            subtext: "今日预定次数",
+            subtext: data2[0].name,
             sublink: "",
             subtarget: null,
             right: "18%",
@@ -61,11 +59,11 @@ export default {
             },
           },
           {
-            show: true,
-            text: "284",
+            show: data2 && data2[1],
+            text: data2[1].value,
             link: "",
             target: null,
-            subtext: "累计预定次数",
+            subtext: data2[1].name,
             sublink: "",
             subtarget: null,
             right: "-7%",
