@@ -22,22 +22,22 @@ import AlarmAck from "@/views/mainMenu/comprehensiveSituational/homePage/compone
 export default {
   name: "MainMenu",
   components: { AlarmAck },
-  data () {
+  data() {
     return {
       isShow: true,
       url: "",
       warnTimer: null,
       tipList: null,
-      centerDatas: []
+      centerDatas: [],
     };
   },
   computed: {
-    getUnityData () {
+    getUnityData() {
       return this.$store.state.unitySendData;
     },
   },
   watch: {
-    getUnityData (val) {
+    getUnityData(val) {
       // debugger;
       let res = val;
       try {
@@ -45,13 +45,15 @@ export default {
           this.$router.push(res.action);
         } else {
         }
-      } catch (e) { }
+      } catch (e) {}
     },
-    '$store.state.comState.centerDatas': function (n, o) {
-      if (n) { this.centerDatas = n }
+    "$store.state.comState.centerDatas": function(n, o) {
+      if (n) {
+        this.centerDatas = n;
+      }
     },
   },
-  beforeCreate () {
+  beforeCreate() {
     if (process.env.NODE_ENV === "production") {
       this.$router.push("/comprehensiveSituational/homePage");
     }
@@ -60,21 +62,24 @@ export default {
       this.tipList = [
         {
           text: "告警！2021-04-30 15:00{李玲}在{公寓广场}发生了{黑名单告警}",
-        }
-      ]
-      this.$store.commit('SET_SHOWWARNTIP', true)
-    }, this.$randomNumer(3000, 100000));
+        },
+      ];
+      this.$store.commit("SET_SHOWWARNTIP", true);
+    }, this.$randomNumer(10000, 300000));
   },
-  created () {
+  created() {
     if (window.vuplex) {
       this.addMessageListener();
     } else {
       window.addEventListener("vuplexready", this.addMessageListener);
     }
     window.addEventListener("message", (event) => {
-      this.$store.commit('SET_CENTERDATAS', false, null)
-      if ((typeof event.data == 'string' && event.data.indexOf('data') != -1) || (typeof event.data == 'object' && event.data.data != undefined)) {
-        let res = JSON.parse(event.data)
+      this.$store.commit("SET_CENTERDATAS", false, null);
+      if (
+        (typeof event.data == "string" && event.data.indexOf("data") != -1) ||
+        (typeof event.data == "object" && event.data.data != undefined)
+      ) {
+        let res = JSON.parse(event.data);
         // console.log(res, 'res');
         this.$store.commit("setData", res);
         if (res.data === "IOCHOME") {
@@ -90,25 +95,25 @@ export default {
       window.debug = true;
     } else {
       this.url = process.env.VUE_APP_UNITY;
-      this.url = 'http://183.62.170.2:8110'
+      this.url = "http://183.62.170.2:8110";
     }
   },
-  mounted () {
+  mounted() {
     this.$nextTick(() => {
-      window.iframe = this.$refs.iframe
-    })
+      window.iframe = this.$refs.iframe;
+    });
   },
-  beforeDestroy () {
-    clearInterval(this.warnTimer)
+  beforeDestroy() {
+    clearInterval(this.warnTimer);
   },
   methods: {
-    getQueryString (name) {
+    getQueryString(name) {
       var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
       var r = window.location.search.substr(1).match(reg);
       if (r != null) return unescape(r[2]);
       return null;
     },
-    addMessageListener () {
+    addMessageListener() {
       window.vuplex.addEventListener("message", (event) => {
         console.log(event.data);
         let res = JSON.parse(event.data);

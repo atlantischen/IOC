@@ -17,22 +17,23 @@ export default {
   name: "theParkIsAll",
   props: {
     _data: {
-      type: Object
-    }
+      type: Object,
+    },
   },
-  data () {
+  data() {
     return {
       ...this._data,
       ids: this.$uuid(),
       spaceRadio: 0,
-    }
+    };
   },
-  mounted () {
-    this.floorSpaceFun(this.datas)
+  mounted() {
+    this.floorSpaceFun(this.datas);
   },
   methods: {
-    floorSpaceFun (val) {
-      const { optionName, datas, data2 } = val
+    floorSpaceFun(val) {
+      const { optionName, datas, data2 } = val;
+      var colors = ["rgba(30, 57, 87, 0.5)", "#cda857", "#4396f3", "#0ff"];
       var option = {
         title: [
           {
@@ -89,9 +90,9 @@ export default {
           left: "50%",
           top: "35%",
           data: optionName,
-          formatter: function (name) {
+          formatter: function(name) {
             var index = 0;
-            optionName.forEach(function (value, i) {
+            optionName.forEach(function(value, i) {
               if (value == name) index = i;
             });
             return "{a|" + name + "}" + datas[index] + "%";
@@ -112,16 +113,13 @@ export default {
           itemHeight: 6,
           itemGap: 12,
         },
-        // color: ["#cda857", "#4396f3", "#0ff", "#236390"],
-        color: ["rgba(30, 57, 87, 0.5)", "#cda857", "#4396f3", "#0ff"],
         series: [
           {
             name: "",
             type: "pie",
-            radius: ["0", "45%"],
+            radius: ["0", 90 - (optionName.length + 1) * 8 + "%"],
             center: ["20%", "50%"],
-            startAngle: -45,
-            color: "rgba(30, 57, 87, 0.3)",
+            color: "rgba(0, 0, 0, 0.4)",
             avoidLabelOverlap: false,
             animationType: "scale",
             label: {
@@ -132,45 +130,60 @@ export default {
             },
             data: [100],
           },
-          {
-            name: "",
-            type: "pie",
-            radius: ["0", "65%"],
-            center: ["20%", "50%"],
-            // roseType: 'radius', //area
-            startAngle: -45,
-            itemStyle: {
-              normal: {
-                // borderWidth: 2,
-                // borderColor: 'rgba(0, 0, 0, 0)',
-                // opacity: 0.75,
-                shadowBlur: 20,
-                shadowOffsetX: 0,
-                shadowOffsetY: 7,
-                shadowColor: "rgba(0, 0, 0, 0.5)",
-              },
-            },
-            animationType: "scale",
-            avoidLabelOverlap: false,
-            label: {
-              show: false,
-            },
-            labelLine: {
-              show: false,
-            },
-            data: [],
-          },
         ],
       };
       for (var i = 0; i < optionName.length; i++) {
-        option.series[1].data[i] = {
-          value: datas[i],
-          name: optionName[i],
+        option.series[i + 1] = {
+          // z: optionName.length - i,
+          name: "",
+          type: "pie",
+          radius: [
+            "0",
+            (i == 0 ? 90 - optionName.length * 5 : 90 - i * 5) + "%",
+          ],
+          center: ["20%", "50%"],
+          // roseType: 'radius', //area
+          startAngle: -45,
+          // itemStyle: {
+          //   normal: {
+          //     // borderWidth: 2,
+          //     // borderColor: 'rgba(0, 0, 0, 0)',
+          //     // opacity: 0.75,
+          //     shadowBlur: 20,
+          //     shadowOffsetX: 0,
+          //     shadowOffsetY: 7,
+          //     shadowColor: "rgba(0, 0, 0, 0.5)",
+          //   },
+          // },
+          animationType: "scale",
+          avoidLabelOverlap: false,
+          label: {
+            show: false,
+          },
+          labelLine: {
+            show: false,
+          },
+          data: datas.map((e, j) => {
+            return {
+              value: e,
+              itemStyle: {
+                normal: {
+                  color: j == i ? colors[j] : "rgb(0,0,0,0)",
+                  shadowBlur: 30,
+                  shadowOffsetX: 2,
+                  shadowOffsetY: 5,
+                  shadowColor: "rgba(0, 0, 0, 0.2)",
+                },
+              },
+              name: i == j ? optionName[i] : "",
+            };
+          }),
         };
+        console.log(option.series[i + 1].data);
       }
       this.$redomEchart(this.$refs["floorSpaceEchart_" + this.ids], option);
-    }
-  }
+    },
+  },
 };
 </script>
 

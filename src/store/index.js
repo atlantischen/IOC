@@ -3,6 +3,7 @@ import {
   createStore
 } from 'vuex'
 
+
 export default createStore({
   state: {
     unitySendData: {},
@@ -13,6 +14,7 @@ export default createStore({
     }
   },
   actions: {},
+  getters: {},
   modules: {
     comState: comState
   }

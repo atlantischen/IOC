@@ -29,63 +29,69 @@ export default {
       type: Object,
     },
   },
-  data () {
+  data() {
     return {
       timer: null,
       isShow: this.$store.state.comState.showWarnTip,
     };
   },
   watch: {
-    '$store.state.comState.showWarnTip': function (n, o) {
-      this.isShow = n
+    "$store.state.comState.showWarnTip": function(n, o) {
+      this.isShow = n;
       if (this.isShow) {
+        setTimeout(() => {
+          this.moveLeft();
+        }, 500);
         this.$SendMessageToUnity("PopUpWarningNoticesBar", { isOpen: true });
-        console.log("=================PopUpWarningNoticesBar, { isOpen: true })")
+        console.log(
+          "=================PopUpWarningNoticesBar, { isOpen: true })"
+        );
       }
-    }
+    },
   },
   components: {},
-  created () {
-  },
-  mounted () {
-    setTimeout(() => {
-      this.moveLeft()
-    }, 500);
+  created() {},
+  mounted() {
     // document.querySelector('.tipBox_text').onmouseover = function () { this.timer = null; clearInterval(this.timer) }
     // document.querySelector('.tipBox_text').onmouseout = function () { this.moveLeft() }
   },
-  beforeDestroy () {
-    clearInterval(this.timer)
+  beforeDestroy() {
+    clearInterval(this.timer);
   },
   methods: {
     // 警告框滑动
-    moveLeft () {
-      var _w = document.getElementById('pList').children[0], _d = 0
-      var _wc = _w.children
-      var _l = _wc.length
-      _w.appendChild(_wc[0])
+    moveLeft() {
+      var _w = document.getElementById("pList").children[0],
+        _d = 0;
+      var _wc = _w.children;
+      var _l = _wc.length;
+      _w.appendChild(_wc[0]);
       this.timer = setInterval(() => {
-        _d--
+        _d--;
         if (-_d >= _w.getBoundingClientRect().width) {
-          _d = 10
-          _w.insertBefore(_wc[_l - 1], _wc[0])
+          _d = 10;
+          _w.insertBefore(_wc[_l - 1], _wc[0]);
         }
         // _w[0].style.transform = 'translateX(-' + _d + 'px)'
-        _w.style.left = _d + 'px'
+        _w.style.left = _d + "px";
       }, 25);
     },
 
     // 点击警告框3D出现警告位置
-    clickItem () {
+    clickItem() {
       this.$SendMessageToUnity("OnWarningNoticesBarClick", {});
-      console.log("=================OnWarningNoticesBarClick")
+      console.log("=================OnWarningNoticesBarClick");
     },
     // 关闭警告
-    closeTip () {
-      this.isShow = false
-      this.$store.commit('SET_SHOWWARNTIP', this.isShow)
-      this.$SendMessageToUnity("PopUpWarningNoticesBar", { isOpen: this.isShow });
-      console.log("=================PopUpWarningNoticesBar, { isOpen: false })")
+    closeTip() {
+      this.isShow = false;
+      this.$store.commit("SET_SHOWWARNTIP", this.isShow);
+      this.$SendMessageToUnity("PopUpWarningNoticesBar", {
+        isOpen: this.isShow,
+      });
+      console.log(
+        "=================PopUpWarningNoticesBar, { isOpen: false })"
+      );
       // this.$emit("close", this.isShow);
     },
   },
