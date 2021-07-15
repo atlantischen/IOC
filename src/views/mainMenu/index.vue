@@ -22,7 +22,7 @@ import AlarmAck from "@/views/mainMenu/comprehensiveSituational/homePage/compone
 export default {
   name: "MainMenu",
   components: { AlarmAck },
-  data() {
+  data () {
     return {
       isShow: true,
       url: "",
@@ -32,12 +32,12 @@ export default {
     };
   },
   computed: {
-    getUnityData() {
+    getUnityData () {
       return this.$store.state.unitySendData;
     },
   },
   watch: {
-    getUnityData(val) {
+    getUnityData (val) {
       // debugger;
       let res = val;
       try {
@@ -45,15 +45,15 @@ export default {
           this.$router.push(res.action);
         } else {
         }
-      } catch (e) {}
+      } catch (e) { }
     },
-    "$store.state.comState.centerDatas": function(n, o) {
+    "$store.state.comState.centerDatas": function (n, o) {
       if (n) {
         this.centerDatas = n;
       }
     },
   },
-  beforeCreate() {
+  beforeCreate () {
     if (process.env.NODE_ENV === "production") {
       this.$router.push("/comprehensiveSituational/homePage");
     }
@@ -65,9 +65,9 @@ export default {
         },
       ];
       this.$store.commit("SET_SHOWWARNTIP", true);
-    }, this.$randomNumer(10000, 300000));
+    }, this.$randomNumer(1000, 50000));
   },
-  created() {
+  created () {
     if (window.vuplex) {
       this.addMessageListener();
     } else {
@@ -98,22 +98,22 @@ export default {
       this.url = "http://183.62.170.2:8110";
     }
   },
-  mounted() {
+  mounted () {
     this.$nextTick(() => {
       window.iframe = this.$refs.iframe;
     });
   },
-  beforeDestroy() {
+  beforeDestroy () {
     clearInterval(this.warnTimer);
   },
   methods: {
-    getQueryString(name) {
+    getQueryString (name) {
       var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
       var r = window.location.search.substr(1).match(reg);
       if (r != null) return unescape(r[2]);
       return null;
     },
-    addMessageListener() {
+    addMessageListener () {
       window.vuplex.addEventListener("message", (event) => {
         console.log(event.data);
         let res = JSON.parse(event.data);

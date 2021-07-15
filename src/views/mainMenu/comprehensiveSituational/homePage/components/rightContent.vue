@@ -26,7 +26,9 @@
             />
             <img v-else :src="imageUrl" class="avatar" />
           </el-upload>
-          <button :class="{ m_disabled: !imageUrl }">搜寻轨迹</button>
+          <button :class="{ m_disabled: !imageUrl }" @click="SearchPath()">
+            搜寻轨迹
+          </button>
         </div>
         <SearchBox
           class="SearchBoxClass"
@@ -294,18 +296,33 @@ export default {
     },
     searchList (val) {
       this.inputV = val
-      if (!val) {
-        return this.$message.error("请输入关键词！")
-      } else {
-        this.slist = this.slist2
-      }
+      // if (!val) {
+      //   return this.$message.error("请输入关键词！")
+      // } else {
+      this.slist = this.slist2
+      // }
       this.isShowList = !this.isShowList;
+    },
+    // 搜索轨迹
+    SearchPath () {
+      this.$SendMessageToUnity("ShowLocationPin", {
+        Serial: 0,
+      });
+      console.log('ShowLocationPin---搜寻轨迹------------')
     },
     searchOneItem (val) {
       console.log(val);
+      this.$SendMessageToUnity("ShowLocationPin", {
+        Serial: 0,
+      });
+      console.log('ShowLocationPin--商家、企业------------')
     },
     zhuizongFun (val) {
       console.log(val);
+      this.$SendMessageToUnity("ShowLocationPin", {
+        Serial: 0,
+      });
+      console.log('ShowLocationPin-----跟踪------------')
     },
     back () {
       this.$emit("_c", null);
