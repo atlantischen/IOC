@@ -25,7 +25,7 @@
     </div>
     <div class="public">
       <div class="tittle">公共区域控制</div>
-      <div class="selected">
+      <div class="select_i">
         <select name="" id="">
           <option v-for="(item, index) in floorList" :key="index">
             {{ item.label }}
@@ -94,7 +94,7 @@
     </div>
     <div class="scene">
      <div class="tittle">照明场景配置</div>
-      <div class="add">
+      <div class="add" @click="dialogShowChange(true)">
         <i class="iconfont icon-tianjia"></i>
         <span>添加通行用户</span>
       </div>
@@ -108,20 +108,20 @@
           <li >{{_it.p1}}</li>
           <li >{{_it.p2}}</li>
         </ul>
-        <a class="light_edit" @click="editor('UI_EVENT_SheBei_Editor',i)">编辑</a>
+        <a class="light_edit" @click="dialogShowChange(true)">编辑</a>
        </li>
      </ul>
 
     </div>
   </IOCRight>
+  <AddScene :dialogShow="dialogShow" :title='title' @dialogShowChange="dialogShowChange"></AddScene>
 </template>
 
 <script>
 export default {
   data() {
-    return {
+     return {
       activeIndex: 1,
-
       floorList: [
         {
           value: 12,
@@ -216,10 +216,18 @@ export default {
             p2:'茶水间-关闭照明'
           },
           
-        ]
+        ],
+       dialogShow:false ,
+       title:'添加场景'
+
+
     };
   },
   methods: {
+    dialogShowChange(val){
+      
+      this.dialogShow=val
+    },
     closeOpen(val, i) {
       if (val == "comArea") {
         this.CommonAreaDatas[i].states =

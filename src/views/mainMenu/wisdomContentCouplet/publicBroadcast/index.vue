@@ -1,7 +1,7 @@
 <template>
   <!-- 公共广播 -->
   <div class="publicBroadcast">
-    <IOCLeft class="position">
+    <IOCLeft style="top:35%">
       <div class="play">
         <div class="tittle">实时采播</div>
         <div class="btn">
@@ -264,7 +264,7 @@ export default {
      
     },
 };
-</script>el-slider__button-wrapper
+</script>
 
 <style lang="less" scoped>
 .el-slider{

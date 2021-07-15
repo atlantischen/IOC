@@ -15,6 +15,8 @@ import VueWechatTitle from 'vue-wechat-title'
 import './assets/iconfont/iconfont.css'
 const app = createApp(App)
 app.config.globalProperties.$SendMessageToUnity = SendMessageToUnity;
+
+
 app.use(ElementPlus, {
   locale
 })

@@ -1,5 +1,5 @@
 <template>
-  <div class="container ">
+  <div class="container">
     <el-select
       class="drop_down "
       v-model="searchData.region"
@@ -79,17 +79,20 @@ export default {
           label: "F",
         },
       ],
+      input:''
     };
   },
   props: {
     searchData: {
       type: Object,
-      default: {}
+      default: {
+        
+      }
     },
   },
   methods: {
     handleClick() {
-      this.$emit("search",this.searchData );
+      this.$emit("search",this.searchData);
     },
   },
 };
@@ -121,7 +124,7 @@ export default {
   align-items: center;
   width: 2.5rem /* 200/80 */ /* 80/80 */;
   .el-input {
-    line-height: 0.45rem /* 36/80 */;
+    line-height: 0;
   }
   .el-input__inner {
     border-color: #43aaf3;
@@ -151,5 +154,6 @@ export default {
 .container {
   display: flex;
   align-items: center;
+  height: .45rem /* 36/80 */;
 }
 </style>

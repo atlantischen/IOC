@@ -14,6 +14,10 @@ import RightAlert from '../components/widget/rightAlert.vue' // 右侧警告框
 import NoT from '../components/widget/noneTing.vue' // noneTing
 import LookVideo from '../components/widget/lookVideo.vue' // 查看视频
 import MoveDialog from '../components/widget/moveDialog.vue'
+import Dialog from '../components/dialog.vue' //监控
+import VideoPlayback from '../components/videoPlayback.vue' //视频回放
+import Video from '../components/video.vue' //视频
+import AddScene from '../components/addScene.vue' //视频
 
 const global = {
   ...configurable,
@@ -22,6 +26,10 @@ const global = {
   Tips,
   NumCounter,
   LicensePlateSearch,
+  Dialog,
+  VideoPlayback,
+  Video,
+  AddScene,
   LeftRight,
   Allcom,
   DropDown,

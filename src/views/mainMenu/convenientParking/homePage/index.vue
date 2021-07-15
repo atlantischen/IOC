@@ -178,7 +178,8 @@ export default {
         },
       ],
       searchData:{
-
+        region:'粤',
+        letter:'B'
       }
     };
   },

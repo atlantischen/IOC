@@ -1,7 +1,7 @@
 <template>
   <IOCLeft>
     <div class="today">
-      <div class="tittle">今日一览</div>
+      <div class="tittle" >今日一览</div>
        <div class="total">
           <ul>
             <li>
@@ -129,6 +129,7 @@ export default {
     }
   },
   methods:{
+  
      ElectricityStatistics(data, data2, yData) {
       let { name, splitNumber, min, max, interval } = yData;
       var dom = this.$refs.ElectricityStatistics;

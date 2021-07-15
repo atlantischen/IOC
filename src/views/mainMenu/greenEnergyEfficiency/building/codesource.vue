@@ -1,7 +1,7 @@
 <template>
   <IOCLeft>
     <div class="cold_row_t">
-      <div class="tittle">今日一览</div>
+      <div class="tittle" >今日一览</div>
       <div class="TodayToSee">
         <div class="TodayToSee_data1 flex">
           <span class="font_text">21.26</span>

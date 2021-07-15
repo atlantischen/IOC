@@ -188,6 +188,76 @@
     }
   }
 }
+.sliderBtn4 {
+  position: relative;
+  width: 1rem /* 80/80 */;
+  height: .325rem /* 26/80 */;
+  line-height: .3rem /* 24/80 */;
+  border-radius: .15rem /* 12/80 *//* 12/80 */;
+  cursor: pointer;
+  border: 1px solid #4396F3;
+  font-size: .175rem /* 14/80 */;
+
+  &::after {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    color: #0e2d43;
+    transform: translateY(-50%);
+    left: .25rem /* 20/80 */;
+    width: 0px;
+    height: 100%;
+    border-radius: .15rem /* 12/80 */;
+    text-align: center;
+    background: #4396F3;
+    transition: all 0.1s ease-in;
+  }
+
+  &.open {
+    &::before {
+      content: '手动';
+      height: 100%;
+      width: 55%;
+      left: -1px;
+      color: #fff;
+      height: .325rem /* 26/80 */;
+    }
+
+    &::after {
+      content: '自动';
+      color: #4396F3;
+      left: 55%;
+    }
+  }
+
+  &.close {
+    &::before {
+      content: '自动';
+      width: 55%;
+      left: 46%;
+      color: #fff;
+      height: .325rem /* 26/80 */;
+
+
+      // border-radius: 0 12px 12px 0;
+    }
+
+    &::after {
+      content: '手动';
+      color: #4396F3;
+      left: .0875rem /* 7/80 */;
+    }
+
+  }
+}
 
 // 选择日期按钮
 .btn {
@@ -217,10 +287,10 @@
   }
 }
 // 下拉框
-.selected {
+.select_i {
   // float: right;
   display: flex;
-  // justify-content: flex-end;
+  justify-content: flex-end;
 
   select {
     width: 0.8rem /* 64/80 */;
@@ -276,6 +346,51 @@
 .disable {
   cursor: not-allowed;
   pointer-events: none;
+}
+// 全局message
+.el-message {
+  top: 50% !important;
+  left: 50% !important;
+  transform: translateXY(-50%, -50%);
+  font-size: 18px !important;
+  min-width: 100px;
+  max-width: 800px;
+  min-height: 100px;
+  background-size: 100% 100%;
+  border: 1px solid #ffffffb6;
+  box-shadow: 0px 0px 6px 0px rgba(0, 0, 0, 0.361);
+  background: rgba(29, 56, 84, 0.9);
+  border: 1px solid rgba(255, 255, 255, 0.76);
+  border-radius: 10px;
+  // border: 1px solid #ffffffb6;
+  // border-color: rgba(41, 57, 76, 0.85);
+  // background: rgba(41, 57, 76, 0.85);
+  // border-image-source: url("../assets/img/message_bg.png");
+  // border-image-slice: 25 25 25 25;
+  // border-image-width: 25px 25px 25px 25px;
+  // border-image-outset: 25px 25px 25px 25px;
+  // border-image-repeat: repeat;
+  // box-shadow: unset;
+  // border-radius: 0px;
+  padding: 20px 48px !important;
+  z-index: 99;
+
+  .el-message__content {
+      color: #fff;
+      font-size: 18px;
+      font-weight: 700;
+      line-height: 2;
+  }
+
+  .el-icon-close {
+      color: #fff;
+  }
+  .el-message__icon{
+    font-size:.375rem /* 30/80 *//* 20/80 */;
+  }
+  .el-icon-success{
+    color: #4396F3
+  }
 }
 
 @import './gl.less';

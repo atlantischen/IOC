@@ -1,5 +1,5 @@
 <template>
-  <IOCLeft  style="width:auto">
+  <IOCLeft  style="width:auto;top:40%">
     <LicensePlateSearch
       @search="search"
       :searchData="searchData"
@@ -286,7 +286,7 @@ export default {
       this.fade = true;
     },
     handleSizeChange(val) {
-      console.log(`每页 ${val} 条`);
+      
     },
     handleCurrentChange(val) {
       this.currentPage = val;
@@ -309,10 +309,12 @@ export default {
 <style lang="less" scoped>
 .right {
   right: 0;
+  top:40%
 }
 .search_box{
   width: 3.35rem /* 268/80 */;
   border: 1px solid #4396F3;
+  border-radius: 0 0 0.075rem 0.075rem;
   background-color: rgba(0, 17, 26, .7);
   &>ul{
     &>li{

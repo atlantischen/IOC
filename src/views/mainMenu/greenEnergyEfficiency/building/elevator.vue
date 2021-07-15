@@ -44,7 +44,7 @@
       <div class="monitor">
         <div class="tittle">轿厢监控</div>
         <div class="box">
-          <div class="video">
+          <div class="video" @click="videoShowChange(true,'carData')">
           <img src="../../../../assets/img/dt_pic7.png" alt="">
           <span class="font_text">视频回放</span>
         </div>
@@ -54,7 +54,7 @@
             <span>{{item++}}号客梯</span>
           </li>
         </ul>
-        <div class="floor">
+        <div class="floor" @click="dialogShowChange(true,'carData')">
           <img src="../../../../assets/img/dt_pic6.png" alt="">
           <span>查看更多</span>
         </div>
@@ -64,7 +64,7 @@
       <div class="monitor">
         <div class="tittle">电梯间监控</div>
         <div class="box">
-          <div class="video">
+          <div class="video" @click="videoShowChange(true,'elevatorData')">
           <img src="../../../../assets/img/dt_pic7.png" alt="">
           <span class="font_text">视频回放</span>
         </div>
@@ -74,7 +74,7 @@
             <span>{{item++}}号客梯</span>
           </li>
         </ul>
-        <div class="floor">
+        <div class="floor" @click="dialogShowChange(true,'elevatorData')">
           <img src="../../../../assets/img/dt_pic6.png" alt="">
           <span>查看更多</span>
         </div>
@@ -82,6 +82,8 @@
         
       </div>
     </IOCRight>
+    <Dialog :dialogShow="dialogShow" :title='title' @dialogShowChange="dialogShowChange"></Dialog>
+    <VideoPlayback :title='title' :backShow="backShow" @videoShowChange="videoShowChange"></VideoPlayback>
 </template>
 
 <script>
@@ -137,7 +139,31 @@ export default {
           behavior:'Upward',
           state:0
         },
-      ]
+      ],
+      dialogShow:false,
+      backShow:false,
+      title:'轿厢监控',
+    }
+  },
+  methods:{
+    dialogShowChange(val,name){
+      if(name==='carData'){
+        this.title='轿厢监控'
+      }else if(name==='elevatorData'){
+        this.title='电梯间监控'
+      }
+      this.dialogShow=val
+
+    },
+    videoShowChange(val,name){
+      if(name==='carData'){
+        this.title='轿厢视频回放'
+      }else if(name==='elevatorData'){
+        this.title='电梯间视频回放'
+      }
+      this.backShow=val
+
+
     }
   }
 

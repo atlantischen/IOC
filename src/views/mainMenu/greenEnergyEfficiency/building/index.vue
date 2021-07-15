@@ -3,6 +3,7 @@
   <div class="container ">
       <ul class="title">
           <li   :class="activeIndex===index?'active':''" v-for="(item,index) in list" :key="index" @click="handleClick(item.path,index,item.name)">{{item.name}}</li>
+
       </ul>
     <router-view></router-view>
   </div>
@@ -14,7 +15,7 @@ export default {
   data(){
     return{
     activeIndex:0,
-    imgCdnUrl:require('../../../../assets/img/ly_bj.png'),
+    // imgCdnUrl:require('../../../../assets/img/ly_bj.png'),
      list: [
         {
           path: "/greenEnergyEfficiency/building/codesource",
@@ -50,7 +51,8 @@ export default {
       this.$router.push(path)
       this.$SendMessageToUnity("OnChangePage", {"name":name});
      
-    }
+    },
+ 
   },
    watch: {
     $route (to,from) {
