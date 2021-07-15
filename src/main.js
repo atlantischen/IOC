@@ -19,17 +19,20 @@ const app = createApp(App)
 app.config.globalProperties.$SendMessageToUnity = SendMessageToUnity;
 import i18n from './lang/index' // 中英文切换
 let lang = localStorage.getItem('language') || i18n.locale
-if (!lang) {
-  localStorage.setItem('language', 'zh')
-} else if (lang == 'en') {
-  app.use(ElementPlus, {
-    locale_en
-  })
-} else if (lang == 'zh') {
-  app.use(ElementPlus, {
-    locale
-  })
-}
+app.use(ElementPlus, {
+  locale
+})
+// if (!lang) {
+//   localStorage.setItem('language', 'zh')
+// } else if (lang == 'en') {
+//   app.use(ElementPlus, {
+//     locale_en
+//   })
+// } else if (lang == 'zh') {
+//   app.use(ElementPlus, {
+//     locale
+//   })
+// }
 app.use(VueWechatTitle)
 import 'element-plus/lib/theme-chalk/index.css'
 import globalComponents from './utils/globalComponents.js' // 所有global组件

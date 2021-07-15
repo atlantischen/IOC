@@ -227,6 +227,30 @@ export default {
                 name: "思码软件",
                 src: require("@/assets/img/datas/drz_smrj.png"),
               },
+              {
+                name: "氪空间",
+                src: require("@/assets/img/datas/drz_kkj.png"),
+              },
+              {
+                name: "威信科技",
+                src: require("@/assets/img/datas/drz_wxkj.png"),
+              },
+              {
+                name: "卓然睿和自动化",
+                src: require("@/assets/img/datas/drz_zr.png"),
+              },
+              {
+                name: "EOPLE",
+                src: require("@/assets/img/datas/drz_eople.png"),
+              },
+              {
+                name: "格瑞智慧能源",
+                src: require("@/assets/img/datas/drz_gr.png"),
+              },
+              {
+                name: "思码软件",
+                src: require("@/assets/img/datas/drz_smrj.png"),
+              },
             ],
           }
         }
