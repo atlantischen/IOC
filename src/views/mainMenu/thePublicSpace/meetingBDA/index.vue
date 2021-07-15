@@ -52,7 +52,7 @@ export default {
         },
         {
           title: "今日会议时段",
-          type: "singleBarChart",
+          type: "SingleBarChart",
           datas: {
             eHeight: 220,
             xAxisD: [

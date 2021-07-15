@@ -26,10 +26,16 @@ import PedestrianPosture2 from './pedestrianPosture2.vue'
 import TableList from './tableList.vue'
 import PyramidChart from './pyramidChart.vue'
 import WaterLevel from './waterLevel.vue'
+import IndustrySpace from './industrySpace.vue'
+import IndustrySpace2 from './industrySpace2.vue'
+import FloorSpace from './floorSpace.vue'
+import EnvironmentalSpace from './environmentalSpace.vue'
+import ServiceOverview from './serviceOverview.vue'
+import DistributionService from './distributionService.vue'
 
 const configurable = {
   TheParkIs, // 园区情况
-  PedestrianPosture, // (人行态势/近7天访客统计)
+  PedestrianPosture, // (人行态势/近7天访客统计,服务办理总数)
   TheParkOutputVal, // 园区产值
   EnergyTrend, // 能耗态势
   EquipmentSituation, // 设备态势
@@ -45,7 +51,7 @@ const configurable = {
   ScatterDiagram, // 散点
   ScatterDiagram2, // 单色散点(今日会议排期)
   ProportionOfSiteType, // 饼图（场所类型占比）
-  SingleBarChart, // 单(多)条柱状图
+  SingleBarChart, // 单(多)条柱状图 (热门服务TOP5)
   UpBarChart, // 上下柱状图（资产设备统计）
   HorizontalBarChart, // 条形图（今日会议室概况）
   PieChart, // 饼图实心（IT资产使用概况）
@@ -55,6 +61,12 @@ const configurable = {
   PedestrianPosture2, // 折线（今日访客统计）
   TableList, // table(今日访客进出车辆)
   PyramidChart, // 金字塔(本月企业服务办理TOP4)
-  WaterLevel, // 金字塔(本月企业服务办理TOP4)
+  WaterLevel, //
+  IndustrySpace, // 饼图（圆环）（产业空间）
+  IndustrySpace2, // 饼图（实心）（产业空间分布）
+  FloorSpace, // 饼图（实心）（产地空间）
+  EnvironmentalSpace, // 环境空间
+  ServiceOverview, // （服务办理概况）
+  DistributionService, // （各服务办理分布）
 }
 export default configurable

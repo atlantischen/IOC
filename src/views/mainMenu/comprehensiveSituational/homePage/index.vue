@@ -1,7 +1,8 @@
 <template>
   <!-- 综合态势home -->
   <div class="zhts_Home">
-    <RightContent v-show="isShowRIght" :inputVal="inputVal" @_c="clickSwitch" />
+    <button @click="cgLang" class="cgLang">{{ $t("lg.name", lang) }}</button>
+    <RightContent v-show="isShowRIght" :inputVal="inputV" @_c="clickSwitch" />
     <LeftRight v-show="!isShowRIght">
       <template #left>
         <Allcom :_Info="leftInfo" />
@@ -11,31 +12,32 @@
         <SearchBox
           class="SearchBoxClass"
           :text="'搜园区建筑、搜企业、搜商家'"
+          :inputV="inputVal"
           @_search="clickSwitch"
           @_input="clickSwitch"
         />
-        <TipBox :_data="tipList" />
       </template>
       <template #right>
         <Allcom :_Info="rightInfo" />
       </template>
     </LeftRight>
-    <AlarmAck />
   </div>
 </template>
 
 <script>
-import AlarmAck from "@/views/mainMenu/comprehensiveSituational/homePage/components/alarmAck.vue";
+import { homePage } from "@/lang/data/comprehensiveSituational/index";
+import i18n from "@/lang/index";
 import RightContent from "./components/rightContent.vue";
 import * as echarts from "echarts";
 // import { aaa } from "@/api/mockApi";
 // import axios from "axios";
 export default {
-  components: { RightContent, AlarmAck },
+  components: { RightContent },
   name: "zhts",
-  data () {
+  data() {
     return {
       inputVal: null,
+      inputV: null,
       // 左侧组件info
       leftInfo: [
         {
@@ -234,15 +236,35 @@ export default {
       tipList: [
         {
           text: "告警！2021-04-30 15:00{李玲}在{公寓广场}发生了{黑名单告警}",
-        }
+        },
       ],
+      lang: null,
     };
   },
-  created () {
+  computed: {
+    lang() {
+      return this.$store.state.comState.lang;
+    },
   },
-  mounted () {
-    this.$SendMessageToUnity("PopUpWarningNoticesBar", { isOpen: true });
-    console.log("=================PopUpWarningNoticesBar, { isOpen: true })")
+  watch: {
+    "$store.state.comState.lang"(n, o) {
+      // this.lang = this.$t("lg.name", n);
+      // this.leftInfo = JSON.parse(
+      //   this.$t("comprehensiveSituational.homePage")
+      // ).leftInfo;
+      // this.rightInfo = JSON.parse(
+      //   this.$t(
+      //     "comprehensiveSituational.homePage",
+      //     this.$store.state.comState.lang
+      //   )
+      // ).rightInfo;
+    },
+  },
+  created() {
+    // (this.leftInfo = homePage.leftInfo),
+    //   (this.rightInfo = homePage.rightInfo)
+  },
+  mounted() {
     // aaa().then(r=>{
     //   console.log(r)
     // })
@@ -250,14 +272,22 @@ export default {
     //   console.log('xxxxxxxxx', req)
     // })
   },
-  destroyed () {
-  },
+  destroyed() {},
   methods: {
-    showTipBoxHandle (val) { },
-    clickSwitch (val) {
-      console.log(val)
+    showTipBoxHandle(val) {},
+    clickSwitch(val) {
       this.inputVal = val;
+      this.inputV = null;
       this.isShowRIght = !this.isShowRIght;
+    },
+    cgLang() {
+      let a;
+      if (localStorage.getItem("language") == "en" || i18n.locale == "en") {
+        a = "zh";
+      } else {
+        a = "en";
+      }
+      this.$store.dispatch("SET_LANG", a);
     },
   },
 };
@@ -268,7 +298,13 @@ export default {
 .zhts_Home {
   // position: relative;
 }
+.cgLang {
+  position: fixed;
+  left: 0;
+  top: 0;
+}
 .SearchBoxClass {
+  padding-top: 1rem /* 80/80 */;
   width: 6.25rem /* 500/80 */;
 }
 </style>

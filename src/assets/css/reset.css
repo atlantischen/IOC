@@ -59,6 +59,7 @@ input,
 select,
 textarea {
   margin: 0;
+  outline:none;
 }
 /* Box sizing */
 html {

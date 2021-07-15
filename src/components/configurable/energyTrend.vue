@@ -8,7 +8,8 @@
     >
       <div class="energyTrend_l y_c">
         <span
-          ><i class="LineBeyond">{{ item.todayPower }}</i
+          ><i class="LineBeyond"
+            ><NumCounter :value="item.todayPower"></NumCounter></i
           >{{ item.unit }}</span
         >
         <span>今日{{ item.text }}</span>
@@ -29,24 +30,23 @@ export default {
   name: "theParkOutputValAll",
   props: {
     _data: {
-      type: Object
-    }
+      type: Object,
+    },
   },
-  data () {
+  data() {
     return {
       ...this._data,
-      ids: this.$uuid()
-    }
+      ids: this.$uuid(),
+    };
   },
-  mounted () {
-    this.energyTrendFun(this.datas)
+  mounted() {
+    this.energyTrendFun(this.datas);
   },
   methods: {
     // 能耗态势
-    energyTrendFun (val) {
-      var _data = val.energyTrendData
+    energyTrendFun(val) {
+      var _data = val.energyTrendData;
       for (var i = 0; i < _data.length; i++) {
-        console.log(i,'i');
         var option = {
           xAxis: {
             show: false,
@@ -151,10 +151,13 @@ export default {
             },
           ],
         };
-        this.$redomEchart(this.$refs["energyTrendEchart_" + i + this.ids], option);
+        this.$redomEchart(
+          this.$refs["energyTrendEchart_" + i + this.ids],
+          option
+        );
       }
-    }
-  }
+    },
+  },
 };
 </script>
 
@@ -176,6 +179,10 @@ export default {
       border-right: 0.00125rem /* 0.1/80 */ rgba(255, 255, 255, 0.2) dotted;
       padding-right: 0.1875rem /* 15/80 */;
       span:nth-child(1) {
+        vertical-align: text-bottom;
+        .num {
+          display: inline;
+        }
         .text_s();
         i {
           .datas_s();

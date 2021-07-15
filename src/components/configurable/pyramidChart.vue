@@ -151,6 +151,11 @@ export default {
                     },
                   },
                 },
+                emphasis: {
+                  labelLine: {
+                    show: i % 2 == 0
+                  }
+                },
               }
             })
           },
@@ -201,6 +206,11 @@ export default {
                       color: "rgb(255,255,255,.7)",
                     },
                   },
+                },
+                emphasis: {
+                  labelLine: {
+                    show: i % 2 != 0
+                  }
                 },
               }
             })

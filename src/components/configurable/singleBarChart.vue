@@ -2,6 +2,20 @@
   <!-- 单条柱状图 -->
   <div class="singleBarChartAll">
     <div class="tittle">{{ title }}</div>
+    <div class="singleBar_time" :style="$paddingFun(datas.padding)">
+      <DropDown
+        v-if="datas.yearsList"
+        :list="datas.yearsList"
+        name="label"
+        @_cg="changePSYears"
+      />
+      <DropDown
+        v-if="datas.momthsList"
+        :list="datas.momthsList"
+        name="label"
+        @_cg="changePSMonths"
+      />
+    </div>
     <div class="singleBarChart">
       <ul class="pp_top" v-show="datas.datas2">
         <li class="y_c" v-for="(item, i) in datas.datas2" :key="i">
@@ -12,7 +26,7 @@
       <div
         :id="'singleBarChartEchart_' + ids"
         :ref="'singleBarChartEchart_' + ids"
-        :style="'height:' + datas.eHeight / 80 + 'rem;'"
+        :style="$eHeightFun(datas.eHeight)"
       ></div>
     </div>
   </div>
@@ -38,13 +52,21 @@ export default {
     this.singleBarChartFun(this.datas);
   },
   methods: {
+    changePSMonths (val) {
+      console.log(val);
+    },
+    changePSYears (val) {
+      console.log(val);
+      this.singleBarChartFun(this.datas);
+    },
     singleBarChartFun (val) {
-      let { xAxisD, datas, units, names } = val;
+      let { xAxisD, datas, units, names, leftTip } = val;
       var allD = [],
         showLb = {
           width: '50',
           padding: [15, 0, 0, -30],
-          rotate: -35,
+          // rotate: -35,
+          rotate: -20,
           interval: 0,
           margin: 20,
         },
@@ -82,10 +104,76 @@ export default {
       }
 
       var option = {
-        tooltip: {},
+        title: {
+          show: leftTip,
+          text: `{c|${leftTip ? leftTip.name : ''}}{a|${leftTip ? leftTip.value : ''}}{b|${leftTip ? leftTip.unit : ''}}`,
+          link: "",
+          target: null,
+          subtext: "",
+          sublink: "",
+          subtarget: null,
+          left: "1%",
+          top: "0%",
+          textAlign: "left",
+          // backgroundColor: 'rgba(0,0,0,0)',
+          // borderColor: '#ccc',
+          // borderWidth: 0,
+          // padding: 5,
+          itemGap: 6,
+          textStyle: {
+            rich: {
+              c: {
+                fontSize: 14,
+                color: "rgb(255,255,255,.7)",
+              },
+              a: {
+                color: "#fff",
+                fontFamily: "BYfont",
+                fontSize: 20,
+              },
+              b: {
+                color: "#fff",
+                fontSize: 12,
+              },
+            },
+          },
+        },
+        tooltip: {
+          show: true,
+          trigger: 'axis',
+          axisPointer: {
+            type: 'line',
+            lineStyle: {
+              opacity: 0,
+              show: false,
+              type: 'dashed',
+              width: 0.5,
+              color: 'rgba(255,255,255,0.8)'
+            }
+          },
+          backgroundColor: "rgba(0,0,0,0.8)",
+          borderWidth: 1,
+          borderColor: "#4396f3",
+          padding: [10, 15],
+          extraCssText: 'box-shadow:inset 0 0 8px rgba(67, 149, 243, 0.6);',
+          textStyle: {
+            color: "#fff",
+          },
+          formatter: params => {
+            console.log(params)
+            let dataStr = `<p style="font-weight:bold;font-size:.2rem;text-align:center;padding-bottom:.0625rem;">${params[0].name}</p>`
+            params.forEach(item => {
+              dataStr += `<div>
+                    <span style=" vertical-align: middle;margin-right:0.0625rem;width:0.15rem;height:0.12rem;border-radius:0.02rem;background:linear-gradient(to bottom, ${item.color.colorStops[0].color},${item.color.colorStops[1].color}"></span>
+                    <span> ${item.seriesName ? item.seriesName + ":" : item.seriesName}  ${item.value}</span>
+                  </div>`
+            })
+            return dataStr
+          }
+        },
         grid: {
           x: 10,
-          y: 40,
+          y: leftTip ? 60 : 40,
           x2: 30,
           y2: -10,
           containLabel: true,
@@ -116,7 +204,7 @@ export default {
                 }
               }
             },
-            boundaryGap: true,
+            // boundaryGap: true,
             data: xAxisD,
             axisTick: {
               show: false,
@@ -128,8 +216,8 @@ export default {
             },
             axisLabel: {
               fontSize: 12,
-              padding: [40, 0, 0, -10],
-              rotate: -40,
+              padding: [40, 0, 0, -(datas[0].length > 4 ? 20 : 10)],
+              rotate: -(datas[0].length > 4 ? 20 : 40),
               textStyle: {
                 color: "#fff",
               },
@@ -199,6 +287,14 @@ export default {
     height: 2.5rem /* 200/80 */;
   }
 
+  .singleBar_time {
+    display: flex;
+    justify-content: flex-end;
+    padding-right: 0.1rem /* 8/80 */;
+    .dropDown {
+      margin-left: 0.375rem /* 30/80 */;
+    }
+  }
   .pp_top {
     width: 100%;
     display: flex;

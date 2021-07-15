@@ -7,6 +7,9 @@ const moment = require('moment')
 var currentDate = function currentDate() {
   let _d
   switch (moment(new Date()).format('d')) {
+    case '0':
+      _d = '日'
+      break;
     case '1':
       _d = '一'
       break;
@@ -23,7 +26,7 @@ var currentDate = function currentDate() {
       _d = '五'
       break;
     default:
-      _d = '-'
+      _d = '六'
       break;
   }
   return moment(new Date()).format('YYYY年MM月DD日 星期' + _d + ' HH:mm:ss')
@@ -35,10 +38,9 @@ var currentDate = function currentDate() {
  * @param {val  bool}
  * @returns {handle}
  */
-var redomEchart = function redomEchart(dom, option, e) {
-  // let resizeDiv = document.getElementById(dom)
-  // let resizeDiv = this.refs[dom]
-  // let resizeDiv = e[dom]
+var redomEchart = function redomEchart(dom, option) {
+  // let that = this
+  // let resizeDiv = that.refs[dom] // document.getElementById(dom)
   let resizeDiv = dom
   let myChart = null
   myChart = echarts.init(resizeDiv)
@@ -60,7 +62,6 @@ var redomEchart = function redomEchart(dom, option, e) {
 var uuid = function uuid() {
   var uuid = []
   var hexDigits = '0123456789abcdefghijklmnopqrstuvwxyz'
-  // var hexDigits = 'adc'
   for (var i = 0; i < 36; i++) {
     uuid[i] = hexDigits.substr(Math.floor(Math.random() * 0x10), 1)
   }
@@ -141,12 +142,93 @@ var Fullscreen = function Fullscreen(val, bool) {
 }
 
 
+/**
+ * @author
+ * @description 向上滚动动画（一列多行,y轴运动）
+ * @param {DOMError }
+ * @param {time}
+ * @returns {Function}
+ */
+var ScrolAnimationTop = function ScrolAnimationTop(dom, time) {
+  var that = this,
+    _time = time * 1000
+  var box = that.$refs[dom] // document.getElementById(dom)
+  let timer = setInterval(scrol, _time);
+
+  function scrol() {
+    var _s = box.children[1].offsetTop - box.children[0].offsetTop
+    box.style.transition = `all 0.5s ease`
+    box.style.transform = `translateY(-${_s}px)`;
+    let _d = box.cloneNode(true)
+    if (box.children[0]) {
+      box.children[0].parentNode.appendChild(_d.children[0])
+    }
+    setTimeout(() => {
+      clearInterval(timer)
+      box.style.transition = `none`
+      box.style.transform = `translateY(0px)`;
+      if (box.children[0]) {
+        box.children[0].parentNode.removeChild(box.children[0])
+      }
+      timer = setInterval(scrol, _time)
+    }, _time / 2);
+  }
+}
+/**
+ * @author
+ * @description 动画（多行多列,x轴运动）
+ * @param {DOMError }
+ * @param {time}
+ * @returns {Function}
+ */
+var ScrolLeftARight = function ScrolLeftARight(dom, time) {
+  var that = this,
+    _time = time * 1000
+  var box = that.$refs[dom] // document.getElementById(dom)
+  let timer = setInterval(scrol, _time);
+
+  function scrol() {
+    let _d = box.cloneNode(true)
+    if (box.children[0]) {
+      box.children[0].parentNode.appendChild(_d.children[0])
+    }
+    var _s = box.children[1].offsetLeft - box.children[0].offsetLeft
+    for (var i = 0; i < box.children.length; i++) {
+      box.children[i].style.transition = `all 0.5s ease`
+      box.children[i].style.transform = `translateX(-${_s}px)`;
+    }
+    setTimeout(() => {
+      clearInterval(timer)
+      for (var i = 0; i < box.children.length; i++) {
+        box.children[i].style.transition = `none`
+        box.children[i].style.transform = `translateX(0px)`;
+      }
+      if (box.children[0]) {
+        box.children[0].parentNode.removeChild(box.children[0])
+      }
+      timer = setInterval(scrol, _time)
+    }, _time / 2);
+  }
+}
+/**
+ * @author
+ * @description 随机数
+ * @param number
+ * @returns {num}
+ */
+var randomNumer = function randomNumer(minNum, maxNum) {
+  return parseInt(Math.random() * (maxNum - minNum + 1) + minNum)
+}
+
 const fun = {
   currentDate,
   redomEchart,
   uuid,
   paddingFun,
   eHeightFun,
-  Fullscreen
+  Fullscreen,
+  ScrolAnimationTop,
+  ScrolLeftARight,
+  randomNumer
 }
 export default fun

@@ -25,7 +25,7 @@ export default {
           type: "PedestrianPosture2",
           datas: {
             eHeight: 240,
-            names: ["进", "出"],
+            names: null,
             unit: ["时间", "人"],
             xData: [
               "00:00",
@@ -52,7 +52,7 @@ export default {
         },
         {
           title: "访客楼栋分布",
-          type: "singleBarChart",
+          type: "SingleBarChart",
           datas: {
             eHeight: 300,
             xAxisD: [
@@ -67,7 +67,9 @@ export default {
               "3C栋",
             ],
             units: ["", "人"],
-            datas: [[500, 480, 900, 850, 650, 610, 780, 620, 500]],
+            datas: [
+              [500, 480, 900, 850, 650, 610, 780, 620, 500],
+            ],
           },
         },
       ],

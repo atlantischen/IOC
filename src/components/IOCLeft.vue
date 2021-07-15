@@ -1,6 +1,6 @@
 <template>
   <div
-    class="ioc_left  ioc_animated"
+    class="ioc_left ioc_animated"
     :class="fade ? 'fadeOutLeft0' : 'fadeInLeft0'"
   >
     <slot></slot>

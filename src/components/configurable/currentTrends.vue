@@ -4,7 +4,8 @@
     <div class="scrollTop" id="scrollTop">
       <ul
         class="currentTrends_ul"
-        id="currentTrendsRef"
+        :id="'currentTrendsRef_' + ids"
+        :ref="'currentTrendsRef_' + ids"
         :style="$paddingFun(datas.padding)"
       >
         <li class="currentTrends_li" v-for="(t, i) in OutputValList" :key="i">
@@ -19,7 +20,6 @@
 </template>
 
 <script>
-import * as echarts from "echarts";
 export default {
   name: "theParkOutputValAll",
   props: {
@@ -31,10 +31,7 @@ export default {
     return {
       ...this._data,
       ids: this.$uuid(),
-      timer: null,
       OutputValList: null,
-      //
-      speed: 0
     };
   },
   mounted () {
@@ -43,32 +40,9 @@ export default {
       this.getDatas();
     });
   },
-  // beforeDestroy () {
-  //   clearInterval(this.timer)
-  // },
   methods: {
     getDatas () {
-      // var box = document.getElementById("currentTrendsRef");
-      // // var box = this.$refs.currentTrendsRef
-      // var _s = 0;
-      // let _d = box.cloneNode(true)
-      // this.timer = setInterval(scrol, 1500);
-      // function scrol () {
-      //   _d = box.cloneNode(true)
-      //   if (box.children.length > 0) {
-      //     box.children[0].parentNode.appendChild(_d.children[0])
-      //   }
-      //   setTimeout(() => {
-      //     _s += box.children[1].offsetTop - box.children[0].offsetTop
-      //     // _s = box.children[1].offsetTop - box.children[0].offsetTop
-      //     box.style.transform = `translateY(-${_s}px)`;
-      //     if (box.children.length > 0) {
-      //       _d.removeChild(_d.children[0])
-      //     }
-      //     console.log(_d)
-      //     console.log(box)
-      //   }, 0);
-      // }
+      this.$ScrolAnimationTop('currentTrendsRef_' + this.ids, 2)
     }
   }
 };
@@ -83,7 +57,6 @@ export default {
     // height: 2.25rem /* 180/80 */;
     padding: 0 0.1875rem /* 15/80 */;
     // overflow: hidden;
-    transition: all 0.5s ease;
   }
   .scrollTop {
     height: 2.25rem /* 180/80 */;

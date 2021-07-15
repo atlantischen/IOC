@@ -37,19 +37,28 @@ export default {
       type: Object,
     },
   },
-  data () {
+  data() {
     return {
       ...this._data,
       ids: this.$uuid(),
+      lang: this.$store.state.comState.lang,
     };
   },
-  mounted () {
+  watch: {
+    // "$store.state.comState.lang"(n) {
+    //   this.parkCaseFun(this[n].datas.datas1);
+    //   this.parkCaseFun2(this[n].datas.datas2);
+    // },
+  },
+  mounted() {
+    // this.parkCaseFun(this[this.lang].datas.datas1);
+    // this.parkCaseFun2(this[this.lang].datas.datas2);
     this.parkCaseFun(this.datas.datas1);
     this.parkCaseFun2(this.datas.datas2);
   },
   methods: {
     // 园区情况
-    parkCaseFun (datas) {
+    parkCaseFun(datas) {
       var datas = datas;
       for (var i = 0; i < datas.length; i++) {
         var option = {
@@ -115,6 +124,13 @@ export default {
                   },
                 },
               },
+              hoverAnimation: false,
+              // emphasis: {
+              //   itemStyle: {
+              //     show: false,
+              //     color: 'tran'
+              //   }
+              // },
               labelLine: {
                 show: false,
               },
@@ -185,7 +201,7 @@ export default {
         // this.$redomEchart("parkCaseEchart_" + i + this.ids, option, this.$refs);
       }
     },
-    parkCaseFun2 (val) {
+    parkCaseFun2(val) {
       var datas = val.datas,
         names = val.names,
         imgs = [
@@ -210,7 +226,7 @@ export default {
                     fontSize: 24,
                     fontFamily: "BYfont",
                     fontWeight: "500",
-                    padding: [0, 5],
+                    padding: [2, 5],
                   },
                   b: {
                     color: "rgb(225,225,225,0.7)",
@@ -224,7 +240,7 @@ export default {
             {
               type: "image",
               id: "logo",
-              left: '2%',
+              left: "2%",
               top: "12%",
               z: 10,
               bounding: "raw",
@@ -270,7 +286,7 @@ export default {
                 },
               ],
               itemStyle: {
-                color: function () {
+                color: function() {
                   let obj = {
                     type: "linear",
                     x: 0, //右

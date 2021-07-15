@@ -1,16 +1,20 @@
 <template>
-  <div class="theParkOutputValAll">
+  <div class="industrySpace2All">
     <div class="tittle">{{ title }}</div>
-    <div
-      :id="'outputValueEchart_' + ids"
-      :ref="'outputValueEchart_' + ids"
-    ></div>
+    <div class="industrySpace2" :style="$paddingFun(datas.padding)">
+      <div
+        :id="'industrySpace2Echart_' + ids"
+        :ref="'industrySpace2Echart_' + ids"
+        :style="$eHeightFun(datas.eHeight)"
+      ></div>
+    </div>
   </div>
 </template>
 
 <script>
+import * as echarts from "echarts";
 export default {
-  name: "theParkOutputValAll",
+  name: "theParkIsAll",
   props: {
     _data: {
       type: Object
@@ -19,45 +23,31 @@ export default {
   data () {
     return {
       ...this._data,
-      ids: this.$uuid()
+      ids: this.$uuid(),
     }
   },
   mounted () {
-    this.outputValueFun(this.datas)
+    this.industrySpace2Fun(this.datas)
   },
   methods: {
-    // 园区产值
-    outputValueFun (val) {
+    industrySpace2Fun (val) {
       const { optionName, datas } = val
+      var dom = this.$refs["industrySpace2Echart_" + this.ids]
       var option = {
-        tooltip: {
-          trigger: "item",
-          backgroundColor: "rgba(0,0,0,0.8)",
-          borderWidth: 1,
-          borderColor: "#4396f3",
-          padding: [5, 10],
-          extraCssText: 'box-shadow:inset 0 0 8px rgba(67, 149, 243, 0.6);',
-          textStyle: {
-            color: "#fff",
-          }
-        },
         title: {
           show: true,
-          text: 164,
+          text: "",
           link: "",
           target: null,
-          subtext: "税收总数\n(亿元)",
+          subtext: "",
           sublink: "",
           subtarget: null,
           left: "22%",
-          bottom: "32%",
+          bottom: "42%",
           textAlign: "center",
-          // backgroundColor:
-          // borderColor: '#ccc',
-          // borderWidth: 0,
-          // padding: 5,
           itemGap: 6,
           textStyle: {
+            show: false,
             fontFamily: "BYfont",
             fontSize: 24,
             color: "#fff",
@@ -69,45 +59,50 @@ export default {
           },
         },
         legend: {
-          selectedMode: false,
+          selectedMode: true,
           show: true,
           orient: "vertical", // 'horizontal'
-          right: 8,
+          left: "45%",
           y: "center",
           data: optionName,
           formatter: function (name) {
-            return "{a|" + name + "}";
+            var index = 0;
+            optionName.forEach(function (value, i) {
+              if (value == name) index = i;
+            });
+            return "{a|" + name + "}" + datas[index] + "%";
           },
           textStyle: {
             color: "#fff",
             fontSize: 12,
             padding: [0, 15, 0, 2],
             rich: {
-              a: {},
+              a: {
+                color: "rgb(255,255,255,.7)",
+                padding: [0, 10, 0, 0],
+              },
             },
           },
           icon: "circle",
           itemWidth: 6,
           itemHeight: 6,
-          itemGap: 18,
+          itemGap: 12,
         },
         color: [
           "#4396f3",
-          "#95c7ff",
-          "#456af3",
           "#0ff",
           "#236390",
-          "#ffdd8d",
           "#9a866a",
-          "#c9a555",
+          "#cda857",
+          "#c7d392",
           "#fff",
         ],
         series: [
           {
             name: "",
             type: "pie",
-            radius: ["62%", "80%"],
-            center: ["23%", "50%"],
+            radius: ["0", "65%"],
+            center: ["20%", "50%"],
             avoidLabelOverlap: false,
             label: {
               show: false,
@@ -125,19 +120,18 @@ export default {
           name: optionName[i],
         };
       }
-      this.$redomEchart(this.$refs["outputValueEchart_" + this.ids], option);
-    },
+      this.$redomEchart(dom, option);
+    }
   }
 };
 </script>
 
 <style lang="less" scoped>
 @import "~@/style/gl.less";
-.theParkOutputValAll {
-  #outputValueEchart,
-  [id^="outputValueEchart_"] {
-    width: 100%;
-    height: 2rem /* 160/80 */;
-  }
+// 产业空间
+#industrySpace2Echart_,
+[id^="industrySpace2Echart_"] {
+  width: 100%;
+  height: 2.125rem /* 170/80 */;
 }
 </style>

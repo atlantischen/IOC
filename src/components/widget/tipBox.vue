@@ -1,5 +1,10 @@
 <template>
-  <div class="p_x_c2 tipBox" v-if="isShow" @click="clickItem">
+  <div
+    class="tipBox ioc_animated"
+    :class="{ fadeInDownTop: isShow }"
+    v-if="isShow"
+    @click="clickItem"
+  >
     <div class="tipBox_text x_c" :class="'tipBox_warn'">
       <div id="pList">
         <ul>
@@ -24,54 +29,69 @@ export default {
       type: Object,
     },
   },
-  data () {
+  data() {
     return {
       timer: null,
-      isShow: true,
+      isShow: this.$store.state.comState.showWarnTip,
     };
   },
-  watch () {
-    this.isShow = this.show;
+  watch: {
+    "$store.state.comState.showWarnTip": function(n, o) {
+      this.isShow = n;
+      if (this.isShow) {
+        setTimeout(() => {
+          this.moveLeft();
+        }, 500);
+        this.$SendMessageToUnity("PopUpWarningNoticesBar", { isOpen: true });
+        console.log(
+          "=================PopUpWarningNoticesBar, { isOpen: true })"
+        );
+      }
+    },
   },
   components: {},
-  mounted () {
-    setTimeout(() => {
-      this.moveLeft()
-    }, 500);
+  created() {},
+  mounted() {
     // document.querySelector('.tipBox_text').onmouseover = function () { this.timer = null; clearInterval(this.timer) }
     // document.querySelector('.tipBox_text').onmouseout = function () { this.moveLeft() }
   },
-  beforeDestroy () {
-    clearInterval(this.timer)
+  beforeDestroy() {
+    clearInterval(this.timer);
   },
   methods: {
     // 警告框滑动
-    moveLeft () {
-      var _w = document.getElementById('pList').children[0], _d = 0
-      var _wc = _w.children
-      var _l = _wc.length
-      _w.appendChild(_wc[0])
+    moveLeft() {
+      var _w = document.getElementById("pList").children[0],
+        _d = 0;
+      var _wc = _w.children;
+      var _l = _wc.length;
+      _w.appendChild(_wc[0]);
       this.timer = setInterval(() => {
-        _d--
+        _d--;
         if (-_d >= _w.getBoundingClientRect().width) {
-          _d = 10
-          _w.insertBefore(_wc[_l - 1], _wc[0])
+          _d = 10;
+          _w.insertBefore(_wc[_l - 1], _wc[0]);
         }
         // _w[0].style.transform = 'translateX(-' + _d + 'px)'
-        _w.style.left = _d + 'px'
+        _w.style.left = _d + "px";
       }, 25);
     },
 
     // 点击警告框3D出现警告位置
-    clickItem () {
+    clickItem() {
       this.$SendMessageToUnity("OnWarningNoticesBarClick", {});
-      console.log("=================OnWarningNoticesBarClick")
+      console.log("=================OnWarningNoticesBarClick");
     },
     // 关闭警告
-    closeTip () {
-      this.isShow = !this.isShow;
-      this.$SendMessageToUnity("PopUpWarningNoticesBar", { isOpen: false });
-      console.log("=================PopUpWarningNoticesBar, { isOpen: false })")
+    closeTip() {
+      this.isShow = false;
+      this.$store.commit("SET_SHOWWARNTIP", this.isShow);
+      this.$SendMessageToUnity("PopUpWarningNoticesBar", {
+        isOpen: this.isShow,
+      });
+      console.log(
+        "=================PopUpWarningNoticesBar, { isOpen: false })"
+      );
       // this.$emit("close", this.isShow);
     },
   },
@@ -81,8 +101,11 @@ export default {
 <style lang="less">
 @import "~@/style/gl.less";
 .tipBox {
-  position: relative;
-  top: 0.875rem /* 70/80 */ !important;
+  position: fixed;
+  top: 3.125rem /* 250/80 */;
+  left: 50%;
+  transform: translateX(-50%);
+  -webkit-transform: translateX(-50%);
   // min-width: 8.125rem /* 650/80 */;
   width: 8.75rem /* 700/80 */;
   height: 0.5rem /* 40/80 */;
@@ -90,6 +113,7 @@ export default {
   font-size: 0.225rem /* 18/80 */;
   margin: 0.25rem /* 20/80 */ 0;
   cursor: pointer;
+  z-index: 200;
   .tipBox_text {
     white-space: nowrap;
     padding: 0 0.4375rem /* 35/80 */;

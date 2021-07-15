@@ -54,6 +54,7 @@ export default {
         }
       for (var i = 0; i < datas.length; i++) {
         allD[i] = {
+          name: names ? names[i] : '',
           data: datas[i],
           areaStyle: {
             show: false,
@@ -85,11 +86,12 @@ export default {
             color: "#fff",
           },
           formatter: params => {
+            console.log(params)
             let dataStr = `<p style="font-weight:bold;text-align:center;">${params[0].name}</p>`
             params.forEach(item => {
               dataStr += `<div>
                   <span style=" vertical-align: middle;margin-right:0.0625rem;width:0.15rem;height:0.025rem;background-color:${item.color};"></span>
-                  <span> ${item.seriesName} :  ${item.data.value}</span>
+                  <span> ${item.seriesName ? item.seriesName + ':' : item.seriesName} ${item.value}</span>
                 </div>`
             })
             return dataStr
@@ -181,7 +183,6 @@ export default {
         series: allD.map(e => {
           return {
             ...e,
-            name: e.name,
             type: "line",
             smooth: smooth,
             itemStyle: {

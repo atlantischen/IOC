@@ -8,16 +8,27 @@
       frameborder="0"
     ></iframe>
     <router-view v-if="isShow" class="comEntry"></router-view>
+    <!-- 告警框 -->
+    <TipBox :_data="tipList" />
+    <!-- 右侧警告框 -->
+    <AlarmAck />
+    <!-- 中心数据 -->
+    <CenterDatas :list="centerDatas" />
   </div>
 </template>
 
 <script>
+import AlarmAck from "@/views/mainMenu/comprehensiveSituational/homePage/components/alarmAck.vue";
 export default {
   name: "MainMenu",
+  components: { AlarmAck },
   data () {
     return {
       isShow: true,
       url: "",
+      warnTimer: null,
+      tipList: null,
+      centerDatas: [],
     };
   },
   computed: {
@@ -36,11 +47,25 @@ export default {
         }
       } catch (e) { }
     },
+    "$store.state.comState.centerDatas": function (n, o) {
+      if (n) {
+        this.centerDatas = n;
+      }
+    },
   },
   beforeCreate () {
     if (process.env.NODE_ENV === "production") {
       this.$router.push("/comprehensiveSituational/homePage");
     }
+    // 随机触发警告
+    this.warnTimer = setInterval(() => {
+      this.tipList = [
+        {
+          text: "告警！2021-04-30 15:00{李玲}在{公寓广场}发生了{黑名单告警}",
+        },
+      ];
+      this.$store.commit("SET_SHOWWARNTIP", true);
+    }, this.$randomNumer(1000, 50000));
   },
   created () {
     if (window.vuplex) {
@@ -49,8 +74,12 @@ export default {
       window.addEventListener("vuplexready", this.addMessageListener);
     }
     window.addEventListener("message", (event) => {
-      if ((typeof event.data == 'string' && event.data.indexOf('data') != -1) || (typeof event.data == 'object' && event.data.data != undefined)) {
-        let res = JSON.parse(event.data)
+      this.$store.commit("SET_CENTERDATAS", false, null);
+      if (
+        (typeof event.data == "string" && event.data.indexOf("data") != -1) ||
+        (typeof event.data == "object" && event.data.data != undefined)
+      ) {
+        let res = JSON.parse(event.data);
         // console.log(res, 'res');
         this.$store.commit("setData", res);
         if (res.data === "IOCHOME") {
@@ -66,12 +95,16 @@ export default {
       window.debug = true;
     } else {
       this.url = process.env.VUE_APP_UNITY;
+      this.url = "http://183.62.170.2:8110";
     }
   },
   mounted () {
     this.$nextTick(() => {
-      window.iframe = this.$refs.iframe
-    })
+      window.iframe = this.$refs.iframe;
+    });
+  },
+  beforeDestroy () {
+    clearInterval(this.warnTimer);
   },
   methods: {
     getQueryString (name) {

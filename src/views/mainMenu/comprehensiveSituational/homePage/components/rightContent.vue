@@ -2,7 +2,7 @@
   <!-- 综合态势右侧搜索 -->
   <div class="rightContent">
     <LeftRight>
-      <template #left>
+      <div class="leftSearch">
         <button @click="back">back</button>
         <div class="theSearchPath y_c">
           <el-upload
@@ -26,7 +26,9 @@
             />
             <img v-else :src="imageUrl" class="avatar" />
           </el-upload>
-          <button :class="{ m_disabled: !imageUrl }">搜寻轨迹</button>
+          <button :class="{ m_disabled: !imageUrl }" @click="SearchPath()">
+            搜寻轨迹
+          </button>
         </div>
         <SearchBox
           class="SearchBoxClass"
@@ -49,7 +51,9 @@
                   class="s_img"
                   :style="
                     item.src
-                      ? 'background: url(' + item.src + ') center #fff;'
+                      ? 'background: url(' +
+                        item.src +
+                        ') center #fff no-repeat; '
                       : 'background-color:#fff;'
                   "
                 ></div>
@@ -66,7 +70,8 @@
             <p class="resultNum">共搜索到{{ slist.length || 0 }}条结果</p>
           </div>
         </SearchBox>
-      </template>
+      </div>
+      <template #left> </template>
       <template #center></template>
       <template #right></template>
     </LeftRight>
@@ -148,28 +153,28 @@ export default {
       slist: [],
       slist2: [
         {
-          name: "面点王",
+          name: "阿桂嫂",
           phone: "",
           info: "梅龙路与金龙路交汇处",
-          src: require("@/assets/img/datas/qy_sysdwyy.png"),
+          src: require("@/assets/img/datas/qy_ags.png"),
         },
         {
           name: "麦丹劳",
           phone: "",
           info: "2栋B座1088号商铺",
-          src: require("@/assets/img/datas/qy_sysdwyy.png"),
+          src: require("@/assets/img/datas/qy_kfc.png"),
         },
         {
-          name: "陈新",
-          phone: "15912345678",
-          info: "逃避缴费",
-          src: require("@/assets/img/datas/qy_sysdwyy.png"),
+          name: "真功夫",
+          phone: "",
+          info: "1栋A座3014号商铺",
+          src: require("@/assets/img/datas/qy_zgf.png"),
         },
         {
-          name: "深圳奇信智能科技有限公司",
+          name: "深圳奇信智能科技有限公司3333333333333333",
           phone: "",
           info: "海纳百川B座16F",
-          src: require("@/assets/img/datas/qy_sysdwyy.png"),
+          src: require("@/assets/img/datas/qy_qx.png"),
         },
       ],
       tableData: [],
@@ -263,9 +268,12 @@ export default {
     };
   },
   watch: {
-    // inputV () {
-    //   return this.inputVal;
-    // },
+    inputVal: {
+      handler (n, o) {
+        this.inputV = n
+      },
+      deep: true
+    }
   },
   mounted () {
     this.total = this.tableData2.length
@@ -288,21 +296,36 @@ export default {
     },
     searchList (val) {
       this.inputV = val
-      if (!val) {
-        return this.$message.error("请输入关键词！")
-      } else {
-        this.slist = this.slist2
-      }
+      // if (!val) {
+      //   return this.$message.error("请输入关键词！")
+      // } else {
+      this.slist = this.slist2
+      // }
       this.isShowList = !this.isShowList;
+    },
+    // 搜索轨迹
+    SearchPath () {
+      this.$SendMessageToUnity("ShowLocationPin", {
+        Serial: 0,
+      });
+      console.log('ShowLocationPin---搜寻轨迹------------')
     },
     searchOneItem (val) {
       console.log(val);
+      this.$SendMessageToUnity("ShowLocationPin", {
+        Serial: 0,
+      });
+      console.log('ShowLocationPin--商家、企业------------')
     },
     zhuizongFun (val) {
       console.log(val);
+      this.$SendMessageToUnity("ShowLocationPin", {
+        Serial: 0,
+      });
+      console.log('ShowLocationPin-----跟踪------------')
     },
     back () {
-      this.$emit("_c");
+      this.$emit("_c", null);
     },
     // 模拟分页
     changeDatasFun () {
@@ -324,6 +347,13 @@ export default {
 <style lang="less" scoped>
 @import "~@/style/gl.less";
 .rightContent {
+  .leftSearch {
+    width: 4.15rem /* 332/80 */;
+    position: fixed;
+    top: 1.125rem /* 90/80 */;
+    left: 0.575rem /* 46/80 */;
+    z-index: 101;
+  }
   :deep(.theSearchPath) {
     width: 2.875rem /* 230/80 */;
     height: 3.75rem /* 300/80 */;
@@ -422,8 +452,8 @@ export default {
     z-index: 0;
     ul {
       min-height: 0.625rem /* 50/80 */;
-      max-height: 4.625rem /* 370/80 */;
-      // overflow-y: auto;
+      max-height: 3.5rem /* 280/80 */;
+      overflow-x: hidden;
       .s_img {
         width: 0.675rem /* 54/80 */;
         height: 0.675rem /* 54/80 */;
@@ -432,11 +462,18 @@ export default {
       }
       li {
         display: flex;
+        flex-wrap: nowrap;
         padding: 0.1875rem /* 15/80 */ 0.25rem /* 20/80 */;
         border-bottom: 1px solid rgba(67, 149, 243, 0.5);
         cursor: pointer;
         & > div {
           padding-left: 0.25rem /* 20/80 */;
+          &:nth-child(2) {
+            width: 2.3125rem /* 185/80 */;
+            p {
+              width: 100%;
+            }
+          }
         }
         p {
           white-space: nowrap;
@@ -461,7 +498,7 @@ export default {
     }
   }
   .SearchBoxList0 {
-    height: 5.125rem /* 410/80 */;
+    height: 4rem /* 320/80 */;
     border: 1px solid #4396f3;
     border-top: none;
   }
