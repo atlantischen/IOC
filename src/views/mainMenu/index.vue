@@ -24,7 +24,7 @@ export default {
   components: { AlarmAck },
   data () {
     return {
-      isShow: true,
+      isShow: false,
       url: "",
       warnTimer: null,
       tipList: null,
@@ -52,20 +52,24 @@ export default {
         this.centerDatas = n;
       }
     },
+    "isShow": function (n, o) {
+      if (n) {
+        // 随机触发警告
+        this.warnTimer = setInterval(() => {
+          this.tipList = [
+            {
+              text: "告警！2021-04-30 15:00{李玲}在{公寓广场}发生了{黑名单告警}",
+            },
+          ];
+          this.$store.commit("SET_SHOWWARNTIP", true);
+        }, this.$randomNumer(1000, 50000));
+      }
+    }
   },
   beforeCreate () {
     if (process.env.NODE_ENV === "production") {
       this.$router.push("/comprehensiveSituational/homePage");
     }
-    // 随机触发警告
-    this.warnTimer = setInterval(() => {
-      this.tipList = [
-        {
-          text: "告警！2021-04-30 15:00{李玲}在{公寓广场}发生了{黑名单告警}",
-        },
-      ];
-      this.$store.commit("SET_SHOWWARNTIP", true);
-    }, this.$randomNumer(1000, 50000));
   },
   created () {
     if (window.vuplex) {
@@ -95,7 +99,7 @@ export default {
       window.debug = true;
     } else {
       this.url = process.env.VUE_APP_UNITY;
-      this.url = "http://183.62.170.2:8110";
+      // this.url = "http://183.62.170.2:8110";
     }
   },
   mounted () {

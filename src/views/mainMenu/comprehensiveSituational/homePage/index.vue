@@ -1,7 +1,7 @@
 <template>
   <!-- 综合态势home -->
   <div class="zhts_Home">
-    <button @click="cgLang" class="cgLang">{{ $t("lg.name", lang) }}</button>
+    <!-- <button @click="cgLang" class="cgLang">{{ $t("lg.name", lang) }}</button> -->
     <RightContent v-show="isShowRIght" :inputVal="inputV" @_c="clickSwitch" />
     <LeftRight v-show="!isShowRIght">
       <template #left>
@@ -34,7 +34,7 @@ import * as echarts from "echarts";
 export default {
   components: { RightContent },
   name: "zhts",
-  data() {
+  data () {
     return {
       inputVal: null,
       inputV: null,
@@ -242,12 +242,12 @@ export default {
     };
   },
   computed: {
-    lang() {
+    lang () {
       return this.$store.state.comState.lang;
     },
   },
   watch: {
-    "$store.state.comState.lang"(n, o) {
+    "$store.state.comState.lang" (n, o) {
       // this.lang = this.$t("lg.name", n);
       // this.leftInfo = JSON.parse(
       //   this.$t("comprehensiveSituational.homePage")
@@ -260,11 +260,11 @@ export default {
       // ).rightInfo;
     },
   },
-  created() {
+  created () {
     // (this.leftInfo = homePage.leftInfo),
     //   (this.rightInfo = homePage.rightInfo)
   },
-  mounted() {
+  mounted () {
     // aaa().then(r=>{
     //   console.log(r)
     // })
@@ -272,15 +272,15 @@ export default {
     //   console.log('xxxxxxxxx', req)
     // })
   },
-  destroyed() {},
+  destroyed () { },
   methods: {
-    showTipBoxHandle(val) {},
-    clickSwitch(val) {
+    showTipBoxHandle (val) { },
+    clickSwitch (val) {
       this.inputVal = val;
       this.inputV = null;
       this.isShowRIght = !this.isShowRIght;
     },
-    cgLang() {
+    cgLang () {
       let a;
       if (localStorage.getItem("language") == "en" || i18n.locale == "en") {
         a = "zh";
