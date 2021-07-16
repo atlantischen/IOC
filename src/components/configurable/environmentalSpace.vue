@@ -4,10 +4,7 @@
     <div class="environmentalSpace" :style="$paddingFun(datas.padding)">
       <div class="weather">
         <div class="weather_l x_c">
-          <svg class="icon duoyun" aria-hidden="true">
-            <use xlink:href="#icon-duoyun"></use>
-          </svg>
-          <!-- <SvgIcon className="duoyun" iconClass="duoyun" /> -->
+          <SvgIcon className="duoyun" :iconClass="returnIcon" />
           <span class="y_c">
             <i
               ><b>{{ weatherDatas ? weatherDatas.wendu : "31" }}</b> ℃</i
@@ -82,11 +79,13 @@ export default {
       ...this._data,
       ids: this.$uuid(),
       weatherDatas: null,
+      returnIcon: null,
     }
   },
   created () {
     getWeather({ city: "深圳" }).then((r) => {
       this.weatherDatas = r.data.data;
+      this.returnIconFun(r.data.data.forecast[0].type)
       console.log(r);
     });
   },
@@ -94,6 +93,92 @@ export default {
     this.environmentalSpaceFun(this.datas)
   },
   methods: {
+    returnIconFun (val) {
+      let _r
+      function istrue (arr, i) {
+        if (val.indexOf(arr[i]) != -1) {
+          return true
+        }
+      }
+      switch (true) {
+        case ['晴'].some(istrue):
+          _r = 'qing'
+          break;
+        case ['多云'].some(istrue):
+          _r = 'duoyun'
+          break;
+        case ['阴'].some(istrue):
+          _r = 'yin'
+          break;
+        case ['雷阵雨'].some(istrue):
+          _r = 'leizhenyu'
+          break;
+        case ['阵雨'].some(istrue):
+          _r = 'zhenyu'
+          break;
+        case ['特大暴雨'].some(istrue):
+          _r = 'tedabaoyu'
+          break;
+        case ['大暴雨'].some(istrue):
+          _r = 'dabaoyu'
+          break;
+        case ['暴雨'].some(istrue):
+          _r = 'baoyu'
+          break;
+        case ['大雨'].some(istrue):
+          _r = 'dayu'
+          break;
+        case ['小雨'].some(istrue):
+          _r = 'xiaoyu'
+          break;
+        case ['中雨'].some(istrue):
+          _r = 'zhongyu'
+          break;
+        case ['冻雨'].some(istrue):
+          _r = 'dongyu'
+          break;
+        case ['冰雹', '雷阵雨'].some(istrue):
+          _r = 'leizhenyubanyoubingbao'
+          break;
+        case ['尘'].some(istrue):
+          _r = 'fuchen'
+          break;
+        case ['雾'].some(istrue):
+          _r = 'wu'
+          break;
+        case ['霾'].some(istrue):
+          _r = 'mai'
+          break;
+        case ['扬沙'].some(istrue):
+          _r = 'yangsha'
+          break;
+        case ['强沙尘暴'].some(istrue):
+          _r = 'qiangshachenbao'
+          break;
+        case ['沙尘暴'].some(istrue):
+          _r = 'shachenbao'
+          break;
+        case ['暴雪'].some(istrue):
+          _r = 'baoxue'
+          break;
+        case ['大雪'].some(istrue):
+          _r = 'daxue'
+          break;
+        case ['中雪'].some(istrue):
+          _r = 'zhongxue'
+          break;
+        case ['小雪'].some(istrue):
+          _r = 'xiaoxue'
+          break;
+        case ['雨夹雪'].some(istrue):
+          _r = 'yujiaxue'
+          break;
+        default:
+          _r = 'duoyun'
+          break;
+      }
+      this.returnIcon = _r
+    },
     environmentalSpaceFun (val) {
       var datas = [53, 300],
         colors = ["#00ffff", "yellow", "orange", "red", "#990056", "#7b0128"],

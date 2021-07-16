@@ -1,8 +1,8 @@
 @font-face {
   font-family: "iconfont"; /* Project id 2619202 */
-  src: url('iconfont.woff2?t=1626244637827') format('woff2'),
-       url('iconfont.woff?t=1626244637827') format('woff'),
-       url('iconfont.ttf?t=1626244637827') format('truetype');
+  src: url('iconfont.woff2?t=1626409904384') format('woff2'),
+       url('iconfont.woff?t=1626409904384') format('woff'),
+       url('iconfont.ttf?t=1626409904384') format('truetype');
 }
 
 .iconfont {
@@ -115,6 +115,10 @@
 
 .icon-wendu:before {
   content: "\e66b";
+}
+
+.icon-zhaoming:before {
+  content: "\e65a";
 }
 
 .icon-shipin-tianchong:before {

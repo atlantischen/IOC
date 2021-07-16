@@ -15,6 +15,7 @@ import 'dayjs/locale/zh-cn'
 import 'dayjs/locale/en'
 import VueWechatTitle from 'vue-wechat-title'
 import './assets/iconfont/iconfont.css'
+import './assets/iconfont/iconfont.js'
 const app = createApp(App)
 app.config.globalProperties.$SendMessageToUnity = SendMessageToUnity;
 import i18n from './lang/index' // 中英文切换

@@ -6,6 +6,13 @@
   "description": "奇信智能-智慧园区管理平台",
   "glyphs": [
     {
+      "icon_id": "1159883",
+      "name": "下载",
+      "font_class": "xiazai",
+      "unicode": "e628",
+      "unicode_decimal": 58920
+    },
+    {
       "icon_id": "689325",
       "name": "圆点中",
       "font_class": "yuandianzhong",
@@ -179,6 +186,13 @@
       "font_class": "wendu",
       "unicode": "e66b",
       "unicode_decimal": 58987
+    },
+    {
+      "icon_id": "13638717",
+      "name": "照明",
+      "font_class": "zhaoming",
+      "unicode": "e65a",
+      "unicode_decimal": 58970
     },
     {
       "icon_id": "8349123",
