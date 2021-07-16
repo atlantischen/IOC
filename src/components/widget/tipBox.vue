@@ -86,7 +86,7 @@ export default {
     // 关闭警告
     closeTip () {
       this.isShow = false;
-      this.$store.commit("SET_SHOWWARNTIP", this.isShow);
+      this.$store.dispatch("SET_SHOWWARNTIP", this.isShow);
       this.$SendMessageToUnity("PopUpWarningNoticesBar", {
         isOpen: this.isShow,
       });

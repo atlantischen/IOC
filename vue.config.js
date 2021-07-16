@@ -9,6 +9,7 @@ const Timestamp = new Date().getTime();
 const CompressionWebpackPlugin = require('compression-webpack-plugin')
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 const productionGzipExtensions = ['js', 'css']
+
 module.exports = {
   lintOnSave: false,
   outputDir: 'dist',
@@ -113,7 +114,7 @@ module.exports = {
     svgRule.uses.clear();
     svgRule
       .test(/\.svg$/)
-      .use('svg-sprite')
+      .use('svg-sprite-loader')
       .loader('svg-sprite-loader')
       .options({
         symbolId: 'icon-[name]'

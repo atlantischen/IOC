@@ -8,7 +8,6 @@
         <Allcom :_Info="leftInfo" />
       </template>
       <template #center>
-        <CenterDatas :list="centerDatasList" v-show="false" />
         <SearchBox
           class="SearchBoxClass"
           :text="'搜园区建筑、搜企业、搜商家'"
@@ -33,7 +32,7 @@ import * as echarts from "echarts";
 // import axios from "axios";
 export default {
   components: { RightContent },
-  name: "zhts",
+  // name: "zhts",
   data () {
     return {
       inputVal: null,
@@ -218,7 +217,7 @@ export default {
       centerDatasList: [
         {
           name: "园区总人数",
-          val: 328556,
+          val: 5880,
         },
         {
           name: "剩余车位数",
@@ -226,11 +225,11 @@ export default {
         },
         {
           name: "未处理告警数",
-          val: 39,
+          val: 4639,
         },
         {
           name: "设备异常数",
-          val: 16,
+          val: 3350,
         },
       ],
       tipList: [
@@ -261,6 +260,7 @@ export default {
     },
   },
   created () {
+    this.$store.dispatch('SET_CENTERDATAS', [true, this.centerDatasList])
     // (this.leftInfo = homePage.leftInfo),
     //   (this.rightInfo = homePage.rightInfo)
   },

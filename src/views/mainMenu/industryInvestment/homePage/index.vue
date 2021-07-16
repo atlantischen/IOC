@@ -277,7 +277,7 @@ export default {
   },
   components: {},
   created () {
-    this.$store.commit('SET_CENTERDATAS', [true, JSON.stringify(this.centerDatasList)])
+    this.$store.commit('SET_CENTERDATAS', [true, this.centerDatasList])
   },
   mounted () {
   },

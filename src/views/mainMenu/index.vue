@@ -47,10 +47,13 @@ export default {
         }
       } catch (e) { }
     },
-    "$store.state.comState.centerDatas": function (n, o) {
-      if (n) {
-        this.centerDatas = n;
-      }
+    "$store.state.comState.centerDatas": {
+      handler (n, o) {
+        if (n) {
+          this.centerDatas = n
+        }
+      },
+      immediate: true
     },
     "isShow": function (n, o) {
       if (n) {
@@ -58,15 +61,16 @@ export default {
         this.warnTimer = setInterval(() => {
           this.tipList = [
             {
-              text: "告警！2021-04-30 15:00{李玲}在{公寓广场}发生了{黑名单告警}",
+              text: "告警！2021-05-11 15:41:47 3期C座5楼电梯间发生陌生人报警",
             },
           ];
-          this.$store.commit("SET_SHOWWARNTIP", true);
+          this.$store.dispatch("SET_SHOWWARNTIP", true);
         }, this.$randomNumer(1000, 50000));
       }
     }
   },
   beforeCreate () {
+    this.$store.dispatch("SET_SHOWWARNTIP", false);
     if (process.env.NODE_ENV === "production") {
       this.$router.push("/comprehensiveSituational/homePage");
     }
@@ -78,7 +82,6 @@ export default {
       window.addEventListener("vuplexready", this.addMessageListener);
     }
     window.addEventListener("message", (event) => {
-      this.$store.commit("SET_CENTERDATAS", false, null);
       if (
         (typeof event.data == "string" && event.data.indexOf("data") != -1) ||
         (typeof event.data == "object" && event.data.data != undefined)

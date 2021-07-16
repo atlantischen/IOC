@@ -1,5 +1,7 @@
 import i18n from '@/lang/index'
-import { getLanguage } from '@/lang/index'
+import {
+  getLanguage
+} from '@/lang/index'
 export default {
   state: {
     isShowLR: false, // 展示左右信息框
@@ -16,10 +18,13 @@ export default {
       state.showWarnTip = value
     },
     SET_CENTERDATAS(state, value) {
-      if (value[0]) {
-        state.centerDatas = JSON.parse(value[1])
+      localStorage.setItem('ENTERDATATAS', JSON.stringify(value))
+      let _d = JSON.parse(localStorage.getItem('ENTERDATATAS'))
+      console.log(_d)
+      if (_d[0]) {
+        state.centerDatas = _d[1]
       }
-      state.showCenterDatas = value[0]
+      state.showCenterDatas = _d[0]
     },
     SET_LANG(state, val) {
       state.lang = val
@@ -29,9 +34,22 @@ export default {
     }
   },
   actions: {
-    SET_LANG({ commit }, val) {
+    SET_LANG({
+      commit
+    }, val) {
       commit('SET_LANG', val)
-    }
+    },
+
+    SET_SHOWWARNTIP({
+      commit
+    }, value) {
+      commit('SET_SHOWWARNTIP', value)
+    },
+    SET_CENTERDATAS({
+      commit
+    }, value) {
+      commit('SET_CENTERDATAS', value)
+    },
   },
   getters: {
     getLanguage: state => state.lang

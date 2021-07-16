@@ -50,6 +50,7 @@ for (var key in globalComponents) {
 for (var key in globalMethods) {
   app.config.globalProperties[`$${key}`] = globalMethods[key]
 }
+
 app.use(router)
 app.use(store)
 app.use(i18n)

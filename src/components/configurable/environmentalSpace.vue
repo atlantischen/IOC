@@ -7,6 +7,7 @@
           <svg class="icon duoyun" aria-hidden="true">
             <use xlink:href="#icon-duoyun"></use>
           </svg>
+          <!-- <SvgIcon className="duoyun" iconClass="duoyun" /> -->
           <span class="y_c">
             <i
               ><b>{{ weatherDatas ? weatherDatas.wendu : "31" }}</b> ℃</i
