@@ -40,6 +40,7 @@ export default {
     getUnityData (val) {
       // debugger;
       let res = val;
+      console.log(res,'res');
       try {
         if (res.action.indexOf("/") === 0) {
           this.$router.push(res.action);
@@ -74,13 +75,13 @@ export default {
       window.addEventListener("vuplexready", this.addMessageListener);
     }
     window.addEventListener("message", (event) => {
+      console.log(event,'event');
       this.$store.commit("SET_CENTERDATAS", false, null);
       if (
         (typeof event.data == "string" && event.data.indexOf("data") != -1) ||
         (typeof event.data == "object" && event.data.data != undefined)
       ) {
         let res = JSON.parse(event.data);
-        // console.log(res, 'res');
         this.$store.commit("setData", res);
         if (res.data === "IOCHOME") {
           this.isShow = true;
@@ -95,7 +96,6 @@ export default {
       window.debug = true;
     } else {
       this.url = process.env.VUE_APP_UNITY;
-      this.url = "http://183.62.170.2:8110";
     }
   },
   mounted () {

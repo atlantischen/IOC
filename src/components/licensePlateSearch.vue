@@ -28,7 +28,7 @@
     </el-select>
     <div class="serch_i">
       <el-input
-        v-model="searchData.input"
+        v-model="searchData.number"
         placeholder="请输入车牌号码"
       ></el-input>
       <div class="item" @click="handleClick">
@@ -49,37 +49,139 @@ export default {
           label: "粤",
         },
         {
+          value: "京",
+          label: "京",
+        },
+        {
+          value: "浙",
+          label: "浙",
+        },
+        {
+          value: "津",
+          label: "津",
+        },
+         {
+          value: "皖",
+          label: "皖",
+        },
+        {
+          value: "沪",
+          label: "沪",
+        },
+         {
+          value: "闽",
+          label: "闽",
+        },
+        {
+          value: "渝",
+          label: "渝",
+        },
+         {
+          value: "赣",
+          label: "赣",
+        },
+        {
+          value: "港",
+          label: "港",
+        },
+        {
+          value: "鲁",
+          label: "鲁",
+        },
+         {
+          value: "澳",
+          label: "澳",
+        },
+        {
+          value: "豫",
+          label: "豫",
+        },
+         {
+          value: "蒙",
+          label: "蒙",
+        },
+        {
           value: "鄂",
           label: "鄂",
         },
+            {
+          value: "新",
+          label: "新",
+        },
         {
-          value: "赣",
-          label: "赣",
+          value: "湘",
+          label: "湘",
+        },
+         {
+          value: "宁",
+          label: "宁",
+        },
+        {
+          value: "藏",
+          label: "藏",
+        },
+         {
+          value: "琼",
+          label: "琼",
+        },
+        {
+          value: "桂",
+          label: "桂",
         },
         {
           value: "川",
           label: "川",
         },
+         {
+          value: "冀",
+          label: "冀",
+        },
+        {
+          value: "贵",
+          label: "贵",
+        },
       ],
       letter: [
         {
-          value: "B",
-          label: "B",
+          value: "A",
+          label: "A",
         },
         {
-          value: "E",
-          label: "E",
+          value: "B",
+          label: "B",
         },
         {
           value: "C",
           label: "C",
         },
         {
+          value: "D",
+          label: "D",
+        },
+        {
+          value: "E",
+          label: "E",
+        },
+       
+        {
           value: "F",
           label: "F",
         },
+        {
+          value: "G",
+          label: "G",
+        },
+        {
+          value: "H",
+          label: "H",
+        },
+       
+        {
+          value: "J",
+          label: "J",
+        },
       ],
-      input:''
+      // input:''
     };
   },
   props: {
@@ -111,6 +213,8 @@ export default {
     height: 0.45rem /* 36/80 */;
     &:focus {
       border-color: #43aaf3;
+
+
     }
   }
   .el-input__icon,
@@ -118,6 +222,7 @@ export default {
   .el-input {
     line-height: 0.45rem;
   }
+
 }
 :deep(.serch_i) {
   display: flex;
@@ -155,5 +260,7 @@ export default {
   display: flex;
   align-items: center;
   height: .45rem /* 36/80 */;
+  
 }
+
 </style>

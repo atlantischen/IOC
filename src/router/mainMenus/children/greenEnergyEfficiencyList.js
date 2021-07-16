@@ -111,4 +111,15 @@ export default [{
     
     }
   },
+  {
+    path: 'lightingDetail',
+    name: 'lightingDetail',
+    component: () => import('@/views/mainMenu/greenEnergyEfficiency/building/lightingDetail.vue'),
+    meta: {
+      id:7
+    
+    }
+  }
+  
+
 ]

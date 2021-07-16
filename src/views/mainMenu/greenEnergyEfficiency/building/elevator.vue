@@ -22,9 +22,8 @@
           <ul>
              <li v-for="(item,index) in elevatorList" :key="index">
                <span>{{item.text}}</span>
-               <div>
-                   <img src="../../../../assets/img/dt_pic.png"  alt="">
-                 
+                 <div>
+                   <img class="elevator_img" src="../../../../assets/img/dt_pic.png"  alt="">
                  <div>
                   <img v-if="item.state===0" src="../../../../assets/img/dt_pic1.png" alt="">
                  <img v-else-if="item.state===1" src="../../../../assets/img/dt_pic2.png" alt="">
@@ -232,6 +231,10 @@ export default {
         &>div{
          display: flex;
          margin-top: .35rem /* 28/80 */;
+         .elevator_img{
+           width: .375rem /* 30/80 */;
+           height: .4125rem /* 33/80 */;
+         }
           &>div{
             display: flex;
             margin-left: .35rem /* 28/80 */;

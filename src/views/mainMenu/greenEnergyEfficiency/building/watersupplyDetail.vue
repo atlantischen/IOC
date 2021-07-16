@@ -59,7 +59,6 @@ export default {
   data() {
     return {
       activeIndex: 0,
-      // imgCdnUrl:require('../../../../assets/img/ly_bj.png'),
       list: [
         {
           path: "/greenEnergyEfficiency/building/codesource",
@@ -141,6 +140,12 @@ export default {
     };
   },
   methods: {
+     handleClick(path,index,name){
+      this.activeIndex=index
+      this.$router.push(path)
+      this.$SendMessageToUnity("OnChangePage", {"name":name});
+     
+    },
       handleChange(val){
             if(val ===0){
               this.systemData.systemState='运行中'

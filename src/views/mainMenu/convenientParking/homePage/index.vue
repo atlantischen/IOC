@@ -178,8 +178,7 @@ export default {
         },
       ],
       searchData:{
-        region:'粤',
-        letter:'B'
+       
       }
     };
   },
@@ -189,7 +188,6 @@ export default {
       console.log(val);
     },
     search(val){
-      // console.log('11111111',val);
       let value = JSON.stringify(val)
       this.$router.push({name:'SmartParking',params:{value:value}})
     },

@@ -97,7 +97,7 @@
               <!-- <i class="el-icon-arrow-right" @click="showBlackListFun"></i> -->
               <span> 照片</span>
             </template>
-            <!-- <template #default="{ row }">
+            <template #default="{ row }">
               <div
                 class="blacklist_img"
                 :style="
@@ -106,7 +106,7 @@
                     : 'background-color:#fff;'
                 "
               ></div>
-            </template> -->
+            </template>
           </el-table-column>
           <el-table-column prop="name" label="姓名" show-overflow-tooltip>
           </el-table-column>

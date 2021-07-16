@@ -30,7 +30,6 @@ export default {
   top: 50%;
   left: 0.575rem /* 46/80 */ /* 16/80 */;
   width: 4.75rem;
-  // min-height: 500px;
   transform: translateY(-50%);
   -webkit-transform: translateY(-50%);
 }
