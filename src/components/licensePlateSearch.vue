@@ -188,12 +188,13 @@ export default {
     searchData: {
       type: Object,
       default: {
-        
+     
       }
     },
   },
   methods: {
     handleClick() {
+      console.log(this.searchData);
       this.$emit("search",this.searchData);
     },
   },

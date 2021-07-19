@@ -5,6 +5,7 @@ import {
 } from "vue-router"
 import MainMenus from './mainMenus/index.js'
 // import MainMenus2 from './mainMenus/index2.js'
+import store from '../store'
 
 const routes = [{
     path: "",
@@ -69,14 +70,11 @@ const router = createRouter({
   routes,
 });
 
-// router.beforeEach((to, from, next) => {
-//   console.log(to)
-//   if (to.name == 'url') {
-//     router.push('/url')
-//   } else {
-//     router.push('/')
-//   }
-//   next()
-// })
+router.beforeEach((to, from, next) => {
+  if (to.path != from.path) {
+    store.dispatch("SET_CENTERDATAS", [false, null]);
+  }
+  next()
+})
 
 export default router

@@ -178,7 +178,10 @@ export default {
         },
       ],
       searchData:{
-       
+          region:'赣',
+        letter:'A',
+        number:'8720B'
+
       }
     };
   },

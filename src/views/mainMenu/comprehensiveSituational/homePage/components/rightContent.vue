@@ -67,7 +67,9 @@
               </li>
             </ul>
             <NoT :_text="`无关键字'${inputV}'的相关结果`" />
-            <p class="resultNum">共搜索到{{ slist.length || 0 }}条结果</p>
+            <p class="resultNum">
+              共搜索到{{ slist ? slist.length : 0 }}条结果
+            </p>
           </div>
         </SearchBox>
       </div>
@@ -81,6 +83,7 @@
       <div class="allBlacklist bigBar">
         <i class="rightArrow el-icon-arrow-right" @click="showBlackListFun"></i>
         <el-table
+          v-if="isFade"
           class="BlacklistTable"
           :data="tableData"
           style="width: 100%"
@@ -97,14 +100,17 @@
               <!-- <i class="el-icon-arrow-right" @click="showBlackListFun"></i> -->
               <span> 照片</span>
             </template>
-            <template #default="{ row }">
+            <template #default="scope">
               <div
                 class="blacklist_img"
-                :style="
-                  row.src
-                    ? 'background: url(' + row.src + ') center #000;'
-                    : 'background-color:#fff;'
-                "
+                :style="[
+                  scope.row
+                    ? 'background: url(' +
+                      scope.row.src +
+                      ') center #000 no-repeat;'
+                    : 'background-color:#fff;',
+                  'background-size: 100%;',
+                ]"
               ></div>
             </template>
           </el-table-column>
@@ -150,7 +156,7 @@ export default {
       imageUrl: null,
       inputV: "",
       isShowList: false,
-      slist: [],
+      slist: null,
       slist2: [
         {
           name: "阿桂嫂",
@@ -180,87 +186,87 @@ export default {
       tableData: [],
       tableData2: [
         {
-          src: require("@/assets/img/datas/qy_sysdwyy.png"),
+          src: require("@/assets/img/datas/p_1.png"),
           name: "李玲",
           info: "涉嫌诈骗",
         },
         {
-          src: require("@/assets/img/datas/qy_sysdwyy.png"),
+          src: require("@/assets/img/datas/p_2.png"),
           name: "陈新",
           info: "逃避缴费",
         },
         {
-          src: require("@/assets/img/datas/qy_sysdwyy.png"),
+          src: require("@/assets/img/datas/p_3.png"),
           name: "韦孟",
           info: "从事传销活动",
         },
         {
-          src: require("@/assets/img/datas/qy_sysdwyy.png"),
+          src: require("@/assets/img/datas/p_4.png"),
           name: "李建华",
           info: "散播谣言",
         },
         {
-          src: require("@/assets/img/datas/qy_sysdwyy.png"),
+          src: require("@/assets/img/datas/p_5.png"),
           name: "肖海辉",
           info: "涉嫌诈骗",
         },
         {
-          src: require("@/assets/img/datas/qy_sysdwyy.png"),
+          src: require("@/assets/img/datas/p_6.png"),
           name: "徐高鹏",
           info: "逃避缴费",
         },
         {
-          src: require("@/assets/img/datas/qy_sysdwyy.png"),
+          src: require("@/assets/img/datas/p_7.png"),
           name: "韦炳佐",
           info: "从事传销活动",
         },
         {
-          src: require("@/assets/img/datas/qy_sysdwyy.png"),
+          src: require("@/assets/img/datas/p_8.png"),
           name: "瞿德志",
           info: "散播谣言",
         },
         {
-          src: require("@/assets/img/datas/qy_sysdwyy.png"),
+          src: require("@/assets/img/datas/p_9.png"),
           name: "陈荣",
           info: "涉嫌诈骗",
         },
         {
-          src: require("@/assets/img/datas/qy_sysdwyy.png"),
+          src: require("@/assets/img/datas/p_10.png"),
           name: "周志军",
           info: "逃避缴费",
         },
         {
-          src: require("@/assets/img/datas/qy_sysdwyy.png"),
+          src: require("@/assets/img/datas/p_11.png"),
           name: "张颖",
           info: "从事传销活动",
         },
         {
-          src: require("@/assets/img/datas/qy_sysdwyy.png"),
+          src: require("@/assets/img/datas/p_12.png"),
           name: "杨靓",
           info: "散播谣言",
         },
         {
-          src: require("@/assets/img/datas/qy_sysdwyy.png"),
+          src: require("@/assets/img/datas/p_13.png"),
           name: "徐清",
           info: "涉嫌诈骗",
         },
         {
-          src: require("@/assets/img/datas/qy_sysdwyy.png"),
+          src: require("@/assets/img/datas/p_14.png"),
           name: "方明",
           info: "逃避缴费",
         },
         {
-          src: require("@/assets/img/datas/qy_sysdwyy.png"),
+          src: require("@/assets/img/datas/p_15.png"),
           name: "李景",
           info: "从事传销活动",
         },
         {
-          src: require("@/assets/img/datas/qy_sysdwyy.png"),
+          src: require("@/assets/img/datas/p_16.png"),
           name: "廖明",
           info: "散播谣言",
         },
         {
-          src: require("@/assets/img/datas/qy_sysdwyy.png"),
+          src: require("@/assets/img/datas/p_17.png"),
           name: "顾宇",
           info: "从事传销活动",
         },
@@ -458,7 +464,6 @@ export default {
         width: 0.675rem /* 54/80 */;
         height: 0.675rem /* 54/80 */;
         border-radius: 20%;
-        background-size: contain;
       }
       li {
         display: flex;

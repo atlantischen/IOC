@@ -17,10 +17,10 @@ export default {
 </script>
 
 <style>
-.el-select-dropdown {
-  width: 3.35rem !important  /* 268/80 */;
+.el-select-dropdown { 
+  /* width: 3.35rem !important  268/80; */
   background-color: rgba(14, 30, 48, 0.9);
-}
+ }
 .el-popper.is-light {
   border-color: red;
 }
@@ -36,8 +36,8 @@ export default {
   color: #4396f3;
 }
 .el-select-dropdown__list {
-  display: flex;
-  flex-wrap: wrap;
-  padding: 0 0.125rem /* 10/80 */ /* 1/80 */;
-}
+  /* display: flex; */
+  /* flex-wrap: wrap; */
+  /* padding: 0 0.125rem 10/80  */
+} 
 </style>

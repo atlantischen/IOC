@@ -20,18 +20,18 @@ export default {
       type: Object,
     },
   },
-  data() {
+  data () {
     return {
       ...this._data,
       ids: this.$uuid(),
       spaceRadio: 0,
     };
   },
-  mounted() {
+  mounted () {
     this.floorSpaceFun(this.datas);
   },
   methods: {
-    floorSpaceFun(val) {
+    floorSpaceFun (val) {
       const { optionName, datas, data2 } = val;
       var colors = ["rgba(30, 57, 87, 0.5)", "#cda857", "#4396f3", "#0ff"];
       var option = {
@@ -90,9 +90,9 @@ export default {
           left: "50%",
           top: "35%",
           data: optionName,
-          formatter: function(name) {
+          formatter: function (name) {
             var index = 0;
-            optionName.forEach(function(value, i) {
+            optionName.forEach(function (value, i) {
               if (value == name) index = i;
             });
             return "{a|" + name + "}" + datas[index] + "%";
@@ -179,7 +179,6 @@ export default {
             };
           }),
         };
-        console.log(option.series[i + 1].data);
       }
       this.$redomEchart(this.$refs["floorSpaceEchart_" + this.ids], option);
     },

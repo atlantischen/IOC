@@ -18,6 +18,7 @@ import Dialog from '../components/dialog.vue' //监控
 import VideoPlayback from '../components/videoPlayback.vue' //视频回放
 import Video from '../components/video.vue' //视频
 import AddScene from '../components/addScene.vue' //视频
+import SvgIcon from '../components/widget/svgIcon.vue' // svg 图标
 
 const global = {
   ...configurable,
@@ -39,6 +40,7 @@ const global = {
   RightAlert,
   NoT,
   LookVideo,
-  MoveDialog
+  MoveDialog,
+  SvgIcon
 }
 export default global

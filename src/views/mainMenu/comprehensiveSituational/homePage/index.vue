@@ -1,14 +1,13 @@
 <template>
   <!-- 综合态势home -->
   <div class="zhts_Home">
-    <button @click="cgLang" class="cgLang">{{ $t("lg.name", lang) }}</button>
+    <!-- <button @click="cgLang" class="cgLang">{{ $t("lg.name", lang) }}</button> -->
     <RightContent v-show="isShowRIght" :inputVal="inputV" @_c="clickSwitch" />
     <LeftRight v-show="!isShowRIght">
       <template #left>
         <Allcom :_Info="leftInfo" />
       </template>
       <template #center>
-        <CenterDatas :list="centerDatasList" v-show="false" />
         <SearchBox
           class="SearchBoxClass"
           :text="'搜园区建筑、搜企业、搜商家'"
@@ -33,8 +32,8 @@ import * as echarts from "echarts";
 // import axios from "axios";
 export default {
   components: { RightContent },
-  name: "zhts",
-  data() {
+  // name: "zhts",
+  data () {
     return {
       inputVal: null,
       inputV: null,
@@ -218,7 +217,7 @@ export default {
       centerDatasList: [
         {
           name: "园区总人数",
-          val: 328556,
+          val: 5880,
         },
         {
           name: "剩余车位数",
@@ -226,11 +225,11 @@ export default {
         },
         {
           name: "未处理告警数",
-          val: 39,
+          val: 4639,
         },
         {
           name: "设备异常数",
-          val: 16,
+          val: 3350,
         },
       ],
       tipList: [
@@ -242,12 +241,12 @@ export default {
     };
   },
   computed: {
-    lang() {
+    lang () {
       return this.$store.state.comState.lang;
     },
   },
   watch: {
-    "$store.state.comState.lang"(n, o) {
+    "$store.state.comState.lang" (n, o) {
       // this.lang = this.$t("lg.name", n);
       // this.leftInfo = JSON.parse(
       //   this.$t("comprehensiveSituational.homePage")
@@ -260,11 +259,12 @@ export default {
       // ).rightInfo;
     },
   },
-  created() {
+  created () {
+    this.$store.dispatch('SET_CENTERDATAS', [true, this.centerDatasList])
     // (this.leftInfo = homePage.leftInfo),
     //   (this.rightInfo = homePage.rightInfo)
   },
-  mounted() {
+  mounted () {
     // aaa().then(r=>{
     //   console.log(r)
     // })
@@ -272,15 +272,15 @@ export default {
     //   console.log('xxxxxxxxx', req)
     // })
   },
-  destroyed() {},
+  destroyed () { },
   methods: {
-    showTipBoxHandle(val) {},
-    clickSwitch(val) {
+    showTipBoxHandle (val) { },
+    clickSwitch (val) {
       this.inputVal = val;
       this.inputV = null;
       this.isShowRIght = !this.isShowRIght;
     },
-    cgLang() {
+    cgLang () {
       let a;
       if (localStorage.getItem("language") == "en" || i18n.locale == "en") {
         a = "zh";

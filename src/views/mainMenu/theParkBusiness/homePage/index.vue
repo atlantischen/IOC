@@ -197,14 +197,9 @@ export default {
     changePSMonths(val) {
       console.log(val);
       this.AssetsAndEquipment();
-
-      // this.popularServiceFun();
     },
     changePSYears(val) {
-      console.log(val);
       this.AssetsAndEquipment();
-
-      // this.popularServiceFun();
     },
 
     meetEchartInit() {

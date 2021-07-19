@@ -13,9 +13,13 @@
         </div>
       </div>
       <ul class="list">
-        <li v-for="item in 2" :key="item">
+        <li>
           <span>平均节能率</span>
           <span>10%</span>
+        </li>
+        <li >
+          <span>能耗费用(元)</span>
+          <span>786</span>
         </li>
       </ul>
     </div>

@@ -1,12 +1,12 @@
 <template>
-  <IOCLeft  style="top:40%">
+  <!-- <IOCLeft  style="top:40%"> -->
     <div class="left">
           <LicensePlateSearch
       @search="search"
       :searchData="searchData"
     ></LicensePlateSearch>
     <div class="search_box">
-      <ul>
+      <ul class="scroll">
         <li v-for="(item, index) in carListRes" :key="index">
           <div>
             <img :src="item.url" alt="" />
@@ -21,7 +21,7 @@
     </div> 
     </div>
   
-  </IOCLeft>
+  <!-- </IOCLeft> -->
   <IOCRight :fade="fade" class="right">
     <div class="list_box">
       <ul class="list_title">
@@ -57,14 +57,17 @@
   </IOCRight>
    <div class="open" v-show="fade" @click="handleClick(false)">
         <i class="iconfont icon-youjiantou"></i>
-      </div>
+    </div>
 </template>
 
 <script>
 export default {
   data() {
     return {
-      searchData: {},
+      searchData:{
+    
+
+      },
       currentPage: 1,
       pageSize: 11,
       fade: false,
@@ -259,34 +262,83 @@ export default {
           reason:'月卡欠费',
           region:'粤',
           letter:'B',
-          number:'AS325'
+          number:'AS325',
+          id:0
         },
-        {
-          url:require('@/assets/img/car_pic1.png'),
-          name:'李玲-粤BF358B',
-          reason:'多次违规停车',
-          reason:'月卡欠费',
-          region:'粤',
-          letter:'B',
-          number:'F358B'
-        },
+       
         {
           url:require('@/assets/img/car_pic2.png'),
           name:'韦孟-粤AD367C',
           reason:'多次违规停车',
-            reason:'月卡欠费',
+          reason:'月卡欠费',
           region:'粤',
           letter:'A',
-          number:'D367C'
+          number:'D367C',
+          id:2
+          
+        },
+         {
+          url:require('@/assets/img/car_pic1.png'),
+          name:'吴泉洋-赣A8720B',
+          reason:'多次违规停车',
+          region:'赣',
+          letter:'A',
+          number:'8720B',
+          id:1
         },
         {
           url:require('@/assets/img/car_pic2.png'),
-          name:'韦孟-粤CD3675',
+          name:'陶敏-赣B26354',
           reason:'多次违规停车',
+          region:'赣',
+          letter:'B',
+          number:'26354',
+          id:3
+        },
+         {
+          url:require('@/assets/img/car_pic.png'),
+          name:'罗灿-湘A45623',
+          reason:'多次违规停车',
+          region:'湘',
+          letter:'A',
+          number:'45623',
+          id:4
+        },
+        {
+          url:require('@/assets/img/car_pic1.png'),
+          name:'余振-鄂JF358B',
           reason:'月卡欠费',
-          region:'粤',
+          region:'鄂',
+          letter:'J',
+          number:'F358B',
+          id:5
+        },
+        {
+          url:require('@/assets/img/car_pic2.png'),
+          name:'赵伟-川AD367C',
+          reason:'多次违规停车',
+          region:'川',
+          letter:'A',
+          number:'D367C',
+          id:6
+        },
+        {
+          url:require('@/assets/img/car_pic2.png'),
+          name:'龚玲-鄂CD3675',
+          reason:'多次违规停车',
+          region:'鄂',
           letter:'C',
-          number:'D3675'
+          number:'D3675',
+          id:7
+        },
+        {
+          url:require('@/assets/img/car_pic2.png'),
+          name:'黄智源-粤A23659',
+          reason:'多次违规停车',
+          region:'粤',
+          letter:'A',
+          number:'23659',
+          id:8
         }
 
       ],
@@ -301,7 +353,6 @@ export default {
     },
     handleClick(val) {
       this.fade = val;
-      console.log(val);
     },
    
     handleSizeChange(val) {
@@ -319,9 +370,7 @@ export default {
     getCarList(list){
       var data = this.searchData
       const {region,letter,number}=data
-    console.log(region,letter,number);
-      // if(JSON.stringify(data) !=='{}'){
-        // console.log(region,letter,number,'region,letter,number');
+      console.log(data);
         if(region ==undefined && letter== undefined && number== undefined  ){
           this.carListRes=list
           console.log(this.carListRes);
@@ -332,20 +381,27 @@ export default {
                 return item
               }
         })
-        }else if(region !==undefined && letter !== undefined && number==undefined){
+        }else if(region !==undefined && letter !== undefined && (number==undefined||number=='')){
+          console.log('333355555');
            this.carListRes=list.filter(item=>{
               if(item.region===region&&item.letter===letter){
                 return item
               }
            })
+           console.log(this.carListRes);
         }else if(region !==undefined && letter !== undefined && number !== undefined ){
            this.carListRes=list.filter(item=>{
               if(item.region===region&&item.letter===letter&&item.number===number){
                 return item
               }
            })
+           console.log('44446666');
+            this.$SendMessageToUnity("QueryCarExitRoute", {"index":this.carListRes[0].id});
+ 
+
         }
-        console.log(this.carListRes,'this.carListRes');
+        // console.log(this.carListRes,'this.carListRes');
+   
       // }else{
       // }
 
@@ -371,8 +427,12 @@ export default {
   top: 40%;
 }
 .left{ 
+  position: fixed;
+  left: 0.575rem;
+  top: 14%;
   height: 6.5125rem /* 521/80 */;
-  overflow: hidden;
+
+
 
   
 }
@@ -382,6 +442,8 @@ export default {
   border-radius: 0 0 0.075rem 0.075rem;
   background-color: rgba(0, 17, 26, 0.7);
   & > ul {
+    max-height: 4.65rem /* 372/80 */;
+    overflow-y: scroll;
     & > li {
       height: 1.1625rem /* 93/80 */;
       border-bottom: 1px solid rgba(67, 150, 243, 0.3);
