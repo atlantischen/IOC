@@ -16,8 +16,8 @@
 
 <script>
 export default {
-  name: 'enterpriseBDA',
-  data () {
+  name: "enterpriseBDA",
+  data() {
     return {
       leftInfo: [
         {
@@ -34,9 +34,9 @@ export default {
               "智能制造",
               "新能源",
               "新材料",
-              "其他"
+              "其他",
             ],
-            datas: [21, 19, 18, 16, 15, 14, 12, 10]
+            datas: [21, 19, 18, 16, 15, 14, 12, 10],
           },
         },
         {
@@ -52,13 +52,13 @@ export default {
               "党群",
               "企业",
               "政务",
-              "入驻"
+              "入驻",
             ],
-            names: ['上月', '本月'],
+            names: ["上月", "本月"],
             units: ["", "个"],
             datas: [
               [180, 100, 200, 230, 150, 230, 50, 200],
-              [300, 140, 140, 260, 240, 260, 60, 300]
+              [300, 140, 140, 260, 240, 260, 60, 300],
             ],
           },
         },
@@ -79,168 +79,166 @@ export default {
               "3期A座",
               "1期B座",
               "2期B座",
-              "1期C座"
+              "1期C座",
             ],
-            datas: [23, 21, 19, 18, 16, 15, 13, 11]
+            datas: [23, 21, 19, 18, 16, 15, 13, 11],
           },
         },
         {
           title: "本月企业服务办理TOP4",
-          type: 'PyramidChart',
+          type: "PyramidChart",
           datas: {
             eHeight: null,
             padding: null,
-            header: ['访客车牌', '访客姓名', '进/出场类型', '时间'],
+            header: ["访客车牌", "访客姓名", "进/出场类型", "时间"],
             tabelD: [
               {
-                licence: '粤B1026B',
-                ownerName: '付春晖',
-                type: '出场',
-                time: '16:05:06'
+                licence: "粤B1026B",
+                ownerName: "付春晖",
+                type: "出场",
+                time: "16:05:06",
               },
               {
-                licence: '粤BF3588',
-                ownerName: '陈云芳',
-                type: '进场',
-                time: '16:08:23'
+                licence: "粤BF3588",
+                ownerName: "陈云芳",
+                type: "进场",
+                time: "16:08:23",
               },
               {
-                licence: '粤A93521',
-                ownerName: '夏少东',
-                type: '出场',
-                time: '16:09:23'
+                licence: "粤A93521",
+                ownerName: "夏少东",
+                type: "出场",
+                time: "16:09:23",
               },
               {
-                licence: '粤AD3521',
-                ownerName: '曲优',
-                type: '出场',
-                time: '15:34:12'
+                licence: "粤AD3521",
+                ownerName: "曲优",
+                type: "出场",
+                time: "15:34:12",
               },
               {
-                licence: '粤AD3521',
-                ownerName: '李志明',
-                type: '出场',
-                time: '15:43:32'
+                licence: "粤AD3521",
+                ownerName: "李志明",
+                type: "出场",
+                time: "15:43:32",
               },
               {
-                licence: '粤AD3521',
-                ownerName: '黄欣',
-                type: '出场',
-                time: '16:09:45'
+                licence: "粤AD3521",
+                ownerName: "黄欣",
+                type: "出场",
+                time: "16:09:45",
               },
               {
-                licence: '粤AD3521',
-                ownerName: '田骄',
-                type: '进场',
-                time: '13:34:21'
+                licence: "粤AD3521",
+                ownerName: "田骄",
+                type: "进场",
+                time: "13:34:21",
               },
               {
-                licence: '粤AD3521',
-                ownerName: '胡思安',
-                type: '进场',
-                time: '12:34:12'
+                licence: "粤AD3521",
+                ownerName: "胡思安",
+                type: "进场",
+                time: "12:34:12",
               },
               {
-                licence: '粤AD3521',
-                ownerName: '吴大坤',
-                type: '出场',
-                time: '16:32:43'
+                licence: "粤AD3521",
+                ownerName: "吴大坤",
+                type: "出场",
+                time: "16:32:43",
               },
               {
-                licence: '粤AD3521',
-                ownerName: '刘虎娣',
-                type: '出场',
-                time: '12:00:12'
+                licence: "粤AD3521",
+                ownerName: "刘虎娣",
+                type: "出场",
+                time: "12:00:12",
               },
               {
-                licence: '粤AD3521',
-                ownerName: '谭珏',
-                type: '出场',
-                time: '19:32:13'
+                licence: "粤AD3521",
+                ownerName: "谭珏",
+                type: "出场",
+                time: "19:32:13",
               },
               {
-                licence: '粤AD3521',
-                ownerName: '王咚咚',
-                type: '出场',
-                time: '11:23:32'
+                licence: "粤AD3521",
+                ownerName: "王咚咚",
+                type: "出场",
+                time: "11:23:32",
               },
               {
-                licence: '粤AD3521',
-                ownerName: '蔡迪',
-                type: '进场',
-                time: '14:23:54'
+                licence: "粤AD3521",
+                ownerName: "蔡迪",
+                type: "进场",
+                time: "14:23:54",
               },
               {
-                licence: '粤AD3521',
-                ownerName: '石俊',
-                type: '出场',
-                time: '12:40:59'
+                licence: "粤AD3521",
+                ownerName: "石俊",
+                type: "出场",
+                time: "12:40:59",
               },
               {
-                licence: '粤AD3521',
-                ownerName: '史娜',
-                type: '进场',
-                time: '14:51:01'
+                licence: "粤AD3521",
+                ownerName: "史娜",
+                type: "进场",
+                time: "14:51:01",
               },
               {
-                licence: '粤AD3521',
-                ownerName: '胡韩振',
-                type: '进场',
-                time: '10:54:02'
+                licence: "粤AD3521",
+                ownerName: "胡韩振",
+                type: "进场",
+                time: "10:54:02",
               },
               {
-                licence: '粤AD3521',
-                ownerName: '章经信',
-                type: '出场',
-                time: '18:43:07'
+                licence: "粤AD3521",
+                ownerName: "章经信",
+                type: "出场",
+                time: "18:43:07",
               },
               {
-                licence: '粤AD3521',
-                ownerName: '刘生',
-                type: '出场',
-                time: '12:34:31'
+                licence: "粤AD3521",
+                ownerName: "刘生",
+                type: "出场",
+                time: "12:34:31",
               },
               {
-                licence: '粤AD3521',
-                ownerName: '林金',
-                type: '进场',
-                time: '18:09:12'
+                licence: "粤AD3521",
+                ownerName: "林金",
+                type: "进场",
+                time: "18:09:12",
               },
               {
-                licence: '粤AD3521',
-                ownerName: '秦风明',
-                type: '出场',
-                time: '17:23:23'
+                licence: "粤AD3521",
+                ownerName: "秦风明",
+                type: "出场",
+                time: "17:23:23",
               },
               {
-                licence: '粤AD3521',
-                ownerName: '昊岳',
-                type: '出场',
-                time: '16:09:23'
+                licence: "粤AD3521",
+                ownerName: "昊岳",
+                type: "出场",
+                time: "16:09:23",
               },
               {
-                licence: '粤AD3521',
-                ownerName: '管简君',
-                type: '出场',
-                time: '16:09:23'
+                licence: "粤AD3521",
+                ownerName: "管简君",
+                type: "出场",
+                time: "16:09:23",
               },
               {
-                licence: '粤AD3521',
-                ownerName: '安吉里',
-                type: '出场',
-                time: '16:09:23'
+                licence: "粤AD3521",
+                ownerName: "安吉里",
+                type: "出场",
+                time: "16:09:23",
               },
-            ]
-          }
+            ],
+          },
         },
       ],
-    }
+    };
   },
   components: {},
-  methods: {
-  }
-}
+  methods: {},
+};
 </script>
 
-<style lang='less' scoped>
-</style>
+<style lang="less" scoped></style>

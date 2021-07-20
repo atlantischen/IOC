@@ -58,7 +58,7 @@ const routes = [{
       name: '404',
       title: '404'
     },
-    component: () => import('@/views/404.vue')
+    component: () => import('@/views/404')
   }
 ];
 // console.log(routes)

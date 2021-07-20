@@ -198,7 +198,6 @@ export default {
 
 <style lang="less" scoped>
 @import "~@/style/gl.less";
-// 聚焦产业
 #leaseSummaryEchart_,
 [id^="leaseSummaryEchart_"] {
   width: 100%;

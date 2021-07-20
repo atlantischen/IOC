@@ -24,7 +24,7 @@ export default {
   components: { AlarmAck },
   data() {
     return {
-      isShow: false,
+      isShow: true,
       url: "",
       warnTimer: null,
       tipList: null,
@@ -40,7 +40,7 @@ export default {
     getUnityData(val) {
       // debugger;
       let res = val;
-      console.log(res,'res');
+      console.log(res, "res");
       try {
         if (res.action.indexOf("/") === 0) {
           this.$router.push(res.action);

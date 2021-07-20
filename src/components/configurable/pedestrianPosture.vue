@@ -26,29 +26,30 @@ export default {
   name: "pedestrianPostureAll",
   props: {
     _data: {
-      type: Object
-    }
+      type: Object,
+    },
   },
-  data () {
+  data() {
     return {
       ...this._data,
-      ids: this.$uuid()
-    }
+      ids: this.$uuid(),
+    };
   },
-  created () {
-  },
-  mounted () {
-    this.pedestrianPostureFun(this.datas)
+  created() {},
+  mounted() {
+    this.pedestrianPostureFun(this.datas);
   },
   methods: {
-    changePSYears2 (val) {
+    changePSYears2(val) {
       console.log(val);
-      this.pedestrianPostureFun(this.datas)
+      this.pedestrianPostureFun(this.datas);
     },
     // 人行态势
-    pedestrianPostureFun (val) {
-      const { names, xData, datas, smooth, unit, rightTip, leftTip } = val
-      var allD = [], color = ["#97c8ff", "#ffdd8d"], color2 = ["#fff", "#ffdd8d"],
+    pedestrianPostureFun(val) {
+      const { names, xData, datas, smooth, unit, rightTip, leftTip } = val;
+      var allD = [],
+        color = ["#97c8ff", "#ffdd8d"],
+        color2 = ["#fff", "#ffdd8d"],
         Linear = [
           [
             { offset: 0, color: "rgb(255, 255, 255, 0.2)" },
@@ -58,15 +59,15 @@ export default {
             { offset: 0, color: "rgb(255, 180, 0, 0.2)" },
             { offset: 1, color: "rgb(255, 221, 141, 0)" },
           ],
-        ]
+        ];
       if (!names) {
-        color = color.reverse()
-        color2 = color2.reverse()
-        Linear = Linear.reverse()
+        color = color.reverse();
+        color2 = color2.reverse();
+        Linear = Linear.reverse();
       }
       for (var i = 0; i < datas.length; i++) {
         allD[i] = {
-          name: names ? names[i] : '',
+          name: names ? names[i] : "",
           smooth: smooth,
           areaStyle: {
             normal: {
@@ -76,7 +77,7 @@ export default {
           itemStyle: {
             normal: {
               lineStyle: {
-                width: 0.8,
+                width: 1,
               },
             },
           },
@@ -86,95 +87,105 @@ export default {
               symbol: j != datas[i].length - 1 ? "none" : "",
               itemStyle: {
                 normal: {
-                  color: color[i]
+                  color: color[i],
                 },
               },
-            }
-          })
-        }
+            };
+          }),
+        };
       }
       var option = {
-        title: [{
-          show: rightTip,
-          text: '',
-          link: "",
-          target: null,
-          subtext: `${rightTip ? rightTip.name : ''}${rightTip ? rightTip.value : ''}`,
-          sublink: "",
-          subtarget: null,
-          right: "-10",
-          top: "-10",
-          textAlign: "center",
-          textStyle: {
-            fontFamily: "BYfont",
-            fontSize: 24,
-            padding: [2, 0],
-            fontWeight: 550,
-            color: "#fff",
+        title: [
+          {
+            show: rightTip,
+            text: "",
+            link: "",
+            target: null,
+            subtext: `${rightTip ? rightTip.name : ""}${
+              rightTip ? rightTip.value : ""
+            }`,
+            sublink: "",
+            subtarget: null,
+            right: "-10",
+            top: "-10",
+            textAlign: "center",
+            textStyle: {
+              fontFamily: "BYfont",
+              fontSize: 24,
+              padding: [2, 0],
+              fontWeight: 550,
+              color: "#fff",
+            },
+            subtextStyle: {
+              fontSize: 12,
+              color: "#fff",
+            },
           },
-          subtextStyle: {
-            fontSize: 12,
-            color: "#fff",
-          },
-        }, {
-          show: leftTip,
-          text: `{c|${leftTip ? leftTip.name : ''}}{a|${leftTip ? leftTip.value : ''}}{b|${leftTip ? leftTip.unit : ''}}`,
-          link: "",
-          target: null,
-          subtext: "",
-          sublink: "",
-          subtarget: null,
-          left: "1%",
-          top: "0%",
-          textAlign: "left",
-          itemGap: 6,
-          textStyle: {
-            rich: {
-              c: {
-                fontSize: 14,
-                color: "rgb(255,255,255,.7)",
-              },
-              a: {
-                color: "#fff",
-                fontFamily: "BYfont",
-                fontSize: 20,
-              },
-              b: {
-                color: "#fff",
-                fontSize: 12,
+          {
+            show: leftTip,
+            text: `{c|${leftTip ? leftTip.name : ""}}{a|${
+              leftTip ? leftTip.value : ""
+            }}{b|${leftTip ? leftTip.unit : ""}}`,
+            link: "",
+            target: null,
+            subtext: "",
+            sublink: "",
+            subtarget: null,
+            left: "1%",
+            top: "0%",
+            textAlign: "left",
+            itemGap: 6,
+            textStyle: {
+              rich: {
+                c: {
+                  fontSize: 14,
+                  color: "rgb(255,255,255,.7)",
+                },
+                a: {
+                  color: "#fff",
+                  fontFamily: "BYfont",
+                  fontSize: 20,
+                },
+                b: {
+                  color: "#fff",
+                  fontSize: 12,
+                },
               },
             },
           },
-        }
         ],
         tooltip: {
           trigger: "axis",
           axisPointer: {
-            type: 'line',
+            type: "line",
             lineStyle: {
-              type: 'dashed',
+              type: "dashed",
               width: 0.5,
-              color: 'rgba(255,255,255,0.8)'
-            }
+              color: "rgba(255,255,255,0.8)",
+            },
           },
           backgroundColor: "rgba(0,0,0,0.8)",
           borderWidth: 1,
           borderColor: "#4396f3",
           padding: [5, 10],
-          extraCssText: 'box-shadow:inset 0 0 8px rgba(67, 149, 243, 0.6);',
+          extraCssText: "box-shadow:inset 0 0 8px rgba(67, 149, 243, 0.6);",
           textStyle: {
             color: "#fff",
           },
-          formatter: params => {
-            let dataStr = `<p style="font-weight:bold;text-align:center;">${params[0].name}</p>`
-            params.forEach(item => {
+          formatter: (params) => {
+            let dataStr = `<p style="font-weight:bold;text-align:center;">${params[0].name}</p>`;
+            params.forEach((item) => {
               dataStr += `<div>
-                  <span style=" vertical-align: middle;margin-right:0.0625rem;width:0.15rem;height:0.025rem;background-color:${item.color};"></span>
-                  <span> ${item.seriesName ? item.seriesName + ':' : item.seriesName}${item.data.value}</span>
-                </div>`
-            })
-            return dataStr
-          }
+                  <span style=" vertical-align: middle;margin-right:0.0625rem;width:0.15rem;height:0.025rem;background-color:${
+                    item.color
+                  };"></span>
+                  <span> ${
+                    item.seriesName ? item.seriesName + ":" : item.seriesName
+                  }${item.data.value}</span>
+                </div>`;
+            });
+            return dataStr;
+          },
         },
         grid: {
           x: 10,
@@ -201,15 +212,15 @@ export default {
         },
         xAxis: {
           type: "category",
-          name: '{a|' + unit[0] + '}',
+          name: "{a|" + unit[0] + "}",
           nameGap: 20,
           nameTextStyle: {
             rich: {
               a: {
                 padding: [-30, 0, 0, -40],
-                color: '#fff'
-              }
-            }
+                color: "#fff",
+              },
+            },
           },
           boundaryGap: true,
           data: xData,
@@ -222,9 +233,9 @@ export default {
             },
           },
           axisLabel: {
-            width: '50',
+            width: "50",
             fontSize: 12,
-            padding: [15, 0, 0, (unit[0] ? -30 : leftTip ? -10 : 0)],
+            padding: [15, 0, 0, unit[0] ? -30 : leftTip ? -10 : 0],
             rotate: -35,
             interval: 0,
             margin: xData[0].length <= 3 ? 10 : 20,
@@ -259,17 +270,20 @@ export default {
             },
           },
         ],
-        series: allD.map(e => {
+        series: allD.map((e) => {
           return {
             type: "line",
             symbolSize: 6,
             ...e,
-          }
-        })
+          };
+        }),
       };
-      this.$redomEchart(this.$refs['pedestrianPostureEchart_' + this.ids], option);
+      this.$redomEchart(
+        this.$refs["pedestrianPostureEchart_" + this.ids],
+        option
+      );
     },
-  }
+  },
 };
 </script>
 
