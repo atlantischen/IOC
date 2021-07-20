@@ -16,11 +16,11 @@
     <div class="cold_row_b">
       <div class="tittle">今日告警</div>
       <ul class="warning scroll">
-        <li v-for="item in 19" :key="item">
-          <div class="tips">严重</div>
+        <li v-for="(item,index) in warningList" :key="index">
+          <div class="tips" :class="item.status===0?'_red':'_yellow'">严重</div>
           <div class="warning_m">
-            <span>15:06</span>
-            <span>1#冷却水泵_发生故障</span>
+            <span>{{item.time}}</span>
+            <span>{{item.title}}</span>
           </div>
           <div class="warning_r">待处理</div>
         </li>
@@ -619,6 +619,65 @@ export default {
           },
         },
       ],
+       warningList:[
+        {
+          status:0,
+          time:'10:00',
+          title:'16F-市场一部_压缩机损坏'
+        },
+        {
+          status:1,
+          time:'11:09',
+          title:'16F-市场二部_温控器超高温'
+        }
+        ,
+        {
+          status:0,
+          time:'15:06',
+          title:'14F-财务室_空调机运转异常'
+        }
+        ,
+        {
+          status:0,
+          time:'16:13',
+          title:'14F-财务室_压缩机启动不良'
+        }
+        ,
+        {
+          status:0,
+          time:'15:55',
+          title:'14F-1601_室内风扇故障'
+        }
+        ,
+        {
+          status:1,
+          time:'19:05',
+          title:'14F-财务室_空调机运转异常'
+        },
+        {
+          status:0,
+          time:'15:55',
+          title:'15F-财务室_空调机运转异常'
+        }
+        ,
+        {
+          status:1,
+          time:'19:05',
+          title:'16F-财务室_空调机运转异常'
+        },
+        {
+          status:0,
+          time:'15:55',
+          title:'16F-财务室_压缩机启动不良'
+        }
+        ,
+        {
+          status:1,
+          time:'19:05',
+          title:'14F-财务室_空调机运转异常'
+        }
+
+      ]
     };
   },
   methods: {
@@ -1031,8 +1090,6 @@ export default {
         height: 0.325rem /* 26/80 */;
         line-height: 0.325rem /* 26/80 */;
         text-align: center;
-        color: red;
-        border: 1px solid #ff4901;
         border-radius: 12px;
       }
       .warning_m {

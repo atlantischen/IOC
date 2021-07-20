@@ -40,6 +40,7 @@ export default {
     getUnityData(val) {
       // debugger;
       let res = val;
+      console.log(res,'res');
       try {
         if (res.action.indexOf("/") === 0) {
           this.$router.push(res.action);
@@ -87,7 +88,6 @@ export default {
         (typeof event.data == "object" && event.data.data != undefined)
       ) {
         let res = JSON.parse(event.data);
-        // console.log(res, 'res');
         this.$store.commit("setData", res);
         if (res.data === "IOCHOME") {
           this.isShow = true;
@@ -102,7 +102,10 @@ export default {
       window.debug = true;
     } else {
       this.url = process.env.VUE_APP_UNITY;
+<<<<<<< HEAD
       // this.url = "http://183.62.170.2:8110";
+=======
+>>>>>>> d4d45b59c6671262cdbe4a32d38bd9ff9b3de63e
     }
   },
   mounted() {

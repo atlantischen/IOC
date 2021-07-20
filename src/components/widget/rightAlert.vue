@@ -41,6 +41,7 @@ export default {
   opacity: 0;
 }
 .fadeOutRight1 {
+  // opacity: 0;
   display: none;
 }
 </style>

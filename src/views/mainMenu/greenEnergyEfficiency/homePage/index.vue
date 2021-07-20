@@ -693,7 +693,7 @@ export default {
   .today_energy {
     margin-top: 0.375rem /* 30/80 */ /* 20/80 */;
     #today_energy {
-      width: 3.75rem /* 300/80 */;
+      width: 100%/* 300/80 */;
       height: 3.125rem /* 250/80 */ /* 200/80 */;
     }
   }

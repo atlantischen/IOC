@@ -103,12 +103,14 @@ export default [{
     ]
   },
   {
-    path: 'watersupplyDetail',
-    name: 'watersupplyDetail',
-    component: () => import('@/views/mainMenu/greenEnergyEfficiency/building/watersupplyDetail.vue'),
+    path: 'codesourceDetail',
+    name: 'codesourceDetail',
+    component: () => import('@/views/mainMenu/greenEnergyEfficiency/building/codesourceDetail.vue'),
     meta: {
       id:6
     
     }
   },
+
+
 ]
