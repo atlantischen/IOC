@@ -25,20 +25,20 @@
 <script>
 export default {
   name: "leftRightPart",
-  data () {
+  data() {
     return {
       fade: false,
     };
   },
   components: {},
-  mounted () {
+  mounted() {
     // console.log(this.$store)
     // document.onclick = function() {
     //   this.handleClick();
     // };
   },
   methods: {
-    handleClick () {
+    handleClick() {
       this.fade = !this.fade;
     },
   },

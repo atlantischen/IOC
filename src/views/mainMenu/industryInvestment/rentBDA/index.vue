@@ -20,7 +20,7 @@ export default {
     return {
       leftInfo: [
         {
-          title: "租赁概括",
+          title: "租赁概况",
           type: "LeaseSummary",
           datas: {
           },

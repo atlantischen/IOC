@@ -15,13 +15,13 @@
 import * as echarts from "echarts";
 export default {
   name: "homePage",
-  data () {
+  data() {
     return {
       // 左侧组件info
       leftInfo: [
         {
-          title: '房屋租售情况',
-          type: 'pieChart2',
+          title: "房屋租售情况",
+          type: "pieChart2",
           datas: {
             eHeight: null,
             padding: null,
@@ -29,13 +29,13 @@ export default {
             datas: [63.2, 21.5, 15.3],
             keyD: {
               value: 2483,
-              name: '房源合计(套)'
-            }
-          }
+              name: "房源合计(套)",
+            },
+          },
         },
         {
-          title: '优惠政策',
-          type: 'favorablePolicy',
+          title: "优惠政策",
+          type: "favorablePolicy",
           datas: {
             padding: null,
             favorablePolicyDatas: [
@@ -58,13 +58,13 @@ export default {
                 src: require("@/assets/img/datas/zc_rcfc.png"),
                 title: "人才扶持政策",
                 content: "行业年会长期落户我区的，对主办方单位分别给予...",
-              }
+              },
             ],
-          }
+          },
         },
         {
-          title: '前沿动态',
-          type: 'currentTrends',
+          title: "前沿动态",
+          type: "currentTrends",
           datas: {
             padding: null,
             currentTrendsDatas: [
@@ -81,18 +81,18 @@ export default {
                 content: "恭喜奇信股份连续8年荣获国家鲁班奖",
               },
             ],
-          }
-        }
+          },
+        },
       ],
       rightInfo: [
         {
-          title: '聚焦产业',
-          type: 'FocusIndustry',
+          title: "聚焦产业",
+          type: "FocusIndustry",
           datas: {
             eHeight: null,
             padding: null,
             keyD: {
-              name: '企业合计(家)',
+              name: "企业合计(家)",
               value: 2483,
             },
             optionName: [
@@ -106,12 +106,12 @@ export default {
               "节能环保",
               "生物医药",
             ],
-            datas: [32.05, 19.23, 12.82, 9.62, 6.41, 8.33, 5.13, 3.2, 3.21]
-          }
+            datas: [32.05, 19.23, 12.82, 9.62, 6.41, 8.33, 5.13, 3.2, 3.21],
+          },
         },
         {
-          title: '企业列表',
-          type: 'companiesList',
+          title: "企业列表",
+          type: "companiesList",
           datas: {
             selectedNum: 1,
             selectedNum2: "A",
@@ -165,42 +165,74 @@ export default {
             companiesImgsListDatas: [
               {
                 name: "升华集团",
+                comType: "制造业",
+                inDate: "2021年4月12日",
+                comInfo:
+                  "升华集团是一家集智能制造、物贸流通、金融科技、矿业开发、股权投资等五大支柱型产业板块的国家级大型控股企业集团",
                 src: require("@/assets/img/datas/qy_shjt.png"),
               },
               {
                 name: "一博科技",
+                comType: "智能硬件",
+                inDate: "2021年5月23日",
+                comInfo:
+                  "一博科技是一家专注于高速PCB设计、PCB制板、SMT焊接加工、元器件供应等服务的企业 ",
                 src: require("@/assets/img/datas/qy_ybkj.png"),
               },
               {
                 name: "华夏视科集团",
+                comType: "生物科技",
+                inDate: "2021年2月02日",
+                comInfo:
+                  "公司于2013年05月10日成立。法定代表人魏俊华，公司经营范围包括：一般经营项目是：从事电子科技、信息科技、通信技术等领域内的技术开发、技术咨询；汽车用品、汽摩配件、电子设备及产品、计算机、软件及辅助设备、通信设备的销售；互联网技术的研发、咨询；应用软件开发；动漫动画设计；经营电子商务；从事广告业务；文化活动策划；国内贸易等。",
                 src: require("@/assets/img/datas/qy_hx.png"),
               },
               {
                 name: "中国建设银行",
+                comType: "生物科技",
+                inDate: "2021年3月13日",
+                comInfo:
+                  "成立于1954年10月1日的中国人民建设银行（后于1996年3月26日正式更名为中国建设银行）。总行位于北京金融大街25号，是中央管理的大型国有银行，国家副部级单位。 中国建设银行主要经营领域包括公司银行业务、个人银行业务和资金业务，在29个国家和地区设有分支机构及子公司，拥有基金、租赁、信托、人寿、财险、投行、期货、养老金等多个行业的子公司。",
                 src: require("@/assets/img/datas/qy_zgjsyh.png"),
               },
               {
                 name: "升华集团",
+                comType: "制造业",
+                inDate: "2021年4月12日",
+                comInfo:
+                  "升华集团是一家集智能制造、物贸流通、金融科技、矿业开发、股权投资等五大支柱型产业板块的国家级大型控股企业集团",
                 src: require("@/assets/img/datas/qy_shjt.png"),
               },
               {
                 name: "一博科技",
+                comType: "智能硬件",
+                inDate: "2021年5月23日",
+                comInfo:
+                  "一博科技是一家专注于高速PCB设计、PCB制板、SMT焊接加工、元器件供应等服务的企业 ",
                 src: require("@/assets/img/datas/qy_ybkj.png"),
               },
               {
                 name: "华夏视科集团",
+                comType: "生物科技",
+                inDate: "2021年2月02日",
+                comInfo:
+                  "公司于2013年05月10日成立。法定代表人魏俊华，公司经营范围包括：一般经营项目是：从事电子科技、信息科技、通信技术等领域内的技术开发、技术咨询；汽车用品、汽摩配件、电子设备及产品、计算机、软件及辅助设备、通信设备的销售；互联网技术的研发、咨询；应用软件开发；动漫动画设计；经营电子商务；从事广告业务；文化活动策划；国内贸易等。",
                 src: require("@/assets/img/datas/qy_hx.png"),
               },
               {
                 name: "中国建设银行",
+                comType: "生物科技",
+                inDate: "2021年3月13日",
+                comInfo:
+                  "成立于1954年10月1日的中国人民建设银行（后于1996年3月26日正式更名为中国建设银行）。总行位于北京金融大街25号，是中央管理的大型国有银行，国家副部级单位。 中国建设银行主要经营领域包括公司银行业务、个人银行业务和资金业务，在29个国家和地区设有分支机构及子公司，拥有基金、租赁、信托、人寿、财险、投行、期货、养老金等多个行业的子公司。",
                 src: require("@/assets/img/datas/qy_zgjsyh.png"),
               },
             ],
-          }
+          },
         },
         {
-          title: '待入驻企业',
-          type: 'enterprisesSettled',
+          title: "待入驻企业",
+          type: "enterprisesSettled",
           datas: {
             enterprisesListDatas: [
               {
@@ -252,8 +284,8 @@ export default {
                 src: require("@/assets/img/datas/drz_smrj.png"),
               },
             ],
-          }
-        }
+          },
+        },
       ],
       centerDatasList: [
         {
@@ -276,13 +308,11 @@ export default {
     };
   },
   components: {},
-  created () {
-    this.$store.commit('SET_CENTERDATAS', [true, this.centerDatasList])
+  created() {
+    this.$store.commit("SET_CENTERDATAS", [true, this.centerDatasList]);
   },
-  mounted () {
-  },
-  methods: {
-  },
+  mounted() {},
+  methods: {},
 };
 </script>
 

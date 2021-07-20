@@ -21,19 +21,19 @@ export default {
       type: Object,
     },
   },
-  data () {
+  data() {
     return {
       ...this._data,
-      ids: this.$uuid()
+      ids: this.$uuid(),
     };
   },
-  created () { },
-  mounted () {
+  created() {},
+  mounted() {
     this.rentalAndSaleFun(this.datas);
   },
   methods: {
-    rentalAndSaleFun (val) {
-      let { optionName, datas, keyD } = val
+    rentalAndSaleFun(val) {
+      let { optionName, datas, keyD } = val;
       var option = {
         title: {
           show: true,
@@ -69,10 +69,10 @@ export default {
           left: "50%",
           y: "center",
           data: optionName,
-          formatter: function (name) {
+          formatter: function(name) {
             var index = 0;
-            optionName.forEach(function (value, i) {
-              if (value == name) index = i
+            optionName.forEach(function(value, i) {
+              if (value == name) index = i;
             });
             return "{a|" + name + "}" + datas[index] + "%";
           },
@@ -132,7 +132,7 @@ export default {
   #rentalAndSaleEchart_,
   [id^="rentalAndSaleEchart_"] {
     width: 100%;
-    height: 2rem /* 160/80 */;
+    height: 1.875rem /* 150/80 */;
   }
 }
 </style>

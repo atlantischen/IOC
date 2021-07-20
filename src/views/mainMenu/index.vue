@@ -22,7 +22,7 @@ import AlarmAck from "@/views/mainMenu/comprehensiveSituational/homePage/compone
 export default {
   name: "MainMenu",
   components: { AlarmAck },
-  data () {
+  data() {
     return {
       isShow: true,
       url: "",
@@ -32,12 +32,12 @@ export default {
     };
   },
   computed: {
-    getUnityData () {
+    getUnityData() {
       return this.$store.state.unitySendData;
     },
   },
   watch: {
-    getUnityData (val) {
+    getUnityData(val) {
       // debugger;
       let res = val;
       console.log(res,'res');
@@ -46,17 +46,17 @@ export default {
           this.$router.push(res.action);
         } else {
         }
-      } catch (e) { }
+      } catch (e) {}
     },
     "$store.state.comState.centerDatas": {
-      handler (n, o) {
+      handler(n, o) {
         if (n) {
-          this.centerDatas = n
+          this.centerDatas = n;
         }
       },
-      immediate: true
+      immediate: true,
     },
-    "isShow": function (n, o) {
+    isShow: function(n, o) {
       if (n) {
         // 随机触发警告
         this.warnTimer = setInterval(() => {
@@ -68,15 +68,15 @@ export default {
           this.$store.dispatch("SET_SHOWWARNTIP", true);
         }, this.$randomNumer(1000, 50000));
       }
-    }
+    },
   },
-  beforeCreate () {
+  beforeCreate() {
     this.$store.dispatch("SET_SHOWWARNTIP", false);
     if (process.env.NODE_ENV === "production") {
       this.$router.push("/comprehensiveSituational/homePage");
     }
   },
-  created () {
+  created() {
     if (window.vuplex) {
       this.addMessageListener();
     } else {
@@ -102,24 +102,28 @@ export default {
       window.debug = true;
     } else {
       this.url = process.env.VUE_APP_UNITY;
+<<<<<<< HEAD
+      // this.url = "http://183.62.170.2:8110";
+=======
+>>>>>>> d4d45b59c6671262cdbe4a32d38bd9ff9b3de63e
     }
   },
-  mounted () {
+  mounted() {
     this.$nextTick(() => {
       window.iframe = this.$refs.iframe;
     });
   },
-  beforeDestroy () {
+  beforeDestroy() {
     clearInterval(this.warnTimer);
   },
   methods: {
-    getQueryString (name) {
+    getQueryString(name) {
       var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
       var r = window.location.search.substr(1).match(reg);
       if (r != null) return unescape(r[2]);
       return null;
     },
-    addMessageListener () {
+    addMessageListener() {
       window.vuplex.addEventListener("message", (event) => {
         console.log(event.data);
         let res = JSON.parse(event.data);
