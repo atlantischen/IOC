@@ -37,7 +37,7 @@
       <div class="btn">
         <ul>
           <li :class="{ active: activeIndex === 1 }" @click="changeBtn(1)">
-            近7天
+            近30天
           </li>
           <li :class="{ active: activeIndex === 2 }" @click="changeBtn(2)">
             近12月
@@ -263,13 +263,31 @@ export default {
               position: ["0", "-20"],
             },
             color: "#00ffff",
-            symbolSize: 6,
+            symbolSize: 10,
             symbol: "circle",
             itemStyle: {
               normal: {
-                color: "#ffff",
+                  color: new echarts.graphic.LinearGradient(0, 0, 1, 0, [
+                  {
+                    offset: 0,
+                    color: "#FFB400",
+                  },
+                  {
+                    offset: 1,
+                    color: "#FFDD8D",
+                  },
+                ]),
                 lineStyle: {
-                  color: "#ffff",
+                    color: new echarts.graphic.LinearGradient(0, 0, 1, 0, [
+                  {
+                    offset: 0,
+                    color: "#FFB400",
+                  },
+                  {
+                    offset: 1,
+                    color: "#FFDD8D",
+                  },
+                ]),
                 },
               },
             },

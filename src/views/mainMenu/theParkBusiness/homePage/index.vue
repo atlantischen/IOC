@@ -37,18 +37,43 @@
         <div class="type">
           <span>类型：</span>
           <ul>
-            <li class="item" v-for="(item, index) in listType" :key="index">
+            <li
+              class="item"
+              :class="activeTypeIndex === index ? 'active' : ''"
+              v-for="(item, index) in listType"
+              :key="index"
+              @click="typeClick('type', index)"
+            >
               {{ item }}
             </li>
           </ul>
         </div>
         <div class="building">
           <span>栋座：</span>
-          <ul>
-            <li class="item" v-for="(item, index) in listBuilding" :key="index">
-              {{ item }}
-            </li>
-          </ul>
+          <div>
+            <ul>
+              <li
+                class="item"
+                :class="activeBulidIndex === index ? 'active' : ''"
+                v-for="(item, index) in listBuilding"
+                :key="index"
+                @click="typeClick('build', index)"
+              >
+                {{ item }}
+              </li>
+            </ul>
+            <ul>
+              <li
+                class="item"
+                :class="activeSeatIndex === index ? 'active' : ''"
+                v-for="(item, index) in listSeat[activeBulidIndex]"
+                :key="index"
+                @click="typeClick('seat', index)"
+              >
+                {{ item }}
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
       <div class="store_img">
@@ -115,7 +140,12 @@ export default {
         },
       ],
       listType: ["餐饮", "娱乐", "文化", "健康", "教育", "购物"],
-      listBuilding: ["1栋", "2栋", "3栋", "A座", "B座", "C座"],
+      listBuilding: ["1栋", "2栋", "3栋"],
+      listSeat: [
+        ["A座", "B座", "C座"],
+        ["A座", "B座"],
+        ["A座", "B座", "C座", "D座"],
+      ],
       imgList: [
         require("../../../../assets/img/94.png"),
         require("../../../../assets/img/95.png"),
@@ -182,10 +212,22 @@ export default {
           value: 1,
         },
       ],
+      activeTypeIndex: 0,
+      activeBulidIndex: 0,
+      activeSeatIndex: 0,
     };
   },
 
   methods: {
+    typeClick(type, i) {
+      if (type == "type") {
+        this.activeTypeIndex = i;
+      } else if (type == "build") {
+        this.activeBulidIndex = i;
+      }else{
+        this.activeSeatIndex = i;
+      }
+    },
     scrollAnimate() {
       this.animateUp = true;
       setTimeout(() => {
@@ -241,7 +283,7 @@ export default {
           formatter: function(name) {
             var i = 0;
             i += 1;
-            return name + "  " + data[lable.indexOf(name)];
+            return name + "  " + data[lable.indexOf(name)] + "%";
           },
           data: lable,
         },
@@ -293,11 +335,11 @@ export default {
         tooltip: {
           // show: false,
           trigger: "axis",
-           axisPointer:{
-                lineStyle:{
-                color:'transparent'
-              }
-              }
+          axisPointer: {
+            lineStyle: {
+              color: "transparent",
+            },
+          },
         },
         xAxis: [
           {
@@ -439,7 +481,6 @@ export default {
       .outer {
         padding-left: 0.1625rem /* 13/80 */;
         margin-top: 0.25rem /* 20/80 */;
- 
 
         & > li {
           display: flex;
@@ -464,12 +505,11 @@ export default {
             }
           }
         }
-        
       }
       .animate-up {
-          transition: all .5s ease-in-out;
-          transform: translateY(-1.0875rem /* 87/80 */ /* 87/80 */);
-        }
+        transition: all 0.5s ease-in-out;
+        transform: translateY(-1.0875rem /* 87/80 */ /* 87/80 */);
+      }
     }
   }
   .store_list {
@@ -482,12 +522,7 @@ export default {
       margin-left: 0.375rem /* 30/80 */ /* 40/80 */ /* 30/80 */;
       white-space: nowrap;
     }
-    ul {
-      display: flex;
-      flex-wrap: wrap;
-      margin-left: 0.375rem /* 30/80 */;
-      width: 60%;
-    }
+
     li {
       width: 0.5625rem /* 45/80 */;
       height: 0.3125rem /* 25/80 */ /* 29/80 */;
@@ -508,9 +543,31 @@ export default {
     .type {
       display: flex;
       margin-top: 0.25rem /* 20/80 */ /* 30/80 */;
+      ul {
+        display: flex;
+        flex-wrap: wrap;
+        margin-left: .25rem /* 20/80 */ /* 30/80 */;
+        width: 60%;
+      }
     }
     .building {
       display: flex;
+        & > div > ul{
+        display: flex;
+        flex-wrap: wrap;
+         margin-left: .25rem /* 20/80 */ /* 30/80 */;
+         &:last-child {
+           flex-wrap: nowrap;
+         }
+          &:last-child >li:nth-child(3n) {
+            margin-right:0.25rem ;
+            // margin-right:  .0625rem /* 5/80 */;
+          }
+        }
+      
+    }
+    .active {
+      border: 1px solid #4696ef;
     }
   }
   .store_img {
@@ -518,7 +575,6 @@ export default {
       height: 4.15rem /* 332/80 */;
       width: 3.875rem /* 310/80 */ /* 330/80 */;
       margin: 0 auto;
-
       overflow: auto;
       display: flex;
       flex-wrap: wrap;
@@ -537,6 +593,7 @@ export default {
     }
   }
   .store_wait {
+    height: 2.5rem /* 200/80 */;
     .swiper {
       // height: 2.5rem /* 200/80 */;
       /deep/.el-carousel__container {

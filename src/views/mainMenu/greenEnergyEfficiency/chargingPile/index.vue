@@ -160,7 +160,7 @@ export default {
         ],
         series: [
           {
-            name: "其他",
+            name: "",
             type: "bar",
             barWidth: 14,
             color: "#0090FF",
@@ -199,6 +199,7 @@ export default {
       var option = {
         tooltip: {
           trigger: "item",
+          show:false
         },
         legend: {
           orient: "horizontal",
