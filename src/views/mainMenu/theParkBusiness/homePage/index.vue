@@ -140,7 +140,7 @@ export default {
         },
       ],
       listType: ["餐饮", "娱乐", "文化", "健康", "教育", "购物"],
-      listBuilding: ["1栋", "2栋", "3栋"],
+      listBuilding: ["1期", "2期", "3期"],
       listSeat: [
         ["A座", "B座", "C座"],
         ["A座", "B座"],
