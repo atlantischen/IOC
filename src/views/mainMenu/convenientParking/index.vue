@@ -40,4 +40,12 @@ export default {
   /* flex-wrap: wrap; */
   /* padding: 0 0.125rem 10/80  */
 } 
+.el-picker-panel{
+  background-color: rgba(14, 30, 48, 0.9);
+  color: #fff;
+}
+.el-picker__popper.el-popper[role=tooltip]{
+  background-color: rgba(14, 30, 48, 0.9);
+}
+
 </style>

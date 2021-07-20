@@ -218,7 +218,7 @@ export default {
   methods: {
     handleClick(i) {
       this.activeIndex = i;
-      this.$message({ message: "该功能暂时不可用", type: "error" });
+      this.$message({ message: "该功能暂时不可用", type: "error"});
     },
     onInputFileChange() {
       var file = document.getElementById("file").files[0];

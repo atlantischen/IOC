@@ -16,7 +16,7 @@ export default {
 }
 </script>
 
-<style lang='less' scoped>
+<style lang='less'>
 .index {
   width: 100%;
   height: 100%;
@@ -29,4 +29,5 @@ export default {
     }
   }
 }
+
 </style>

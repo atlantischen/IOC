@@ -204,7 +204,7 @@ export default {
         ],
         series: [
           {
-            name: "其他",
+            name: "",
             type: "bar",
             barWidth: 14,
             color: "#0090FF",
@@ -412,7 +412,7 @@ export default {
         ],
         series: [
           {
-            name: "其他",
+            name: "",
             type: "bar",
             barWidth: 14,
             color: "#0090FF",
@@ -517,7 +517,7 @@ export default {
         ],
         series: [
           {
-            name: "直接访问",
+            name: "",
             barWidth: 40,
             type: "bar",
             itemStyle: {

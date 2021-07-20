@@ -324,6 +324,7 @@ export default {
             type: "category",
             data: data,
             axisLine: {
+              show: false,
               lineStyle: {
                 color: "rgb(255,255,255,.5)",
               },
@@ -336,6 +337,9 @@ export default {
                 color: "#fff",
               },
             },
+             axisTick: {
+            show: false,
+          },
           },
         ],
         yAxis: [
@@ -350,10 +354,14 @@ export default {
             },
             // data: ['5', '10', '15'],
             axisLine: {
+              show: false,
               lineStyle: {
                 color: "#fff",
               },
             },
+             axisTick: {
+            show: false,
+          },
             splitLine: {
               lineStyle: {
                 width: 1,
