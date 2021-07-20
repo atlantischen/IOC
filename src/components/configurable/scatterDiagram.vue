@@ -25,39 +25,39 @@ export default {
       type: Object,
     },
   },
-  data () {
+  data() {
     return {
       ...this._data,
       ids: this.$uuid(),
     };
   },
-  created () { },
-  mounted () {
+  created() {},
+  mounted() {
     this.scatterDiagramFun(this.datas);
   },
   methods: {
-    scatterDiagramFun (val) {
+    scatterDiagramFun(val) {
       let { xAxisD, names, title, units } = val;
       var data = [
         [
           [120, 1200, 123, "新能源", "2021"],
-          [150, 2500, 354, "Canada", "2021"],
-          [250, 4200, 23, "China", "2021"],
-          [350, 3200, 423, "Cuba", "2021"],
-          [350, 4100, 234, "Finland", "2021"],
-          [550, 4900, 234, "France", "2021"],
-          [650, 6500, 754, "Germany", "2021"],
-          [680, 78.1, 32, "Iceland", "2021"],
+          [150, 2500, 354, "零售商家", "2021"],
+          [250, 4200, 23, "信息技术", "2021"],
+          [350, 3200, 423, "新材料", "2021"],
+          [350, 4100, 234, "生物医药", "2021"],
+          [550, 4900, 234, "智能制造", "2021"],
+          [650, 6500, 754, "现代服务", "2021"],
+          [680, 78.1, 32, "节能环保", "2021"],
         ],
         [
           [150, 1500, 213, "新能源", "2020"],
-          [220, 2000, 234, "Canada", "2020"],
-          [230, 4800, 652, "China", "2020"],
-          [400, 3000, 23, "Cuba", "2020"],
-          [400, 4500, 324, "Finland", "2020"],
-          [450, 4200, 23, "France", "2020"],
-          [490, 5000, 23, "Germany", "2020"],
-          [550, 6800, 345, "Iceland", "2020"],
+          [220, 2000, 234, "零售商家", "2020"],
+          [230, 4800, 652, "信息技术", "2020"],
+          [400, 3000, 23, "新材料", "2020"],
+          [400, 4500, 324, "生物医药", "2020"],
+          [450, 4200, 23, "智能制造", "2020"],
+          [490, 5000, 23, "现代服务", "2020"],
+          [550, 6800, 345, "节能环保", "2020"],
           [680, 6000, 345, "Iceland", "2020"],
         ],
       ];
@@ -73,24 +73,24 @@ export default {
           },
         },
         tooltip: {
-          trigger: 'item',
+          trigger: "item",
           backgroundColor: "rgba(0,0,0,0.8)",
           borderWidth: 1,
           borderColor: "#4396f3",
           padding: [10, 15],
-          extraCssText: 'box-shadow:inset 0 0 8px rgba(67, 149, 243, 0.6);',
+          extraCssText: "box-shadow:inset 0 0 8px rgba(67, 149, 243, 0.6);",
           textStyle: {
             color: "#fff",
           },
-          formatter: params => {
-            console.log(params)
-            let dataStr = `<p style="font-weight:bold;font-size:.2rem;text-align:center;padding-bottom:.0625rem;">${params.data[3]}</p>`
+          formatter: (params) => {
+            console.log(params);
+            let dataStr = `<p style="font-weight:bold;font-size:.2rem;text-align:center;padding-bottom:.0625rem;">${params.data[3]}</p>`;
             dataStr += `<div>
                   <span>企业数量：${params.data[2]}</span><br>
-                  <span>产业占比：${params.data[2]}</span>
-                </div>`
-            return dataStr
-          }
+                  <span>产业占比：37%</span>
+                </div>`;
+            return dataStr;
+          },
         },
         legend: {
           left: "10%",
@@ -178,14 +178,14 @@ export default {
             name: names[0],
             data: data[0],
             type: "scatter",
-            symbolSize: function (data) {
+            symbolSize: function(data) {
               return Math.sqrt(data[2]);
             },
             emphasis: {
               focus: "series",
               label: {
                 show: false,
-              }
+              },
             },
             itemStyle: {
               // shadowBlur: 10,
@@ -211,14 +211,14 @@ export default {
             name: names[1],
             data: data[1],
             type: "scatter",
-            symbolSize: function (data) {
+            symbolSize: function(data) {
               // return Math.sqrt(data[2]) / 5e2;
               return Math.sqrt(data[2]);
             },
             emphasis: {
               focus: "series",
               label: {
-                show: false
+                show: false,
               },
             },
             itemStyle: {
