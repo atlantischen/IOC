@@ -14,53 +14,54 @@ export default {
   name: "investmentSituationAll",
   props: {
     _data: {
-      type: Object
-    }
+      type: Object,
+    },
   },
-  data () {
+  data() {
     return {
       ...this._data,
-      ids: this.$uuid()
-    }
+      ids: this.$uuid(),
+    };
   },
-  created () {
-  },
-  mounted () {
-    this.pedestrianPostureFun(this.datas)
+  created() {},
+  mounted() {
+    this.pedestrianPostureFun(this.datas);
   },
   methods: {
     // 人行态势
-    pedestrianPostureFun (val) {
-      const { names, xData, datas, smooth, unit } = val
+    pedestrianPostureFun(val) {
+      const { names, xData, datas, smooth, unit } = val;
       var option = {
         tooltip: {
           trigger: "axis",
           axisPointer: {
-            type: 'line',
+            type: "line",
             lineStyle: {
-              type: 'dashed',
+              type: "dashed",
               width: 0.5,
-              color: 'rgba(255,255,255,0.8)'
-            }
+              color: "rgba(255,255,255,0.8)",
+            },
           },
           backgroundColor: "rgba(0,0,0,0.8)",
           borderWidth: 1,
           borderColor: "#4396f3",
           padding: [5, 10],
-          extraCssText: 'box-shadow:inset 0 0 8px rgba(67, 149, 243, 0.6);',
+          extraCssText: "box-shadow:inset 0 0 8px rgba(67, 149, 243, 0.6);",
           textStyle: {
             color: "#fff",
           },
-          formatter: params => {
-            let dataStr = `<p style="font-weight:bold;text-align:center;">${params[0].name}</p>`
-            params.forEach(item => {
+          formatter: (params) => {
+            let dataStr = `<p style="font-weight:bold;text-align:center;">${
+              params[0].name
+            }${this._data.title == "招商情况" ? "招商数量" : ""}</p>`;
+            params.forEach((item) => {
               dataStr += `<div>
                   <span style=" vertical-align: middle;margin-right:0.0625rem;width:0.15rem;height:0.025rem;background-color:${item.color};"></span>
                   <span> ${item.seriesName} :  ${item.data.value}</span>
-                </div>`
-            })
-            return dataStr
-          }
+                </div>`;
+            });
+            return dataStr;
+          },
         },
         color: ["#fff", "#ffb400"],
         grid: {
@@ -196,9 +197,12 @@ export default {
           data: j == 0 ? _data : _data2,
         };
       }
-      this.$redomEchart(this.$refs['pedestrianPostureEchart_' + this.ids], option);
+      this.$redomEchart(
+        this.$refs["pedestrianPostureEchart_" + this.ids],
+        option
+      );
     },
-  }
+  },
 };
 </script>
 

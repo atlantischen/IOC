@@ -21,20 +21,19 @@ export default {
   name: "theParkOutputValAll",
   props: {
     _data: {
-      type: Object
-    }
+      type: Object,
+    },
   },
-  data () {
+  data() {
     return {
       ...this._data,
-      ids: this.$uuid()
-    }
+      ids: this.$uuid(),
+    };
   },
-  mounted () {
+  mounted() {
     // this.energyTrendFun(this.datas)
   },
-  methods: {
-  }
+  methods: {},
 };
 </script>
 
@@ -48,18 +47,18 @@ export default {
     justify-content: space-between;
     .favorablePolicy_li {
       width: 47%;
-      padding: 10px;
+      padding: 0.125rem /* 10/80 */ ;
       img {
-        .ioc_img(50px, 50px, 50%);
+        .ioc_img(0.625rem /* 50/80 */, 0.625rem /* 50/80 */, 50%) ;;
         background: rgba(204, 204, 204, 0.5);
       }
       span {
-        font-size: 16px;
-        padding: 5px 0 4px;
+        font-size: 0.2rem /* 16/80 */;
+        padding: 0.0625rem /* 5/80 */ 0 0.05rem /* 4/80 */;
       }
       p {
         .text_s();
-        line-height: 16px;
+        line-height: 0.2rem /* 16/80 */;
       }
     }
   }

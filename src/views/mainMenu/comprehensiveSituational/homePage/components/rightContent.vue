@@ -3,7 +3,7 @@
   <div class="rightContent">
     <LeftRight>
       <div class="leftSearch">
-        <button @click="back">back</button>
+        <i class="iconfont icon-fanhui" @click="back"></i>
         <div class="theSearchPath y_c">
           <el-upload
             class="upload-demo uploadPhoto"
@@ -142,13 +142,13 @@
 </template>
 
 <script>
-import { nextTick } from '@vue/runtime-core';
+import { nextTick } from "@vue/runtime-core";
 export default {
   name: "rightContent",
   props: {
     inputVal: String,
   },
-  data () {
+  data() {
     return {
       currentPage: 1,
       total: 1,
@@ -275,76 +275,76 @@ export default {
   },
   watch: {
     inputVal: {
-      handler (n, o) {
-        this.inputV = n
+      handler(n, o) {
+        this.inputV = n;
       },
-      deep: true
-    }
+      deep: true,
+    },
   },
-  mounted () {
-    this.total = this.tableData2.length
-    this.changeDatasFun()
+  mounted() {
+    this.total = this.tableData2.length;
+    this.changeDatasFun();
   },
   methods: {
     // 上传头像
-    changeFile (file, fileList) {
-      var _that = this
-      if (!file || !window.FileReader) return
-      var reader = new FileReader()
-      reader.readAsDataURL(file.raw)
-      reader.onload = function (e) {
-        _that.imageUrl = reader.result
-      }
+    changeFile(file, fileList) {
+      var _that = this;
+      if (!file || !window.FileReader) return;
+      var reader = new FileReader();
+      reader.readAsDataURL(file.raw);
+      reader.onload = function(e) {
+        _that.imageUrl = reader.result;
+      };
     },
-    // 
-    showBlackListFun () {
+    //
+    showBlackListFun() {
       this.isFade = !this.isFade;
     },
-    searchList (val) {
-      this.inputV = val
+    searchList(val) {
+      this.inputV = val;
       // if (!val) {
       //   return this.$message.error("请输入关键词！")
       // } else {
-      this.slist = this.slist2
+      this.slist = this.slist2;
       // }
       this.isShowList = !this.isShowList;
     },
     // 搜索轨迹
-    SearchPath () {
+    SearchPath() {
       this.$SendMessageToUnity("ShowLocationPin", {
         Serial: 0,
       });
-      console.log('ShowLocationPin---搜寻轨迹------------')
+      console.log("ShowLocationPin---搜寻轨迹------------");
     },
-    searchOneItem (val) {
+    searchOneItem(val) {
       console.log(val);
       this.$SendMessageToUnity("ShowLocationPin", {
         Serial: 0,
       });
-      console.log('ShowLocationPin--商家、企业------------')
+      console.log("ShowLocationPin--商家、企业------------");
     },
-    zhuizongFun (val) {
+    zhuizongFun(val) {
       console.log(val);
       this.$SendMessageToUnity("ShowLocationPin", {
         Serial: 0,
       });
-      console.log('ShowLocationPin-----跟踪------------')
+      console.log("ShowLocationPin-----跟踪------------");
     },
-    back () {
+    back() {
       this.$emit("_c", null);
     },
     // 模拟分页
-    changeDatasFun () {
-      let _data = JSON.parse(JSON.stringify(this.tableData2))
-      let _first = (this.currentPage - 1) * 10
-      this.tableData = _data.slice(_first, (_first + 10))
+    changeDatasFun() {
+      let _data = JSON.parse(JSON.stringify(this.tableData2));
+      let _first = (this.currentPage - 1) * 10;
+      this.tableData = _data.slice(_first, _first + 10);
     },
-    handleSizeChange (val) {
+    handleSizeChange(val) {
       console.log(`每页 ${val} 条`);
     },
-    handleCurrentChange (val) {
-      this.currentPage = val
-      this.changeDatasFun()
+    handleCurrentChange(val) {
+      this.currentPage = val;
+      this.changeDatasFun();
     },
   },
 };
@@ -359,6 +359,9 @@ export default {
     top: 1.125rem /* 90/80 */;
     left: 0.575rem /* 46/80 */;
     z-index: 101;
+    .icon-fanhui {
+      font-size: 0.3125rem /* 25/80 */;
+    }
   }
   :deep(.theSearchPath) {
     width: 2.875rem /* 230/80 */;

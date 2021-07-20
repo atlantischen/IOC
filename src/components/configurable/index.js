@@ -45,7 +45,7 @@ const configurable = {
   CompaniesList, // 企业列表
   EnterprisesSettled, // 待入驻企业
   InvestmentSituation, // 招商情况
-  LeaseSummary, // 租赁概括
+  LeaseSummary, // 租赁概况
   ShapeOfMountain, // 象形柱图
   WaterPolo, // 水球图
   ScatterDiagram, // 散点

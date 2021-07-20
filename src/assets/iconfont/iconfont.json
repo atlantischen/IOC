@@ -3,8 +3,15 @@
   "name": "智慧园区管理平台",
   "font_family": "iconfont",
   "css_prefix_text": "icon-",
-  "description": "奇信智能-智慧园区管理平台",
+  "description": "奇信智能-智慧园区管理平台 3D内嵌",
   "glyphs": [
+    {
+      "icon_id": "16102274",
+      "name": "返回",
+      "font_class": "fanhui",
+      "unicode": "e629",
+      "unicode_decimal": 58921
+    },
     {
       "icon_id": "1159883",
       "name": "下载",
