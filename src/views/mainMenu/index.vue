@@ -102,10 +102,6 @@ export default {
       window.debug = true;
     } else {
       this.url = process.env.VUE_APP_UNITY;
-<<<<<<< HEAD
-      // this.url = "http://183.62.170.2:8110";
-=======
->>>>>>> d4d45b59c6671262cdbe4a32d38bd9ff9b3de63e
     }
   },
   mounted() {
