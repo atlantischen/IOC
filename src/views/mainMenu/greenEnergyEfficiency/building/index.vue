@@ -25,6 +25,14 @@ export default {
           path: "/greenEnergyEfficiency/building/airConditioner",
           name: "空调",
         },
+{
+          path: "/greenEnergyEfficiency/building/primaryAirSystem",
+          name: "新风",
+        },
+  {
+          path: "/greenEnergyEfficiency/building/watersupply",
+          name: "给排水",
+        },
         {
           path: "/greenEnergyEfficiency/building/elevator",
           name: "电梯",
@@ -33,14 +41,8 @@ export default {
           path: "/greenEnergyEfficiency/building/lighting",
           name: "照明",
         },
-        {
-          path: "/greenEnergyEfficiency/building/primaryAirSystem",
-          name: "新风",
-        },
-        {
-          path: "/greenEnergyEfficiency/building/watersupply",
-          name: "给排水",
-        },
+        
+      
       ],
     }
   },
