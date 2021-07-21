@@ -14,24 +14,22 @@ export default {
   name: "shapeOfMountainAll",
   props: {
     _data: {
-      type: Object
-    }
+      type: Object,
+    },
   },
-  data () {
+  data() {
     return {
       ...this._data,
-      ids: this.$uuid()
-    }
+      ids: this.$uuid(),
+    };
   },
-  created () {
-  },
-  mounted () {
-    this.shapeOfMountainFun(this.datas)
+  created() {},
+  mounted() {
+    this.shapeOfMountainFun(this.datas);
   },
   methods: {
-    // 人行态势
-    shapeOfMountainFun (val) {
-      const { names, xData, datas, smooth, unit } = val
+    shapeOfMountainFun(val) {
+      const { xData, datas, proportion } = val;
       var option = {
         grid: {
           left: "10",
@@ -46,37 +44,37 @@ export default {
           top: "92%",
           icon: "circle",
           textStyle: {
-            color: "#0DCAD2"
-          }
+            color: "#0DCAD2",
+          },
         },
         tooltip: {
           trigger: "axis",
           axisPointer: {
-            type: 'line',
+            type: "line",
             lineStyle: {
-              type: 'dashed',
+              type: "dashed",
               width: 0.5,
-              color: 'rgba(255,255,255,0.8)'
-            }
+              color: "rgba(255,255,255,0.8)",
+            },
           },
           backgroundColor: "rgba(0,0,0,0.8)",
           borderWidth: 1,
           borderColor: "#4396f3",
           padding: [5, 15],
-          extraCssText: 'box-shadow:inset 0 0 8px rgba(67, 149, 243, 0.6);',
+          extraCssText: "box-shadow:inset 0 0 8px rgba(67, 149, 243, 0.6);",
           textStyle: {
             color: "#fff",
           },
-          formatter: params => {
-            let dataStr = `<p style="font-weight:bold;text-align:center;">${params[0].name}</p>`
-            params.forEach(item => {
+          formatter: (params) => {
+            let dataStr = `<p style="font-weight:bold;text-align:center;">${params[0].name}</p>`;
+            params.forEach((item) => {
               dataStr += `<div>
                 <span> 数量 :  ${item.data}</span><br/>
-                <span> 占比 :  0% </span>
-                </div>`
-            })
-            return dataStr
-          }
+                <span> 占比 :  ${proportion[item.dataIndex]}% </span>
+                </div>`;
+            });
+            return dataStr;
+          },
         },
         xAxis: {
           type: "category",
@@ -92,28 +90,28 @@ export default {
             },
           },
           axisTick: {
-            show: false
+            show: false,
           },
           axisLine: {
             lineStyle: {
-              color: "rgb(255,255,255,.5)"
-            }
-          }
+              color: "rgb(255,255,255,.5)",
+            },
+          },
         },
         yAxis: {
           type: "value",
           axisLabel: {
-            show: false
+            show: false,
           },
           axisTick: {
-            show: false
+            show: false,
           },
           axisLine: {
-            show: false
+            show: false,
           },
           splitLine: {
-            show: false
-          }
+            show: false,
+          },
         },
         series: [
           {
@@ -122,7 +120,7 @@ export default {
             label: {
               show: false,
               position: "top",
-              formatter: function (params) {
+              formatter: function(params) {
                 var index = params.dataIndex;
                 var str = "{a|" + params.value + "}\n{c|" + params.value + "}";
                 return str;
@@ -132,17 +130,12 @@ export default {
                   fontSize: 18,
                   color: "#534EE1",
                   align: "center",
-                  height: 40
+                  height: 40,
                 },
                 c: {
                   fontSize: 18,
                   color: "#fff",
-                  padding: [
-                    -2,
-                    0,
-                    2,
-                    0
-                  ],
+                  padding: [-2, 0, 2, 0],
                   // backgroundColor: {
                   //   image: labelimg
                   // },
@@ -150,9 +143,9 @@ export default {
                   verticalAlign: "bottom",
                   height: 50,
                   lineHeight: 40,
-                  width: 100
-                }
-              }
+                  width: 100,
+                },
+              },
             },
             itemStyle: {
               normal: {
@@ -162,28 +155,32 @@ export default {
                   y: 0,
                   x2: 0,
                   y2: 1,
-                  colorStops: [{
-                    offset: 0,
-                    color: "rgba(67, 149, 243, 1)"
-                  },
-                  {
-                    offset: 1,
-                    color: "rgba(67, 149, 243, 0.2)"
-                  }
+                  colorStops: [
+                    {
+                      offset: 0,
+                      color: "rgba(67, 149, 243, 1)",
+                    },
+                    {
+                      offset: 1,
+                      color: "rgba(67, 149, 243, 0.2)",
+                    },
                   ],
-                  global: false
-                }
-              }
+                  global: false,
+                },
+              },
             },
             data: datas,
-            symbol: 'path://M0,10 L10,10 C5.5,10 5.5,5 5,0 C5,5 4.5,10 0,10 z',
-            barCategoryGap: '-50%',
-          }
-        ]
-      }
-      this.$redomEchart(this.$refs['shapeOfMountainEchart_' + this.ids], option);
+            symbol: "path://M0,10 L10,10 C5.5,10 5.5,5 5,0 C5,5 4.5,10 0,10 z",
+            barCategoryGap: "-50%",
+          },
+        ],
+      };
+      this.$redomEchart(
+        this.$refs["shapeOfMountainEchart_" + this.ids],
+        option
+      );
     },
-  }
+  },
 };
 </script>
 

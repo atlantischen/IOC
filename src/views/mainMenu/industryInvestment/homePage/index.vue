@@ -121,13 +121,13 @@ export default {
                 id: 1,
                 nums: [
                   {
-                    name: "A",
+                    name: "A座",
                   },
                   {
-                    name: "B",
+                    name: "B座",
                   },
                   {
-                    name: "C",
+                    name: "C座",
                   },
                 ],
               },
@@ -136,10 +136,13 @@ export default {
                 id: 2,
                 nums: [
                   {
-                    name: "A",
+                    name: "A座",
                   },
                   {
-                    name: "B",
+                    name: "B座",
+                  },
+                  {
+                    name: "C座",
                   },
                 ],
               },
@@ -148,16 +151,13 @@ export default {
                 id: 3,
                 nums: [
                   {
-                    name: "A",
+                    name: "A座",
                   },
                   {
-                    name: "B",
+                    name: "B座",
                   },
                   {
-                    name: "C",
-                  },
-                  {
-                    name: "D",
+                    name: "C座",
                   },
                 ],
               },

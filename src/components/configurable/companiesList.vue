@@ -22,30 +22,27 @@
               :class="{ actived: datas.selectedNum2 == t.name }"
               @click.stop="selectBuldingFun('', t.name)"
             >
-              {{ t.name }}座
+              {{ t.name }}
             </li>
           </ul>
         </div>
       </div>
       <ul
         class="companiesImgsList"
+        @mouseleave="leaveItemFun()"
         :class="[
           datas.buldingList ? '' : 'companiesImgsList' + datas.listCols,
           datas.buldingList ? 'mniBar' : 'companiesImgsList_over',
         ]"
       >
-        <li
-          class="x_fs_rap"
-          :ref="'companiesImgsListRef_' + ids"
-          @mouseleave="leaveItemFun()"
-        >
+        <li class="x_fs_rap" :ref="'companiesImgsListRef_' + ids">
           <a v-for="(t, i) in datas.companiesImgsListDatas" :key="i">
             <img
               :src="t.src"
               :alt="t.name"
               @mouseenter="hoverItemFun($event, i)"
             />
-            <div class="litInfo" :style="returnStyle" v-show="showItem == i">
+            <div class="litInfo" :style="returnStyle" v-if="showItem == i">
               <div class="litInfo_title x_c">
                 <img class="litInfo_img" :key="i" :src="t.src" :alt="t.name" />
                 <span>{{ t.name }}</span>
@@ -92,7 +89,7 @@ export default {
   },
   mounted() {
     document.onclick = function() {
-      this.showItem = null;
+      this.leaveItemFun();
     };
     if (!this.datas.buldingList) {
       this.$nextTick(() => {
@@ -102,6 +99,7 @@ export default {
   },
   methods: {
     selectBuldingFun(key, val) {
+      this.leaveItemFun();
       switch (key) {
         case "B":
           this.datas.selectedNum = val;
@@ -150,6 +148,7 @@ export default {
           border-radius: 0.0625rem /* 5/80 */;
           padding: 0.0375rem /* 3/80 */ 0.125rem /* 10/80 */;
           text-align: center;
+          cursor: pointer;
         }
         .actived {
           border: 0.0125rem /* 1/80 */ solid #4396f3;

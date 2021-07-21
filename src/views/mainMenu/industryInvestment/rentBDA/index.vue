@@ -16,14 +16,13 @@
 <script>
 export default {
   name: "rentBDA",
-  data () {
+  data() {
     return {
       leftInfo: [
         {
           title: "租赁概况",
           type: "LeaseSummary",
-          datas: {
-          },
+          datas: {},
         },
         {
           title: "各类型租用统计",
@@ -41,6 +40,7 @@ export default {
               "节能环保",
             ],
             datas: [1234, 1123, 934, 842, 734, 634, 522, 423, 365],
+            proportion: [45, 35, 26, 25, 13, 9, 7, 4, 2],
           },
         },
       ],
@@ -81,7 +81,7 @@ export default {
                 unit: "元",
               },
             ],
-            units: ['万元', '万元'],
+            units: ["万元", "万元"],
             names: ["今年", "去年"],
             title: "气泡大小：企业类型数量",
             xAsixD: [100, 200, 300, 400, 500, 600, 700],
