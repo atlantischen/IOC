@@ -41,34 +41,30 @@ export default {
       type: Object,
     },
   },
-  data () {
+  data() {
     return {
       ...this._data,
       ids: this.$uuid(),
     };
   },
-  created () { },
-  mounted () {
+  created() {},
+  mounted() {
     this.singleBarChartFun(this.datas);
   },
   methods: {
-    changePSMonths (val) {
+    changePSMonths(val) {
       console.log(val);
     },
-    changePSYears (val) {
+    changePSYears(val) {
       console.log(val);
       this.singleBarChartFun(this.datas);
     },
-    singleBarChartFun (val) {
+    singleBarChartFun(val) {
       let { xAxisD, datas, units, names, leftTip } = val;
       var allD = [],
         showLb = {
-          width: '50',
-          padding: [15, 0, 0, -30],
-          // rotate: -35,
-          rotate: -20,
-          interval: 0,
-          margin: 20,
+          rotate: -(datas[0].length > 4 ? 20 : 50),
+          padding: [40, 0, 0, -(datas[0].length > 4 ? 20 : 10)],
         },
         colorRange = [
           [
@@ -87,26 +83,35 @@ export default {
             { offset: 0, color: "rgba(226, 28, 28, 1)" },
             { offset: 1, color: "rgba(226, 28, 28, .1)" },
           ],
-        ]
-      if (names && names.indexOf('次要') != -1) {
-        colorRange.splice(0, 1)
+        ];
+      if (names && names.indexOf("次要") != -1) {
+        colorRange.splice(0, 1);
       }
       for (let i = 0; i < datas.length; i++) {
         allD[i] = {
-          name: names ? names[i] : '',
-          barWidth: 14 / (datas.length > 1 ? datas.length * 2 / 3 : datas.length),
+          name: names ? names[i] : "",
+          barWidth:
+            14 / (datas.length > 1 ? (datas.length * 2) / 3 : datas.length),
           barGap: "0",
           itemStyle: {
-            color: new echarts.graphic.LinearGradient(0, 0, 0, 1, colorRange[i]),
+            color: new echarts.graphic.LinearGradient(
+              0,
+              0,
+              0,
+              1,
+              colorRange[i]
+            ),
           },
-          data: datas[i]
-        }
+          data: datas[i],
+        };
       }
 
       var option = {
         title: {
           show: leftTip,
-          text: `{c|${leftTip ? leftTip.name : ''}}{a|${leftTip ? leftTip.value : ''}}{b|${leftTip ? leftTip.unit : ''}}`,
+          text: `{c|${leftTip ? leftTip.name : ""}}{a|${
+            leftTip ? leftTip.value : ""
+          }}{b|${leftTip ? leftTip.unit : ""}}`,
           link: "",
           target: null,
           subtext: "",
@@ -140,36 +145,40 @@ export default {
         },
         tooltip: {
           show: true,
-          trigger: 'axis',
+          trigger: "axis",
           axisPointer: {
-            type: 'line',
+            type: "line",
             lineStyle: {
               opacity: 0,
               show: false,
-              type: 'dashed',
+              type: "dashed",
               width: 0.5,
-              color: 'rgba(255,255,255,0.8)'
-            }
+              color: "rgba(255,255,255,0.8)",
+            },
           },
           backgroundColor: "rgba(0,0,0,0.8)",
           borderWidth: 1,
           borderColor: "#4396f3",
           padding: [10, 15],
-          extraCssText: 'box-shadow:inset 0 0 8px rgba(67, 149, 243, 0.6);',
+          extraCssText: "box-shadow:inset 0 0 8px rgba(67, 149, 243, 0.6);",
           textStyle: {
             color: "#fff",
           },
-          formatter: params => {
-            console.log(params)
-            let dataStr = `<p style="font-weight:bold;font-size:.2rem;text-align:center;padding-bottom:.0625rem;">${params[0].name}</p>`
-            params.forEach(item => {
+          formatter: (params) => {
+            console.log(params);
+            let dataStr = `<p style="font-weight:bold;font-size:.2rem;text-align:center;padding-bottom:.0625rem;">${params[0].name}</p>`;
+            params.forEach((item) => {
               dataStr += `<div>
-                    <span style=" vertical-align: middle;margin-right:0.0625rem;width:0.15rem;height:0.12rem;border-radius:0.02rem;background:linear-gradient(to bottom, ${item.color.colorStops[0].color},${item.color.colorStops[1].color}"></span>
-                    <span> ${item.seriesName ? item.seriesName + ":" : item.seriesName}  ${item.value}</span>
-                  </div>`
-            })
-            return dataStr
-          }
+                    <span style=" vertical-align: middle;margin-right:0.0625rem;width:0.15rem;height:0.12rem;border-radius:0.02rem;background:linear-gradient(to bottom, ${
+                      item.color.colorStops[0].color
+                    },${item.color.colorStops[1].color}"></span>
+                    <span> ${
+                      item.seriesName ? item.seriesName + ":" : item.seriesName
+                    }  ${item.value}</span>
+                  </div>`;
+            });
+            return dataStr;
+          },
         },
         grid: {
           x: 10,
@@ -194,17 +203,16 @@ export default {
         xAxis: [
           {
             type: "category",
-            name: '{a|' + (units[0] ? units[0] : "") + '}',
+            name: "{a|" + (units[0] ? units[0] : "") + "}",
             nameGap: 20,
             nameTextStyle: {
               rich: {
                 a: {
                   padding: [-25, 0, 0, -40],
-                  color: '#fff'
-                }
-              }
+                  color: "#fff",
+                },
+              },
             },
-            // boundaryGap: true,
             data: xAxisD,
             axisTick: {
               show: false,
@@ -215,11 +223,15 @@ export default {
               },
             },
             axisLabel: {
-              fontSize: 12,
-              padding: [40, 0, 0, -(datas[0].length > 4 ? 20 : 10)],
-              rotate: -(datas[0].length > 4 ? 20 : 40),
+              interval: 0,
+              margin: units && units[1] ? 25 : 20,
+              // padding: [40, 0, 0, -(datas[0].length > 4 ? 20 : 10)],
+              // padding: [40, 0, 0, -(xAxisD[0].length > 4 ? 20 : 10)],
+              rotate: -(xAxisD[0].length > 4 ? 25 : 30),
               textStyle: {
+                fontSize: 12,
                 color: "#fff",
+                align: "center",
               },
             },
             axisline: {
@@ -256,16 +268,16 @@ export default {
             },
           },
         ],
-        series: allD.map(e => {
+        series: allD.map((e) => {
           return {
             type: "bar",
-            ...e
-          }
-        })
+            ...e,
+          };
+        }),
       };
       if (units && units[0]) {
         for (let key in showLb) {
-          option.xAxis[0].axisLabel[key] = showLb[key]
+          // option.xAxis[0].axisLabel[key] = showLb[key];
         }
       }
       this.$redomEchart(this.$refs["singleBarChartEchart_" + this.ids], option);

@@ -213,7 +213,7 @@ export default {
         xAxis: {
           type: "category",
           name: "{a|" + unit[0] + "}",
-          nameGap: 20,
+          // nameGap: 20,
           nameTextStyle: {
             rich: {
               a: {
@@ -222,7 +222,7 @@ export default {
               },
             },
           },
-          boundaryGap: true,
+          // boundaryGap: true,
           data: xData,
           axisTick: {
             show: false,
@@ -233,14 +233,14 @@ export default {
             },
           },
           axisLabel: {
-            width: "50",
             fontSize: 12,
-            padding: [15, 0, 0, unit[0] ? -30 : leftTip ? -10 : 0],
-            rotate: -35,
+            // padding: [15, 0, 0, unit[0] ? -30 : leftTip ? -10 : 0],
+            rotate: -30,
             interval: 0,
-            margin: xData[0].length <= 3 ? 10 : 20,
+            margin: xData[0].length <= 3 ? 10 : 30,
             textStyle: {
               color: "#fff",
+              align: "center",
             },
           },
         },

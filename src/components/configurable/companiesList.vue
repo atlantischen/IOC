@@ -29,7 +29,6 @@
       </div>
       <ul
         class="companiesImgsList"
-        @mouseleave="leaveItemFun()"
         :class="[
           datas.buldingList ? '' : 'companiesImgsList' + datas.listCols,
           datas.buldingList ? 'mniBar' : 'companiesImgsList_over',
@@ -41,6 +40,7 @@
               :src="t.src"
               :alt="t.name"
               @mouseenter="hoverItemFun($event, i)"
+              @mouseleave="leaveItemFun()"
             />
             <div class="litInfo" :style="returnStyle" v-if="showItem == i">
               <div class="litInfo_title x_c">
