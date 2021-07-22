@@ -12,9 +12,9 @@
           <span><i class="iconfont icon-shuju"></i> 数据模式</span>
         </template>
       </el-tab-pane>
-      <el-tab-pane label="配置管理" name="second">
+      <el-tab-pane label="视频模式" name="second">
         <template #label>
-          <span><i class="iconfont icon-shipin-tianchong"></i> 配置管理</span>
+          <span><i class="iconfont icon-shipin-tianchong"></i> 视频模式</span>
         </template></el-tab-pane
       >
     </el-tabs>

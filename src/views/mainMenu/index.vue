@@ -24,7 +24,7 @@ export default {
   components: { AlarmAck },
   data() {
     return {
-      isShow: true,
+      isShow: false,
       url: "",
       warnTimer: null,
       tipList: null,
