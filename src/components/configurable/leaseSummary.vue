@@ -31,7 +31,7 @@ export default {
       var dom = this.$refs["leaseSummaryEchart_" + this.ids]
       var myChart = echarts.init(dom)
       var optionName = ["空置产业空间", "已租产业空间"],
-        xAxiasD = [9.935, 89.565],
+        xAxiasD = [12.935, 89.565],
         datas = {
           name: '园区总面积',
           value: 99.55

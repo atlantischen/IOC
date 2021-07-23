@@ -148,6 +148,7 @@ export default {
                 },
                 b: {
                   color: "#fff",
+                  padding: [0, 0, 8, 3],
                   fontSize: 12,
                 },
               },

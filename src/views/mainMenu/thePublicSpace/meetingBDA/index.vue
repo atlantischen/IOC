@@ -33,7 +33,7 @@ export default {
                 "VIP会议室",
                 "豪华会议室",
               ],
-              datas: [35, 15, 15, 13, 8, 2],
+              datas: [38, 18, 18, 16, 10],
             },
             cd: {
               name: "场地占比",
@@ -46,7 +46,7 @@ export default {
                 "展馆",
                 "礼堂",
               ],
-              datas: [35, 15, 15, 13, 8, 2, 3],
+              datas: [36, 17, 16, 15, 9, 3, 4],
             },
           },
         },
@@ -54,7 +54,7 @@ export default {
           title: "今日会议时段",
           type: "SingleBarChart",
           datas: {
-            eHeight: 220,
+            eHeight: 200,
             xAxisD: [
               "08:00",
               "09:00",

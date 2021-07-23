@@ -17,7 +17,7 @@
 <script>
 export default {
   name: "enterpriseBDA",
-  data() {
+  data () {
     return {
       leftInfo: [
         {
@@ -36,7 +36,7 @@ export default {
               "新材料",
               "其他",
             ],
-            datas: [21, 19, 18, 16, 15, 14, 12, 10],
+            datas: [18, 15, 14, 13, 12, 11, 10, 7],
           },
         },
         {
@@ -81,7 +81,7 @@ export default {
               "2期B座",
               "1期C座",
             ],
-            datas: [23, 21, 19, 18, 16, 15, 13, 11],
+            datas: [18, 17, 15, 14, 11, 10, 8, 7],
           },
         },
         {

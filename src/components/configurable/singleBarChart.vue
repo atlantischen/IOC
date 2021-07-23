@@ -138,6 +138,7 @@ export default {
               },
               b: {
                 color: "#fff",
+                padding: [0, 0, 8, 3],
                 fontSize: 12,
               },
             },
@@ -183,7 +184,7 @@ export default {
         grid: {
           x: 10,
           y: leftTip ? 60 : 40,
-          x2: 30,
+          x2: 20,
           y2: -10,
           containLabel: true,
         },
@@ -302,7 +303,7 @@ export default {
   .singleBar_time {
     display: flex;
     justify-content: flex-end;
-    padding-right: 0.1rem /* 8/80 */;
+    padding-right: 0.225rem /* 18/80 */;
     .dropDown {
       margin-left: 0.375rem /* 30/80 */;
     }

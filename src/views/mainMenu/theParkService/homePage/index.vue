@@ -170,6 +170,8 @@ export default {
           datas: {
             eHeight: null,
             padding: null,
+            optionName: ["个人服务", "基础服务", "企业服务", "新材料"],
+            datas: [26.79, 47.35, 20.45, 5.41]
           }
         }
       ],

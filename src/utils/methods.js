@@ -219,6 +219,15 @@ var ScrolLeftARight = function ScrolLeftARight(dom, time) {
 var randomNumer = function randomNumer(minNum, maxNum) {
   return parseInt(Math.random() * (maxNum - minNum + 1) + minNum)
 }
+/**
+ * @author
+ * @description 数据格式(,)
+ * @param number
+ * @returns {num}
+ */
+var filterNum = function filterNum(val) {
+  return Number(val).toLocaleString()
+}
 
 const fun = {
   currentDate,
@@ -229,6 +238,7 @@ const fun = {
   Fullscreen,
   ScrolAnimationTop,
   ScrolLeftARight,
-  randomNumer
+  randomNumer,
+  filterNum
 }
 export default fun

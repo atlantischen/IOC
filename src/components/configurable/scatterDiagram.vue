@@ -4,7 +4,7 @@
     <ul class="sd_top">
       <li class="y_c" v-for="(item, i) in datas.datas" :key="i">
         <span
-          >{{ item.value }} <i>{{ item.unit }}</i>
+          >{{ filterNumFun(item.value) }}<i>{{ item.unit }}</i>
         </span>
         <span>{{ item.name }}</span>
       </li>
@@ -36,6 +36,9 @@ export default {
     this.scatterDiagramFun(this.datas);
   },
   methods: {
+    filterNumFun(val) {
+      return this.$filterNum(val);
+    },
     scatterDiagramFun(val) {
       let { xAxisD, names, title, units, datas } = val;
       var data = [
@@ -260,7 +263,11 @@ export default {
     padding: 0.125rem /* 10/80 */ 0.3125rem /* 25/80 */ 0.375rem /* 30/80 */;
     li {
       flex: 1;
+      span {
+        white-space: nowrap;
+      }
       span:nth-child(1) {
+        // letter-spacing: .025rem /* 2/80 */;
         .datas_s();
         i {
           .text_s();

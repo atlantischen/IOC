@@ -56,7 +56,7 @@ export default {
               },
               {
                 name: "待入驻",
-                value: "16%",
+                value: "13%",
               },
               {
                 name: "装修中",
