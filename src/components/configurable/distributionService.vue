@@ -30,9 +30,10 @@ export default {
     this.distributionServicesFun(this.datas)
   },
   methods: {
-    distributionServicesFun () {
+    distributionServicesFun (val) {
       var dom = this.$refs["distributionServicesEchart_" + this.ids]
       var myChart = echarts.init(dom)
+      const { optionName, datas} = val
       var j = 0, colors = [
         "#00ffff",
         "#cd9a57",
@@ -44,8 +45,6 @@ export default {
         "#c9a555",
         "#fff",
       ]
-      var optionName = ["个人服务", "基础服务", "企业服务", "新材料"],
-        datas = [26.86, 47.55, 21.45, 5.41];
       var option = {
         grid: {
           containLabel: true,

@@ -153,7 +153,6 @@ export default {
 
 <style lang="less" scoped>
 @import "~@/style/gl.less";
-// 聚焦产业
 #pieChart3Echart_,
 [id^="pieChart3Echart_"] {
   width: 100%;

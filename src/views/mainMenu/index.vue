@@ -69,7 +69,7 @@ export default {
             },
           ];
           this.$store.dispatch("SET_SHOWWARNTIP", true);
-        }, this.$randomNumer(1000, 50000));
+        }, this.$randomNumer(5000, 300000));
       }
     },
   },

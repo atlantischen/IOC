@@ -13,22 +13,22 @@ export default {
   name: "theParkOutputValAll",
   props: {
     _data: {
-      type: Object
-    }
+      type: Object,
+    },
   },
-  data () {
+  data() {
     return {
       ...this._data,
-      ids: this.$uuid()
-    }
+      ids: this.$uuid(),
+    };
   },
-  mounted () {
-    this.outputValueFun(this.datas)
+  mounted() {
+    this.outputValueFun(this.datas);
   },
   methods: {
     // 园区产值
-    outputValueFun (val) {
-      const { optionName, datas } = val
+    outputValueFun(val) {
+      const { optionName, datas } = val;
       var option = {
         tooltip: {
           trigger: "item",
@@ -36,10 +36,13 @@ export default {
           borderWidth: 1,
           borderColor: "#4396f3",
           padding: [5, 10],
-          extraCssText: 'box-shadow:inset 0 0 8px rgba(67, 149, 243, 0.6);',
+          extraCssText: "box-shadow:inset 0 0 8px rgba(67, 149, 243, 0.6);",
           textStyle: {
             color: "#fff",
-          }
+          },
+          // formatter: v => {
+          //   return {v.name} +':'+ v.value + '%'
+          // }
         },
         title: {
           show: true,
@@ -75,7 +78,7 @@ export default {
           right: 8,
           y: "center",
           data: optionName,
-          formatter: function (name) {
+          formatter: function(name) {
             return "{a|" + name + "}";
           },
           textStyle: {
@@ -127,7 +130,7 @@ export default {
       }
       this.$redomEchart(this.$refs["outputValueEchart_" + this.ids], option);
     },
-  }
+  },
 };
 </script>
 

@@ -16,29 +16,29 @@ export default {
   name: "theParkIsAll",
   props: {
     _data: {
-      type: Object
-    }
+      type: Object,
+    },
   },
-  data () {
+  data() {
     return {
       ...this._data,
-      ids: this.$uuid()
-    }
+      ids: this.$uuid(),
+    };
   },
-  mounted () {
-    this.FocusIndustryFun(this.datas)
+  mounted() {
+    this.FocusIndustryFun(this.datas);
   },
   methods: {
-    FocusIndustryFun (val) {
+    FocusIndustryFun(val) {
       var j = 0;
-      const { optionName, datas, keyD } = val
+      const { optionName, datas, keyD } = val;
       var option = {
         title: {
           show: keyD,
-          text: keyD ? keyD.value : '',
+          text: keyD ? keyD.value : "",
           link: "",
           target: null,
-          subtext: keyD ? keyD.name : '',
+          subtext: keyD ? keyD.name : "",
           sublink: "",
           subtarget: null,
           left: "48%",
@@ -67,7 +67,7 @@ export default {
           left: "50%",
           y: "center",
           data: optionName,
-          formatter: function (name) {
+          formatter: function(name) {
             return "{a|" + name + "}" + datas[j++] + "%";
           },
           textStyle: {
@@ -103,28 +103,76 @@ export default {
             type: "pie",
             radius: ["50%", "65%"],
             center: ["50%", "50%"],
-            avoidLabelOverlap: true,
+            avoidLabelOverlap: false,
             maxAngle: 145,
             alignTo: "edge",
+            data: [],
+          },
+          {
+            name: "",
+            type: "pie",
+            radius: ["50%", "65%"],
+            center: ["50%", "50%"],
+            avoidLabelOverlap: false,
+            hoverAnimation: false,
+            maxAngle: 145,
+            alignTo: "edge",
+            data: [],
+          },
+        ],
+      };
+      for (var i = 0; i < optionName.length; i++) {
+        if (this._data.title == "聚焦产业") {
+          option.series[0].data[i] = {
+            value: optionName.length / 100,
+            name: optionName[i],
+            label: {
+              formatter: `{a|${datas[i]}%}\n{b|{b}}`,
+              padding: [0, -45, 0, -45],
+              minMargin: 5,
+              lineHeight: 15,
+              rich: {
+                a: {
+                  width: 100,
+                  fontSize: 12,
+                  padding: [3, 0, 0, 0],
+                  color: "rgb(255,255,255,.7)",
+                },
+                b: {
+                  width: 100,
+                  fontSize: 12,
+                  padding: [0, 0, 6, 0],
+                  color: "rgb(255,255,255,.7)",
+                },
+              },
+            },
+            labelLine: {
+              length: 20,
+              length2: 50,
+              // maxSurfaceAngle: 80
+            },
+          };
+        } else {
+          option.series[1].data[i] = {
+            value: datas[i],
+            name: optionName[i],
             label: {
               // minMargin: 10,
-              // alignTo: 'edge',
+              // alignTo: "edge",
               // edgeDistance: 10,
-              // lineHeight: 10,
+              lineHeight: 18,
               formatter: "{a|{c}%}\n{b|{b}}",
               padding: [0, -45, 0, -45],
               rich: {
                 a: {
                   width: 100,
                   fontSize: 12,
-                  padding: [2, 0],
+                  padding: [0, 0, 3, 0],
                   color: "rgb(255,255,255,.7)",
                 },
                 b: {
                   width: 100,
                   fontSize: 12,
-                  lineHeight: 14,
-                  // padding: [1, 0],
                   color: "rgb(255,255,255,.7)",
                 },
               },
@@ -132,21 +180,14 @@ export default {
             labelLine: {
               length: 20,
               length2: 45,
-              // maxSurfaceAngle: 80
+              maxSurfaceAngle: 80,
             },
-            data: [],
-          },
-        ],
-      };
-      for (var i = 0; i < optionName.length; i++) {
-        option.series[0].data[i] = {
-          value: datas[i],
-          name: optionName[i],
-        };
+          };
+        }
       }
       this.$redomEchart(this.$refs["focusIndustryEchart_" + this.ids], option);
-    }
-  }
+    },
+  },
 };
 </script>
 

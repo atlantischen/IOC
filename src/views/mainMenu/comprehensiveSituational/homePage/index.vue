@@ -66,7 +66,7 @@ export default {
               ],
             ],
             datas2: {
-              datas: [23, 34, 45],
+              datas: [2.57, 25, 78.3],
               names: ["占地面积", "绿化率", "入驻率"],
             },
           },
@@ -110,7 +110,7 @@ export default {
               "节能环保",
               "商家",
             ],
-            datas: [43, 34, 32, 34, 35, 32, 20, 20, 8],
+            datas: [24, 16, 13, 15, 15, 12, 2, 2, 1],
             datas2: [
               {
                 name: "今日总人流量",
@@ -217,7 +217,7 @@ export default {
       centerDatasList: [
         {
           name: "园区总人数",
-          val: 5880,
+          val: 32856,
         },
         {
           name: "剩余车位数",
@@ -225,11 +225,11 @@ export default {
         },
         {
           name: "未处理告警数",
-          val: 4639,
+          val: 39,
         },
         {
           name: "设备异常数",
-          val: 3350,
+          val: 16,
         },
       ],
       tipList: [

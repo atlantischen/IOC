@@ -4,7 +4,7 @@
     <ul class="sd_top">
       <li class="y_c" v-for="(item, i) in datas.datas" :key="i">
         <span
-          >{{ item.value }} <i>{{ item.unit }}</i>
+          >{{ filterNumFun(item.value) }}<i>{{ item.unit }}</i>
         </span>
         <span>{{ item.name }}</span>
       </li>
@@ -25,40 +25,44 @@ export default {
       type: Object,
     },
   },
-  data () {
+  data() {
     return {
       ...this._data,
       ids: this.$uuid(),
     };
   },
-  created () { },
-  mounted () {
+  created() {},
+  mounted() {
     this.scatterDiagramFun(this.datas);
   },
   methods: {
-    scatterDiagramFun (val) {
-      let { xAxisD, names, title, units } = val;
+    filterNumFun(val) {
+      return this.$filterNum(val);
+    },
+    scatterDiagramFun(val) {
+      let { xAxisD, names, title, units, datas } = val;
       var data = [
         [
-          [120, 1200, 123, "新能源", "2021"],
-          [150, 2500, 354, "Canada", "2021"],
-          [250, 4200, 23, "China", "2021"],
-          [350, 3200, 423, "Cuba", "2021"],
-          [350, 4100, 234, "Finland", "2021"],
-          [550, 4900, 234, "France", "2021"],
-          [650, 6500, 754, "Germany", "2021"],
-          [680, 78.1, 32, "Iceland", "2021"],
+          [120, 1200, 123, 2, "零售商家", "2021"],
+          [150, 1800, 32, 4, "信息技术", "2021"],
+          [250, 2560, 23, 7, "新能源", "2021"],
+          [350, 2803, 32, 13, "新材料", "2021"],
+          [350, 3452, 234, 25, "生物医药", "2021"],
+          [550, 3920, 234, 32, "智能制造", "2021"],
+          [650, 4237, 532, 46, "文化创意", "2021"],
+          [670, 5326, 23, 54, "现代服务", "2021"],
+          [680, 6520, 342, 61, "节能环保", "2021"],
         ],
         [
-          [150, 1500, 213, "新能源", "2020"],
-          [220, 2000, 234, "Canada", "2020"],
-          [230, 4800, 652, "China", "2020"],
-          [400, 3000, 23, "Cuba", "2020"],
-          [400, 4500, 324, "Finland", "2020"],
-          [450, 4200, 23, "France", "2020"],
-          [490, 5000, 23, "Germany", "2020"],
-          [550, 6800, 345, "Iceland", "2020"],
-          [680, 6000, 345, "Iceland", "2020"],
+          [150, 1500, 213, 3, "零售商家", "2020"],
+          [220, 2000, 256, 6, "信息技术", "2020"],
+          [230, 4800, 432, 10, "新能源", "2020"],
+          [400, 3000, 23, 23, "新材料", "2020"],
+          [400, 4500, 324, 29, "生物医药", "2020"],
+          [450, 4200, 23, 35, "智能制造", "2020"],
+          [490, 5000, 23, 48, "文化创意", "2020"],
+          [520, 5500, 34, 58, "现代服务", "2020"],
+          [550, 6000, 345, 69, "节能环保", "2020"],
         ],
       ];
       var option = {
@@ -73,24 +77,24 @@ export default {
           },
         },
         tooltip: {
-          trigger: 'item',
+          trigger: "item",
           backgroundColor: "rgba(0,0,0,0.8)",
           borderWidth: 1,
           borderColor: "#4396f3",
           padding: [10, 15],
-          extraCssText: 'box-shadow:inset 0 0 8px rgba(67, 149, 243, 0.6);',
+          extraCssText: "box-shadow:inset 0 0 8px rgba(67, 149, 243, 0.6);",
           textStyle: {
             color: "#fff",
           },
-          formatter: params => {
-            console.log(params)
-            let dataStr = `<p style="font-weight:bold;font-size:.2rem;text-align:center;padding-bottom:.0625rem;">${params.data[3]}</p>`
+          formatter: (params) => {
+            console.log(params);
+            let dataStr = `<p style="font-weight:bold;font-size:.2rem;text-align:center;padding-bottom:.0625rem;">${params.data[4]}</p>`;
             dataStr += `<div>
                   <span>企业数量：${params.data[2]}</span><br>
-                  <span>产业占比：${params.data[2]}</span>
-                </div>`
-            return dataStr
-          }
+                  <span>产业占比：${params.data[3]}%</span>
+                </div>`;
+            return dataStr;
+          },
         },
         legend: {
           left: "10%",
@@ -178,14 +182,14 @@ export default {
             name: names[0],
             data: data[0],
             type: "scatter",
-            symbolSize: function (data) {
+            symbolSize: function(data) {
               return Math.sqrt(data[2]);
             },
             emphasis: {
               focus: "series",
               label: {
                 show: false,
-              }
+              },
             },
             itemStyle: {
               // shadowBlur: 10,
@@ -211,14 +215,14 @@ export default {
             name: names[1],
             data: data[1],
             type: "scatter",
-            symbolSize: function (data) {
+            symbolSize: function(data) {
               // return Math.sqrt(data[2]) / 5e2;
               return Math.sqrt(data[2]);
             },
             emphasis: {
               focus: "series",
               label: {
-                show: false
+                show: false,
               },
             },
             itemStyle: {
@@ -259,7 +263,11 @@ export default {
     padding: 0.125rem /* 10/80 */ 0.3125rem /* 25/80 */ 0.375rem /* 30/80 */;
     li {
       flex: 1;
+      span {
+        white-space: nowrap;
+      }
       span:nth-child(1) {
+        // letter-spacing: .025rem /* 2/80 */;
         .datas_s();
         i {
           .text_s();

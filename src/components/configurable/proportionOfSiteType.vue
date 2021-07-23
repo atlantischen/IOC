@@ -26,22 +26,22 @@ export default {
       type: Object,
     },
   },
-  data () {
+  data() {
     return {
       ...this._data,
       ids: this.$uuid(),
     };
   },
-  created () { },
-  mounted () {
+  created() {},
+  mounted() {
     this.proportionOfSiteTypeFun(this.datas);
     this.proportionOfSiteType2Fun(this.datas);
   },
   methods: {
     // 会议室占比
-    proportionOfSiteTypeFun (val) {
-      var dom = this.$refs["proportionOfSiteTypeEchart_" + this.ids]
-      var myChart = echarts.init(dom)
+    proportionOfSiteTypeFun(val) {
+      var dom = this.$refs["proportionOfSiteTypeEchart_" + this.ids];
+      var myChart = echarts.init(dom);
       let { optionName, datas, name } = val.hys;
       var j = 0,
         colors = [
@@ -59,23 +59,23 @@ export default {
       var option = {
         tooltip: {
           show: true,
-          trigger: 'item',
+          trigger: "item",
           axisPointer: {
-            type: 'line',
+            type: "line",
             lineStyle: {
-              type: 'dashed',
+              type: "dashed",
               width: 0.5,
-              color: 'rgba(255,255,255,0.8)'
-            }
+              color: "rgba(255,255,255,0.8)",
+            },
           },
           backgroundColor: "rgba(0,0,0,0.8)",
           borderWidth: 1,
           borderColor: "#4396f3",
           padding: [10, 15],
-          extraCssText: 'box-shadow:inset 0 0 8px rgba(67, 149, 243, 0.6);',
+          extraCssText: "box-shadow:inset 0 0 8px rgba(67, 149, 243, 0.6);",
           textStyle: {
             color: "#fff",
-          }
+          },
         },
         title: [
           {
@@ -108,7 +108,7 @@ export default {
           left: "65%",
           y: "center",
           data: optionName,
-          formatter: function (name) {
+          formatter: function(name) {
             // return "{a|" + name + "}" + datas[j++] + "%";
             return "{a|" + name + "}";
           },
@@ -150,7 +150,7 @@ export default {
           },
           {
             tooltip: {
-              show: false
+              show: false,
             },
             type: "pie",
             animation: false,
@@ -184,45 +184,42 @@ export default {
               color: "#ffffff00",
             },
             tooltip: {
-              show: false
+              show: false,
             },
             label: { show: false },
           }
         );
       }
-      this.$redomEchart(
-        dom,
-        option
-      );
+      this.$redomEchart(dom, option);
       myChart.dispatchAction({
-        type: 'highlight',
+        type: "highlight",
         seriesIndex: 0,
-        dataIndex: 7
+        dataIndex: 7,
       });
     },
     // 场地占比
-    proportionOfSiteType2Fun (val) {
+    proportionOfSiteType2Fun(val) {
       let { optionName, datas, name } = val.cd;
       var option = {
         tooltip: {
           show: true,
-          trigger: 'item',
+          trigger: "item",
           axisPointer: {
-            type: 'line',
+            type: "line",
             lineStyle: {
-              type: 'dashed',
+              type: "dashed",
               width: 0.5,
-              color: 'rgba(255,255,255,0.8)'
-            }
+              color: "rgba(255,255,255,0.8)",
+            },
           },
           backgroundColor: "rgba(0,0,0,0.8)",
           borderWidth: 1,
           borderColor: "#4396f3",
           padding: [10, 15],
-          extraCssText: 'box-shadow:inset 0 0 8px rgba(67, 149, 243, 0.6);',
+          extraCssText: "box-shadow:inset 0 0 8px rgba(67, 149, 243, 0.6);",
           textStyle: {
             color: "#fff",
-          }
+          },
         },
         title: [
           {
@@ -255,7 +252,7 @@ export default {
           left: "65%",
           y: "center",
           data: optionName,
-          formatter: function (name) {
+          formatter: function(name) {
             // return "{a|" + name + "}" + datas[j++] + "%";
             return "{a|" + name + "}";
           },
@@ -308,7 +305,7 @@ export default {
           {
             type: "pie",
             tooltip: {
-              show: false
+              show: false,
             },
             animation: false,
             radius: ["0", "55%"],
@@ -352,7 +349,7 @@ export default {
   #proportionOfSiteType2Echart_,
   [id^="proportionOfSiteType2Echart_"] {
     width: 100%;
-    height: 2.5rem /* 200/80 */;
+    height: 2.3125rem /* 185/80 */;
   }
 }
 </style>

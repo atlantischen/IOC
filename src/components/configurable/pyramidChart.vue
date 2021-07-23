@@ -225,7 +225,6 @@ export default {
 
 <style lang="less" scoped>
 @import "~@/style/gl.less";
-// 聚焦产业
 #pyramidChartEchart_,
 [id^="pyramidChartEchart_"] {
   width: 100%;
