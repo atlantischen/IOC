@@ -58,13 +58,15 @@
     <div class="new_air">
       <div class="tittle">新风控制</div>
       <ul class="scroll">
-        <li v-for="item in 12" :key="item">
+        <li v-for="item in 12" :key="item" @click="lookVideo('B1-水房1#')">
           <span>2020-12-31 14:04</span>
           <span>B1-水房1#</span>
         </li>
       </ul>
     </div>
   </IOCRight>
+  <LookVideo :Visible="Visible" :title="dialogTitle" @off="openCloseDialog" />
+
 </template>
 
 <script>
@@ -73,6 +75,8 @@ import * as echarts from "echarts";
 export default {
   data () {
     return {
+      Visible: false,
+      dialogTitle:'',
       activeIndex: 1,
       percentageList:[
         {
@@ -238,14 +242,13 @@ export default {
             show: false,
           },
 
-          splitLine: {
-            show: true,
-            lineStyle: {
-              width: 1,
-              type: "dashed",
-              color: "rgb(255,255,255,0.5)",
+           splitLine: {
+              lineStyle: {
+                width: 0.5,
+                type: "dashed",
+                color: "rgb(255,255,255,1)",
+              },
             },
-          },
 
           axisLabel: {
             interval: (index, value) => {
@@ -455,9 +458,9 @@ export default {
             },
             splitLine: {
               lineStyle: {
-                width: 1,
+                width: 0.5,
                 type: "dashed",
-                color: "rgb(255,255,255,0.5)",
+                color: "rgb(255,255,255,1)",
               },
             },
             axisLine: {
@@ -539,6 +542,14 @@ export default {
         ],
       };
       this.$redomEchart(dom, option);
+    },
+    lookVideo (val) {
+      this.dialogTitle = val
+      this.openCloseDialog(true)
+
+    },
+    openCloseDialog (val) {
+      this.Visible = val
     },
   },
   mounted () {

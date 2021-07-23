@@ -10,7 +10,7 @@
       >
         <div class="videoBox" ref="videoBoxRef">
           <video controls>
-            <source src="~@/assets/video/vvv.mp4" type="video/mp4" />
+            <source  src="~@/assets/video/vvv.mp4" type="video/mp4" />
             <source src="~@/assets/video/vvv.jpg" type="video/ogg" />
             您的浏览器不支持Video标签。
           </video>
@@ -19,7 +19,7 @@
             <i class="currentTime" id="currentTimeRef" ref="currentTimeRef"
               >{{ $currentDate() }}
             </i>
-            <i class="videoLocal">16楼333333</i>
+            <!-- <i class="videoLocal">16楼</i> -->
             <i
               class="iconfont x_c vs_bg vs_full"
               :class="isFullscreen ? 'icon-suoxiao actived' : 'icon-fullScreen'"

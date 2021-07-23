@@ -362,11 +362,11 @@ export default {
              axisTick: {
             show: false,
           },
-            splitLine: {
+          splitLine: {
               lineStyle: {
-                width: 1,
+                width: 0.5,
                 type: "dashed",
-                color: "rgb(255,255,255,.5)",
+                color: "rgb(255,255,255,1)",
               },
             },
           },

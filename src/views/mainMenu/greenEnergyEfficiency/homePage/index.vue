@@ -92,7 +92,7 @@
               <div class="use">
                 <i :style="'width:' + i.percentage + '%'"></i>
                 <div>
-                  <span>今日用电量：</span>
+                  <span>{{i.desc}}用电量：</span>
                   <span class="font_text">
                     <NumCounter :value="i.kwh"></NumCounter
                   ></span>
@@ -148,7 +148,7 @@
             <div class="middle">
               <i :style="'width:80%'"></i>
               <div>
-                <span>本月电能耗：</span>
+                <span>本月水能耗：</span>
                 <span class="font_text">
                   <NumCounter :value="48.52"></NumCounter>
                 </span>
@@ -162,7 +162,7 @@
             <div class="middle">
               <i :style="'width:70%'"></i>
               <div>
-                <span>本月电能耗：</span>
+                <span>本月气能耗：</span>
                 <span class="font_text">
                   <NumCounter :value="63.28"></NumCounter
                 ></span>
@@ -174,6 +174,8 @@
         </ul>
       </div>
     </IOCRight>
+  <LookVideo :Visible="Visible" :title="dialogTitle" @off="openCloseDialog" />
+
   </div>
 </template>
 
@@ -183,8 +185,11 @@ export default {
   name: "homePage",
   data () {
     return {
+      Visible: false,
+      dialogTitle:'',
       dateList: [
         {
+          desc:'今日',
           dateType: "日",
           kwh: 447.31,
           percentage: 40,
@@ -193,6 +198,7 @@ export default {
 
         },
         {
+          desc:'本周',
           dateType: "周",
           kwh: 5152.11,
           percentage: 50,
@@ -201,6 +207,7 @@ export default {
 
         },
         {
+          desc:'本月',
           dateType: "月",
           kwh: 25101.91,
           percentage: 60,
@@ -209,6 +216,8 @@ export default {
 
         },
         {
+          desc:'本年',
+
           dateType: "年",
           kwh: 729187.01,
           percentage: 70,
@@ -223,17 +232,24 @@ export default {
     };
   },
   methods: {
+    lookVideo (val) {
+      this.dialogTitle = val
+      this.openCloseDialog(true)
 
+    },
+    openCloseDialog (val) {
+      this.Visible = val
+    },
     trendInit () {
       var dom = this.$refs["today_energy"];
       var option = {
-        grid: {
-          top: "60",
-          left: "30",
-          right: "0",
-          bottom: "30",
-          containLabel: true,
-        },
+        // grid: {
+        //   top: "60",
+        //   left: "30",
+        //   right: "20",
+        //   bottom: "30",
+        //   containLabel: true,
+        // },
           tooltip: {
           // show: false,
           // trigger: 'item',  
@@ -246,7 +262,7 @@ export default {
         
         },
         legend: {
-          right: 0,
+          right: 20,
           top: 10,
           data: ["电能源", "水能源"],
           itemWidth: 10, // 图例的宽度
@@ -263,7 +279,7 @@ export default {
         grid: {
           top: "70",
           left: "0",
-          x2: 0,
+          x2: 20,
           y2: 20,
           containLabel: true,
         },
@@ -331,10 +347,11 @@ export default {
                 color: "#fff",
               },
             },
-            splitLine: {
+              splitLine: {
               lineStyle: {
-                width: 1,
+                width: 0.5,
                 type: "dashed",
+                color: "rgb(255,255,255,1)",
               },
             },
             axisTick: {
@@ -361,10 +378,11 @@ export default {
                 color: "#fff",
               },
             },
-            splitLine: {
+             splitLine: {
               lineStyle: {
-                width: 1,
+                width: 0.5,
                 type: "dashed",
+                color: "rgb(255,255,255,1)",
               },
             },
             axisTick: {
@@ -483,6 +501,7 @@ export default {
       var option = {
         tooltip: {
           trigger: "item",
+          show:false
         },
         series: [
           {
@@ -726,7 +745,7 @@ export default {
           display: flex;
           align-items: center;
           justify-content: space-around;
-          margin-bottom: 0.125rem /* 10/80 */;
+          margin-bottom: .25rem /* 20/80 *//* 10/80 */;
           .date {
             width: 0.35rem /* 28/80 */;
             height: 0.35rem;
@@ -758,7 +777,7 @@ export default {
                 // display: block;
                 font-size: 0.175rem /* 14/80 */;
                 opacity: 0.7;
-                margin-bottom: 0.1875rem /* 15/80 */;
+                // margin-bottom: 0.1875rem /* 15/80 */;
               }
               & > span:nth-child(2) {
                 font-size: 0.25rem /* 20/80 */;
@@ -812,7 +831,6 @@ export default {
         display: block;
         font-size: 0.175rem /* 14/80 */;
         opacity: 0.7;
-        margin-bottom: 0.1875rem /* 15/80 */;
       }
       & > span:nth-child(2) {
         font-size: 0.25rem /* 20/80 */;
@@ -825,8 +843,7 @@ export default {
       & > li {
         display: flex;
         width: 100%;
-        margin-bottom: 0.125rem;
-        margin-top: 0.25rem /* 20/80 */;
+        margin: 0.125rem 0;
         img {
           width: 0.5rem /* 40/80 */;
           height: 0.5rem /* 40/80 */;

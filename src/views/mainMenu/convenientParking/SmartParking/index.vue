@@ -7,7 +7,7 @@
     ></LicensePlateSearch>
     <div class="search_box">
       <ul class="scroll">
-        <li v-for="(item, index) in carListRes" :key="index">
+        <li v-for="(item, index) in carListRes" :key="index" @click="confirmClick(index)">
           <div>
             <img :src="item.url" alt="" />
           </div>
@@ -354,9 +354,11 @@ export default {
     handleClick(val) {
       this.fade = val;
     },
-   
+    confirmClick(i){
+      const id= this.carListRes[i].id
+      this.$SendMessageToUnity("QueryCarExitRoute", {"index":id});
+    },
     handleSizeChange(val) {
-
     },
     handleCurrentChange(val) {
       this.currentPage = val;
@@ -395,7 +397,7 @@ export default {
                 return item
               }
            })
-           console.log('44446666');
+           console.log(this.carListRes[0].id);
             this.$SendMessageToUnity("QueryCarExitRoute", {"index":this.carListRes[0].id});
  
 

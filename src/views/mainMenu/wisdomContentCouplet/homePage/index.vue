@@ -39,6 +39,7 @@
         <div id="equipment_warning" ref="equipment_warning"></div>
       </div>
     </IOCRight>
+    <!-- <Rtps></Rtps> -->
   </div>
 </template>
 
@@ -80,7 +81,31 @@ export default {
           value: 2019,
         },
       ],
-      momthsList: [
+     momthsList: [
+        {
+          label: "12月",
+          value: 12,
+        },
+        {
+          label: "11月",
+          value: 11,
+        },
+        {
+          label: "10月",
+          value: 10,
+        },
+        {
+          label: "9月",
+          value: 9,
+        },
+        {
+          label: "8月",
+          value: 8,
+        },
+        {
+          label: "7月",
+          value: 7,
+        },
         {
           label: "6月",
           value: 6,
@@ -193,11 +218,11 @@ export default {
             axisTick: {
               show: false,
             },
-            splitLine: {
+              splitLine: {
               lineStyle: {
-                width: 1,
+                width: 0.5,
                 type: "dashed",
-                color: "rgb(255,255,255,.5)",
+                color: "rgb(255,255,255,1)",
               },
             },
           },
@@ -403,9 +428,9 @@ export default {
             },
             splitLine: {
               lineStyle: {
-                width: 1,
+                width: 0.5,
                 type: "dashed",
-                color: "rgb(255,255,255,.5)",
+                color: "rgb(255,255,255,1)",
               },
             },
           },

@@ -9,7 +9,7 @@
         <div class="tittle">热门商家TOP5</div>
         <div class="select">
           <DropDown :list="yearsList" name="label" @_cg="changePSYears" />
-          <DropDown :list="momthsList" name="label" @_cg="changePSMonths" />
+          <DropDown  style="margin-right:30px" :list="momthsList" name="label" @_cg="changePSMonths" />
         </div>
         <div id="store_top" ref="store_top"></div>
       </div>
@@ -188,6 +188,30 @@ export default {
       ],
       momthsList: [
         {
+          label: "12月",
+          value: 12,
+        },
+        {
+          label: "11月",
+          value: 11,
+        },
+        {
+          label: "10月",
+          value: 10,
+        },
+        {
+          label: "9月",
+          value: 9,
+        },
+        {
+          label: "8月",
+          value: 8,
+        },
+        {
+          label: "7月",
+          value: 7,
+        },
+        {
           label: "6月",
           value: 6,
         },
@@ -252,6 +276,7 @@ export default {
       var option = {
         tooltip: {
           trigger: "item",
+          show:false
         },
         labelLine: {
           show: false,
@@ -393,9 +418,9 @@ export default {
             },
             splitLine: {
               lineStyle: {
-                width: 1,
+                width: 0.5,
                 type: "dashed",
-                color: "rgb(255,255,255,.5)",
+                color: "rgb(255,255,255,1)",
               },
             },
           },
@@ -459,14 +484,12 @@ export default {
   /* position: absolute; */
   .store_type {
     width: 100%;
-    height: 1.575rem /* 126/80 */ /* 180/80 */;
     #store {
       width: 100%;
       height: 1.575rem /* 126/80 */ /* 180/80 */;
     }
   }
   .store_top {
-    margin: 30px 0 0 0;
     #store_top {
       width: 100%;
       height: 2.5rem /* 200/80 */;
@@ -571,6 +594,8 @@ export default {
     }
   }
   .store_img {
+    margin-top: .3125rem /* 25/80 *//* 29/80 */;
+
     ul {
       height: 4.15rem /* 332/80 */;
       width: 3.875rem /* 310/80 */ /* 330/80 */;
@@ -593,9 +618,7 @@ export default {
     }
   }
   .store_wait {
-    height: 2.5rem /* 200/80 */;
-    .swiper {
-      // height: 2.5rem /* 200/80 */;
+    .swiper { 
       /deep/.el-carousel__container {
         height: 1.65rem /* 132/80 */ !important;
       }

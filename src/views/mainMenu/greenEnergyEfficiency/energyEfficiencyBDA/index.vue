@@ -45,7 +45,7 @@
     </IOCLeft>
     <IOCRight>
       <div class="energy">
-        <div class="tittle">今日分项用电分析</div>
+        <div class="tittle">能耗指标</div>
         <div class="outer">
           <div id="energy" ref="energy"></div>
           <div class="desc">
@@ -58,7 +58,7 @@
         </div>
          <div class="month_use_w">
           <div class="tittle">本月建筑用水分析</div>
-        <div class="count">月能总耗计:<NumCounter class="num" :value="9245.94"></NumCounter>m³</div>
+        <div class="count">月能耗总计:<NumCounter class="num" :value="9245.94"></NumCounter>m³</div>
 
           <div id="use_W" ref="use_W"></div>
       </div>
@@ -233,11 +233,11 @@ export default {
             axisTick: {
               show: false,
             },
-            splitLine: {
+             splitLine: {
               lineStyle: {
-                width: 1,
+                width: 0.5,
                 type: "dashed",
-                color: "rgb(255,255,255,.5)",
+                color: "rgb(255,255,255,1)",
               },
             },
           },
@@ -607,11 +607,11 @@ export default {
             axisTick: {
               show: false,
             },
-            splitLine: {
+             splitLine: {
               lineStyle: {
-                width: 1,
+                width: 0.5,
                 type: "dashed",
-                color: "rgb(255,255,255,.5)",
+                color: "rgb(255,255,255,1)",
               },
             },
           },

@@ -64,10 +64,7 @@
           <div class="childBox temperature" v-show="_it.airPanelV == 1">
             <p>
               当前温度：<i
-                :style="{
-                  color:
-                    _it.tem.currentTem > _it.tem.targetTem ? 'red' : '#fff',
-                }"
+                
                 v-text="_it.tem.currentTem"
               ></i>
               ℃
@@ -807,11 +804,11 @@ export default {
             axisTick: {
               show: false,
             },
-            splitLine: {
+           splitLine: {
               lineStyle: {
-                width: 1,
+                width: 0.5,
                 type: "dashed",
-                color: "rgb(255,255,255,0.5)",
+                color: "rgb(255,255,255,1)",
               },
             },
             axisLine: {
@@ -897,7 +894,7 @@ export default {
     // 改变目标温度
     changeTemper (name, i) {
       if (name === 'up') {
-        if (this.airPanelList[i].tem.targetTem >= 29) return false
+        if (this.airPanelList[i].tem.targetTem >= 30) return false
         console.log(this.airPanelList[i].tem.targetTem);
         this.EnergyEfficiency(
           this.$refs["EnergyEfficiency" + i],
@@ -919,6 +916,7 @@ export default {
     },
     // 改变风速
     changeSpeeds (val, i) {
+      console.log(val, i);
       this.airPanelList[i].speed.value = val;
     },
     changeAirPanel (val, i) {
@@ -930,7 +928,7 @@ export default {
 
     EnergyEfficiency (val, data) {
       var dom = val;
-      console.log(data, 'data');
+      
       var option = {
         series: [
           {
@@ -940,19 +938,22 @@ export default {
             startAngle: 180,
             endAngle: 0,
             min: 0,
-            max: 300,
+            max: 30,
             splitNumber: 4,
+
             itemStyle: {
-              color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
-                {
-                  offset: 0,
-                  color: "#00FFFF",
-                },
-                {
-                  offset: 1,
-                  color: "red",
-                },
-              ]),
+                color: 'red',
+                 shadowColor: 'rgba(0,138,255,0.45)',
+              // color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+              //   {
+              //     offset: 0,
+              //     color: "#00FFFF",
+              //   },
+              //   {
+              //     offset: 1,
+              //     color: "red",
+              //   },
+              // ]),
             },
             progress: {
               show: true,
@@ -964,7 +965,7 @@ export default {
             axisLine: {
               lineStyle: {
                 width: 6,
-                color: [[1, '#E6EBF8'], [data / 30, '#4396f3']],
+                color: [[data / 30, '#4396f3'],[30/ data, '#fff']],
                 shadowColor: "rgba(0, 0, 0, 0.4)",
                 shadowBlur: 8,
                 shadowOffsetX: 1,

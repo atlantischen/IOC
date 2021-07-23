@@ -55,8 +55,6 @@
       <div class="use_kwh">
         <div class="tittle">用电情况</div>
         <div id="use_kwh" ref="use_kwh"></div>
-
-
       </div>
     </IOCRight>
   </div>
@@ -82,16 +80,15 @@ export default {
           y2: 0,
           containLabel: true,
         },
-          tooltip: {
+        tooltip: {
           // show: false,
-          // trigger: 'item',  
-          trigger: 'axis',
-          axisPointer:{
-            lineStyle:{
-            color:'transparent'
-          }
-          }
-        
+          // trigger: 'item',
+          trigger: "axis",
+          axisPointer: {
+            lineStyle: {
+              color: "transparent",
+            },
+          },
         },
         xAxis: [
           {
@@ -151,9 +148,9 @@ export default {
             },
             splitLine: {
               lineStyle: {
-                width: 1,
+                width: 0.5,
                 type: "dashed",
-                color: "rgb(255,255,255,.5)",
+                color: "rgb(255,255,255,1)",
               },
             },
           },
@@ -196,10 +193,15 @@ export default {
     },
     online() {
       var dom = this.$refs["online"];
+      var data= [
+              { value: 60, name: "在线" },
+              { value: 2, name: "离线" },
+              { value: 2, name: "故障" },
+            ];
       var option = {
         tooltip: {
           trigger: "item",
-          show:false
+          show: false,
         },
         legend: {
           orient: "horizontal",
@@ -207,10 +209,35 @@ export default {
           icon: "circle",
           itemWidth: 10,
           itemHeight: 10,
+          formatter: function(name) {
+            var target;
+            for (var i = 0, l = data.length; i < l; i++) {
+    
+              if (data[i].name == name) {
+                target = data[i].value;
+              }
+            }
+            var arr = [
+              "{a|" +name +" :}{b|" + target + "%}",
+            ];
+            return arr.join("\n");
+          },
           textStyle: {
             //图例文字的样式
             color: "#fff",
             fontSize: 12,
+            rich: {
+              a: {
+              
+                align: "left",
+                padding: [0, 0, 0, 5],
+              },
+              b: {
+               
+                align: "right",
+                padding: [0, 0, 0, 10],
+              },
+            },
           },
         },
 
@@ -228,11 +255,12 @@ export default {
                 },
               },
             },
+            
             color: ["#4695ED", "#05E3FF", "#CD8C57"],
             data: [
-              { value: 60, name: "在线 93.75%" },
-              { value: 2, name: "离线 3.13%" },
-              { value: 2, name: "故障 3.12%" },
+              { value: 60, name: "在线" },
+              { value: 2, name: "离线" },
+              { value: 2, name: "故障" },
             ],
             emphasis: {
               itemStyle: {
@@ -248,18 +276,47 @@ export default {
     },
     use() {
       var dom = this.$refs["use"];
+      var data = [
+              { value: 36, name: "正在使用" },
+              { value: 24, name: "闲置" },
+              { value: 4, name: "报损" },
+            ]
       var option = {
         legend: {
-          top: "35%",
-          left: "65%",
+          top: "45%",
+          left: "60%",
           orient: "vertical",
           icon: "circle",
           itemWidth: 10,
           itemHeight: 10,
+          formatter: function(name) {
+            var total = 0;
+            var target;
+            for (var i = 0, l = data.length; i < l; i++) {
+              total+=data[i].value;
+              if (data[i].name == name) {
+                target = data[i].value;
+              }
+            }
+            var arr = ["{a|" +name +" }{b|" + ((target/total)*100).toFixed(2) + "%}"];
+            return arr.join("\n");
+          },
           textStyle: {
             //图例文字的样式
             color: "#fff",
             fontSize: 12,
+            rich: {
+              a: {
+                width: 55,
+                padding: [0, 0, 0, 5],
+
+              },
+              b: {
+              verticalAlign: 'top',
+              align: 'center',
+              padding: [0, 0, 0, 15],
+              },
+            },
           },
         },
 
@@ -267,8 +324,8 @@ export default {
           {
             name: "面积模式",
             type: "pie",
-            radius: [40, 100],
-            center: ["30%", "50%"],
+            radius:[50,100],
+            center: ["30%", "60%"],
             roseType: "area",
             itemStyle: {
               normal: {
@@ -282,11 +339,7 @@ export default {
             },
             color: ["#4695ED", "#05E3FF", "#CD8C57"],
 
-            data: [
-              { value: 36, name: "正在使用   56.25%" },
-              { value: 24, name: "闲置   40.63%" },
-              { value: 4, name: "报损   3.13%" },
-            ],
+            data:data ,
           },
         ],
       };
@@ -302,16 +355,15 @@ export default {
           y2: 0,
           containLabel: true,
         },
-         tooltip: {
+        tooltip: {
           // show: false,
-          // trigger: 'item',  
-          trigger: 'axis',
-          axisPointer:{
-            lineStyle:{
-            color:'transparent'
-          }
-          }
-        
+          // trigger: 'item',
+          trigger: "axis",
+          axisPointer: {
+            lineStyle: {
+              color: "transparent",
+            },
+          },
         },
         xAxis: [
           {
@@ -371,9 +423,9 @@ export default {
             },
             splitLine: {
               lineStyle: {
-                width: 1,
+                width: 0.5,
                 type: "dashed",
-                color: "rgb(255,255,255,.5)",
+                color: "rgb(255,255,255,1)",
               },
             },
           },
@@ -456,10 +508,10 @@ export default {
       height: 3.125rem;
     }
   }
-  .use_kwh{
+  .use_kwh {
     #use_kwh {
       width: 100%;
-      height: 3.75rem /* 300/80 *//* 250/80 */ /* 300/80 */;
+      height: 3.75rem /* 300/80 */ /* 250/80 */ /* 300/80 */;
     }
   }
 }

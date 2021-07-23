@@ -51,7 +51,7 @@
         <div class="select">
           <DropDown :list="yearsList" name="label"  />
         </div>
-        <div class="count">停车场营收合计:<NumCounter class="num" :value="2496.852"></NumCounter>元</div>
+        <div class="count">停车场营收合计:<NumCounter class="num" :value="2496852.00"></NumCounter>元</div>
 
         <div id="revenue_total" ref="revenue_total"></div>
       </div>
@@ -290,9 +290,9 @@ export default {
             },
             splitLine: {
               lineStyle: {
-                width: 1,
+                width: 0.5,
                 type: "dashed",
-                color: "rgb(255,255,255,.5)",
+                color: "rgb(255,255,255,1)",
               },
             },
           },
@@ -424,7 +424,7 @@ export default {
             max: 1000000,
             splitNumber: 4,
             interval: 200000,
-            name: "个",
+            name: "元",
             nameTextStyle: {
               align: "right",
             },
@@ -446,9 +446,9 @@ export default {
             },
             splitLine: {
               lineStyle: {
-                width: 1,
+                width: 0.5,
                 type: "dashed",
-                color: "rgb(255,255,255,.5)",
+                color: "rgb(255,255,255,1)",
               },
             },
           },
@@ -623,10 +623,11 @@ export default {
                 color: "#fff",
               },
             },
-            splitLine: {
+             splitLine: {
               lineStyle: {
-                width: 1,
+                width: 0.5,
                 type: "dashed",
+                color: "rgb(255,255,255,1)",
               },
             },
             axisTick: {

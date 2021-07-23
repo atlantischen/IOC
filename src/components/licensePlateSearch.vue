@@ -194,7 +194,7 @@ export default {
   },
   methods: {
     handleClick() {
-      console.log(this.searchData);
+      // console.log(this.searchData);
       this.$emit("search",this.searchData);
     },
   },

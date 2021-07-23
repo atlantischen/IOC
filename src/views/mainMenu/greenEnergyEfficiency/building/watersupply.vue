@@ -64,7 +64,7 @@
     <div class="pump ">
       <div class="tittle">泵房监控</div>
         <ul>
-          <li v-for="item in 4" :key="item">
+          <li v-for="(item,index) in 4" :key="index" @click="lookVideo(`${++index}号客梯`)">
             <span>2020-12-31    14:40</span>
             <span>{{item++}}号客梯</span>
           </li>
@@ -72,6 +72,8 @@
 
     </div>
   </IOCRight>
+  <LookVideo :Visible="Visible" :title="dialogTitle" @off="openCloseDialog" />
+
 </template>
 
 <script>
@@ -79,6 +81,8 @@ import * as echarts from "echarts";
 export default {
   data(){
     return{
+      Visible: false,
+      dialogTitle:'',
       activeIndex:1,
        SolenoidSwitchesDatas: [{
             time: '2021-03-01 12:22:03',
@@ -217,11 +221,11 @@ export default {
             axisTick: {
               show: false,
             },
-            splitLine: {
+             splitLine: {
               lineStyle: {
-                width: 1,
+                width: 0.5,
                 type: "dashed",
-                color: "rgb(255,255,255,0.5)",
+                color: "rgb(255,255,255,1)",
               },
             },
             axisLine: {
@@ -338,6 +342,15 @@ export default {
           }
         );
       }
+    },
+      lookVideo (val) {
+        console.log(val);
+      this.dialogTitle = val
+      this.openCloseDialog(true)
+
+    },
+    openCloseDialog (val) {
+      this.Visible = val
     },
   },
   mounted(){

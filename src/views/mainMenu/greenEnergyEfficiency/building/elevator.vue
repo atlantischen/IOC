@@ -48,7 +48,7 @@
           <span class="font_text">视频回放</span>
         </div>
         <ul>
-          <li v-for="item in 4" :key="item">
+          <li v-for="(item,index) in 4" :key="item" @click="lookVideo(`${++index}号客梯`)">
             <span>2020-12-31    14:40</span>
             <span>{{item++}}号客梯</span>
           </li>
@@ -68,7 +68,7 @@
           <span class="font_text">视频回放</span>
         </div>
         <ul>
-          <li v-for="item in 4" :key="item">
+          <li v-for="(item,index) in 4" :key="index" @click="lookVideo(`${++index}号客梯`)">
             <span>2020-12-31    14:40</span>
             <span>{{item++}}号客梯</span>
           </li>
@@ -83,12 +83,16 @@
     </IOCRight>
     <Dialog :dialogShow="dialogShow" :title='title' @dialogShowChange="dialogShowChange"></Dialog>
     <VideoPlayback :title='title' :backShow="backShow" @videoShowChange="videoShowChange"></VideoPlayback>
+  <LookVideo :Visible="Visible" :title="dialogTitle" @off="openCloseDialog" />
+
 </template>
 
 <script>
 export default {
   data(){
     return{
+      Visible: false,
+      dialogTitle:'',
       elevatorList:[ 
         {
           text:'1号客梯',
@@ -162,8 +166,15 @@ export default {
       }
       this.backShow=val
 
+    },
+     lookVideo (val) {
+      this.dialogTitle = val
+      this.openCloseDialog(true)
 
-    }
+    },
+    openCloseDialog (val) {
+      this.Visible = val
+    },
   }
 
 }

@@ -73,6 +73,8 @@ export default {
       var option = {
         tooltip: {
           trigger: "item",
+          show:false
+
         },
         labelLine: {
           show: false,
@@ -140,7 +142,7 @@ export default {
           trigger: "axis",
           axisPointer: {
             // Use axis to trigger tooltip
-            type: "shadow", // 'shadow' as default; can also be 'line' or 'shadow'
+            type: "none", // 'shadow' as default; can also be 'line' or 'shadow'
           },
         },
         legend: {

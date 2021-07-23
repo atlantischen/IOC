@@ -14,7 +14,7 @@
             <li
               v-for="(item, index) in Math.floor(18 / 12 >= item)? 12: 18 % 12"
               :key="index"
-              @click="ClickVideo(index)"
+             @click="lookVideo(`${++index}号客梯`)"
             >
               <span>2020-12-31 14:04</span>
               <span>{{ ++index }}号客梯</span>
@@ -44,12 +44,16 @@
         </div>
       </el-dialog>
     </div>
+  <LookVideo :Visible="Visible" :title="dialogTitle" @off="openCloseDialog" />
+
   </div>
 </template>
 <script>
 export default {
   data() {
     return {
+      Visible: false,
+      dialogTitle:'',
       active: 0,
       value: "",
       selectCheck: null,
@@ -90,7 +94,14 @@ export default {
       this.checkedTime =
         val == 0 ? "5" : val == 33 ? "10" : val == 66 ? "15" : "20";
     },
-    ClickVideo(i) {},
+    lookVideo (val) {
+      this.dialogTitle = val
+      this.openCloseDialog(true)
+
+    },
+    openCloseDialog (val) {
+      this.Visible = val
+    },
   },
 
   created() {},
@@ -103,7 +114,7 @@ export default {
     .el-dialog {
       width: 1255px/* 1331/80 */ /* 1744/80 */ /* 1392/80 */ !important;
       height: 9.05rem /* 724/80 */ /* 920/80 */ /* 750/80 */ /* 772/80 */ !important;
-      margin-top: 15vh !important;
+      margin-top: 13vh !important;
       background-image: url("../assets/img/dtjk_pic.png");
             background-size: 100% 100%;
 

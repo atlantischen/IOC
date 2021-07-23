@@ -13,7 +13,9 @@
     <!-- 右侧警告框 -->
     <AlarmAck />
     <!-- 中心数据 -->
-    <CenterDatas :list="centerDatas" />
+    <CenterDatas :list="centerDatas"/>
+    <!-- 设备管理 -->
+    <Device v-show="deviceShow" :fade='fade' @chageFade="chageFade($event)"></Device>
   </div>
 </template>
 
@@ -24,7 +26,9 @@ export default {
   components: { AlarmAck },
   data() {
     return {
+      deviceShow:false,
       isShow: true,
+      fade:true,
       url: "",
       warnTimer: null,
       tipList: null,
@@ -40,7 +44,6 @@ export default {
     getUnityData(val) {
       // debugger;
       let res = val;
-      console.log(res,'res');
       try {
         if (res.action.indexOf("/") === 0) {
           this.$router.push(res.action);
@@ -88,11 +91,17 @@ export default {
         (typeof event.data == "object" && event.data.data != undefined)
       ) {
         let res = JSON.parse(event.data);
+        console.log(res,'resShow');
+
         this.$store.commit("setData", res);
         if (res.data === "IOCHOME") {
           this.isShow = true;
         } else if (res.action === "hide") {
           this.isShow = false;
+        }else if (res.action === "ShowUserInterface"){
+          this.fade = false;
+          this.deviceShow=true
+
         }
       }
     });
@@ -121,7 +130,7 @@ export default {
     },
     addMessageListener() {
       window.vuplex.addEventListener("message", (event) => {
-        console.log(event.data);
+     
         let res = JSON.parse(event.data);
         this.$store.commit("setData", res);
         if (res && res.lenght != 0) {
@@ -133,6 +142,9 @@ export default {
         }
       });
     },
+    chageFade(val){
+      this.fade=val
+    }
   },
 };
 </script>
