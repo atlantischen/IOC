@@ -16,18 +16,18 @@ export default {
       type: Object,
     },
   },
-  data() {
+  data () {
     return {
       ...this._data,
       ids: this.$uuid(),
     };
   },
-  mounted() {
+  mounted () {
     this.outputValueFun(this.datas);
   },
   methods: {
     // 园区产值
-    outputValueFun(val) {
+    outputValueFun (val) {
       const { optionName, datas } = val;
       var option = {
         tooltip: {
@@ -40,9 +40,9 @@ export default {
           textStyle: {
             color: "#fff",
           },
-          // formatter: v => {
-          //   return {v.name} +':'+ v.value + '%'
-          // }
+          formatter: v => {
+            return v.name + ':' + v.value + '%'
+          }
         },
         title: {
           show: true,
@@ -78,7 +78,7 @@ export default {
           right: 8,
           y: "center",
           data: optionName,
-          formatter: function(name) {
+          formatter: function (name) {
             return "{a|" + name + "}";
           },
           textStyle: {
