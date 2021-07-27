@@ -57,7 +57,7 @@
                   alt=""
                 />
               </span>
-              <span>
+              <span @click="handleStop">
                 <img src="../../../../assets/img/ds_pic.png" alt="" /> </span
               ><span>
                 <img src="../../../../assets/img/kj_pic.png" alt="" />
@@ -84,10 +84,10 @@
               选择文件
             </div>
           </div>
-          <button @click="handleStar1">开始播放</button>
-          <button @click="handleStar2">停止播放</button>
-          <button @click="handleStar3">暂停播放</button>
-          <button @click="handleStar4">继续播放</button>
+          <button @click="handleStar">开始播放</button>
+          <button @click="handleStop">停止播放</button>
+          <button @click="handleSuspend">暂停播放</button>
+          <button @click="handleSContinue">继续播放</button>
         </div>
       </div>
     </IOCLeft>
@@ -181,14 +181,14 @@ export default {
     handleStar1() {
       this.startPlay();
     },
-    handleStar2() {
+    handleStop() {
       this.$refs.audio.currentTime = 0;
       this.pausePlay();
     },
-    handleStar3() {
+    handleSuspend() {
       this.pausePlay();
     },
-    handleStar4() {
+    handleSContinue() {
       this.startPlay();
     },
     setControlList() {
@@ -317,6 +317,7 @@ export default {
     .item {
       width: 1.7625rem /* 141/80 */;
       height: 0.7125rem /* 57/80 */;
+      background-color: #192939;
       border: 1px solid #4396f3;
       border-radius: 0.0625rem /* 5/80 */;
       padding: 0 0.25rem /* 20/80 */;

@@ -167,8 +167,11 @@ export default {
           containLabel: true,
         },
         tooltip: {
-          // show: false,
-          // trigger: 'item',  
+          backgroundColor: "rgba(0,0,0,0.8)",
+          borderWidth: 1,
+          borderColor: "#4396f3",
+          padding: [5, 10],
+          extraCssText: 'box-shadow:inset 0 0 8px rgba(67, 149, 243, 0.6);', 
           trigger: 'axis',
           axisPointer:{
             lineStyle:{
@@ -543,8 +546,11 @@ export default {
           containLabel: true,
         },
           tooltip: {
-          // show: false,
-          // trigger: 'item',  
+           backgroundColor: "rgba(0,0,0,0.8)",
+          borderWidth: 1,
+          borderColor: "#4396f3",
+          padding: [5, 10],
+          extraCssText: 'box-shadow:inset 0 0 8px rgba(67, 149, 243, 0.6);',
           trigger: 'axis',
           axisPointer:{
             lineStyle:{

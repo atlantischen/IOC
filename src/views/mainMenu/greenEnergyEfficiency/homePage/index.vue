@@ -251,8 +251,11 @@ export default {
         //   containLabel: true,
         // },
           tooltip: {
-          // show: false,
-          // trigger: 'item',  
+           backgroundColor: "rgba(0,0,0,0.8)",
+          borderWidth: 1,
+          borderColor: "#4396f3",
+          padding: [5, 10],
+          extraCssText: 'box-shadow:inset 0 0 8px rgba(67, 149, 243, 0.6);',
           trigger: 'axis',
           axisPointer:{
             lineStyle:{
@@ -501,11 +504,14 @@ export default {
       var option = {
         tooltip: {
           trigger: "item",
-          show:false
+           backgroundColor: "rgba(0,0,0,0.8)",
+          borderWidth: 1,
+          borderColor: "#4396f3",
+          padding: [5, 10],
+          extraCssText: 'box-shadow:inset 0 0 8px rgba(67, 149, 243, 0.6);',
         },
         series: [
           {
-            // name: "访问来源",
             type: "pie",
             radius: ["90%", "75%"],
             center: ["25%", "53%"],
@@ -521,12 +527,9 @@ export default {
                   fontSize: 50,
                   color: '#fff',
                   fontFamily: "BYfont",
-
                 }
               }
-
             },
-
             data: [
               {
                 value: 500,
@@ -545,11 +548,11 @@ export default {
               },
               {
                 value: 300,
+                name: "未使用",
                 width: 20,
                 itemStyle: {
                   color: "#1E3957",
                 },
-                name: "总数",
               },
             ],
           },
@@ -559,7 +562,6 @@ export default {
     },
   },
   mounted () {
-
     this.trendInit();
     this.KPIint();
   },

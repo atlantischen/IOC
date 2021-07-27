@@ -127,6 +127,30 @@ export default {
       ],
       momthsList: [
         {
+          label: "12月",
+          value: 12,
+        },
+        {
+          label: "11月",
+          value: 11,
+        },
+        {
+          label: "10月",
+          value: 10,
+        },
+        {
+          label: "9月",
+          value: 9,
+        },
+        {
+          label: "8月",
+          value: 8,
+        },
+        {
+          label: "7月",
+          value: 7,
+        },
+        {
           label: "6月",
           value: 6,
         },
@@ -153,27 +177,126 @@ export default {
       ],
       dateList: [
         {
+          label: "31日",
+          value: 31,
+        },
+        {
+          label: "30日",
+          value: 30,
+        },
+        {
+          label: "29日",
+          value: 29,
+        },
+        {
+          label: "28日",
+          value: 28,
+        },
+        {
+          label: "27日",
+          value: 27,
+        },
+        {
+          label: "26日",
+          value: 26,
+        },
+        {
+          label: "25日",
+          value: 25,
+        },
+        {
           label: "24日",
-          value: 6,
+          value: 24,
         },
         {
           label: "23日",
-          value: 5,
+          value: 23,
+        },
+        {
+          label: "22日",
+          value: 22,
         },
         {
           label: "21日",
-          value: 4,
+          value: 21,
         },
         {
           label: "20日",
-          value: 3,
+          value: 20,
         },
         {
           label: "19日",
-          value: 2,
+          value: 19,
         },
         {
           label: "18日",
+          value: 18,
+        },
+        {
+          label: "17日",
+          value: 17,
+        },
+        {
+          label: "16日",
+          value: 16,
+        },
+        {
+          label: "15日",
+          value: 15,
+        },
+        {
+          label: "14日",
+          value: 14,
+        },{
+          label: "13日",
+          value: 13,
+        },
+        {
+          label: "12日",
+          value: 12,
+        },
+        {
+          label: "11日",
+          value: 11,
+        },
+        {
+          label: "10日",
+          value: 22,
+        },
+        {
+          label: "9日",
+          value: 9,
+        },
+        {
+          label: "8日",
+          value: 8,
+        },
+        {
+          label: "7日",
+          value: 12,
+        },
+        {
+          label: "6日",
+          value: 6,
+        },
+        {
+          label: "5日",
+          value: 5,
+        },
+        {
+          label: "4日",
+          value: 4,
+        },
+        {
+          label: "3日",
+          value: 3,
+        },
+         {
+          label: "2日",
+          value: 2,
+        },
+        {
+          label: "1日",
           value: 1,
         },
       ],
@@ -218,6 +341,11 @@ export default {
            tooltip: {
           // show: false,
           trigger: "axis",
+           backgroundColor: "rgba(0,0,0,0.8)",
+          borderWidth: 1,
+          borderColor: "#4396f3",
+          padding: [5, 10],
+          extraCssText: 'box-shadow:inset 0 0 8px rgba(67, 149, 243, 0.6);',
            axisPointer:{
                 lineStyle:{
                 color:'transparent'
@@ -376,6 +504,11 @@ export default {
         tooltip: {
           // show: false,
           trigger: "axis",
+           backgroundColor: "rgba(0,0,0,0.8)",
+          borderWidth: 1,
+          borderColor: "#4396f3",
+          padding: [5, 10],
+          extraCssText: 'box-shadow:inset 0 0 8px rgba(67, 149, 243, 0.6);',
            axisPointer:{
                 lineStyle:{
                 color:'transparent'
@@ -528,8 +661,11 @@ export default {
           containLabel: true,
         },
           tooltip: {
-          // show: false,
-          // trigger: 'item',  
+           backgroundColor: "rgba(0,0,0,0.8)",
+          borderWidth: 1,
+          borderColor: "#4396f3",
+          padding: [5, 10],
+          extraCssText: 'box-shadow:inset 0 0 8px rgba(67, 149, 243, 0.6);',
           trigger: 'axis',
           axisPointer:{
             lineStyle:{

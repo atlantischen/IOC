@@ -73,7 +73,14 @@ export default {
       var option = {
         tooltip: {
           trigger: "item",
-          show:false
+           backgroundColor: "rgba(0,0,0,0.8)",
+          borderWidth: 1,
+          borderColor: "#4396f3",
+          padding: [5, 10],
+          extraCssText: 'box-shadow:inset 0 0 8px rgba(67, 149, 243, 0.6);',
+             formatter:function(param){
+            return param.marker+param.name+"："+ param.value + "%<br>";
+        }
 
         },
         labelLine: {
@@ -140,6 +147,11 @@ export default {
       var option = {
         tooltip: {
           trigger: "axis",
+           backgroundColor: "rgba(0,0,0,0.8)",
+          borderWidth: 1,
+          borderColor: "#4396f3",
+          padding: [5, 10],
+          extraCssText: 'box-shadow:inset 0 0 8px rgba(67, 149, 243, 0.6);',
           axisPointer: {
             // Use axis to trigger tooltip
             type: "none", // 'shadow' as default; can also be 'line' or 'shadow'

@@ -30,7 +30,7 @@ export default {
   components: { AlarmAck },
   data () {
     return {
-      isShow: true,
+      isShow: false,
       deviceShow: false,
       fade: true,
       url: "",

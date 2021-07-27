@@ -187,6 +187,16 @@ export default {
             color: "#fff",
           },
         },
+      tooltip: {
+          // show: false,
+          // trigger: 'item',
+          trigger: "axis",
+          axisPointer: {
+            lineStyle: {
+              color: "transparent",
+            },
+          },
+        },
         grid: {
           top: "40",
           left: "10",
