@@ -73,7 +73,7 @@ export default {
   },
   components: {},
   methods: {
-    // 各服务办理分布
+    // 餐饮类型
     distributionServicesFun() {
       var j = 0,
         colors = ["#00ffff", "#4695ED", "#95D3FF", "#4367F3", "#CDA857"];
@@ -125,9 +125,6 @@ export default {
                height: 0,
               width: 0,
               lineHeight: 0,
-              // radius和padding为圆点大小，圆点半径为几radius和padding各项数值就为几如：圆点半径为1
-              // borderRadius: 4,
-              // padding: [4, -4, 4, -4],
               borderRadius: 2.5,
               padding: [2.5, -2.5, 2.5, -2.5],
               // formatter: "{a|{c}%}\n{b|{b}}\n{hr|}",
@@ -202,6 +199,11 @@ export default {
         tooltip: {
           // show:false,
           trigger: "axis",
+           backgroundColor: "rgba(0,0,0,0.8)",
+          borderWidth: 1,
+          borderColor: "#4396f3",
+          padding: [5, 10],
+          extraCssText: 'box-shadow:inset 0 0 8px rgba(67, 149, 243, 0.6);',
           axisPointer: {
             // Use axis to trigger tooltip
             type: "none",

@@ -26,8 +26,8 @@ export default {
   components: { AlarmAck },
   data() {
     return {
-      deviceShow:false,
       isShow: true,
+      deviceShow:false,
       fade:true,
       url: "",
       warnTimer: null,
@@ -130,7 +130,6 @@ export default {
     },
     addMessageListener() {
       window.vuplex.addEventListener("message", (event) => {
-     
         let res = JSON.parse(event.data);
         this.$store.commit("setData", res);
         if (res && res.lenght != 0) {

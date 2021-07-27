@@ -81,8 +81,11 @@ export default {
           containLabel: true,
         },
         tooltip: {
-          // show: false,
-          // trigger: 'item',
+           backgroundColor: "rgba(0,0,0,0.8)",
+          borderWidth: 1,
+          borderColor: "#4396f3",
+          padding: [5, 10],
+          extraCssText: 'box-shadow:inset 0 0 8px rgba(67, 149, 243, 0.6);',
           trigger: "axis",
           axisPointer: {
             lineStyle: {
@@ -194,14 +197,21 @@ export default {
     online() {
       var dom = this.$refs["online"];
       var data= [
-              { value: 60, name: "在线" },
-              { value: 2, name: "离线" },
-              { value: 2, name: "故障" },
+              { value: 92, name: "在线" },
+              { value: 4, name: "离线" },
+              { value: 4, name: "故障" },
             ];
       var option = {
         tooltip: {
           trigger: "item",
-          show: false,
+           backgroundColor: "rgba(0,0,0,0.8)",
+          borderWidth: 1,
+          borderColor: "#4396f3",
+          padding: [5, 10],
+          extraCssText: 'box-shadow:inset 0 0 8px rgba(67, 149, 243, 0.6);',
+          formatter:function(param){
+            return param.marker+param.name+"："+ param.value + "%<br>";
+        },
         },
         legend: {
           orient: "horizontal",
@@ -257,11 +267,7 @@ export default {
             },
             
             color: ["#4695ED", "#05E3FF", "#CD8C57"],
-            data: [
-              { value: 60, name: "在线" },
-              { value: 2, name: "离线" },
-              { value: 2, name: "故障" },
-            ],
+            data: data,
             emphasis: {
               itemStyle: {
                 shadowBlur: 10,
@@ -282,6 +288,15 @@ export default {
               { value: 4, name: "报损" },
             ]
       var option = {
+         tooltip: {
+          trigger: "item",
+           backgroundColor: "rgba(0,0,0,0.8)",
+          borderWidth: 1,
+          borderColor: "#4396f3",
+          padding: [5, 10],
+          extraCssText: 'box-shadow:inset 0 0 8px rgba(67, 149, 243, 0.6);',
+           formatter:'{b} : {d}%',
+        },
         legend: {
           top: "45%",
           left: "60%",
@@ -356,8 +371,11 @@ export default {
           containLabel: true,
         },
         tooltip: {
-          // show: false,
-          // trigger: 'item',
+           backgroundColor: "rgba(0,0,0,0.8)",
+          borderWidth: 1,
+          borderColor: "#4396f3",
+          padding: [5, 10],
+          extraCssText: 'box-shadow:inset 0 0 8px rgba(67, 149, 243, 0.6);',
           trigger: "axis",
           axisPointer: {
             lineStyle: {

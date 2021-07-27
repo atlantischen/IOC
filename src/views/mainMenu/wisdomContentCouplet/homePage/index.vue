@@ -136,10 +136,7 @@ export default {
   components: {},
   methods: {
     changePSMonths (val) {
-      console.log(val);
-      // this.AssetsAndEquipment();
-
-      // this.popularServiceFun();
+     
     },
     equipmentInit () {
       var dom = this.$refs["equipment"];
@@ -152,8 +149,11 @@ export default {
           containLabel: true,
         },
          tooltip: {
-          // show: false,
-          // trigger: 'item',  
+           backgroundColor: "rgba(0,0,0,0.8)",
+          borderWidth: 1,
+          borderColor: "#4396f3",
+          padding: [5, 10],
+          extraCssText: 'box-shadow:inset 0 0 8px rgba(67, 149, 243, 0.6);',
           trigger: 'axis',
           axisPointer:{
             lineStyle:{
@@ -267,18 +267,29 @@ export default {
       var dom = this.$refs["equipment_faulty"];
       var datas = [
         [
-          { name: "电梯", value: 6.3, itemStyle: { color: "#fff" } },
+          { name: "电梯", value: 6.30, itemStyle: { color: "#fff" } },
           { name: "门禁", value: 22.05, itemStyle: { color: "#4396F3" } },
           { name: "视频", value: 25.02, itemStyle: { color: "#95C7FF" } },
           { name: "能源", value: 9.45, itemStyle: { color: "#08E2FF" } },
           { name: "照明", value: 11.05, itemStyle: { color: "#236390" } },
-          { name: "BA", value: 12.6, itemStyle: { color: "#C7D392" } },
+          { name: "BA", value: 12.60, itemStyle: { color: "#C7D392" } },
           { name: "消防", value: 13.39, itemStyle: { color: "#9A866A" } },
         ],
       ];
 
       var option = {
+          tooltip: {
+          trigger: "item",
+           backgroundColor: "rgba(0,0,0,0.8)",
+          borderWidth: 1,
+          borderColor: "#4396f3",
+          padding: [5, 10],
+          extraCssText: 'box-shadow:inset 0 0 8px rgba(67, 149, 243, 0.6);',
+             formatter:function(param){
+            return param.marker+param.name+"："+ param.value + "%<br>";
+        }
 
+        },
         series: datas.map(function (data, idx) {
           var top = idx * 33.3;
           return {
@@ -351,8 +362,11 @@ export default {
           containLabel: true,
         },
           tooltip: {
-          // show: false,
-          // trigger: 'item',  
+          backgroundColor: "rgba(0,0,0,0.8)",
+          borderWidth: 1,
+          borderColor: "#4396f3",
+          padding: [5, 10],
+          extraCssText: 'box-shadow:inset 0 0 8px rgba(67, 149, 243, 0.6);',
           trigger: 'axis',
           axisPointer:{
             lineStyle:{
@@ -485,8 +499,11 @@ export default {
         },
 
   tooltip: {
-          // show: false,
-          // trigger: 'item',  
+           backgroundColor: "rgba(0,0,0,0.8)",
+          borderWidth: 1,
+          borderColor: "#4396f3",
+          padding: [5, 10],
+          extraCssText: 'box-shadow:inset 0 0 8px rgba(67, 149, 243, 0.6);',
           trigger: 'axis',
           axisPointer:{
             lineStyle:{
@@ -568,7 +585,7 @@ export default {
                       width: 17,
                       height: 27,
                       backgroundColor: {
-                        image: item > 0 ? "/1.png" : "/2.png",
+                        image: item > 0 ? "/img/1.png" : "/img/2.png",
                       },
                     },
                   },

@@ -111,7 +111,7 @@
 
 <script>
 import * as echarts from "echarts";
-import { EleResize } from "assets/js/echarts";
+// import { EleResize } from "assets/js/echarts";
 export default {
   name: "HomePage",
   data() {
@@ -276,7 +276,17 @@ export default {
       var option = {
         tooltip: {
           trigger: "item",
-          show:false
+           backgroundColor: "rgba(0,0,0,0.8)",
+          borderWidth: 1,
+          borderColor: "#4396f3",
+          padding: [5, 10],
+          extraCssText: 'box-shadow:inset 0 0 8px rgba(67, 149, 243, 0.6);',
+          //  formatter:'{b} : {d}%',
+           formatter:function(param){
+            return param.marker+param.name+"："+ param.value/100 + "%<br>";
+        }
+
+           
         },
         labelLine: {
           show: false,
@@ -314,7 +324,7 @@ export default {
         },
         series: [
           {
-            name: "访问来源",
+            name: "",
             type: "pie",
             radius: "80%",
             center: ["20%", "50%"],
@@ -325,12 +335,12 @@ export default {
               },
             },
             data: [
-              { value: 800, name: "餐饮" },
-              { value: 800, name: "健康" },
-              { value: 1100, name: "娱乐" },
-              { value: 1500, name: "教育" },
-              { value: 600, name: "文化" },
-              { value: 600, name: "购物" },
+              { value: 2909, name: "餐饮"},
+              { value: 1273, name: "健康"},
+              { value: 2545, name: "娱乐"},
+              { value: 1455, name: "教育"},
+              { value: 1091, name: "文化"},
+              { value: 727, name: "购物"},
             ],
           },
         ],
@@ -354,12 +364,17 @@ export default {
           top: "30",
           left: "30",
           right: "30",
-          bottom: "0",
+          bottom: "-10",
           containLabel: true,
         },
         tooltip: {
           // show: false,
           trigger: "axis",
+           backgroundColor: "rgba(0,0,0,0.8)",
+          borderWidth: 1,
+          borderColor: "#4396f3",
+          padding: [5, 10],
+          extraCssText: 'box-shadow:inset 0 0 8px rgba(67, 149, 243, 0.6);',
           axisPointer: {
             lineStyle: {
               color: "transparent",
@@ -389,7 +404,6 @@ export default {
               interval: 0,
               rotate: -30,
               padding: [20, 30, 0, -20],
-              // align:'right',
             },
           },
         ],
