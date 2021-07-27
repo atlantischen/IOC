@@ -225,7 +225,7 @@ export default {
         },
         {
           name: "未处理告警数",
-          val: 39,
+          val: this.$randomNumer(0, 9),
         },
         {
           name: "设备异常数",

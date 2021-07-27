@@ -251,6 +251,7 @@ export default {
         &::after {
           .turnAround(5s);
           content: "";
+          top: -2.9rem /* 232/80 */;
           left: -1.625rem /* 130/80 */;
           position: absolute;
           width: 5.6875rem /* 455/80 */;

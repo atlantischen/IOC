@@ -13,9 +13,13 @@
     <!-- 右侧警告框 -->
     <AlarmAck />
     <!-- 中心数据 -->
-    <CenterDatas :list="centerDatas"/>
+    <CenterDatas :list="centerDatas" />
     <!-- 设备管理 -->
-    <Device v-show="deviceShow" :fade='fade' @chageFade="chageFade($event)"></Device>
+    <Device
+      v-show="deviceShow"
+      :fade="fade"
+      @chageFade="chageFade($event)"
+    ></Device>
   </div>
 </template>
 
@@ -24,7 +28,7 @@ import AlarmAck from "@/views/mainMenu/comprehensiveSituational/homePage/compone
 export default {
   name: "MainMenu",
   components: { AlarmAck },
-  data() {
+  data () {
     return {
       isShow: true,
       deviceShow:false,
@@ -36,12 +40,12 @@ export default {
     };
   },
   computed: {
-    getUnityData() {
+    getUnityData () {
       return this.$store.state.unitySendData;
     },
   },
   watch: {
-    getUnityData(val) {
+    getUnityData (val) {
       // debugger;
       let res = val;
       try {
@@ -49,17 +53,17 @@ export default {
           this.$router.push(res.action);
         } else {
         }
-      } catch (e) {}
+      } catch (e) { }
     },
     "$store.state.comState.centerDatas": {
-      handler(n, o) {
+      handler (n, o) {
         if (n) {
           this.centerDatas = n;
         }
       },
       immediate: true,
     },
-    isShow: function(n, o) {
+    isShow: function (n, o) {
       if (n) {
         // 随机触发警告
         this.warnTimer = setInterval(() => {
@@ -73,13 +77,13 @@ export default {
       }
     },
   },
-  beforeCreate() {
+  beforeCreate () {
     this.$store.dispatch("SET_SHOWWARNTIP", false);
     if (process.env.NODE_ENV === "production") {
       this.$router.push("/comprehensiveSituational/homePage");
     }
   },
-  created() {
+  created () {
     if (window.vuplex) {
       this.addMessageListener();
     } else {
@@ -91,17 +95,16 @@ export default {
         (typeof event.data == "object" && event.data.data != undefined)
       ) {
         let res = JSON.parse(event.data);
-        console.log(res,'resShow');
+        console.log(res, "resShow");
 
         this.$store.commit("setData", res);
         if (res.data === "IOCHOME") {
           this.isShow = true;
         } else if (res.action === "hide") {
           this.isShow = false;
-        }else if (res.action === "ShowUserInterface"){
+        } else if (res.action === "ShowUserInterface") {
           this.fade = false;
-          this.deviceShow=true
-
+          this.deviceShow = true;
         }
       }
     });
@@ -113,22 +116,22 @@ export default {
       this.url = process.env.VUE_APP_UNITY;
     }
   },
-  mounted() {
+  mounted () {
     this.$nextTick(() => {
       window.iframe = this.$refs.iframe;
     });
   },
-  beforeDestroy() {
+  beforeDestroy () {
     clearInterval(this.warnTimer);
   },
   methods: {
-    getQueryString(name) {
+    getQueryString (name) {
       var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
       var r = window.location.search.substr(1).match(reg);
       if (r != null) return unescape(r[2]);
       return null;
     },
-    addMessageListener() {
+    addMessageListener () {
       window.vuplex.addEventListener("message", (event) => {
         let res = JSON.parse(event.data);
         this.$store.commit("setData", res);
@@ -141,9 +144,9 @@ export default {
         }
       });
     },
-    chageFade(val){
-      this.fade=val
-    }
+    chageFade (val) {
+      this.fade = val;
+    },
   },
 };
 </script>

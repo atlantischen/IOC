@@ -26,20 +26,20 @@ export default {
       type: Object,
     },
   },
-  data() {
+  data () {
     return {
       ...this._data,
       ids: this.$uuid(),
     };
   },
-  created() {},
-  mounted() {
+  created () { },
+  mounted () {
     this.proportionOfSiteTypeFun(this.datas);
     this.proportionOfSiteType2Fun(this.datas);
   },
   methods: {
     // 会议室占比
-    proportionOfSiteTypeFun(val) {
+    proportionOfSiteTypeFun (val) {
       var dom = this.$refs["proportionOfSiteTypeEchart_" + this.ids];
       var myChart = echarts.init(dom);
       let { optionName, datas, name } = val.hys;
@@ -108,7 +108,7 @@ export default {
           left: "65%",
           y: "center",
           data: optionName,
-          formatter: function(name) {
+          formatter: function (name) {
             // return "{a|" + name + "}" + datas[j++] + "%";
             return "{a|" + name + "}";
           },
@@ -198,7 +198,7 @@ export default {
       });
     },
     // 场地占比
-    proportionOfSiteType2Fun(val) {
+    proportionOfSiteType2Fun (val) {
       let { optionName, datas, name } = val.cd;
       var option = {
         tooltip: {
@@ -220,6 +220,9 @@ export default {
           textStyle: {
             color: "#fff",
           },
+          formatter: v => {
+            return v.name + ':' + v.value + '%'
+          }
         },
         title: [
           {
@@ -252,7 +255,7 @@ export default {
           left: "65%",
           y: "center",
           data: optionName,
-          formatter: function(name) {
+          formatter: function (name) {
             // return "{a|" + name + "}" + datas[j++] + "%";
             return "{a|" + name + "}";
           },
