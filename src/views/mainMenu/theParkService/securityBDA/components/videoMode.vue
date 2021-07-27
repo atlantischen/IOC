@@ -2,11 +2,14 @@
   <!-- 视频模式 -->
   <div class="videoMode">
     <ul class="videoMode_Box x_sb_rap">
-      <li
-        v-for="(item, i) in videoDatas"
-        :key="i"
-        @click="lookVideo(item)"
-      ></li>
+      <li v-for="(item, i) in videoDatas" :key="i" @click="lookVideo(item)">
+        <iframe
+          style="width: 100%; height: 100%"
+          src="http://172.21.71.225:10800/play.html?channel=1&protocol=FLV&iframe=yes&aspect=400x220"
+          allowfullscreen
+          allow="autoplay; fullscreen"
+        ></iframe>
+      </li>
     </ul>
     <LookVideo :Visible="Visible" :title="dialogTitle" @off="openCloseDialog" />
   </div>
