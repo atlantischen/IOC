@@ -33,7 +33,7 @@ export default {
       isShow: false,
       deviceShow: false,
       fade: true,
-      showAlarmAck: true,
+      showAlarmAck: false,
       url: "",
       warnTimer: null,
       tipList: null,
@@ -108,6 +108,8 @@ export default {
         } else if (res.action === "ShowUserInterface") {
           this.fade = false;
           this.deviceShow = true;
+        } else if (res.action === "OnAlarmProcessingBtnClick") {
+          this.closeAlarmAck(true)
         }
       }
     });
@@ -154,12 +156,12 @@ export default {
     hideGlobal () {
       this.fade = false;
       this.deviceShow = false;
-      this.showAlarmAck = false
+      this.closeAlarmAck(false)
       this.$store.dispatch("SET_SHOWWARNTIP", false);
       this.$store.commit("SET_CENTERDATAS", [false, null]);
     },
-    closeAlarmAck () {
-      this.showAlarmAck = false
+    closeAlarmAck (val) {
+      this.showAlarmAck = val
     }
   },
 };

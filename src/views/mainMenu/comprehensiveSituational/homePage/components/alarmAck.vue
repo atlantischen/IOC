@@ -125,37 +125,7 @@ export default {
   components: {},
   watch: {
     _isFade: function (n, o) {
-      console.log('2iyiq', n, o)
       this.isFade = n
-    },
-  },
-  mounted () {
-    window.addEventListener("message", this.sureAlarmFun, true);
-  },
-  methods: {
-    submitForm (formName) {
-      this.$refs[formName].validate((valid) => {
-        if (valid) {
-          // this.sureAlarmFun();
-          this.isFade = !this.isFade;
-          this.$emit('close')
-          this.$message.success("已确认警报！");
-          this.resetForm("ruleForm");
-        } else {
-          return false;
-        }
-      });
-    },
-    resetForm (formName) {
-      this.$refs[formName].resetFields();
-    },
-    sureAlarmFun (v) {
-      // OnAlarmProcessingBtnClick
-      // console.log(v)
-      // console.log(this.$store.state.unitySendData)
-      if (this.$store.state.unitySendData.action == 'OnAlarmProcessingBtnClick') {
-        this.isFade = !this.isFade;
-      }
       if (this.isFade) {
         this.ruleForm = {
           name: "中心广场摄像机",
@@ -166,6 +136,41 @@ export default {
         };
       }
     },
+  },
+  mounted () {
+    // window.addEventListener("message", this.sureAlarmFun, true);
+  },
+  methods: {
+    submitForm (formName) {
+      this.$refs[formName].validate((valid) => {
+        if (valid) {
+          // this.sureAlarmFun();
+          this.isFade = !this.isFade;
+          this.$emit('close', this.isFade)
+          this.$message.success("已确认警报！");
+          this.resetForm("ruleForm");
+        } else {
+          return false;
+        }
+      });
+    },
+    resetForm (formName) {
+      this.$refs[formName].resetFields();
+    },
+    // sureAlarmFun (v) {
+    //   if (this.$store.state.unitySendData.action == 'OnAlarmProcessingBtnClick') {
+    //     this.isFade = !this.isFade;
+    //   }
+    //   if (this.isFade) {
+    //     this.ruleForm = {
+    //       name: "中心广场摄像机",
+    //       type: "物品偷盗",
+    //       because: "摄像头侦测报警",
+    //       handler: "梁海山",
+    //       result: "已派人通知查看",
+    //     };
+    //   }
+    // },
   },
 };
 </script>
