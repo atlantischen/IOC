@@ -20,7 +20,7 @@ export default {
     SET_CENTERDATAS(state, value) {
       localStorage.setItem('ENTERDATATAS', JSON.stringify(value))
       let _d = JSON.parse(localStorage.getItem('ENTERDATATAS'))
-      console.log(_d)
+      // console.log(_d)
       if (_d[0]) {
         state.centerDatas = _d[1]
       }

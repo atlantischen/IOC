@@ -86,7 +86,6 @@ export default {
     getWeather({ city: "深圳" }).then((r) => {
       this.weatherDatas = r.data.data;
       this.returnIconFun(r.data.data.forecast[0].type)
-      console.log(r);
     });
   },
   mounted () {

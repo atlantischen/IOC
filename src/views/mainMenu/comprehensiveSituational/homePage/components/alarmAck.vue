@@ -76,6 +76,11 @@
 <script>
 export default {
   name: "alarmAck",
+  props: {
+    _isFade: {
+      type: Boolean
+    }
+  },
   data () {
     return {
       isFade: false,
@@ -118,8 +123,13 @@ export default {
     };
   },
   components: {},
+  watch: {
+    _isFade: function (n, o) {
+      console.log('2iyiq', n, o)
+      this.isFade = n
+    },
+  },
   mounted () {
-    // console.log(this.$store.state)
     window.addEventListener("message", this.sureAlarmFun, true);
   },
   methods: {
@@ -128,6 +138,7 @@ export default {
         if (valid) {
           // this.sureAlarmFun();
           this.isFade = !this.isFade;
+          this.$emit('close')
           this.$message.success("已确认警报！");
           this.resetForm("ruleForm");
         } else {

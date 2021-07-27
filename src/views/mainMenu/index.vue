@@ -11,13 +11,13 @@
     <!-- 告警框 -->
     <TipBox :_data="tipList" />
     <!-- 右侧警告框 -->
-    <AlarmAck />
+    <AlarmAck :_isFade="showAlarmAck" @close="closeAlarmAck" />
     <!-- 中心数据 -->
     <CenterDatas :list="centerDatas" />
     <!-- 设备管理 -->
     <Device
       v-show="deviceShow"
-      :fade="fade"
+      :_fade="fade"
       @chageFade="chageFade($event)"
     ></Device>
   </div>
@@ -33,6 +33,7 @@ export default {
       isShow: false,
       deviceShow: false,
       fade: true,
+      showAlarmAck: true,
       url: "",
       warnTimer: null,
       tipList: null,
@@ -73,7 +74,7 @@ export default {
             },
           ];
           this.$store.dispatch("SET_SHOWWARNTIP", true);
-        }, this.$randomNumer(1000, 3000));
+        }, this.$randomNumer(3000, 30000));
       }
     },
   },
@@ -90,18 +91,20 @@ export default {
       window.addEventListener("vuplexready", this.addMessageListener);
     }
     window.addEventListener("message", (event) => {
+      // console.log(event)
       if (
         (typeof event.data == "string" && event.data.indexOf("data") != -1) ||
         (typeof event.data == "object" && event.data.data != undefined)
       ) {
         let res = JSON.parse(event.data);
         console.log(res, "resShow");
-
         this.$store.commit("setData", res);
         if (res.data === "IOCHOME") {
           this.isShow = true;
         } else if (res.action === "hide") {
+          clearInterval(this.warnTimer);
           this.isShow = false;
+          this.hideGlobal()
         } else if (res.action === "ShowUserInterface") {
           this.fade = false;
           this.deviceShow = true;
@@ -114,6 +117,7 @@ export default {
       window.debug = true;
     } else {
       this.url = process.env.VUE_APP_UNITY;
+      this.url = 'http://183.62.170.2:8110'
     }
   },
   mounted () {
@@ -147,6 +151,16 @@ export default {
     chageFade (val) {
       this.fade = val;
     },
+    hideGlobal () {
+      this.fade = false;
+      this.deviceShow = false;
+      this.showAlarmAck = false
+      this.$store.dispatch("SET_SHOWWARNTIP", false);
+      this.$store.commit("SET_CENTERDATAS", [false, null]);
+    },
+    closeAlarmAck () {
+      this.showAlarmAck = false
+    }
   },
 };
 </script>
