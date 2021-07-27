@@ -230,28 +230,52 @@ var filterNum = function filterNum(val) {
 }
 /**
  *
- * 只精确到分钟，精确到秒可以自行添加
- * @param {any} start 开始时间  (例 9:30)
- * @param {any} end   结束时间  (例 15:00)
+ * 获取00:00到现在的时整点
+ * @param {any} start 开始时间  (00:00)
+ * @param {any} end   结束(获取现在 例 15:00)
  * @returns
  */
-var timeRangeArr = function timeRangeArr(start, end) {
-  var timeline = [],
-    startHour = start.split(':')[0] * 1,
-    startMin = start.split(':')[1] * 1,
-    endHour = end.split(':')[0] * 1,
-    endMin = end.split(':')[1] * 1;
-  for (var i = startHour; i <= endHour; i++) {
-    var start = (i == startHour) ? startMin : '0';
-    console.log(start)
-    var end = (i == endHour) ? endMin : '59';
-    console.log(end)
-    for (var j = start; j <= end; j++) {
-      j = (j < 10) ? '0' + j : j;
-      timeline.push(i + ":" + j);
+var timeRangeArr = function timeRangeArr(_range) {
+  function noRepeat(arr) {
+    var newArr = [];
+    for (var i = 0; i < arr.length; i++) {
+      if (newArr.indexOf(arr[i]) == -1) {
+        newArr.push(arr[i]);
+      }
     }
+    return newArr;
   }
-  return timeline;
+
+  function getNewArr(arr, _range2) {
+    var n = [],
+      _l = arr.length
+    for (var z = 0; z <= _l; z += Math.ceil(_l / (_range2 - 1))) {
+      let _d = arr.slice(z, z + 1)[0]
+      if (_d) {
+        n.push(_d)
+      }
+    }
+    n.push(arr[_l - 1])
+    return noRepeat(n)
+  }
+  var _start = '00:00',
+    range = _range - 1,
+    _end = moment(new Date()).format('HH:mm').split(':')[0] + ':00'
+  var timeline = [],
+    startHour = _start.split(':')[0] * 1,
+    endHour = _end.split(':')[0] * 1
+  for (var i = startHour; i <= endHour; i++) {
+    timeline.push(((i < 10) ? '0' + i : i) + ":00");
+  }
+  if (timeline.length > 5) {
+    if (range) {
+      return getNewArr(timeline, range)
+    } else {
+      return noRepeat(timeline, 5)
+    }
+  } else {
+    return timeline;
+  }
 }
 const fun = {
   currentDate,

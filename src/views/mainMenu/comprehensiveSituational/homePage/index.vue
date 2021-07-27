@@ -77,9 +77,10 @@ export default {
           datas: {
             smooth: false,
             unit: ["时间", "人"],
-            // names: ["办公人员", "访客"],
             names: ["访客"],
-            xData: ["05:00", "06:00", "07:00", "08:00", "09:00", "10:00"],
+            xData: this.$timeRangeArr(7),
+            // names: ["办公人员", "访客"],
+            // xData: ["05:00", "06:00", "07:00", "08:00", "09:00", "10:00"],
             // datas: [
             //   [23, 12, 43, 32, 21, 43],
             //   [34, 2, 32, 32, 32, 23],
@@ -159,15 +160,16 @@ export default {
             smooth: true,
             names: ["进", "出"],
             unit: ["时间", "辆"],
-            xData: [
-              "00:00",
-              "02:00",
-              "04:00",
-              "06:00",
-              "08:00",
-              "10:00",
-              "12:00",
-            ],
+            // xData: [
+            //   "00:00",
+            //   "02:00",
+            //   "04:00",
+            //   "06:00",
+            //   "08:00",
+            //   "10:00",
+            //   "12:00",
+            // ],
+            xData: this.$timeRangeArr(6),
             datas: [
               [7, 9, 3, 14, 9, 36, 23],
               [10, 15, 12, 23, 20, 45, 36],
@@ -269,7 +271,6 @@ export default {
     //   (this.rightInfo = homePage.rightInfo)
   },
   mounted () {
-    console.log(this.$timeRangeArr('00:00', '11:00'))
     // aaa().then(r=>{
     //   console.log(r)
     // })

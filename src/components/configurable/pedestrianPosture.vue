@@ -46,7 +46,7 @@ export default {
     },
     // 人行态势
     pedestrianPostureFun (val) {
-      const { names, xData, datas, smooth, unit, rightTip, leftTip } = val;
+      let { names, xData, datas, smooth, unit, rightTip, leftTip } = val;
       var allD = [],
         color = ["#97c8ff", "#ffdd8d"],
         color2 = ["#fff", "#ffdd8d"],
@@ -83,7 +83,7 @@ export default {
           },
           data: datas[i].map((e, j) => {
             return {
-              value: e,
+              value: xData[j] ? e : null,
               symbol: j != datas[i].length - 1 ? "none" : "",
               itemStyle: {
                 normal: {
