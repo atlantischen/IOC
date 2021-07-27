@@ -32,8 +32,8 @@ export default {
   methods: {
     distributionServicesFun (val) {
       var dom = this.$refs["distributionServicesEchart_" + this.ids]
-      var myChart = echarts.init(dom)
-      const { optionName, datas} = val
+      var myChart = echarts.init(dom), oneIndex = null
+      const { optionName, datas } = val
       var j = 0, colors = [
         "#00ffff",
         "#cd9a57",
@@ -46,6 +46,22 @@ export default {
         "#fff",
       ]
       var option = {
+        tooltip: {
+          trigger: "item",
+          backgroundColor: "rgba(0,0,0,0.8)",
+          borderWidth: 1,
+          borderColor: "#4396f3",
+          padding: [5, 10],
+          extraCssText: "box-shadow:inset 0 0 8px rgba(67, 149, 243, 0.6);",
+          textStyle: {
+            color: "#fff",
+          },
+          formatter: (v) => {
+            if (v.dataIndex % 2 == 0 && v.seriesIndex == 0) {
+              return v.name + ':' + v.value + '%'
+            }
+          }
+        },
         grid: {
           containLabel: true,
         },

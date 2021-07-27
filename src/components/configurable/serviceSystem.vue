@@ -204,7 +204,7 @@ export default {
         if (this.actvedNum == 0) {
           this.actvedNum = this.serviceSystemDatas.list.length;
         }
-      }, 1000);
+      }, 5000);
     },
     hoverItem (val, i) {
       switch (val) {

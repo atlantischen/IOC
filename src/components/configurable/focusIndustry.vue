@@ -19,20 +19,34 @@ export default {
       type: Object,
     },
   },
-  data() {
+  data () {
     return {
       ...this._data,
       ids: this.$uuid(),
     };
   },
-  mounted() {
+  mounted () {
     this.FocusIndustryFun(this.datas);
   },
   methods: {
-    FocusIndustryFun(val) {
+    FocusIndustryFun (val) {
       var j = 0;
       const { optionName, datas, keyD } = val;
       var option = {
+        tooltip: {
+          trigger: "item",
+          backgroundColor: "rgba(0,0,0,0.8)",
+          borderWidth: 1,
+          borderColor: "#4396f3",
+          padding: [5, 10],
+          extraCssText: "box-shadow:inset 0 0 8px rgba(67, 149, 243, 0.6);",
+          textStyle: {
+            color: "#fff",
+          },
+          formatter: (v) => {
+            return v.name + ':' + datas[v.dataIndex] + '%'
+          }
+        },
         title: {
           show: keyD,
           text: keyD ? keyD.value : "",
@@ -67,7 +81,7 @@ export default {
           left: "50%",
           y: "center",
           data: optionName,
-          formatter: function(name) {
+          formatter: function (name) {
             return "{a|" + name + "}" + datas[j++] + "%";
           },
           textStyle: {

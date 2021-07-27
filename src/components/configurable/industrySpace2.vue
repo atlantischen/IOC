@@ -34,6 +34,20 @@ export default {
       const { optionName, datas } = val
       var dom = this.$refs["industrySpace2Echart_" + this.ids]
       var option = {
+        tooltip: {
+          trigger: "item",
+          backgroundColor: "rgba(0,0,0,0.8)",
+          borderWidth: 1,
+          borderColor: "#4396f3",
+          padding: [5, 10],
+          extraCssText: "box-shadow:inset 0 0 8px rgba(67, 149, 243, 0.6);",
+          textStyle: {
+            color: "#fff",
+          },
+          formatter: (v) => {
+            return v.name + ':' + v.value + '%'
+          }
+        },
         title: {
           show: true,
           text: "",

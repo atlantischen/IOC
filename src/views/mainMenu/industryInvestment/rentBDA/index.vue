@@ -16,13 +16,21 @@
 <script>
 export default {
   name: "rentBDA",
-  data() {
+  data () {
     return {
       leftInfo: [
         {
           title: "租赁概况",
           type: "LeaseSummary",
-          datas: {},
+          datas: {
+            optionName: ["空置产业空间", "已租产业空间"],
+            unit: '万平',
+            xAxiasD: [12.935, 89.565],
+            datas: {
+              name: '园区总面积',
+              value: 99.55
+            }
+          },
         },
         {
           title: "各类型租用统计",

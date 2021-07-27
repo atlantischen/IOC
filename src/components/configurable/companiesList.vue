@@ -79,7 +79,7 @@ export default {
       type: Object,
     },
   },
-  data() {
+  data () {
     return {
       ...this._data,
       ids: this.$uuid(),
@@ -87,10 +87,10 @@ export default {
       returnStyle: "",
     };
   },
-  mounted() {
-    document.onclick = function() {
-      this.leaveItemFun();
-    };
+  mounted () {
+    // document.onclick = function() {
+    //   this.leaveItemFun();
+    // };
     if (!this.datas.buldingList) {
       this.$nextTick(() => {
         this.getDatas();
@@ -98,7 +98,7 @@ export default {
     }
   },
   methods: {
-    selectBuldingFun(key, val) {
+    selectBuldingFun (key, val) {
       this.leaveItemFun();
       switch (key) {
         case "B":
@@ -109,15 +109,15 @@ export default {
           break;
       }
     },
-    hoverItemFun(e, i) {
+    hoverItemFun (e, i) {
       this.showItem = i;
       this.returnStyle = `right:${window.screen.width -
         e.clientX}px;top:${e.clientY - 300}px`;
     },
-    leaveItemFun() {
+    leaveItemFun () {
       this.showItem = null;
     },
-    getDatas() {
+    getDatas () {
       // this.$ScrolAnimationTop('companiesImgsListRef_' + this.ids, 3)
     },
   },
@@ -197,7 +197,7 @@ export default {
           }
         }
         .litInfo_img {
-          .ioc_img(0.625rem /* 50/80 */, 0.625rem /* 50/80 */, 50%) ;;
+          .ioc_img(0.625rem /* 50/80 */, 0.625rem /* 50/80 */, 50%);
           object-fit: cover;
           margin-right: 0.25rem /* 20/80 */;
         }

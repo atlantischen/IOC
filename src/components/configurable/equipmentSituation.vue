@@ -151,7 +151,7 @@ export default {
                 { offset: 1, color: "rgb(67, 150, 243, .1)" },
               ]),
             },
-            data: [27860, 35320, 34320, 29450],
+            data: datas[0],
           },
           {
             name: names[1],
@@ -163,7 +163,7 @@ export default {
                 { offset: 1, color: "rgb(151, 200, 255, .1)" },
               ]),
             },
-            data: datas,
+            data: datas[1],
           },
         ],
       };

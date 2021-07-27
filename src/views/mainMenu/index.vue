@@ -30,7 +30,7 @@ export default {
   components: { AlarmAck },
   data () {
     return {
-      isShow: false,
+      isShow: true,
       deviceShow: false,
       fade: true,
       url: "",
@@ -73,7 +73,7 @@ export default {
             },
           ];
           this.$store.dispatch("SET_SHOWWARNTIP", true);
-        }, this.$randomNumer(5000, 300000));
+        }, this.$randomNumer(1000, 3000));
       }
     },
   },

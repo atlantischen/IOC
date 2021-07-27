@@ -103,7 +103,7 @@ export default {
 @import "~@/style/gl.less";
 .tipBox {
   position: fixed;
-  top: 3.125rem /* 250/80 */;
+  top: 0.75rem /* 60/80 */;
   left: 50%;
   transform: translateX(-50%);
   -webkit-transform: translateX(-50%);
@@ -114,7 +114,7 @@ export default {
   font-size: 0.225rem /* 18/80 */;
   margin: 0.25rem /* 20/80 */ 0;
   cursor: pointer;
-  z-index: 200;
+  z-index: 500;
   .tipBox_text {
     white-space: nowrap;
     padding: 0 0.4375rem /* 35/80 */;

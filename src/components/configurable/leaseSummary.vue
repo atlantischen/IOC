@@ -28,15 +28,24 @@ export default {
   },
   methods: {
     leaseSummaryFun (val) {
+      const { unit, optionName, xAxiasD, datas } = val
       var dom = this.$refs["leaseSummaryEchart_" + this.ids]
       var myChart = echarts.init(dom)
-      var optionName = ["空置产业空间", "已租产业空间"],
-        xAxiasD = [12.935, 89.565],
-        datas = {
-          name: '园区总面积',
-          value: 99.55
-        }
       var option = {
+        tooltip: {
+          trigger: "item",
+          backgroundColor: "rgba(0,0,0,0.8)",
+          borderWidth: 1,
+          borderColor: "#4396f3",
+          padding: [5, 10],
+          extraCssText: "box-shadow:inset 0 0 8px rgba(67, 149, 243, 0.6);",
+          textStyle: {
+            color: "#fff",
+          },
+          formatter: (v) => {
+            return v.name + ':' + v.value + unit
+          }
+        },
         title: [
           {
             show: true,
@@ -63,7 +72,7 @@ export default {
           },
           {
             show: true,
-            text: datas.value + '{a|万平}',
+            text: datas.value + `{a|${unit}}`,
             link: "",
             target: null,
             subtext: "",
@@ -98,7 +107,7 @@ export default {
             optionName.forEach(function (value, i) {
               if (value == name) index = i
             })
-            return "{a|" + xAxiasD[index] + "}{c|万平}" + "\n{b|" + name + "}";
+            return "{a|" + xAxiasD[index] + "}{c|" + unit + "}" + "\n{b|" + name + "}";
           },
           textStyle: {
             color: "#fff",

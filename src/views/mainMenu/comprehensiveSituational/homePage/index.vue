@@ -50,7 +50,7 @@ export default {
                   name: "待入驻企业",
                 },
                 {
-                  data: [28],
+                  data: [234],
                   name: "已入驻企业",
                 },
               ],
@@ -77,10 +77,14 @@ export default {
           datas: {
             smooth: false,
             unit: ["时间", "人"],
-            names: ["办公人员", "访客"],
+            // names: ["办公人员", "访客"],
+            names: ["访客"],
             xData: ["05:00", "06:00", "07:00", "08:00", "09:00", "10:00"],
+            // datas: [
+            //   [23, 12, 43, 32, 21, 43],
+            //   [34, 2, 32, 32, 32, 23],
+            // ],
             datas: [
-              [23, 12, 43, 32, 21, 43],
               [34, 2, 32, 32, 32, 23],
             ],
             datas2: [
@@ -170,15 +174,15 @@ export default {
             ],
             datas2: [
               {
-                value: 3200,
+                value: 2465,
                 name: "总车位",
               },
               {
-                value: 218,
+                value: 381,
                 name: "剩余车位",
               },
               {
-                value: 2954,
+                value: 2084,
                 name: "在场车辆",
               },
             ],
@@ -208,7 +212,7 @@ export default {
             ],
             names: ["正常", "故障"],
             xAxisName: ["安防", "能耗", "网络", "消防"],
-            datas: [12530, 23440, 24520, 23440],
+            datas: [[1023, 824, 1000, 1014], [35, 32, 53, 82]],
           },
         },
       ],
@@ -221,7 +225,7 @@ export default {
         },
         {
           name: "剩余车位数",
-          val: 1241,
+          val: 381,
         },
         {
           name: "未处理告警数",
@@ -265,6 +269,7 @@ export default {
     //   (this.rightInfo = homePage.rightInfo)
   },
   mounted () {
+    console.log(this.$timeRangeArr('00:00', '11:00'))
     // aaa().then(r=>{
     //   console.log(r)
     // })

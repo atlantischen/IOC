@@ -228,7 +228,31 @@ var randomNumer = function randomNumer(minNum, maxNum) {
 var filterNum = function filterNum(val) {
   return Number(val).toLocaleString()
 }
-
+/**
+ *
+ * 只精确到分钟，精确到秒可以自行添加
+ * @param {any} start 开始时间  (例 9:30)
+ * @param {any} end   结束时间  (例 15:00)
+ * @returns
+ */
+var timeRangeArr = function timeRangeArr(start, end) {
+  var timeline = [],
+    startHour = start.split(':')[0] * 1,
+    startMin = start.split(':')[1] * 1,
+    endHour = end.split(':')[0] * 1,
+    endMin = end.split(':')[1] * 1;
+  for (var i = startHour; i <= endHour; i++) {
+    var start = (i == startHour) ? startMin : '0';
+    console.log(start)
+    var end = (i == endHour) ? endMin : '59';
+    console.log(end)
+    for (var j = start; j <= end; j++) {
+      j = (j < 10) ? '0' + j : j;
+      timeline.push(i + ":" + j);
+    }
+  }
+  return timeline;
+}
 const fun = {
   currentDate,
   redomEchart,
@@ -239,6 +263,7 @@ const fun = {
   ScrolAnimationTop,
   ScrolLeftARight,
   randomNumer,
-  filterNum
+  filterNum,
+  timeRangeArr
 }
 export default fun
