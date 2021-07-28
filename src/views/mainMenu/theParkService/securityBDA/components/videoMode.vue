@@ -2,13 +2,18 @@
   <!-- 视频模式 -->
   <div class="videoMode">
     <ul class="videoMode_Box x_sb_rap">
-      <li v-for="(item, i) in videoDatas" :key="i" @click="lookVideo(item)">
+      <li v-for="(item, i) in videoDatas" @click="lookVideo(item)" :key="i">
         <iframe
+          v-if="item.url"
+          :id="'iframeVideo' + i"
+          :ref="'iframeVideo' + i"
           style="width: 100%; height: 100%"
           :src="item.url + '&protocol=FLV&iframe=yes'"
           allowfullscreen
           allow="autoplay; fullscreen"
         ></iframe>
+        <span v-else>无信号</span>
+        <!-- ws://47.119.172.151:10810/nvc/test/ws/flv/hls/stream_1.flv -->
       </li>
     </ul>
     <LookVideo :Visible="Visible" :title="dialogTitle" @off="openCloseDialog" />
@@ -75,14 +80,56 @@ export default {
     }
   },
   components: {},
+  mounted () {
+    var IframeOnClick = {
+      resolution: 200,
+      iframes: [],
+      interval: null,
+      Iframe: function () {
+        this.element = arguments[0];
+        this.cb = arguments[1];
+        this.hasTracked = false;
+      },
+      track: function (element, cb) {
+        this.iframes.push(new this.Iframe(element, cb));
+        if (!this.interval) {
+          var _this = this
+          this.interval = setInterval(function () { _this.checkClick(); }, this.resolution);
+        }
+      },
+      checkClick: function () {
+        if (document.activeElement) {
+          var activeElement = document.activeElement;
+          for (var i in this.iframes) {
+            if (activeElement === this.iframes[i].element) {
+              if (this.iframes[i].hasTracked == false) {
+                this.iframes[i].cb.apply(window, []);
+                this.iframes[i].hasTracked = true;
+              }
+            } else {
+              this.iframes[i].hasTracked = false;
+            }
+          }
+        }
+      }
+    };
+    for (var i = 0; i < this.videoDatas.length; i++) {
+      // IframeOnClick.track(document.getElementById("iframeVideo" + i), function (e) {
+      //   console.log(e)
+      // }, i);
+      // IframeOnClick.track(document.getElementById("iframeVideo" + i), function (i) {
+      //   this.lookVideo(this.videoDatas[i])
+      // });
+    }
+  },
   methods: {
     openCloseDialog (val) {
       this.Visible = val
     },
     lookVideo (val) {
+      console.log(val)
       this.dialogTitle = val.local
       this.openCloseDialog(true)
-      console.log(val)
     }
   }
 }
