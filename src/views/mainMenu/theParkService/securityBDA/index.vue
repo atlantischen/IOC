@@ -43,7 +43,7 @@ export default {
 .securityBDA {
   :deep(.securityBDA_tabs) {
     position: fixed;
-    top: 1.25rem /* 100/80 */;
+    top: 1.5625rem /* 125/80 */;
     left: 50%;
     transform: translate(-50%, 0%);
     -webkit-transform: translate(-50%, 0%);

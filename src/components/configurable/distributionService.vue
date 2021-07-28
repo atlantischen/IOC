@@ -133,28 +133,28 @@ export default {
               height: 0,
               lineHeight: 0,
               backgroundColor: 'auto',
-              padding: [4, -4, 4, -4],
-              borderRadius: 4,
+              padding: [3, -3, 3, -3],
+              borderRadius: 3,
               distanceToLabelLine: 0,
               formatter: '{top|{d}%}\n{bottom|{b}}',
-              align: 'center',
+              // align: 'center',
               rich: {
                 top: {
+                  color: '#fff',
                   verticalAlign: 'bottom',
-                  padding: [10, 10, 0, 10],
-                  align: 'center'
+                  padding: [5, -50]
                 },
                 bottom: {
-                  padding: [0, 10, 10, 10],
-                  verticalAlign: 'top',
-                  align: 'center'
+                  color: '#fff',
+                  padding: [10, -50],
+                  verticalAlign: 'top'
                 }
               }
             },
             labelLine: {
               normal: {
                 length: 20,
-                length2: 50
+                length2: 70
               }
             },
             data: [],

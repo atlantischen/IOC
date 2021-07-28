@@ -5,7 +5,7 @@
       <li v-for="(item, i) in videoDatas" :key="i" @click="lookVideo(item)">
         <iframe
           style="width: 100%; height: 100%"
-          src="http://172.21.71.225:10800/play.html?channel=1&protocol=FLV&iframe=yes&aspect=400x220"
+          :src="item.url + '&protocol=FLV&iframe=yes'"
           allowfullscreen
           allow="autoplay; fullscreen"
         ></iframe>
@@ -24,53 +24,53 @@ export default {
       dialogTitle: '',
       videoDatas: [
         {
-          id: 1,
-          local: '16楼C区铭筑'
+          local: '16楼C区铭筑',
+          url: 'http://172.21.71.225:10800/play.html?channel=5'
         },
         {
-          id: 2,
-          local: '14楼A区铭筑'
+          local: '16楼C区铭筑',
+          url: 'http://172.21.71.225:10800/play.html?channel=6'
         },
         {
-          id: 3,
-          local: '15楼D区铭筑'
+          local: '16楼C区铭筑',
+          url: 'http://172.21.71.225:10800/play.html?channel=7'
         },
         {
-          id: 4,
-          local: '16楼C区铭筑'
+          local: '16楼C区铭筑',
+          url: 'http://172.21.71.225:10800/play.html?channel=8'
         },
         {
-          id: 5,
-          local: '16楼C区铭筑'
+          local: '16楼C区铭筑',
+          url: 'http://172.21.71.225:10800/play.html?channel=9'
         },
         {
-          id: 6,
-          local: '16楼C区铭筑'
+          local: '16楼C区铭筑',
+          url: 'http://172.21.71.225:10800/play.html?channel=10'
         },
         {
-          id: 7,
-          local: '16楼C区铭筑'
+          local: '16楼C区铭筑',
+          url: 'http://172.21.71.225:10800/play.html?channel=11'
         },
         {
-          id: 8,
-          local: '16楼C区铭筑'
+          local: '14楼B区机房外',
+          url: 'http://172.21.71.225:10800/play.html?channel=12'
         },
         {
-          id: 9,
-          local: '16楼C区铭筑'
+          local: '14楼C区中科展示',
+          url: 'http://172.21.71.225:10800/play.html?channel=13'
         },
         {
-          id: 10,
-          local: '16楼C区铭筑'
+          local: '14楼C区展示区',
+          url: 'http://172.21.71.225:10800/play.html?channel=14'
         },
         {
-          id: 11,
-          local: '16楼C区铭筑'
+          local: '14层A区大事记朝外',
+          url: 'http://172.21.71.225:10800/play.html?channel=15'
         },
         {
-          id: 12,
-          local: '16楼C区铭筑'
-        }
+          local: '14楼展厅入口',
+          url: 'http://172.21.71.225:10800/play.html?channel=16'
+        },
       ]
     }
   },
@@ -93,7 +93,7 @@ export default {
   width: 20.45rem /* 1636/80 */;
   height: 8.55rem /* 684/80 */;
   position: fixed;
-  top: 1.875rem /* 150/80 */;
+  top: 2.125rem /* 170/80 */;
   left: 50%;
   transform: translate(-50%, 0%);
   -webkit-transform: translate(-50%, 0%);
