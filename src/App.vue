@@ -33,7 +33,6 @@ export default {
   // },
   mounted () {
     window.addEventListener("message", this.event, true);
-    
   },
   beforeDestory () {
     window.removeEventListener("message", this.event, true);

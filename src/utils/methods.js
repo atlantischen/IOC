@@ -2,6 +2,7 @@ import {
   EleResize
 } from '@/assets/js/echarts'
 import * as echarts from 'echarts';
+import screenfull from "screenfull";
 const moment = require('moment')
 
 var currentDate = function currentDate() {
@@ -277,6 +278,18 @@ var timeRangeArr = function timeRangeArr(_range) {
     return timeline;
   }
 }
+/**
+ *
+ * 全屏
+ * @returns
+ */
+var handleFullScreen = function handleFullScreen() {
+  if (!screenfull.isEnabled) {
+    this.$message.info("您的浏览器版本过低，不支持全屏浏览");
+    return false;
+  }
+  screenfull.toggle();
+}
 const fun = {
   currentDate,
   redomEchart,
@@ -288,6 +301,7 @@ const fun = {
   ScrolLeftARight,
   randomNumer,
   filterNum,
-  timeRangeArr
+  timeRangeArr,
+  handleFullScreen
 }
 export default fun

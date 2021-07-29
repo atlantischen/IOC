@@ -75,15 +75,7 @@ export default {
     },
     isShow: function (n, o) {
       if (n) {
-        // 随机触发警告
-        this.warnTimer = setInterval(() => {
-          this.tipList = [
-            {
-              text: "告警！2021-05-11 15:41:47 3期C座5楼电梯间发生陌生人报警",
-            },
-          ];
-          this.$store.dispatch("SET_SHOWWARNTIP", true);
-        }, this.$randomNumer(3000, 30000));
+        this.warnTimeFun()
       }
     },
   },
@@ -100,7 +92,6 @@ export default {
       window.addEventListener("vuplexready", this.addMessageListener);
     }
     window.addEventListener("message", (event) => {
-      // console.log(event)
       if (
         (typeof event.data == "string" && event.data.indexOf("data") != -1) ||
         (typeof event.data == "object" && event.data.data != undefined)
@@ -114,14 +105,21 @@ export default {
           clearInterval(this.warnTimer);
           this.isShow = false;
           this.hideGlobal(false)
-        } else if (res.action === "ShowUserInterface") {
+        } else if (res.action === "ShowUserInterface") { // 设备
           this.fade = false;
           this.deviceShow = true;
-        } else if (res.action === "OnAlarmProcessingBtnClick") {
+        } else if (res.action === "OnAlarmProcessingBtnClick") { // 确认报警
           this.showAlarmAck = true
-        } else if (res.action === "OpenWarningMessagePage") {
+        } else if (res.action === "OpenWarningMessagePage") { // 报警列表
           this.showAllAlert = true
           this.allAlertDatas = res.data.Datas
+        } else if (res.action === "Enter3DFullScreen") { // 3D全屏
+          this.$handleFullScreen()
+          clearInterval(this.warnTimer);
+          this.hideGlobal(false)
+          this.isShow = false;
+        } else if (res.data === "esc") { // 退出3D全屏
+          // this.Exit3DFullScreen()
         }
       }
     });
@@ -131,12 +129,21 @@ export default {
       window.debug = true;
     } else {
       this.url = process.env.VUE_APP_UNITY;
-      // this.url = 'http://183.62.170.2:8110'
+      this.url = 'http://183.62.170.2:8110'
     }
   },
   mounted () {
     this.$nextTick(() => {
       window.iframe = this.$refs.iframe;
+      // this.IframeOnload()
+      var _that = this
+      window.addEventListener("resize", function () {
+        var isFull = document.fullscreenElement || document.mozFullScreenElement || document.webkitFullscreenElement;
+        if (isFull == undefined) isFull = false;
+        if (!isFull) {// 全屏下按键esc
+          _that.Exit3DFullScreen()
+        }
+      });
     });
   },
   beforeDestroy () {
@@ -185,6 +192,40 @@ export default {
           this.hideGlobal(false)
           break;
       }
+    },
+    // 3D加载完后
+    IframeOnload () {
+      let _ref = this.$refs.iframe
+      _ref.onload = _ref.onreadystatechange = function () {
+        if (this.readyState && this.readyState != 'complete') return;
+        else {
+          // do some
+        }
+      }
+    },
+    // 退出3D全屏
+    Exit3DFullScreen () {
+      clearInterval(this.warnTimer);
+      this.warnTimeFun()
+      this.isShow = true;
+      this.$SendMessageToUnity("Exit3DFullScreen");
+    },
+    // 随机触发警告
+    warnTimeFun () {
+      this.warnTimer = setInterval(() => {
+        this.tipList = [
+          {
+            text: "告警！2021-05-11 15:41:47 3期C座5楼电梯间发生陌生人报警",
+          }
+        ];
+        this.$store.dispatch("SET_SHOWWARNTIP", true);
+      }, this.$randomNumer(3000, 30000));
+    },
+    //监测是否按下esc键
+    checkFull () {
+      var isFull = document.fullscreenElement || document.mozFullScreenElement || document.webkitFullscreenElement;
+      if (isFull == undefined) isFull = false;
+      return isFull;
     }
   },
 };
