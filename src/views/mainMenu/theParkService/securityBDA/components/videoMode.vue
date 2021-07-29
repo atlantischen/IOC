@@ -2,7 +2,17 @@
   <!-- 视频模式 -->
   <div class="videoMode">
     <ul class="videoMode_Box x_sb_rap">
-      <li v-for="(item, i) in videoDatas" @click="lookVideo(item)" :key="i">
+      <li
+        v-for="(item, i) in videoDatas"
+        @mouseenter="mouseFun(true, i)"
+        @mouseleave="mouseFun(false, i)"
+        :key="i"
+      >
+        <div
+          :class="['box_master', showMaster ? 'show_master' : 'close_master']"
+          v-if="showMaster && masterIndex == i"
+          @click="lookVideo(item)"
+        ></div>
         <iframe
           v-if="item.url"
           :id="'iframeVideo' + i"
@@ -16,7 +26,12 @@
         <!-- ws://47.119.172.151:10810/nvc/test/ws/flv/hls/stream_1.flv -->
       </li>
     </ul>
-    <LookVideo :Visible="Visible" :title="dialogTitle" @off="openCloseDialog" />
+    <LookVideo
+      :Visible="Visible"
+      :_data="videoD"
+      :title="dialogTitle"
+      @off="openCloseDialog"
+    />
   </div>
 </template>
 
@@ -27,6 +42,8 @@ export default {
     return {
       Visible: false,
       dialogTitle: '',
+      showMaster: false,
+      masterIndex: null,
       videoDatas: [
         {
           local: '16楼C区铭筑',
@@ -76,7 +93,8 @@ export default {
           local: '14楼展厅入口',
           url: 'http://172.21.71.225:10800/play.html?channel=16'
         },
-      ]
+      ],
+      videoD: {}
     }
   },
   components: {},
@@ -129,13 +147,20 @@ export default {
     lookVideo (val) {
       console.log(val)
       this.dialogTitle = val.local
+      this.videoD = val
       this.openCloseDialog(true)
+    },
+    mouseFun (bool, i) {
+      console.log(bool)
+      this.showMaster = bool
+      this.masterIndex = i
     }
   }
 }
 </script>
 
 <style lang='less' scoped>
+@import "~@/style/animation.less";
 .videoMode_Box {
   width: 20.45rem /* 1636/80 */;
   height: 8.55rem /* 684/80 */;
@@ -145,7 +170,22 @@ export default {
   transform: translate(-50%, 0%);
   -webkit-transform: translate(-50%, 0%);
   z-index: 108;
+  .box_master {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 168px;
+    background: rgba(0, 0, 0, 0.2);
+  }
+  .show_master {
+    .toShow(0.2s, 0.1s);
+  }
+  .close_master {
+    .toHide(5s, 5s);
+  }
   li {
+    position: relative;
     width: 5rem /* 400/80 */;
     height: 2.75rem /* 220/80 */;
     background: #111;

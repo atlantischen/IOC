@@ -182,6 +182,7 @@ export default {
       var datas = [53, 300],
         colors = ["#00ffff", "yellow", "orange", "red", "#990056", "#7b0128"],
         selectedColor = ''
+      datas[0] = this.$randomNumer(40, 70)
       switch (true) {
         case datas[0] < (datas[1] / 6) * 1:
           selectedColor = colors[0]
@@ -249,9 +250,10 @@ export default {
               formatter: "{a| {c}}\n{b| }",
               rich: {
                 a: {
-                  width: 20,
+                  width: 40,
                   height: 15,
-                  padding: [3, 10, 5],
+                  padding: [3, 3, 5, 0],
+                  align: 'center',
                   color: "#000",
                   borderRadius: 5,
                   backgroundColor: selectedColor

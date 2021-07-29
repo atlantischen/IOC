@@ -148,7 +148,7 @@ export default {
   props: {
     inputVal: String,
   },
-  data() {
+  data () {
     return {
       currentPage: 1,
       total: 1,
@@ -275,32 +275,32 @@ export default {
   },
   watch: {
     inputVal: {
-      handler(n, o) {
+      handler (n, o) {
         this.inputV = n;
       },
       deep: true,
     },
   },
-  mounted() {
+  mounted () {
     this.total = this.tableData2.length;
     this.changeDatasFun();
   },
   methods: {
     // 上传头像
-    changeFile(file, fileList) {
+    changeFile (file, fileList) {
       var _that = this;
       if (!file || !window.FileReader) return;
       var reader = new FileReader();
       reader.readAsDataURL(file.raw);
-      reader.onload = function(e) {
+      reader.onload = function (e) {
         _that.imageUrl = reader.result;
       };
     },
     //
-    showBlackListFun() {
+    showBlackListFun () {
       this.isFade = !this.isFade;
     },
-    searchList(val) {
+    searchList (val) {
       this.inputV = val;
       // if (!val) {
       //   return this.$message.error("请输入关键词！")
@@ -310,39 +310,41 @@ export default {
       this.isShowList = !this.isShowList;
     },
     // 搜索轨迹
-    SearchPath() {
-      this.$SendMessageToUnity("ShowLocationPin", {
-        Serial: 0,
-      });
-      console.log("ShowLocationPin---搜寻轨迹------------");
+    SearchPath () {
+      if (this.imageUrl) {
+        this.$SendMessageToUnity("ShowLocationPin", {
+          Serial: 0,
+        });
+        console.log("ShowLocationPin---搜寻轨迹------------");
+      }
     },
-    searchOneItem(val) {
+    searchOneItem (val) {
       console.log(val);
       this.$SendMessageToUnity("ShowLocationPin", {
         Serial: 0,
       });
       console.log("ShowLocationPin--商家、企业------------");
     },
-    zhuizongFun(val) {
+    zhuizongFun (val) {
       console.log(val);
       this.$SendMessageToUnity("ShowLocationPin", {
         Serial: 0,
       });
       console.log("ShowLocationPin-----跟踪------------");
     },
-    back() {
+    back () {
       this.$emit("_c", null);
     },
     // 模拟分页
-    changeDatasFun() {
+    changeDatasFun () {
       let _data = JSON.parse(JSON.stringify(this.tableData2));
       let _first = (this.currentPage - 1) * 10;
       this.tableData = _data.slice(_first, _first + 10);
     },
-    handleSizeChange(val) {
+    handleSizeChange (val) {
       console.log(`每页 ${val} 条`);
     },
-    handleCurrentChange(val) {
+    handleCurrentChange (val) {
       this.currentPage = val;
       this.changeDatasFun();
     },

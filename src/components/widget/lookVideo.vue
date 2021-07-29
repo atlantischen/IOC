@@ -9,11 +9,18 @@
         @open="openClose(true)"
       >
         <div class="videoBox" ref="videoBoxRef">
-          <video controls>
+          <!-- <video controls>
             <source  src="~@/assets/video/v.mp4" type="video/mp4" />
             <source src="~@/assets/video/vvv.jpg" type="video/ogg" />
             您的浏览器不支持Video标签。
-          </video>
+          </video> -->
+          <iframe
+            v-if="_data.url"
+            style="width: 100%; height: 100%"
+            :src="_data.url + '&protocol=FLV&iframe=yes'"
+            allowfullscreen
+            allow="autoplay; fullscreen"
+          ></iframe>
           <div class="videoSet">
             <!-- <i class="currentTime"> 2021年07月05日 </i> -->
             <i class="currentTime" id="currentTimeRef" ref="currentTimeRef"
@@ -34,7 +41,6 @@
 </template>
 
 <script>
-import { nextTick } from '@vue/runtime-core';
 export default {
   name: "LookVideo",
   props: {

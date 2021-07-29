@@ -11,7 +11,7 @@
     <!-- 告警框 -->
     <TipBox :_data="tipList" />
     <!-- 右侧警告框 -->
-    <AlarmAck :_isFade="showAlarmAck" @close="closeAlarmAck" />
+    <AlarmAck :_isFade="showAlarmAck" @close="closeOpenItem" />
     <!-- 中心数据 -->
     <CenterDatas :list="centerDatas" />
     <!-- 设备管理 -->
@@ -20,20 +20,29 @@
       :_fade="fade"
       @chageFade="chageFade($event)"
     ></Device>
+    <!-- 查看所有告警 -->
+    <AllAlert
+      :Visible="showAllAlert"
+      :_data="allAlertDatas"
+      @off="closeOpenItem"
+    />
   </div>
 </template>
 
 <script>
+import AllAlert from "@/components/widget/allAlert.vue"
 import AlarmAck from "@/views/mainMenu/comprehensiveSituational/homePage/components/alarmAck.vue";
 export default {
   name: "MainMenu",
-  components: { AlarmAck },
+  components: { AlarmAck, AllAlert },
   data () {
     return {
       isShow: false,
       deviceShow: false,
       fade: true,
       showAlarmAck: false,
+      showAllAlert: false,
+      allAlertDatas: null,
       url: "",
       warnTimer: null,
       tipList: null,
@@ -104,12 +113,15 @@ export default {
         } else if (res.action === "hide") {
           clearInterval(this.warnTimer);
           this.isShow = false;
-          this.hideGlobal()
+          this.hideGlobal(false)
         } else if (res.action === "ShowUserInterface") {
           this.fade = false;
           this.deviceShow = true;
         } else if (res.action === "OnAlarmProcessingBtnClick") {
-          this.closeAlarmAck(true)
+          this.showAlarmAck = true
+        } else if (res.action === "OpenWarningMessagePage") {
+          this.showAllAlert = true
+          this.allAlertDatas = res.data.Datas
         }
       }
     });
@@ -153,15 +165,26 @@ export default {
     chageFade (val) {
       this.fade = val;
     },
-    hideGlobal () {
-      this.fade = false;
-      this.deviceShow = false;
-      this.closeAlarmAck(false)
-      this.$store.dispatch("SET_SHOWWARNTIP", false);
-      this.$store.commit("SET_CENTERDATAS", [false, null]);
+    hideGlobal (bool) {
+      this.fade = bool;
+      this.deviceShow = bool;
+      this.showAllAlert = bool;
+      this.showAlarmAck = bool
+      this.$store.dispatch("SET_SHOWWARNTIP", bool);
+      this.$store.commit("SET_CENTERDATAS", [bool, null]);
     },
-    closeAlarmAck (val) {
-      this.showAlarmAck = val
+    closeOpenItem (name, bool) {
+      switch (name) {
+        case 'allAlarm':
+          this.showAllAlert = bool
+          break;
+        case 'AlarmAck':
+          this.showAlarmAck = bool
+          break;
+        default:
+          this.hideGlobal(false)
+          break;
+      }
     }
   },
 };
