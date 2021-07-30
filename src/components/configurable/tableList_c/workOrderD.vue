@@ -17,7 +17,10 @@
           <p>
             <span>创建时间：</span><span>{{ _data[1].creatTime || "-" }}</span>
           </p>
-          <p><span>工单内容：</span><span>2号电梯下降时出现震动</span></p>
+          <p>
+            <span>工单内容：</span
+            ><span>{{ _data[1].workOrderInfo || "-" }}</span>
+          </p>
           <p>
             <span>图片预览：</span
             ><span
