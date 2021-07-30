@@ -21,6 +21,8 @@ import AddScene from '../components/addScene.vue' //视频
 import SvgIcon from '../components/widget/svgIcon.vue' // svg 图标
 import Rtps from '../components/rtps.vue' 
 import Device from '../components/device.vue' 
+import ElevatorMonitoring from '../components/elevatorMonitoring.vue'  //电梯监控
+import Player from '../components/player.vue'  //flv视频流
 
 const global = {
   ...configurable,
@@ -45,6 +47,8 @@ const global = {
   MoveDialog,
   SvgIcon,
   Rtps,
-  Device
+  Device,
+  ElevatorMonitoring,
+  Player
 }
 export default global

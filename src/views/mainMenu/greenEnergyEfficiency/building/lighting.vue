@@ -14,7 +14,7 @@
           </li>
           <li>
             <span class="font_text">70</span>
-            <span>开启数</span>
+            <span>关闭数</span>
           </li>
           <li>
             <span class="font_text">13</span>
@@ -94,7 +94,7 @@
     </div>
     <div class="scene">
      <div class="tittle">照明场景配置</div>
-      <div class="add" @click="dialogShowChange(true)">
+      <div class="add" @click="dialogShowChange(true,'Add')">
         <i class="iconfont icon-tianjia"></i>
         <span>添加通行用户</span>
       </div>
@@ -108,13 +108,13 @@
           <li >{{_it.p1}}</li>
           <li >{{_it.p2}}</li>
         </ul>
-        <a class="light_edit" @click="dialogShowChange(true)">编辑</a>
+        <a class="light_edit" @click="dialogShowChange(true,'Edit')">编辑</a>
        </li>
      </ul>
 
     </div>
   </IOCRight>
-  <AddScene :dialogShow="dialogShow" :title='title' @dialogShowChange="dialogShowChange"></AddScene>
+  <AddScene :dialogShow="dialogShow" :formData='formData' @dialogShowChange="dialogShowChange" @formDataClick='formDataClick'></AddScene>
 </template>
 
 <script>
@@ -198,7 +198,7 @@ export default {
           {
             states: 1,
             p1:'当07:00-工作日时',
-            p2:'大堂-开启照明灯'
+            p2:'大堂-开启照明'
           },
           {
             states: 0,
@@ -217,16 +217,36 @@ export default {
           },
           
         ],
-       dialogShow:false ,
-       title:'添加场景'
-
-
+      dialogShow:false ,
+      formData:{}
     };
   },
   methods: {
-    dialogShowChange(val){
-      
+    dialogShowChange(val,t){
+      if(t==='Add'){
+          this.formData={ 
+            title:'添加场景',
+            region: "",
+            date: "",
+            type: [],
+            type1: [],
+            resource: "照明回路",
+        }
+      }else if(t==='Edit'){
+        this.formData={
+          title:'编辑场景',
+          region: "",
+          date: "123262",
+          type: ['法定节假日'],
+          type1: ['楼梯间'],
+          resource: "开关回路",
+        }
+      }
       this.dialogShow=val
+    },
+     formDataClick(val){
+       this.formData= val
+      
     },
     closeOpen(val, i) {
       if (val == "comArea") {
@@ -240,34 +260,34 @@ export default {
     },
     clickUsedEchart(num) {
       this.activeIndex = num;
-      if (num == 0) {
+      if (num == 1) {
         this.ElectricityStatistics(
-          ["12.13", "12.14", "12.15", "12.16", "12.17", "12.18", "12.19"],
+          ["12.5", "12.6", "12.7", "12.8", "12.9", "12.10", "12.11"],
           [
-            [2, 23, 34, 43, 65, 54, 43],
-            [4, 3, 23, 23, 32, 11, 5],
-            [54, 23, 23, 43, 2, 11, 34],
-            [13, 12, 16, 2, 14, 13, 4],
+            [2, 2, 0.6, 0.8, 1, 2, 3],
+            [1, 3, 0.3, 0.5, 1, 1, 0.8],
+            [2, 0.8, 3, 3, 2, 0.5, 0.6],
+            [0.5, 0.5, 1, 2, 0.7, 1, 0.2],
           ]
         );
-      } else if (num == 1) {
+      } else if (num == 2) {
         this.ElectricityStatistics(
           ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"],
           [
-            [32, 7, 54, 23, 56, 21, 32, 7, 54, 23, 56, 21],
-            [3, 23, 43, 5, 23, 54, 23, 5, 23, 54, 32, 5],
-            [4, 32, 12, 43, 56, 45, 2, 12, 12, 43, 12, 1],
-            [24, 12, 32, 32, 41, 12, 24, 12, 32, 32, 41, 12],
+            [3, 4, 3, 2.8, 3, 4, 3, 2,3, 2.2, 1.3, 3],
+            [3, 3, 4, 2.2, 2, 1.3, 2.5, 2.1, 1.2, 1.8, 1.2, 1.2],
+            [2, 3, 2, 1.5, 1.6, 1.5, 3, 1.3, 1.1, 1.3, 1.4, 1.6],
+            [2, 1, 1, 1.8, 1.5, 1.2, 1.3, 1.1, 1.2, 1.3, 1.2, 1.2],
           ]
         );
-      } else {
+      } else if (num == 3) {
         this.ElectricityStatistics(
           ["2019年", "2020年", "2021年"],
           [
-            [243, 241, 313],
-            [23, 43, 34],
-            [231, 322, 34],
-            [123, 32, 123],
+            [4, 4, 3],
+            [2, 4, 2],
+            [1, 1, 4],
+            [2, 2, 1],
           ]
         );
       }
@@ -346,10 +366,14 @@ export default {
           {
             name: "kw",
             type: "value",
-            splitNumber: 3,
+             min: 0,
+            max: 12,
+            interval: 3,
+            splitNumber: 4,
             axisLabel: {
               formatter: function (value) {
-                return value / 1000 + (value != 0 ? "k" : "");
+                // return value / 1000 + (value != 0 ? "k" : "");
+                return value+"k" ;
               },
             },
             // data: ['5', '10', '15'],
@@ -420,11 +444,13 @@ export default {
   },
   mounted(){
      this.ElectricityStatistics(
-              ["12.13", "12.14", "12.15", "12.16", "12.17", "12.18", "12.19"],[
-              [2, 23, 34, 43, 65, 54, 43],
-              [4, 3, 23, 23, 32, 11, 5],
-              [54, 23, 23, 43, 2, 11, 34],
-              [13, 12, 16, 2, 14, 13, 4]]
+                        ["12.5", "12.6", "12.7", "12.8", "12.9", "12.10", "12.11"],
+                         [
+            [2, 2, 0.6, 0.8, 1, 2, 3],
+            [1, 3, 0.3, 0.5, 1, 1, 0.8],
+            [2, 0.8, 3, 3, 2, 0.5, 0.6],
+            [0.5, 0.5, 1, 2, 0.7, 1, 0.2],
+          ]
             );
   }
 };

@@ -30,7 +30,7 @@ export default {
   components: { AlarmAck },
   data () {
     return {
-      isShow: false,
+      isShow: true,
       deviceShow: false,
       fade: true,
       showAlarmAck: false,
@@ -119,7 +119,7 @@ export default {
       window.debug = true;
     } else {
       this.url = process.env.VUE_APP_UNITY;
-      // this.url = 'http://183.62.170.2:8110'
+
     }
   },
   mounted () {
@@ -139,6 +139,7 @@ export default {
     },
     addMessageListener () {
       window.vuplex.addEventListener("message", (event) => {
+        console.log(event.data);
         let res = JSON.parse(event.data);
         this.$store.commit("setData", res);
         if (res && res.lenght != 0) {

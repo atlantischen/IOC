@@ -56,7 +56,7 @@ export default {
       dialogTitle:'',
       active: 0,
       value: "",
-      selectCheck: null,
+      selectCheck: 1,
       checkedTime: 5,
       marks: {
         0: "5S",

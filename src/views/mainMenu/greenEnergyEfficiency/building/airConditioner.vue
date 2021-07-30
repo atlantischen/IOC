@@ -31,7 +31,7 @@
       <div class="btn">
         <ul>
           <li :class="{ active: activeIndex === 1 }" @click="changeBtn(1)">
-            近30天
+            近7天
           </li>
           <li :class="{ active: activeIndex === 2 }" @click="changeBtn(2)">
             近12月
@@ -683,10 +683,11 @@ export default {
       this.activeIndex = val;
       if (val == 1) {
         this.ElectricityStatistics(
-          ["1", "4", "7", "11", "14", "17", "21", "24", "27", "31"],
-          [200, 2300, 2300, 4300, 2000, 1001, 400, 2050, 2030, 2300],
+        ["7.24", "7.25", "7.26", "7.27", "7.28", "7.29", "7.30"],
+      [2500, 3000, 2800, 4000, 3000, 2900, 3900,],
           {
             name: "kw·h",
+            company:'日',
             splitNumber: 3,
             min: 0,
             max: 4800,
@@ -699,6 +700,8 @@ export default {
           [3, 4, 4, 3, 2, 1, 2, 5, 4, 3, 6, 2],
           {
             name: "万kw·h",
+            company:'月',
+
             splitNumber: 4,
             min: 0,
             max: 6.0,
@@ -711,6 +714,8 @@ export default {
           [23, 41, 13],
           {
             name: "万kw·h",
+            company:'年',
+          
             splitNumber: 4,
             min: 0,
             max: 60,
@@ -721,7 +726,7 @@ export default {
     },
 
     ElectricityStatistics (data, data2, yData) {
-      let { name, splitNumber, min, max, interval } = yData;
+      let { name,company, splitNumber, min, max, interval } = yData;
       // var dom = "ElectricityStatistics";
       var dom = this.$refs.ElectricityStatistics;
 
@@ -730,7 +735,7 @@ export default {
         grid: {
           top: "40",
           left: "10",
-          right: "0",
+          right: "20",
           bottom: "10",
           containLabel: true,
           backgroundColor: "rgba(0,0,0,0)",
@@ -764,15 +769,10 @@ export default {
         },
         xAxis: {
           type: "category",
-          // name: "{a|日期}",
+           name: company,
           nameTextStyle: {
-            rich: {
-              a: {
-                color: "#fff",
-                padding: [30, 0, 0, -40],
-              },
-            },
-          },
+            padding: [20, 0, 0, -10]    // 四个数字分别为上右下左与原位置距离
+        },
           data: data,
           axisTick: {
             show: false,
@@ -1043,10 +1043,11 @@ export default {
   },
   mounted () {
     this.ElectricityStatistics(
-      ["1", "4", "7", "11", "14", "17", "21", "24", "27", "31"],
-      [200, 2300, 2300, 4300, 2000, 1001, 400, 2050, 2030, 2300],
+      ["7.24", "7.25", "7.26", "7.27", "7.28", "7.29", "7.30"],
+      [2500, 3000, 2800, 4000, 3000, 2900, 3900,],
       {
         name: "kw·h",
+        company:'日',
         splitNumber: 3,
         min: 0,
         max: 4800,

@@ -119,11 +119,11 @@ export default {
           status: 0,
         },
         {
-          name: "2#冷却水循环泵",
+          name: "3#冷却水循环泵",
           status: 1,
         },
         {
-          name: "3#冷冻水循环泵",
+          name: "1#冷冻水循环泵",
           status: 1,
         },
         {

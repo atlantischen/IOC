@@ -43,14 +43,16 @@
       <div class="monitor">
         <div class="tittle">轿厢监控</div>
         <div class="box">
-          <div class="video" @click="videoShowChange(true,'carData')">
+          <div class="videos" @click="videoShowChange(true,'carData')">
           <img src="../../../../assets/img/dt_pic7.png" alt="">
           <span class="font_text">视频回放</span>
         </div>
         <ul>
-          <li v-for="(item,index) in 4" :key="item" @click="lookVideo(`${++index}号客梯`)">
-            <span>2020-12-31    14:40</span>
-            <span>{{item++}}号客梯</span>
+          <li v-for="(item,index) in monitorList" :key="item" @click="lookVideo(`${++index}号客梯`)">
+            <!-- <span>2020-12-31    14:40</span>
+            <span>{{item++}}号客梯</span> -->
+          <iframe id="iframe" :src="item.flv_url"  allowfullscreen allow="autoplay; fullscreen"></iframe>
+
           </li>
         </ul>
         <div class="floor" @click="dialogShowChange(true,'carData')">
@@ -63,14 +65,16 @@
       <div class="monitor">
         <div class="tittle">电梯间监控</div>
         <div class="box">
-          <div class="video" @click="videoShowChange(true,'elevatorData')">
+          <div class="videos" @click="videoShowChange(true,'elevatorData')">
           <img src="../../../../assets/img/dt_pic7.png" alt="">
           <span class="font_text">视频回放</span>
         </div>
         <ul>
-          <li v-for="(item,index) in 4" :key="index" @click="lookVideo(`${++index}号客梯`)">
-            <span>2020-12-31    14:40</span>
-            <span>{{item++}}号客梯</span>
+          <li v-for="(item,index) in monitorList1" :key="index" @click="lookVideo(`${++index}号客梯`)">
+            <!-- <span>2020-12-31    14:40</span>
+            <span>{{item++}}号客梯</span> -->
+          <iframe id="iframe" :src="item.flv_url"  allowfullscreen allow="autoplay; fullscreen"></iframe>
+            
           </li>
         </ul>
         <div class="floor" @click="dialogShowChange(true,'elevatorData')">
@@ -84,6 +88,8 @@
     <Dialog :dialogShow="dialogShow" :title='title' @dialogShowChange="dialogShowChange"></Dialog>
     <VideoPlayback :title='title' :backShow="backShow" @videoShowChange="videoShowChange"></VideoPlayback>
   <LookVideo :Visible="Visible" :title="dialogTitle" @off="openCloseDialog" />
+  <ElevatorMonitoring  :ElevatorVisible="ElevatorVisible"  :dataList="dataList"  @off="ElevatorCloseDialog" />
+
 
 </template>
 
@@ -92,6 +98,8 @@ export default {
   data(){
     return{
       Visible: false,
+      ElevatorVisible:false,
+      dataList:{},
       dialogTitle:'',
       elevatorList:[ 
         {
@@ -146,6 +154,44 @@ export default {
       dialogShow:false,
       backShow:false,
       title:'轿厢监控',
+       monitorList:[
+        {
+          img_url:require('assets/img/monitor/snap (2).png'),
+          flv_url:'http://172.21.71.225:10800/play.html?channel=13&iframe=yes'
+        },
+         {
+          img_url:require('assets/img/monitor/snap (3).png'),
+          flv_url:'http://172.21.71.225:10800/play.html?channel=8&iframe=yes'
+        },
+         {
+          img_url:require('assets/img/monitor/snap (4).png'),
+          flv_url:'http://172.21.71.225:10800/play.html?channel=1&iframe=yes'
+        },
+         {
+          img_url:require('assets/img/monitor/snap (5).png'),
+          flv_url:'http://172.21.71.225:10800/play.html?channel=3&iframe=yes'
+        },
+         
+      ],
+        monitorList1:[
+        {
+          img_url:require('assets/img/monitor/snap (2).png'),
+          flv_url:'http://172.21.71.225:10800/play.html?channel=12&iframe=yes'
+        },
+         {
+          img_url:require('assets/img/monitor/snap (3).png'),
+          flv_url:'http://172.21.71.225:10800/play.html?channel=14&iframe=yes'
+        },
+         {
+          img_url:require('assets/img/monitor/snap (4).png'),
+          flv_url:'http://172.21.71.225:10800/play.html?channel=15&iframe=yes'
+        },
+         {
+          img_url:require('assets/img/monitor/snap (5).png'),
+          flv_url:'http://172.21.71.225:10800/play.html?channel=16&iframe=yes'
+        },
+         
+      ]
     }
   },
   methods:{
@@ -175,17 +221,44 @@ export default {
     openCloseDialog (val) {
       this.Visible = val
     },
-  }
+    ElevatorCloseDialog(val) {
+      this.ElevatorVisible = val
+    },
+     event (event) {
+      
+        console.log(event.data);
+        let res = JSON.parse(event.data)
+        console.log(res,'res');
+        if(res.action ==='OpenElevatorVideo' && JSON.stringify(res.data) !== "{}"){
+          console.log('true');
+            this.ElevatorVisible=true
+            this.dataList=res.data
+        }
+
+
+      // if ((typeof event.data == 'string' && event.data.indexOf('data') != -1) || (typeof event.data == 'object' && event.data.data != undefined)) {
+        // let res = JSON.parse(event.data)
+        // console.log(res,'电梯');
+      }
+    // },
+  },
+  mounted () {
+    window.addEventListener("message", this.event, true);
+    
+  },
+  destroyed() {
+    window.removeEventListener("message", this.event, true);
+  },
 
 }
 </script>
 
 <style lang="less" scoped>
 .box{
-  padding:0 .18rem /* 20/80 */;
+  // padding:0 .18rem /* 20/80 */;
   box-sizing: border-box;
 }
-.video{
+.videos{
   display: flex;
   justify-content: flex-end;
   margin-bottom: .125rem /* 10/80 */;
@@ -281,24 +354,30 @@ export default {
 
 
     li{
-      width: 1.95rem /* 156/80 */;
-      height: 1.375rem /* 110/80 */;
-      background-color: rgba(67, 150, 243, .3);
-      padding: .1625rem /* 13/80 */ .125rem /* 10/80 */;
+      width: 49%/* 156/80 */;
+                height: 1.4rem /* 112/80 */;
+
+      // background-color: rgba(67, 150, 243, .3);
+      // padding: .1625rem /* 13/80 */ .125rem /* 10/80 */;
       box-sizing: border-box;
       position: relative;
-      margin: 0 .1rem /* 8/80 */ .1rem /* 8/80 */ 0;
-      
-      span:first-child{}
-      span:last-child{
-        position: absolute;
-        bottom: .125rem /* 10/80 */;
-        right: .1625rem /* 13/80 */;
+      margin-bottom: .0625rem /* 5/80 */;
+       #iframe{
+          width: 100% /* 174/80 *//* 112/80 */;
+          height: 1.4rem !important /* 112/80 *//* 112/80 */;
       }
+      // margin: 0 .1rem /* 8/80 */ .1rem /* 8/80 */ 0;
+      
+      // span:first-child{}
+      // span:last-child{
+      //   position: absolute;
+      //   bottom: .125rem /* 10/80 */;
+      //   right: .1625rem /* 13/80 */;
+      // }
     }
-    li:nth-child(2n){
-      margin-right: 0;
-    }
+    // li:nth-child(2n){
+    //   margin-right: 0;
+    // }
   }
   .floor{
     height: .45rem /* 36/80 */;

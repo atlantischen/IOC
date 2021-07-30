@@ -8,12 +8,14 @@
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
+    "@easydarwin/easywasmplayer": "^4.0.13",
     "animate.css": "^4.1.1",
     "axios": "^0.21.1",
     "core-js": "^3.6.5",
     "echarts": "^4.9.0",
     "echarts-liquidfill": "^2.0.6",
     "element-plus": "^1.0.2-beta.48",
+    "flv.js": "^1.6.0",
     "http-server": "^0.12.3",
     "less-loader": "^5.0.0",
     "lib-flexible": "^0.3.2",

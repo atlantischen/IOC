@@ -3,9 +3,11 @@
     <div class="warper">
       <el-dialog
         center
-        :title="title"
+        :title="form.title"
         v-model="dialogShowChange"
         @close="closeDialog"
+         @open='openClick'
+        :destroy-on-close="true"
       >
         <div class="box">
           <!-- <div class="set_t">
@@ -20,7 +22,7 @@
             <span>如果时间到点了就做什么？</span>
           </div>
           <el-form
-            :model="ruleForm"
+            :model="form"
             :rules="rules"
             ref="ruleForm"
             size="mini"
@@ -31,13 +33,13 @@
               <el-date-picker
                 type="date"
                 placeholder="设置时间"
-                v-model="ruleForm.date"
+                v-model="form.date"
                 style="width: 100%;"
               ></el-date-picker>
             </el-form-item>
             <el-form-item label="&nbsp;" prop="type">
               <el-select
-                v-model="ruleForm.type"
+                v-model="form.type"
                 multiple
                 placeholder="设置重复(可多选)"
               >
@@ -50,14 +52,14 @@
                 </el-option>
               </el-select>
             </el-form-item>
-            <el-form-item class="interval" prop="type" label="&nbsp;">
+            <el-form-item class="interval" prop="type1" label="&nbsp;">
               <el-select
-                v-model="ruleForm.type1"
+                v-model="form.type1"
                 multiple
                 placeholder="选择区域(可多选)"
               >
                 <el-option
-                  v-for="item in options"
+                  v-for="item in region"
                   :key="item.value"
                   :label="item.label"
                   :value="item.value"
@@ -66,23 +68,23 @@
               </el-select>
             </el-form-item>
 
-            <el-form-item label="&nbsp;" prop="resource">
+            <el-form-item label="&nbsp;" prop="resource" >
               <el-radio-group
-                v-model="ruleForm.resource"
+                v-model="form.resource"
                 @change="changeSelect"
               >
                 <el-radio label="开关回路"></el-radio>
                 <el-radio label="照明回路"></el-radio>
               </el-radio-group>
             </el-form-item>
-            <el-form-item v-show="isShow">
-              <el-slider v-model="value"></el-slider>
+            <el-form-item v-if="form.resource==='照明回路'">
+              <el-slider v-model="value" :format-tooltip="handlDelta"></el-slider>
             </el-form-item>
 
-            <el-form-item label="&nbsp;" prop="region">
-              <el-select v-model="ruleForm.region" clearable  placeholder="选择执行动作">
+            <el-form-item label="&nbsp;" prop="region" v-else :required='isShow'>
+              <el-select v-model="form.region"  clearable  placeholder="选择执行动作">
                 <el-option
-                  v-for="item in options"
+                  v-for="item in action"
                   :key="item.value"
                   :label="item.label"
                   :value="item.value"
@@ -107,15 +109,16 @@
 <script>
 export default {
   data() {
+     var validateRegion = (rule, value, callback) => {
+        if (value === '') {
+          callback(new Error('请选择活动区域'));
+        } else {
+          callback();
+        }
+      };
     return {
       dialogShowChange: this.dialogShow,
-      ruleForm: {
-        region: "",
-        date: "",
-        type: [],
-        type1: [],
-        resource: "开关回路",
-      },
+      ruleForm: this.formData,
       rules: {
         date: [
           {
@@ -126,7 +129,7 @@ export default {
           },
         ],
          region: [
-            { required: true, message: '请选择活动区域', trigger: 'change' }
+            { validator: validateRegion, trigger: 'change' }
           ],
 
         type: [
@@ -137,31 +140,100 @@ export default {
             trigger: "change",
           },
         ],
+         type1: [
+          {
+            type: "array",
+            required: true,
+            message: "请至少选择一个选项",
+            trigger: "change",
+          },
+        ],
       },
       options: [
         {
-          value: "选项1",
-          label: "黄金糕",
+          value: "每天",
+          label: "每天",
         },
         {
-          value: "选项2",
-          label: "双皮奶",
+          value: "法定工作日",
+          label: "法定工作日",
         },
         {
-          value: "选项3",
-          label: "蚵仔煎",
+          value: "法定节假日",
+          label: "法定节假日",
         },
         {
-          value: "选项4",
-          label: "龙须面",
+          value: "周日",
+          label: "周日",
         },
         {
-          value: "选项5",
-          label: "北京烤鸭",
+          value: "周一",
+          label: "周一",
+        },
+         {
+          value: "周二",
+          label: "周二",
+        },
+        {
+          value: "周三",
+          label: "周三",
+        },
+         {
+          value: "周四",
+          label: "周四",
+        },
+        {
+          value: "周五",
+          label: "周五",
+        },
+        {
+          value: "周六",
+          label: "周六",
         },
       ],
-      isShow: false,
+      region:[
+       {
+          value: "电梯间",
+          label: "电梯间",
+        },
+        {
+          value: "楼梯间",
+          label: "楼梯间",
+        },
+        {
+          value: "走廊",
+          label: "走廊",
+        },
+        {
+          value: "卫生间",
+          label: "卫生间",
+        },
+        {
+          value: "茶水间",
+          label: "茶水间",
+        },
+         {
+          value: "大堂",
+          label: "大堂",
+        },
+      ],
+      action:[
+         {
+          value: "开启照明",
+          label: "开启照明",
+        },
+         {
+          value: "关闭照明",
+          label: "关闭照明",
+        },
+      ],
+      // isShow: true,
       value: 50,
+      form:{
+
+      }
+
+      
    
     };
   },
@@ -174,33 +246,44 @@ export default {
       type: Boolean,
       default: false,
     },
+    formData:{
+      type: Object,
+      default: {},
+    }
   },
   watch: {
     dialogShow(val) {
       this.dialogShowChange = val;
     },
+   
   },
 
   methods: {
     closeDialog() {
       this.$emit("dialogShowChange", false);
     },
+    handlDelta(e) {
+      return e + '%'
+
+    },
+   
     // 单选框
-    changeSelect(val) {
-      console.log(val);
-      if (val === "照明回路") {
-        this.isShow = true;
-      } else {
-        this.isShow = false;
-      }
+    // changeSelect(val) {
+    //   // if (val === "开关回路") {
+    //   //   this.isShow = true;
+    //   // } else if(val === "照明回路") {
+    //   //   this.isShow = false;
+    //   // }
+    // },
+     openClick(){
+      this.form={...this.formData}
     },
     submitForm(formName) {
       this.$refs[formName].validate((valid) => {
         if (valid) {
-
-           this.$message({ message: "照明场景添加成功", type: "success" });
+           this.$message({ message: `照明场景${this.form==='添加场景'?'新增':'编辑'}成功`, type: "success" });
             this.$emit("dialogShowChange", false);
-
+            this.$emit("formDataClick", this.form);
         } else {
           return false;
         }

@@ -92,6 +92,7 @@ ul{
       margin-bottom: 0;
     }
     .active{
+      // background-color:#4396f3;
         background-image: url('../../../../assets/img/ly_bj.png');
         background-size: contain;
 
