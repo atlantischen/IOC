@@ -118,6 +118,7 @@ export default {
       text-align: center;
       width: 16.675rem /* 1334/80 */;
       height: 8.425rem /* 674/80 */;
+      background: #000;
       video {
         width: 100%;
         height: 100%;

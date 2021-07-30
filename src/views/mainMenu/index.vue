@@ -137,7 +137,6 @@ export default {
   mounted () {
     this.$nextTick(() => {
       window.iframe = this.$refs.iframe;
-      // this.IframeOnload()
       var _that = this
       window.addEventListener("resize", function () {
         var isFull = document.fullscreenElement || document.mozFullScreenElement || document.webkitFullscreenElement;
@@ -196,16 +195,6 @@ export default {
           break;
       }
     },
-    // 3D加载完后
-    IframeOnload () {
-      let _ref = this.$refs.iframe
-      _ref.onload = _ref.onreadystatechange = function () {
-        if (this.readyState && this.readyState != 'complete') return;
-        else {
-          // do some
-        }
-      }
-    },
     // 退出3D全屏
     Exit3DFullScreen () {
       this.clearWarnTimeFun()
@@ -227,6 +216,7 @@ export default {
     clearWarnTimeFun () {
       clearInterval(this.warnTimer);
       this.warnTimer = null
+      this.$store.dispatch("SET_SHOWWARNTIP", false);
     },
     //监测是否按下esc键
     checkFull () {

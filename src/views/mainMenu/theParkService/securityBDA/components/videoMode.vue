@@ -13,7 +13,9 @@
           v-if="showMaster && masterIndex == i"
           @click="lookVideo(item)"
         ></div>
+        <Vloading v-show="showIfame" />
         <iframe
+          v-show="!showIfame"
           v-if="item.url"
           :id="'iframeVideo' + i"
           :ref="'iframeVideo' + i"
@@ -22,8 +24,7 @@
           allowfullscreen
           allow="autoplay; fullscreen"
         ></iframe>
-        <span v-else>无信号</span>
-        <!-- ws://47.119.172.151:10810/nvc/test/ws/flv/hls/stream_1.flv -->
+        <Vloading v-else :text="'无信号'" />
       </li>
     </ul>
     <LookVideo
@@ -40,61 +41,112 @@ export default {
   name: 'videoMode',
   data () {
     return {
+      showIfame: true,
       Visible: false,
       dialogTitle: '',
       showMaster: false,
       masterIndex: null,
+      // videoDatas: [
+      //   {
+      //     local: '16楼C区铭筑',
+      //     url: 'http://172.21.71.225:10800/play.html?channel=5'
+      //   },
+      //   {
+      //     local: '16楼C区铭筑',
+      //     url: 'http://172.21.71.225:10800/play.html?channel=6'
+      //   },
+      //   {
+      //     local: '16楼C区铭筑',
+      //     url: 'http://172.21.71.225:10800/play.html?channel=7'
+      //   },
+      //   {
+      //     local: '16楼C区铭筑',
+      //     url: 'http://172.21.71.225:10800/play.html?channel=8'
+      //   },
+      //   {
+      //     local: '16楼C区铭筑',
+      //     url: 'http://172.21.71.225:10800/play.html?channel=9'
+      //   },
+      //   {
+      //     local: '16楼C区铭筑',
+      //     url: 'http://172.21.71.225:10800/play.html?channel=10'
+      //   },
+      //   {
+      //     local: '16楼C区铭筑',
+      //     url: 'http://172.21.71.225:10800/play.html?channel=11'
+      //   },
+      //   {
+      //     local: '14楼B区机房外',
+      //     url: 'http://172.21.71.225:10800/play.html?channel=12'
+      //   },
+      //   {
+      //     local: '14楼C区中科展示',
+      //     url: 'http://172.21.71.225:10800/play.html?channel=13'
+      //   },
+      //   {
+      //     local: '14楼C区展示区',
+      //     url: 'http://172.21.71.225:10800/play.html?channel=14'
+      //   },
+      //   {
+      //     local: '14层A区大事记朝外',
+      //     url: 'http://172.21.71.225:10800/play.html?channel=15'
+      //   },
+      //   {
+      //     local: '14楼展厅入口',
+      //     url: 'http://172.21.71.225:10800/play.html?channel=16'
+      //   },
+      // ],
       videoDatas: [
         {
           local: '16楼C区铭筑',
-          url: 'http://172.21.71.225:10800/play.html?channel=5'
+          url: 'http://47.119.172.151:10810/play.html?device=LiveNVR001&channel=1&protocol=WS_FLV'
         },
         {
           local: '16楼C区铭筑',
-          url: 'http://172.21.71.225:10800/play.html?channel=6'
+          url: 'http://47.119.172.151:10810/play.html?device=LiveNVR001&channel=2&protocol=WS_FLV',
         },
         {
           local: '16楼C区铭筑',
-          url: 'http://172.21.71.225:10800/play.html?channel=7'
+          url: 'http://47.119.172.151:10810/play.html?device=LiveNVR001&channel=3&protocol=WS_FLV',
         },
         {
           local: '16楼C区铭筑',
-          url: 'http://172.21.71.225:10800/play.html?channel=8'
+          url: 'http://47.119.172.151:10810/play.html?device=LiveNVR001&channel=4&protocol=WS_FLV',
         },
         {
           local: '16楼C区铭筑',
-          url: 'http://172.21.71.225:10800/play.html?channel=9'
+          url: 'http://47.119.172.151:10810/play.html?device=LiveNVR001&channel=5&protocol=WS_FLV',
         },
         {
           local: '16楼C区铭筑',
-          url: 'http://172.21.71.225:10800/play.html?channel=10'
+          url: 'http://47.119.172.151:10810/play.html?device=LiveNVR001&channel=6&protocol=WS_FLV',
         },
         {
           local: '16楼C区铭筑',
-          url: 'http://172.21.71.225:10800/play.html?channel=11'
+          url: 'http://47.119.172.151:10810/play.html?device=LiveNVR001&channel=7&protocol=WS_FLV',
         },
         {
           local: '14楼B区机房外',
-          url: 'http://172.21.71.225:10800/play.html?channel=12'
+          url: 'http://47.119.172.151:10810/play.html?device=LiveNVR001&channel=8&protocol=WS_FLV',
         },
         {
           local: '14楼C区中科展示',
-          url: 'http://172.21.71.225:10800/play.html?channel=13'
+          url: 'http://47.119.172.151:10810/play.html?device=LiveNVR001&channel=9&protocol=WS_FLV',
         },
         {
           local: '14楼C区展示区',
-          url: 'http://172.21.71.225:10800/play.html?channel=14'
+          url: 'http://47.119.172.151:10810/play.html?device=LiveNVR001&channel=10&protocol=WS_FLV',
         },
         {
           local: '14层A区大事记朝外',
-          url: 'http://172.21.71.225:10800/play.html?channel=15'
+          url: 'http://47.119.172.151:10810/play.html?device=LiveNVR001&channel=11&protocol=WS_FLV',
         },
         {
           local: '14楼展厅入口',
-          url: 'http://172.21.71.225:10800/play.html?channel=16'
+          url: 'http://47.119.172.151:10810/play.html?device=LiveNVR001&channel=12&protocol=WS_FLV',
         },
       ],
-      videoD: {}
+      videoD: {},
     }
   },
   components: {},
@@ -132,13 +184,13 @@ export default {
       }
     };
     for (var i = 0; i < this.videoDatas.length; i++) {
-      // IframeOnClick.track(document.getElementById("iframeVideo" + i), function (e) {
-      //   console.log(e)
-      // }, i);
       // IframeOnClick.track(document.getElementById("iframeVideo" + i), function (i) {
       //   this.lookVideo(this.videoDatas[i])
       // });
     }
+    this.$afterIframeOnload('iframeVideo0', () => {
+      this.showIfame = false
+    })
   },
   methods: {
     openCloseDialog (val) {

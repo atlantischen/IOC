@@ -222,7 +222,7 @@ var randomNumer = function randomNumer(minNum, maxNum) {
 }
 /**
  * @author
- * @description 数据格式(,)
+ * @description 数据格式(,分隔)
  * @param number
  * @returns {num}
  */
@@ -278,8 +278,8 @@ var timeRangeArr = function timeRangeArr(_range) {
     return timeline;
   }
 }
+
 /**
- *
  * 全屏
  * @returns
  */
@@ -289,6 +289,19 @@ var handleFullScreen = function handleFullScreen() {
     return false;
   }
   screenfull.toggle();
+}
+/**
+ * iframe加载完之后
+ * @returns
+ */
+var afterIframeOnload = function afterIframeOnload(dom, fun) {
+  let _ref = this.$refs[dom]
+  _ref.onload = _ref.onreadystatechange = function () {
+    if (this.readyState && this.readyState != 'complete') return;
+    else {
+      fun()
+    }
+  }
 }
 const fun = {
   currentDate,
@@ -302,6 +315,7 @@ const fun = {
   randomNumer,
   filterNum,
   timeRangeArr,
-  handleFullScreen
+  handleFullScreen,
+  afterIframeOnload
 }
 export default fun
