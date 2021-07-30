@@ -166,7 +166,6 @@ export default {
             color: "#fff",
           },
           formatter: (params) => {
-            console.log(params);
             let dataStr = `<p style="font-weight:bold;font-size:.2rem;text-align:center;padding-bottom:.0625rem;">${params[0].name}</p>`;
             params.forEach((item) => {
               dataStr += `<div>

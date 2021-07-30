@@ -17,6 +17,12 @@
 .toShow {
   .toShow(1.5s, 0.5s);
 }
+.toHide(@time,@delay) {
+  position: absolute;
+  animation: toHide @time @delay;
+  animation-fill-mode: both !important;
+  -webkit-animation-fill-mode: both !important;
+}
 
 /* 放大效果*/
 .enlarge {
@@ -94,6 +100,25 @@
 
   100% {
     opacity: 1;
+  }
+}
+@keyframes toHide {
+  0% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
+
+@-webkit-keyframes toHide {
+  0% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
   }
 }
 

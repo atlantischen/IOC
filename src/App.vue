@@ -4,6 +4,7 @@
 
 <script>
 import screenfull from "screenfull";
+
 export default {
   name: "App",
   data: function () {
@@ -12,23 +13,12 @@ export default {
     };
   },
   methods: {
-    handleFullScreen () {
-      if (!screenfull.isEnabled) {
-        this.$message.info("您的浏览器版本过低，不支持全屏浏览");
-        return false;
-      }
-      console.log('触发~');
-      screenfull.toggle();
-    },
     event (event) {
       console.log(event.data,'event.data');
       if ((typeof event.data == 'string' && event.data.indexOf('data') != -1) || (typeof event.data == 'object' && event.data.data != undefined)) {
         let res = JSON.parse(event.data)
         if (res.action == "fullscreen") {
-          this.handleFullScreen();
-        }else if(res.data ==='f11'){
-          console.log('3d禁用');
-           this.handleFullScreen()
+          this.$handleFullScreen();
         }
       }
 
@@ -41,7 +31,7 @@ export default {
         //禁用f11
         event.returnValue = false
         //触发全屏的按钮
-        this.handleFullScreen()
+        this.$handleFullScreen()
       }
     },
     change(){
@@ -59,15 +49,9 @@ export default {
     }
   },
 
-  // beforeCreate () {
-  //   if (process.env.NODE_ENV == "production")
-  //     this.$router.push("/comprehensiveSituational/homePage");
-  // },
   mounted () {
        this.init()
     window.addEventListener("message", this.event, true);
-    window.addEventListener("keydown", this.KeyDown)// 监听按键事件
-    
   },
   destroyed  () {
     

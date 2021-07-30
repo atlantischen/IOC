@@ -2,6 +2,7 @@ import {
   EleResize
 } from '@/assets/js/echarts'
 import * as echarts from 'echarts';
+import screenfull from "screenfull";
 const moment = require('moment')
 
 var currentDate = function currentDate() {
@@ -221,7 +222,7 @@ var randomNumer = function randomNumer(minNum, maxNum) {
 }
 /**
  * @author
- * @description 数据格式(,)
+ * @description 数据格式(,分隔)
  * @param number
  * @returns {num}
  */
@@ -277,6 +278,31 @@ var timeRangeArr = function timeRangeArr(_range) {
     return timeline;
   }
 }
+
+/**
+ * 全屏
+ * @returns
+ */
+var handleFullScreen = function handleFullScreen() {
+  if (!screenfull.isEnabled) {
+    this.$message.info("您的浏览器版本过低，不支持全屏浏览");
+    return false;
+  }
+  screenfull.toggle();
+}
+/**
+ * iframe加载完之后
+ * @returns
+ */
+var afterIframeOnload = function afterIframeOnload(dom, fun) {
+  let _ref = this.$refs[dom]
+  _ref.onload = _ref.onreadystatechange = function () {
+    if (this.readyState && this.readyState != 'complete') return;
+    else {
+      fun()
+    }
+  }
+}
 const fun = {
   currentDate,
   redomEchart,
@@ -288,6 +314,19 @@ const fun = {
   ScrolLeftARight,
   randomNumer,
   filterNum,
-  timeRangeArr
+  timeRangeArr,
+  handleFullScreen,
+  afterIframeOnload
 }
 export default fun
+
+
+
+// 10:57
+export function formatHm(val) {
+  if (val) return moment(val).format('HH:mm')
+}
+//  2020-11-26 10:57:00
+export function formatYMDHms(val) {
+  if (val) return moment(val).format('YYYY-MM-DD HH:mm:ss')
+}

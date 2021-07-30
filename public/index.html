@@ -1,25 +1,44 @@
 <!DOCTYPE html>
-<html lang="en" >
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width,initial-scale=1.0">
-    <meta http-equiv="pragram" content="no-cache" />
-    <meta name="transparent" content="true">
-    <meta http-equiv="cache-control" content="no-cache, no-store, must-revalidate"  />
-    <meta http-equiv="expires" content="0" />
-    <!-- <script src="./EasyWasmPlayer.js"></script> -->
+<html lang="en">
 
-    <!-- <script src="/ckplayer/ckplayer.js"></script> -->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <meta http-equiv="pragram" content="no-cache" />
+  <meta name="transparent" content="true">
+  <meta http-equiv="cache-control" content="no-cache, no-store, must-revalidate" />
+  <meta http-equiv="expires" content="0" />
+  <!-- <script src="/ckplayer/ckplayer.js"></script> -->
+  <script src="https://cdn.bootcdn.net/ajax/libs/RecordRTC/5.6.2/RecordRTC.min.js"></script>
 
-    <link rel="icon" href="<%= BASE_URL %>favicon.ico">
-    <title><%= htmlWebpackPlugin.options.title %></title>
-  </head>
-  <body>
-    <noscript>
-      <strong>We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
-    </noscript>
-    <div id="app"></div>
-    <!-- built files will be auto injected -->
-  </body>
+  <link rel="icon" href="<%= BASE_URL %>favicon.ico">
+  <title>
+    <%= htmlWebpackPlugin.options.title %>
+  </title>
+</head>
+
+<body>
+  <script>
+    // ie9版本以下的提示
+    (function () {
+      var ua = navigator.userAgent.toLocaleLowerCase();
+      var browserType = "", browserVersion = "";
+      if (ua.match(/msie/) != null || ua.match(/trident/) != null) {
+        browserType = "IE";
+        browserVersion = ua.match(/msie ([\d.]+)/) != null ? ua.match(/msie ([\d.]+)/)[1] : ua.match(/rv:([\d.]+)/)[1];
+        if ((1 * browserVersion) < 9) {
+          alert("请在ie11版本浏览器上使用系统")
+        }
+      }
+    })();
+  </script>
+  <noscript>
+    <strong>We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't work properly without JavaScript enabled.
+        Please enable it to continue.</strong>
+  </noscript>
+  <div id="app"></div>
+  <!-- built files will be auto injected -->
+</body>
+
 </html>

@@ -17,23 +17,23 @@ export default {
   props: {
     list: {},
   },
-  data() {
+  data () {
     return {
       isShow: false,
       centerlist: null,
     };
   },
   watch: {
-    "$store.state.comState.showCenterDatas": function(n, o) {
+    "$store.state.comState.showCenterDatas": function (n, o) {
       this.isShow = n;
     },
-    list: function(n, o) {
+    list: function (n, o) {
       // console.log(n, o)
       this.centerlist = n;
     },
   },
-  created() {},
-  mounted() {},
+  created () { },
+  mounted () { },
   methods: {},
 };
 </script>
@@ -53,11 +53,11 @@ export default {
     span {
       white-space: nowrap;
       &:first-child {
-        .datas_s(0.375rem /* 30/80 */) ;;
+        .datas_s(0.375rem /* 30/80 */);
         color: #ffb400;
       }
       &:last-child {
-        .text_s(0.175rem /* 14/80 */) ;;
+        .text_s(0.175rem /* 14/80 */);
       }
     }
   }

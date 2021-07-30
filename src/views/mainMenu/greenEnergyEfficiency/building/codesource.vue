@@ -134,7 +134,7 @@ export default {
      monitorList:[
          {
           img_url:require('assets/img/monitor/snap (4).png'),
-          flv_url:'http://172.21.71.225:10800/play.html?channel=1&iframe=yes'
+          flv_url:'http://47.119.172.151:10810/play.html?device=LiveNVR001&channel=1&iframe=yes'
         },
          {
           img_url:require('assets/img/monitor/snap (5).png'),

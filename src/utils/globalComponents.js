@@ -23,6 +23,9 @@ import Rtps from '../components/rtps.vue'
 import Device from '../components/device.vue' 
 import ElevatorMonitoring from '../components/elevatorMonitoring.vue'  //电梯监控
 import Player from '../components/player.vue'  //flv视频流
+// import Rtps from '../components/rtps.vue'
+// import Device from '../components/device.vue'
+import Vloading from '../components/widget/vLoading.vue' // loading
 
 const global = {
   ...configurable,
@@ -49,6 +52,7 @@ const global = {
   Rtps,
   Device,
   ElevatorMonitoring,
-  Player
+  Player,
+  Vloading
 }
 export default global

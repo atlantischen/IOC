@@ -146,7 +146,7 @@ export default {
         if (valid) {
           // this.sureAlarmFun();
           this.isFade = !this.isFade;
-          this.$emit('close', this.isFade)
+          this.$emit('close', 'AlarmAck', this.isFade)
           this.$message.success("已确认警报！");
           this.resetForm("ruleForm");
         } else {

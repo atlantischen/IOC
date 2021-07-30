@@ -9,8 +9,42 @@
         @open="openClose(true)"
       >
         <div class="videoBox" ref="videoBoxRef">
-          <iframe :src="flv_url" id="iframe" name='item' allowfullscreen allow="autoplay; fullscreen"></iframe>
-
+          <video controls>
+            <source src="~@/assets/video/vvv.mp4" type="video/mp4" />
+            <source src="~@/assets/video/vvv.jpg" type="video/ogg" />
+            您的浏览器不支持Video标签。
+          </video>
+          <!-- <iframe
+            v-if="_data.url"
+            style="width: 100%; height: 100%"
+            :src="_data.url + '&protocol=FLV&iframe=yes'"
+            allowfullscreen
+            allow="autoplay; fullscreen"
+          ></iframe> -->
+          <div class="videoSet">
+            <!-- <i class="currentTime" id="currentTimeRef" ref="currentTimeRef"
+              >{{ $currentDate() }}
+            </i> -->
+            <!-- <i class="videoLocal">16楼</i> -->
+            <i
+              class="iconfont x_c vs_bg vs_full"
+              :class="isFullscreen ? 'icon-suoxiao actived' : 'icon-fullScreen'"
+              @click="fullScreenFun"
+            ></i>
+            <i
+              class="iconfont x_c vs_bg icon-luxiang"
+              :class="{ actived: isShowRecord }"
+              @click="Record"
+            ></i>
+          </div>
+          <RecordVideo
+            :_data="RecordData"
+            ref="RecordRef"
+            id="RecordRef"
+            :Visible="isShowRecord"
+            @close="Record"
+          />
+          <!-- <Recording ref="RecordRef" id="RecordRef" /> -->
         </div>
       </el-dialog>
     </div>
@@ -18,7 +52,8 @@
 </template>
 
 <script>
-import { nextTick } from "@vue/runtime-core";
+import RecordVideo from "@/components/widget/recordVideo.vue"
+import Recording from "@/components/widget/recording.vue"
 export default {
   name: "LookVideo",
   props: {
@@ -32,16 +67,18 @@ export default {
   },
   data() {
     return {
+      isShowRecord: false,
       dialogVisible: false,
       isFullscreen: false,
       timer: null,
+      RecordData: {}
     };
   },
-  components: {},
+  components: { RecordVideo, Recording },
   watch: {
     Visible: {
-      handler(newVal, oldVal) {
-        this.dialogVisible = newVal;
+      handler (n, o) {
+        this.dialogVisible = n
       },
       deep: true,
     },
@@ -63,15 +100,22 @@ export default {
         this.$refs.currentTimeRef.innerHTML = this.$currentDate();
       }, 1000);
     },
-    openClose(val) {
-      this.dialogVisible = val;
-      this.$emit("off", val);
+    openClose (val) {
+      this.dialogVisible = val
+      if (!val) { this.isShowRecord = val }
+      this.$emit('off', val)
     },
-    fullScreenFun() {
-      this.$Fullscreen(this.$refs.videoBoxRef, this.isFullscreen);
-      this.isFullscreen = !this.isFullscreen;
+    fullScreenFun () {
+      this.$Fullscreen(this.$refs.videoBoxRef, this.isFullscreen)
+      this.isFullscreen = !this.isFullscreen
     },
- 
+    Record () {
+      console.log(this._data)
+      // this.$refs.RecordRef.startRecording()
+      this.RecordData = this._data
+      this.isShowRecord = !this.isShowRecord
+      if (!this.isShowRecord) this.$refs.RecordRef.closeHandle()
+    }
   },
 };
 </script>
@@ -93,8 +137,9 @@ export default {
     .videoBox {
       position: relative;
       text-align: center;
-      // width: 16.675rem /* 1334/80 */;
-      // height: 8.425rem /* 674/80 */;
+      width: 16.675rem /* 1334/80 */;
+      height: 8.425rem /* 674/80 */;
+      background: #000;
       video {
         width: 100%;
         height: 100%;
@@ -103,6 +148,7 @@ export default {
         i {
           position: absolute;
           color: #fff;
+          z-index: 0;
           &.actived {
             color: #0ff;
           }

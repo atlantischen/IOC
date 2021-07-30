@@ -5,9 +5,10 @@
       <div class="weather">
         <div class="weather_l x_c">
           <SvgIcon className="duoyun" :iconClass="returnIcon" />
-          <span class="y_c">
-            <i
-              ><b>{{ weatherDatas ? weatherDatas.wendu : "31" }}</b> ℃</i
+          <span class="y_c du_right">
+            <i>
+              <b>{{ weatherDatas ? weatherDatas.wendu : "31" }}</b>
+              <i class="dy_du">℃</i></i
             >
             <i>{{ weatherDatas ? weatherDatas.forecast[0].type : "多云" }}</i>
           </span>
@@ -182,6 +183,7 @@ export default {
       var datas = [53, 300],
         colors = ["#00ffff", "yellow", "orange", "red", "#990056", "#7b0128"],
         selectedColor = ''
+      datas[0] = this.$randomNumer(40, 70)
       switch (true) {
         case datas[0] < (datas[1] / 6) * 1:
           selectedColor = colors[0]
@@ -249,9 +251,10 @@ export default {
               formatter: "{a| {c}}\n{b| }",
               rich: {
                 a: {
-                  width: 20,
+                  width: 40,
                   height: 15,
-                  padding: [3, 10, 5],
+                  padding: [3, 3, 5, 0],
+                  align: 'center',
                   color: "#000",
                   borderRadius: 5,
                   backgroundColor: selectedColor
@@ -409,14 +412,21 @@ export default {
         height: 0.5rem /* 40/80 */;
       }
       span {
-        padding: 0.0625rem /* 5/80 */ 0 0 0.0625rem /* 5/80 */;
+        position: relative;
+        width: 0.4375rem /* 35/80 */;
+        margin: 0 0.1rem /* 8/80 */;
         align-items: flex-start;
         i {
+          white-space: nowrap;
           &:first-child {
             b {
-              .datas_s();
+              .datas_s(.2rem /* 16/80 */);
               font-weight: 500;
-              font-size: 0.175rem /* 14/80 */;
+            }
+            .dy_du {
+              position: absolute;
+              right: 0;
+              top: 0;
             }
           }
           .text_s();

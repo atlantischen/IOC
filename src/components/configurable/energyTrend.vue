@@ -33,18 +33,18 @@ export default {
       type: Object,
     },
   },
-  data() {
+  data () {
     return {
       ...this._data,
       ids: this.$uuid(),
     };
   },
-  mounted() {
+  mounted () {
     this.energyTrendFun(this.datas);
   },
   methods: {
     // 能耗态势
-    energyTrendFun(val) {
+    energyTrendFun (val) {
       var _data = val.energyTrendData;
       for (var i = 0; i < _data.length; i++) {
         var option = {
@@ -73,25 +73,20 @@ export default {
                 show: true,
                 animation: false,
                 position: "left",
-                offset: [120, 15],
+                offset: [120, 16],
                 formatter:
                   "本月" +
-                  _data[i].text +
-                  ":{a| " +
-                  _data[i].monthPower +
-                  " }" +
-                  _data[i].unit +
-                  "",
+                  _data[i].text + ":{a| " + _data[i].monthPower + "}" + _data[i].unit,
                 textStyle: {
                   color: "rgb(255,255,255,.7)",
                   fontSize: 14,
                   width: "115",
-                  textAlign: "bottom",
                   rich: {
                     a: {
                       fontFamily: "BYfont",
                       color: "#fff",
                       fontSize: 16,
+                      padding: [0, 2, -3, 8]
                     },
                   },
                 },
@@ -115,25 +110,24 @@ export default {
                 show: true,
                 animation: false,
                 position: "left",
-                offset: [120, 15],
+                offset: [120, 16],
                 formatter:
                   "本年" +
                   _data[i].text +
                   ":{a| " +
                   _data[i].yearPower +
-                  " }" +
-                  _data[i].unit +
-                  "",
+                  "}" +
+                  _data[i].unit,
                 textStyle: {
                   color: "rgb(255,255,255,.7)",
                   fontSize: 14,
                   width: "115",
-                  textAlign: "bottom",
                   rich: {
                     a: {
                       fontFamily: "BYfont",
                       color: "#fff",
                       fontSize: 16,
+                      padding: [0, 2, -3, 8]
                     },
                   },
                 },

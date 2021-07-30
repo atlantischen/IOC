@@ -6,6 +6,13 @@
   "description": "奇信智能-智慧园区管理平台 3D内嵌",
   "glyphs": [
     {
+      "icon_id": "5651501",
+      "name": "停止",
+      "font_class": "tingzhi1",
+      "unicode": "e67d",
+      "unicode_decimal": 59005
+    },
+    {
       "icon_id": "16102274",
       "name": "返回",
       "font_class": "fanhui",
