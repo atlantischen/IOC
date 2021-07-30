@@ -319,3 +319,14 @@ const fun = {
   afterIframeOnload
 }
 export default fun
+
+
+
+// 10:57
+export function formatHm(val) {
+  if (val) return moment(val).format('HH:mm')
+}
+//  2020-11-26 10:57:00
+export function formatYMDHms(val) {
+  if (val) return moment(val).format('YYYY-MM-DD HH:mm:ss')
+}

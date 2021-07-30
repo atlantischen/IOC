@@ -17,6 +17,7 @@
         <iframe
           v-show="!showIfame"
           v-if="item.url"
+          class="iframeVideo"
           :id="'iframeVideo' + i"
           :ref="'iframeVideo' + i"
           style="width: 100%; height: 100%"
@@ -24,7 +25,7 @@
           allowfullscreen
           allow="autoplay; fullscreen"
         ></iframe>
-        <Vloading v-else :text="'无信号'" />
+        <Vloading v-show="item.url && is404" :text="'无信号'" />
       </li>
     </ul>
     <LookVideo
@@ -43,6 +44,7 @@ export default {
     return {
       showIfame: true,
       Visible: false,
+      is404: false,
       dialogTitle: '',
       showMaster: false,
       masterIndex: null,
@@ -102,47 +104,47 @@ export default {
           url: 'http://47.119.172.151:10810/play.html?device=LiveNVR001&channel=1&protocol=WS_FLV'
         },
         {
-          local: '16楼C区铭筑',
+          local: '16层C区女厕',
           url: 'http://47.119.172.151:10810/play.html?device=LiveNVR001&channel=2&protocol=WS_FLV',
         },
         {
-          local: '16楼C区铭筑',
+          local: '16楼前台',
           url: 'http://47.119.172.151:10810/play.html?device=LiveNVR001&channel=3&protocol=WS_FLV',
         },
         {
-          local: '16楼C区铭筑',
+          local: '16楼A区铭筑男厕',
           url: 'http://47.119.172.151:10810/play.html?device=LiveNVR001&channel=4&protocol=WS_FLV',
         },
         {
-          local: '16楼C区铭筑',
+          local: '16楼A区会议室',
           url: 'http://47.119.172.151:10810/play.html?device=LiveNVR001&channel=5&protocol=WS_FLV',
         },
         {
-          local: '16楼C区铭筑',
+          local: '14楼A区铭筑',
           url: 'http://47.119.172.151:10810/play.html?device=LiveNVR001&channel=6&protocol=WS_FLV',
         },
         {
-          local: '16楼C区铭筑',
+          local: '14楼D区吧台',
           url: 'http://47.119.172.151:10810/play.html?device=LiveNVR001&channel=7&protocol=WS_FLV',
         },
         {
-          local: '14楼B区机房外',
+          local: '14楼C区女厕',
           url: 'http://47.119.172.151:10810/play.html?device=LiveNVR001&channel=8&protocol=WS_FLV',
         },
         {
-          local: '14楼C区中科展示',
+          local: '14楼A区大事记',
           url: 'http://47.119.172.151:10810/play.html?device=LiveNVR001&channel=9&protocol=WS_FLV',
         },
         {
-          local: '14楼C区展示区',
+          local: '14层B区男厕',
           url: 'http://47.119.172.151:10810/play.html?device=LiveNVR001&channel=10&protocol=WS_FLV',
         },
         {
-          local: '14层A区大事记朝外',
+          local: '14楼贵宾会议室外',
           url: 'http://47.119.172.151:10810/play.html?device=LiveNVR001&channel=11&protocol=WS_FLV',
         },
         {
-          local: '14楼展厅入口',
+          local: '14楼B区机房外',
           url: 'http://47.119.172.151:10810/play.html?device=LiveNVR001&channel=12&protocol=WS_FLV',
         },
       ],
@@ -191,19 +193,20 @@ export default {
     this.$afterIframeOnload('iframeVideo0', () => {
       this.showIfame = false
     })
+
   },
   methods: {
     openCloseDialog (val) {
       this.Visible = val
+
     },
     lookVideo (val) {
-      console.log(val)
-      this.dialogTitle = val.local
+      this.dialogTitle = val.deviceName = val.local
       this.videoD = val
+      console.log(val)
       this.openCloseDialog(true)
     },
     mouseFun (bool, i) {
-      console.log(bool)
       this.showMaster = bool
       this.masterIndex = i
     }

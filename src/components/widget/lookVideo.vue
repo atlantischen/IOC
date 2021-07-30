@@ -9,31 +9,42 @@
         @open="openClose(true)"
       >
         <div class="videoBox" ref="videoBoxRef">
-          <!-- <video controls>
-            <source  src="~@/assets/video/v.mp4" type="video/mp4" />
+          <video controls>
+            <source src="~@/assets/video/vvv.mp4" type="video/mp4" />
             <source src="~@/assets/video/vvv.jpg" type="video/ogg" />
             您的浏览器不支持Video标签。
-          </video> -->
-          <iframe
+          </video>
+          <!-- <iframe
             v-if="_data.url"
             style="width: 100%; height: 100%"
             :src="_data.url + '&protocol=FLV&iframe=yes'"
             allowfullscreen
             allow="autoplay; fullscreen"
-          ></iframe>
+          ></iframe> -->
           <div class="videoSet">
-            <!-- <i class="currentTime"> 2021年07月05日 </i> -->
-            <i class="currentTime" id="currentTimeRef" ref="currentTimeRef"
+            <!-- <i class="currentTime" id="currentTimeRef" ref="currentTimeRef"
               >{{ $currentDate() }}
-            </i>
+            </i> -->
             <!-- <i class="videoLocal">16楼</i> -->
             <i
               class="iconfont x_c vs_bg vs_full"
               :class="isFullscreen ? 'icon-suoxiao actived' : 'icon-fullScreen'"
               @click="fullScreenFun"
             ></i>
-            <i class="iconfont x_c vs_bg icon-luxiang"></i>
+            <i
+              class="iconfont x_c vs_bg icon-luxiang"
+              :class="{ actived: isShowRecord }"
+              @click="Record"
+            ></i>
           </div>
+          <RecordVideo
+            :_data="RecordData"
+            ref="RecordRef"
+            id="RecordRef"
+            :Visible="isShowRecord"
+            @close="Record"
+          />
+          <!-- <Recording ref="RecordRef" id="RecordRef" /> -->
         </div>
       </el-dialog>
     </div>
@@ -41,6 +52,8 @@
 </template>
 
 <script>
+import RecordVideo from "@/components/widget/recordVideo.vue"
+import Recording from "@/components/widget/recording.vue"
 export default {
   name: "LookVideo",
   props: {
@@ -59,16 +72,18 @@ export default {
   },
   data () {
     return {
+      isShowRecord: false,
       dialogVisible: false,
       isFullscreen: false,
-      timer: null
+      timer: null,
+      RecordData: {}
     };
   },
-  components: {},
+  components: { RecordVideo, Recording },
   watch: {
     Visible: {
-      handler (newVal, oldVal) {
-        this.dialogVisible = newVal
+      handler (n, o) {
+        this.dialogVisible = n
       },
       deep: true
     }
@@ -90,11 +105,19 @@ export default {
     },
     openClose (val) {
       this.dialogVisible = val
+      if (!val) { this.isShowRecord = val }
       this.$emit('off', val)
     },
     fullScreenFun () {
       this.$Fullscreen(this.$refs.videoBoxRef, this.isFullscreen)
       this.isFullscreen = !this.isFullscreen
+    },
+    Record () {
+      console.log(this._data)
+      // this.$refs.RecordRef.startRecording()
+      this.RecordData = this._data
+      this.isShowRecord = !this.isShowRecord
+      if (!this.isShowRecord) this.$refs.RecordRef.closeHandle()
     }
   },
 };
@@ -127,6 +150,7 @@ export default {
         i {
           position: absolute;
           color: #fff;
+          z-index: 0;
           &.actived {
             color: #0ff;
           }
