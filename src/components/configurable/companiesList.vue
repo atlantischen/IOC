@@ -31,7 +31,7 @@
         class="companiesImgsList"
         :class="[
           datas.buldingList ? '' : 'companiesImgsList' + datas.listCols,
-          datas.buldingList ? 'mniBar' : 'companiesImgsList_over',
+          !datas.buldingList && datas.companiesImgsListDatas.length>6 ? 'mniBar' : 'companiesImgsList_over',
         ]"
       >
         <li class="x_fs_rap" :ref="'companiesImgsListRef_' + ids">

@@ -9,18 +9,18 @@
         @open="openClose(true)"
       >
         <div class="videoBox" ref="videoBoxRef">
-          <video controls>
+          <!-- <video controls>
             <source src="~@/assets/video/vvv.mp4" type="video/mp4" />
             <source src="~@/assets/video/vvv.jpg" type="video/ogg" />
             您的浏览器不支持Video标签。
-          </video>
-          <!-- <iframe
+          </video> -->
+          <iframe
             v-if="_data.url"
             style="width: 100%; height: 100%"
-            :src="_data.url + '&protocol=FLV&iframe=yes'"
+            :src="_data.url + '&iframe=yes'"
             allowfullscreen
             allow="autoplay; fullscreen"
-          ></iframe> -->
+          ></iframe>
           <div class="videoSet">
             <!-- <i class="currentTime" id="currentTimeRef" ref="currentTimeRef"
               >{{ $currentDate() }}
@@ -37,14 +37,21 @@
               @click="Record"
             ></i>
           </div>
-          <RecordVideo
+
+          <!-- <RecordVideo
+            :_data="RecordData"
+            ref="RecordRef"
+            id="RecordRef"
+            :Visible="isShowRecord"
+            @close="Record"
+          /> -->
+          <Recording
             :_data="RecordData"
             ref="RecordRef"
             id="RecordRef"
             :Visible="isShowRecord"
             @close="Record"
           />
-          <!-- <Recording ref="RecordRef" id="RecordRef" /> -->
         </div>
       </el-dialog>
     </div>
@@ -57,15 +64,15 @@ import Recording from "@/components/widget/recording.vue"
 export default {
   name: "LookVideo",
   props: {
-    flv_url:{
-      type:String
+    _data: {
+      type: String
     },
     Visible: {
       type: Boolean,
     },
 
   },
-  data() {
+  data () {
     return {
       isShowRecord: false,
       dialogVisible: false,
@@ -83,16 +90,16 @@ export default {
       deep: true,
     },
   },
-  mounted() {
+  mounted () {
     this.currentD();
 
 
   },
-  beforeDestroy() {
+  beforeDestroy () {
     clearInterval(this.timer);
   },
   methods: {
-    currentD() {
+    currentD () {
       this.timer = setInterval(() => {
         if (!this.$refs.currentTimeRef) {
           return;
@@ -110,8 +117,6 @@ export default {
       this.isFullscreen = !this.isFullscreen
     },
     Record () {
-      console.log(this._data)
-      // this.$refs.RecordRef.startRecording()
       this.RecordData = this._data
       this.isShowRecord = !this.isShowRecord
       if (!this.isShowRecord) this.$refs.RecordRef.closeHandle()
@@ -125,10 +130,11 @@ export default {
   overflow: hidden;
   :deep(.qDialog) {
     .el-dialog {
-      width: 16.875rem /* 1350/80 */ /* 1392/80 */ !important;
-      height:10.25rem /* 820/80 */ /* 850/80 */ /* 800/80 *//* 900/80 */ /* 772/80 */ !important;
+      width: 16.875rem /* 1350/80 */ !important;
+      height: 10.25rem /* 820/80 */ !important;
       .el-dialog__body {
-        padding: 0.3625rem /* 29/80 */ /* 30/80 */;
+        text-align: center;
+        padding: 0.3625rem /* 29/80 */;
       }
       .el-dialog__footer {
         padding: 0;
@@ -137,7 +143,7 @@ export default {
     .videoBox {
       position: relative;
       text-align: center;
-      width: 16.675rem /* 1334/80 */;
+      width: 16.125rem /* 1290/80 */;
       height: 8.425rem /* 674/80 */;
       background: #000;
       video {
@@ -183,9 +189,9 @@ export default {
       }
     }
   }
-  #iframe{
-    width: 100% /* 1216/80 *//* 1250/80 */; 
-    height:9.0875rem /* 727/80 */ /* 700/80 */ /* 684/80 */ /* 1000/80 */;
+  #iframe {
+    width: 100% /* 1216/80 */;
+    height: 9.0875rem /* 727/80 */ /* 700/80 */ /* 684/80 */ /* 1000/80 */;
   }
 }
 </style>

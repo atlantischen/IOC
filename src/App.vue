@@ -14,7 +14,7 @@ export default {
   },
   methods: {
     event (event) {
-      console.log(event.data,'event.data');
+      console.log(event.data, 'event.data');
       if ((typeof event.data == 'string' && event.data.indexOf('data') != -1) || (typeof event.data == 'object' && event.data.data != undefined)) {
         let res = JSON.parse(event.data)
         if (res.action == "fullscreen") {
@@ -24,8 +24,8 @@ export default {
 
     },
     KeyDown (event) {
-     var event = event || window.event;
-      console.log(event.keyCode ,'event.keyCode ');
+      var event = event || window.event;
+      console.log(event.keyCode, 'event.keyCode ');
       if (event.keyCode === 122) {
         console.log('returnValue');
         //禁用f11
@@ -34,12 +34,12 @@ export default {
         this.$handleFullScreen()
       }
     },
-    change(){
+    change () {
       this.isFullscreen = screenfull.isFullscreen
     },
     init () {
       if (screenfull.isEnabled) {
-        screenfull.on('change', this.change) 
+        screenfull.on('change', this.change)
       }
     },
     destroy () {
@@ -50,11 +50,10 @@ export default {
   },
 
   mounted () {
-       this.init()
+    this.init()
     window.addEventListener("message", this.event, true);
   },
-  destroyed  () {
-    
+  destroyed () {
     window.removeEventListener("message", this.event, true);
     window.removeEventListener("keydown", this.KeyDown, true);
     this.destroy()
@@ -66,9 +65,9 @@ export default {
 </script>
 
 <style>
-html,body{
+html,
+body {
   height: 100%;
-  
 }
 #app {
   width: 100%;
