@@ -59,8 +59,23 @@
       <div class="tittle">冷源监控</div>
       <ul class="scroll">
         <li v-for="(item,index) in monitorList" :key="index" @click="lookVideo(`${++index}号客梯`)">
+        <Vloading v-show="showIfame" />
+
           <!-- <Player  :monitorList="monitorList" ></Player> -->
-          <iframe id="iframe" :src="item.flv_url"  allowfullscreen allow="autoplay; fullscreen"></iframe>
+         <iframe
+          v-show="!showIfame"
+          scrolling="no"
+          v-if="item.url"
+          class="iframeVideo"
+          name="iFrame"
+          id="iframe"
+          :ref="'iframeVideo' +index"
+          style="width: 100%; height: 100%"
+          :src="item.url + '&protocol=FLV&iframe=yes'"
+          allowfullscreen
+          allow="autoplay; fullscreen"
+        ></iframe>      
+          <!-- <Vloading v-show="item.url" :text="'无信号'" /> -->
 
         </li>
       </ul>
@@ -76,6 +91,7 @@ import * as echarts from "echarts";
 export default {
   data () {
     return {
+      showIfame: true,
       Visible: false,
       flv_url:'',
       dialogTitle:'',
@@ -132,30 +148,30 @@ export default {
         }
       ],
      monitorList:[
-         {
-          img_url:require('assets/img/monitor/snap (4).png'),
-          flv_url:'http://47.119.172.151:10810/play.html?device=LiveNVR001&channel=1&iframe=yes'
+        {
+          local: '16楼C区铭筑',
+          url: 'http://47.119.172.151:10810/play.html?device=LiveNVR001&channel=1&protocol=WS_FLV'
         },
-         {
-          img_url:require('assets/img/monitor/snap (5).png'),
-          flv_url:'http://172.21.71.225:10800/play.html?channel=3&iframe=yes'
+        {
+          local: '16层C区女厕',
+          url: 'http://47.119.172.151:10810/play.html?device=LiveNVR001&channel=2&protocol=WS_FLV',
         },
-         {
-          img_url:require('assets/img/monitor/snap (6).png'),
-          flv_url:'http://172.21.71.225:10800/play.html?channel=4&iframe=yes'
+        {
+          local: '16楼前台',
+          url: 'http://47.119.172.151:10810/play.html?device=LiveNVR001&channel=3&protocol=WS_FLV',
         },
-         {
-          img_url:require('assets/img/monitor/snap (7).png'),
-          flv_url:'http://172.21.71.225:10800/play.html?channel=5&iframe=yes'
+        {
+          local: '16楼A区铭筑男厕',
+          url: 'http://47.119.172.151:10810/play.html?device=LiveNVR001&channel=4&protocol=WS_FLV',
         },
-         {
-          img_url:require('assets/img/monitor/snap (6).png'),
-          flv_url:'http://172.21.71.225:10800/play.html?channel=4&iframe=yes'
+        {
+          local: '16楼A区会议室',
+          url: 'http://47.119.172.151:10810/play.html?device=LiveNVR001&channel=5&protocol=WS_FLV',
         },
-         {
-          img_url:require('assets/img/monitor/snap (7).png'),
-          flv_url:'http://172.21.71.225:10800/play.html?channel=5&iframe=yes'
-        }
+        {
+          local: '14楼A区铭筑',
+          url: 'http://47.119.172.151:10810/play.html?device=LiveNVR001&channel=6&protocol=WS_FLV',
+        },
       ] 
     };
   },
@@ -605,6 +621,7 @@ export default {
     },
   },
   mounted () {
+    let that=this
     this.RealTotalPower();
     this.ElectricityStatistics(
       ["7.24", "7.25", "7.26", "7.27", "7.28", "7.29", "7.30"],
@@ -618,7 +635,38 @@ export default {
         interval: 1200,
       }
     );
-  },
+     this.$afterIframeOnload('iframeVideo0', () => {
+      this.showIfame = false 
+    })
+    window.onload = function(){
+
+      that.$nextTick(()=>{
+        //  const iframe = window.frames['iFrame']
+        // const handleLoad = () => {
+        //   setTimeout(() => {
+        //     const Do = (iframe.contentWindow || iframe.contentDocument)
+        //     console.log(Do,'do');
+        //     Do.document.document.getElementById('ascrail2000').style.display = 'none'
+        //   }, 500)
+        // }
+        // iframe.addEventListener('load', handleLoad, true)
+        var _iframe = document.getElementById('iframe')
+         var a =  this.$refs.iframeVideo0
+        //  _iframe.style.overflow= "hidden";
+        console.log(_iframe,a,'_iframe');
+
+
+
+      })
+      
+    // var _iframe = document.getElementById('iframe').contentWindow
+    
+    // console.log(_iframe,'_iframe');
+    // _iframe.style.display= "none";  //修改样式
+
+  }
+  }
+    
 };
 </script>
 

@@ -14,7 +14,10 @@ export default {
   },
   methods: {
     event (event) {
+<<<<<<< HEAD
       console.log(event.data, 'event.data');
+=======
+>>>>>>> 27b67121d4c583f6a6eadc527b0eba5deeecf64d
       if ((typeof event.data == 'string' && event.data.indexOf('data') != -1) || (typeof event.data == 'object' && event.data.data != undefined)) {
         let res = JSON.parse(event.data)
         if (res.action == "fullscreen") {
@@ -52,6 +55,7 @@ export default {
   mounted () {
     this.init()
     window.addEventListener("message", this.event, true);
+    window.addEventListener("message", this.KeyDown, true);
   },
   destroyed () {
     window.removeEventListener("message", this.event, true);
