@@ -26,7 +26,7 @@ export default {
     
   },
   methods: {
-    createVideo() {
+   createVideo() {
       this.monitorList.forEach(item => {
            if (flvjs.isSupported()) {
         var videoElement = document.getElementById("videoElement"+item.id);
@@ -104,7 +104,7 @@ export default {
       this.flvPlayer.destroy();
       this.flvPlayer = null;
     },
-    
+     
     reloadVideo(flvPlayer) {
       this.destoryVideo(flvPlayer);
       this.createVideo();

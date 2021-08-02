@@ -49,9 +49,21 @@
         </div>
         <ul>
           <li v-for="(item,index) in monitorList" :key="item" @click="lookVideo(`${++index}号客梯`)">
-            <!-- <span>2020-12-31    14:40</span>
-            <span>{{item++}}号客梯</span> -->
-          <iframe id="iframe" :src="item.flv_url"  allowfullscreen allow="autoplay; fullscreen"></iframe>
+             <Vloading v-show="showIfame" />
+
+          <!-- <Player  :monitorList="monitorList" ></Player> -->
+         <iframe
+          v-show="!showIfame"
+          scrolling="no"
+          v-if="item.url"
+          class="iframeVideo"
+          id="iframe"
+          :ref="'iframeVideo' +index"
+          style="width: 100%; height: 100%"
+          :src="item.url + '&protocol=FLV&iframe=yes'"
+          allowfullscreen
+          allow="autoplay; fullscreen"
+        ></iframe>  
 
           </li>
         </ul>
@@ -73,7 +85,22 @@
           <li v-for="(item,index) in monitorList1" :key="index" @click="lookVideo(`${++index}号客梯`)">
             <!-- <span>2020-12-31    14:40</span>
             <span>{{item++}}号客梯</span> -->
-          <iframe id="iframe" :src="item.flv_url"  allowfullscreen allow="autoplay; fullscreen"></iframe>
+           <Vloading v-show="showIfame" />
+
+          <!-- <Player  :monitorList="monitorList" ></Player> -->
+         <iframe
+          v-show="!showIfame"
+          scrolling="no"
+          v-if="item.url"
+          class="iframeVideo"
+          name="iFrame"
+          id="iframe"
+          :ref="'iframeVideo' +index"
+          style="width: 100%; height: 100%"
+          :src="item.url + '&protocol=FLV&iframe=yes'"
+          allowfullscreen
+          allow="autoplay; fullscreen"
+        ></iframe>  
             
           </li>
         </ul>
@@ -97,6 +124,8 @@
 export default {
   data(){
     return{
+           showIfame: true,
+
       Visible: false,
       ElevatorVisible:false,
       dataList:{},
@@ -155,40 +184,40 @@ export default {
       backShow:false,
       title:'轿厢监控',
        monitorList:[
+       {
+          local: '16楼C区铭筑',
+          url: 'http://47.119.172.151:10810/play.html?device=LiveNVR001&channel=1&protocol=WS_FLV'
+        },
         {
-          img_url:require('assets/img/monitor/snap (2).png'),
-          flv_url:'http://172.21.71.225:10800/play.html?channel=13&iframe=yes'
+          local: '16层C区女厕',
+          url: 'http://47.119.172.151:10810/play.html?device=LiveNVR001&channel=2&protocol=WS_FLV',
         },
-         {
-          img_url:require('assets/img/monitor/snap (3).png'),
-          flv_url:'http://172.21.71.225:10800/play.html?channel=8&iframe=yes'
+        {
+          local: '16楼前台',
+          url: 'http://47.119.172.151:10810/play.html?device=LiveNVR001&channel=3&protocol=WS_FLV',
         },
-         {
-          img_url:require('assets/img/monitor/snap (4).png'),
-          flv_url:'http://172.21.71.225:10800/play.html?channel=1&iframe=yes'
-        },
-         {
-          img_url:require('assets/img/monitor/snap (5).png'),
-          flv_url:'http://172.21.71.225:10800/play.html?channel=3&iframe=yes'
+        {
+          local: '16楼A区铭筑男厕',
+          url: 'http://47.119.172.151:10810/play.html?device=LiveNVR001&channel=4&protocol=WS_FLV',
         },
          
       ],
         monitorList1:[
+       {
+          local: '16楼A区会议室',
+          url: 'http://47.119.172.151:10810/play.html?device=LiveNVR001&channel=5&protocol=WS_FLV',
+        },
         {
-          img_url:require('assets/img/monitor/snap (2).png'),
-          flv_url:'http://172.21.71.225:10800/play.html?channel=12&iframe=yes'
+          local: '14楼A区铭筑',
+          url: 'http://47.119.172.151:10810/play.html?device=LiveNVR001&channel=6&protocol=WS_FLV',
         },
-         {
-          img_url:require('assets/img/monitor/snap (3).png'),
-          flv_url:'http://172.21.71.225:10800/play.html?channel=14&iframe=yes'
+        {
+          local: '14楼D区吧台',
+          url: 'http://47.119.172.151:10810/play.html?device=LiveNVR001&channel=7&protocol=WS_FLV',
         },
-         {
-          img_url:require('assets/img/monitor/snap (4).png'),
-          flv_url:'http://172.21.71.225:10800/play.html?channel=15&iframe=yes'
-        },
-         {
-          img_url:require('assets/img/monitor/snap (5).png'),
-          flv_url:'http://172.21.71.225:10800/play.html?channel=16&iframe=yes'
+        {
+          local: '14楼C区女厕',
+          url: 'http://47.119.172.151:10810/play.html?device=LiveNVR001&channel=8&protocol=WS_FLV',
         },
          
       ]
@@ -225,12 +254,8 @@ export default {
       this.ElevatorVisible = val
     },
      event (event) {
-      
-        console.log(event.data);
         let res = JSON.parse(event.data)
-        console.log(res,'res');
         if(res.action ==='OpenElevatorVideo' && JSON.stringify(res.data) !== "{}"){
-          console.log('true');
             this.ElevatorVisible=true
             this.dataList=res.data
         }
@@ -244,6 +269,9 @@ export default {
   },
   mounted () {
     window.addEventListener("message", this.event, true);
+    this.$afterIframeOnload('iframeVideo0', () => {
+      this.showIfame = false 
+    })
     
   },
   destroyed() {

@@ -77,12 +77,12 @@
     <div class="airControl">
       <div class="tittle">新风控制</div>
       <div class=" NewRiskControl">
-        <div class="NewRiskControl_row">
+        <div class="NewRiskControl_row"  :class="NewRiskData.speedStates == 1 ? '' : 'toGrey'">
           <div class="NewRiskControl_row_top">
             <span class="NewRiskTitle" >SA01_新风</span>
             <div class="sliderBtn " :class="NewRiskData.speedStates==1?'open ':'close'" @click="closeOpen('speed')"></div>
           </div>
-          <div class="NewRiskControl_row_ct">
+          <div class="NewRiskControl_row_ct" :class="NewRiskData.speedStates == 1 ? '' : 'disable'">
             <div class="winspeed">送风风速
               <span :class="{'actived':NewRiskData.speed1>=1}" @click="changeWinSpeed('speed1', 1)">
                 <i class="iconfont icon-fengsu" ></i>
@@ -107,12 +107,12 @@
             </div>
           </div>
         </div>
-        <div class="NewRiskControl_row">
+        <div class="NewRiskControl_row" :class="NewRiskData.timeOpenStates == 1 ? '' : 'toGrey'">
           <div class="NewRiskControl_row_top">
             <span>定时开启</span>
             <div class="sliderBtn " :class="NewRiskData.timeOpenStates==1?'open ':'close'" @click="closeOpen('open')"></div>
           </div>
-          <div class="NewRiskControl_row_ct">
+          <div class="NewRiskControl_row_ct" :class="NewRiskData.timeOpenStates == 1 ? '' : 'disable'">
             <div class="setReTime">
               <span>开启时间</span>
               <span> <input class="inputNumber"  :placeholder="NewRiskData.openTime.split(':')[0]" @input="myFunction1" type="number">时 </span>
@@ -132,12 +132,12 @@
             </div>
           </div>
         </div>
-        <div class="NewRiskControl_row">
+        <div class="NewRiskControl_row" :class="NewRiskData.timeCloseStates == 1 ? '' : 'toGrey'">
           <div class="NewRiskControl_row_top">
             <span>定时关闭</span>
             <div class="sliderBtn " :class="NewRiskData.timeCloseStates==1?'open ':'close'" @click="closeOpen('close')"></div>
           </div>
-          <div class="NewRiskControl_row_ct">
+          <div class="NewRiskControl_row_ct"  :class="NewRiskData.timeCloseStates == 1 ? '' : 'disable'">
             <div class="setReTime">
               <span>开启时间</span>
               <span> <input class="inputNumber"  :placeholder="NewRiskData.closeTime.split(':')[0]" @input="myFunction3" type="number">时 </span>
@@ -229,10 +229,10 @@ export default {
       ],
        NewRiskData:{
           name: 'SA01_新风',
-          speedStates: 0,
+          speedStates: 1,
           speed1: 2,
           speed2: 1,
-          timeOpenStates:0,
+          timeOpenStates:1,
           openTime: '22:10',
           openDate: [1, 2, 3, 4, 5],
           timeCloseStates:1,
@@ -513,6 +513,7 @@ export default {
            closeOpen(val) {
           if(val == 'speed'){
             this.NewRiskData.speedStates = this.NewRiskData.speedStates==1?0:1
+            console.log(this.NewRiskData.speedStates,'this.NewRiskData.speedStates');
           }else if(val == 'open'){
             this.NewRiskData.timeOpenStates = this.NewRiskData.timeOpenStates==1?0:1
           }else{
