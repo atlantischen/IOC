@@ -1,81 +1,83 @@
 <template>
   <!-- 综合态势右侧搜索 -->
+  <!-- <transition name="el-zoom-in-left"> -->
   <div class="rightContent">
-    <LeftRight>
-      <div class="leftSearch">
-        <i class="iconfont icon-fanhui" @click="back"></i>
-        <div class="theSearchPath y_c">
-          <el-upload
-            class="upload-demo uploadPhoto"
-            action="#"
-            drag
-            :show-file-list="false"
-            :auto-upload="false"
-            :on-change="changeFile"
-            multiple
-          >
-            <img
-              v-if="!imageUrl"
-              class="upload_av"
-              src="~@/assets/img/datas/sc_av.png"
-            />
-            <img
-              v-if="!imageUrl"
-              class="upload_up"
-              src="~@/assets/img/datas/sc_up.png"
-            />
-            <img v-else :src="imageUrl" class="avatar" />
-          </el-upload>
-          <button :class="{ m_disabled: !imageUrl }" @click="SearchPath()">
-            搜寻轨迹
-          </button>
-        </div>
-        <SearchBox
-          class="SearchBoxClass"
-          :text="'搜园区建筑、搜企业、搜商家'"
-          :inputV="inputV"
-          @_search="searchList"
+    <LeftRight :_show="showLeftRight">
+      <template #rPage>
+        <div
+          class="leftSearch"
         >
-          <div
-            class="SearchBoxList stretch_all"
-            :class="{ SearchBoxList0: isShowList }"
-          >
-            <ul class="bigBar" v-if="slist && slist.length > 0">
-              <li
-                class="x_left"
-                v-for="(item, i) in slist"
-                :key="i"
-                @click="searchOneItem(item)"
-              >
-                <div
-                  class="s_img"
-                  :style="
-                    item.src
-                      ? 'background: url(' +
-                        item.src +
-                        ') center #fff no-repeat; '
-                      : 'background-color:#fff;'
-                  "
-                ></div>
-                <div class="y_sa_rap">
-                  <p class="LineBeyond">
-                    {{ item.name || "-" }}{{ item.phone ? "-" : ""
-                    }}{{ item.phone }}
-                  </p>
-                  <p class="LineBeyond">{{ item.info || "-" }}</p>
-                </div>
-              </li>
-            </ul>
-            <NoT :_text="`无关键字'${inputV}'的相关结果`" />
-            <p class="resultNum">
-              共搜索到{{ slist ? slist.length : 0 }}条结果
-            </p>
+          <i class="iconfont icon-fanhui" @click="back"></i>
+          <div class="theSearchPath y_c">
+            <el-upload
+              class="upload-demo uploadPhoto"
+              action="#"
+              drag
+              :show-file-list="false"
+              :auto-upload="false"
+              :on-change="changeFile"
+              multiple
+            >
+              <img
+                v-if="!imageUrl"
+                class="upload_av"
+                src="~@/assets/img/datas/sc_av.png"
+              />
+              <img
+                v-if="!imageUrl"
+                class="upload_up"
+                src="~@/assets/img/datas/sc_up.png"
+              />
+              <img v-else :src="imageUrl" class="avatar" />
+            </el-upload>
+            <button :class="{ m_disabled: !imageUrl }" @click="SearchPath()">
+              搜寻轨迹
+            </button>
           </div>
-        </SearchBox>
-      </div>
-      <template #left> </template>
-      <template #center></template>
-      <template #right></template>
+          <SearchBox
+            class="SearchBoxClass"
+            :text="'搜园区建筑、搜企业、搜商家'"
+            :inputV="inputV"
+            @_search="searchList"
+          >
+            <div
+              class="SearchBoxList stretch_all"
+              :class="{ SearchBoxList0: isShowList }"
+            >
+              <ul class="bigBar" v-if="slist && slist.length > 0">
+                <li
+                  class="x_left"
+                  v-for="(item, i) in slist"
+                  :key="i"
+                  @click="searchOneItem(item)"
+                >
+                  <div
+                    class="s_img"
+                    :style="
+                      item.src
+                        ? 'background: url(' +
+                          item.src +
+                          ') center #fff no-repeat; '
+                        : 'background-color:#fff;'
+                    "
+                  ></div>
+                  <div class="y_sa_rap">
+                    <p class="LineBeyond">
+                      {{ item.name || "-" }}{{ item.phone ? "-" : ""
+                      }}{{ item.phone }}
+                    </p>
+                    <p class="LineBeyond">{{ item.info || "-" }}</p>
+                  </div>
+                </li>
+              </ul>
+              <NoT :_text="`无关键字'${inputV}'的相关结果`" />
+              <p class="resultNum">
+                共搜索到{{ slist ? slist.length : 0 }}条结果
+              </p>
+            </div>
+          </SearchBox>
+        </div>
+      </template>
     </LeftRight>
     <!-- 黑名单 -->
     <div class="rightBtn" v-show="!isFade" @click="showBlackListFun"></div>
@@ -139,17 +141,24 @@
       </div>
     </RightAlert>
   </div>
+  <!-- </transition> -->
 </template>
 
 <script>
-import { nextTick } from "@vue/runtime-core";
 export default {
   name: "rightContent",
   props: {
-    inputVal: String,
+    inputVal: {
+      type: String,
+    },
+    _show: {
+      type: Boolean,
+      default: false,
+    },
   },
-  data () {
+  data() {
     return {
+      showLeftRight: false,
       currentPage: 1,
       total: 1,
       isFade: false,
@@ -275,32 +284,38 @@ export default {
   },
   watch: {
     inputVal: {
-      handler (n, o) {
+      handler(n, o) {
         this.inputV = n;
       },
       deep: true,
     },
+    _show: {
+      handler(n) {
+        this.showLeftRight = n;
+        console.log(this.showLeftRight);
+      },
+    },
   },
-  mounted () {
+  mounted() {
     this.total = this.tableData2.length;
     this.changeDatasFun();
   },
   methods: {
     // 上传头像
-    changeFile (file, fileList) {
+    changeFile(file, fileList) {
       var _that = this;
       if (!file || !window.FileReader) return;
       var reader = new FileReader();
       reader.readAsDataURL(file.raw);
-      reader.onload = function (e) {
+      reader.onload = function(e) {
         _that.imageUrl = reader.result;
       };
     },
     //
-    showBlackListFun () {
+    showBlackListFun() {
       this.isFade = !this.isFade;
     },
-    searchList (val) {
+    searchList(val) {
       this.inputV = val;
       // if (!val) {
       //   return this.$message.error("请输入关键词！")
@@ -310,7 +325,7 @@ export default {
       this.isShowList = !this.isShowList;
     },
     // 搜索轨迹
-    SearchPath () {
+    SearchPath() {
       if (this.imageUrl) {
         this.$SendMessageToUnity("ShowLocationPin", {
           Serial: 0,
@@ -318,33 +333,33 @@ export default {
         console.log("ShowLocationPin---搜寻轨迹------------");
       }
     },
-    searchOneItem (val) {
+    searchOneItem(val) {
       console.log(val);
       this.$SendMessageToUnity("ShowLocationPin", {
         Serial: 0,
       });
       console.log("ShowLocationPin--商家、企业------------");
     },
-    zhuizongFun (val) {
+    zhuizongFun(val) {
       console.log(val);
       this.$SendMessageToUnity("ShowLocationPin", {
         Serial: 0,
       });
       console.log("ShowLocationPin-----跟踪------------");
     },
-    back () {
+    back() {
       this.$emit("_c", null);
     },
     // 模拟分页
-    changeDatasFun () {
+    changeDatasFun() {
       let _data = JSON.parse(JSON.stringify(this.tableData2));
       let _first = (this.currentPage - 1) * 10;
       this.tableData = _data.slice(_first, _first + 10);
     },
-    handleSizeChange (val) {
+    handleSizeChange(val) {
       console.log(`每页 ${val} 条`);
     },
-    handleCurrentChange (val) {
+    handleCurrentChange(val) {
       this.currentPage = val;
       this.changeDatasFun();
     },

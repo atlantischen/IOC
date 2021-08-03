@@ -7,57 +7,58 @@ import screenfull from "screenfull";
 
 export default {
   name: "App",
-  data: function () {
+  data: function() {
     return {
-      isFullscreen: false
+      isFullscreen: false,
     };
   },
   methods: {
-    event (event) {
-      if ((typeof event.data == 'string' && event.data.indexOf('data') != -1) || (typeof event.data == 'object' && event.data.data != undefined)) {
-        let res = JSON.parse(event.data)
+    event(event) {
+      if (
+        (typeof event.data == "string" && event.data.indexOf("data") != -1) ||
+        (typeof event.data == "object" && event.data.data != undefined)
+      ) {
+        let res = JSON.parse(event.data);
         if (res.action == "fullscreen") {
           this.$handleFullScreen();
         }
       }
-
     },
-    KeyDown (event) {
-     var event = event || window.event;
-      console.log(event.keyCode ,'event.keyCode ');
+    KeyDown(event) {
+      var event = event || window.event;
+      console.log(event.keyCode, "event.keyCode ");
       if (event.keyCode === 122) {
-        console.log('returnValue');
+        console.log("returnValue");
         //禁用f11
-        event.returnValue = false
+        event.returnValue = false;
         //触发全屏的按钮
-        this.$handleFullScreen()
+        this.$handleFullScreen();
       }
     },
-    change(){
-      this.isFullscreen = screenfull.isFullscreen
+    change() {
+      this.isFullscreen = screenfull.isFullscreen;
     },
-    init () {
+    init() {
       if (screenfull.isEnabled) {
-        screenfull.on('change', this.change) 
+        screenfull.on("change", this.change);
       }
     },
-    destroy () {
+    destroy() {
       if (screenfull.isEnabled) {
-        screenfull.off('change', this.change)
+        screenfull.off("change", this.change);
       }
-    }
+    },
   },
 
-  mounted () {
-       this.init()
+  mounted() {
+    this.init();
     window.addEventListener("message", this.event, true);
     window.addEventListener("message", this.KeyDown, true);
   },
-  destroyed  () {
-    
+  destroyed() {
     window.removeEventListener("message", this.event, true);
     window.removeEventListener("keydown", this.KeyDown, true);
-    this.destroy()
+    this.destroy();
   },
   watch: {
     route: {},
@@ -66,9 +67,9 @@ export default {
 </script>
 
 <style>
-html,body{
+html,
+body {
   height: 100%;
-  
 }
 #app {
   width: 100%;

@@ -25,7 +25,7 @@ export default {
           datas: {
             optionName: ["空置产业空间", "已租产业空间"],
             unit: '万平',
-            xAxiasD: [12.935, 89.565],
+            xAxiasD: [10.985, 88.565],
             datas: {
               name: '园区总面积',
               value: 99.55

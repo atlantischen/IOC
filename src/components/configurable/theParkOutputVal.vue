@@ -16,19 +16,19 @@ export default {
       type: Object,
     },
   },
-  data () {
+  data() {
     return {
       ...this._data,
       ids: this.$uuid(),
     };
   },
-  mounted () {
+  mounted() {
     this.outputValueFun(this.datas);
   },
   methods: {
     // 园区产值
-    outputValueFun (val) {
-      const { optionName, datas } = val;
+    outputValueFun(val) {
+      const { optionName, datas, data2 } = val;
       var option = {
         tooltip: {
           trigger: "item",
@@ -40,16 +40,16 @@ export default {
           textStyle: {
             color: "#fff",
           },
-          formatter: v => {
-            return v.name + ':' + v.value + '%'
-          }
+          formatter: (v) => {
+            return v.name + ":" + v.value + "%";
+          },
         },
         title: {
           show: true,
-          text: 164,
+          text: data2.value,
           link: "",
           target: null,
-          subtext: "税收总数\n(亿元)",
+          subtext: data2.name + "\n" + data2.unit,
           sublink: "",
           subtarget: null,
           left: "22%",
@@ -78,7 +78,7 @@ export default {
           right: 8,
           y: "center",
           data: optionName,
-          formatter: function (name) {
+          formatter: function(name) {
             return "{a|" + name + "}";
           },
           textStyle: {
@@ -128,6 +128,17 @@ export default {
           name: optionName[i],
         };
       }
+      // var time = data2.value - 10,
+      //   timer = null;
+      // timer = setInterval(() => {
+      //   time += 1;
+      //   option.title.text = time;
+      //   this.$redomEchart(this.$refs["outputValueEchart_" + this.ids], option);
+      //   if (time == data2.value) {
+      //     clearInterval(timer);
+      //     return;
+      //   }
+      // }, 1000);
       this.$redomEchart(this.$refs["outputValueEchart_" + this.ids], option);
     },
   },

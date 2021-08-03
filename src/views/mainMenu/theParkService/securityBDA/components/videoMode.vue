@@ -21,7 +21,7 @@
           :id="'iframeVideo' + i"
           :ref="'iframeVideo' + i"
           style="width: 100%; height: 100%"
-          :src="item.url + '&protocol=FLV&iframe=yes'"
+          :src="item.url + '&iframe=yes'"
           allowfullscreen
           allow="autoplay; fullscreen"
         ></iframe>
@@ -53,99 +53,55 @@ export default {
       //     local: '16楼C区铭筑',
       //     url: 'http://172.21.71.225:10800/play.html?channel=5'
       //   },
-      //   {
-      //     local: '16楼C区铭筑',
-      //     url: 'http://172.21.71.225:10800/play.html?channel=6'
-      //   },
-      //   {
-      //     local: '16楼C区铭筑',
-      //     url: 'http://172.21.71.225:10800/play.html?channel=7'
-      //   },
-      //   {
-      //     local: '16楼C区铭筑',
-      //     url: 'http://172.21.71.225:10800/play.html?channel=8'
-      //   },
-      //   {
-      //     local: '16楼C区铭筑',
-      //     url: 'http://172.21.71.225:10800/play.html?channel=9'
-      //   },
-      //   {
-      //     local: '16楼C区铭筑',
-      //     url: 'http://172.21.71.225:10800/play.html?channel=10'
-      //   },
-      //   {
-      //     local: '16楼C区铭筑',
-      //     url: 'http://172.21.71.225:10800/play.html?channel=11'
-      //   },
-      //   {
-      //     local: '14楼B区机房外',
-      //     url: 'http://172.21.71.225:10800/play.html?channel=12'
-      //   },
-      //   {
-      //     local: '14楼C区中科展示',
-      //     url: 'http://172.21.71.225:10800/play.html?channel=13'
-      //   },
-      //   {
-      //     local: '14楼C区展示区',
-      //     url: 'http://172.21.71.225:10800/play.html?channel=14'
-      //   },
-      //   {
-      //     local: '14层A区大事记朝外',
-      //     url: 'http://172.21.71.225:10800/play.html?channel=15'
-      //   },
-      //   {
-      //     local: '14楼展厅入口',
-      //     url: 'http://172.21.71.225:10800/play.html?channel=16'
-      //   },
       // ],
       videoDatas: [
         {
           local: '16楼C区铭筑',
-          url: 'http://47.119.172.151:10810/play.html?device=LiveNVR001&channel=1&protocol=WS_FLV'
+          url: 'http://47.119.172.151:10810/play.html?device=LiveNVR001&channel=1'
         },
         {
           local: '16层C区女厕',
-          url: 'http://47.119.172.151:10810/play.html?device=LiveNVR001&channel=2&protocol=WS_FLV',
+          url: 'http://47.119.172.151:10810/play.html?device=LiveNVR001&channel=2',
         },
         {
           local: '16楼前台',
-          url: 'http://47.119.172.151:10810/play.html?device=LiveNVR001&channel=3&protocol=WS_FLV',
+          url: 'http://47.119.172.151:10810/play.html?device=LiveNVR001&channel=3',
         },
         {
           local: '16楼A区铭筑男厕',
-          url: 'http://47.119.172.151:10810/play.html?device=LiveNVR001&channel=4&protocol=WS_FLV',
+          url: 'http://47.119.172.151:10810/play.html?device=LiveNVR001&channel=4',
         },
         {
           local: '16楼A区会议室',
-          url: 'http://47.119.172.151:10810/play.html?device=LiveNVR001&channel=5&protocol=WS_FLV',
+          url: 'http://47.119.172.151:10810/play.html?device=LiveNVR001&channel=5',
         },
         {
           local: '14楼A区铭筑',
-          url: 'http://47.119.172.151:10810/play.html?device=LiveNVR001&channel=6&protocol=WS_FLV',
+          url: 'http://47.119.172.151:10810/play.html?device=LiveNVR001&channel=6',
         },
         {
           local: '14楼D区吧台',
-          url: 'http://47.119.172.151:10810/play.html?device=LiveNVR001&channel=7&protocol=WS_FLV',
+          url: 'http://47.119.172.151:10810/play.html?device=LiveNVR001&channel=7',
         },
         {
           local: '14楼C区女厕',
-          url: 'http://47.119.172.151:10810/play.html?device=LiveNVR001&channel=8&protocol=WS_FLV',
+          url: 'http://47.119.172.151:10810/play.html?device=LiveNVR001&channel=8',
         },
         {
           local: '14楼A区大事记',
-          url: 'http://47.119.172.151:10810/play.html?device=LiveNVR001&channel=9&protocol=WS_FLV',
+          url: 'http://47.119.172.151:10810/play.html?device=LiveNVR001&channel=9',
         },
         {
           local: '14层B区男厕',
-          url: 'http://47.119.172.151:10810/play.html?device=LiveNVR001&channel=10&protocol=WS_FLV',
+          url: 'http://47.119.172.151:10810/play.html?device=LiveNVR001&channel=10',
         },
         {
           local: '14楼贵宾会议室外',
-          url: 'http://47.119.172.151:10810/play.html?device=LiveNVR001&channel=11&protocol=WS_FLV',
+          url: 'http://47.119.172.151:10810/play.html?device=LiveNVR001&channel=11',
         },
         {
           local: '14楼B区机房外',
-          url: 'http://47.119.172.151:10810/play.html?device=LiveNVR001&channel=12&protocol=WS_FLV',
+          url: 'http://47.119.172.151:10810/play.html?device=LiveNVR001&channel=12',
         },
       ],
       videoD: {},

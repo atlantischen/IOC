@@ -2,8 +2,7 @@
   <!-- 综合态势home -->
   <div class="zhts_Home">
     <!-- <button @click="cgLang" class="cgLang">{{ $t("lg.name", lang) }}</button> -->
-    <RightContent v-show="isShowRIght" :inputVal="inputV" @_c="clickSwitch" />
-    <LeftRight v-show="!isShowRIght">
+    <LeftRight :_show="isShowRIght">
       <template #left>
         <Allcom :_Info="leftInfo" />
       </template>
@@ -12,14 +11,15 @@
           class="SearchBoxClass"
           :text="'搜园区建筑、搜企业、搜商家'"
           :inputV="inputVal"
-          @_search="clickSwitch"
-          @_input="clickSwitch"
+          @click="clickSwitch()"
         />
+        <!-- @_search / @_input -->
       </template>
       <template #right>
         <Allcom :_Info="rightInfo" />
       </template>
     </LeftRight>
+    <RightContent :_show="isShowRIght" :inputVal="inputV" @_c="clickSwitch" />
   </div>
 </template>
 
@@ -33,7 +33,7 @@ import * as echarts from "echarts";
 export default {
   components: { RightContent },
   // name: "zhts",
-  data () {
+  data() {
     return {
       inputVal: null,
       inputV: null,
@@ -46,11 +46,11 @@ export default {
             datas1: [
               [
                 {
-                  data: [158],
+                  data: [79],
                   name: "待入驻企业",
                 },
                 {
-                  data: [234],
+                  data: [168],
                   name: "已入驻企业",
                 },
               ],
@@ -85,17 +85,15 @@ export default {
             //   [23, 12, 43, 32, 21, 43],
             //   [34, 2, 32, 32, 32, 23],
             // ],
-            datas: [
-              [34, 2, 32, 32, 32, 23],
-            ],
+            datas: [[1, 2, 32, 32, 32, 23]],
             datas2: [
               {
                 name: "今日总人流量",
-                value: 28264,
+                value: 342543,
               },
               {
                 name: "今日总访客",
-                value: 289,
+                value: this.$randomNumer(200, 300),
               },
             ],
           },
@@ -116,16 +114,11 @@ export default {
               "商家",
             ],
             datas: [24, 16, 13, 15, 15, 12, 2, 2, 1],
-            datas2: [
-              {
-                name: "今日总人流量",
-                value: 28264,
-              },
-              {
-                name: "今日总访客",
-                value: 289,
-              },
-            ],
+            data2: {
+              value: 164,
+              name: "税收总数",
+              unit: "(亿元)",
+            },
           },
         },
       ],
@@ -139,16 +132,16 @@ export default {
               {
                 unit: "kW.h",
                 text: "电耗",
-                todayPower: 632,
-                monthPower: 15752,
-                yearPower: 200163,
+                todayPower: 12968,
+                monthPower: this.$getDayNums("m") * 1296,
+                yearPower: this.$getDayNums("y") * 1296,
               },
               {
                 unit: "m³",
                 text: "水耗",
-                todayPower: 205,
-                monthPower: 5380,
-                yearPower: 62583,
+                todayPower: 2056,
+                monthPower: this.$getDayNums("m") * 205,
+                yearPower: this.$getDayNums("y") * 205,
               },
             ],
           },
@@ -214,7 +207,10 @@ export default {
             ],
             names: ["正常", "故障"],
             xAxisName: ["安防", "能耗", "网络", "消防"],
-            datas: [[1023, 824, 1000, 1014], [35, 32, 53, 82]],
+            datas: [
+              [1123, 924, 1000, 1014],
+              [45, 12, 9, 13],
+            ],
           },
         },
       ],
@@ -247,12 +243,12 @@ export default {
     };
   },
   computed: {
-    lang () {
+    lang() {
       return this.$store.state.comState.lang;
     },
   },
   watch: {
-    "$store.state.comState.lang" (n, o) {
+    "$store.state.comState.lang"(n, o) {
       // this.lang = this.$t("lg.name", n);
       // this.leftInfo = JSON.parse(
       //   this.$t("comprehensiveSituational.homePage")
@@ -265,12 +261,12 @@ export default {
       // ).rightInfo;
     },
   },
-  created () {
-    this.$store.dispatch('SET_CENTERDATAS', [true, this.centerDatasList])
+  created() {
+    this.$store.dispatch("SET_CENTERDATAS", [true, this.centerDatasList]);
     // (this.leftInfo = homePage.leftInfo),
     //   (this.rightInfo = homePage.rightInfo)
   },
-  mounted () {
+  mounted() {
     // aaa().then(r=>{
     //   console.log(r)
     // })
@@ -278,15 +274,15 @@ export default {
     //   console.log('xxxxxxxxx', req)
     // })
   },
-  destroyed () { },
+  destroyed() {},
   methods: {
-    showTipBoxHandle (val) { },
-    clickSwitch (val) {
+    showTipBoxHandle(val) {},
+    clickSwitch(val) {
       this.inputVal = val;
       this.inputV = null;
       this.isShowRIght = !this.isShowRIght;
     },
-    cgLang () {
+    cgLang() {
       let a;
       if (localStorage.getItem("language") == "en" || i18n.locale == "en") {
         a = "zh";
