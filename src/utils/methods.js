@@ -280,6 +280,20 @@ var timeRangeArr = function timeRangeArr(_range) {
 }
 
 /**
+ *
+ * 获取1月到现在的月份数组
+ * @param {any} start 开始时间  (1月)
+ * @param {any} end   结束(8月)
+ * @returns
+ */
+var monthRangeArr = function monthRangeArr(_range) {
+  var _m = Number(moment(new Date()).format('MM')), arr = []
+  for (var i = 1; i < _m; i++) {
+    arr.push(i + '月')
+  }
+  return arr
+}
+/**
  * 全屏
  * @returns
  */
@@ -303,6 +317,24 @@ var afterIframeOnload = function afterIframeOnload(dom, fun) {
     }
   }
 }
+/**
+ * 获取今年开始 本年第几天（y） 本月第几天（m）
+ * @returns
+ */
+var getDayNums = function getDayNums(val) {
+  switch (val) {
+    case 'y':
+      let currentYear = new Date().getFullYear().toString();
+      let hasTimestamp = new Date() - new Date(currentYear);
+      let hasDays = Math.ceil(hasTimestamp / 86400000) + 1;
+      // console.log('今天是%s年中的第%s天', currentYear, hasDays);
+      return hasDays
+    case 'm':
+      return Number(moment(new Date()).format('DD'))
+    default:
+      return 0
+  }
+}
 const fun = {
   currentDate,
   redomEchart,
@@ -315,8 +347,10 @@ const fun = {
   randomNumer,
   filterNum,
   timeRangeArr,
+  monthRangeArr,
   handleFullScreen,
-  afterIframeOnload
+  afterIframeOnload,
+  getDayNums
 }
 export default fun
 

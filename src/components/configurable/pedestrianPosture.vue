@@ -29,23 +29,23 @@ export default {
       type: Object,
     },
   },
-  data () {
+  data() {
     return {
       ...this._data,
       ids: this.$uuid(),
     };
   },
-  created () { },
-  mounted () {
+  created() {},
+  mounted() {
     this.pedestrianPostureFun(this.datas);
   },
   methods: {
-    changePSYears2 (val) {
+    changePSYears2(val) {
       console.log(val);
       this.pedestrianPostureFun(this.datas);
     },
     // 人行态势
-    pedestrianPostureFun (val) {
+    pedestrianPostureFun(val) {
       let { names, xData, datas, smooth, unit, rightTip, leftTip } = val;
       var allD = [],
         color = ["#97c8ff", "#ffdd8d"],
@@ -101,8 +101,9 @@ export default {
             text: "",
             link: "",
             target: null,
-            subtext: `${rightTip ? rightTip.name : ""}${rightTip ? rightTip.value : ""
-              }`,
+            subtext: `${rightTip ? rightTip.name : ""}${
+              rightTip ? rightTip.value : ""
+            }`,
             sublink: "",
             subtarget: null,
             right: "-10",
@@ -122,8 +123,9 @@ export default {
           },
           {
             show: leftTip,
-            text: `{c|${leftTip ? leftTip.name : ""}}{a|${leftTip ? leftTip.value : ""
-              }}{b|${leftTip ? leftTip.unit : ""}}`,
+            text: `{c|${leftTip ? leftTip.name : ""}}{a|${
+              leftTip ? leftTip.value : ""
+            }}{b|${leftTip ? leftTip.unit : ""}}`,
             link: "",
             target: null,
             subtext: "",
@@ -175,10 +177,12 @@ export default {
             let dataStr = `<p style="font-weight:bold;text-align:center;">${params[0].name}</p>`;
             params.forEach((item) => {
               dataStr += `<div>
-                  <span style=" vertical-align: middle;margin-right:0.0625rem;width:0.15rem;height:0.025rem;background-color:${item.color
-                };"></span>
-                  <span> ${item.seriesName ? item.seriesName + ":" : item.seriesName
-                }${item.data.value}</span>
+                  <span style=" vertical-align: middle;margin-right:0.0625rem;width:0.15rem;height:0.025rem;background-color:${
+                    item.color
+                  };"></span>
+                  <span> ${
+                    item.seriesName ? item.seriesName + ":" : item.seriesName
+                  }${item.data.value}</span>
                 </div>`;
             });
             return dataStr;
@@ -272,6 +276,7 @@ export default {
             type: "line",
             symbolSize: 6,
             ...e,
+            animationDuration: 2000,
           };
         }),
       };

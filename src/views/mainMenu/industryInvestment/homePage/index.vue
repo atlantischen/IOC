@@ -319,7 +319,7 @@ export default {
       centerDatasList: [
         {
           name: "企业总数",
-          val: 1368,
+          val: 2483,
         },
         {
           name: "商家总数",

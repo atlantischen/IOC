@@ -18,6 +18,9 @@
     >
       <slot name="right"></slot>
     </div>
+    <div class="otherModel ioc_animated" :class="fade ? 'fadeInRight2' : ''">
+      <slot name="rPage"></slot>
+    </div>
     <slot></slot>
   </div>
 </template>
@@ -25,10 +28,23 @@
 <script>
 export default {
   name: "leftRightPart",
+  props: {
+    _show: {
+      type: Boolean,
+      default: false,
+    },
+  },
   data() {
     return {
       fade: false,
     };
+  },
+  watch: {
+    _show: {
+      handler(n) {
+        this.fade = n;
+      },
+    },
   },
   components: {},
   mounted() {
@@ -49,6 +65,12 @@ export default {
 @import "~@/style/gl.less";
 .tittle {
   margin: 0.1875rem /* 15/80 */ 0;
+}
+.otherModel {
+  opacity: 0;
+  position: fixed;
+  top: 0;
+  left: 0;
 }
 .leftRightPart {
   color: #fff;

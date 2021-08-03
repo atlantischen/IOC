@@ -103,12 +103,13 @@ export default {
           },
           axisLabel: {
             fontSize: 12,
-            padding: [20, 0, 0, -20],
+            padding: [0, 0, 0, 0],
             rotate: -20,
             interval: 0,
-            margin: 10,
+            margin: 15,
             textStyle: {
               color: "#fff",
+              align: "center",
             },
           },
         },
