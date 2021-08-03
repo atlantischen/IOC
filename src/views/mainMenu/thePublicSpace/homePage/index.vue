@@ -66,7 +66,7 @@ export default {
               "天平台广场",
             ],
             names: null,
-            units: ["", "个"],
+            units: ["", "次"],
             datas: [
               [78, 60, 55, 38, 27]
             ],

@@ -17,10 +17,10 @@
           </ul>
           <ul class="x_sa_rap">
             <li
-              v-for="(t, i) in datas.buldingList[datas.selectedNum - 1].nums"
-              :key="i"
-              :class="{ actived: datas.selectedNum2 == t.name }"
-              @click.stop="selectBuldingFun('', t.name)"
+              v-for="(t, ii) in datas.buldingList[datas.selectedNum - 1].nums"
+              :key="ii"
+              :class="{ actived: datas.selectedNum2 == ii }"
+              @click.stop="selectBuldingFun('', ii)"
             >
               {{ t.name }}
             </li>
@@ -28,14 +28,57 @@
         </div>
       </div>
       <ul
+        v-if="!datas.buldingList"
         class="companiesImgsList"
         :class="[
           datas.buldingList ? '' : 'companiesImgsList' + datas.listCols,
-          !datas.buldingList && datas.companiesImgsListDatas.length>6 ? 'mniBar' : 'companiesImgsList_over',
+          !datas.buldingList && datas.companiesImgsListDatas.length > 6
+            ? 'mniBar'
+            : 'companiesImgsList_over',
         ]"
       >
         <li class="x_fs_rap" :ref="'companiesImgsListRef_' + ids">
           <a v-for="(t, i) in datas.companiesImgsListDatas" :key="i">
+            <img
+              :src="t.src"
+              :alt="t.name"
+              @mouseenter="hoverItemFun($event, i)"
+              @mouseleave="leaveItemFun()"
+            />
+            <div class="litInfo" :style="returnStyle" v-if="showItem == i">
+              <div class="litInfo_title x_c">
+                <img class="litInfo_img" :key="i" :src="t.src" :alt="t.name" />
+                <span>{{ t.name }}</span>
+              </div>
+              <div class="litInfo_content">
+                <p>
+                  <span>公司类型： </span
+                  ><span>
+                    {{ t.comType || "-" }}
+                  </span>
+                </p>
+                <p>
+                  <span>进驻日期：</span
+                  ><span>
+                    {{ t.inDate || "-" }}
+                  </span>
+                </p>
+                <p><span>公司简介：</span> <i v-html="t.comInfo"></i></p>
+              </div>
+            </div>
+          </a>
+        </li>
+      </ul>
+      <ul
+        v-else
+        class="companiesImgsList"
+        :class="[
+          datas.buldingList ? '' : 'companiesImgsList' + datas.listCols,
+          'mniBar',
+        ]"
+      >
+        <li class="x_fs_rap" :ref="'companiesImgsListRef_' + ids">
+          <a v-for="(t, i) in datas.buldingList[datas.selectedNum - 1].nums[datas.selectedNum2].buildings" :key="i">
             <img
               :src="t.src"
               :alt="t.name"
@@ -79,7 +122,7 @@ export default {
       type: Object,
     },
   },
-  data () {
+  data() {
     return {
       ...this._data,
       ids: this.$uuid(),
@@ -87,7 +130,7 @@ export default {
       returnStyle: "",
     };
   },
-  mounted () {
+  mounted() {
     // document.onclick = function() {
     //   this.leaveItemFun();
     // };
@@ -98,7 +141,7 @@ export default {
     }
   },
   methods: {
-    selectBuldingFun (key, val) {
+    selectBuldingFun(key, val) {
       this.leaveItemFun();
       switch (key) {
         case "B":
@@ -109,15 +152,15 @@ export default {
           break;
       }
     },
-    hoverItemFun (e, i) {
+    hoverItemFun(e, i) {
       this.showItem = i;
       this.returnStyle = `right:${window.screen.width -
         e.clientX}px;top:${e.clientY - 300}px`;
     },
-    leaveItemFun () {
+    leaveItemFun() {
       this.showItem = null;
     },
-    getDatas () {
+    getDatas() {
       // this.$ScrolAnimationTop('companiesImgsListRef_' + this.ids, 3)
     },
   },
@@ -197,7 +240,7 @@ export default {
           }
         }
         .litInfo_img {
-          .ioc_img(0.625rem /* 50/80 */, 0.625rem /* 50/80 */, 50%);
+          .ioc_img(0.625rem /* 50/80 */, 0.625rem /* 50/80 */, 50%) ;;
           object-fit: cover;
           margin-right: 0.25rem /* 20/80 */;
         }

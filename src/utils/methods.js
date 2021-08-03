@@ -335,6 +335,28 @@ var getDayNums = function getDayNums(val) {
       return 0
   }
 }
+/**
+ * 数字递增
+ * @returns
+ */
+var numAdd = function numAdd(aa) {
+  var that = this
+  const numD = document.getElementById(aa)
+  // const numD = that.$refs[aa]
+  console.log(aa)
+  console.log(numD)
+  var num = numD.getAttribute("data-to")
+  var time = numD.getAttribute("data-speed")
+  var numTime = num / time
+  var i = 1
+  var timer = setInterval(function () {
+    if (i == num) {
+      clearInterval(timer)
+    }
+    // numD.innerHTML = i++;
+    return filterNum(i++)
+  }, numTime)
+}
 const fun = {
   currentDate,
   redomEchart,
@@ -350,7 +372,8 @@ const fun = {
   monthRangeArr,
   handleFullScreen,
   afterIframeOnload,
-  getDayNums
+  getDayNums,
+  numAdd
 }
 export default fun
 

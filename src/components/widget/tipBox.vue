@@ -7,6 +7,7 @@
   >
     <div class="tipBox_text x_c" :class="'tipBox_warn'">
       <div id="pList" ref="pList">
+        <!--  class="text_animate" -->
         <ul>
           <li v-for="(item, i) in _data" :key="i">{{ item.text }}</li>
           <li v-for="(item, i) in _data" :key="i">{{ item.text }}</li>
@@ -36,20 +37,21 @@ export default {
     };
   },
   watch: {
-    "$store.state.comState.showWarnTip": {handler(n, o) {
-      this.isShow = n;
-      if (this.isShow) {
-        setTimeout(() => {
-          this.moveLeft();
-        }, 500);
-        this.$SendMessageToUnity("PopUpWarningNoticesBar", { isOpen: true });
-        console.log(
-          "=================PopUpWarningNoticesBar, { isOpen: true })"
-        );
-      }
+    "$store.state.comState.showWarnTip": {
+      handler(n, o) {
+        this.isShow = n;
+        if (this.isShow) {
+          setTimeout(() => {
+            this.moveLeft();
+          }, 500);
+          this.$SendMessageToUnity("PopUpWarningNoticesBar", { isOpen: true });
+          console.log(
+            "=================PopUpWarningNoticesBar, { isOpen: true })"
+          );
+        }
+      },
+      immediate: true,
     },
-    immediate: true,
-    }
   },
   components: {},
   created() {},
