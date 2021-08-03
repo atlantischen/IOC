@@ -9,7 +9,12 @@
         <div class="tittle">热门商家TOP5</div>
         <div class="select">
           <DropDown :list="yearsList" name="label" @_cg="changePSYears" />
-          <DropDown  style="margin-right:30px" :list="momthsList" name="label" @_cg="changePSMonths" />
+          <DropDown
+            style="margin-right:30px"
+            :list="momthsList"
+            name="label"
+            @_cg="changePSMonths"
+          />
         </div>
         <div id="store_top" ref="store_top"></div>
       </div>
@@ -77,9 +82,10 @@
         </div>
       </div>
       <div class="store_img">
-        <ul class="scroll">
-          <li v-for="(item, index) in imgList" :key="index">
-            <img :src="item" alt="" />
+        <ul  :class="{ 'animate-up': ImganimateUp }">
+          <li v-for="(item, index) in imgList" :key="index" >
+            <img :src="item.imgT" alt="" />
+            <img :src="item.imgB" alt="" />
           </li>
         </ul>
       </div>
@@ -87,12 +93,17 @@
         <div class="tittle" @click="handleFullScreen">待入驻商家</div>
         <el-carousel
           class="swiper"
-          indicator-position="outside"
+          indicator-position="none"
           :interval="3000"
         >
-          <el-carousel-item v-for="item in 3" :key="item">
-            <ul>
-              <li v-for="(item, index) in waitList" :key="index">
+          <el-carousel-item v-for="item in 4" :loop='true' :key="item">
+             <ul v-show="item==1 || item==3">
+              <li v-for="(item, index) in waitList.slice(0,6)" :key="index">
+                <img :src="item" alt="" />
+              </li>
+            </ul>
+            <ul v-show="item==2 || item==4"> 
+              <li v-for="(item, index) in waitList.slice(6,12)" :key="index">
                 <img :src="item" alt="" />
               </li>
             </ul>
@@ -119,7 +130,9 @@ export default {
       //   isShow:true,
       fade: false,
       animateUp: false,
+      ImganimateUp: false,
       timer: null,
+      Imgtimer: null,
       businessList: [
         {
           src: require("../../../../assets/img/真功夫.png"),
@@ -147,22 +160,37 @@ export default {
         ["A座", "B座", "C座", "D座"],
       ],
       imgList: [
-        require("../../../../assets/img/94.png"),
-        require("../../../../assets/img/95.png"),
-        require("../../../../assets/img/96.png"),
-        require("../../../../assets/img/97.png"),
-        require("../../../../assets/img/98.png"),
-        require("../../../../assets/img/99.png"),
-        require("../../../../assets/img/100.png"),
-        require("../../../../assets/img/101.png"),
-        require("../../../../assets/img/94.png"),
-        require("../../../../assets/img/95.png"),
-        require("../../../../assets/img/96.png"),
-        require("../../../../assets/img/97.png"),
-        require("../../../../assets/img/98.png"),
-        require("../../../../assets/img/99.png"),
-        require("../../../../assets/img/100.png"),
-        require("../../../../assets/img/101.png"),
+        {
+         imgT: require("../../../../assets/img/94.png"),
+         imgB: require("../../../../assets/img/95.png")
+        },
+        {
+         imgT: require("../../../../assets/img/96.png"),
+         imgB: require("../../../../assets/img/97.png")
+        },{
+         imgT: require("../../../../assets/img/98.png"),
+         imgB: require("../../../../assets/img/99.png")
+        },
+        {
+         imgT: require("../../../../assets/img/100.png"),
+         imgB: require("../../../../assets/img/101.png")
+        },
+        {
+         imgT: require("../../../../assets/img/yqsy_pic1.png"),
+         imgB: require("../../../../assets/img/yqsy_pic2.png")
+        },
+        {
+         imgT: require("../../../../assets/img/yqsy_pic3.png"),
+         imgB: require("../../../../assets/img/yqsy_pic4.png")
+        },
+        {
+         imgT: require("../../../../assets/img/yqsy_pic15.png"),
+         imgB: require("../../../../assets/img/yqsy_pic6.png")
+        },
+        {
+         imgT: require("../../../../assets/img/yqsy_pic7.png"),
+         imgB: require("../../../../assets/img/yqsy_pic8.png")
+        },
       ],
       waitList: [
         require("../../../../assets/img/入驻商家1.png"),
@@ -171,6 +199,12 @@ export default {
         require("../../../../assets/img/入驻商家4.png"),
         require("../../../../assets/img/入驻商家5.png"),
         require("../../../../assets/img/入驻商家6.png"),
+        require("../../../../assets/img/yqsy_pic9.png"),
+        require("../../../../assets/img/yqsy_pic10.png"),
+        require("../../../../assets/img/yqsy_pic11.png"),
+        require("../../../../assets/img/yqsy_pic12.png"),
+        require("../../../../assets/img/yqsy_pic13.png"),
+        require("../../../../assets/img/yqsy_pic14.png"),
       ],
       yearsList: [
         {
@@ -248,7 +282,7 @@ export default {
         this.activeTypeIndex = i;
       } else if (type == "build") {
         this.activeBulidIndex = i;
-      }else{
+      } else {
         this.activeSeatIndex = i;
       }
     },
@@ -260,12 +294,111 @@ export default {
         this.animateUp = false;
       }, 500);
     },
+    scrollAnimateImg() {
+      this.ImganimateUp = true;
+      setTimeout(() => {
+        this.imgList.push(this.imgList[0]);
+        this.imgList.shift();
+        this.ImganimateUp = false;
+      }, 500);
+    },
     changePSMonths(val) {
-      console.log(val);
-      this.AssetsAndEquipment();
+        switch (val) {
+        case 12:
+          this.AssetsAndEquipment({
+            max:30000,
+            data:[20200, 19400, 21000, 22300, 23600]
+          });
+          break;
+         case 11:
+          this.AssetsAndEquipment({
+            max:25000,
+            data: [19400, 18400, 17400, 16400, 15400]
+          });
+          break;  
+         case 10:
+          this.AssetsAndEquipment({
+            max:20000,
+            data:[16500, 14300, 15500, 13600, 14600]
+          });
+           case 9:
+          this.AssetsAndEquipment({
+            max:30000,
+            data:[20200, 19400, 21000, 22300, 23600]
+          });
+          break;
+         case 8:
+          this.AssetsAndEquipment({
+            max:25000,
+            data: [19400, 18400, 17400, 16400, 15400]
+          });
+          break;  
+         case 7:
+          this.AssetsAndEquipment({
+            max:20000,
+            data:[16500, 14300, 15500, 13600, 14600]
+          });
+           case 6:
+          this.AssetsAndEquipment({
+            max:20000,
+            data:[16500, 14300, 15500, 13600, 14600]
+          });
+           case 5:
+          this.AssetsAndEquipment({
+            max:30000,
+            data:[20200, 19400, 21000, 22300, 23600]
+          });
+          break;
+         case 4:
+          this.AssetsAndEquipment({
+            max:25000,
+            data: [19400, 18400, 17400, 16400, 15400]
+          });
+          break;  
+         case 3:
+          this.AssetsAndEquipment({
+            max:20000,
+            data:[16500, 14300, 15500, 13600, 14600]
+          });
+           case 2:
+          this.AssetsAndEquipment({
+            max:30000,
+            data:[20200, 19400, 21000, 22300, 23600]
+          });
+          break;
+         case 1:
+          this.AssetsAndEquipment({
+            max:25000,
+            data: [19400, 18400, 17400, 16400, 15400]
+          });
+          break;  
+        default:
+          break;
+      }
     },
     changePSYears(val) {
-      this.AssetsAndEquipment();
+      switch (val) {
+        case 2021:
+          this.AssetsAndEquipment({
+            max:30000,
+            data:[20200, 19400, 21000, 22300, 23600]
+          });
+          break;
+         case 2020:
+          this.AssetsAndEquipment({
+            max:25000,
+            data: [19400, 18400, 17400, 16400, 15400]
+          });
+          break;  
+         case 2019:
+          this.AssetsAndEquipment({
+            max:20000,
+            data:[16500, 14300, 15500, 13600, 14600]
+          });
+          break;  
+        default:
+          break;
+      }
     },
 
     meetEchartInit() {
@@ -276,17 +409,17 @@ export default {
       var option = {
         tooltip: {
           trigger: "item",
-           backgroundColor: "rgba(0,0,0,0.8)",
+          backgroundColor: "rgba(0,0,0,0.8)",
           borderWidth: 1,
           borderColor: "#4396f3",
           padding: [5, 10],
-          extraCssText: 'box-shadow:inset 0 0 8px rgba(67, 149, 243, 0.6);',
+          extraCssText: "box-shadow:inset 0 0 8px rgba(67, 149, 243, 0.6);",
           //  formatter:'{b} : {d}%',
-           formatter:function(param){
-            return param.marker+param.name+"："+ param.value/100 + "%<br>";
-        }
-
-           
+          formatter: function(param) {
+            return (
+              param.marker + param.name + "：" + param.value / 100 + "%<br>"
+            );
+          },
         },
         labelLine: {
           show: false,
@@ -335,19 +468,20 @@ export default {
               },
             },
             data: [
-              { value: 2909, name: "餐饮"},
-              { value: 1273, name: "健康"},
-              { value: 2545, name: "娱乐"},
-              { value: 1455, name: "教育"},
-              { value: 1091, name: "文化"},
-              { value: 727, name: "购物"},
+              { value: 2909, name: "餐饮" },
+              { value: 1273, name: "健康" },
+              { value: 2545, name: "娱乐" },
+              { value: 1455, name: "教育" },
+              { value: 1091, name: "文化" },
+              { value: 727, name: "购物" },
             ],
           },
         ],
       };
       this.$redomEchart(dom, option);
     },
-    AssetsAndEquipment() {
+    AssetsAndEquipment(val) {
+      const {max,data} =val;
       var dom = this.$refs["store_top"];
       var option = {
         title: {
@@ -370,11 +504,11 @@ export default {
         tooltip: {
           // show: false,
           trigger: "axis",
-           backgroundColor: "rgba(0,0,0,0.8)",
+          backgroundColor: "rgba(0,0,0,0.8)",
           borderWidth: 1,
           borderColor: "#4396f3",
           padding: [5, 10],
-          extraCssText: 'box-shadow:inset 0 0 8px rgba(67, 149, 243, 0.6);',
+          extraCssText: "box-shadow:inset 0 0 8px rgba(67, 149, 243, 0.6);",
           axisPointer: {
             lineStyle: {
               color: "transparent",
@@ -403,17 +537,20 @@ export default {
             axisLabel: {
               interval: 0,
               rotate: -30,
-              padding: [20, 30, 0, -20],
+              padding: [30, 30, 0, -20],
             },
           },
         ],
         yAxis: [
           {
+            name: "人次",
+            nameTextStyle: {
+              padding: [0, 0, 0, -35], // 四个数字分别为上右下左与原位置距离
+            },
             min: 0,
-            max: 25000,
+            max: max,
             splitNumber: 4,
             interval: 5000,
-            name: "",
             type: "value",
             splitNumber: 2,
             axisLabel: {
@@ -469,7 +606,7 @@ export default {
                 ),
               },
             },
-            data: [19400, 18400, 17400, 16400, 15400],
+            data:data,
           },
         ],
       };
@@ -479,11 +616,13 @@ export default {
   created() {},
   destroyed() {
     clearInterval(this.timer);
+    clearInterval(this.Imgtimer);
   },
   mounted() {
     this.meetEchartInit();
-    this.AssetsAndEquipment();
-    this.timer = setInterval(this.scrollAnimate, 2000);
+     this.AssetsAndEquipment({ max:30000,data:[20200, 19400, 21000, 22300, 23600]});
+    this.timer = setInterval(this.scrollAnimate, 1500);
+    this.Imgtimer = setInterval(this.scrollAnimateImg, 2000);
 
     //   console.log(event.data);
   },
@@ -509,7 +648,10 @@ export default {
       height: 2.5rem /* 200/80 */;
     }
   }
-
+   .animate-up {
+        transition: all 0.5s ease-in-out;
+        transform: translateY(-1.0875rem /* 87/80 */ /* 87/80 */);
+      }
   .store_discount {
     color: #ffffff;
     .box {
@@ -543,10 +685,7 @@ export default {
           }
         }
       }
-      .animate-up {
-        transition: all 0.5s ease-in-out;
-        transform: translateY(-1.0875rem /* 87/80 */ /* 87/80 */);
-      }
+     
     }
   }
   .store_list {
@@ -583,33 +722,32 @@ export default {
       ul {
         display: flex;
         flex-wrap: wrap;
-        margin-left: .25rem /* 20/80 */ /* 30/80 */;
+        margin-left: 0.25rem /* 20/80 */ /* 30/80 */;
         width: 60%;
       }
     }
     .building {
       display: flex;
-        & > div > ul{
+      & > div > ul {
         display: flex;
         flex-wrap: wrap;
-         margin-left: .25rem /* 20/80 */ /* 30/80 */;
-         &:last-child {
-           flex-wrap: nowrap;
-         }
-          &:last-child >li:nth-child(3n) {
-            margin-right:0.25rem ;
-            // margin-right:  .0625rem /* 5/80 */;
-          }
+        margin-left: 0.25rem /* 20/80 */ /* 30/80 */;
+        &:last-child {
+          flex-wrap: nowrap;
         }
-      
+        &:last-child > li:nth-child(3n) {
+          margin-right: 0.25rem;
+          // margin-right:  .0625rem /* 5/80 */;
+        }
+      }
     }
     .active {
       border: 1px solid #4696ef;
     }
   }
   .store_img {
-    margin-top: .3125rem /* 25/80 *//* 29/80 */;
-
+    margin-top: 0.3125rem /* 25/80 */ /* 29/80 */;
+  overflow: hidden;
     ul {
       height: 4.15rem /* 332/80 */;
       width: 3.875rem /* 310/80 */ /* 330/80 */;
@@ -618,21 +756,22 @@ export default {
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
+      overflow: hidden;
     }
     li {
-      margin-right: 0.125rem /* 10/80 */;
-      margin-bottom: 0.125rem /* 10/80 */;
+      width: 100%;
+      display: flex;
+      justify-content:space-around;
+      margin-bottom: .1625rem /* 13/80 */ /* 10/80 */;
     }
-    li:nth-child(2n) {
-      margin-right: 0;
-    }
+   
     img {
       width: 1.75rem /* 140/80 */ /* 145/80 */;
       height: 0.875rem;
     }
   }
   .store_wait {
-    .swiper { 
+    .swiper {
       /deep/.el-carousel__container {
         height: 1.65rem /* 132/80 */ !important;
       }

@@ -120,16 +120,14 @@ export default {
           left: "1%",
           top: "0%",
           textAlign: "left",
-          // backgroundColor: 'rgba(0,0,0,0)',
-          // borderColor: '#ccc',
-          // borderWidth: 0,
-          // padding: 5,
           itemGap: 6,
           textStyle: {
             rich: {
               c: {
                 fontSize: 14,
                 color: "rgb(255,255,255,.7)",
+            
+
               },
               a: {
                 color: "#fff",

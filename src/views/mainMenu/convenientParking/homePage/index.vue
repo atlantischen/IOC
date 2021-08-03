@@ -31,10 +31,10 @@
       <div class="park_time">
         <div class="tittle">停车时长统计</div>
         <div class="select">
-          <DropDown :list="yearsList" name="label"/>
-          <DropDown :list="momthsList" name="label"  />
+          <DropDown :list="yearsList" name="label"  @_cg="changePSYears"/>
+          <DropDown :list="momthsList" name="label"  @_cg="changePSMonths" />
         </div>
-        <div class="count">停车数量合计:<NumCounter class="num" :value="1369"></NumCounter>辆</div>
+        <!-- <div class="count">停车数量合计:<NumCounter class="num" :value="total"></NumCounter>辆</div> -->
 
         <div id="park_time"  ref="park_time"></div>
       </div>
@@ -49,9 +49,9 @@
       <div class="revenue_total">
         <div class="tittle">营收总览</div>
         <div class="select">
-          <DropDown :list="yearsList" name="label"  />
+          <DropDown :list="yearsList" name="label"  @_cg="RevenueChangePSYears" />
         </div>
-        <div class="count">停车场营收合计:<NumCounter class="num" :value="2496852.00"></NumCounter>元</div>
+        <!-- <div class="count">停车场营收合计:<NumCounter class="num" :value="2496852.00"></NumCounter>元</div> -->
 
         <div id="revenue_total" ref="revenue_total"></div>
       </div>
@@ -74,17 +74,18 @@ export default {
   name: "homePage",
   data () {
     return {
+      total:null,
       list: [
         {
-          num: 2465,
+          num: 2447,
           describe: '总车位数'
         },
         {
-          num: 2084,
+          num: 2211,
           describe: '在场车辆'
         },
         {
-          num: 381,
+          num: 236,
           describe: '剩余车位'
         },
       ],
@@ -310,8 +311,106 @@ export default {
   },
   components: {},
   methods: {
-    changePSMonths (val) {
-      console.log(val);
+     changePSMonths(val) {
+        switch (val) {
+        case 12:
+          this.AssetsAndEquipment({
+            max:80,
+            data: [25, 26, 54, 70, 72, 38, 25]
+          });
+          break;
+         case 11:
+          this.AssetsAndEquipment({
+            max:90,
+            data: [22, 38, 45, 77, 80, 43, 28]
+          });
+          break;  
+         case 10:
+          this.AssetsAndEquipment({
+            max:70,
+            data: [23, 44, 55, 64, 67, 50, 30]
+          });
+           case 9:
+          this.AssetsAndEquipment({
+            max:90,
+            data: [20, 33, 45, 77, 85, 60, 28]
+          });
+          break;
+         case 8:
+          this.AssetsAndEquipment({
+            max:80,
+            data: [25, 33, 54, 72, 74, 38, 21]
+          });
+          break;  
+         case 7:
+          this.AssetsAndEquipment({
+           max:80,
+            data:  [23, 26, 54, 69, 70, 45, 23]
+          });
+           case 6:
+          this.AssetsAndEquipment({
+           max:70,
+            data:  [20, 43, 55, 66, 67, 50, 33]
+          });
+           case 5:
+          this.AssetsAndEquipment({
+           max:90,
+            data: [10, 18, 45, 80, 82, 45, 23]
+          });
+          break;
+         case 4:
+          this.AssetsAndEquipment({
+            max:70,
+            data:  [25, 36, 55, 62, 63, 38, 25]
+          });
+          break;  
+         case 3:
+          this.AssetsAndEquipment({
+            max:80,
+            data:  [25, 38, 54, 70, 72, 44, 25]
+          });
+           case 2:
+          this.AssetsAndEquipment({
+            max:90,
+            data: [22, 33, 45, 76, 75, 53, 28]
+          });
+          break;
+         case 1:
+          this.AssetsAndEquipment({
+            max:70,
+            data: [29, 43, 50, 59, 65, 54, 35]
+          });
+          break;  
+        default:
+          break;
+      }
+    },
+    changePSYears(val) {
+      switch (val) {
+        case 2021:
+          this.AssetsAndEquipment({
+            max:70,
+            data: [29, 43, 55, 65, 68, 54, 35]
+          });
+          break;
+         case 2020:
+          this.AssetsAndEquipment({
+           max:80,
+            data: [25, 38, 54, 70, 72, 44, 25]
+          });
+          break;  
+         case 2019:
+          this.AssetsAndEquipment({
+            max:90,
+            data: [22, 33, 45, 78, 82, 53, 28]
+          });
+          break;  
+        default:
+          break;
+      }
+    },
+    RevenueChangePSYears(val){
+
     },
     search(val){
       let value = JSON.stringify(val)
@@ -324,24 +423,53 @@ export default {
     handleClick () {
       this.$SendMessageToUnity("gan", { wocao: true, fuckyou: "123" });
       this.$SendMessageToUnity("gan2", {});
-      // this.$SendMessageToUnity("nimei",{wocao:true,fuckyou:"456"});
-      // console.log(window.iframe.contentWindow,'iframe');
     },
-    AssetsAndEquipment () {
+    AssetsAndEquipment (val) {
+      const {max,data} =val;
+      const total = data.reduce((x,y)=>x+y,0)
       var dom = this.$refs["park_time"]
       var option = {
         grid: {
-          top: "30",
+          top: "60",
           left: "0",
-          right: "0",
+          right: "20",
           bottom: "0",
           containLabel: true,
         },
-     
-           tooltip: {
-          // show: false,
+        title: {
+          show: true,
+          text: `{c|车辆数量合计:}{a|${total}}{b|辆}`,
+          link: "",
+          target: null,
+          left: "1%",
+          top: "-8",
+          textAlign: "left",
+          itemGap: 6,
+          textStyle: {
+            rich: {
+              c: {
+                fontSize: 14,
+                color: "rgb(255,255,255,1)",
+                padding: [0, 0, 10, 0],
+              },
+              a: {
+                color: "#fff",
+                fontFamily: "BYfont",
+                fontSize: 20,
+                padding:[0, 0, 5, 5]
+              },
+              b: {
+                color: "#fff",
+                padding: [0, 0, 10, 0],
+               
+                fontSize: 12,
+              },
+            },
+          },
+        },
+        tooltip: {
           trigger: "axis",
-           backgroundColor: "rgba(0,0,0,0.8)",
+          backgroundColor: "rgba(0,0,0,0.8)",
           borderWidth: 1,
           borderColor: "#4396f3",
           padding: [5, 10],
@@ -354,7 +482,10 @@ export default {
         },
         xAxis: [
           {
-            name: "",
+            name: "辆",
+            nameTextStyle: {
+              padding:[0,0,-30,-18],
+            },
             type: "category",
             data: [
               "<0.5h",
@@ -390,7 +521,7 @@ export default {
         yAxis: [
           {
             min: 0,
-            max: 70,
+            max: max,
             splitNumber: 4,
             interval: 10,
             name: "个",
@@ -455,47 +586,52 @@ export default {
                 ),
               },
             },
-            data: [40, 30, 20, 10, 20, 30, 35],
+            data: data,
           },
         ],
       };
       this.$redomEchart(dom, option);
     },
-    revenueInit () {
+    revenueInit (val) {
+      const {max,Monthly,Temporary,month} =val;
+      const total = [...Monthly,...Temporary].reduce((x,y)=>x+y,0)
       var dom = this.$refs["revenue_total"]
       var option = {
-        // title: {
-        //   text: "{a|停车场营收合计：}{b|" + "2.496.852" + "}{c|元}",
-        //   left: "0",
-        //   top: "10",
-        //   // subtext: '会议数',
-        //   subtextStyle: {
-        //     color: "#fff",
-        //   },
-        //   textStyle: {
-        //     rich: {
-        //       a: {
-        //         fontSize: 14,
-        //         color: "#fff",
-        //         fontFamily: "Microsoft YaHei",
-        //         opacity: 0.7,
-        //       },
-        //       b: {
-        //         fontSize: 20,
-        //         color: "ffff",
-        //         fontFamily: "BYfont",
-        //       },
-        //       c: {
-        //         fontSize: 12,
-        //         fontWeight: "bold",
-        //         padding: [0, 5],
-        //         color: "#fff",
-        //       },
-        //     },
-        //   },
-        // },
+        title: {
+          text: "{a|停车场营收合计：}{b|" + total + "}{c|元}",
+          left: "1%",
+          top: "-7",
+          subtextStyle: {
+            color: "#fff",
+          },
+          textStyle: {
+            rich: {
+              a: {
+                fontSize: 14,
+                color: "#fff",
+                fontFamily: "Microsoft YaHei",
+                opacity: 0.7,
+                padding: [0, 0, 10, 0],
+
+              },
+              b: {
+                fontSize: 20,
+                color: "ffff",
+                fontFamily: "BYfont",
+                padding:[0, 0, 5, 0]
+
+              },
+              c: {
+                fontSize: 12,
+                color: "#fff",
+                padding: [0, 0, 10, -5],
+
+              },
+            },
+          },
+        },
         grid: {
-          top: "50",
+          top: "80",
           left: "0",
           x2: 0,
           y2: -30,
@@ -504,7 +640,7 @@ export default {
         tooltip: {
           // show: false,
           trigger: "axis",
-           backgroundColor: "rgba(0,0,0,0.8)",
+          backgroundColor: "rgba(0,0,0,0.8)",
           borderWidth: 1,
           borderColor: "#4396f3",
           padding: [5, 10],
@@ -516,7 +652,7 @@ export default {
               }
         },
         legend: {
-          top: 10,
+          top: 25,
           right: 0,
           data: ["临时卡", "月卡"],
           textStyle: {
@@ -528,7 +664,7 @@ export default {
           {
             name: "",
             type: "category",
-            data: ["1月", "2月", "3月", "4月", "5月", "6月"],
+            data:month,
             axisLine: {
               lineStyle: {
                 width: 0,
@@ -554,7 +690,7 @@ export default {
         yAxis: [
           {
             min: 0,
-            max: 1000000,
+            max: max,
             splitNumber: 4,
             interval: 200000,
             name: "元",
@@ -613,7 +749,7 @@ export default {
                 ),
               },
             },
-            data: [320000, 435000, 430000, 340000, 456000, 560000, 340000],
+            data:Monthly,
           },
           {
             name: "临时卡",
@@ -644,7 +780,7 @@ export default {
             emphasis: {
               focus: "series",
             },
-            data: [62000, 73200, 70100, 73400, 109000, 113000, 112000],
+            data:Temporary,
           },
         ],
       };
@@ -879,8 +1015,21 @@ export default {
     },
   },
   mounted () {
-    this.AssetsAndEquipment();
-    this.revenueInit();
+     this.AssetsAndEquipment({
+            max:70,
+            data: [29, 43, 55, 65, 68, 54, 35]
+          });
+      
+    this.revenueInit(
+          {
+            max:1000000,
+            Monthly:[320000, 435000, 430000, 340000, 456000, 560000, 340000],
+            Temporary: [62000, 73200, 70100, 73400, 109000, 113000, 112000],
+            month: ["1月", "2月", "3月", "4月", "5月", "6月", "7月"]
+
+
+          }
+    );
     this.trendInit();
    
   },
