@@ -24,6 +24,7 @@
 </template>
 
 <script>
+import data from "@/utils/falseData.js"
 import { homePage } from "@/lang/data/comprehensiveSituational/index";
 import i18n from "@/lang/index";
 import RightContent from "./components/rightContent.vue";
@@ -33,7 +34,7 @@ import * as echarts from "echarts";
 export default {
   components: { RightContent },
   // name: "zhts",
-  data() {
+  data () {
     return {
       inputVal: null,
       inputV: null,
@@ -93,7 +94,7 @@ export default {
               },
               {
                 name: "今日总访客",
-                value: this.$randomNumer(200, 300),
+                value: data.VisitorsToday,
               },
             ],
           },
@@ -243,12 +244,12 @@ export default {
     };
   },
   computed: {
-    lang() {
+    lang () {
       return this.$store.state.comState.lang;
     },
   },
   watch: {
-    "$store.state.comState.lang"(n, o) {
+    "$store.state.comState.lang" (n, o) {
       // this.lang = this.$t("lg.name", n);
       // this.leftInfo = JSON.parse(
       //   this.$t("comprehensiveSituational.homePage")
@@ -261,12 +262,12 @@ export default {
       // ).rightInfo;
     },
   },
-  created() {
+  created () {
     this.$store.dispatch("SET_CENTERDATAS", [true, this.centerDatasList]);
     // (this.leftInfo = homePage.leftInfo),
     //   (this.rightInfo = homePage.rightInfo)
   },
-  mounted() {
+  mounted () {
     // aaa().then(r=>{
     //   console.log(r)
     // })
@@ -274,15 +275,15 @@ export default {
     //   console.log('xxxxxxxxx', req)
     // })
   },
-  destroyed() {},
+  destroyed () { },
   methods: {
-    showTipBoxHandle(val) {},
-    clickSwitch(val) {
+    showTipBoxHandle (val) { },
+    clickSwitch (val) {
       this.inputVal = val;
       this.inputV = null;
       this.isShowRIght = !this.isShowRIght;
     },
-    cgLang() {
+    cgLang () {
       let a;
       if (localStorage.getItem("language") == "en" || i18n.locale == "en") {
         a = "zh";

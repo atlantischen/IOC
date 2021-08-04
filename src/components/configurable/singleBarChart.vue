@@ -41,25 +41,24 @@ export default {
       type: Object,
     },
   },
-  data() {
+  data () {
     return {
       ...this._data,
       ids: this.$uuid(),
     };
   },
-  created() {},
-  mounted() {
+  created () { },
+  mounted () {
     this.singleBarChartFun(this.datas);
   },
   methods: {
-    changePSMonths(val) {
-      console.log(val);
-    },
-    changePSYears(val) {
-      console.log(val);
+    changePSMonths (val) {
       this.singleBarChartFun(this.datas);
     },
-    singleBarChartFun(val) {
+    changePSYears (val) {
+      this.singleBarChartFun(this.datas);
+    },
+    singleBarChartFun (val) {
       let { xAxisD, datas, units, names, leftTip } = val;
       var allD = [],
         showLb = {
@@ -109,9 +108,8 @@ export default {
       var option = {
         title: {
           show: leftTip,
-          text: `{c|${leftTip ? leftTip.name : ""}}{a|${
-            leftTip ? leftTip.value : ""
-          }}{b|${leftTip ? leftTip.unit : ""}}`,
+          text: `{c|${leftTip ? leftTip.name : ""}}{a|${leftTip ? leftTip.value : ""
+            }}{b|${leftTip ? leftTip.unit : ""}}`,
           link: "",
           target: null,
           subtext: "",
@@ -169,12 +167,10 @@ export default {
             let dataStr = `<p style="font-weight:bold;font-size:.2rem;text-align:center;padding-bottom:.0625rem;">${params[0].name}</p>`;
             params.forEach((item) => {
               dataStr += `<div>
-                    <span style=" vertical-align: middle;margin-right:0.0625rem;width:0.15rem;height:0.12rem;border-radius:0.02rem;background:linear-gradient(to bottom, ${
-                      item.color.colorStops[0].color
-                    },${item.color.colorStops[1].color}"></span>
-                    <span> ${
-                      item.seriesName ? item.seriesName + ":" : item.seriesName
-                    }  ${item.value}</span>
+                    <span style=" vertical-align: middle;margin-right:0.0625rem;width:0.15rem;height:0.12rem;border-radius:0.02rem;background:linear-gradient(to bottom, ${item.color.colorStops[0].color
+                },${item.color.colorStops[1].color}"></span>
+                    <span> ${item.seriesName ? item.seriesName + ":" : item.seriesName
+                }  ${item.value}</span>
                   </div>`;
             });
             return dataStr;

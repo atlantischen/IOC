@@ -16,7 +16,7 @@
 <script>
 export default {
   name: "assetsBDA",
-  data() {
+  data () {
     return {
       // 左侧组件info
       leftInfo: [
@@ -30,7 +30,7 @@ export default {
             },
             optionName: ["领用出库", "在库", "入库中"],
             datas: [60, 24, 16],
-            nums: [1334, 534, 336],
+            nums: [1346, 540, 338],
           },
         },
         {

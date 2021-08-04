@@ -1,31 +1,57 @@
-import dataM from './dataMethods' // 处理数据方法综合
-import dateTimeM from './dateTimeMethods' // 处理日期时间方法综合
-
-import {
-  EleResize
-} from '@/assets/js/echarts'
-import * as echarts from 'echarts';
-import screenfull from "screenfull";
-
 /**
  * @author
- * @description echart共用方法
- * @param {val  bool}
+ * @description 随机id
+ * @param {val  null}
  * @returns {handle}
  */
-var redomEchart = function redomEchart(dom, option) {
-  // let that = this
-  // let resizeDiv = that.refs[dom] // document.getElementById(dom)
-  let resizeDiv = dom
-  let myChart = null
-  myChart = echarts.init(resizeDiv)
-  myChart.clear()
-  myChart.setOption(option, true)
-  let listener = function () {
-    myChart.resize()
+var uuid = function uuid() {
+  var uuid = []
+  var hexDigits = '0123456789abcdefghijklmnopqrstuvwxyz'
+  for (var i = 0; i < 36; i++) {
+    uuid[i] = hexDigits.substr(Math.floor(Math.random() * 0x10), 1)
   }
-  EleResize.on(resizeDiv, listener)
+  uuid[14] = '4'
+  uuid[19] = hexDigits.substr((uuid[19] & 0x3) | 0x8, 1)
+  uuid[8] = uuid[13] = uuid[18] = uuid[23] = ''
+  // return 'u' + uuid.join('').replace('-', '')
+  return 'u' + uuid.join('')
 }
+/**
+ * @author
+ * @description 统一padding
+ * @param {val  array}
+ * @returns {string}
+ */
+var paddingFun = function paddingFun(val) {
+  if (!val) {
+    return
+  }
+  let _s = ''
+  switch (true) {
+    case typeof val == 'array' || typeof val == 'object':
+      for (let i = 0; i < val.length; i++) {
+        _s += val[i] == 0 ? '0 ' : val[i] / 80 + 'rem '
+      }
+      return 'padding:' + _s + ';'
+    case typeof val == 'number':
+      return 'padding:' + val / 80 + 'rem;'
+    default:
+      break;
+  }
+}
+/**
+ * @author
+ * @description 统一height
+ * @param {val  number}
+ * @returns {string}
+ */
+var eHeightFun = function eHeightFun(val) {
+  if (!val) {
+    return
+  }
+  return val ? 'height:' + val / 80 + 'rem;' : ''
+}
+
 
 /**
  * @author
@@ -129,50 +155,75 @@ var ScrolLeftARight = function ScrolLeftARight(dom, time) {
     }, _time / 2);
   }
 }
-
 /**
- * 全屏
- * @returns
+ * @author
+ * @description 随机数
+ * @param number
+ * @returns {num}
  */
-var handleFullScreen = function handleFullScreen() {
-  if (!screenfull.isEnabled) {
-    this.$message.info("您的浏览器版本过低，不支持全屏浏览");
-    return false;
+var randomNumer = function randomNumer(minNum, maxNum, val) {
+  if (!val) {
+    return parseInt(Math.random() * (maxNum - minNum + 1) + minNum)
+  } else {
+    // 小数
+    return (Math.random() * (maxNum - minNum) + minNum).toFixed(val)
   }
-  screenfull.toggle();
 }
 /**
- * iframe加载完之后
+ * @author
+ * @description 数据格式(,分隔)
+ * @param number
+ * @returns {num}
+ */
+var filterNum = function filterNum(val) {
+  return Number(val).toLocaleString()
+}
+
+
+/**
+ * 数组求和
  * @returns
  */
-var afterIframeOnload = function afterIframeOnload(dom, fun) {
-  let _ref = this.$refs[dom]
-  _ref.onload = _ref.onreadystatechange = function () {
-    if (this.readyState && this.readyState != 'complete') return;
-    else {
-      fun()
+var arrAdd = function arrAdd(arr) {
+  var sum = 0;
+  for (var i = 0; i < arr.length; i++) {
+    sum = sum + arr[i];
+  }
+  return sum
+}
+
+/**
+ * 数字递增
+ * @returns
+ */
+var numAdd = function numAdd(aa) {
+  var that = this
+  const numD = document.getElementById(aa)
+  // const numD = that.$refs[aa]
+  console.log(aa)
+  console.log(numD)
+  var num = numD.getAttribute("data-to")
+  var time = numD.getAttribute("data-speed")
+  var numTime = num / time
+  var i = 1
+  var timer = setInterval(function () {
+    if (i == num) {
+      clearInterval(timer)
     }
-  }
+    // numD.innerHTML = i++;
+    return filterNum(i++)
+  }, numTime)
 }
-
 const fun = {
-  ...dataM,
-  ...dateTimeM,
-  redomEchart,
+  uuid,
+  paddingFun,
+  eHeightFun,
   Fullscreen,
   ScrolAnimationTop,
   ScrolLeftARight,
-  handleFullScreen,
-  afterIframeOnload,
+  randomNumer,
+  filterNum,
+  arrAdd,
+  numAdd
 }
 export default fun
-
-
-// 10:57
-export function formatHm(val) {
-  if (val) return moment(val).format('HH:mm')
-}
-//  2020-11-26 10:57:00
-export function formatYMDHms(val) {
-  if (val) return moment(val).format('YYYY-MM-DD HH:mm:ss')
-}
