@@ -16,7 +16,7 @@
 <script>
 export default {
   name: "rentBDA",
-  data () {
+  data() {
     return {
       leftInfo: [
         {
@@ -24,12 +24,12 @@ export default {
           type: "LeaseSummary",
           datas: {
             optionName: ["空置产业空间", "已租产业空间"],
-            unit: '万平',
+            unit: "万平",
             xAxiasD: [10.985, 88.565],
             datas: {
-              name: '园区总面积',
-              value: 99.55
-            }
+              name: "园区总面积",
+              value: 99.55,
+            },
           },
         },
         {
@@ -45,10 +45,10 @@ export default {
               "智能制造",
               "文化创意",
               "现代服务",
-              "节能环保",
+              "节能环保"
             ],
             datas: [1234, 1123, 934, 842, 734, 634, 522, 423, 365],
-            proportion: [45, 35, 26, 25, 13, 9, 7, 4, 2],
+            proportion: [22, 20, 18, 12, 8, 7, 6, 5, 2],
           },
         },
       ],
@@ -68,7 +68,11 @@ export default {
               },
               {
                 name: "装修中",
-                value: "10%",
+                value: "8%",
+              },
+              {
+                name: "空置中",
+                value: "2%",
               },
             ],
           },
@@ -85,7 +89,7 @@ export default {
               },
               {
                 name: "今年园区总税收值",
-                value: 48543233,
+                value: 324543233 * 0.06,
                 unit: "元",
               },
             ],
