@@ -23,7 +23,7 @@
               <span>总车位</span>
               <span class="font_text">
                 <NumCounter :value="item.totalPark"></NumCounter>
-                </span>
+              </span>
             </div>
           </li>
         </ul>
@@ -31,25 +31,32 @@
       <div class="park_time">
         <div class="tittle">停车时长统计</div>
         <div class="select">
-          <DropDown :list="yearsList" name="label"  @_cg="changePSYears"/>
-          <DropDown :list="momthsList" name="label"  @_cg="changePSMonths" />
+          <DropDown :list="yearsList" name="label" @_cg="changePSYears" />
+          <DropDown :list="flag?momthsList:nowMomthsList" name="label" @_cg="changePSMonths" />
         </div>
         <!-- <div class="count">停车数量合计:<NumCounter class="num" :value="total"></NumCounter>辆</div> -->
 
-        <div id="park_time"  ref="park_time"></div>
+        <div id="park_time" ref="park_time"></div>
       </div>
     </IOCLeft>
     <Tips :list="list"></Tips>
     <div class="search_box">
-     <LicensePlateSearch class="ioc_animated fadeInDownTop" @search="search" :searchData="searchData"></LicensePlateSearch>
-
+      <LicensePlateSearch
+        class="ioc_animated fadeInDownTop"
+        @search="search"
+        :searchData="searchData"
+      ></LicensePlateSearch>
     </div>
-   
+
     <IOCRight>
       <div class="revenue_total">
         <div class="tittle">营收总览</div>
         <div class="select">
-          <DropDown :list="yearsList" name="label"  @_cg="RevenueChangePSYears" />
+          <DropDown
+            :list="yearsList"
+            name="label"
+            @_cg="RevenueChangePSYears"
+          />
         </div>
         <!-- <div class="count">停车场营收合计:<NumCounter class="num" :value="2496852.00"></NumCounter>元</div> -->
 
@@ -58,9 +65,9 @@
       <div class="car_trend">
         <div class="tittle">车辆进出场走势统计</div>
         <div class="select">
-          <DropDown :list="yearsList" name="label"  />
-          <DropDown :list="momthsList" name="label" />
-          <DropDown :list="dateList" name="label" />
+          <DropDown :list="yearsList" name="label" @_cg="carChangeYears" />
+          <DropDown :list="momthsList" name="label" @_cg="carChangeMomth" />
+          <DropDown :list="dateList" name="label" @_cg="carChangeDate" />
         </div>
         <div id="car_trend" ref="car_trend"></div>
       </div>
@@ -72,45 +79,43 @@
 import * as echarts from "echarts";
 export default {
   name: "homePage",
-  data () {
+  data() {
     return {
-      total:null,
+      flag:true,
+      total: null,
       list: [
         {
           num: 2447,
-          describe: '总车位数'
+          describe: "总车位数",
         },
         {
           num: 2211,
-          describe: '在场车辆'
+          describe: "在场车辆",
         },
         {
           num: 236,
-          describe: '剩余车位'
+          describe: "剩余车位",
         },
       ],
       parkList: [
         {
-          floor: 'B1',
+          floor: "B1",
           presencePark: 553,
           freePark: 72,
-          totalPark: 625
-
+          totalPark: 625,
         },
         {
-          floor: 'B2',
+          floor: "B2",
           presencePark: 755,
           freePark: 101,
-          totalPark: 856
-
+          totalPark: 856,
         },
         {
-          floor: 'B3',
+          floor: "B3",
           presencePark: 903,
           freePark: 63,
-          totalPark: 966
-
-        }
+          totalPark: 966,
+        },
       ],
       yearsList: [
         {
@@ -176,6 +181,7 @@ export default {
           value: 1,
         },
       ],
+      nowMomthsList:this.$monthRangeArrList(),
       dateList: [
         {
           label: "31日",
@@ -248,7 +254,8 @@ export default {
         {
           label: "14日",
           value: 14,
-        },{
+        },
+        {
           label: "13日",
           value: 13,
         },
@@ -292,7 +299,7 @@ export default {
           label: "3日",
           value: 3,
         },
-         {
+        {
           label: "2日",
           value: 2,
         },
@@ -301,86 +308,86 @@ export default {
           value: 1,
         },
       ],
-      searchData:{
-          region:'赣',
-        letter:'A',
-        number:'8720B'
-
-      }
+      searchData: {
+        region: "赣",
+        letter: "A",
+        number: "8720B",
+      },
     };
   },
   components: {},
   methods: {
-     changePSMonths(val) {
-        switch (val) {
+    changePSMonths(val) {
+      switch (val) {
         case 12:
           this.AssetsAndEquipment({
-            max:80,
-            data: [25, 26, 54, 70, 72, 38, 25]
+            max: 80,
+            data: [25, 26, 54, 70, 72, 38, 25],
+          });
+
+          break;
+        case 11:
+          this.AssetsAndEquipment({
+            max: 90,
+            data: [22, 38, 45, 77, 80, 43, 28],
           });
           break;
-         case 11:
+        case 10:
           this.AssetsAndEquipment({
-            max:90,
-            data: [22, 38, 45, 77, 80, 43, 28]
+            max: 70,
+            data: [23, 44, 55, 64, 67, 50, 30],
           });
-          break;  
-         case 10:
+        case 9:
           this.AssetsAndEquipment({
-            max:70,
-            data: [23, 44, 55, 64, 67, 50, 30]
-          });
-           case 9:
-          this.AssetsAndEquipment({
-            max:90,
-            data: [20, 33, 45, 77, 85, 60, 28]
+            max: 90,
+            data: [20, 33, 45, 77, 85, 60, 28],
           });
           break;
-         case 8:
+        case 8:
           this.AssetsAndEquipment({
-            max:80,
-            data: [25, 33, 54, 72, 74, 38, 21]
-          });
-          break;  
-         case 7:
-          this.AssetsAndEquipment({
-           max:80,
-            data:  [23, 26, 54, 69, 70, 45, 23]
-          });
-           case 6:
-          this.AssetsAndEquipment({
-           max:70,
-            data:  [20, 43, 55, 66, 67, 50, 33]
-          });
-           case 5:
-          this.AssetsAndEquipment({
-           max:90,
-            data: [10, 18, 45, 80, 82, 45, 23]
+            max: 80,
+            data: [25, 33, 54, 72, 74, 38, 21],
           });
           break;
-         case 4:
+        case 7:
           this.AssetsAndEquipment({
-            max:70,
-            data:  [25, 36, 55, 62, 63, 38, 25]
+            max: 80,
+            data: [23, 26, 54, 69, 70, 45, 23],
           });
-          break;  
-         case 3:
+        case 6:
           this.AssetsAndEquipment({
-            max:80,
-            data:  [25, 38, 54, 70, 72, 44, 25]
+            max: 70,
+            data: [20, 43, 55, 66, 67, 50, 33],
           });
-           case 2:
+        case 5:
           this.AssetsAndEquipment({
-            max:90,
-            data: [22, 33, 45, 76, 75, 53, 28]
+            max: 90,
+            data: [10, 18, 45, 80, 82, 45, 23],
           });
           break;
-         case 1:
+        case 4:
           this.AssetsAndEquipment({
-            max:70,
-            data: [29, 43, 50, 59, 65, 54, 35]
+            max: 70,
+            data: [25, 36, 55, 62, 63, 38, 25],
           });
-          break;  
+          break;
+        case 3:
+          this.AssetsAndEquipment({
+            max: 80,
+            data: [25, 38, 54, 70, 72, 44, 25],
+          });
+        case 2:
+          this.AssetsAndEquipment({
+            max: 90,
+            data: [22, 33, 45, 76, 75, 53, 28],
+          });
+          break;
+        case 1:
+          this.AssetsAndEquipment({
+            max: 70,
+            data: [29, 43, 50, 59, 65, 54, 35],
+          });
+          break;
         default:
           break;
       }
@@ -389,45 +396,75 @@ export default {
       switch (val) {
         case 2021:
           this.AssetsAndEquipment({
-            max:70,
-            data: [29, 43, 55, 65, 68, 54, 35]
+            max: 70,
+            data: [29, 43, 55, 65, 68, 54, 35],
           });
+          this.flag= false
           break;
-         case 2020:
+        case 2020:
           this.AssetsAndEquipment({
-           max:80,
-            data: [25, 38, 54, 70, 72, 44, 25]
+            max: 80,
+            data: [25, 38, 54, 70, 72, 44, 25],
           });
-          break;  
-         case 2019:
+          this.flag= true
+          break;
+        case 2019:
           this.AssetsAndEquipment({
-            max:90,
-            data: [22, 33, 45, 78, 82, 53, 28]
+            max: 90,
+            data: [22, 33, 45, 78, 82, 53, 28],
           });
-          break;  
+          this.flag= true
+          break;
         default:
           break;
       }
     },
-    RevenueChangePSYears(val){
+    RevenueChangePSYears(val) {
+      switch (val) {
+        case 2021:
+          this.revenueInit({
+            max: 1000000,
+            Monthly: [320000, 435000, 530000, 340000, 456000, 560000, 540000],
+            Temporary: [92000, 93200, 90100, 103400, 209000, 113000, 112000],
+            month: this.$monthRangeArr(),
+          });
+          this.flag=true
+          break;
+        case 2020:
+           this.revenueInit({
+            max: 1000000,
+            Monthly: [320000, 435000, 430000, 340000, 456000, 560000, 220000,120000, 280000, 130000, 140000, 356000],
+            Temporary:[62000, 73200, 70100, 73400, 109000, 113000, 112000,62000, 63200, 70100, 63400, 209000],
+            month:['1月','2月','3月','4月','5月','6月','7月','8月','9月','10月','11月','12月',],
+          });
+          break;
+        case 2019:
+            this.revenueInit({
+            max: 1000000,
+            Monthly:[220000, 335000, 430000, 340000, 256000, 360000, 220000,120000, 280000, 150000, 160000, 156000],
+            Temporary:[82000, 103200, 90100, 93400, 109000, 113000, 112000,82000, 73200, 70100, 93400, 169000],
+            month:['1月','2月','3月','4月','5月','6月','7月','8月','9月','10月','11月','12月',],
 
+          });
+          break;
+        default:
+          break;
+      }
     },
-    search(val){
-      let value = JSON.stringify(val)
-      this.$router.push({name:'SmartParking',params:{value:value}})
+    search(val) {
+      let value = JSON.stringify(val);
+      this.$router.push({ name: "SmartParking", params: { value: value } });
     },
-    postMessageToUnity (data) {
+    postMessageToUnity(data) {},
 
-    },
-
-    handleClick () {
+    handleClick() {
       this.$SendMessageToUnity("gan", { wocao: true, fuckyou: "123" });
       this.$SendMessageToUnity("gan2", {});
     },
-    AssetsAndEquipment (val) {
-      const {max,data} =val;
-      const total = data.reduce((x,y)=>x+y,0)
-      var dom = this.$refs["park_time"]
+    AssetsAndEquipment(val) {
+      const { max, data } = val;
+      const total = data.reduce((x, y) => x + y, 0);
+      var dom = this.$refs["park_time"];
       var option = {
         grid: {
           top: "60",
@@ -456,12 +493,12 @@ export default {
                 color: "#fff",
                 fontFamily: "BYfont",
                 fontSize: 20,
-                padding:[0, 0, 5, 5]
+                padding: [0, 0, 5, 5],
               },
               b: {
                 color: "#fff",
                 padding: [0, 0, 10, 0],
-               
+
                 fontSize: 12,
               },
             },
@@ -473,18 +510,18 @@ export default {
           borderWidth: 1,
           borderColor: "#4396f3",
           padding: [5, 10],
-          extraCssText: 'box-shadow:inset 0 0 8px rgba(67, 149, 243, 0.6);',
-           axisPointer:{
-                lineStyle:{
-                color:'transparent'
-              }
-              }
+          extraCssText: "box-shadow:inset 0 0 8px rgba(67, 149, 243, 0.6);",
+          axisPointer: {
+            lineStyle: {
+              color: "transparent",
+            },
+          },
         },
         xAxis: [
           {
             name: "辆",
             nameTextStyle: {
-              padding:[0,0,-30,-18],
+              padding: [0, 0, -30, -18],
             },
             type: "category",
             data: [
@@ -534,7 +571,7 @@ export default {
             type: "value",
             splitNumber: 2,
             axisLabel: {
-              formatter: function (value) {
+              formatter: function(value) {
                 return value;
               },
             },
@@ -592,10 +629,10 @@ export default {
       };
       this.$redomEchart(dom, option);
     },
-    revenueInit (val) {
-      const {max,Monthly,Temporary,month} =val;
-      const total = [...Monthly,...Temporary].reduce((x,y)=>x+y,0)
-      var dom = this.$refs["revenue_total"]
+    revenueInit(val) {
+      const { max, Monthly, Temporary, month } = val;
+      const total = [...Monthly, ...Temporary].reduce((x, y) => x + y, 0);
+      var dom = this.$refs["revenue_total"];
       var option = {
         title: {
           text: "{a|停车场营收合计：}{b|" + total + "}{c|元}",
@@ -612,20 +649,17 @@ export default {
                 fontFamily: "Microsoft YaHei",
                 opacity: 0.7,
                 padding: [0, 0, 10, 0],
-
               },
               b: {
                 fontSize: 20,
                 color: "ffff",
                 fontFamily: "BYfont",
-                padding:[0, 0, 5, 0]
-
+                padding: [0, 0, 5, 0],
               },
               c: {
                 fontSize: 12,
                 color: "#fff",
                 padding: [0, 0, 10, -5],
-
               },
             },
           },
@@ -633,8 +667,8 @@ export default {
         grid: {
           top: "80",
           left: "0",
-          x2: 0,
-          y2: -30,
+          x2: 10,
+          y2: -20,
           containLabel: true,
         },
         tooltip: {
@@ -644,12 +678,12 @@ export default {
           borderWidth: 1,
           borderColor: "#4396f3",
           padding: [5, 10],
-          extraCssText: 'box-shadow:inset 0 0 8px rgba(67, 149, 243, 0.6);',
-           axisPointer:{
-                lineStyle:{
-                color:'transparent'
-              }
-              }
+          extraCssText: "box-shadow:inset 0 0 8px rgba(67, 149, 243, 0.6);",
+          axisPointer: {
+            lineStyle: {
+              color: "transparent",
+            },
+          },
         },
         legend: {
           top: 25,
@@ -664,7 +698,7 @@ export default {
           {
             name: "",
             type: "category",
-            data:month,
+            data: month,
             axisLine: {
               lineStyle: {
                 width: 0,
@@ -682,7 +716,7 @@ export default {
             axisLabel: {
               interval: 0,
               rotate: -30,
-              padding: [20, 40, 0, 0],
+              padding: [20, 40, 0, -10],
               // align:'right',
             },
           },
@@ -700,7 +734,7 @@ export default {
             type: "value",
             splitNumber: 2,
             axisLabel: {
-              formatter: function (value) {
+              formatter: function(value) {
                 return value;
               },
             },
@@ -749,7 +783,7 @@ export default {
                 ),
               },
             },
-            data:Monthly,
+            data: Monthly,
           },
           {
             name: "临时卡",
@@ -780,13 +814,13 @@ export default {
             emphasis: {
               focus: "series",
             },
-            data:Temporary,
+            data: Temporary,
           },
         ],
       };
       this.$redomEchart(dom, option);
     },
-    trendInit () {
+    trendInit() {
       var dom = this.$refs["car_trend"];
       var option = {
         grid: {
@@ -796,19 +830,18 @@ export default {
           bottom: "30",
           containLabel: true,
         },
-          tooltip: {
-           backgroundColor: "rgba(0,0,0,0.8)",
+        tooltip: {
+          backgroundColor: "rgba(0,0,0,0.8)",
           borderWidth: 1,
           borderColor: "#4396f3",
           padding: [5, 10],
-          extraCssText: 'box-shadow:inset 0 0 8px rgba(67, 149, 243, 0.6);',
-          trigger: 'axis',
-          axisPointer:{
-            lineStyle:{
-            color:'transparent'
-          }
-          }
-        
+          extraCssText: "box-shadow:inset 0 0 8px rgba(67, 149, 243, 0.6);",
+          trigger: "axis",
+          axisPointer: {
+            lineStyle: {
+              color: "transparent",
+            },
+          },
         },
         legend: {
           right: 0,
@@ -879,9 +912,9 @@ export default {
             name: "辆",
             type: "value",
             min: 0,
-            max: 40,
+            max: 3000,
             splitNumber: 4,
-            interval: 5,
+            interval: 500,
             // axisLabel: {
             //   formatter: function (value) {
             //     return value / 1000 + (value != 0 ? 'k' : '');
@@ -895,7 +928,7 @@ export default {
                 color: "#fff",
               },
             },
-             splitLine: {
+            splitLine: {
               lineStyle: {
                 width: 0.5,
                 type: "dashed",
@@ -921,7 +954,7 @@ export default {
               fontSize: "12",
               distance: -90,
               padding: [0, 0, 30, 0],
-              formatter: function (_) {
+              formatter: function(_) {
                 return "进: " + _.value;
               },
             },
@@ -973,7 +1006,7 @@ export default {
               distance: -90,
               color: "#fff",
               fontSize: "12",
-              formatter: function (_) {
+              formatter: function(_) {
                 return "出: " + _.value;
               },
             },
@@ -1014,29 +1047,31 @@ export default {
       this.$redomEchart(dom, option);
     },
   },
-  mounted () {
-     this.AssetsAndEquipment({
-            max:70,
-            data: [29, 43, 55, 65, 68, 54, 35]
-          });
+  created(){
+    // this.nowMomthsList=this.$monthRangeArrList()
+    console.log(this.$monthRangeArrList(),'this.$monthRangeArrList()');
+
       
-    this.revenueInit(
-          {
-            max:1000000,
-            Monthly:[320000, 435000, 430000, 340000, 456000, 560000, 340000],
-            Temporary: [62000, 73200, 70100, 73400, 109000, 113000, 112000],
-            month: ["1月", "2月", "3月", "4月", "5月", "6月", "7月"]
-
-
-          }
-    );
+  },
+  mounted() {
+    this.AssetsAndEquipment({
+      max: 70,
+      data: [29, 43, 55, 65, 68, 54, 35],
+    });
+    this.revenueInit({
+      max: 1000000,
+      Monthly: [320000, 435000, 530000, 340000, 456000, 560000, 540000],
+            Temporary: [92000, 93200, 90100, 103400, 209000, 113000, 112000],
+      month: this.$monthRangeArr(),
+    });
     this.trendInit();
-   
+    
+    
   },
 };
 </script>
 
-<style lang='less' scoped>
+<style lang="less" scoped>
 .homePage {
   .park {
     ul > li {
@@ -1101,12 +1136,11 @@ export default {
       height: 3.5rem /* 280/80 */ /* 300/80 */ /* 160/80 */;
     }
   }
-  .search_box{
-      position: absolute;
-  left: 50%;
-  top: 2.6rem /* 208/80 */ /* 128/80 */;
-  // transform: translateX(-50%);
- 
+  .search_box {
+    position: absolute;
+    left: 50%;
+    top: 2.6rem /* 208/80 */ /* 128/80 */;
+    // transform: translateX(-50%);
   }
 }
 </style>

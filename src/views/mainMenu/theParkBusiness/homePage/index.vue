@@ -11,7 +11,7 @@
           <DropDown :list="yearsList" name="label" @_cg="changePSYears" />
           <DropDown
             style="margin-right:30px"
-            :list="momthsList"
+            :list="flag?momthsList:nowMomthsList"
             name="label"
             @_cg="changePSMonths"
           />
@@ -128,6 +128,7 @@ export default {
   data() {
     return {
       //   isShow:true,
+      flag:false,
       fade: false,
       animateUp: false,
       ImganimateUp: false,
@@ -270,6 +271,7 @@ export default {
           value: 1,
         },
       ],
+      nowMomthsList:this.$monthRangeArrList(),
       activeTypeIndex: 0,
       activeBulidIndex: 0,
       activeSeatIndex: 0,

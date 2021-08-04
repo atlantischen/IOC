@@ -49,7 +49,7 @@
         <div class="outer">
           <div id="energy" ref="energy"></div>
           <div class="desc">
-            总耗能指标 <span class="font_text">40</span> TCE
+            总耗能指标 <span class="font_text">180</span> TCE
           </div>
         </div>
         <div class="outer2">
@@ -76,27 +76,27 @@ export default {
     return {
       todayList: [
         {
-          kwh: 9605.56,
+          kwh: 4802.78,
           text: "照明插座用电",
-          percentage: 3,
+          percentage: this.$randomNum(1,5),
           state: 1,
         },
         {
-          kwh: 5318.32,
+          kwh: 2659.16,
           text: "动力用电",
-          percentage: 3,
+          percentage:  this.$randomNum(1,5),
           state: 1,
         },
         {
-          kwh: 19230.18,
+          kwh: 9615.09,
           text: "空调用电",
-          percentage: 3,
+          percentage:  this.$randomNum(1,5),
           state: 0,
         },
         {
-          kwh: 1569.12,
+          kwh: 784.60,
           text: "其他用电",
-          percentage: 3,
+          percentage:  this.$randomNum(1,5),
           state: 0,
         },
       ],
@@ -341,7 +341,7 @@ export default {
             },
             data: [
               {
-                value: 40,
+                value: 180,
               },
             ],
           },
@@ -357,7 +357,7 @@ export default {
             type: "gauge",
             // center:['50%','50%'],
             min: 0,
-            max: 100,
+            max: 200,
             radius: "95%",
             progress: {
               show: true,
@@ -402,9 +402,9 @@ export default {
             detail: {
               valueAnimation: true,
               fontSize: 12,
-              offsetCenter: [0, "70%"],
+              offsetCenter: [0, "75%"],
               formatter: function(value) {
-                return "{value|" + value + "}\n{unit|耗电指标}\n{unit|kwh}";
+                return "{value|" + value + "}\n{unit|耗电指标}\n{unit|TCE}";
               },
               rich: {
                 value: {
@@ -419,7 +419,7 @@ export default {
             },
             data: [
               {
-                value: 40,
+                value: 105,
               },
             ],
           },
@@ -435,7 +435,7 @@ export default {
             type: "gauge",
             // center:['50%','50%'],
             min: 0,
-            max: 100,
+            max: 200,
             radius: "95%",
             progress: {
               show: true,
@@ -482,7 +482,7 @@ export default {
               fontSize: 12,
               offsetCenter: [0, "70%"],
               formatter: function(value) {
-                return "{value|" + value + "}\n{unit|耗水指标}\n{unit|m³}";
+                return "{value|" + value + "}\n{unit|耗水指标}\n{unit|TCE}";
               },
               rich: {
                 value: {
@@ -497,7 +497,7 @@ export default {
             },
             data: [
               {
-                value: 19,
+                value: 75,
               },
             ],
           },
@@ -563,7 +563,7 @@ export default {
           {
             name: "",
             type: "category",
-            data: ["1栋", "2栋", "3栋", "生产楼", "宿舍楼"],
+            data: ["1期", "2期", "3期", "生产楼", "宿舍楼"],
             axisLine: {
               lineStyle: {
                 width: 0,

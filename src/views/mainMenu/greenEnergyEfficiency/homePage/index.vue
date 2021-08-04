@@ -17,7 +17,7 @@
           </div>
           <div class="percentage">
             <img src="../../../../assets/img/1.png" alt="" />
-            <span> <NumCounter :value="13.22"></NumCounter>%</span>
+            <span> <NumCounter :value="4.22"></NumCounter>%</span>
           </div>
         </div>
       </div>
@@ -27,42 +27,42 @@
             <img src="../../../../assets/img/electirc.png" alt="" />
             <div class="energy_consumption_desc">
               <span class="font_text">
-                <NumCounter :value="304376.75"></NumCounter>
+                <NumCounter :value="1296*num"></NumCounter>
               </span>
               <span>KWH</span>
               <div>电耗能</div>
             </div>
             <div class="percentage">
               <img src="../../../../assets/img/1.png" alt="" />
-              <span class="font_text"> 14.53%</span>
+              <span class="font_text"> 3.53%</span>
             </div>
           </li>
           <li>
             <img src="../../../../assets/img/water.png" alt="" />
             <div class="energy_consumption_desc">
               <span class="font_text">
-                <NumCounter :value="48.52"></NumCounter>
+                <NumCounter :value="205*num"></NumCounter>
               </span>
               <span>T</span>
               <div>水耗能</div>
             </div>
             <div class="percentage">
               <img src="../../../../assets/img/1.png" alt="" />
-              <span class="font_text">6.37%</span>
+              <span class="font_text">2.37%</span>
             </div>
           </li>
           <li>
             <img src="../../../../assets/img/gas.png" alt="" />
             <div class="energy_consumption_desc">
               <span class="font_text">
-                <NumCounter :value="63.28"></NumCounter>
+                <NumCounter :value="636.28*num"></NumCounter>
               </span>
               <span>m³</span>
               <div>气耗能</div>
             </div>
             <div class="percentage">
               <img src="../../../../assets/img/2.png" alt="" />
-              <span class="font_text">8.08%</span>
+              <span class="font_text">2.08%</span>
             </div>
           </li>
         </ul>
@@ -141,7 +141,7 @@
                 <span>KW.H</span>
               </div>
             </div>
-            <div class="bottom">8.32%</div>
+            <div class="bottom">{{num*3}}%</div>
           </li>
           <li>
             <img src="../../../../assets/img/water.png" alt="" />
@@ -155,7 +155,7 @@
                 <span>T</span>
               </div>
             </div>
-            <div class="bottom">4.73%</div>
+            <div class="bottom">{{num*2}}%</div>
           </li>
           <li>
             <img src="../../../../assets/img/gas.png" alt="" />
@@ -169,7 +169,7 @@
                 <span>m³</span>
               </div>
             </div>
-            <div class="bottom">2.54%</div>
+            <div class="bottom">{{num*1}}%</div>
           </li>
         </ul>
       </div>
@@ -217,7 +217,6 @@ export default {
         },
         {
           desc:'本年',
-
           dateType: "年",
           kwh: 729187.01,
           percentage: 70,
@@ -228,7 +227,8 @@ export default {
       ],
       KPIList: [
 
-      ]
+      ],
+      num:new Date().getDate()
     };
   },
   methods: {
@@ -564,6 +564,8 @@ export default {
   mounted () {
     this.trendInit();
     this.KPIint();
+   
+
   },
 };
 </script>

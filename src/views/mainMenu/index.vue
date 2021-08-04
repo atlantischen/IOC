@@ -37,7 +37,7 @@ export default {
   components: { AlarmAck, AllAlert },
   data() {
     return {
-      isShow: false,
+      isShow: true,
       deviceShow: false,
       fade: true,
       showAlarmAck: false,
@@ -258,6 +258,7 @@ export default {
   position: relative;
   width: 100%;
   height: 100%;
+  background-color: #CCC;
 }
 #iframe3D {
   width: 100%;

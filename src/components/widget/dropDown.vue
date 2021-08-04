@@ -27,7 +27,7 @@ export default {
       type: String,
     },
     list: {
-      type: Object,
+      type: Array,
       default: () => [],
     },
   },
@@ -37,7 +37,9 @@ export default {
     };
   },
   components: {},
-  mounted () { },
+  mounted () { 
+   
+  },
   methods: {
     changeItem (val,i) {
       this.activedName = this.list[i][this.name];

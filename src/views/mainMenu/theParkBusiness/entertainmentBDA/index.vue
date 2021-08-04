@@ -216,7 +216,7 @@ export default {
             emphasis: {
               focus: "series",
             },
-            data: [10, 9, 13, 10],
+            data: [7, 9, 6, 5],
 
           },
           {
@@ -234,7 +234,7 @@ export default {
             emphasis: {
               focus: "series",
             },
-            data: [10, 9, 11, 7],
+            data: [8, 9, 8, 7],
           },
           {
             name: "书吧",
@@ -285,7 +285,7 @@ export default {
             emphasis: {
               focus: "series",
             },
-            data: [5, 4, 6, 10],
+            data: [5, 4, 6, 9],
           },
         ],
       };

@@ -220,6 +220,12 @@ var ScrolLeftARight = function ScrolLeftARight(dom, time) {
 var randomNumer = function randomNumer(minNum, maxNum) {
   return parseInt(Math.random() * (maxNum - minNum + 1) + minNum)
 }
+
+// 随机数保留后面两位小数
+var randomNum =function randomNum(minNum,maxNum){ 
+  return (Math.random() * (maxNum - minNum ) + minNum).toFixed(2)
+
+} 
 /**
  * @author
  * @description 数据格式(,分隔)
@@ -280,20 +286,6 @@ var timeRangeArr = function timeRangeArr(_range) {
 }
 
 /**
- *
- * 获取1月到现在的月份数组
- * @param {any} start 开始时间  (1月)
- * @param {any} end   结束(8月)
- * @returns
- */
-var monthRangeArr = function monthRangeArr(_range) {
-  var _m = Number(moment(new Date()).format('MM')), arr = []
-  for (var i = 1; i < _m; i++) {
-    arr.push(i + '月')
-  }
-  return arr
-}
-/**
  * 全屏
  * @returns
  */
@@ -321,7 +313,7 @@ var afterIframeOnload = function afterIframeOnload(dom, fun) {
  * 获取今年开始 本年第几天（y） 本月第几天（m）
  * @returns
  */
-var getDayNums = function getDayNums(val) {
+ var getDayNums = function getDayNums(val) {
   switch (val) {
     case 'y':
       let currentYear = new Date().getFullYear().toString();
@@ -335,6 +327,27 @@ var getDayNums = function getDayNums(val) {
       return 0
   }
 }
+var monthRangeArr = function monthRangeArr(_range) {
+  var _m = Number(moment(new Date()).format('MM')), arr = []
+  for (var i = 1; i < _m; i++) {
+    arr.push(i + '月')
+  }
+  return arr
+}
+var monthRangeArrList = function monthRangeArrList(_range) {
+  var _m = Number(moment(new Date()).format('MM')),
+   arr = []
+  for (var i =  _m; i <= _m; i--) {
+    arr.push({
+      label:i+'月',
+      value:i
+    })
+   
+  }
+  return arr
+}
+
+
 const fun = {
   currentDate,
   redomEchart,
@@ -345,12 +358,15 @@ const fun = {
   ScrolAnimationTop,
   ScrolLeftARight,
   randomNumer,
+  randomNum,
   filterNum,
   timeRangeArr,
-  monthRangeArr,
   handleFullScreen,
   afterIframeOnload,
-  getDayNums
+  getDayNums,
+  monthRangeArr,
+  monthRangeArrList
+  
 }
 export default fun
 
