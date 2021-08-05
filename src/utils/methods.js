@@ -154,7 +154,6 @@ var afterIframeOnload = function afterIframeOnload(dom, fun) {
     }
   }
 }
-
 const fun = {
   ...dataM,
   ...dateTimeM,

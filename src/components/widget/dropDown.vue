@@ -8,7 +8,7 @@
         <el-dropdown-menu>
           <el-dropdown-item
             v-for="(item, i) in list"
-            @click="changeItem(i)"
+            @click="changeItem(item.value,i)"
             :key="i"
             :class="{ 'is-checed': activedName == item[name] }"
             >{{ item[name] }}</el-dropdown-item
@@ -27,7 +27,7 @@ export default {
       type: String,
     },
     list: {
-      type: Object,
+      type: Array,
       default: () => [],
     },
   },
@@ -37,10 +37,12 @@ export default {
     };
   },
   components: {},
-  mounted () { },
+  mounted () { 
+   
+  },
   methods: {
-    changeItem (val) {
-      this.activedName = this.list[val][this.name];
+    changeItem (val,i) {
+      this.activedName = this.list[i][this.name];
       this.$emit("_cg", val);
     },
   },

@@ -37,7 +37,7 @@ export default {
   components: { AlarmAck, AllAlert },
   data () {
     return {
-      isShow: true,
+      isShow: false,
       deviceShow: false,
       fade: true,
       showAlarmAck: false,
@@ -134,12 +134,10 @@ export default {
       }
     });
     if (this.getQueryString("debug")) {
-      console.log("我是debug!!");
       this.url = "";
       window.debug = true;
     } else {
       this.url = process.env.VUE_APP_UNITY;
-      this.url = 'http://183.62.170.2:8110'
     }
   },
   mounted () {
@@ -257,6 +255,7 @@ export default {
   position: relative;
   width: 100%;
   height: 100%;
+  // background-color: #CCC;
 }
 #iframe3D {
   width: 100%;

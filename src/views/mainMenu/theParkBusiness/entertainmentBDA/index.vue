@@ -10,7 +10,7 @@
         ></div>
       </div>
       <div class="distribution">
-        <div class="tittle">餐饮分布</div>
+        <div class="tittle">文娱分布</div>
         <div id="distribution" ref="distribution"></div>
       </div>
     </IOCLeft>
@@ -216,7 +216,8 @@ export default {
             emphasis: {
               focus: "series",
             },
-            data: [320, 302, 301, 334, 390, 330, 320],
+            data: [7, 9, 6, 5],
+
           },
           {
             name: "健身",
@@ -233,7 +234,7 @@ export default {
             emphasis: {
               focus: "series",
             },
-            data: [120, 132, 101, 134, 90, 230, 210],
+            data: [8, 9, 8, 7],
           },
           {
             name: "书吧",
@@ -250,7 +251,7 @@ export default {
             emphasis: {
               focus: "series",
             },
-            data: [220, 182, 191, 234, 290, 330, 310],
+            data: [8, 8, 9, 8],
           },
           {
             name: "文化",
@@ -267,7 +268,7 @@ export default {
             emphasis: {
               focus: "series",
             },
-            data: [150, 212, 201, 154, 190, 330, 410],
+            data:[6, 8, 5, 9],
           },
           {
             name: "影院",
@@ -284,7 +285,7 @@ export default {
             emphasis: {
               focus: "series",
             },
-            data: [820, 832, 901, 934, 1290, 1330, 1320],
+            data: [5, 4, 6, 9],
           },
         ],
       };

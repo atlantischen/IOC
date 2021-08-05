@@ -169,6 +169,7 @@ var randomNumer = function randomNumer(minNum, maxNum, val) {
     return (Math.random() * (maxNum - minNum) + minNum).toFixed(val)
   }
 }
+
 /**
  * @author
  * @description 数据格式(,分隔)
