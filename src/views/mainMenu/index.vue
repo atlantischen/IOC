@@ -14,7 +14,7 @@
     <AlarmAck :_isFade="showAlarmAck" @close="closeOpenItem" />
     <!-- 中心数据 -->
     <CenterDatas :list="centerDatas" />
-  
+
     <!-- 查看所有告警 -->
     <AllAlert
       :Visible="showAllAlert"
@@ -30,7 +30,7 @@ import AlarmAck from "@/views/mainMenu/comprehensiveSituational/homePage/compone
 export default {
   name: "MainMenu",
   components: { AlarmAck, AllAlert },
-  data () {
+  data() {
     return {
       isShow: true,
       showAlarmAck: false,
@@ -44,26 +44,26 @@ export default {
     };
   },
   computed: {
-    getUnityData () {
+    getUnityData() {
       return this.$store.state.unitySendData;
     },
   },
   watch: {
-    getUnityData (val) {
+    getUnityData(val) {
       // debugger;
       let res = val;
       try {
         if (res.action.indexOf("/") === 0) {
-          if(res.action==='/greenEnergyEfficiency/building/codesource'){
-               this.$store.commit('setActiveIndex',0)
+          if (res.action === "/greenEnergyEfficiency/building/codesource") {
+            this.$store.commit("setActiveIndex", 0);
           }
           this.$router.push(res.action);
         } else {
         }
-      } catch (e) { }
+      } catch (e) {}
     },
     "$store.state.comState.centerDatas": {
-      handler (n, o) {
+      handler(n, o) {
         if (n) {
           this.centerDatas = n;
         }
@@ -71,7 +71,7 @@ export default {
       immediate: true,
     },
     isShow: {
-      handler (n, o) {
+      handler(n, o) {
         if (n) {
           this.warnTimeFun();
         }
@@ -79,13 +79,13 @@ export default {
       immediate: true,
     },
   },
-  beforeCreate () {
+  beforeCreate() {
     this.$store.dispatch("SET_SHOWWARNTIP", false);
     if (process.env.NODE_ENV === "production") {
       this.$router.push("/comprehensiveSituational/homePage");
     }
   },
-  created () {
+  created() {
     if (window.vuplex) {
       this.addMessageListener();
     } else {
@@ -107,7 +107,7 @@ export default {
           this.hideGlobal(false);
         } else if (res.action === "ShowUserInterface") {
           // 设备
-          this.fade = false;
+          // this.fade = false;
           // this.deviceShow = true;
         } else if (res.action === "OnAlarmProcessingBtnClick") {
           // 确认报警
@@ -136,11 +136,11 @@ export default {
       this.url = process.env.VUE_APP_UNITY;
     }
   },
-  mounted () {
+  mounted() {
     this.$nextTick(() => {
       window.iframe = this.$refs.iframe;
       var _that = this;
-      window.addEventListener("resize", function () {
+      window.addEventListener("resize", function() {
         var isFull =
           document.fullscreenElement ||
           document.mozFullScreenElement ||
@@ -154,17 +154,17 @@ export default {
       });
     });
   },
-  beforeDestroy () {
+  beforeDestroy() {
     this.clearWarnTimeFun();
   },
   methods: {
-    getQueryString (name) {
+    getQueryString(name) {
       var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
       var r = window.location.search.substr(1).match(reg);
       if (r != null) return unescape(r[2]);
       return null;
     },
-    addMessageListener () {
+    addMessageListener() {
       window.vuplex.addEventListener("message", (event) => {
         console.log(event.data);
         let res = JSON.parse(event.data);
@@ -178,16 +178,16 @@ export default {
         }
       });
     },
-  
-    hideGlobal (bool) {
-      this.fade = bool;
-      this.deviceShow = bool;
+
+    hideGlobal(bool) {
+      // this.fade = bool;
+      // this.deviceShow = bool;
       this.showAllAlert = bool;
       this.showAlarmAck = bool;
       this.$store.dispatch("SET_SHOWWARNTIP", bool);
       this.$store.commit("SET_CENTERDATAS", [bool, null]);
     },
-    closeOpenItem (name, bool) {
+    closeOpenItem(name, bool) {
       switch (name) {
         case "allAlarm":
           this.showAllAlert = bool;
@@ -201,14 +201,14 @@ export default {
       }
     },
     // 退出3D全屏
-    Exit3DFullScreen () {
+    Exit3DFullScreen() {
       this.clearWarnTimeFun();
       this.isShow = true;
       this.$SendMessageToUnity("Exit3DFullScreen", {});
       this.showEscHandler = false;
     },
     // 随机触发警告
-    warnTimeFun () {
+    warnTimeFun() {
       // this.warnTimer = setInterval(() => {
       this.tipList = [
         {
@@ -225,13 +225,13 @@ export default {
       this.$store.dispatch("SET_SHOWWARNTIP", true);
       // }, this.$randomNumer(3000, 30000));
     },
-    clearWarnTimeFun () {
+    clearWarnTimeFun() {
       // clearInterval(this.warnTimer);
       // this.warnTimer = null;
       // this.$store.dispatch("SET_SHOWWARNTIP", false);
     },
     //监测是否按下esc键
-    checkFull () {
+    checkFull() {
       var isFull =
         document.fullscreenElement ||
         document.mozFullScreenElement ||

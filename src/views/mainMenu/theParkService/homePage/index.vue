@@ -17,7 +17,7 @@
 <script>
 export default {
   name: "homePage",
-  data () {
+  data() {
     return {
       leftInfo: [
         {
@@ -26,31 +26,31 @@ export default {
           datas: {
             eHeight: null,
             padding: null,
-            header: ['预定', '受理', '完成'],
+            header: ["预定", "受理", "完成"],
             tabList: [
               {
-                name: '本月',
-                data: [390, 478, 300]
+                name: "本月",
+                data: [390, 478, 300],
               },
               {
-                name: '上月',
-                data: [268, 292, 568]
+                name: "上月",
+                data: [268, 292, 568],
               },
             ],
             return: [
               {
-                state: 'up',
-                data: this.$randomNumer(1, 5, 2) + '%',
+                state: "up",
+                data: this.$randomNumer(1, 5, 2) + "%",
               },
               {
-                state: 'up',
-                data: this.$randomNumer(1, 5, 2) + '%'
+                state: "up",
+                data: this.$randomNumer(1, 5, 2) + "%",
               },
               {
-                state: 'down',
-                data: this.$randomNumer(1, 5, 2) + '%'
-              }
-            ]
+                state: "down",
+                data: this.$randomNumer(1, 5, 2) + "%",
+              },
+            ],
           },
         },
         {
@@ -68,12 +68,18 @@ export default {
             ],
             units: ["", "个"],
             datas: [
-              [this.$randomNumer(250, 280), this.$randomNumer(150, 200), this.$randomNumer(100, 150), this.$randomNumer(50, 100), this.$randomNumer(0, 50)]
+              [
+                this.$randomNumer(250, 280),
+                this.$randomNumer(150, 200),
+                this.$randomNumer(100, 150),
+                this.$randomNumer(50, 100),
+                this.$randomNumer(0, 50),
+              ],
             ],
             leftTip: {
-              name: '服务单合计：',
+              name: "服务单合计：",
               value: 436,
-              unit: '单'
+              unit: "单",
             },
             yearsList: [
               {
@@ -169,24 +175,25 @@ export default {
             //   [119, 120, 130, 140, 143, 154, 160, 162, 169, 170, 190, 200],
             // ],
             datas: [
-              [this.$randomNumer(400, 700),
-              this.$randomNumer(400, 700),
-              this.$randomNumer(400, 700),
-              this.$randomNumer(400, 700),
-              this.$randomNumer(400, 700),
-              this.$randomNumer(400, 700),
-              this.$randomNumer(400, 700),
-              this.$randomNumer(400, 700),
-              this.$randomNumer(400, 700),
-              this.$randomNumer(400, 700),
-              this.$randomNumer(400, 700),
-              this.$randomNumer(400, 700),
+              [
+                this.$randomNumer(400, 700),
+                this.$randomNumer(400, 700),
+                this.$randomNumer(400, 700),
+                this.$randomNumer(400, 700),
+                this.$randomNumer(400, 700),
+                this.$randomNumer(400, 700),
+                this.$randomNumer(400, 700),
+                this.$randomNumer(400, 700),
+                this.$randomNumer(400, 700),
+                this.$randomNumer(400, 700),
+                this.$randomNumer(400, 700),
+                this.$randomNumer(400, 700),
               ],
             ],
             leftTip: {
-              name: '服务单合计：',
+              name: "服务单合计：",
               value: 436,
-              unit: '单'
+              unit: "单",
             },
             yearsList: [
               {
@@ -202,7 +209,7 @@ export default {
                 value: 2019,
               },
             ],
-          }
+          },
         },
         {
           title: "各服务办理分布",
@@ -210,24 +217,27 @@ export default {
           datas: {
             eHeight: null,
             padding: null,
-            optionName: ["个人服务", "基础服务", "企业服务", "新材料"],
-            datas: [26.79, 47.35, 20.45, 5.41]
-          }
-        }
+            optionName: ["个人服务", "基础服务", "企业服务", "党群服务"],
+            datas: [26.79, 47.35, 20.45, 5.41],
+          },
+        },
       ],
     };
   },
   components: {},
-  created () {
-    this.leftInfo[1].datas.leftTip.value = this.$arrAdd(this.leftInfo[1].datas.datas[0])
-    let _l = this.rightInfo[0].datas.xData.length
-    let _d = this.rightInfo[0].datas.datas[0] = this.rightInfo[0].datas.datas[0].slice(0, _l)
-    this.rightInfo[0].datas.leftTip.value = this.$arrAdd(_d)
+  created() {
+    this.leftInfo[1].datas.leftTip.value = this.$arrAdd(
+      this.leftInfo[1].datas.datas[0]
+    );
+    let _l = this.rightInfo[0].datas.xData.length;
+    let _d = (this.rightInfo[0].datas.datas[0] = this.rightInfo[0].datas.datas[0].slice(
+      0,
+      _l
+    ));
+    this.rightInfo[0].datas.leftTip.value = this.$arrAdd(_d);
   },
-  mounted () {
-  },
-  methods: {
-  },
+  mounted() {},
+  methods: {},
 };
 </script>
 

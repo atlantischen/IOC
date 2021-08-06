@@ -55,108 +55,6 @@ var eHeightFun = function eHeightFun(val) {
 
 /**
  * @author
- * @description 全屏/取消全屏
- * @param {val  bool}
- * @returns {handle}
- */
-var Fullscreen = function Fullscreen(val, bool) {
-  const element = val
-  // console.log(element);
-  if (bool) {
-    if (document.exitFullscreen) {
-      document.exitFullscreen()
-    } else if (document.webkitCancelFullScreen) {
-      document.webkitCancelFullScreen()
-    } else if (document.mozCancelFullScreen) {
-      document.mozCancelFullScreen()
-    } else if (document.msExitFullscreen) {
-      document.msExitFullscreen()
-    }
-  } else {
-    if (element.requestFullscreen) {
-      element.requestFullscreen()
-    } else if (element.webkitRequestFullScreen) {
-      element.webkitRequestFullScreen()
-    } else if (element.mozRequestFullScreen) {
-      element.mozRequestFullScreen()
-    } else if (element.msRequestFullscreen) {
-      // IE11
-      element.msRequestFullscreen()
-    }
-  }
-}
-
-
-/**
- * @author
- * @description 向上滚动动画（一列多行,y轴运动）
- * @param {DOMError }
- * @param {time}
- * @returns {Function}
- */
-var ScrolAnimationTop = function ScrolAnimationTop(dom, time) {
-  var that = this,
-    _time = time * 1000
-  var box = that.$refs[dom] // document.getElementById(dom)
-  let timer = setInterval(scrol, _time);
-
-  function scrol() {
-    var _s = box.children[1].offsetTop - box.children[0].offsetTop
-    box.style.transition = `all 0.5s ease`
-    box.style.transform = `translateY(-${_s}px)`;
-    let _d = box.cloneNode(true)
-    if (box.children[0]) {
-      box.children[0].parentNode.appendChild(_d.children[0])
-    }
-    setTimeout(() => {
-      clearInterval(timer)
-      box.style.transition = `none`
-      box.style.transform = `translateY(0px)`;
-      if (box.children[0]) {
-        box.children[0].parentNode.removeChild(box.children[0])
-      }
-      timer = setInterval(scrol, _time)
-    }, _time / 2);
-  }
-}
-/**
- * @author
- * @description 动画（多行多列,x轴运动）
- * @param {DOMError }
- * @param {time}
- * @returns {Function}
- */
-var ScrolLeftARight = function ScrolLeftARight(dom, time) {
-  var that = this,
-    _time = time * 1000
-  var box = that.$refs[dom] // document.getElementById(dom)
-  let timer = setInterval(scrol, _time);
-
-  function scrol() {
-    let _d = box.cloneNode(true)
-    if (box.children[0]) {
-      box.children[0].parentNode.appendChild(_d.children[0])
-    }
-    var _s = box.children[1].offsetLeft - box.children[0].offsetLeft
-    for (var i = 0; i < box.children.length; i++) {
-      box.children[i].style.transition = `all 0.5s ease`
-      box.children[i].style.transform = `translateX(-${_s}px)`;
-    }
-    setTimeout(() => {
-      clearInterval(timer)
-      for (var i = 0; i < box.children.length; i++) {
-        box.children[i].style.transition = `none`
-        box.children[i].style.transform = `translateX(0px)`;
-      }
-      if (box.children[0]) {
-        box.children[0].parentNode.removeChild(box.children[0])
-      }
-      timer = setInterval(scrol, _time)
-    }, _time / 2);
-  }
-}
-/**
- * @author
  * @description 随机数
  * @param number
  * @returns {num}
@@ -219,9 +117,6 @@ const fun = {
   uuid,
   paddingFun,
   eHeightFun,
-  Fullscreen,
-  ScrolAnimationTop,
-  ScrolLeftARight,
   randomNumer,
   filterNum,
   arrAdd,
