@@ -17,7 +17,7 @@
           </div>
           <div class="percentage">
             <img src="../../../../assets/img/1.png" alt="" />
-            <span> <NumCounter :value="4.22"></NumCounter>%</span>
+            <span> <NumCounter :value="$randomNum(1,5)"></NumCounter>%</span>
           </div>
         </div>
       </div>
@@ -34,7 +34,7 @@
             </div>
             <div class="percentage">
               <img src="../../../../assets/img/1.png" alt="" />
-              <span class="font_text"> 3.53%</span>
+              <span class="font_text"> {{$randomNum(1,5)}}%</span>
             </div>
           </li>
           <li>
@@ -48,7 +48,7 @@
             </div>
             <div class="percentage">
               <img src="../../../../assets/img/1.png" alt="" />
-              <span class="font_text">2.37%</span>
+              <span class="font_text">{{$randomNum(1,5)}}%</span>
             </div>
           </li>
           <li>
@@ -62,7 +62,7 @@
             </div>
             <div class="percentage">
               <img src="../../../../assets/img/2.png" alt="" />
-              <span class="font_text">2.08%</span>
+              <span class="font_text">{{$randomNum(1,5)}}%</span>
             </div>
           </li>
         </ul>
@@ -76,16 +76,16 @@
       <div class="energy_contrast">
         <div class="tittle">能耗对比</div>
         <div class="energy_title">
-          <div>
+          <div  @click="changeClick('电')">
             <img src="../../../../assets/img/4.png" alt="" />
             <span>电耗能</span>
           </div>
-          <div>
+          <div  @click="changeClick('水')">
             <img src="../../../../assets/img/6.png" alt="" />
             <span>水耗能</span>
           </div>
         </div>
-        <div class="energy_chart">
+        <div class="energy_chart" v-if="activeType==='电'">
           <ul>
             <li v-for="i in dateList" :key="i">
               <div class="date">{{ i.dateType }}</div>
@@ -93,6 +93,35 @@
                 <i :style="'width:' + i.percentage + '%'"></i>
                 <div>
                   <span>{{i.desc}}用电量：</span>
+                  <span class="font_text">
+                    <NumCounter :value="i.kwh"></NumCounter
+                  ></span>
+                  <span>kW.h</span>
+                </div>
+              </div>
+              <div class="increase">
+                <!-- <img src="../../../../assets/img/2.png" alt="" /> -->
+                <img
+                  :src="
+                    i.state === 0
+                      ? require('../../../../assets/img/2.png')
+                      : require('../../../../assets/img/1.png')
+                  "
+                  alt=""
+                />
+                <span class="font_text">{{ i.increase }}%</span>
+              </div>
+            </li>
+          </ul>
+        </div>
+        <div class="energy_chart" v-if="activeType==='水'">
+          <ul>
+            <li v-for="i in WdateList" :key="i">
+              <div class="date">{{ i.dateType }}</div>
+              <div class="use">
+                <i :style="'width:' + i.percentage + '%'"></i>
+                <div>
+                  <span>{{i.desc}}用水量：</span>
                   <span class="font_text">
                     <NumCounter :value="i.kwh"></NumCounter
                   ></span>
@@ -187,12 +216,13 @@ export default {
     return {
       Visible: false,
       dialogTitle:'',
+      activeType:'电',
       dateList: [
         {
           desc:'今日',
           dateType: "日",
-          kwh: 447.31,
-          percentage: 40,
+          kwh: 12968,
+          percentage: 46,
           increase: 1.02,
           state: 0,
 
@@ -200,8 +230,8 @@ export default {
         {
           desc:'本周',
           dateType: "周",
-          kwh: 5152.11,
-          percentage: 50,
+          kwh: 90776,
+          percentage: 52,
           increase: 2.35,
           state: 1
 
@@ -209,8 +239,8 @@ export default {
         {
           desc:'本月',
           dateType: "月",
-          kwh: 25101.91,
-          percentage: 60,
+          kwh: 389040,
+          percentage: 64,
           increase: 5.96,
           state: 0
 
@@ -218,9 +248,47 @@ export default {
         {
           desc:'本年',
           dateType: "年",
-          kwh: 729187.01,
-          percentage: 70,
+          kwh: 4668480,
+          percentage: 72,
           increase: 3.56,
+          state: 1
+
+        },
+      ],
+      WdateList: [
+        {
+          desc:'今日',
+          dateType: "日",
+          kwh: 2056,
+          percentage: 43,
+          increase: 2.03,
+          state: 1,
+
+        },
+        {
+          desc:'本周',
+          dateType: "周",
+          kwh: 14392,
+          percentage: 52,
+          increase: 1.35,
+          state: 0
+
+        },
+        {
+          desc:'本月',
+          dateType: "月",
+          kwh: 61680,
+          percentage: 63,
+          increase: 4.03,
+          state: 0
+
+        },
+        {
+          desc:'本年',
+          dateType: "年",
+          kwh: 740160,
+          percentage: 76,
+          increase: 2.98,
           state: 1
 
         },
@@ -237,10 +305,13 @@ export default {
       this.openCloseDialog(true)
 
     },
+    changeClick(val){
+      this.activeType=val
+    },
     openCloseDialog (val) {
       this.Visible = val
     },
-    trendInit () {
+    trendInit (data) {
       var dom = this.$refs["today_energy"];
       var option = {
         // grid: {
@@ -291,20 +362,7 @@ export default {
           {
             name: "",
             type: "category",
-            data: [
-              "00:00",
-              "01:00",
-              "02:00",
-              "03:00",
-              "04:00",
-              "05:00",
-              "06:00",
-              "07:00",
-              "08:00",
-              "09:00",
-              "10:00",
-              "11:00",
-            ],
+            data: data,
             axisLine: {
               lineStyle: {
                 width: 1,
@@ -325,7 +383,12 @@ export default {
               interval: 0,
               rotate: -30,
               padding: [10, 25, 0, 0],
-              // align:'right',
+               formatter: function(value, index) {
+                if (index % 2) {
+                  return value;
+                }
+                return "";
+              },
             },
           },
         ],
@@ -334,9 +397,9 @@ export default {
             name: "KWH",
             type: "value",
             min: 0,
-            max: 60,
+            max: 1500,
             splitNumber: 5,
-            interval: 10,
+            interval: 300,
             // axisLabel: {
             //   formatter: function (value) {
             //     return value / 1000 + (value != 0 ? 'k' : '');
@@ -365,9 +428,9 @@ export default {
             name: "T",
             type: "value",
             min: 0,
-            max: 30,
+            max: 250,
             splitNumber: 5,
-            interval: 5,
+            interval: 50,
             // axisLabel: {
             //   formatter: function (value) {
             //     return value / 1000 + (value != 0 ? 'k' : '');
@@ -397,8 +460,9 @@ export default {
         series: [
           {
             name: "电能源",
+            yAxisIndex:0 ,
             symbol: "none",
-            data: [1, 5, 7, 8, 9, 22, 15, 26, 30, 18, 13, 10],
+            data: [100, 50, 70, 80, 90, 100, 150, 260, 350, 538, 689, 763, 899, 1036,1136, 1233, 1265, 1360, 1378, 1401, 1421, 1436, 1456, 1123,736],
             type: "line",
             endLabel: {
               show: false,
@@ -448,7 +512,9 @@ export default {
           {
             name: "水能源",
             symbol: "none",
-            data: [1, 10, 26, 30, 32, 39, 28, 36, 34, 30, 35, 39],
+            yAxisIndex:1 ,
+
+            data: [5, 10, 36, 45, 50, 63, 72, 83, 106, 111, 123, 134,145, 153, 165, 168, 178, 189, 206, 236, 240, 246, 56, 39],
             type: "line",
             symbolSize: 6,
             smooth: true,
@@ -562,7 +628,7 @@ export default {
     },
   },
   mounted () {
-    this.trendInit();
+    this.trendInit( this.$getNowTime());
     this.KPIint();
    
 

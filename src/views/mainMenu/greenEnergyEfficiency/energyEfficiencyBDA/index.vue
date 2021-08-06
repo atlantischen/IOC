@@ -29,7 +29,7 @@
       </div>
       <div class="month_use">
         <div class="tittle">本月建筑用电分析</div>
-        <div class="count">本月总耗计:<NumCounter class="num" :value="35723.18"></NumCounter>kwh</div>
+        <!-- <div class="count">本月总耗计:<NumCounter class="num" :value="35723.18"></NumCounter>kwh</div> -->
         <div id="park_time" ref="park_time"></div>
       </div>
       <div class="TOP">
@@ -58,7 +58,7 @@
         </div>
          <div class="month_use_w">
           <div class="tittle">本月建筑用水分析</div>
-        <div class="count">月能耗总计:<NumCounter class="num" :value="9245.94"></NumCounter>m³</div>
+        <!-- <div class="count">月能耗总计:<NumCounter class="num" :value="9245.94"></NumCounter>m³</div> -->
 
           <div id="use_W" ref="use_W"></div>
       </div>
@@ -128,42 +128,47 @@ export default {
   methods: {
     AssetsAndEquipment() {
       var dom = this.$refs["park_time"];
+      const data=[12369, 9823, 10345, 13245, 10236];
+      const total = data.reduce((x, y) => x + y, 0);
+
       var option = {
-        // title: {
-        //   text: "{a|月能总耗计：}{b|" + 35723.18 + "}{c|kw.h}",
-        //   left: "0",
-        //   top: "0",
-        //   // subtext: '会议数',
-        //   subtextStyle: {
-        //     color: "#fff",
-        //   },
-        //   textStyle: {
-        //     rich: {
-        //       a: {
-        //         fontSize: 14,
-        //         color: "#fff",
-        //         fontFamily: "Microsoft YaHei",
-        //         opacity: 0.7,
-        //       },
-        //       b: {
-        //         fontSize: 20,
-        //         color: "ffff",
-        //         fontFamily: "BYfont",
-        //       },
-        //       c: {
-        //         fontSize: 12,
-        //         fontWeight: "bold",
-        //         padding: [0, 5],
-        //         color: "#fff",
-        //       },
-        //     },
-        //   },
-        // },
+        
+         title: {
+          show: true,
+          text: `{c|月能总耗计:}{a|${total}}{b|kw.h}`,
+          link: "",
+          target: null,
+          left: "1%",
+          top: "-10",
+          textAlign: "left",
+          itemGap: 6,
+          textStyle: {
+            rich: {
+              c: {
+                fontSize: 14,
+                color: "rgb(255,255,255,1)",
+                padding: [0, 0, 10, 0],
+              },
+              a: {
+                color: "#fff",
+                fontFamily: "BYfont",
+                fontSize: 20,
+                padding: [0, 0, 5, 5],
+              },
+              b: {
+                color: "#fff",
+                padding: [0, 0, 10, 0],
+
+                fontSize: 12,
+              },
+            },
+          },
+        },
         grid: {
-          top: "30",
+          top: "60",
           left: "0",
           right: "0",
-          bottom: "0",
+          bottom: "20",
           containLabel: true,
         },
         tooltip: {
@@ -184,7 +189,7 @@ export default {
           {
             name: "",
             type: "category",
-            data: ["1栋", "2栋", "3栋", "生产楼", "宿舍楼"],
+            data: ["1期", "2期", "3期", "生产楼", "宿舍楼"],
             axisLine: {
               lineStyle: {
                 width: 0,
@@ -275,7 +280,7 @@ export default {
                 ),
               },
             },
-            data: [12500, 10000, 11000, 13000, 10000],
+            data: data,
           },
         ],
       };
@@ -506,43 +511,47 @@ export default {
       this.$redomEchart(dom, option);
     },
      use_W() {
+       const data = [2659, 2963, 2314, 1124, 1436]
+      const total = data.reduce((x, y) => x + y, 0);
+
       var dom = this.$refs["use_W"];
       var option = {
-        // title: {
-        //   text: "{a|月能总耗计：}{b|" + 9245.94 + "}{c|m³}",
-        //   left: "0",
-        //   top: "0",
-        //   // subtext: '会议数',
-        //   subtextStyle: {
-        //     color: "#fff",
-        //   },
-        //   textStyle: {
-        //     rich: {
-        //       a: {
-        //         fontSize: 14,
-        //         color: "#fff",
-        //         fontFamily: "Microsoft YaHei",
-        //         opacity: 0.7,
-        //       },
-        //       b: {
-        //         fontSize: 20,
-        //         color: "ffff",
-        //         fontFamily: "BYfont",
-        //       },
-        //       c: {
-        //         fontSize: 12,
-        //         fontWeight: "bold",
-        //         padding: [0, 5],
-        //         color: "#fff",
-        //       },
-        //     },
-        //   },
-        // },
+         title: {
+          show: true,
+          text: `{c|月能耗总计:}{a|${total}}{b|m³}`,
+          link: "",
+          target: null,
+          left: "1%",
+          top: "-10",
+          textAlign: "left",
+          itemGap: 6,
+          textStyle: {
+            rich: {
+              c: {
+                fontSize: 14,
+                color: "rgb(255,255,255,1)",
+                padding: [0, 0, 10, 0],
+              },
+              a: {
+                color: "#fff",
+                fontFamily: "BYfont",
+                fontSize: 20,
+                padding: [0, 0, 5, 5],
+              },
+              b: {
+                color: "#fff",
+                padding: [0, 0, 10, 0],
+
+                fontSize: 12,
+              },
+            },
+          },
+        },
         grid: {
-          top: "30",
+          top: "60",
           left: "0",
           right: "0",
-          bottom: "0",
+          bottom: "20",
           containLabel: true,
         },
           tooltip: {
@@ -652,7 +661,7 @@ export default {
                 ),
               },
             },
-            data: [2500, 1000, 1100, 1300, 1000],
+            data:data,
           },
         ],
       };

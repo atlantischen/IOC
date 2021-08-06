@@ -2,7 +2,7 @@
   <IOCLeft>
     <ul class="title">
       <li
-        :class="activeIndex === index ? 'active' : ''"
+        :class="$store.state.activeIndex === index ? 'active' : ''"
         v-for="(item, index) in list"
         :key="index"
         @click="handleClick(item.path, index, item.name)"
@@ -58,7 +58,7 @@
 export default {
   data() {
     return {
-      activeIndex: 0,
+      // activeIndex: 0,
       list: [
         {
           path: "/greenEnergyEfficiency/building/codesource",
@@ -69,20 +69,20 @@ export default {
           name: "空调",
         },
         {
-          path: "/greenEnergyEfficiency/building/elevator",
-          name: "电梯",
-        },
-        {
-          path: "/greenEnergyEfficiency/building/lighting",
-          name: "照明",
-        },
-        {
           path: "/greenEnergyEfficiency/building/primaryAirSystem",
           name: "新风",
         },
         {
           path: "/greenEnergyEfficiency/building/watersupply",
           name: "给排水",
+        },
+        {
+          path: "/greenEnergyEfficiency/building/elevator",
+          name: "电梯",
+        },
+        {
+          path: "/greenEnergyEfficiency/building/lighting",
+          name: "照明",
         },
       ],
       systemList: [
@@ -141,7 +141,8 @@ export default {
   },
   methods: {
      handleClick(path,index,name){
-      this.activeIndex=index
+      // this.activeIndex=index
+      this.$store.commit('setActiveIndex',index)
       this.$router.push(path)
       this.$SendMessageToUnity("OnChangePage", {"name":name});
      

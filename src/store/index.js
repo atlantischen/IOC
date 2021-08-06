@@ -7,10 +7,14 @@ import {
 export default createStore({
   state: {
     unitySendData: {},
+    activeIndex:0
   },
   mutations: {
     setData(state, payload) {
       state.unitySendData = payload
+    },
+    setActiveIndex(state, payload) {
+      state.activeIndex = payload
     }
   },
   actions: {},

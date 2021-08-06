@@ -1,6 +1,6 @@
 <template>
-  <!-- <IOCLeft  style="top:40%"> -->
-    <div class="left">
+
+    <div class="left ioc_animated fadeInLeft0">
           <LicensePlateSearch
       @search="search"
       :searchData="searchData"
@@ -20,8 +20,7 @@
       <span class="search_total">共搜索到{{carListRes.length}}条结果</span>
     </div> 
     </div>
-  
-  <!-- </IOCLeft> -->
+
   <IOCRight :fade="fade" class="right">
     <div class="list_box">
       <ul class="list_title">
@@ -431,7 +430,7 @@ export default {
 .left{ 
   position: fixed;
   left: 0.575rem;
-  top: 14%;
+  top:40%;
   height: 6.5125rem /* 521/80 */;
 
 

@@ -37,9 +37,9 @@ export default {
   components: { AlarmAck, AllAlert },
   data() {
     return {
-      isShow: false,
+      isShow: true,
       deviceShow: false,
-      fade: true,
+      fade: false,
       showAlarmAck: false,
       showAllAlert: false,
       showEscHandler: false,
@@ -61,6 +61,9 @@ export default {
       let res = val;
       try {
         if (res.action.indexOf("/") === 0) {
+          if(res.action==='/greenEnergyEfficiency/building/codesource'){
+               this.$store.commit('setActiveIndex',0)
+          }
           this.$router.push(res.action);
         } else {
         }
@@ -112,7 +115,7 @@ export default {
         } else if (res.action === "ShowUserInterface") {
           // 设备
           this.fade = false;
-          this.deviceShow = true;
+          // this.deviceShow = true;
         } else if (res.action === "OnAlarmProcessingBtnClick") {
           // 确认报警
           this.showAlarmAck = true;

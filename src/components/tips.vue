@@ -1,5 +1,5 @@
 <template>
-  <div class="box ioc_animated fadeInDownTop">
+  <div class="box ioc_animated fadeInDownTop"   :class="fade ? 'fadeOutDownTop' : 'fadeInDownTop'">
     <ul>
       <li v-for="(item, index) in list" :key="index">
         <div class="font_text">
@@ -21,6 +21,9 @@ export default {
     list: {
       type: Object,
       default: {}
+    },
+     fade: {
+      type: Boolean,
     },
   },
   created () {

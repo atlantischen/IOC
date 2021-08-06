@@ -337,7 +337,7 @@ var monthRangeArr = function monthRangeArr(_range) {
 var monthRangeArrList = function monthRangeArrList(_range) {
   var _m = Number(moment(new Date()).format('MM')),
    arr = []
-  for (var i =  _m; i <= _m; i--) {
+  for (var i =  _m; i >= 1; i--) {
     arr.push({
       label:i+'月',
       value:i
@@ -346,7 +346,55 @@ var monthRangeArrList = function monthRangeArrList(_range) {
   }
   return arr
 }
+// 获取当天是第几天并生成数组
+var getNowDayList =function getNowDayList() {
+  let index = Number(moment(new Date()).format('DD'))
+  let arr =[]
+  for (var i =  index; i >= 1; i--) {
+    arr.push({
+      label:i+'日',
+      value:i
+    })
+   
+  }
+  return arr
+}
+// 获取当前时间到00:00
+var getNowTime= function getNowTime() {
+    let i =new Date().getHours()
+    let arr = []
+    for (let index = 0; index <= i; index++) {
+      if(index<10){
+         arr.push(`0${index}:00`)
+      }else{
+        arr.push(`${index}:00`)
 
+      }
+    }
+    return arr
+}
+// 获取当前日并往前推迟7天
+// fun_date(7) //7天后的日期
+// fun_date(-7) //7天前的日期
+function fun_date(){
+  var myDate = new Date();
+  myDate.setDate(myDate.getDate() - 7);  //后7天就把该行代码注释
+  var dateArray = [];
+  var dateTemp;
+  var flag = 1;
+  for (var i = 0; i <=7; i++) {
+    var month = myDate.getMonth() + 1;
+    var date = myDate.getDate();
+    // month < 10 ? (month = "0" + month) : month;
+    date < 10 ? (date = "0" + date) : date;
+    dateTemp = month + "." + date;
+    dateArray.push(dateTemp);
+    myDate.setDate(myDate.getDate() + flag);
+  }
+  dateArray.shift()
+  return dateArray
+
+}
 
 /**
  * 数字递增
@@ -388,7 +436,10 @@ const fun = {
   getDayNums,
   monthRangeArr,
   monthRangeArrList,
-  numAdd
+  numAdd,
+  getNowDayList,
+  getNowTime,
+  fun_date
 }
 export default fun
 

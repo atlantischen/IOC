@@ -111,6 +111,15 @@ export default [{
     
     }
   },
+  {
+    path: 'watersupplyDetail',
+    name: 'watersupplyDetail',
+    component: () => import('@/views/mainMenu/greenEnergyEfficiency/building/watersupplyDetail.vue'),
+    meta: {
+      id:6
+    
+    }
+  },
 
 
 ]

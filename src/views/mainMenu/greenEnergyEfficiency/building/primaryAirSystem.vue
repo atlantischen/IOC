@@ -56,7 +56,7 @@
       <div class="useKWH">
         <div class="tittle">用电量统计</div>
       <div class="btn">
-        <ul>
+        <!-- <ul>
           <li :class="{ active: activeIndex === 1 }" @click="changeBtn(1)">
             近70天
           </li>
@@ -66,7 +66,7 @@
           <li :class="{ active: activeIndex === 3 }" @click="changeBtn(3)">
             近3年
           </li>
-        </ul>
+        </ul> -->
       </div>
         <div id="ElectricityStatistics" ref="ElectricityStatistics"></div>
 
@@ -413,53 +413,53 @@ export default {
       };
       this.$redomEchart(dom, option);
     },
-      changeBtn(val) {
+    //   changeBtn(val) {
 
-      this.activeIndex = val;
-      if (val == 1) {
-        this.ElectricityStatistics(
-          ["7.24", "7.25", "7.26", "7.27", "7.28", "7.29", "7.30"],
-      [1200, 1500, 1300, 1400, 1600, 1700, 1900,],
-          {
-            name: "kw·h",
-            company:'日',
+    //   this.activeIndex = val;
+    //   if (val == 1) {
+    //     this.ElectricityStatistics(
+    //       ["7.24", "7.25", "7.26", "7.27", "7.28", "7.29", "7.30"],
+    //   [1200, 1500, 1300, 1400, 1600, 1700, 1900,],
+    //       {
+    //         name: "kw·h",
+    //         company:'日',
 
-            splitNumber: 3,
-            min: 0,
-            max: 4800,
-            interval: 1200,
-          }
-        );
-      } else if (val == 2) {
-        this.ElectricityStatistics(
-          ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"],
-          [3, 4, 4, 3, 2, 1, 2, 5, 4, 3, 6, 2],
-          {
-            name: "万kw·h",
-            company:'月',
+    //         splitNumber: 3,
+    //         min: 0,
+    //         max: 4800,
+    //         interval: 1200,
+    //       }
+    //     );
+    //   } else if (val == 2) {
+    //     this.ElectricityStatistics(
+    //       ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"],
+    //       [3, 4, 4, 3, 2, 1, 2, 5, 4, 3, 6, 2],
+    //       {
+    //         name: "万kw·h",
+    //         company:'月',
 
-            splitNumber: 4,
-            min: 0,
-            max: 6.0,
-            interval: 1.5,
-          }
-        );
-      } else {
-        this.ElectricityStatistics(
-          ["2019年", "2020年", "2021年"],
-          [23, 41, 13],
-          {
-            name: "万kw·h",
-            company:'年',
+    //         splitNumber: 4,
+    //         min: 0,
+    //         max: 6.0,
+    //         interval: 1.5,
+    //       }
+    //     );
+    //   } else {
+    //     this.ElectricityStatistics(
+    //       ["2019年", "2020年", "2021年"],
+    //       [23, 41, 13],
+    //       {
+    //         name: "万kw·h",
+    //         company:'年',
 
-            splitNumber: 4,
-            min: 0,
-            max: 60,
-            interval: 20,
-          }
-        );
-      }
-    },
+    //         splitNumber: 4,
+    //         min: 0,
+    //         max: 60,
+    //         interval: 20,
+    //       }
+    //     );
+    //   }
+    // },
       // 改变风速
         changeWinSpeed(name, i){
           if(name == 'speed1'){
@@ -523,8 +523,8 @@ export default {
   },
   mounted(){
      this.ElectricityStatistics(
-      ["7.24", "7.25", "7.26", "7.27", "7.28", "7.29", "7.30"],
-      [1200, 1500, 1300, 1400, 1600, 1700, 1900,],
+      this.$fun_date(),
+      [2566, 3189, 3998, 3960, 3956, 4011, 4169],
       {
         name: "kw·h",
         company:'日',

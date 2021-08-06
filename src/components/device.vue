@@ -1,5 +1,5 @@
 <template>
-  <IOCRight :fade="fade" style="right: 0; width: auto; z-index: 1000">
+  <IOCRight :fade="_fade" style="right: 0; width: auto; z-index: 1000">
     <div class="box">
       <div class="box_t">显示设备</div>
       <i class="el-icon-close close" @click="handleClick(true)"></i>
@@ -20,7 +20,6 @@
 export default {
   data () {
     return {
-      fade: true,
       equipmentList: [
         {
           url: require('../assets/img/sb1.png')
