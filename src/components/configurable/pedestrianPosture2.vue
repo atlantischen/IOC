@@ -149,7 +149,7 @@ export default {
             fontSize: 12,
             padding: [15, 0, 0, 0],
             rotate: -35,
-            interval: 0,
+            interval: "auto",
             margin: 20,
             textStyle: {
               color: "#fff",

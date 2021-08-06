@@ -24,7 +24,7 @@
 </template>
 
 <script>
-import data from "@/utils/falseData.js"
+import data from "@/utils/falseData.js";
 import { homePage } from "@/lang/data/comprehensiveSituational/index";
 import i18n from "@/lang/index";
 import RightContent from "./components/rightContent.vue";
@@ -34,7 +34,7 @@ import * as echarts from "echarts";
 export default {
   components: { RightContent },
   // name: "zhts",
-  data () {
+  data() {
     return {
       inputVal: null,
       inputV: null,
@@ -79,14 +79,41 @@ export default {
             smooth: false,
             unit: ["时间", "人"],
             names: ["访客"],
-            xData: this.$timeRangeArr(7),
             // names: ["办公人员", "访客"],
             // xData: ["05:00", "06:00", "07:00", "08:00", "09:00", "10:00"],
             // datas: [
             //   [23, 12, 43, 32, 21, 43],
             //   [34, 2, 32, 32, 32, 23],
             // ],
-            datas: [[1, 2, 32, 32, 32, 23]],
+            xData: this.$timeRangeArr(),
+            datas: [
+              [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                this.$randomNumer(0, 6),
+                this.$randomNumer(6, 9),
+                this.$randomNumer(9, 12),
+                this.$randomNumer(12, 24),
+                this.$randomNumer(20, 24),
+                this.$randomNumer(24, 30),
+                this.$randomNumer(24, 30),
+                this.$randomNumer(24, 32),
+                this.$randomNumer(24, 30),
+                this.$randomNumer(4, 9),
+                this.$randomNumer(1, 4),
+                0,
+                0,
+                0,
+                0,
+                0,
+              ],
+            ],
             datas2: [
               {
                 name: "今日总人流量",
@@ -163,10 +190,60 @@ export default {
             //   "10:00",
             //   "12:00",
             // ],
-            xData: this.$timeRangeArr(6),
+            xData: this.$timeRangeArr(),
             datas: [
-              [7, 9, 3, 14, 9, 36, 23],
-              [10, 15, 12, 23, 20, 45, 36],
+              [
+                7,
+                9,
+                3,
+                14,
+                9,
+                36,
+                23,
+                14,
+                9,
+                36,
+                23,
+                14,
+                9,
+                36,
+                23,
+                14,
+                9,
+                36,
+                14,
+                9,
+                36,
+                14,
+                9,
+                36,
+              ],
+              [
+                10,
+                15,
+                12,
+                23,
+                20,
+                45,
+                36,
+                20,
+                23,
+                20,
+                23,
+                20,
+                45,
+                36,
+                20,
+                23,
+                20,
+                23,
+                20,
+                45,
+                36,
+                23,
+                20,
+                45,
+              ],
             ],
             datas2: [
               {
@@ -244,12 +321,12 @@ export default {
     };
   },
   computed: {
-    lang () {
+    lang() {
       return this.$store.state.comState.lang;
     },
   },
   watch: {
-    "$store.state.comState.lang" (n, o) {
+    "$store.state.comState.lang"(n, o) {
       // this.lang = this.$t("lg.name", n);
       // this.leftInfo = JSON.parse(
       //   this.$t("comprehensiveSituational.homePage")
@@ -262,28 +339,42 @@ export default {
       // ).rightInfo;
     },
   },
-  created () {
+  created() {
     this.$store.dispatch("SET_CENTERDATAS", [true, this.centerDatasList]);
     // (this.leftInfo = homePage.leftInfo),
     //   (this.rightInfo = homePage.rightInfo)
   },
-  mounted () {
+  mounted() {
     // aaa().then(r=>{
     //   console.log(r)
     // })
     // axios('/meun').then(req => {
     //   console.log('xxxxxxxxx', req)
     // })
+    let _l = this.leftInfo[1].datas.xData.length;
+    let _l2 = this.rightInfo[1].datas.xData.length;
+    this.leftInfo[1].datas.datas[0] = this.leftInfo[1].datas.datas[0].slice(
+      0,
+      _l
+    );
+    this.rightInfo[1].datas.datas[0] = this.rightInfo[1].datas.datas[0].slice(
+      0,
+      _l2
+    );
+    this.rightInfo[1].datas.datas[1] = this.rightInfo[1].datas.datas[1].slice(
+      0,
+      _l2
+    );
   },
-  destroyed () { },
+  destroyed() {},
   methods: {
-    showTipBoxHandle (val) { },
-    clickSwitch (val) {
+    showTipBoxHandle(val) {},
+    clickSwitch(val) {
       this.inputVal = val;
       this.inputV = null;
       this.isShowRIght = !this.isShowRIght;
     },
-    cgLang () {
+    cgLang() {
       let a;
       if (localStorage.getItem("language") == "en" || i18n.locale == "en") {
         a = "zh";

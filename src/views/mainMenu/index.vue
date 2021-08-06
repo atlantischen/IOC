@@ -37,7 +37,7 @@ export default {
   components: { AlarmAck, AllAlert },
   data () {
     return {
-      isShow: false,
+      isShow: true,
       deviceShow: false,
       fade: true,
       showAlarmAck: false,

@@ -49,7 +49,7 @@
                   class="x_left"
                   v-for="(item, i) in slist"
                   :key="i"
-                  @click="searchOneItem(item)"
+                  @click="searchOneItem(i)"
                 >
                   <div
                     class="s_img"
@@ -334,11 +334,10 @@ export default {
       }
     },
     searchOneItem(val) {
-      console.log(val);
       this.$SendMessageToUnity("ShowLocationPin", {
-        Serial: 0,
+        Serial: val,
       });
-      console.log("ShowLocationPin--商家、企业------------");
+      console.log("ShowLocationPin--商家、企业------------",val);
     },
     zhuizongFun(val) {
       console.log(val);
