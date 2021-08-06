@@ -46,6 +46,14 @@ export default {
     },
     // 人行态势
     pedestrianPostureFun(val) {
+      if (this.title == "服务办理总数") {
+        let _l = this.datas.xData.length;
+        this.datas.datas[0] = [];
+        for (let i = 0; i < _l; i++) {
+          this.datas.datas[0].push(this.$randomNumer(400, 700));
+        }
+        this.datas.leftTip.value = this.$arrAdd(this.datas.datas[0]);
+      }
       let { names, xData, datas, smooth, unit, rightTip, leftTip } = val;
       var allD = [],
         color = ["#97c8ff", "#ffdd8d"],

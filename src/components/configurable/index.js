@@ -7,6 +7,7 @@ import FavorablePolicy from './favorablePolicy.vue'
 import CurrentTrends from './currentTrends.vue'
 import FocusIndustry from './focusIndustry.vue'
 import CompaniesList from './companiesList.vue'
+import CompaniesList2 from './companiesList2.vue'
 import EnterprisesSettled from './enterprisesSettled.vue'
 import InvestmentSituation from './investmentSituation.vue'
 import LeaseSummary from './leaseSummary.vue'
@@ -43,6 +44,7 @@ const configurable = {
   CurrentTrends, // 前沿动态
   FocusIndustry, // (聚焦产业)
   CompaniesList, // 企业列表
+  CompaniesList2, // 企业列表
   EnterprisesSettled, // 待入驻企业
   InvestmentSituation, // 招商情况
   LeaseSummary, // 租赁概况

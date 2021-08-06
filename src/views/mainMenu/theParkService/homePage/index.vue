@@ -225,17 +225,7 @@ export default {
     };
   },
   components: {},
-  created() {
-    this.leftInfo[1].datas.leftTip.value = this.$arrAdd(
-      this.leftInfo[1].datas.datas[0]
-    );
-    let _l = this.rightInfo[0].datas.xData.length;
-    let _d = (this.rightInfo[0].datas.datas[0] = this.rightInfo[0].datas.datas[0].slice(
-      0,
-      _l
-    ));
-    this.rightInfo[0].datas.leftTip.value = this.$arrAdd(_d);
-  },
+  created() {},
   mounted() {},
   methods: {},
 };

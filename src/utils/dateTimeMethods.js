@@ -147,7 +147,7 @@ var getYearMonth = function getYearMonth(year) {
   var _y = Number(moment(new Date()).format('YYYY')), arr = [],
     _m = Number(moment(new Date()).format('MM'))
   if (year < _y) {
-    for (let i = 13; i > 0; i--) {
+    for (let i = 12; i > 0; i--) {
       arr.push({
         label: i + "月",
         value: i,

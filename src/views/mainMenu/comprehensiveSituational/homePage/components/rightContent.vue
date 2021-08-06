@@ -4,9 +4,7 @@
   <div class="rightContent">
     <LeftRight :_show="showLeftRight">
       <template #rPage>
-        <div
-          class="leftSearch"
-        >
+        <div class="leftSearch">
           <i class="iconfont icon-fanhui" @click="back"></i>
           <div class="theSearchPath y_c">
             <el-upload
@@ -122,7 +120,10 @@
           </el-table-column>
           <el-table-column prop="" label="操作">
             <template #default="scope">
-              <button class="bt_df zhuizong" @click="zhuizongFun(scope.row)">
+              <button
+                class="bt_df zhuizong"
+                @click="zhuizongFun(scope.row, scope.$index)"
+              >
                 追踪
               </button>
             </template>
@@ -337,12 +338,12 @@ export default {
       this.$SendMessageToUnity("ShowLocationPin", {
         Serial: val,
       });
-      console.log("ShowLocationPin--商家、企业------------",val);
+      console.log("ShowLocationPin--商家、企业------------", val);
     },
-    zhuizongFun(val) {
-      console.log(val);
+    zhuizongFun(val, i) {
+      console.log(this.currentPage > 1 ? (this.currentPage - 1) * 10 + i : i);
       this.$SendMessageToUnity("ShowLocationPin", {
-        Serial: 0,
+        Serial: this.currentPage > 1 ? (this.currentPage - 1) * 10 + i : i,
       });
       console.log("ShowLocationPin-----跟踪------------");
     },

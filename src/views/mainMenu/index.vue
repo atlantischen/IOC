@@ -32,7 +32,7 @@ export default {
   components: { AlarmAck, AllAlert },
   data() {
     return {
-      isShow: true,
+      isShow: false,
       showAlarmAck: false,
       showAllAlert: false,
       showEscHandler: false,

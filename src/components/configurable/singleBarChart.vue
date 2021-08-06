@@ -44,7 +44,9 @@ export default {
   data() {
     return {
       ...this._data,
-      momthsList: this.$getYearMonth(this._data.datas.yearsList[0].value),
+      momthsList: this._data.datas.yearsList
+        ? this.$getYearMonth(this._data.datas.yearsList[0].value)
+        : null,
       ids: this.$uuid(),
     };
   },
@@ -62,6 +64,16 @@ export default {
       this.momthsList = this.$getYearMonth(val);
     },
     singleBarChartFun(val) {
+      if(this.title == '热门服务TOP5'){
+        this.datas.datas[0] = [
+          this.$randomNumer(250, 280),
+          this.$randomNumer(150, 200),
+          this.$randomNumer(100, 150),
+          this.$randomNumer(50, 100),
+          this.$randomNumer(0, 50),
+        ];
+        this.datas.leftTip.value = this.$arrAdd(this.datas.datas[0]);
+      }
       let { xAxisD, datas, units, names, leftTip } = val;
       var allD = [],
         showLb = {
