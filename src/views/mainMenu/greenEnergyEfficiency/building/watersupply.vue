@@ -35,7 +35,7 @@
     <div class="KWH">
       <div class="tittle">用电量统计</div>
       <div class="btn">
-        <ul>
+        <!-- <ul>
           <li :class="{ active: activeIndex === 1 }" @click="changeBtn(1)">
             近7天
           </li>
@@ -45,7 +45,7 @@
           <li :class="{ active: activeIndex === 3 }" @click="changeBtn(3)">
             近3年
           </li>
-        </ul>
+        </ul> -->
       </div>
       <div id="ElectricityStatistics" ref="ElectricityStatistics"></div>
 
@@ -397,8 +397,8 @@ export default {
   },
   mounted(){
     this.ElectricityStatistics(
-              ["7.24", "7.25", "7.26", "7.27", "7.28", "7.29", "7.30"],
-      [700, 1000, 1300, 1800, 2000, 2300, 1300,],
+       this.$fun_date(),
+      [2019, 2323, 2436, 2536, 2831, 2912, 3122,],
       {
         name: "kw·h",
         company:'日',

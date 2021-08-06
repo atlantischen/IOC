@@ -122,8 +122,19 @@ export default {
             padding: null,
             smooth: true,
             unit: ["日期", "人"],
-            xData: ["4.13", "4.14", "4.15", "4.16", "4.17", "4.18", "4.19"],
-            datas: [[300, 390, 300, 210, 350, 450, 320]],
+            // xData: ["4.13", "4.14", "4.15", "4.16", "4.17", "4.18", "4.19"],
+            xData: this.$funDateArr(-7),
+            datas: [
+              [
+                this.$randomNumer(100,300),
+                this.$randomNumer(100,300),
+                this.$randomNumer(100,300),
+                this.$randomNumer(100,300),
+                this.$randomNumer(100,300),
+                this.$randomNumer(100,300),
+                this.$randomNumer(100,300),
+              ],
+            ],
           },
         },
         {

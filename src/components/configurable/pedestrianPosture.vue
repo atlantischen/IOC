@@ -239,7 +239,7 @@ export default {
             // padding: [15, 0, 0, unit[0] ? -30 : leftTip ? -10 : 0],
             rotate: -30,
             // interval: "auto",
-            margin: xData[0].length <= 3 ? 15 : 30,
+            margin: xData[0].length <= 3 ? 15 : 35,
             textStyle: {
               color: "#fff",
               align: "center",
@@ -252,7 +252,7 @@ export default {
             nameTextStyle: {
               padding: [5, 0, 0, -30],
             },
-            splitNumber: 6,
+            splitNumber: 5,
             axisTick: {
               show: false,
             },

@@ -1,7 +1,7 @@
 <template>
   <IOCLeft>
     <div class="cold_row_t">
-      <div class="tittle" >今日一览</div>
+      <div class="tittle">今日一览</div>
       <div class="TodayToSee">
         <div class="TodayToSee_data1 flex">
           <span class="font_text">21.26</span>
@@ -13,20 +13,22 @@
         </div>
       </div>
       <ul class="list">
-        <li v-for="(item,index) in percentageList" :key="index">
-          <span>{{item.desc}}</span>
-          <span>{{item.val}}</span>
+        <li v-for="(item, index) in percentageList" :key="index">
+          <span>{{ item.desc }}</span>
+          <span>{{ item.val }}</span>
         </li>
       </ul>
     </div>
     <div class="cold_row_b">
       <div class="tittle">今日告警</div>
       <ul class="warning scroll">
-        <li v-for="(item,index) in warningList" :key="index">
-          <div class="tips" :class="item.status===0?'_red':'_yellow'">严重</div>
+        <li v-for="(item, index) in warningList" :key="index">
+          <div class="tips" :class="item.status === 0 ? '_red' : '_yellow'">
+            严重
+          </div>
           <div class="warning_m">
-            <span>{{item.time}}</span>
-            <span>{{item.title}}</span>
+            <span>{{ item.time }}</span>
+            <span>{{ item.title }}</span>
           </div>
           <div class="warning_r">待处理</div>
         </li>
@@ -41,7 +43,7 @@
     <div class="KWH">
       <div class="tittle">用电量统计</div>
       <div class="btn">
-        <ul>
+        <!-- <ul>
           <li :class="{ active: activeIndex === 1 }" @click="changeBtn(1)">
             近7天
           </li>
@@ -51,18 +53,22 @@
           <li :class="{ active: activeIndex === 3 }" @click="changeBtn(3)">
             近3年
           </li>
-        </ul>
+        </ul> -->
         <div id="ElectricityStatistics" ref="ElectricityStatistics"></div>
       </div>
     </div>
     <div class="new_air">
       <div class="tittle">冷源监控</div>
       <ul class="scroll">
-        <li v-for="(item,index) in monitorList" :key="index" @click="lookVideo(`${++index}号客梯`)">
-        <Vloading v-show="showIfame" />
+        <li
+          v-for="(item, index) in monitorList"
+          :key="index"
+          @click="lookVideo(`${++index}号客梯`)"
+        >
+          <!-- <Vloading v-show="showIfame" /> -->
 
-          <!-- <Player  :monitorList="monitorList" ></Player> -->
-         <iframe
+          <Player :monitorList="monitorList"></Player>
+          <!-- <iframe
           v-show="!showIfame"
           scrolling="no"
           v-if="item.url"
@@ -74,155 +80,148 @@
           :src="item.url + '&protocol=FLV&iframe=yes'"
           allowfullscreen
           allow="autoplay; fullscreen"
-        ></iframe>      
+        ></iframe>       -->
           <!-- <Vloading v-show="item.url" :text="'无信号'" /> -->
-
         </li>
       </ul>
     </div>
   </IOCRight>
   <LookVideo :Visible="Visible" :flv_url="flv_url" @off="openCloseDialog" />
-
 </template>
 
 <script>
 import * as echarts from "echarts";
 
 export default {
-  data () {
+  data() {
     return {
       showIfame: true,
       Visible: false,
-      flv_url:'',
-      dialogTitle:'',
+      flv_url: "",
+      dialogTitle: "",
       activeIndex: 1,
-      percentageList:[
+      percentageList: [
         {
-          desc:'空调足迹COP平均值',
-          val:'6.0'
+          desc: "空调足迹COP平均值",
+          val: "6.0",
         },
-         {
-          desc:'平均节能率',
-          val:'10%'
+        {
+          desc: "平均节能率",
+          val: "10%",
         },
-         {
-          desc:'能耗费用(元)',
-          val:'786'
-        }
-        
+        {
+          desc: "能耗费用(元)",
+          val: "786",
+        },
       ],
-      warningList:[
+      warningList: [
         {
-          status:0,
-          time:'10:00',
-          title:'1#冷却塔_供水温度低于下限值'
+          status: 0,
+          time: "10:00",
+          title: "1#冷却塔_供水温度低于下限值",
         },
         {
-          status:1,
-          time:'11:09',
-          title:'1#冷却水泵_发生故障'
-        }
-        ,
+          status: 1,
+          time: "11:09",
+          title: "1#冷却水泵_发生故障",
+        },
         {
-          status:0,
-          time:'15:06',
-          title:'2#冷却泵_发生故障'
-        }
-        ,
+          status: 0,
+          time: "15:06",
+          title: "2#冷却泵_发生故障",
+        },
         {
-          status:0,
-          time:'16:13',
-          title:'3#冷冻泵_供水温度低于下限值'
-        }
-        ,
+          status: 0,
+          time: "16:13",
+          title: "3#冷冻泵_供水温度低于下限值",
+        },
         {
-          status:0,
-          time:'15:55',
-          title:'4#冷却水泵_温度异常'
-        }
-        ,
+          status: 0,
+          time: "15:55",
+          title: "4#冷却水泵_温度异常",
+        },
         {
-          status:1,
-          time:'19:05',
-          title:'2#冷却塔_供水温度低于下限值'
-        }
+          status: 1,
+          time: "19:05",
+          title: "2#冷却塔_供水温度低于下限值",
+        },
       ],
-     monitorList:[
+      monitorList: [
         {
-          local: '16楼C区铭筑',
-          url: 'http://47.119.172.151:10810/play.html?device=LiveNVR001&channel=1&protocol=WS_FLV'
+          local: "16楼C区铭筑",
+          id: 1,
+          url: "ws://10.10.7.27:10800/ws/flv/hls/stream_1.flv?token=EpVT95Gng",
         },
-        {
-          local: '16层C区女厕',
-          url: 'http://47.119.172.151:10810/play.html?device=LiveNVR001&channel=2&protocol=WS_FLV',
-        },
-        {
-          local: '16楼前台',
-          url: 'http://47.119.172.151:10810/play.html?device=LiveNVR001&channel=3&protocol=WS_FLV',
-        },
-        {
-          local: '16楼A区铭筑男厕',
-          url: 'http://47.119.172.151:10810/play.html?device=LiveNVR001&channel=4&protocol=WS_FLV',
-        },
-        {
-          local: '16楼A区会议室',
-          url: 'http://47.119.172.151:10810/play.html?device=LiveNVR001&channel=5&protocol=WS_FLV',
-        },
-        {
-          local: '14楼A区铭筑',
-          url: 'http://47.119.172.151:10810/play.html?device=LiveNVR001&channel=6&protocol=WS_FLV',
-        },
-      ] 
+        // {
+        //   local: '16层C区女厕',
+        //   url: 'http://47.119.172.151:10810/play.html?device=LiveNVR001&channel=2&protocol=WS_FLV',
+        // },
+        // {
+        //   local: '16楼前台',
+        //   url: 'http://47.119.172.151:10810/play.html?device=LiveNVR001&channel=3&protocol=WS_FLV',
+        // },
+        // {
+        //   local: '16楼A区铭筑男厕',
+        //   url: 'http://47.119.172.151:10810/play.html?device=LiveNVR001&channel=4&protocol=WS_FLV',
+        // },
+        // {
+        //   local: '16楼A区会议室',
+        //   url: 'http://47.119.172.151:10810/play.html?device=LiveNVR001&channel=5&protocol=WS_FLV',
+        // },
+        // {
+        //   local: '14楼A区铭筑',
+        //   url: 'http://47.119.172.151:10810/play.html?device=LiveNVR001&channel=6&protocol=WS_FLV',
+        // },
+      ],
     };
   },
   methods: {
-    
-    changeBtn (val) {
-      console.log(val);
-      this.activeIndex = val;
-      if (val == 1) {
-        this.ElectricityStatistics(
-          ["7.24", "7.25", "7.26", "7.27", "7.28", "7.29", "7.30"],
-      [2000, 3300, 3300, 4300, 3000, 3001, 4000],
-          {
-            name: "kw·h",
-            company:'日',
-            splitNumber: 3,
-            min: 0,
-            max: 4800,
-            interval: 1200,
-          }
-        );
-      } else if (val == 2) {
-        this.ElectricityStatistics(
-          ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"],
-          [3, 4, 4, 3, 2, 1, 2, 5, 4, 3, 6, 2],
-          {
-            name: "万kw·h",
-            company:'月',
-            splitNumber: 4,
-            min: 0,
-            max: 6.0,
-            interval: 1.5,
-          }
-        );
-      } else {
-        this.ElectricityStatistics(
-          ["2019年", "2020年", "2021年"],
-          [23, 41, 13],
-          {
-            name: "万kw·h",
-            company:'年',
+    // changeBtn (val) {
+    //   console.log(val);
+    //   this.activeIndex = val;
+    //   if (val == 1) {
+    //     this.ElectricityStatistics(
+    //       ["7.24", "7.25", "7.26", "7.27", "7.28", "7.29", "7.30"],
+    //   [2000, 3300, 3300, 4300, 3000, 3001, 4000],
+    //       {
+    //         name: "kw·h",
+    //         company:'日',
+    //         splitNumber: 3,
+    //         min: 0,
+    //         max: 4800,
+    //         interval: 1200,
+    //       }
+    //     );
+    //   } else if (val == 2) {
+    //     this.ElectricityStatistics(
+    //       ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"],
+    //       [3, 4, 4, 3, 2, 1, 2, 5, 4, 3, 6, 2],
+    //       {
+    //         name: "万kw·h",
+    //         company:'月',
+    //         splitNumber: 4,
+    //         min: 0,
+    //         max: 6.0,
+    //         interval: 1.5,
+    //       }
+    //     );
+    //   } else {
+    //     this.ElectricityStatistics(
+    //       ["2019年", "2020年", "2021年"],
+    //       [23, 41, 13],
+    //       {
+    //         name: "万kw·h",
+    //         company:'年',
 
-            splitNumber: 4,
-            min: 0,
-            max: 60,
-            interval: 20,
-          }
-        );
-      }
-    },
-    RealTotalPower () {
+    //         splitNumber: 4,
+    //         min: 0,
+    //         max: 60,
+    //         interval: 20,
+    //       }
+    //     );
+    //   }
+    // },
+    RealTotalPower(data) {
       var y = [0, 25, 50, 75];
       var dom = this.$refs.RealTotalPower;
       var option = {
@@ -236,7 +235,7 @@ export default {
             color: "#fff",
           },
         },
-      tooltip: {
+        tooltip: {
           // show: false,
           // trigger: 'item',
           trigger: "axis",
@@ -255,7 +254,6 @@ export default {
         },
         xAxis: {
           type: "category",
-          // name: '时间',
           axisTick: {
             show: false,
           },
@@ -267,25 +265,20 @@ export default {
             },
           },
           axisLabel: {
+            interval: 0,
             fontSize: 11,
-            rotate: 40,
             textStyle: {
               color: "#fff",
             },
+            rotate: 40,
+            formatter: function(value, index) {
+              if (index % 2) {
+                return value;
+              }
+              return "";
+            },
           },
-          data: [
-            "00:00",
-            "02:00",
-            "04:00",
-            "06:00",
-            "08:00",
-            "10:00",
-            "12:00",
-            "14:00",
-            "16:00",
-            "18:00",
-            "20:00",
-          ],
+          data: data,
         },
         yAxis: {
           name: "kw",
@@ -301,13 +294,13 @@ export default {
             show: false,
           },
 
-           splitLine: {
-              lineStyle: {
-                width: 0.5,
-                type: "dashed",
-                color: "rgb(255,255,255,1)",
-              },
+          splitLine: {
+            lineStyle: {
+              width: 0.5,
+              type: "dashed",
+              color: "rgb(255,255,255,1)",
             },
+          },
 
           axisLabel: {
             interval: (index, value) => {
@@ -330,30 +323,62 @@ export default {
         },
         series: [
           {
-            name: "实时访客",
+            name: "功率",
             data: [
               {
-                value: 20,
+                value: 2,
                 symbol: "none",
               },
               {
-                value: 45,
+                value: 5,
                 symbol: "none",
               },
               {
-                value: 30,
+                value: 8,
                 symbol: "none",
               },
               {
-                value: 60,
+                value: 11,
                 symbol: "none",
               },
               {
-                value: 45,
+                value: 13,
                 symbol: "none",
               },
               {
-                value: 60,
+                value: 15,
+                symbol: "none",
+              },
+              {
+                value: 16,
+                symbol: "none",
+              },
+              {
+                value: 21,
+                symbol: "none",
+              },
+              {
+                value: 34,
+                symbol: "none",
+              },
+              {
+                value: 39,
+                symbol: "none",
+              },
+              {
+                value: 42,
+                symbol: "none",
+              },
+              {
+                value: 48,
+                symbol: "none",
+              },
+              {
+                value: 50,
+                symbol: "none",
+              },
+              {
+                value: 52,
                 symbol: "none",
               },
               {
@@ -365,7 +390,19 @@ export default {
                 symbol: "none",
               },
               {
-                value: 75,
+                value: 61,
+                symbol: "none",
+              },
+              {
+                value: 63,
+                symbol: "none",
+              },
+              {
+                value: 65,
+                symbol: "none",
+              },
+              {
+                value: 67,
                 symbol: "none",
               },
               {
@@ -373,7 +410,15 @@ export default {
                 symbol: "none",
               },
               {
-                value: 52,
+                value: 40,
+                symbol: "none",
+
+                // itemStyle: {
+                //   color: "#FFB400",
+                // },
+              },
+              {
+                value: 22,
                 symbol: "none",
 
                 // itemStyle: {
@@ -407,7 +452,7 @@ export default {
               distance: -90,
               color: "#fff",
               fontSize: "12",
-              formatter: function (_) {
+              formatter: function(_) {
                 return "实时访客: " + _.value;
               },
             },
@@ -430,8 +475,8 @@ export default {
       };
       this.$redomEchart(dom, option);
     },
-    ElectricityStatistics (data, data2, yData) {
-      let { name,company, splitNumber, min, max, interval } = yData;
+    ElectricityStatistics(data, data2, yData) {
+      let { name, company, splitNumber, min, max, interval } = yData;
       // var dom = "ElectricityStatistics";
       var dom = this.$refs.ElectricityStatistics;
       var option = {
@@ -474,8 +519,8 @@ export default {
           type: "category",
           name: company,
           nameTextStyle: {
-            padding: [20, 0, 0, -10]    // 四个数字分别为上右下左与原位置距离
-        },
+            padding: [20, 0, 0, -10], // 四个数字分别为上右下左与原位置距离
+          },
           // nameTextStyle: {
           //   rich: {
           //     a: {
@@ -530,16 +575,13 @@ export default {
               showMinLabel: false,
               textStyle: {
                 color: "#fff",
-            },
-            formatter:function (value, index) {   
-              if(company=='月'){
-					    	 return value.toFixed(1);      
-              }
-               return value
-						}
-
-          
-
+              },
+              formatter: function(value, index) {
+                if (company == "月") {
+                  return value.toFixed(1);
+                }
+                return value;
+              },
             },
           },
           {
@@ -573,7 +615,6 @@ export default {
             symbol: "none",
             itemStyle: {
               normal: {
-                
                 color: new echarts.graphic.LinearGradient(0, 0, 1, 0, [
                   {
                     offset: 0,
@@ -589,7 +630,7 @@ export default {
                 // },
               },
             },
-             areaStyle: {
+            areaStyle: {
               normal: {
                 color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
                   {
@@ -610,63 +651,55 @@ export default {
       };
       this.$redomEchart(dom, option);
     },
-    lookVideo (val) {
-      console.log(val);
-      this.flv_url=val
-      this.openCloseDialog(true)
-
+    lookVideo(val) {
+      this.flv_url = val;
+      this.openCloseDialog(true);
     },
-    openCloseDialog (val) {
-      this.Visible = val
+    openCloseDialog(val) {
+      this.Visible = val;
     },
   },
-  mounted () {
-    let that=this
-    this.RealTotalPower();
+  mounted() {
+    let that = this;
+    this.RealTotalPower(this.$getNowTime());
     this.ElectricityStatistics(
-      ["7.24", "7.25", "7.26", "7.27", "7.28", "7.29", "7.30"],
-      [2000, 3300, 3300, 4300, 3000, 3001, 4000,],
+      this.$fun_date(),
+      [2000, 3300, 3300, 4300, 3000, 3001, 4000],
       {
         name: "kw·h",
-        company:'日',
+        company: "日",
         splitNumber: 3,
         min: 0,
         max: 4800,
         interval: 1200,
       }
     );
-     this.$afterIframeOnload('iframeVideo0', () => {
-      this.showIfame = false 
-    })
-    window.onload = function(){
+    //  this.$afterIframeOnload('iframeVideo0', () => {
+    //   this.showIfame = false
+    // })
+    // window.onload = function() {
+    //   that.$nextTick(() => {
+    //     //  const iframe = window.frames['iFrame']
+    //     // const handleLoad = () => {
+    //     //   setTimeout(() => {
+    //     //     const Do = (iframe.contentWindow || iframe.contentDocument)
+    //     //     console.log(Do,'do');
+    //     //     Do.document.document.getElementById('ascrail2000').style.display = 'none'
+    //     //   }, 500)
+    //     // }
+    //     // iframe.addEventListener('load', handleLoad, true)
+    //     var _iframe = document.getElementById("iframe");
+    //     var a = this.$refs.iframeVideo0;
+    //     //  _iframe.style.overflow= "hidden";
+    //     console.log(_iframe, a, "_iframe");
+    //   });
 
-      that.$nextTick(()=>{
-        //  const iframe = window.frames['iFrame']
-        // const handleLoad = () => {
-        //   setTimeout(() => {
-        //     const Do = (iframe.contentWindow || iframe.contentDocument)
-        //     console.log(Do,'do');
-        //     Do.document.document.getElementById('ascrail2000').style.display = 'none'
-        //   }, 500)
-        // }
-        // iframe.addEventListener('load', handleLoad, true)
-        var _iframe = document.getElementById('iframe')
-         var a =  this.$refs.iframeVideo0
-        //  _iframe.style.overflow= "hidden";
-        console.log(_iframe,a,'_iframe');
+    //   // var _iframe = document.getElementById('iframe').contentWindow
 
-
-
-      })
-      
-    // var _iframe = document.getElementById('iframe').contentWindow
-    
-    // console.log(_iframe,'_iframe');
-    // _iframe.style.display= "none";  //修改样式
-
-  }
-  }
-    
+    //   // console.log(_iframe,'_iframe');
+    //   // _iframe.style.display= "none";  //修改样式
+    // };
+  },
 };
 </script>
 
@@ -685,7 +718,6 @@ export default {
 }
 
 .cold_row_t {
-
   .flex {
     display: flex;
     flex-direction: column;
@@ -750,9 +782,9 @@ export default {
         height: 0.325rem /* 26/80 */;
         line-height: 0.325rem /* 26/80 */;
         text-align: center;
-        border-radius: .15rem /* 12/80 */;
+        border-radius: 0.15rem /* 12/80 */;
       }
-     
+
       .warning_m {
         display: flex;
         flex-direction: column;
@@ -774,7 +806,6 @@ export default {
   margin-top: 0.125rem /* 10/80 */;
 }
 .KWH {
- 
 }
 .new_air {
   margin-top: 0.4375rem /* 35/80 */ /* 45/80 */ /* 15/80 */;
@@ -787,8 +818,8 @@ export default {
     margin-top: 0.3125rem /* 25/80 */;
 
     & > li {
-         width: 49%/* 174/80 *//* 112/80 */;
-          height: 1.4rem /* 112/80 */;
+      width: 49% /* 174/80 */ /* 112/80 */;
+      height: 1.4rem /* 112/80 */;
       // height: 1.4rem /* 112/80 */;
       // background-image: url('../../../../assets/img/monitor/snap (2).png');
       // background-repeat: no-repeat;
@@ -797,10 +828,9 @@ export default {
       //   width: 100%;
       //   height: 100%;
       // }
-      #iframe{
-          width: 100% /* 174/80 *//* 112/80 */;
-          height: 1.4rem !important /* 112/80 *//* 112/80 */;
-   
+      #iframe {
+        width: 100% /* 174/80 */ /* 112/80 */;
+        height: 1.4rem !important /* 112/80 *//* 112/80 */;
       }
       // #iframe::-webkit-scrollbar {
       //   display: none !important;

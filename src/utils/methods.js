@@ -1,5 +1,6 @@
 import dataM from './dataMethods' // 处理数据方法综合
 import dateTimeM from './dateTimeMethods' // 处理日期时间方法综合
+const moment = require('moment')
 
 import {
   EleResize
@@ -154,6 +155,8 @@ var afterIframeOnload = function afterIframeOnload(dom, fun) {
     }
   }
 }
+
+
 const fun = {
   ...dataM,
   ...dateTimeM,
@@ -162,7 +165,7 @@ const fun = {
   ScrolAnimationTop,
   ScrolLeftARight,
   handleFullScreen,
-  afterIframeOnload,
+  afterIframeOnload
 }
 export default fun
 

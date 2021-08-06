@@ -1,9 +1,9 @@
 <template>
   <!-- -- -->
   <div class="homePage">
-    <IOCLeft>
+    <IOCLeft :fade="fade">
       <div class="park">
-        <div class="tittle">车位情况</div>
+        <div class="tittle" @click="showClick">车位情况</div>
         <ul>
           <li v-for="(item, index) in parkList" :key="index">
             <div class="floor" @click="handleClick">{{ item.floor }}</div>
@@ -32,23 +32,27 @@
         <div class="tittle">停车时长统计</div>
         <div class="select">
           <DropDown :list="yearsList" name="label" @_cg="changePSYears" />
-          <DropDown :list="flag?momthsList:nowMomthsList" name="label" @_cg="changePSMonths" />
+          <DropDown
+            :list="flag ? momthsList : nowMomthsList"
+            name="label"
+            @_cg="changePSMonths"
+          />
         </div>
         <!-- <div class="count">停车数量合计:<NumCounter class="num" :value="total"></NumCounter>辆</div> -->
 
         <div id="park_time" ref="park_time"></div>
       </div>
     </IOCLeft>
-    <Tips :list="list"></Tips>
-    <div class="search_box">
+    <Tips :fade="fade"  :list="list"></Tips>
+    <div class="search_box ioc_animated fadeInDownTop" :style="posationTop">
       <LicensePlateSearch
-        class="ioc_animated fadeInDownTop"
         @search="search"
         :searchData="searchData"
+        :posationTop="posationTop"
       ></LicensePlateSearch>
     </div>
 
-    <IOCRight>
+    <IOCRight :fade="fade">
       <div class="revenue_total">
         <div class="tittle">营收总览</div>
         <div class="select">
@@ -66,8 +70,16 @@
         <div class="tittle">车辆进出场走势统计</div>
         <div class="select">
           <DropDown :list="yearsList" name="label" @_cg="carChangeYears" />
-          <DropDown :list="momthsList" name="label" @_cg="carChangeMomth" />
-          <DropDown :list="dateList" name="label" @_cg="carChangeDate" />
+          <DropDown
+            :list="flag ? momthsList : nowMomthsList"
+            name="label"
+            @_cg="carChangeMomth"
+          />
+          <DropDown
+            :list="!flag && !MonthFlag ? nowDateList : dateList"
+            name="label"
+            @_cg="carChangeDate"
+          />
         </div>
         <div id="car_trend" ref="car_trend"></div>
       </div>
@@ -81,7 +93,9 @@ export default {
   name: "homePage",
   data() {
     return {
-      flag:true,
+      flag: false,
+      fade:false,
+      MonthFlag: false,
       total: null,
       list: [
         {
@@ -181,7 +195,8 @@ export default {
           value: 1,
         },
       ],
-      nowMomthsList:this.$monthRangeArrList(),
+      nowMomthsList: this.$monthRangeArrList(),
+      nowDateList: this.$getNowDayList(),
       dateList: [
         {
           label: "31日",
@@ -313,6 +328,33 @@ export default {
         letter: "A",
         number: "8720B",
       },
+      timeArr: [
+        "00:00",
+        "01:00",
+        "02:00",
+        "03:00",
+        "04:00",
+        "05:00",
+        "06:00",
+        "07:00",
+        "08:00",
+        "09:00",
+        "10:00",
+        "11:00",
+        "12:00",
+        "13:00",
+        "14:00",
+        "15:00",
+        "16:00",
+        "17:00",
+        "18:00",
+        "19:00",
+        "20:00",
+        "21:00",
+        "22:00",
+        "23:00",
+      ],
+      posationTop:''
     };
   },
   components: {},
@@ -346,7 +388,7 @@ export default {
         case 8:
           this.AssetsAndEquipment({
             max: 80,
-            data: [25, 33, 54, 72, 74, 38, 21],
+            data: [5, 10, 22, 32, 44, 28, 15],
           });
           break;
         case 7:
@@ -399,21 +441,21 @@ export default {
             max: 70,
             data: [29, 43, 55, 65, 68, 54, 35],
           });
-          this.flag= false
+          this.flag = false;
           break;
         case 2020:
           this.AssetsAndEquipment({
             max: 80,
             data: [25, 38, 54, 70, 72, 44, 25],
           });
-          this.flag= true
+          this.flag = true;
           break;
         case 2019:
           this.AssetsAndEquipment({
             max: 90,
             data: [22, 33, 45, 78, 82, 53, 28],
           });
-          this.flag= true
+          this.flag = true;
           break;
         default:
           break;
@@ -424,43 +466,209 @@ export default {
         case 2021:
           this.revenueInit({
             max: 1000000,
-            Monthly: [320000, 435000, 530000, 340000, 456000, 560000, 540000],
+            Monthly: [220000, 335000, 430000, 340000, 456000, 560000, 540000],
             Temporary: [92000, 93200, 90100, 103400, 209000, 113000, 112000],
             month: this.$monthRangeArr(),
           });
-          this.flag=true
+          this.flag = true;
           break;
         case 2020:
-           this.revenueInit({
+          this.revenueInit({
             max: 1000000,
-            Monthly: [320000, 435000, 430000, 340000, 456000, 560000, 220000,120000, 280000, 130000, 140000, 356000],
-            Temporary:[62000, 73200, 70100, 73400, 109000, 113000, 112000,62000, 63200, 70100, 63400, 209000],
-            month:['1月','2月','3月','4月','5月','6月','7月','8月','9月','10月','11月','12月',],
+            Monthly: [
+              320000,
+              435000,
+              430000,
+              340000,
+              456000,
+              560000,
+              220000,
+              120000,
+              280000,
+              130000,
+              140000,
+              356000,
+            ],
+            Temporary: [
+              62000,
+              73200,
+              70100,
+              73400,
+              109000,
+              113000,
+              112000,
+              62000,
+              63200,
+              70100,
+              63400,
+              209000,
+            ],
+            month: [
+              "1月",
+              "2月",
+              "3月",
+              "4月",
+              "5月",
+              "6月",
+              "7月",
+              "8月",
+              "9月",
+              "10月",
+              "11月",
+              "12月",
+            ],
           });
           break;
         case 2019:
-            this.revenueInit({
+          this.revenueInit({
             max: 1000000,
-            Monthly:[220000, 335000, 430000, 340000, 256000, 360000, 220000,120000, 280000, 150000, 160000, 156000],
-            Temporary:[82000, 103200, 90100, 93400, 109000, 113000, 112000,82000, 73200, 70100, 93400, 169000],
-            month:['1月','2月','3月','4月','5月','6月','7月','8月','9月','10月','11月','12月',],
-
+            Monthly: [
+              220000,
+              335000,
+              430000,
+              340000,
+              256000,
+              360000,
+              220000,
+              120000,
+              280000,
+              150000,
+              160000,
+              156000,
+            ],
+            Temporary: [
+              82000,
+              103200,
+              90100,
+              93400,
+              109000,
+              113000,
+              112000,
+              82000,
+              73200,
+              70100,
+              93400,
+              169000,
+            ],
+            month: [
+              "1月",
+              "2月",
+              "3月",
+              "4月",
+              "5月",
+              "6月",
+              "7月",
+              "8月",
+              "9月",
+              "10月",
+              "11月",
+              "12月",
+            ],
           });
           break;
         default:
           break;
       }
     },
+    carChangeYears(val) {
+      switch (val) {
+        case 2021:
+          this.trendInit(this.timeArr,[102,89,20,1,5,5,80,100,120,220,330,400,550,650,800,905,1020,1300,1600,1680,1700,1500,1380,260],[112,90,56,6,12,23,120,110,150,250,430,490,589,670,810,965,1120,1400,1600,1680,1750,1563,1206,236]);
+          this.flag = false;
+          break;
+        case 2020:
+           this.trendInit(this.timeArr,[102,89,20,1,5,5,80,100,120,220,330,400,550,650,800,905,1020,1300,1600,1680,1700,1500,1380,260],[112,90,56,6,12,23,120,110,150,250,430,490,589,670,810,965,1120,1400,1600,1680,1750,1563,1206,236]);
+          this.flag = true;
+          break;
+        case 2019:
+          this.trendInit(this.timeArr,[102,89,20,1,5,5,80,100,120,220,330,400,550,650,800,905,1020,1300,1600,1680,1700,1500,1380,260],[112,90,56,6,12,23,120,110,150,250,430,490,589,670,810,965,1120,1400,1600,1680,1750,1563,1206,236]);
+          this.flag = true;
+          break;
+        default:
+          break;
+      }
+    },
+    carChangeMomth(val) {
+      switch (val) {
+        case 12:
+          this.trendInit(this.timeArr,[102,89,20,1,5,5,80,100,120,220,330,400,550,650,800,905,1020,1300,1600,1680,1700,1500,1380,260],[112,90,56,6,12,23,120,110,150,250,430,490,589,670,810,965,1120,1400,1600,1680,1750,1563,1206,236]);
+          this.MonthFlag = true;
+
+          break;
+        case 11:
+          this.trendInit(this.timeArr,[102,89,20,1,5,5,80,100,120,220,330,400,550,650,800,905,1020,1300,1600,1680,1700,1500,1380,260],[112,90,56,6,12,23,120,110,150,250,430,490,589,670,810,965,1120,1400,1600,1680,1750,1563,1206,236]);
+          this.MonthFlag = true;
+
+          break;
+        case 10:
+          this.trendInit(this.timeArr,[102,89,20,1,5,5,80,100,120,220,330,400,550,650,800,905,1020,1300,1600,1680,1700,1500,1380,260],[112,90,56,6,12,23,120,110,150,250,430,490,589,670,810,965,1120,1400,1600,1680,1750,1563,1206,236]);
+          this.MonthFlag = true;
+
+        case 9:
+          this.trendInit(this.timeArr,[102,89,20,1,5,5,80,100,120,220,330,400,550,650,800,905,1020,1300,1600,1680,1700,1500,1380,260],[112,90,56,6,12,23,120,110,150,250,430,490,589,670,810,965,1120,1400,1600,1680,1750,1563,1206,236]);
+          this.MonthFlag = true;
+
+          break;
+        case 8:
+          this.trendInit(this.timeArr,[102,89,20,1,5,5,80,100,120,220,330,400,550,650,800,905,1020,1300,1600,1680,1700,1500,1380,260],[112,90,56,6,12,23,120,110,150,250,430,490,589,670,810,965,1120,1400,1600,1680,1750,1563,1206,236]);
+          this.MonthFlag = false;
+
+          break;
+        case 7:
+           this.trendInit(this.timeArr,[102,89,20,1,5,5,80,100,120,220,330,400,550,650,800,905,1020,1300,1600,1680,1700,1500,1380,260],[112,90,56,6,12,23,120,110,150,250,430,490,589,670,810,965,1120,1400,1600,1680,1750,1563,1206,236]);
+          this.MonthFlag = true;
+
+        case 6:
+           this.trendInit(this.timeArr,[102,89,20,1,5,5,80,100,120,220,330,400,550,650,800,905,1020,1300,1600,1680,1700,1500,1380,260],[112,90,56,6,12,23,120,110,150,250,430,490,589,670,810,965,1120,1400,1600,1680,1750,1563,1206,236]);
+          this.MonthFlag = true;
+
+        case 5:
+          this.trendInit(this.timeArr,[102,89,20,1,5,5,80,100,120,220,330,400,550,650,800,905,1020,1300,1600,1680,1700,1500,1380,260],[112,90,56,6,12,23,120,110,150,250,430,490,589,670,810,965,1120,1400,1600,1680,1750,1563,1206,236]);
+          this.MonthFlag = true;
+
+          break;
+        case 4:
+          this.trendInit(this.timeArr,[102,89,20,1,5,5,80,100,120,220,330,400,550,650,800,905,1020,1300,1600,1680,1700,1500,1380,260],[112,90,56,6,12,23,120,110,150,250,430,490,589,670,810,965,1120,1400,1600,1680,1750,1563,1206,236]);
+          this.MonthFlag = true;
+
+          break;
+        case 3:
+         this.trendInit(this.timeArr,[102,89,20,1,5,5,80,100,120,220,330,400,550,650,800,905,1020,1300,1600,1680,1700,1500,1380,260],[112,90,56,6,12,23,120,110,150,250,430,490,589,670,810,965,1120,1400,1600,1680,1750,1563,1206,236]);
+          this.MonthFlag = true;
+
+        case 2:
+          this.trendInit(this.timeArr,[102,89,20,1,5,5,80,100,120,220,330,400,550,650,800,905,1020,1300,1600,1680,1700,1500,1380,260],[112,90,56,6,12,23,120,110,150,250,430,490,589,670,810,965,1120,1400,1600,1680,1750,1563,1206,236]);
+          this.MonthFlag = true;
+
+          break;
+        case 1:
+          this.trendInit(this.timeArr,[102,89,20,1,5,5,80,100,120,220,330,400,550,650,800,905,1020,1300,1600,1680,1700,1500,1380,260],[112,90,56,6,12,23,120,110,150,250,430,490,589,670,810,965,1120,1400,1600,1680,1750,1563,1206,236]);
+
+          this.MonthFlag = true;
+
+          break;
+        default:
+          break;
+      }
+    },
+    carChangeDate(val) {
+      console.log(this.flag,this.MonthFlag);
+      if (!this.flag && !this.MonthFlag && val === new Date().getDate()) {
+        this.trendInit(this.$getNowTime(),[102,89,20,1,5,5,80,100,120,220,330,400,550,650,800,905,1020,1300,1600,1680,1700,1500,1380,260],[112,90,56,6,12,23,120,110,150,250,430,490,589,670,810,965,1120,1400,1600,1680,1750,1563,1206,236]);
+      } else {
+        this.trendInit(this.timeArr,[102,89,20,1,5,5,80,100,120,220,330,400,550,650,800,905,1020,1300,1600,1680,1700,1500,1380,260],[112,90,56,6,12,23,120,110,150,250,430,490,589,670,810,965,1120,1400,1600,1680,1750,1563,1206,236]);
+      }
+    },
+    showClick(){
+      this.fade = true;
+      this.posationTop= "top:1.6rem"
+    },
+
     search(val) {
       let value = JSON.stringify(val);
       this.$router.push({ name: "SmartParking", params: { value: value } });
     },
-    postMessageToUnity(data) {},
 
-    handleClick() {
-      this.$SendMessageToUnity("gan", { wocao: true, fuckyou: "123" });
-      this.$SendMessageToUnity("gan2", {});
-    },
     AssetsAndEquipment(val) {
       const { max, data } = val;
       const total = data.reduce((x, y) => x + y, 0);
@@ -493,7 +701,7 @@ export default {
                 color: "#fff",
                 fontFamily: "BYfont",
                 fontSize: 20,
-                padding: [0, 0, 5, 5],
+                padding: [0, 5, 5, 5],
               },
               b: {
                 color: "#fff",
@@ -519,10 +727,10 @@ export default {
         },
         xAxis: [
           {
-            name: "辆",
-            nameTextStyle: {
-              padding: [0, 0, -30, -18],
-            },
+            // name: "辆",
+            // nameTextStyle: {
+            //   padding: [0, 0, -30, -18],
+            // },
             type: "category",
             data: [
               "<0.5h",
@@ -561,7 +769,7 @@ export default {
             max: max,
             splitNumber: 4,
             interval: 10,
-            name: "个",
+            name: "辆",
             nameTextStyle: {
               align: "right",
             },
@@ -631,35 +839,35 @@ export default {
     },
     revenueInit(val) {
       const { max, Monthly, Temporary, month } = val;
-      const total = [...Monthly, ...Temporary].reduce((x, y) => x + y, 0);
+      const  total= [...Monthly, ...Temporary].reduce((x, y) => x + y, 0);
       var dom = this.$refs["revenue_total"];
       var option = {
         title: {
-          text: "{a|停车场营收合计：}{b|" + total + "}{c|元}",
+          text: `{c|停车场营收合计:}{a|${total}}{b|元}`,
+          link: "",
+          target: null,
           left: "1%",
-          top: "-7",
-          subtextStyle: {
-            color: "#fff",
-          },
-          textStyle: {
+          top: "-8",
+          textAlign: "left",
+          itemGap: 6,
+         textStyle: {
             rich: {
-              a: {
+              c: {
                 fontSize: 14,
-                color: "#fff",
-                fontFamily: "Microsoft YaHei",
-                opacity: 0.7,
+                color: "rgb(255,255,255,1)",
                 padding: [0, 0, 10, 0],
               },
-              b: {
-                fontSize: 20,
-                color: "ffff",
-                fontFamily: "BYfont",
-                padding: [0, 0, 5, 0],
-              },
-              c: {
-                fontSize: 12,
+              a: {
                 color: "#fff",
-                padding: [0, 0, 10, -5],
+                fontFamily: "BYfont",
+                fontSize: 20,
+                padding: [0, 5, 5, 5],
+              },
+              b: {
+                color: "#fff",
+                padding: [0, 0, 10, 0],
+
+                fontSize: 12,
               },
             },
           },
@@ -820,16 +1028,10 @@ export default {
       };
       this.$redomEchart(dom, option);
     },
-    trendInit() {
+    trendInit(val,enterData,outData) {
       var dom = this.$refs["car_trend"];
+
       var option = {
-        grid: {
-          top: "60",
-          left: "30",
-          right: "0",
-          bottom: "30",
-          containLabel: true,
-        },
         tooltip: {
           backgroundColor: "rgba(0,0,0,0.8)",
           borderWidth: 1,
@@ -861,28 +1063,15 @@ export default {
         grid: {
           top: "70",
           left: "0",
-          x2: 0,
+          x2: 15,
           y2: 20,
           containLabel: true,
         },
 
         xAxis: [
           {
-            name: "",
             type: "category",
-            data: [
-              "00:00",
-              "01:00",
-              "02:00",
-              "03:00",
-              "04:00",
-              "05:00",
-              "06:00",
-              "07:00",
-              "08:00",
-              "09:00",
-              "10:00",
-            ],
+            data: val,
             axisLine: {
               lineStyle: {
                 width: 1,
@@ -903,7 +1092,12 @@ export default {
               interval: 0,
               rotate: -30,
               padding: [20, 30, 0, -10],
-              // align:'right',
+              formatter: function(value, index) {
+                if (index % 2) {
+                  return value;
+                }
+                return "";
+              },
             },
           },
         ],
@@ -945,7 +1139,7 @@ export default {
           {
             name: "进",
             symbol: "none",
-            data: [1, 7, 8, 9, 22, 15, 26, 30, 18, 13, 10],
+            data: enterData,
             type: "line",
             endLabel: {
               show: false,
@@ -995,7 +1189,7 @@ export default {
           {
             name: "出",
             symbol: "none",
-            data: [1, 26, 30, 32, 39, 28, 36, 34, 30, 35, 39],
+            data:outData,
             type: "line",
             symbolSize: 6,
             smooth: true,
@@ -1046,27 +1240,51 @@ export default {
       };
       this.$redomEchart(dom, option);
     },
-  },
-  created(){
-    // this.nowMomthsList=this.$monthRangeArrList()
-    console.log(this.$monthRangeArrList(),'this.$monthRangeArrList()');
 
-      
+  },
+  created() {
+    
+  },
+    computed: {
+    getUnityData () {
+      return this.$store.state.unitySendData;
+    },
+  },
+  watch:{
+    getUnityData(val){
+      try {
+       switch (val.action) {
+             case 'view_hide':
+              this.fade = true;
+               this.posationTop= "top:1.6rem"
+               break;
+             case 'view_show':
+              this.fade = false;
+              this.posationTop= " "
+               break;   
+             default:
+               break;
+           }
+      } catch (e) { }
+    }
   },
   mounted() {
     this.AssetsAndEquipment({
       max: 70,
-      data: [29, 43, 55, 65, 68, 54, 35],
+      data: [5, 10, 22, 32, 44, 28, 15],
     });
     this.revenueInit({
-      max: 1000000,
-      Monthly: [320000, 435000, 530000, 340000, 456000, 560000, 540000],
+            max: 1000000,
+            Monthly: [220000, 335000, 430000, 340000, 456000, 560000, 540000],
             Temporary: [92000, 93200, 90100, 103400, 209000, 113000, 112000],
-      month: this.$monthRangeArr(),
-    });
-    this.trendInit();
-    
-    
+            month: this.$monthRangeArr(),
+          });
+    this.trendInit(this.$getNowTime(),[102,89,20,1,5,5,80,100,120,220,330,400,550,650,800,905,1020,1300,1600,1680,1700,1500,1380,260],[112,90,56,6,12,23,120,110,150,250,430,490,589,670,810,965,1120,1400,1600,1680,1750,1563,1206,236]);
+  },
+   destroyed() {
+
+
+
   },
 };
 </script>
@@ -1137,10 +1355,11 @@ export default {
     }
   }
   .search_box {
-    position: absolute;
+   position: absolute;
     left: 50%;
     top: 2.6rem /* 208/80 */ /* 128/80 */;
-    // transform: translateX(-50%);
+
+
   }
 }
 </style>

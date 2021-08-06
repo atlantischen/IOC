@@ -31,20 +31,20 @@ export default {
       type: Object,
     },
   },
-  data () {
+  data() {
     return {
       ...this._data,
       ids: this.$uuid(),
     };
   },
-  created () { },
-  mounted () {
+  created() {},
+  mounted() {
     this.horizontalBarChartFun(this.datas);
   },
   methods: {
-    horizontalBarChartFun (val) {
-      var _data = val.data;
-      for (var i = 0; i < _data.length; i++) {
+    horizontalBarChartFun(val) {
+      var _datas = val.data;
+      for (var i = 0; i < _datas.length; i++) {
         var option = {
           xAxis: {
             show: false,
@@ -98,7 +98,7 @@ export default {
                 show: true,
                 position: "left",
                 offset: [120, -20],
-                formatter: _data[i].name + "{a| " + _data[i].value + " }",
+                formatter: _datas[i].name + "{a| " + _datas[i].value + " }",
                 textStyle: {
                   color: "rgb(255,255,255,.7)",
                   fontSize: 14,
@@ -129,7 +129,7 @@ export default {
                       ]),
                     },
                   },
-                  value: _data[i].value.indexOf('%') != -1 ? _data[i].value.split("%")[0] : _data[i].value,
+                  value: typeof _datas[i].value == 'string'?(_datas[i].value.indexOf("%") != -1? _datas[i].value.split("%")[0]: _datas[i].value):_datas[i].value,
                   z: 1,
                 },
               ],

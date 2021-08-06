@@ -343,14 +343,6 @@ export default {
     this.$store.dispatch("SET_CENTERDATAS", [true, this.centerDatasList]);
     // (this.leftInfo = homePage.leftInfo),
     //   (this.rightInfo = homePage.rightInfo)
-  },
-  mounted() {
-    // aaa().then(r=>{
-    //   console.log(r)
-    // })
-    // axios('/meun').then(req => {
-    //   console.log('xxxxxxxxx', req)
-    // })
     let _l = this.leftInfo[1].datas.xData.length;
     let _l2 = this.rightInfo[1].datas.xData.length;
     this.leftInfo[1].datas.datas[0] = this.leftInfo[1].datas.datas[0].slice(
@@ -365,6 +357,14 @@ export default {
       0,
       _l2
     );
+  },
+  mounted() {
+    // aaa().then(r=>{
+    //   console.log(r)
+    // })
+    // axios('/meun').then(req => {
+    //   console.log('xxxxxxxxx', req)
+    // })
   },
   destroyed() {},
   methods: {

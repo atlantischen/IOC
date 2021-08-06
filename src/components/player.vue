@@ -17,6 +17,7 @@ export default {
     return {
       flvPlayer: null,
     };
+      
   },
   props:{
     monitorList:{
@@ -34,7 +35,7 @@ export default {
           type: "flv",
           isLive: true,
           hasAudio: false,
-          url:item.flv_url,
+          url:item.url,
         },
         {
             cors: true, // 是否跨域
@@ -97,7 +98,6 @@ export default {
       this.flvPlayer.play();
     },
     destoryVideo() {
-      console.log('wochufale!');
       this.flvPlayer.pause();
       this.flvPlayer.unload();
       this.flvPlayer.detachMediaElement();
@@ -129,7 +129,6 @@ export default {
   },
 
   destroyed () {
-    console.log('触发');
     this.destoryVideo();
     this.reloadVideo(flvPlayer)
   },
@@ -143,7 +142,7 @@ export default {
 </script>
 <style>
 .myVideo-video{
-  width: 49%;
+  /* width: 49%; */
   margin-bottom: .0625rem /* 5/80 */;
   
       /* height:100%;

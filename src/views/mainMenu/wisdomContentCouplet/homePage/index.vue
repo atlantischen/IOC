@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <IOCLeft>
+    <IOCLeft :fade="fade">
       <div class="equipment">
         <div class="tittle">设备情况</div>
         <div id="equipment" ref="equipment"></div>
@@ -10,13 +10,17 @@
         <div id="equipment_faulty" ref="equipment_faulty"></div>
       </div>
     </IOCLeft>
-    <Tips :list="list"></Tips>
-    <IOCRight>
+    <Tips :fade="fade" :list="list"></Tips>
+    <IOCRight :fade="fade">
       <div class="equipment_comparison">
         <div class="tittle">设备对比分析</div>
         <div class="select">
           <DropDown :list="yearsList" name="label" @_cg="changePSYears" />
-          <DropDown :list="momthsList" name="label" @_cg="changePSYears" />
+          <DropDown
+            :list="flag ? momthsList : nowMomthsList"
+            name="label"
+            @_cg="changePSMonths"
+          />
         </div>
         <div id="equipment_comparison" ref="equipment_comparison"></div>
         <ul class="equipment_title">
@@ -39,7 +43,13 @@
         <div id="equipment_warning" ref="equipment_warning"></div>
       </div>
     </IOCRight>
-    <!-- <Rtps></Rtps> -->
+      <!-- 设备管理 -->
+    <Device
+      v-show="deviceShow"
+      :_fade="_fade"
+      @chageFade="chageFade($event)"
+    ></Device>
+    <div v-if="fade" class="mask" @mouseenter="deviceChangeShow"></div>
   </div>
 </template>
 
@@ -47,25 +57,29 @@
 import * as echarts from "echarts";
 export default {
   name: "homePage",
-  data () {
+  data() {
     return {
+      flag: false,
+      deviceShow: false,
+      _fade:false,
+      fade:false,
       list: [
         {
           num: 33526,
-          describe: '设备总数'
+          describe: "设备总数",
         },
         {
           num: 33423,
-          describe: '在线设备数'
+          describe: "在线设备数",
         },
         {
           num: 104,
-          describe: '离线设备数'
+          describe: "离线设备数",
         },
         {
           num: 21,
-          describe: '告警设备数'
-        }
+          describe: "告警设备数",
+        },
       ],
       yearsList: [
         {
@@ -81,7 +95,7 @@ export default {
           value: 2019,
         },
       ],
-     momthsList: [
+      momthsList: [
         {
           label: "12月",
           value: 12,
@@ -131,14 +145,78 @@ export default {
           value: 1,
         },
       ],
+      nowMomthsList: this.$monthRangeArrList(),
     };
   },
   components: {},
   methods: {
-    changePSMonths (val) {
-     
+      chageFade (val) {
+      this._fade = val;
     },
-    equipmentInit () {
+    deviceChangeShow(){
+      console.log('进入！');
+      this.deviceShow=true
+       this._fade=false
+    },
+    changePSMonths(val) {
+      switch (val) {
+        case 12:
+          this.equipmentComparisonInit([-1.21, 2.98, 2.56]);
+          break;
+        case 11:
+          this.equipmentComparisonInit([-2.36, -3.02, 2.13]);
+          break;
+        case 10:
+          this.equipmentComparisonInit([-2.36, -3.02, 2.13]);
+        case 9:
+          this.equipmentComparisonInit([0.98, -2.02, 3.45]);
+          break;
+        case 8:
+          this.equipmentComparisonInit([1.21, -2.19, 4.13]);
+          break;
+        case 7:
+          this.equipmentComparisonInit([-1.29, -3.02, 2.13]);
+        case 6:
+          this.equipmentComparisonInit([2.36, -3.02, 2.13]);
+          break;
+        case 4:
+          this.equipmentComparisonInit([-2.36, -3.02, 2.13]);
+          break;
+        case 3:
+          this.equipmentComparisonInit([-2.36, 3.02, 2.13]);
+        case 2:
+          this.equipmentComparisonInit([3.36, -2.02, 2.13]);
+          break;
+        case 1:
+          this.equipmentComparisonInit([-2.89, -3.36, 1.13]);
+          break;
+        default:
+          break;
+      }
+    },
+    changePSYears(val) {
+      switch (val) {
+        case 2021:
+          this.equipmentComparisonInit([-1.36, 4.12, 2.38]);
+          this.flag = false;
+          break;
+        case 2020:
+          this.equipmentComparisonInit([-0.36, 3.98, 3.13]);
+
+          this.flag = true;
+
+          break;
+        case 2019:
+          this.equipmentComparisonInit([-1.36, -4.21, 3.38]);
+
+          this.flag = true;
+
+          break;
+        default:
+          break;
+      }
+    },
+    equipmentInit() {
       var dom = this.$refs["equipment"];
       var option = {
         grid: {
@@ -148,19 +226,18 @@ export default {
           y2: -10,
           containLabel: true,
         },
-         tooltip: {
-           backgroundColor: "rgba(0,0,0,0.8)",
+        tooltip: {
+          backgroundColor: "rgba(0,0,0,0.8)",
           borderWidth: 1,
           borderColor: "#4396f3",
           padding: [5, 10],
-          extraCssText: 'box-shadow:inset 0 0 8px rgba(67, 149, 243, 0.6);',
-          trigger: 'axis',
-          axisPointer:{
-            lineStyle:{
-            color:'transparent'
-          }
-          }
-        
+          extraCssText: "box-shadow:inset 0 0 8px rgba(67, 149, 243, 0.6);",
+          trigger: "axis",
+          axisPointer: {
+            lineStyle: {
+              color: "transparent",
+            },
+          },
         },
         xAxis: [
           {
@@ -205,7 +282,7 @@ export default {
             type: "value",
             splitNumber: 2,
             axisLabel: {
-              formatter: function (value) {
+              formatter: function(value) {
                 return value;
               },
             },
@@ -218,7 +295,7 @@ export default {
             axisTick: {
               show: false,
             },
-              splitLine: {
+            splitLine: {
               lineStyle: {
                 width: 0.5,
                 type: "dashed",
@@ -257,40 +334,39 @@ export default {
                 ),
               },
             },
-            data: [4580, 3666,23623, 11230, 24631, 3099, 3559],
+            data: [4580, 3666, 23623, 11230, 24631, 3099, 3559],
           },
         ],
       };
       this.$redomEchart(dom, option);
     },
-    equipmentFaultyInit () {
+    equipmentFaultyInit() {
       var dom = this.$refs["equipment_faulty"];
       var datas = [
         [
-          { name: "电梯", value: 6.30, itemStyle: { color: "#fff" } },
+          { name: "电梯", value: 6.3, itemStyle: { color: "#fff" } },
           { name: "门禁", value: 22.05, itemStyle: { color: "#4396F3" } },
           { name: "视频", value: 25.02, itemStyle: { color: "#95C7FF" } },
           { name: "能源", value: 9.45, itemStyle: { color: "#08E2FF" } },
           { name: "照明", value: 11.05, itemStyle: { color: "#236390" } },
-          { name: "BA", value: 12.60, itemStyle: { color: "#C7D392" } },
+          { name: "BA", value: 12.6, itemStyle: { color: "#C7D392" } },
           { name: "消防", value: 13.39, itemStyle: { color: "#9A866A" } },
         ],
       ];
 
       var option = {
-          tooltip: {
+        tooltip: {
           trigger: "item",
-           backgroundColor: "rgba(0,0,0,0.8)",
+          backgroundColor: "rgba(0,0,0,0.8)",
           borderWidth: 1,
           borderColor: "#4396f3",
           padding: [5, 10],
-          extraCssText: 'box-shadow:inset 0 0 8px rgba(67, 149, 243, 0.6);',
-             formatter:function(param){
-            return param.marker+param.name+"："+ param.value + "%<br>";
-        }
-
+          extraCssText: "box-shadow:inset 0 0 8px rgba(67, 149, 243, 0.6);",
+          formatter: function(param) {
+            return param.marker + param.name + "：" + param.value + "%<br>";
+          },
         },
-        series: datas.map(function (data, idx) {
+        series: datas.map(function(data, idx) {
           var top = idx * 33.3;
           return {
             type: "pie",
@@ -332,7 +408,7 @@ export default {
               length2: 120,
               maxSurfaceAngle: 80,
             },
-            labelLayout: function (params) {
+            labelLayout: function(params) {
               var isLeft = params.labelRect.x < myChart.getWidth() / 2;
               var points = params.labelLinePoints;
               // Update the end point.
@@ -349,9 +425,8 @@ export default {
         }),
       };
       this.$redomEchart(dom, option);
-
     },
-    equipmentWarningInit () {
+    equipmentWarningInit() {
       var dom = this.$refs["equipment_warning"];
       var option = {
         grid: {
@@ -361,19 +436,18 @@ export default {
           y2: -10,
           containLabel: true,
         },
-          tooltip: {
+        tooltip: {
           backgroundColor: "rgba(0,0,0,0.8)",
           borderWidth: 1,
           borderColor: "#4396f3",
           padding: [5, 10],
-          extraCssText: 'box-shadow:inset 0 0 8px rgba(67, 149, 243, 0.6);',
-          trigger: 'axis',
-          axisPointer:{
-            lineStyle:{
-            color:'transparent'
-          }
-          }
-        
+          extraCssText: "box-shadow:inset 0 0 8px rgba(67, 149, 243, 0.6);",
+          trigger: "axis",
+          axisPointer: {
+            lineStyle: {
+              color: "transparent",
+            },
+          },
         },
         xAxis: [
           {
@@ -427,7 +501,7 @@ export default {
             type: "value",
             splitNumber: 2,
             axisLabel: {
-              formatter: function (value) {
+              formatter: function(value) {
                 return value;
               },
             },
@@ -479,45 +553,38 @@ export default {
                 ),
               },
             },
-            data: [140, 130, 200, 100, 98, 99, 59],
+            data: [143, 126, 209, 89, 78, 96, 59],
           },
         ],
       };
       this.$redomEchart(dom, option);
-
     },
-    equipmentComparisonInit () {
+    equipmentComparisonInit(data) {
       var dom = this.$refs["equipment_comparison"];
-      var data = [-2.54, 4.74, 2.54];
+      // var data = [2.54, -4.74, 2.54];
       var option = {
         grid: {
           x: -30,
           y: -30,
           x2: -10,
-          y2: 20,
+          y2: 50,
           containLabel: true,
         },
 
-  tooltip: {
-           backgroundColor: "rgba(0,0,0,0.8)",
+        tooltip: {
+          backgroundColor: "rgba(0,0,0,0.8)",
           borderWidth: 1,
           borderColor: "#4396f3",
           padding: [5, 10],
-          extraCssText: 'box-shadow:inset 0 0 8px rgba(67, 149, 243, 0.6);',
-          trigger: 'axis',
-          axisPointer:{
-            lineStyle:{
-            color:'transparent'
-          }
-          }
-        
+          extraCssText: "box-shadow:inset 0 0 8px rgba(67, 149, 243, 0.6);",
+          trigger: "axis",
+          axisPointer: {
+            lineStyle: {
+              color: "transparent",
+            },
+          },
         },
-        // grid: {
-        //   left: "3%",
-        //   right: "4%",
-        //   bottom: "3%",
-        //   containLabel: true,
-        // },
+
         color: new echarts.graphic.LinearGradient(
           0,
           1,
@@ -525,8 +592,8 @@ export default {
           0,
           [
             {
-              offset: 0.2,
-              color: "rgba(67, 149, 243, 0.2)", // 0% 处的颜色
+              offset: 0,
+              color: "rgba(67, 149, 243, 0.5)", // 0% 处的颜色
             },
             {
               offset: 1,
@@ -579,7 +646,13 @@ export default {
               return {
                 value: item,
                 label: {
-                  formatter: "{img1|}{c}%",
+                  // formatter: "{img1|}{c}%",
+                  formatter:function (params) {
+                    let c = Math.abs(params.data.value);
+                    console.log(c,'c');
+                    return `{img1|}${c}%`;
+                  },
+                  
                   rich: {
                     img1: {
                       width: 17,
@@ -597,15 +670,33 @@ export default {
         ],
       };
       this.$redomEchart(dom, option);
-
     },
   },
-  mounted () {
+  computed: {
+    getUnityData () {
+      return this.$store.state.unitySendData;
+    },
+  },
+  watch:{
+    getUnityData(val){
+      try {
+       if(val.action ==='ME_ZHYLSingle' && val.data==='1' ){
+         this.fade =true
+       }else if(val.action ==='ME_ZHYLSingle' && val.data==='0'){
+         this.fade =false
+       }
+      } catch (e) { }
+    }
+  },
+  mounted() {
     this.equipmentInit();
     this.equipmentFaultyInit();
     this.equipmentWarningInit();
-    this.equipmentComparisonInit();
+    this.equipmentComparisonInit([-2.54, 4.74, 2.54]);
   },
+  created(){
+    this.$store
+  }
 };
 </script>
 
@@ -658,6 +749,15 @@ export default {
       width: 100%;
       height: 3.75rem /* 300/80 */;
     }
+  }
+  .mask{
+    position: fixed;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: .75rem /* 60/80 */ /* 100/80 */ /* 300/80 */;
+    height: 6.25rem /* 500/80 */ /* 300/80 */;
+    // background-color: red;
   }
 }
 </style>

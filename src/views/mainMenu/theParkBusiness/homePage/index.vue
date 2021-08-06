@@ -11,7 +11,7 @@
           <DropDown :list="yearsList" name="label" @_cg="changePSYears" />
           <DropDown
             style="margin-right:30px"
-            :list="flag?momthsList:nowMomthsList"
+            :list="flag ? momthsList : nowMomthsList"
             name="label"
             @_cg="changePSMonths"
           />
@@ -82,28 +82,55 @@
         </div>
       </div>
       <div class="store_img">
-        <ul  :class="{ 'animate-up': ImganimateUp }">
-          <li v-for="(item, index) in imgList" :key="index" >
-            <img :src="item.imgT" alt="" />
-            <img :src="item.imgB" alt="" />
+        <ul :class="{ 'animate-up': ImganimateUp }">
+          <li v-for="(item, index) in imgList" :key="index">
+            <img
+              :src="item.imgT"
+              alt=""
+              @mouseenter="hoverItemFun($event, index, item.imgT,item.imgTDesc)"
+              @mouseleave="leaveItemFun()"
+            />
+            <img
+              :src="item.imgB"
+              alt=""
+              @mouseenter="hoverItemFun($event, index, item.imgB,item.imgBDesc)"
+              @mouseleave="leaveItemFun()"
+            />
           </li>
         </ul>
+        <div class="litInfo" :style="returnStyle" v-if="showItem">
+          <div class="litInfo_title x_c">
+            <img class="litInfo_img" :src="img_src" />
+            <span>{{imgDesc.name}}</span>
+          </div>
+          <div class="litInfo_content">
+            <p>
+              <span>公司类型： </span
+              ><span>
+               {{imgDesc.type}}
+              </span>
+            </p>
+            <p>
+              <span>进驻日期：</span
+              ><span>
+                {{imgDesc.time}}
+              </span>
+            </p>
+            <p><span>公司简介：</span> <i>{{imgDesc.describe}}</i></p>
+          </div>
+        </div>
       </div>
       <div class="store_wait">
         <div class="tittle" @click="handleFullScreen">待入驻商家</div>
-        <el-carousel
-          class="swiper"
-          indicator-position="none"
-          :interval="3000"
-        >
-          <el-carousel-item v-for="item in 4" :loop='true' :key="item">
-             <ul v-show="item==1 || item==3">
-              <li v-for="(item, index) in waitList.slice(0,6)" :key="index">
+        <el-carousel class="swiper" indicator-position="none" :interval="3000">
+          <el-carousel-item v-for="item in 4" :loop="true" :key="item">
+            <ul v-show="item == 1 || item == 3">
+              <li v-for="(item, index) in waitList.slice(0, 6)" :key="index">
                 <img :src="item" alt="" />
               </li>
             </ul>
-            <ul v-show="item==2 || item==4"> 
-              <li v-for="(item, index) in waitList.slice(6,12)" :key="index">
+            <ul v-show="item == 2 || item == 4">
+              <li v-for="(item, index) in waitList.slice(6, 12)" :key="index">
                 <img :src="item" alt="" />
               </li>
             </ul>
@@ -128,7 +155,7 @@ export default {
   data() {
     return {
       //   isShow:true,
-      flag:false,
+      flag: false,
       fade: false,
       animateUp: false,
       ImganimateUp: false,
@@ -162,37 +189,167 @@ export default {
       ],
       imgList: [
         {
-         imgT: require("../../../../assets/img/94.png"),
-         imgB: require("../../../../assets/img/95.png")
+          imgT: require("../../../../assets/img/94.png"),
+          imgTDesc: {
+            name: "潮煮艺",
+            time: "2015年",
+            type: "餐饮",
+            describe:
+              "广州三潮煮艺餐饮管理有限责任公司是一家通过国家AAA企业信用认证，集产品研发、生产、销售、品牌输出为一体的综合服务性餐饮企业。本着“始于客户需求，终于客户满意”的服务理念，践行“昌美食、启潮流”的理想、不断提升线上线下一体化的核心竞争力，为客户提供多元化精品创业项目。",
+          },
+
+          imgB: require("../../../../assets/img/95.png"),
+          imgBDesc: {
+            name: "创味来",
+
+            time: "2016年",
+            type: "餐饮",
+            describe:
+              "创味来烘焙餐饮有限公司为客户提供好的产品和技术支持、健全的售后服务，我公司主要经营服务：烘焙技术咨询；销售：烘焙模具；持有效审批证件从事食品流通；",
+          },
         },
         {
-         imgT: require("../../../../assets/img/96.png"),
-         imgB: require("../../../../assets/img/97.png")
-        },{
-         imgT: require("../../../../assets/img/98.png"),
-         imgB: require("../../../../assets/img/99.png")
+          imgT: require("../../../../assets/img/96.png"),
+          imgB: require("../../../../assets/img/97.png"),
+          imgTDesc: {
+            name: "椒叔先生",
+
+            time: "2009年11月",
+            type: "餐饮",
+            describe:
+              "椒叔先生餐饮管理有限公司以发展年轻西餐路线的餐厅，我们专注于符合广州大众化消费西餐领域，在产品、服务、餐厅风格等方面都受到广泛的认可。其产品包含七大系列：汉堡系列、炸(烤)鸡系列、披萨系列、中式快餐系列、小吃系列、时尚饮品、冰激凌系列。",
+          },
+          imgBDesc: {
+            name: "阿桂嫂",
+
+            time: "2009年3月",
+            type: "餐饮",
+            describe:
+              "阿桂嫂米线也是云南米线的知名品牌，提供的多样美食产品非常具有地方特色，美味健康的同时，价格也非常实惠。",
+          },
         },
         {
-         imgT: require("../../../../assets/img/100.png"),
-         imgB: require("../../../../assets/img/101.png")
+          imgT: require("../../../../assets/img/98.png"),
+          imgB: require("../../../../assets/img/99.png"),
+          imgTDesc: {
+            name: "厨房里",
+
+            time: "2016年",
+            type: "餐饮",
+            describe:
+              "厨房里餐饮管理服务有限公司是一家专业从事食堂承包，以及粮油、副食品、农产品批发配送业务的综合性服务机构，公司经过多年的摸索与实践，不断稳步发展、改革创新，突破了传统的饭堂模式，建立了规范化、标准化的连锁经营的膳食管理服务网络。",
+          },
+          imgBDesc: {
+            name: "法诺",
+
+            time: "2020年",
+            type: "餐饮",
+            describe:
+              "法诺餐饮的特点是选料广泛（如蜗牛、鹅肝都是法式菜肴中的美味）；加工精细；烹调考究，滋味有浓有淡，花色品种多。",
+          },
         },
         {
-         imgT: require("../../../../assets/img/yqsy_pic1.png"),
-         imgB: require("../../../../assets/img/yqsy_pic2.png")
+          imgT: require("../../../../assets/img/100.png"),
+          imgB: require("../../../../assets/img/101.png"),
+          imgTDesc: {
+            name: "肯德基",
+
+            time: "2008年",
+            type: "餐饮",
+            describe:
+              "肯德基（Kentucky Fried Chicken，肯塔基州炸鸡，简称KFC），总部美国，也是世界第二大速食及最大炸鸡连锁企业，1952年由创始人哈兰·山德士（Colonel Harland Sanders）创建， [1]  主要出售炸鸡、汉堡、薯条、盖饭、蛋挞、汽水等高热量快餐食品。",
+          },
+          imgBDesc: {
+            name: "朝廷喜茶",
+
+            time: "2020年",
+            type: "餐饮",
+            describe:
+              "朝廷喜茶餐厅是食全酒美餐饮暨一尊皇牛、鲍鱼公主、潮宫、古山之后的又一新餐饮品牌，食全酒美一贯以传达健康饮食为使命，旗下所有餐厅一直采用优质食材，在烹饪过程中不使用色素和食品添加剂，为打造放心的公众餐厅尽一己之力",
+          },
         },
         {
-         imgT: require("../../../../assets/img/yqsy_pic3.png"),
-         imgB: require("../../../../assets/img/yqsy_pic4.png")
+          imgT: require("../../../../assets/img/yqsy_pic1.png"),
+          imgB: require("../../../../assets/img/yqsy_pic2.png"),
+          imgTDesc: {
+            name: "新辣道鱼火锅",
+
+            time: "2016年",
+            type: "餐饮",
+            describe:
+              "新辣道鱼火锅餐饮坚持以绿色、健康、营养之路，以鲜、香、嫩、爽、滑为特点的新派的鱼王锅，其味通老少，宜南北，食不上火，肯有美容养颜，开胃健脾，明目益智等功效。七秒鱼一经推出，便在餐饮界引起轰动；",
+          },
+          imgBDesc: {
+            name: "杨记拉面",
+
+            time: "2003年",
+            type: "餐饮",
+            describe:
+              "杨记拉面是一种荤、素、汤、菜、饭兼而有之的传统风味小吃，以味道鲜美，经济实惠而 享誉中原，在2005年4月荣获“中原风味名吃”荣誉称号，97年12月又摘取“中华名小吃”桂冠。",
+          },
         },
         {
-         imgT: require("../../../../assets/img/yqsy_pic15.png"),
-         imgB: require("../../../../assets/img/yqsy_pic6.png")
+          imgT: require("../../../../assets/img/yqsy_pic3.png"),
+          imgB: require("../../../../assets/img/yqsy_pic4.png"),
+          imgTDesc: {
+            name: "味多美",
+
+            time: "1996年",
+            type: "餐饮",
+            describe:
+              "多美公司是国内著名烘焙连锁食品企业，主要经营产品包括蛋糕、面包、咖啡、中西式点心、月饼、粽子等。2010—2011年相继落户上海、河北、包头等地味多美公司旗下的“味多美”品牌定位于中高端消费者，以丰富的、高品质的产品，平民化的价格，亲切友善的服务，便利的连锁店铺，赢得了消费者的青睐。",
+          },
+          imgBDesc: {
+            name: "稻香村",
+
+            time: "1994年",
+            type: "餐饮",
+            describe:
+              "稻香村糕点生产历史悠久，是传统手工糕点制作的典型代表，以色香味美闻名于世，有“南味坊”之称，是保定糕点文化、技艺与传承的集大成者。手工工序的细腻程度和要求之高，是其他糕点生产难以比拟的。这些手工技艺是保定稻香村糕点技师百年的智慧结晶，且难以为现代技术所替代。“沉浸浓郁、含英咀华”为其精髓内核。保定稻香村将文人读书之道用于产品制作，体现出保定稻香村产品品位和格调之高。",
+          },
         },
         {
-         imgT: require("../../../../assets/img/yqsy_pic7.png"),
-         imgB: require("../../../../assets/img/yqsy_pic8.png")
+          imgT: require("../../../../assets/img/yqsy_pic15.png"),
+          imgB: require("../../../../assets/img/yqsy_pic6.png"),
+          imgTDesc: {
+            name: "正一味",
+
+            time: "1999年",
+            type: "餐饮",
+            describe:
+              "正一味快餐管理有限公司。作为目前大陆地区领先的韩式餐饮连锁品牌，始终坚持着“健康,诚信”的经营理念，以美味高品质的产品，稳定优质的服务、时尚休闲的就餐环境,全心全意为顾客营造全新的用餐体验。",
+          },
+          imgBDesc: {
+            name: "皇城老妈",
+
+            time: "1986年",
+            type: "餐饮",
+            describe:
+              "皇城老妈是四川火锅的著名品牌，开业十余年来，以浓郁的川蜀文化风韵、优质的服务、精美丰盛的菜品和勇于创新的文化经营个性，赢得了顾客的青睐。皇城老妈吸取蜀汉遗韵和川中浓郁的民间风貌，以现代手法，整合、营造出精美大气而别具特色的文化氛围。收藏往昔美好，追忆似水流年，凸现出更具时代特色的就餐空间。",
+          },
+        },
+        {
+          imgT: require("../../../../assets/img/yqsy_pic7.png"),
+          imgB: require("../../../../assets/img/yqsy_pic8.png"),
+          imgTDesc: {
+            name: "小尾羊",
+
+            time: "2012年3月",
+            type: "餐饮",
+            describe:
+              "深圳小尾羊食品有限公司是内蒙古小尾羊牧业科技股份有限公司下属的全资子公司。公司主营肉食品加工、调味品生产、物流配送、市场销售、肉业直营店连锁等业务。",
+          },
+          imgBDesc: {
+            name: "辣舌",
+
+            time: "2005年",
+            type: "餐饮",
+            describe:
+              "辣舌餐饮是一家以绿色、健康、营养之路，以家乡特色菜为主的餐厅",
+          },
         },
       ],
+      imgDesc:'',
       waitList: [
         require("../../../../assets/img/入驻商家1.png"),
         require("../../../../assets/img/入驻商家2.png"),
@@ -271,10 +428,13 @@ export default {
           value: 1,
         },
       ],
-      nowMomthsList:this.$monthRangeArrList(),
+      nowMomthsList: this.$monthRangeArrList(),
       activeTypeIndex: 0,
       activeBulidIndex: 0,
       activeSeatIndex: 0,
+      returnStyle: "",
+      showItem: false,
+      img_src: "",
     };
   },
 
@@ -305,75 +465,75 @@ export default {
       }, 500);
     },
     changePSMonths(val) {
-        switch (val) {
+      switch (val) {
         case 12:
           this.AssetsAndEquipment({
-            max:30000,
-            data:[20200, 19400, 21000, 22300, 23600]
+            max: 30000,
+            data: [20200, 19400, 21000, 22300, 23600],
           });
           break;
-         case 11:
+        case 11:
           this.AssetsAndEquipment({
-            max:25000,
-            data: [19400, 18400, 17400, 16400, 15400]
-          });
-          break;  
-         case 10:
-          this.AssetsAndEquipment({
-            max:20000,
-            data:[16500, 14300, 15500, 13600, 14600]
-          });
-           case 9:
-          this.AssetsAndEquipment({
-            max:30000,
-            data:[20200, 19400, 21000, 22300, 23600]
+            max: 25000,
+            data: [19400, 18400, 17400, 16400, 15400],
           });
           break;
-         case 8:
+        case 10:
           this.AssetsAndEquipment({
-            max:25000,
-            data: [19400, 18400, 17400, 16400, 15400]
+            max: 20000,
+            data: [16500, 14300, 15500, 13600, 14600],
           });
-          break;  
-         case 7:
+        case 9:
           this.AssetsAndEquipment({
-            max:20000,
-            data:[16500, 14300, 15500, 13600, 14600]
-          });
-           case 6:
-          this.AssetsAndEquipment({
-            max:20000,
-            data:[16500, 14300, 15500, 13600, 14600]
-          });
-           case 5:
-          this.AssetsAndEquipment({
-            max:30000,
-            data:[20200, 19400, 21000, 22300, 23600]
+            max: 30000,
+            data: [20200, 19400, 21000, 22300, 23600],
           });
           break;
-         case 4:
+        case 8:
           this.AssetsAndEquipment({
-            max:25000,
-            data: [19400, 18400, 17400, 16400, 15400]
-          });
-          break;  
-         case 3:
-          this.AssetsAndEquipment({
-            max:20000,
-            data:[16500, 14300, 15500, 13600, 14600]
-          });
-           case 2:
-          this.AssetsAndEquipment({
-            max:30000,
-            data:[20200, 19400, 21000, 22300, 23600]
+            max: 25000,
+            data: [9400, 6400, 7400, 5400, 9400],
           });
           break;
-         case 1:
+        case 7:
           this.AssetsAndEquipment({
-            max:25000,
-            data: [19400, 18400, 17400, 16400, 15400]
+            max: 20000,
+            data: [16500, 14300, 15500, 13600, 14600],
           });
-          break;  
+        case 6:
+          this.AssetsAndEquipment({
+            max: 20000,
+            data: [16500, 14300, 15500, 13600, 14600],
+          });
+        case 5:
+          this.AssetsAndEquipment({
+            max: 30000,
+            data: [20200, 19400, 21000, 22300, 23600],
+          });
+          break;
+        case 4:
+          this.AssetsAndEquipment({
+            max: 25000,
+            data: [19400, 18400, 17400, 16400, 15400],
+          });
+          break;
+        case 3:
+          this.AssetsAndEquipment({
+            max: 20000,
+            data: [16500, 14300, 15500, 13600, 14600],
+          });
+        case 2:
+          this.AssetsAndEquipment({
+            max: 30000,
+            data: [20200, 19400, 21000, 22300, 23600],
+          });
+          break;
+        case 1:
+          this.AssetsAndEquipment({
+            max: 25000,
+            data: [19400, 18400, 17400, 16400, 15400],
+          });
+          break;
         default:
           break;
       }
@@ -382,22 +542,27 @@ export default {
       switch (val) {
         case 2021:
           this.AssetsAndEquipment({
-            max:30000,
-            data:[20200, 19400, 21000, 22300, 23600]
+            max: 30000,
+            data: [20200, 19400, 21000, 22300, 23600],
           });
+          this.flag = false;
           break;
-         case 2020:
+        case 2020:
           this.AssetsAndEquipment({
-            max:25000,
-            data: [19400, 18400, 17400, 16400, 15400]
+            max: 25000,
+            data: [19400, 18400, 17400, 16400, 15400],
           });
-          break;  
-         case 2019:
+          this.flag = true;
+
+          break;
+        case 2019:
           this.AssetsAndEquipment({
-            max:20000,
-            data:[16500, 14300, 15500, 13600, 14600]
+            max: 20000,
+            data: [16500, 14300, 15500, 13600, 14600],
           });
-          break;  
+          this.flag = true;
+
+          break;
         default:
           break;
       }
@@ -407,7 +572,6 @@ export default {
       var dom = this.$refs["store"];
       var data = [29.09, 12.73, 25.45, 14.55, 10.91, 7.27];
       var lable = ["餐饮", "健康", "娱乐", "教育", "文化", "购物"];
-
       var option = {
         tooltip: {
           trigger: "item",
@@ -483,7 +647,7 @@ export default {
       this.$redomEchart(dom, option);
     },
     AssetsAndEquipment(val) {
-      const {max,data} =val;
+      const { max, data } = val;
       var dom = this.$refs["store_top"];
       var option = {
         title: {
@@ -608,11 +772,25 @@ export default {
                 ),
               },
             },
-            data:data,
+            data: data,
           },
         ],
       };
       this.$redomEchart(dom, option);
+    },
+    hoverItemFun(e, i, src,desc) {
+      this.showItem = true;
+      this.img_src = src;
+      this.imgDesc = desc
+      console.log(
+        window.screen.width - e.clientX,
+        "window.screen.width -e.clientX"
+      );
+      this.returnStyle = `right:${window.screen.width -
+        e.clientX}px;top:${e.clientY - 250}px`;
+    },
+    leaveItemFun() {
+      this.showItem = false;
     },
   },
   created() {},
@@ -622,7 +800,10 @@ export default {
   },
   mounted() {
     this.meetEchartInit();
-     this.AssetsAndEquipment({ max:30000,data:[20200, 19400, 21000, 22300, 23600]});
+    this.AssetsAndEquipment({
+      max: 30000,
+      data: [9400, 6400, 7400, 5400, 9400],
+    });
     this.timer = setInterval(this.scrollAnimate, 1500);
     this.Imgtimer = setInterval(this.scrollAnimateImg, 2000);
 
@@ -632,6 +813,8 @@ export default {
 </script>
 
 <style lang="less" scoped>
+@import "~@/style/gl.less";
+
 .container {
   // overflow: hidden;
   /* width: 100%; */
@@ -650,10 +833,10 @@ export default {
       height: 2.5rem /* 200/80 */;
     }
   }
-   .animate-up {
-        transition: all 0.5s ease-in-out;
-        transform: translateY(-1.0875rem /* 87/80 */ /* 87/80 */);
-      }
+  .animate-up {
+    transition: all 0.5s ease-in-out;
+    transform: translateY(-1.0875rem /* 87/80 */ /* 87/80 */);
+  }
   .store_discount {
     color: #ffffff;
     .box {
@@ -687,7 +870,6 @@ export default {
           }
         }
       }
-     
     }
   }
   .store_list {
@@ -749,7 +931,7 @@ export default {
   }
   .store_img {
     margin-top: 0.3125rem /* 25/80 */ /* 29/80 */;
-  overflow: hidden;
+    overflow: hidden;
     ul {
       height: 4.15rem /* 332/80 */;
       width: 3.875rem /* 310/80 */ /* 330/80 */;
@@ -763,13 +945,55 @@ export default {
     li {
       width: 100%;
       display: flex;
-      justify-content:space-around;
-      margin-bottom: .1625rem /* 13/80 */ /* 10/80 */;
+      justify-content: space-around;
+      margin-bottom: 0.1625rem /* 13/80 */ /* 10/80 */;
     }
-   
+
     img {
       width: 1.75rem /* 140/80 */ /* 145/80 */;
       height: 0.875rem;
+    }
+
+    .litInfo {
+      position: fixed;
+      // height: 6.25rem /* 500/80 */;
+      top: 0;
+      right: 0;
+      width: 3.8125rem /* 305/80 */;
+      min-height: 0.375rem /* 30/80 */;
+      background: #0f2033;
+      opacity: 0.9;
+      border-radius: 6px;
+      padding: 0.25rem /* 20/80 */;
+      box-shadow: inset 0 1px 10px 0.1px rgba(67, 149, 243, 0.1);
+      -moz-box-shadow: inset 0 1px 10px 0.1px rgb(67, 149, 243, 0.1);
+      -webkit-box-shadow: inset 0 1px 10px 0.1px rgb(67, 149, 243, 0.1);
+      z-index: 20;
+      .litInfo_title {
+        justify-content: flex-start;
+      }
+      .litInfo_content {
+        padding-top: 0.125rem /* 10/80 */;
+        p {
+          line-height: 1.6;
+        }
+        span {
+          vertical-align: text-top;
+          &:nth-child(1) {
+            min-width: 0.375rem /* 30/80 */;
+            padding-right: 0.0625rem /* 5/80 */;
+          }
+          &:nth-child(2) {
+            min-width: 1.25rem /* 100/80 */;
+            white-space: normal;
+          }
+        }
+      }
+      .litInfo_img {
+        .ioc_img(0.625rem /* 50/80 */, 0.625rem /* 50/80 */, 50%) ;;
+        object-fit: cover;
+        margin-right: 0.25rem /* 20/80 */;
+      }
     }
   }
   .store_wait {

@@ -101,6 +101,20 @@ var timeRangeArr = function timeRangeArr(_rangeT, delItem, _range,) {
   return returnArr
 }
 
+// 获取当前时间到00:00
+var getNowTime = function getNowTime() {
+  let i = new Date().getHours()
+  let arr = []
+  for (let index = 0; index <= i; index++) {
+    if (index < 10) {
+      arr.push(`0${index}:00`)
+    } else {
+      arr.push(`${index}:00`)
+    }
+  }
+  return arr
+}
+
 /**
  *
  * 获取1月到现在的月份数组
@@ -124,6 +138,32 @@ var monthRangeArr = function monthRangeArr(inclued) {
 }
 
 /**
+ *
+ * 根据年份获取相应月份
+ * @param {any} year 年份 2021
+ * @returns
+ */
+var getYearMonth = function getYearMonth(year) {
+  var _y = Number(moment(new Date()).format('YYYY')), arr = [],
+    _m = Number(moment(new Date()).format('MM'))
+  if (year < _y) {
+    for (let i = 13; i > 0; i--) {
+      arr.push({
+        label: i + "月",
+        value: i,
+      })
+    }
+  } else {
+    for (let i = _m; i > 0; i--) {
+      arr.push({
+        label: i + "月",
+        value: i,
+      })
+    }
+  }
+  return arr
+}
+/**
  * 获取今年开始 本年第几天（y） 本月第几天（m）
  * @returns
  */
@@ -141,14 +181,79 @@ var getDayNums = function getDayNums(val) {
       return 0
   }
 }
+
+var monthRangeArr = function monthRangeArr(_range) {
+  var _m = Number(moment(new Date()).format('MM')), arr = []
+  for (var i = 1; i < _m; i++) {
+    arr.push(i + '月')
+  }
+  return arr
+}
+var monthRangeArrList = function monthRangeArrList(_range) {
+  var _m = Number(moment(new Date()).format('MM')),
+    arr = []
+  for (var i = _m; i >= 1; i--) {
+    arr.push({
+      label: i + '月',
+      value: i
+    })
+
+  }
+  return arr
+}
+// 获取当前日并往前推迟7天
+// fun_date(7) //7天后的日期
+// fun_date(-7) //7天前的日期
+var funDateArr = function funDateArr() {
+  var myDate = new Date();
+  myDate.setDate(myDate.getDate() - 7);  //后7天就把该行代码注释
+  var dateArray = [];
+  var dateTemp;
+  var flag = 1;
+  for (var i = 0; i <= 7; i++) {
+    var month = myDate.getMonth() + 1;
+    var date = myDate.getDate();
+    // month < 10 ? (month = "0" + month) : month;
+    date < 10 ? (date = "0" + date) : date;
+    dateTemp = month + "." + date;
+    dateArray.push(dateTemp);
+    myDate.setDate(myDate.getDate() + flag);
+  }
+  dateArray.shift()
+  return dateArray
+
+}
+
+
+
+
+// 获取当天是第几天并生成数组
+var getNowDayList = function getNowDayList() {
+  let index = Number(moment(new Date()).format('DD'))
+  let arr = []
+  for (var i = index; i >= 1; i--) {
+    arr.push({
+      label: i + '日',
+      value: i
+    })
+  }
+  return arr
+}
+
 const fun = {
   currentDate,
   timeRangeArr,
   monthRangeArr,
-  getDayNums
+  getDayNums,
+  monthRangeArr,
+  monthRangeArrList,
+  funDateArr,
+  getNowTime,
+  getNowDayList,
+  fun_date,
+  getYearMonth
 }
 export default fun
-
 // 10:57
 export function formatHm(val) {
   if (val) return moment(val).format('HH:mm')
@@ -157,3 +262,27 @@ export function formatHm(val) {
 export function formatYMDHms(val) {
   if (val) return moment(val).format('YYYY-MM-DD HH:mm:ss')
 }
+
+// 获取当前日并往前推迟7天
+// fun_date(7) //7天后的日期
+// fun_date(-7) //7天前的日期
+function fun_date() {
+  var myDate = new Date();
+  myDate.setDate(myDate.getDate() - 7);  //后7天就把该行代码注释
+  var dateArray = [];
+  var dateTemp;
+  var flag = 1;
+  for (var i = 0; i <= 7; i++) {
+    var month = myDate.getMonth() + 1;
+    var date = myDate.getDate();
+    // month < 10 ? (month = "0" + month) : month;
+    date < 10 ? (date = "0" + date) : date;
+    dateTemp = month + "." + date;
+    dateArray.push(dateTemp);
+    myDate.setDate(myDate.getDate() + flag);
+  }
+  dateArray.shift()
+  return dateArray
+
+}
+

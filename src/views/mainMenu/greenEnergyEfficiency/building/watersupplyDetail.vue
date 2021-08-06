@@ -2,7 +2,7 @@
   <IOCLeft>
     <ul class="title">
       <li
-        :class="activeIndex === index ? 'active' : ''"
+        :class="$store.state.activeIndex === index ? 'active' : ''"
         v-for="(item, index) in list"
         :key="index"
         @click="handleClick(item.path, index, item.name)"
@@ -12,70 +12,42 @@
     </ul>
   </IOCLeft>
   <IOCRight>
-     <div class="lighting">
-      <div class="tittle">照明一览</div>
-      <div class="total">
-        <ul>
-          <li>
-            <i class="iconfont icon-zhaoming"></i>
-          </li>
-          <li>
-            <span class="font_text">350</span>
-            <span>照明回路</span>
-          </li>
-          <li>
-            <span class="font_text">267</span>
-            <span>开启数</span>
-          </li>
-          <li>
-            <span class="font_text">70</span>
-            <span>开启数</span>
-          </li>
-          <li>
-            <span class="font_text">13</span>
-            <span>故障数</span>
-          </li>
-        </ul>
-      </div>
-    </div>
-    <div class="public">
-      <div class="tittle">公共区域控制</div>
-      <div class="select_i">
-        <select name="" id="">
-          <option v-for="(item, index) in floorList" :key="index">
-            {{ item.label }}
-          </option>
-        </select>
-      </div>
-
-      <ul class="CommonAreaControl">
-        <li v-for="(_t, i) in CommonAreaDatas" :key="i">
-          <div class="li_tp">
-            <i v-if="_t.eqTypy == 'dtj'" class="iconfont icon--diantijian"></i>
-            <i
-              v-else-if="_t.eqTypy == 'ltj'"
-              class="iconfont icon-loutijian"
-            ></i>
-            <i v-else-if="_t.eqTypy == 'zl'" class="iconfont icon-zoulang"></i>
-            <i v-else-if="_t.eqTypy == 'nwsj'" class="iconfont icon-nan"></i>
-            <i v-else-if="_t.eqTypy == 'nwsj2'" class="iconfont icon-nv"></i>
-            <i v-else-if="_t.eqTypy == 'dt'" class="iconfont icon-datang"></i>
-            <i
-              v-else-if="_t.eqTypy == 'csj'"
-              style="font-size: 34px"
-              class="iconfont icon-chashui"
-            ></i>
-            <i v-else>--</i>
-            <div
-              class="sliderBtn"
-              :class="_t.states == 1 ? 'open ' : 'close'"
-              @click="closeOpen(i)"
-            ></div>
-          </div>
-          <div class="li_bt">
-            <span>{{ _t.areaName }}</span>
-            <span>照明回路:{{ _t.circuit }}</span>
-          </div>
+    <div id="coldSAndWaterSDetail" class="coldSAndWaterSDetail">
+      <div class="tittle">排水系统</div>
+      <ul class="sysConfig">
+        <li class="sysStatus">
+          <span>系统状态</span>
+          <span id="caw_status" :class="[systemType == 0 ? '_blue_' : '_red_']">{{
+            systemData.systemState
+          }}</span>
+        </li>
+        <li class="sysControl">
+          <span>系统控制</span>
+          <span class="btnGrounp">
+            <a
+              :class="[systemType == 0 ? 'bg_blue' : 'bg_grey']"
+              @click="handleChange(0)"
+              >启动</a
+            >
+            <a
+              :class="[systemType == 0 ? 'bg_grey' : 'bg_red']"
+              @click="handleChange(1)"
+              >停止</a
+            >
+          </span>
+        </li>
+      </ul>
+      <div class="tittle">手自动切换</div>
+      <ul class="AutomaticSwitch">
+        <li v-for="(item, index) in systemList" :key="index">
+          <span class="LineBeyond">{{ item.name }}</span>
+          <span
+            ><div
+              class="sliderBtn4"
+              :class="[item.status == '1' ? 'open' : 'close']"
+              @click="selectChange(index)"
+            ></div
+          ></span>
         </li>
       </ul>
     </div>
@@ -86,7 +58,7 @@
 export default {
   data() {
     return {
-      activeIndex: 0,
+      // activeIndex: 0,
       list: [
         {
           path: "/greenEnergyEfficiency/building/codesource",
@@ -97,14 +69,6 @@ export default {
           name: "空调",
         },
         {
-          path: "/greenEnergyEfficiency/building/elevator",
-          name: "电梯",
-        },
-        {
-          path: "/greenEnergyEfficiency/building/lighting",
-          name: "照明",
-        },
-        {
           path: "/greenEnergyEfficiency/building/primaryAirSystem",
           name: "新风",
         },
@@ -112,96 +76,97 @@ export default {
           path: "/greenEnergyEfficiency/building/watersupply",
           name: "给排水",
         },
-      ],
-     
-      floorList: [
         {
-          value: 12,
-          label: "F12",
+          path: "/greenEnergyEfficiency/building/elevator",
+          name: "电梯",
         },
         {
-          value: 13,
-          label: "F13",
-        },
-        {
-          value: 14,
-          label: "F14",
-        },
-        {
-          value: 15,
-          label: "F15",
-        },
-        {
-          value: 16,
-          label: "F16",
+          path: "/greenEnergyEfficiency/building/lighting",
+          name: "照明",
         },
       ],
-      CommonAreaDatas: [
+      systemList: [
         {
-          areaName: "茶水间-左",
-          states: 1,
-          circuit: 1,
-          eqTypy: "csj",
+          name: "1#给水泵",
+          status: 1,
         },
         {
-          areaName: "电梯间",
-          states: 0,
-          circuit: 48,
-          eqTypy: "dtj",
+          name: "2#给水泵",
+          status: 0,
         },
         {
-          areaName: "楼梯间",
-          states: 0,
-          circuit: 26,
-          eqTypy: "ltj",
+          name: "3#给水泵",
+          status: 1,
         },
         {
-          areaName: "茶水间-右",
-          states: 0,
-          circuit: 2,
-          eqTypy: "csj",
+          name: "4#给水泵",
+          status: 1,
         },
         {
-          areaName: "男卫生间",
-          states: 0,
-          circuit: 2,
-          eqTypy: "nwsj",
+          name: "1#水流开关",
+          status: 0,
         },
         {
-          areaName: "女卫生间",
-          states: 0,
-          circuit: 2,
-          eqTypy: "nwsj2",
+          name: "2#水流开关",
+          status: 1,
         },
         {
-          areaName: "大堂",
-          states: 0,
-          circuit: 6,
-          eqTypy: "dt",
+          name: "3#水流开关",
+          status: 1,
         },
         {
-          areaName: "走廊",
-          states: 1,
-          circuit: 67,
-          eqTypy: "zl",
+          name: "4#水流开关",
+          status: 0,
         },
+        // {
+        //   name: "3#冷却水循环泵",
+        //   status: 1,
+        // },
+        // {
+        //   name: "1#冷冻水循环泵",
+        //   status: 1,
+        // },
+        // {
+        //   name: "2#冷冻水循环泵",
+        //   status: 1,
+        // },
+        // {
+        //   name: "3#冷冻水循环泵",
+        //   status: 1,
+        // },
       ],
-    
+      systemType: 0,
+      systemData: { systemState: "运行中" },
     };
   },
   methods: {
      handleClick(path,index,name){
-      this.activeIndex=index
+      // this.activeIndex=index
+      this.$store.commit('setActiveIndex',index)
       this.$router.push(path)
       this.$SendMessageToUnity("OnChangePage", {"name":name});
      
     },
-     closeOpen(i) {
-        this.CommonAreaDatas[i].states =
-          this.CommonAreaDatas[i].states == 1 ? 0 : 1;
-    
-    },
-    
+      handleChange(val){
+            if(val ===0){
+              this.systemData.systemState='运行中'
+            }else{
+              this.systemData.systemState='已停止'
+            }
+              this.systemType=val
+          },
+          selectChange(i){
+             this.systemList= this.systemList.map((item,index)=>{
+              if(index == i){
+                if(item.status==1){
+                  item.status=0
+                }else if(item.status==0){
+                  item.status=1
+                }
+              }
+              return item
+            })
+          }
   },
 };
 </script>
@@ -234,77 +199,82 @@ export default {
     background-size: contain;
   }
 }
-.lighting {
-  .total {
-    & > ul {
-      display: flex;
-      justify-content: space-around;
-      margin: 0.25rem /* 20/80 */ 0;
-      .icon-zhaoming{
-        font-size: .5rem /* 40/80 */;
-        color: #4396F3;
-      }
-      & > li {
-        display: flex;
-        flex-direction: column;
-        text-align: center;
-        span:first-child {
-          font-size: 0.25rem /* 20/80 */;
-          margin-bottom: 0.125rem /* 10/80 */;
-        }
-        span:last-child {
-          font-size: 0.15rem /* 12/80 */;
-        }
-      }
-    }
-  }
+.coldSAndWaterSDetail {
+  width: 4.375rem /* 350/80 */;
+  color: #fff;
 }
-.public {
-  // 空气一览
-  .CommonAreaControl {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    margin-top: 15px;
-    li {
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      // width: 173px;
-      width: 1.95rem /* 156/80 */;
-      height: 1.3375rem /* 107/80 */;
-      background: rgba(255, 255, 255, 0.1);
-      font-size: 0.15rem /* 12/80 */;
-      border-radius: 3px;
-      padding: 0.1875rem /* 15/80 */ 0.125rem /* 10/80 */;
-      margin: 0.175rem /* 14/80 */ 0 0 0.1875rem /* 15/80 */;
-      &:nth-child(1),
-      &:nth-child(2) {
-        margin-top: 0px;
-      }
-      span {
-        white-space: nowrap;
-        display: block;
-      }
-      .li_tp,
-      .li_bt {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-      }
-      .li_tp {
-        i {
-          font-size: 0.475rem /* 38/80 */;
-          color: #4396f3;
-        }
-      }
-      .li_bt {
-        i {
-          font-size: 0.175rem /* 14/80 */;
-        }
-      }
-    }
-  }
+._blue {
+  color: #4396f3;
+}
+._red {
+  color: #e21c1c;
+}
+.bg_red {
+  background: #ff4901;
+  color: #fff;
 }
 
+.bg_blue {
+  background: #4396F3;
+  color: #fff;
+}
+
+.bg_grey {
+  background: grey;
+  color: #fff;
+}
+
+.sysConfig,
+.AutomaticSwitch {
+  padding-left: 40px;
+}
+
+.sysConfig li {
+  display: flex;
+  justify-content: space-between;
+  padding: 15px 0;
+  font-size: 14px;
+}
+
+.sysConfig li span {
+  display: flex;
+  justify-content: space-between;
+  width: 170px;
+}
+
+.sysConfig li span:nth-child(2) {
+  width: 130px;
+}
+
+.sysConfig li:nth-child(1) span:nth-child(2) {
+  text-align: left;
+}
+
+.btnGrounp a {
+  width: 56px;
+  height: 26px;
+  line-height: 26px;
+  text-align: center;
+  border-radius: 6px;
+  margin-right: 5px;
+}
+
+.AutomaticSwitch li {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 0;
+  font-size: 14px;
+}
+
+.AutomaticSwitch li span:nth-child(1) {
+  width: 200px;
+}
+
+.AutomaticSwitch li span:nth-child(2) {
+  width: 96px;
+}
+#caw_status {
+  font-weight: bold;
+}
 </style>

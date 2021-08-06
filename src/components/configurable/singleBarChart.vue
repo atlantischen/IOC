@@ -11,7 +11,7 @@
       />
       <DropDown
         v-if="datas.momthsList"
-        :list="datas.momthsList"
+        :list="momthsList"
         name="label"
         @_cg="changePSMonths"
       />
@@ -41,24 +41,27 @@ export default {
       type: Object,
     },
   },
-  data () {
+  data() {
     return {
       ...this._data,
+      momthsList: this.$getYearMonth(this._data.datas.yearsList[0].value),
       ids: this.$uuid(),
     };
   },
-  created () { },
-  mounted () {
+  created() {},
+  mounted() {
     this.singleBarChartFun(this.datas);
+    this.changePSMonths();
   },
   methods: {
-    changePSMonths (val) {
+    changePSMonths(val) {
       this.singleBarChartFun(this.datas);
     },
-    changePSYears (val) {
+    changePSYears(val) {
       this.singleBarChartFun(this.datas);
+      this.momthsList = this.$getYearMonth(val);
     },
-    singleBarChartFun (val) {
+    singleBarChartFun(val) {
       let { xAxisD, datas, units, names, leftTip } = val;
       var allD = [],
         showLb = {
@@ -108,8 +111,9 @@ export default {
       var option = {
         title: {
           show: leftTip,
-          text: `{c|${leftTip ? leftTip.name : ""}}{a|${leftTip ? leftTip.value : ""
-            }}{b|${leftTip ? leftTip.unit : ""}}`,
+          text: `{c|${leftTip ? leftTip.name : ""}}{a|${
+            leftTip ? leftTip.value : ""
+          }}{b|${leftTip ? leftTip.unit : ""}}`,
           link: "",
           target: null,
           subtext: "",
@@ -124,8 +128,6 @@ export default {
               c: {
                 fontSize: 14,
                 color: "rgb(255,255,255,.7)",
-            
-
               },
               a: {
                 color: "#fff",
@@ -165,10 +167,12 @@ export default {
             let dataStr = `<p style="font-weight:bold;font-size:.2rem;text-align:center;padding-bottom:.0625rem;">${params[0].name}</p>`;
             params.forEach((item) => {
               dataStr += `<div>
-                    <span style=" vertical-align: middle;margin-right:0.0625rem;width:0.15rem;height:0.12rem;border-radius:0.02rem;background:linear-gradient(to bottom, ${item.color.colorStops[0].color
-                },${item.color.colorStops[1].color}"></span>
-                    <span> ${item.seriesName ? item.seriesName + ":" : item.seriesName
-                }  ${item.value}</span>
+                    <span style=" vertical-align: middle;margin-right:0.0625rem;width:0.15rem;height:0.12rem;border-radius:0.02rem;background:linear-gradient(to bottom, ${
+                      item.color.colorStops[0].color
+                    },${item.color.colorStops[1].color}"></span>
+                    <span> ${
+                      item.seriesName ? item.seriesName + ":" : item.seriesName
+                    }  ${item.value}</span>
                   </div>`;
             });
             return dataStr;
