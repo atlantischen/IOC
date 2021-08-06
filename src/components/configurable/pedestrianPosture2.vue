@@ -4,7 +4,8 @@
     <div class="pedestrianPosture2" :style="$paddingFun(datas.padding)">
       <ul class="pp_top">
         <li class="y_c" v-for="(item, i) in datas.datas2" :key="i">
-          <span>{{ item.value }}</span>
+          <!-- <span>{{ item.value }}</span> -->
+          <span><NumCounter :value="item.value"></NumCounter></span>
           <span>{{ item.name }}</span>
         </li>
       </ul>
@@ -39,7 +40,7 @@ export default {
   methods: {
     // 人行态势
     pedestrianPosture2Fun(val) {
-      const { names, xData, datas, smooth, unit } = val;
+      let { names, xData, datas, smooth, unit } = val;
       var allD = [],
         Linear = {
           0: [
@@ -150,7 +151,7 @@ export default {
             padding: [15, 0, 0, 0],
             rotate: -35,
             interval: "auto",
-            margin: 20,
+            margin: 25,
             textStyle: {
               color: "#fff",
               align: "center",

@@ -37,11 +37,12 @@ var currentDate = function currentDate() {
 /**
  *
  * 获取00:00到现在的时整点  开始时间  (00:00) 结束(获取现在 例 15:00) 
+ * @param {Array} _rangeT // 初始化开始结束时间 
  * @param {Number} _range // 显示个数（存在1~2误差） 
  * @param {Array} delItem // 删除数组中指定项
  * @returns
  */
-var timeRangeArr = function timeRangeArr(_range, delItem) {
+var timeRangeArr = function timeRangeArr(_rangeT, delItem, _range,) {
   function noRepeat(arr) {
     var newArr = [];
     for (var i = 0; i < arr.length; i++) {
@@ -64,8 +65,14 @@ var timeRangeArr = function timeRangeArr(_range, delItem) {
     n.push(arr[_l - 1])
     return noRepeat(n)
   }
-  var _start = '00:00',
-    _end = moment(new Date()).format('HH:mm').split(':')[0] + ':00'
+  var _start = '00:00'
+  var _end = moment(new Date()).format('HH:mm').split(':')[0] + ':00'
+  if (_rangeT) {
+    _start = _rangeT[0]
+    if (_rangeT[1].split(':')[0] * 1 <= _end.split(':')[0] * 1) {
+      _end = _rangeT[1]
+    }
+  }
   var timeline = [], returnArr = [],
     startHour = _start.split(':')[0] * 1,
     endHour = _end.split(':')[0] * 1

@@ -50,17 +50,15 @@ export default {
                 0,
                 0,
                 0,
-                this.$randomNumer(0, 6),
-                this.$randomNumer(6, 9),
-                this.$randomNumer(9, 12),
-                this.$randomNumer(12, 24),
-                this.$randomNumer(20, 24),
-                this.$randomNumer(24, 30),
-                this.$randomNumer(24, 30),
-                this.$randomNumer(24, 32),
-                this.$randomNumer(24, 30),
-                this.$randomNumer(4, 9),
-                this.$randomNumer(1, 4),
+                0,
+                this.$randomNumer(10, 40),
+                this.$randomNumer(10, 50),
+                this.$randomNumer(10, 50),
+                this.$randomNumer(10, 50),
+                this.$randomNumer(10, 50),
+                this.$randomNumer(10, 50),
+                this.$randomNumer(10, 50),
+                0,
                 0,
                 0,
                 0,
@@ -97,7 +95,20 @@ export default {
               "3C栋",
             ],
             units: ["", "人"],
-            datas: [[500, 480, 900, 850, 650, 610, 780, 620, 500]],
+            datas: [
+              // [500, 480, 900, 850, 650, 610, 780, 620, 500],
+              [
+                this.$randomNumer(50, 300),
+                this.$randomNumer(50, 300),
+                this.$randomNumer(50, 300),
+                this.$randomNumer(50, 300),
+                this.$randomNumer(50, 300),
+                this.$randomNumer(50, 300),
+                this.$randomNumer(50, 300),
+                this.$randomNumer(50, 300),
+                this.$randomNumer(50, 300),
+              ],
+            ],
           },
         },
       ],
@@ -274,6 +285,13 @@ export default {
     };
   },
   components: {},
+  created() {
+    let _l = this.leftInfo[0].datas.xData.length;
+    this.leftInfo[0].datas.datas[0] = this.leftInfo[0].datas.datas[0].slice(
+      0,
+      _l
+    );
+  },
   mounted() {},
   methods: {},
 };
