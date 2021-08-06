@@ -1240,12 +1240,20 @@ export default {
       };
       this.$redomEchart(dom, option);
     },
-    event(event) {
-      
-        let res = JSON.parse(event.data);
-            console.log(res,'resresresresres');
-         if (res && res.lenght != 0) {
-           switch (res.action) {
+
+  },
+  created() {
+    
+  },
+    computed: {
+    getUnityData () {
+      return this.$store.state.unitySendData;
+    },
+  },
+  watch:{
+    getUnityData(val){
+      try {
+       switch (val.action) {
              case 'view_hide':
               this.fade = true;
                this.posationTop= "top:1.6rem"
@@ -1257,16 +1265,8 @@ export default {
              default:
                break;
            }
-        
-        }
-     
-    },
-  },
-  created() {
-    window.addEventListener("message", this.event, true);
-
-
-   
+      } catch (e) { }
+    }
   },
   mounted() {
     this.AssetsAndEquipment({
@@ -1282,7 +1282,7 @@ export default {
     this.trendInit(this.$getNowTime(),[102,89,20,1,5,5,80,100,120,220,330,400,550,650,800,905,1020,1300,1600,1680,1700,1500,1380,260],[112,90,56,6,12,23,120,110,150,250,430,490,589,670,810,965,1120,1400,1600,1680,1750,1563,1206,236]);
   },
    destroyed() {
-       window.removeEventListener("message", this.event, true);
+
 
 
   },

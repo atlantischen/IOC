@@ -17,7 +17,7 @@
           </div>
           <div class="percentage">
             <img src="../../../../assets/img/1.png" alt="" />
-            <span> <NumCounter :value="$randomNum(1,5)"></NumCounter>%</span>
+            <span> <NumCounter :value="$randomNumer(1,5,2)"></NumCounter>%</span>
           </div>
         </div>
       </div>
@@ -34,7 +34,7 @@
             </div>
             <div class="percentage">
               <img src="../../../../assets/img/1.png" alt="" />
-              <span class="font_text"> {{$randomNum(1,5)}}%</span>
+              <span class="font_text"> {{$randomNumer(1,5,2)}}%</span>
             </div>
           </li>
           <li>
@@ -48,7 +48,7 @@
             </div>
             <div class="percentage">
               <img src="../../../../assets/img/1.png" alt="" />
-              <span class="font_text">{{$randomNum(1,5)}}%</span>
+              <span class="font_text">{{$randomNumer(1,5,2)}}%</span>
             </div>
           </li>
           <li>
@@ -62,7 +62,7 @@
             </div>
             <div class="percentage">
               <img src="../../../../assets/img/2.png" alt="" />
-              <span class="font_text">{{$randomNum(1,5)}}%</span>
+              <span class="font_text">{{$randomNumer(1,5,2)}}%</span>
             </div>
           </li>
         </ul>
@@ -165,7 +165,7 @@
               <div>
                 <span>本月电能耗：</span>
                 <span class="font_text">
-                  <NumCounter :value="304376.75"></NumCounter>
+                  <NumCounter :value="1296*num"></NumCounter>
                 </span>
                 <span>KW.H</span>
               </div>
@@ -179,7 +179,7 @@
               <div>
                 <span>本月水能耗：</span>
                 <span class="font_text">
-                  <NumCounter :value="48.52"></NumCounter>
+                  <NumCounter :value="205*num"></NumCounter>
                 </span>
                 <span>T</span>
               </div>
@@ -193,7 +193,7 @@
               <div>
                 <span>本月气能耗：</span>
                 <span class="font_text">
-                  <NumCounter :value="63.28"></NumCounter
+                  <NumCounter :value="636.28*num"></NumCounter
                 ></span>
                 <span>m³</span>
               </div>

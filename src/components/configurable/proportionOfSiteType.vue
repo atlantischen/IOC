@@ -76,6 +76,9 @@ export default {
           textStyle: {
             color: "#fff",
           },
+          formatter: v => {
+            return v.name + ':' + v.value + '%'
+          }
         },
         title: [
           {
@@ -105,12 +108,15 @@ export default {
           selectedMode: true,
           show: true,
           orient: "vertical", // 'horizontal'
-          left: "65%",
+          left: "62%",
           y: "center",
           data: optionName,
           formatter: function (name) {
-            // return "{a|" + name + "}" + datas[j++] + "%";
-            return "{a|" + name + "}";
+            var index = 0;
+            optionName.forEach(function (value, i) {
+              if (value == name) index = i;
+            });
+            return "{a|" + name + "}" + datas[index] + "%";
           },
           textStyle: {
             color: "#fff",
@@ -118,7 +124,8 @@ export default {
             padding: [0, 15, 0, 2],
             rich: {
               a: {
-                width: 40,
+                // width: 40,
+                padding: [0, 5, 0, 0],
                 color: "rgb(255,255,255,.7)",
               },
             },
@@ -252,12 +259,15 @@ export default {
           selectedMode: true,
           show: true,
           orient: "vertical", // 'horizontal'
-          left: "65%",
+          left: "62%",
           y: "center",
           data: optionName,
           formatter: function (name) {
-            // return "{a|" + name + "}" + datas[j++] + "%";
-            return "{a|" + name + "}";
+            var index = 0;
+            optionName.forEach(function (value, i) {
+              if (value == name) index = i;
+            });
+            return "{a|" + name + "}" + datas[index] + "%";
           },
           textStyle: {
             color: "#fff",
@@ -265,7 +275,7 @@ export default {
             padding: [0, 15, 0, 2],
             rich: {
               a: {
-                width: 40,
+                padding: [0, 5, 0, 0],
                 color: "rgb(255,255,255,.7)",
               },
             },

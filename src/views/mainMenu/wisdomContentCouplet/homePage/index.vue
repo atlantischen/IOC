@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <IOCLeft>
+    <IOCLeft :fade="fade">
       <div class="equipment">
         <div class="tittle">设备情况</div>
         <div id="equipment" ref="equipment"></div>
@@ -10,8 +10,8 @@
         <div id="equipment_faulty" ref="equipment_faulty"></div>
       </div>
     </IOCLeft>
-    <Tips :list="list"></Tips>
-    <IOCRight>
+    <Tips :fade="fade" :list="list"></Tips>
+    <IOCRight :fade="fade">
       <div class="equipment_comparison">
         <div class="tittle">设备对比分析</div>
         <div class="select">
@@ -43,7 +43,13 @@
         <div id="equipment_warning" ref="equipment_warning"></div>
       </div>
     </IOCRight>
-    <!-- <Rtps></Rtps> -->
+      <!-- 设备管理 -->
+    <Device
+      v-show="deviceShow"
+      :_fade="_fade"
+      @chageFade="chageFade($event)"
+    ></Device>
+    <div v-if="fade" class="mask" @mouseenter="deviceChangeShow"></div>
   </div>
 </template>
 
@@ -54,7 +60,9 @@ export default {
   data() {
     return {
       flag: false,
-
+      deviceShow: false,
+      _fade:false,
+      fade:false,
       list: [
         {
           num: 33526,
@@ -142,6 +150,14 @@ export default {
   },
   components: {},
   methods: {
+      chageFade (val) {
+      this._fade = val;
+    },
+    deviceChangeShow(){
+      console.log('进入！');
+      this.deviceShow=true
+       this._fade=false
+    },
     changePSMonths(val) {
       switch (val) {
         case 12:
@@ -656,12 +672,31 @@ export default {
       this.$redomEchart(dom, option);
     },
   },
+  computed: {
+    getUnityData () {
+      return this.$store.state.unitySendData;
+    },
+  },
+  watch:{
+    getUnityData(val){
+      try {
+       if(val.action ==='ME_ZHYLSingle' && val.data==='1' ){
+         this.fade =true
+       }else if(val.action ==='ME_ZHYLSingle' && val.data==='0'){
+         this.fade =false
+       }
+      } catch (e) { }
+    }
+  },
   mounted() {
     this.equipmentInit();
     this.equipmentFaultyInit();
     this.equipmentWarningInit();
     this.equipmentComparisonInit([-2.54, 4.74, 2.54]);
   },
+  created(){
+    this.$store
+  }
 };
 </script>
 
@@ -714,6 +749,15 @@ export default {
       width: 100%;
       height: 3.75rem /* 300/80 */;
     }
+  }
+  .mask{
+    position: fixed;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: .75rem /* 60/80 */ /* 100/80 */ /* 300/80 */;
+    height: 6.25rem /* 500/80 */ /* 300/80 */;
+    // background-color: red;
   }
 }
 </style>

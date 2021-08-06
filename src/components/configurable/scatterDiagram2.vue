@@ -3,8 +3,15 @@
     <div class="tittle">{{ title }}</div>
     <ul class="sd_top">
       <li class="y_c" v-for="(item, i) in datas.datas" :key="i">
-        <span
+        <!-- <span
           >{{ item.value }} <i>{{ item.unit }}</i>
+        </span> -->
+        <span v-if="item.name == '今日会议预约数'"
+          >{{ thisDay || item.value }} <i>{{ item.unit }}</i>
+        </span>
+        <span v-else
+          >{{ thisDay * $getDayNums("m") || item.value }}
+          <i>{{ item.unit }}</i>
         </span>
         <span>{{ item.name }}</span>
       </li>
@@ -25,19 +32,24 @@ export default {
       type: Object,
     },
   },
-  data() {
+  data () {
     return {
       ...this._data,
       ids: this.$uuid(),
+      thisDay: 0,
     };
   },
-  created() {},
-  mounted() {
+  created () { },
+  mounted () {
     this.scatterDiagramFun(this.datas);
   },
   methods: {
-    scatterDiagramFun(val) {
+    scatterDiagramFun (val) {
       let { xAxisD, yAxisD, units, title, data, names, yRange } = val;
+      this.thisDay = 0
+      for (var i = 0; i < data.length; i++) {
+        this.thisDay = this.thisDay + data[i][2]
+      }
       var option = {
         title: {
           text: title,
@@ -69,9 +81,8 @@ export default {
             color: "#fff",
           },
           formatter: (params) => {
-            let dataStr = `<p style="font-weight:bold;text-align:center;color:#4396f3;">${
-              xAxisD[params.value[0]]
-            }</p>`;
+            let dataStr = `<p style="font-weight:bold;text-align:center;color:#4396f3;">${xAxisD[params.value[0]]
+              }</p>`;
             dataStr += `<div>
               <span>${yRange[params.value[1]]}</span><br/>
               <span>预约会议数：${params.value[2]}</span>
@@ -192,11 +203,11 @@ export default {
           {
             name: names ? names[0] : "",
             type: "scatter",
-            symbolSize: function(val) {
+            symbolSize: function (val) {
               return val[2] * 3;
             },
             data: data,
-            animationDelay: function(idx) {
+            animationDelay: function (idx) {
               return idx * 5;
             },
             emphasis: {

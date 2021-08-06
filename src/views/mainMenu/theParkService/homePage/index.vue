@@ -40,15 +40,15 @@ export default {
             return: [
               {
                 state: 'up',
-                data: '40.22%',
+                data: this.$randomNumer(1, 5, 2) + '%',
               },
               {
                 state: 'up',
-                data: '44.53%'
+                data: this.$randomNumer(1, 5, 2) + '%'
               },
               {
                 state: 'down',
-                data: '38.08%'
+                data: this.$randomNumer(1, 5, 2) + '%'
               }
             ]
           },
@@ -68,7 +68,7 @@ export default {
             ],
             units: ["", "个"],
             datas: [
-              [353, 220, 160, 100, 60]
+              [this.$randomNumer(250, 280), this.$randomNumer(150, 200), this.$randomNumer(100, 150), this.$randomNumer(50, 100), this.$randomNumer(0, 50)]
             ],
             leftTip: {
               name: '服务单合计：',
@@ -89,56 +89,56 @@ export default {
                 value: 2019,
               },
             ],
-           momthsList: [
-        {
-          label: "12月",
-          value: 12,
-        },
-        {
-          label: "11月",
-          value: 11,
-        },
-        {
-          label: "10月",
-          value: 10,
-        },
-        {
-          label: "9月",
-          value: 9,
-        },
-        {
-          label: "8月",
-          value: 8,
-        },
-        {
-          label: "7月",
-          value: 7,
-        },
-        {
-          label: "6月",
-          value: 6,
-        },
-        {
-          label: "5月",
-          value: 5,
-        },
-        {
-          label: "4月",
-          value: 4,
-        },
-        {
-          label: "3月",
-          value: 3,
-        },
-        {
-          label: "2月",
-          value: 2,
-        },
-        {
-          label: "1月",
-          value: 1,
-        },
-      ],
+            momthsList: [
+              {
+                label: "12月",
+                value: 12,
+              },
+              {
+                label: "11月",
+                value: 11,
+              },
+              {
+                label: "10月",
+                value: 10,
+              },
+              {
+                label: "9月",
+                value: 9,
+              },
+              {
+                label: "8月",
+                value: 8,
+              },
+              {
+                label: "7月",
+                value: 7,
+              },
+              {
+                label: "6月",
+                value: 6,
+              },
+              {
+                label: "5月",
+                value: 5,
+              },
+              {
+                label: "4月",
+                value: 4,
+              },
+              {
+                label: "3月",
+                value: 3,
+              },
+              {
+                label: "2月",
+                value: 2,
+              },
+              {
+                label: "1月",
+                value: 1,
+              },
+            ],
           },
         },
       ],
@@ -150,22 +150,38 @@ export default {
             eHeight: 240,
             padding: null,
             unit: ["", "单"],
-            xData: [
-              "1月",
-              "2月",
-              "3月",
-              "4月",
-              "5月",
-              "6月",
-              "7月",
-              "8月",
-              "9月",
-              "10月",
-              "11月",
-              "12月",
-            ],
+            // xData: [
+            //   "1月",
+            //   "2月",
+            //   "3月",
+            //   "4月",
+            //   "5月",
+            //   "6月",
+            //   "7月",
+            //   "8月",
+            //   "9月",
+            //   "10月",
+            //   "11月",
+            //   "12月",
+            // ],
+            xData: this.$monthRangeArr(true),
+            // datas: [
+            //   [119, 120, 130, 140, 143, 154, 160, 162, 169, 170, 190, 200],
+            // ],
             datas: [
-              [119, 120, 130, 140, 143, 154, 160, 162, 169, 170, 190, 200],
+              [this.$randomNumer(400, 700),
+              this.$randomNumer(400, 700),
+              this.$randomNumer(400, 700),
+              this.$randomNumer(400, 700),
+              this.$randomNumer(400, 700),
+              this.$randomNumer(400, 700),
+              this.$randomNumer(400, 700),
+              this.$randomNumer(400, 700),
+              this.$randomNumer(400, 700),
+              this.$randomNumer(400, 700),
+              this.$randomNumer(400, 700),
+              this.$randomNumer(400, 700),
+              ],
             ],
             leftTip: {
               name: '服务单合计：',
@@ -202,6 +218,12 @@ export default {
     };
   },
   components: {},
+  created () {
+    this.leftInfo[1].datas.leftTip.value = this.$arrAdd(this.leftInfo[1].datas.datas[0])
+    let _l = this.rightInfo[0].datas.xData.length
+    let _d = this.rightInfo[0].datas.datas[0] = this.rightInfo[0].datas.datas[0].slice(0, _l)
+    this.rightInfo[0].datas.leftTip.value = this.$arrAdd(_d)
+  },
   mounted () {
   },
   methods: {

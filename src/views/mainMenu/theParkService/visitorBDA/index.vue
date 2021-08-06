@@ -15,6 +15,7 @@
 </template>
 
 <script>
+import data from "@/utils/falseData.js"
 export default {
   name: 'visitorBDA',
   data () {
@@ -28,23 +29,25 @@ export default {
             names: null,
             unit: ["时间", "人"],
             xData: [
-              "00:00",
-              "04:00",
-              "08:00",
-              "12:00",
+              "09:00",
+              "10:00",
+              "11:00",
+              "14:00",
+              "15:00",
               "16:00",
-              "20:00"
+              "17:00",
+              "18:00"
             ],
             datas: [
-              [120, 140, 300, 450, 600, 470],
+              [120, 240, 310, 355, 320, 220, 100, 98],
             ],
             datas2: [
               {
-                value: 23690,
+                value: 32856,
                 name: "今日总人数",
               },
               {
-                value: 89,
+                value: data.VisitorsToday,
                 name: "今日访客总量",
               },
             ],
@@ -112,7 +115,7 @@ export default {
             },
             tabelD: [
               {
-                licence: '粤B1026B',
+                licence: '粤BB026B',
                 ownerName: '付春晖',
                 type: '出场',
                 time: '16:05:06'
@@ -124,127 +127,127 @@ export default {
                 time: '16:08:23'
               },
               {
-                licence: '粤A93521',
+                licence: '粤BR35E1',
                 ownerName: '夏少东',
                 type: '出场',
                 time: '16:09:23'
               },
               {
-                licence: '粤AD3521',
+                licence: '川AF2343',
                 ownerName: '曲优',
                 type: '出场',
                 time: '15:34:12'
               },
               {
-                licence: '粤AD3521',
+                licence: '粤D234D3',
                 ownerName: '李志明',
                 type: '出场',
                 time: '15:43:32'
               },
               {
-                licence: '粤AD3521',
+                licence: '粤C30335',
                 ownerName: '黄欣',
                 type: '出场',
                 time: '16:09:45'
               },
               {
-                licence: '粤AD3521',
+                licence: '贵A32404',
                 ownerName: '田骄',
                 type: '进场',
                 time: '13:34:21'
               },
               {
-                licence: '粤AD3521',
+                licence: '粤EF3430',
                 ownerName: '胡思安',
                 type: '进场',
                 time: '12:34:12'
               },
               {
-                licence: '粤AD3521',
+                licence: '粤BS4544',
                 ownerName: '吴大坤',
                 type: '出场',
                 time: '16:32:43'
               },
               {
-                licence: '粤AD3521',
+                licence: '粤DF3243',
                 ownerName: '刘虎娣',
                 type: '出场',
                 time: '12:00:12'
               },
               {
-                licence: '粤AD3521',
+                licence: '湘A34355',
                 ownerName: '谭珏',
                 type: '出场',
                 time: '19:32:13'
               },
               {
-                licence: '粤AD3521',
+                licence: '赣BR3423',
                 ownerName: '王咚咚',
                 type: '出场',
                 time: '11:23:32'
               },
               {
-                licence: '粤AD3521',
+                licence: '湘AY8768',
                 ownerName: '蔡迪',
                 type: '进场',
                 time: '14:23:54'
               },
               {
-                licence: '粤AD3521',
+                licence: '苏CZ3453',
                 ownerName: '石俊',
                 type: '出场',
                 time: '12:40:59'
               },
               {
-                licence: '粤AD3521',
+                licence: '粤D46456',
                 ownerName: '史娜',
                 type: '进场',
                 time: '14:51:01'
               },
               {
-                licence: '粤AD3521',
+                licence: '粤S34354',
                 ownerName: '胡韩振',
                 type: '进场',
                 time: '10:54:02'
               },
               {
-                licence: '粤AD3521',
+                licence: '鲁A45466',
                 ownerName: '章经信',
                 type: '出场',
                 time: '18:43:07'
               },
               {
-                licence: '粤AD3521',
+                licence: '冀B235D3',
                 ownerName: '刘生',
                 type: '出场',
                 time: '12:34:31'
               },
               {
-                licence: '粤AD3521',
+                licence: '粤F456E6',
                 ownerName: '林金',
                 type: '进场',
                 time: '18:09:12'
               },
               {
-                licence: '粤AD3521',
+                licence: '粤B454F5',
                 ownerName: '秦风明',
                 type: '出场',
                 time: '17:23:23'
               },
               {
-                licence: '粤AD3521',
+                licence: '粤H545R6',
                 ownerName: '昊岳',
                 type: '出场',
                 time: '16:09:23'
               },
               {
-                licence: '粤AD3521',
+                licence: '浙A12313',
                 ownerName: '管简君',
                 type: '出场',
                 time: '16:09:23'
               },
               {
-                licence: '粤AD3521',
+                licence: '鄂AF3432',
                 ownerName: '安吉里',
                 type: '出场',
                 time: '16:09:23'
@@ -256,6 +259,8 @@ export default {
     }
   },
   components: {},
+  mounted () {
+  },
   methods: {
   }
 }
