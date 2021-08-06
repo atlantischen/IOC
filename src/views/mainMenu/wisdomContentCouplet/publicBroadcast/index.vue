@@ -107,6 +107,15 @@
       </div>
     </IOCRight> -->
   </div>
+     <!-- 设备管理 -->
+    <Device
+      v-show="deviceShow"
+      :_fade="_fade"
+      :idArry="idArry"
+      @chageFade="chageFade($event)"
+    ></Device>
+  <div class="mask" @mouseenter="deviceChangeShow"></div>
+
 </template>
 
 <script>
@@ -129,6 +138,9 @@ export default {
   name: "publicBroadcast",
   data() {
     return {
+       deviceShow: false,
+      _fade:false,
+      idArry:[0,1,2,3,4,5,10],
       activeIndex: null,
       text: "",
       audio: {
@@ -144,7 +156,6 @@ export default {
       sliderTime: 0,
       volume: 100,
       speeds: this.theSpeeds,
-
       controlList: {
         // 不显示下载
         noDownload: false,
@@ -164,6 +175,14 @@ export default {
   },
   components: {},
   methods: {
+      chageFade (val) {
+      this._fade = val;
+    },
+    deviceChangeShow(){
+      console.log('进入！');
+      this.deviceShow=true
+       this._fade=false
+    },
     handleClick(i) {
       this.activeIndex = i;
       this.$message({ message: "该功能暂时不支持!", type: "error"});
@@ -295,6 +314,9 @@ export default {
         : "播放中" + realFormatSecond(this.audio.currentTime);
     },
   },
+  created(){
+       this.$SendMessageToUnity("ShowIoTDevice_IOCMap",{strList:'0,1,2,3,4,5,10'});
+  }
 };
 </script>
 
@@ -460,5 +482,14 @@ export default {
     margin-left: 0.075rem /* 6/80 */;
   }
 }
+.mask{
+    position: fixed;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: .75rem /* 60/80 */ /* 100/80 */ /* 300/80 */;
+    height: 6.25rem /* 500/80 */ /* 300/80 */;
+    // background-color: red;
+  }
 
 </style>
