@@ -189,11 +189,11 @@ export default {
           return {
             ...e,
             type: "line",
-            smooth: smooth,
+            smooth: smooth ? smooth : true,
             itemStyle: {
               normal: {
                 lineStyle: {
-                  width: 0.5,
+                  width: 1,
                 },
               },
             },

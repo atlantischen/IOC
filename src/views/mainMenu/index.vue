@@ -118,11 +118,17 @@ export default {
           this.allAlertDatas = res.data.Datas;
         } else if (res.action === "Enter3DFullScreen") {
           // 3D全屏
+          this.showEscHandler = true;
+          if (this.checkFull()) {
+            this.hideGlobal(false);
+            this.clearWarnTimeFun();
+            this.isShow = false;
+            return;
+          }
           this.clearWarnTimeFun();
           this.$handleFullScreen();
           this.hideGlobal(false);
           this.isShow = false;
-          this.showEscHandler = true;
         } else if (res.data === "esc") {
           // 退出3D全屏
           // this.Exit3DFullScreen()
@@ -134,6 +140,7 @@ export default {
       window.debug = true;
     } else {
       this.url = process.env.VUE_APP_UNITY;
+      this.url = 'http://183.62.170.2:8110';
     }
   },
   mounted() {
@@ -141,12 +148,14 @@ export default {
       window.iframe = this.$refs.iframe;
       var _that = this;
       window.addEventListener("resize", function() {
-        var isFull =
-          document.fullscreenElement ||
-          document.mozFullScreenElement ||
-          document.webkitFullscreenElement;
-        if (isFull == undefined) isFull = false;
-        console.log(!isFull, _that.showEscHandler);
+        // var isFull =
+        //   document.fullscreenElement ||
+        //   document.mozFullScreenElement ||
+        //   document.webkitFullscreenElement;
+        // if (isFull == undefined) isFull = false;
+        console.log("isFull", _that.checkFull());
+        var isFull = _that.checkFull();
+        // console.log(!isFull, _that.showEscHandler);
         if (!isFull && _that.showEscHandler) {
           // 全屏下按键esc
           _that.Exit3DFullScreen();
@@ -237,6 +246,7 @@ export default {
         document.mozFullScreenElement ||
         document.webkitFullscreenElement;
       if (isFull == undefined) isFull = false;
+      if (isFull) isFull = true;
       return isFull;
     },
   },

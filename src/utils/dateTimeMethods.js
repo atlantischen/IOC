@@ -69,7 +69,7 @@ var timeRangeArr = function timeRangeArr(_rangeT, delItem, _range,) {
   var _end = moment(new Date()).format('HH:mm').split(':')[0] + ':00'
   if (_rangeT) {
     _start = _rangeT[0]
-    if (_rangeT[1].split(':')[0] * 1 <= _end.split(':')[0] * 1) {
+    if (_rangeT[1] && Number(_rangeT[1].split(':')[0] * 1) >= Number(_end.split(':')[0] * 1)) {
       _end = _rangeT[1]
     }
   }

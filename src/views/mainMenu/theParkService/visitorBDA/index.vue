@@ -64,6 +64,7 @@ export default {
                 0,
                 0,
                 0,
+                0,
               ],
             ],
             datas2: [
@@ -126,13 +127,13 @@ export default {
             xData: this.$funDateArr(-7),
             datas: [
               [
-                this.$randomNumer(100,300),
-                this.$randomNumer(100,300),
-                this.$randomNumer(100,300),
-                this.$randomNumer(100,300),
-                this.$randomNumer(100,300),
-                this.$randomNumer(100,300),
-                this.$randomNumer(100,300),
+                this.$randomNumer(100, 300),
+                this.$randomNumer(100, 300),
+                this.$randomNumer(100, 300),
+                this.$randomNumer(100, 300),
+                this.$randomNumer(100, 300),
+                this.$randomNumer(100, 300),
+                this.$randomNumer(100, 300),
               ],
             ],
           },
@@ -303,7 +304,8 @@ export default {
       _l
     );
   },
-  mounted() {},
+  mounted() {
+  },
   methods: {},
 };
 </script>

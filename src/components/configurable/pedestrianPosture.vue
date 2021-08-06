@@ -103,68 +103,7 @@ export default {
         };
       }
       var option = {
-        title: [
-          {
-            show: rightTip,
-            text: "",
-            link: "",
-            target: null,
-            subtext: `${rightTip ? rightTip.name : ""}${
-              rightTip ? rightTip.value : ""
-            }`,
-            sublink: "",
-            subtarget: null,
-            right: "-10",
-            top: "-10",
-            textAlign: "center",
-            textStyle: {
-              fontFamily: "BYfont",
-              fontSize: 24,
-              padding: [2, 0],
-              fontWeight: 550,
-              color: "#fff",
-            },
-            subtextStyle: {
-              fontSize: 12,
-              color: "#fff",
-            },
-          },
-          {
-            show: leftTip,
-            text: `{c|${leftTip ? leftTip.name : ""}}{a|${
-              leftTip ? leftTip.value : ""
-            }}{b|${leftTip ? leftTip.unit : ""}}`,
-            link: "",
-            target: null,
-            subtext: "",
-            sublink: "",
-            subtarget: null,
-            left: "1%",
-            top: "0%",
-            textAlign: "left",
-            itemGap: 6,
-            textStyle: {
-              rich: {
-                c: {
-                  fontSize: 14,
-                  color: "rgb(255,255,255,.7)",
-                },
-                a: {
-                  color: "#fff",
-                  fontFamily: "BYfont",
-                  fontSize: 20,
-                },
-                b: {
-                  color: "#fff",
-                  padding: [0, 0, 8, 3],
-                  fontSize: 12,
-                },
-              },
-            },
-          },
-        ],
         tooltip: {
-          show: true,
           trigger: "axis",
           axisPointer: {
             type: "line",
@@ -197,6 +136,66 @@ export default {
             return dataStr;
           },
         },
+        title: [
+          {
+            show: rightTip ? true : false,
+            text: "",
+            link: "",
+            target: null,
+            subtext: `${rightTip ? rightTip.name : ""}${
+              rightTip ? rightTip.value : ""
+            }`,
+            sublink: "",
+            subtarget: null,
+            right: "-10",
+            top: "-10",
+            textAlign: "center",
+            textStyle: {
+              fontFamily: "BYfont",
+              fontSize: 24,
+              padding: [2, 0],
+              fontWeight: 550,
+              color: "#fff",
+            },
+            subtextStyle: {
+              fontSize: 12,
+              color: "#fff",
+            },
+          },
+          {
+            show: leftTip ? true : false,
+            text: `{c|${leftTip ? leftTip.name : ""}}{a|${
+              leftTip ? leftTip.value : ""
+            }}{b|${leftTip ? leftTip.unit : ""}}`,
+            link: "",
+            target: null,
+            subtext: "",
+            sublink: "",
+            subtarget: null,
+            left: "1%",
+            top: "0%",
+            textAlign: "left",
+            itemGap: 6,
+            textStyle: {
+              rich: {
+                c: {
+                  fontSize: 14,
+                  color: "rgb(255,255,255,.7)",
+                },
+                a: {
+                  color: "#fff",
+                  fontFamily: "BYfont",
+                  fontSize: 20,
+                },
+                b: {
+                  color: "#fff",
+                  padding: [0, 0, 8, 3],
+                  fontSize: 12,
+                },
+              },
+            },
+          },
+        ],
         grid: {
           x: 10,
           y: leftTip ? 60 : 30,
@@ -204,7 +203,6 @@ export default {
           y2: -10,
           containLabel: true,
         },
-        color: color2,
         legend: {
           show: names,
           right: 20,
@@ -220,6 +218,7 @@ export default {
           itemHeight: 2,
           itemGap: 20,
         },
+        color: color2,
         xAxis: {
           type: "category",
           name: "{a|" + unit[0] + "}",

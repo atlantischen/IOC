@@ -1,58 +1,71 @@
 <template>
   <div class="companiesListAll">
     <div class="tittle">{{ title }}</div>
-    <div class="companiesList">
-      <ul class="companiesImgsList companiesImgsList4 mniBar">
-        <!-- <el-carousel
-          class="enterprisesCarousel"
-          :interval="4000"
-          arrow="never"
-          indicator-position="none"
+    <div class="companiesList" ref="companiesListRef">
+      <!-- <el-carousel
+        class="enterprisesCarousel"
+        :interval="4000"
+        arrow="never"
+        indicator-position="none"
+      >
+        <el-carousel-item
+          v-for="(tt, ii) in Math.ceil(datas.companiesImgsListDatas.length / 8)"
+          :key="ii"
         > -->
-        <!-- <el-carousel-item
-        v-for="(item, i) in Math.ceil(datas.enterprisesListDatas.length / 6)"
-        :key="i"
-      ></el-carousel-item> -->
-        <li class="x_fs_rap" :ref="'companiesImgsListRef_' + ids">
-          <!-- <el-carousel-item
-              v-for="(t, i) in Math.ceil(
-                datas.companiesImgsListDatas.length / 8
-              )"
-              :key="i"
-            > -->
-          <a v-for="(t, i) in datas.companiesImgsListDatas" :key="i">
-            <img
-              :src="t.src"
-              :alt="t.name"
-              @mouseenter="hoverItemFun($event, i)"
-              @mouseleave="leaveItemFun()"
-            />
-            <div class="litInfo" :style="returnStyle" v-if="showItem == i">
-              <div class="litInfo_title x_c">
-                <img class="litInfo_img" :key="i" :src="t.src" :alt="t.name" />
-                <span>{{ t.name }}</span>
-              </div>
-              <div class="litInfo_content">
-                <p>
-                  <span>公司类型： </span
-                  ><span>
-                    {{ t.comType || "-" }}
-                  </span>
-                </p>
-                <p>
-                  <span>进驻日期：</span
-                  ><span>
-                    {{ t.inDate || "-" }}
-                  </span>
-                </p>
-                <p><span>公司简介：</span> <i v-html="t.comInfo"></i></p>
-              </div>
-            </div>
-          </a>
-          <!-- </el-carousel-item> -->
-        </li>
-        <!-- </el-carousel> -->
-      </ul>
+          <ul
+            class="companiesImgsList companiesImgsList4 companiesImgsList_over" 
+          v-for="(tt, ii) in Math.ceil(datas.companiesImgsListDatas.length / 8)"
+          :key="ii"
+          >
+            <li class="x_fs_rap">
+              <a
+                v-for="(t, i) in datas.companiesImgsListDatas.slice(
+                  ii * 8,
+                  ii * 8 + 8
+                )"
+                :key="i"
+              >
+                <img
+                  :src="t.src"
+                  :alt="t.name"
+                  @mouseenter="hoverItemFun($event, (ii + 1) * (ii * 8 + i))"
+                  @mouseleave="leaveItemFun()"
+                />
+                <div
+                  class="litInfo"
+                  :style="returnStyle"
+                  v-if="showItem == (ii + 1) * (ii * 8 + i)"
+                >
+                  <div class="litInfo_title x_c">
+                    <img
+                      class="litInfo_img"
+                      :key="i"
+                      :src="t.src"
+                      :alt="t.name"
+                    />
+                    <span>{{ t.name }}</span>
+                  </div>
+                  <div class="litInfo_content">
+                    <p>
+                      <span>公司类型： </span
+                      ><span>
+                        {{ t.comType || "-" }}
+                      </span>
+                    </p>
+                    <p>
+                      <span>进驻日期：</span
+                      ><span>
+                        {{ t.inDate || "-" }}
+                      </span>
+                    </p>
+                    <p><span>公司简介：</span> <i v-html="t.comInfo"></i></p>
+                  </div>
+                </div>
+              </a>
+            </li>
+          </ul>
+        <!-- </el-carousel-item>
+      </el-carousel> -->
     </div>
   </div>
 </template>
@@ -75,6 +88,7 @@ export default {
     };
   },
   mounted() {
+    // this.$ScrolLeftARight("companiesListRef", 4);
     // document.onclick = function() {
     //   this.leaveItemFun();
     // };
@@ -97,6 +111,7 @@ export default {
       }
     },
     hoverItemFun(e, i) {
+      console.log(i);
       this.showItem = i;
       this.returnStyle = `right:${window.screen.width -
         e.clientX}px;top:${e.clientY - 300}px`;
@@ -114,17 +129,31 @@ export default {
 <style lang="less" scoped>
 @import "~@/style/gl.less";
 // 企业列表
+:deep(.enterprisesCarousel) {
+  width: 100%;
+  height: 4.5rem /* 360/80 */;
+  .el-carousel__container {
+    height: 100%;
+  }
+  overflow: hidden;
+}
 .companiesListAll {
   .companiesList {
+    display: flex;
+    width: 4.3rem /* 344/80 */;
+    // height: 4.5rem /* 360/80 */;
     font-size: 0.2rem /* 16/80 */;
+    overflow: hidden;
     .companiesImgsList {
+      white-space: nowrap;
+      flex-shrink: 0;
       width: 100%;
       height: 2.25rem /* 180/80 */;
-      overflow-y: auto;
       li {
         width: 100%;
       }
       .litInfo {
+        white-space: pre-wrap;
         position: fixed;
         top: 0;
         right: 0;
@@ -137,7 +166,7 @@ export default {
         box-shadow: inset 0 1px 10px 0.1px rgba(67, 149, 243, 0.1);
         -moz-box-shadow: inset 0 1px 10px 0.1px rgb(67, 149, 243, 0.1);
         -webkit-box-shadow: inset 0 1px 10px 0.1px rgb(67, 149, 243, 0.1);
-        z-index: 20;
+        z-index: 3000;
         .litInfo_title {
           justify-content: flex-start;
         }
@@ -186,7 +215,7 @@ export default {
       height: 4.5rem /* 360/80 */;
     }
     .companiesImgsList_over {
-      overflow: hidden;
+      // overflow: hidden;
     }
   }
 }
