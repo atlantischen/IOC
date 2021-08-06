@@ -24,8 +24,8 @@
   <IOCRight :fade="fade" class="right">
     <div class="list_box">
       <ul class="list_title">
-        <li v-for="(item, index) in 4" :key="index">
-          <span>车牌</span>
+        <li v-for="(item, index) in arrList" :key="index">
+          <span>{{item}}</span>
         </li>
       </ul>
       <div class="close" @click="handleClick(true)">
@@ -36,7 +36,7 @@
           <span>{{ item.idCar }}</span>
           <span>{{ item.name }}</span>
           <span>{{ item.reason }}</span>
-          <span>
+          <span @click="clickTrack">
             <i>{{ item.operation }}</i>
           </span>
         </li>
@@ -67,6 +67,7 @@ export default {
     
 
       },
+      arrList:['车牌','姓名','拉黑事由','操作'],
       currentPage: 1,
       pageSize: 11,
       fade: false,
@@ -356,6 +357,9 @@ export default {
     confirmClick(i){
       const id= this.carListRes[i].id
       this.$SendMessageToUnity("QueryCarExitRoute", {"index":id});
+    },
+    clickTrack(){
+      this.$SendMessageToUnity("QueryCarExitRoute", {"index":8});
     },
     handleSizeChange(val) {
     },

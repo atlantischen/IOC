@@ -47,6 +47,7 @@
     <Device
       v-show="deviceShow"
       :_fade="_fade"
+      :idArry="idArry"
       @chageFade="chageFade($event)"
     ></Device>
     <div v-if="fade" class="mask" @mouseenter="deviceChangeShow"></div>
@@ -59,6 +60,7 @@ export default {
   name: "homePage",
   data() {
     return {
+      idArry:[6,7,8,9],
       flag: false,
       deviceShow: false,
       _fade:false,
@@ -682,6 +684,7 @@ export default {
       try {
        if(val.action ==='ME_ZHYLSingle' && val.data==='1' ){
          this.fade =true
+           this.$SendMessageToUnity("ShowIoTDevice_IOCMap",{strList:'6,7,8,9'});
        }else if(val.action ==='ME_ZHYLSingle' && val.data==='0'){
          this.fade =false
        }
@@ -695,7 +698,8 @@ export default {
     this.equipmentComparisonInit([-2.54, 4.74, 2.54]);
   },
   created(){
-    this.$store
+  
+
   }
 };
 </script>
