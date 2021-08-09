@@ -75,11 +75,11 @@ export default {
           describe: "在线设备数",
         },
         {
-          num: 104,
+          num: 78,
           describe: "离线设备数",
         },
         {
-          num: 21,
+          num: 25,
           describe: "告警设备数",
         },
       ],
@@ -336,7 +336,7 @@ export default {
                 ),
               },
             },
-            data: [4580, 3666, 23623, 11230, 24631, 3099, 3559],
+            data: [5623, 6301, 8314, 3945, 2843, 3099, 3401],
           },
         ],
       };
@@ -357,17 +357,17 @@ export default {
       ];
 
       var option = {
-        tooltip: {
-          trigger: "item",
-          backgroundColor: "rgba(0,0,0,0.8)",
-          borderWidth: 1,
-          borderColor: "#4396f3",
-          padding: [5, 10],
-          extraCssText: "box-shadow:inset 0 0 8px rgba(67, 149, 243, 0.6);",
-          formatter: function(param) {
-            return param.marker + param.name + "：" + param.value + "%<br>";
-          },
-        },
+        // tooltip: {
+        //   trigger: "item",
+        //   backgroundColor: "rgba(0,0,0,0.8)",
+        //   borderWidth: 1,
+        //   borderColor: "#4396f3",
+        //   padding: [5, 10],
+        //   extraCssText: "box-shadow:inset 0 0 8px rgba(67, 149, 243, 0.6);",
+        //   formatter: function(param) {
+        //     return param.marker + param.name + "：" + param.value + "%<br>";
+        //   },
+        // },
         series: datas.map(function(data, idx) {
           var top = idx * 33.3;
           return {
@@ -698,6 +698,7 @@ export default {
     this.equipmentComparisonInit([-2.54, 4.74, 2.54]);
   },
   created(){
+       this.$SendMessageToUnity("ShowIoTDevice_IOCMap",{strList:'0,1,2,3,4,5,10'});
   
 
   }

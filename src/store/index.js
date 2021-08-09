@@ -7,7 +7,8 @@ import {
 export default createStore({
   state: {
     unitySendData: {},
-    activeIndex:0
+    activeIndex:0,
+    cancelTokenArr: []
   },
   mutations: {
     setData(state, payload) {
@@ -15,6 +16,12 @@ export default createStore({
     },
     setActiveIndex(state, payload) {
       state.activeIndex = payload
+    },
+    clearToken ({ cancelTokenArr }) {
+      cancelTokenArr.forEach(item => {
+        item('路由跳转取消请求')
+      })
+      cancelTokenArr = []
     }
   },
   actions: {},

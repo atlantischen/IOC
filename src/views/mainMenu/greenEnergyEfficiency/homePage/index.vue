@@ -76,11 +76,11 @@
       <div class="energy_contrast">
         <div class="tittle">能耗对比</div>
         <div class="energy_title">
-          <div  @click="changeClick('电')">
+          <div :class="{active:activeIndex==='电'}"  @click="changeClick('电')">
             <img src="../../../../assets/img/4.png" alt="" />
             <span>电耗能</span>
           </div>
-          <div  @click="changeClick('水')">
+          <div :class="{active:activeIndex==='水'}"  @click="changeClick('水')">
             <img src="../../../../assets/img/6.png" alt="" />
             <span>水耗能</span>
           </div>
@@ -293,10 +293,9 @@ export default {
 
         },
       ],
-      KPIList: [
-
-      ],
-      num:new Date().getDate()
+      KPIList: [],
+      num:new Date().getDate(),
+      activeIndex:'电'
     };
   },
   methods: {
@@ -306,6 +305,7 @@ export default {
 
     },
     changeClick(val){
+      this.activeIndex=val
       this.activeType=val
     },
     openCloseDialog (val) {
@@ -799,10 +799,12 @@ export default {
         flex-direction: column;
         align-items: center;
         background: #233d59;
-        border: 1px solid #4696ef;
         // opacity: 0.6;
         border-radius: 0.05rem /* 4/80 */;
         color: #fff;
+      }
+      .active{
+        border: 1px solid #4696ef;
       }
       & > div:first-child {
         margin-right: 0.2375rem /* 19/80 */;

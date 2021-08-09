@@ -8,6 +8,7 @@
           :class="item.isShow ? '' : 'toGrey'"
           v-for="item in equipmentList"
           :key="item"
+          @click="setClick(item.id)"
         >
           <img :src="item.url" alt="" />
           <span>{{ item.title }}</span>
@@ -93,6 +94,7 @@ export default {
           isShow: false,
         },
       ],
+      arrList:[...this.idArry]
     };
   },
   props: {
@@ -113,17 +115,57 @@ export default {
     handleClick(val) {
       this.$emit("chageFade", true);
     },
-  
-  },
-  created() {
-    this.equipmentList.forEach((item) => {
+    setClick(i){
+      console.log(i);
+      this.equipmentList.forEach(item=>{
+        if(item.id ===i){
+          item.isShow = !item.isShow
+          switch (item.isShow) {
+          case true:
+           this.arrList.push(i)
+           let arr = this.arrList.toString()
+          this.$SendMessageToUnity("ShowIoTDevice_IOCMap",{strList:arr});
+          break;
+          case false:
+            this.arrList.splice(this.arrList.findIndex(item => item === i), 1)
+            let res=this.arrList.toString()
+            this.$SendMessageToUnity("ShowIoTDevice_IOCMap",{strList:res});
+            break;  
+          default:
+            break;
+        }
+        }
+        
+      })
+    },
+    init(){
+      this.equipmentList.forEach((item) => {
         this.idArry.forEach((element) => {
           if (item.id == element) {
-            console.log(item.id, element);
             item.isShow = true;
           } 
         });
       });
+    },
+    allClick(){
+      this.arrList= [...this.idArry]
+      let arr = this.idArry.toString()
+      this.init()
+      this.$SendMessageToUnity("ShowIoTDevice_IOCMap",{strList:arr});
+
+    },
+    cancelClick(){
+      this.arrList= []
+
+      this.equipmentList.forEach(item=>{
+          item.isShow = false
+      })
+       this.$SendMessageToUnity("ShowIoTDevice_IOCMap",{strList:''});
+    }
+  
+  },
+  created() {
+    this.init()
 
   },
 };
@@ -161,6 +203,7 @@ export default {
     & > li {
       width: 1.125rem /* 90/80 */;
       height: 1.125rem /* 90/80 */;
+      position: relative;
       margin: 0 0.175rem 0.175rem /* 14/80 */ 0;
       border: 1px solid #4396f3;
       border-radius: 0.05rem /* 4/80 */;
@@ -173,7 +216,22 @@ export default {
         height: 0.675rem;
         margin-bottom: 0.0625rem /* 5/80 */;
       }
+
+      //  &::before{
+      //   content:"";
+      //   position:absolute;
+      //   left:0;
+      //   top:0;
+      //    width: 100%;
+      // height: .5625rem /* 45/80 *//* 90/80 */;
+      //   box-sizing:border-box;
+      //   border-bottom:1px solid deeppink;
+      //   transform-origin:bottom center;
+      //   transform:rotateZ(45deg) scale(1.414);
+      //   // animation:slash 5s infinite ease;
+      // }
     }
+   
     & > li:nth-child(3n) {
       margin-right: 0;
     }

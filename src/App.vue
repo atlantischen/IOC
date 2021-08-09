@@ -26,7 +26,6 @@ export default {
     },
     KeyDown(event) {
       var event = event || window.event;
-      console.log(event.keyCode, "event.keyCode ");
       if (event.keyCode === 122) {
         console.log("returnValue");
         //禁用f11
