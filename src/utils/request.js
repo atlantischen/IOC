@@ -4,6 +4,7 @@ import {
 } from 'element-plus'
 
 import router from '../router'
+
 // import store from '../store'
 
 
@@ -17,6 +18,9 @@ const instance = axios.create({
 
 instance.interceptors.request.use(
   config => {
+    config.cancelToken = new axios.CancelToken(function (cancel) {
+      store.commit('pushToken', {cancelToken: cancel})
+    })
     // let Bearer = getToken() || getCookie()
     // let Bearer
     // if (getToken()) Bearer = 'Bearer ' + getToken()

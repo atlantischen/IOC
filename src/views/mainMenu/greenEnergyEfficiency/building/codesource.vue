@@ -60,14 +60,14 @@
     <div class="new_air">
       <div class="tittle">冷源监控</div>
       <ul class="scroll">
-        <li
-          v-for="(item, index) in monitorList"
-          :key="index"
-          @click="lookVideo(`${++index}号客梯`)"
-        >
+        <li @click="lookVideo(`${++index}号客梯`)">
           <!-- <Vloading v-show="showIfame" /> -->
 
-          <Player :monitorList="monitorList"></Player>
+          <Player
+            ref="player"
+            width="49"
+            :monitorList="monitorList"
+          ></Player>
           <!-- <iframe
           v-show="!showIfame"
           scrolling="no"
@@ -148,9 +148,28 @@ export default {
       ],
       monitorList: [
         {
-          local: "16楼C区铭筑",
           id: 1,
-          url: "ws://10.10.7.27:10800/ws/flv/hls/stream_1.flv?token=EpVT95Gng",
+          url: "http://10.10.7.27:8087/live?app=live&stream=cctv1",
+        },
+        {
+          id: 2,
+          url: "http://10.10.7.27:8087/live?app=live&stream=cctv2",
+        },
+        {
+          id: 3,
+          url: "http://10.10.7.27:8087/live?app=live&stream=cctv3",
+        },
+        {
+          id: 4,
+          url: "http://10.10.7.27:8087/live?app=live&stream=cctv4",
+        },
+        {
+          id: 5,
+          url: "http://10.10.7.27:8087/live?app=live&stream=cctv5",
+        },
+        {
+          id: 6,
+          url: "http://10.10.7.27:8087/live?app=live&stream=cctv6",
         },
         // {
         //   local: '16层C区女厕',
@@ -652,6 +671,7 @@ export default {
       this.$redomEchart(dom, option);
     },
     lookVideo(val) {
+      console.log();
       this.flv_url = val;
       this.openCloseDialog(true);
     },
@@ -699,6 +719,12 @@ export default {
     //   // console.log(_iframe,'_iframe');
     //   // _iframe.style.display= "none";  //修改样式
     // };
+  },
+  beforeRouteLeave(to, from, next) {
+    if (to.path != from.path) {
+      this.$refs.player.destoryVideo();
+    }
+    next();
   },
 };
 </script>
@@ -818,8 +844,11 @@ export default {
     margin-top: 0.3125rem /* 25/80 */;
 
     & > li {
-      width: 49% /* 174/80 */ /* 112/80 */;
-      height: 1.4rem /* 112/80 */;
+      width: 100% /* 174/80 */ /* 112/80 */;
+      height: 100% /* 112/80 */;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
       // height: 1.4rem /* 112/80 */;
       // background-image: url('../../../../assets/img/monitor/snap (2).png');
       // background-repeat: no-repeat;
@@ -828,10 +857,11 @@ export default {
       //   width: 100%;
       //   height: 100%;
       // }
-      #iframe {
-        width: 100% /* 174/80 */ /* 112/80 */;
-        height: 1.4rem !important /* 112/80 *//* 112/80 */;
-      }
+
+      // #iframe {
+      //   width: 100% /* 174/80 */ /* 112/80 */;
+      //   height: 1.4rem !important /* 112/80 *//* 112/80 */;
+      // }
       // #iframe::-webkit-scrollbar {
       //   display: none !important;
       // }

@@ -64,13 +64,13 @@
     <div class="pump ">
       <div class="tittle">泵房监控</div>
         <ul>
-          <li v-for="(item,index) in monitorList" :key="index" @click="lookVideo(`${++index}号客梯`)">
+          <li  @click="lookVideo(`${++index}号客梯`)">
             <!-- <span>2020-12-31    14:40</span>
             <span>{{item++}}号客梯</span> -->
-           <Vloading v-show="showIfame" />
+           <!-- <Vloading v-show="showIfame" /> -->
 
-          <!-- <Player  :monitorList="monitorList" ></Player> -->
-         <iframe
+          <Player ref="player"   width="49" :monitorList="monitorList" ></Player>
+         <!-- <iframe
           v-show="!showIfame"
           scrolling="no"
           v-if="item.url"
@@ -82,7 +82,7 @@
           :src="item.url + '&protocol=FLV&iframe=yes'"
           allowfullscreen
           allow="autoplay; fullscreen"
-        ></iframe>      
+        ></iframe>       -->
           </li>
         </ul>
 
@@ -147,21 +147,21 @@ export default {
           },
         ],
         monitorList:[
-        {
-          local: '16楼前台',
-          url: 'http://47.119.172.151:10810/play.html?device=LiveNVR001&channel=3&protocol=WS_FLV',
+       {
+          id: 1,
+          url: "http://10.10.7.27:8087/live?app=live&stream=cctv13",
         },
         {
-          local: '16楼A区铭筑男厕',
-          url: 'http://47.119.172.151:10810/play.html?device=LiveNVR001&channel=4&protocol=WS_FLV',
+          id: 2,
+          url: "http://10.10.7.27:8087/live?app=live&stream=cctv14",
         },
         {
-          local: '16楼A区会议室',
-          url: 'http://47.119.172.151:10810/play.html?device=LiveNVR001&channel=5&protocol=WS_FLV',
+          id: 3,
+          url: "http://10.10.7.27:8087/live?app=live&stream=cctv15",
         },
         {
-          local: '14楼A区铭筑',
-          url: 'http://47.119.172.151:10810/play.html?device=LiveNVR001&channel=6&protocol=WS_FLV',
+          id: 4,
+          url: "http://10.10.7.27:8087/live?app=live&stream=cctv12",
         },
       ] 
         
@@ -409,10 +409,16 @@ export default {
         interval: 1200,
       }
     );
-       this.$afterIframeOnload('iframeVideo0', () => {
-      this.showIfame = false 
-    })
-  }
+    //    this.$afterIframeOnload('iframeVideo0', () => {
+    //   this.showIfame = false 
+    // })
+  },
+  beforeRouteLeave(to, from, next) {
+    if (to.path != from.path) {
+      this.$refs.player.destoryVideo();
+    }
+    next();
+  },
 }
 </script>
 
@@ -517,36 +523,34 @@ export default {
 }
 .pump{
   ul{
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
+      // display: flex;
+      // flex-wrap: wrap;
+      // justify-content: space-between;
       // padding: 0 .175rem /* 14/80 */;
 
 
     li{
-     width: 49%/* 174/80 *//* 112/80 */;
-          height: 1.4rem /* 112/80 */;
-      // background-color: rgba(67, 150, 243, .3);
-      // padding: .1625rem /* 13/80 */ .125rem /* 10/80 */;
-      box-sizing: border-box;
-      position: relative;
-      margin-bottom:.0625rem /* 5/80 */;
+       width: 100% /* 174/80 */ /* 112/80 */;
+      height: 100% /* 112/80 */;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
       // margin: 0 .1rem /* 8/80 */ .1rem /* 8/80 */ 0;
       
-      span:first-child{}
-      span:last-child{
-        position: absolute;
-        bottom: .125rem /* 10/80 */;
-        right: .1625rem /* 13/80 */;
-      }
-       #iframe{
-          width: 100% /* 174/80 *//* 112/80 */;
-          height: 1.4rem !important /* 112/80 *//* 112/80 */;
-      }
+      // span:first-child{}
+      // span:last-child{
+      //   position: absolute;
+      //   bottom: .125rem /* 10/80 */;
+      //   right: .1625rem /* 13/80 */;
+      // }
+      //  #iframe{
+      //     width: 100% /* 174/80 *//* 112/80 */;
+      //     height: 1.4rem !important /* 112/80 *//* 112/80 */;
+      // }
     }
-    li:nth-child(2n){
-      margin-right: 0;
-    }
+    // li:nth-child(2n){
+    //   margin-right: 0;
+    // }
   }
 }
 </style>

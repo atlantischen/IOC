@@ -53,16 +53,19 @@ export default {
   components: {},
   methods: {
     handleClick(path, index, name) {
-      // this.activeIndex = index;
-        this.$store.commit('setActiveIndex',index)
-      console.log( this.$store.state.activeIndex);
+      this.$store.commit('setActiveIndex',index)
       this.$router.push(path);
       this.$SendMessageToUnity("OnChangePage", { name: name });
+
     },
   },
-  watch: {
-    $route(to, from) {},
-  },
+  // watch: {
+  //   $route(to, from) {
+  //     if(to.path !=from.path){
+  //       // this.$router.go(0)
+  //     }
+  //   },
+  // },
 };
 </script>
 

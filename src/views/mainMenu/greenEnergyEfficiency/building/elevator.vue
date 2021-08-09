@@ -48,11 +48,11 @@
           <span class="font_text">视频回放</span>
         </div>
         <ul>
-          <li v-for="(item,index) in monitorList" :key="item" @click="lookVideo(`${++index}号客梯`)">
-             <Vloading v-show="showIfame" />
+          <li  @click="lookVideo(`${++index}号客梯`)">
+             <!-- <Vloading v-show="showIfame" /> -->
 
-          <!-- <Player  :monitorList="monitorList" ></Player> -->
-         <iframe
+          <Player  width="49"  ref="player1" :monitorList="monitorList" ></Player>
+         <!-- <iframe
           v-show="!showIfame"
           scrolling="no"
           v-if="item.url"
@@ -63,7 +63,7 @@
           :src="item.url + '&protocol=FLV&iframe=yes'"
           allowfullscreen
           allow="autoplay; fullscreen"
-        ></iframe>  
+        ></iframe>   -->
 
           </li>
         </ul>
@@ -82,13 +82,13 @@
           <span class="font_text">视频回放</span>
         </div>
         <ul>
-          <li v-for="(item,index) in monitorList1" :key="index" @click="lookVideo(`${++index}号客梯`)">
+          <li  @click="lookVideo(`${++index}号客梯`)">
             <!-- <span>2020-12-31    14:40</span>
             <span>{{item++}}号客梯</span> -->
-           <Vloading v-show="showIfame" />
+           <!-- <Vloading v-show="showIfame" /> -->
 
-          <!-- <Player  :monitorList="monitorList" ></Player> -->
-         <iframe
+          <Player  width="49"  ref="player" :monitorList="monitorList1" ></Player>
+         <!-- <iframe
           v-show="!showIfame"
           scrolling="no"
           v-if="item.url"
@@ -100,7 +100,7 @@
           :src="item.url + '&protocol=FLV&iframe=yes'"
           allowfullscreen
           allow="autoplay; fullscreen"
-        ></iframe>  
+        ></iframe>   -->
             
           </li>
         </ul>
@@ -112,7 +112,7 @@
         
       </div>
     </IOCRight>
-    <Dialog :dialogShow="dialogShow" :title='title' @dialogShowChange="dialogShowChange"></Dialog>
+    <Dialog :dialogShow="dialogShow" :title='title' @videoShow="videoShow" @dialogShowChange="dialogShowChange"></Dialog>
     <VideoPlayback :title='title' :backShow="backShow" @videoShowChange="videoShowChange"></VideoPlayback>
   <LookVideo :Visible="Visible" :title="dialogTitle" @off="openCloseDialog" />
   <ElevatorMonitoring  :ElevatorVisible="ElevatorVisible"  :dataList="dataList"  @off="ElevatorCloseDialog" />
@@ -124,8 +124,7 @@
 export default {
   data(){
     return{
-           showIfame: true,
-
+      showIfame: true,
       Visible: false,
       ElevatorVisible:false,
       dataList:{},
@@ -185,39 +184,39 @@ export default {
       title:'轿厢监控',
        monitorList:[
        {
-          local: '16楼C区铭筑',
-          url: 'http://47.119.172.151:10810/play.html?device=LiveNVR001&channel=1&protocol=WS_FLV'
+          id: 1,
+          url: "http://10.10.7.27:8086/live?app=live&stream=cctv1",
         },
         {
-          local: '16层C区女厕',
-          url: 'http://47.119.172.151:10810/play.html?device=LiveNVR001&channel=2&protocol=WS_FLV',
+          id: 2,
+          url: "http://10.10.7.27:8086/live?app=live&stream=cctv2",
         },
         {
-          local: '16楼前台',
-          url: 'http://47.119.172.151:10810/play.html?device=LiveNVR001&channel=3&protocol=WS_FLV',
+          id: 3,
+          url: "http://10.10.7.27:8086/live?app=live&stream=cctv3",
         },
         {
-          local: '16楼A区铭筑男厕',
-          url: 'http://47.119.172.151:10810/play.html?device=LiveNVR001&channel=4&protocol=WS_FLV',
+          id: 4,
+          url: "http://10.10.7.27:8086/live?app=live&stream=cctv4",
         },
          
       ],
         monitorList1:[
        {
-          local: '16楼A区会议室',
-          url: 'http://47.119.172.151:10810/play.html?device=LiveNVR001&channel=5&protocol=WS_FLV',
+          id: 6,
+          url: "http://10.10.7.27:8087/live?app=live&stream=cctv6",
         },
         {
-          local: '14楼A区铭筑',
-          url: 'http://47.119.172.151:10810/play.html?device=LiveNVR001&channel=6&protocol=WS_FLV',
+          id: 7,
+          url: "http://10.10.7.27:8087/live?app=live&stream=cctv7",
         },
         {
-          local: '14楼D区吧台',
-          url: 'http://47.119.172.151:10810/play.html?device=LiveNVR001&channel=7&protocol=WS_FLV',
+          id: 8,
+          url: "http://10.10.7.27:8087/live?app=live&stream=cctv8",
         },
         {
-          local: '14楼C区女厕',
-          url: 'http://47.119.172.151:10810/play.html?device=LiveNVR001&channel=8&protocol=WS_FLV',
+          id: 9,
+          url: "http://10.10.7.27:8087/live?app=live&stream=cctv9",
         },
          
       ]
@@ -230,8 +229,22 @@ export default {
       }else if(name==='elevatorData'){
         this.title='电梯间监控'
       }
-      this.dialogShow=val
+      //  this.$refs.player1.destoryVideo();
 
+      this.dialogShow=val
+    },
+    videoShow(val){
+      if(val){
+        console.log('打开触发了');
+
+        this.$refs.player1.createVideo();
+        this.$refs.player.createVideo();
+      }else{
+        console.log('关闭触发了');
+        this.$refs.player1.destoryVideo();
+        this.$refs.player.destoryVideo();
+      }
+        
     },
     videoShowChange(val,name){
       if(name==='carData'){
@@ -269,10 +282,16 @@ export default {
   },
   mounted () {
     window.addEventListener("message", this.event, true);
-    this.$afterIframeOnload('iframeVideo0', () => {
-      this.showIfame = false 
-    })
+    // this.$afterIframeOnload('iframeVideo0', () => {
+    //   this.showIfame = false 
+    // })
     
+  },
+  beforeRouteLeave(to, from, next) {
+    if (to.path != from.path) {
+      this.videoShow(false)
+    }
+    next();
   },
   destroyed() {
     window.removeEventListener("message", this.event, true);
@@ -382,18 +401,15 @@ export default {
 
 
     li{
-      width: 49%/* 156/80 */;
-                height: 1.4rem /* 112/80 */;
-
-      // background-color: rgba(67, 150, 243, .3);
-      // padding: .1625rem /* 13/80 */ .125rem /* 10/80 */;
-      box-sizing: border-box;
-      position: relative;
-      margin-bottom: .0625rem /* 5/80 */;
-       #iframe{
-          width: 100% /* 174/80 *//* 112/80 */;
-          height: 1.4rem !important /* 112/80 *//* 112/80 */;
-      }
+      width: 100% /* 174/80 */ /* 112/80 */;
+      height: 100% /* 112/80 */;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      //  #iframe{
+      //     width: 100% /* 174/80 *//* 112/80 */;
+      //     height: 1.4rem !important /* 112/80 *//* 112/80 */;
+      // }
       // margin: 0 .1rem /* 8/80 */ .1rem /* 8/80 */ 0;
       
       // span:first-child{}

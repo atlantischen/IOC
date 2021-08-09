@@ -6,18 +6,20 @@
         :title="title"
         v-model="dialogVideoVisible"
         @close="closeDialog"
+        @open="openDialog"
       >
         <el-carousel height="150px" :autoplay="false" indicator-position="none">
           <!-- <el-carousel-item v-for="item in 1" :key="item"> -->
             <div class="box">
               <ul>
                 <li
-                  v-for="(item, index) in videoDatas"
-                  :key="index"
+                
                   @click="lookVideo(`${++index}号客梯`)"
                 >
+          <Player class="video_player" height='185'  width="24.5"  :monitorList="monitorList" ></Player>
+
                   <!-- <Vloading v-show="showIfame" /> -->
-                  <iframe
+                  <!-- <iframe
                     v-if="item.url"
                     class="iframeVideo"
                     id="iframeVideo"
@@ -26,7 +28,7 @@
                     :src="item.url + '&protocol=FLV&iframe=yes'"
                     allowfullscreen
                     allow="autoplay; fullscreen"
-                  ></iframe>
+                  ></iframe> -->
                 </li>
               </ul>
             </div>
@@ -71,67 +73,56 @@ export default {
         66: "15S",
         99: "20S",
       },
-      videoDatas: [
+    monitorList: [
         {
-          local: "16楼C区铭筑",
-          url:
-            "http://47.119.172.151:10810/play.html?device=LiveNVR001&channel=1&protocol=WS_FLV",
+          id: 1,
+          url: "http://10.10.7.27:8085/live?app=live&stream=cctv4",
         },
         {
-          local: "16层C区女厕",
-          url:
-            "http://47.119.172.151:10810/play.html?device=LiveNVR001&channel=2&protocol=WS_FLV",
+          id: 2,
+          url: "http://10.10.7.27:8084/live?app=live&stream=cctv5",
         },
-        {
-          local: "16楼前台",
-          url:
-            "http://47.119.172.151:10810/play.html?device=LiveNVR001&channel=3&protocol=WS_FLV",
-        },
-        {
-          local: "16楼A区铭筑男厕",
-          url:
-            "http://47.119.172.151:10810/play.html?device=LiveNVR001&channel=4&protocol=WS_FLV",
-        },
-        {
-          local: "16楼A区会议室",
-          url:
-            "http://47.119.172.151:10810/play.html?device=LiveNVR001&channel=5&protocol=WS_FLV",
-        },
-        {
-          local: "14楼A区铭筑",
-          url:
-            "http://47.119.172.151:10810/play.html?device=LiveNVR001&channel=6&protocol=WS_FLV",
-        },
-        {
-          local: "14楼D区吧台",
-          url:
-            "http://47.119.172.151:10810/play.html?device=LiveNVR001&channel=7&protocol=WS_FLV",
-        },
-        {
-          local: "14楼C区女厕",
-          url:
-            "http://47.119.172.151:10810/play.html?device=LiveNVR001&channel=8&protocol=WS_FLV",
-        },
-        {
-          local: "14楼A区大事记",
-          url:
-            "http://47.119.172.151:10810/play.html?device=LiveNVR001&channel=9&protocol=WS_FLV",
-        },
-        {
-          local: "14层B区男厕",
-          url:
-            "http://47.119.172.151:10810/play.html?device=LiveNVR001&channel=10&protocol=WS_FLV",
-        },
-        {
-          local: "14楼贵宾会议室外",
-          url:
-            "http://47.119.172.151:10810/play.html?device=LiveNVR001&channel=11&protocol=WS_FLV",
-        },
-        {
-          local: "14楼B区机房外",
-          url:
-            "http://47.119.172.151:10810/play.html?device=LiveNVR001&channel=12&protocol=WS_FLV",
-        },
+        // {
+        //   id: 3,
+        //   url: "http://10.10.7.27:8084/live?app=live&stream=cctv6",
+        // },
+        // {
+        //   id: 4,
+        //   url: "http://10.10.7.27:8084/live?app=live&stream=cctv4",
+        // },
+        // {
+        //   id: 5,
+        //   url: "http://10.10.7.27:8084/live?app=live&stream=cctv5",
+        // },
+        // {
+        //   id: 6,
+        //   url: "http://10.10.7.27:8084/live?app=live&stream=cctv6",
+        // },
+        //  {
+        //   id: 7,
+        //   url: "http://10.10.7.27:8085/live?app=live&stream=cctv1",
+        // },
+        // {
+        //   id: 8,
+        //   url: "http://10.10.7.27:8085/live?app=live&stream=cctv2",
+        // },
+        // {
+        //   id: 9,
+        //   url: "http://10.10.7.27:8085/live?app=live&stream=cctv3",
+        // },
+        // {
+        //   id: 10,
+        //   url: "http://10.10.7.27:8085/live?app=live&stream=cctv4",
+        // },
+        // {
+        //   id: 11,
+        //   url: "http://10.10.7.27:8085/live?app=live&stream=cctv5",
+        // },
+        // {
+        //   id: 12,
+        //   url: "http://10.10.7.27:8085/live?app=live&stream=cctv6",
+        // },
+      
       ],
       dialogVideoVisible: this.dialogShow,
     };
@@ -153,10 +144,22 @@ export default {
   },
   methods: {
     closeDialog() {
+      console.log('我关闭了');
+
       this.$emit("dialogShowChange", false);
+      // this.$emit("videoShow",true);
+      console.log('.wqedwqrdqwrwqrw');
+      // this.$refs.player3.destoryVideo()
+
+    },
+    openDialog(){
+      console.log('我打开了');
+      this.$emit("videoShow",false);
+      // this.$refs.player3.createVideo()
+
+
     },
     changeIscarousel(val) {
-      console.log(val);
       this.selectCheck = val == 1 ? null : 1;
     },
     selectTime(val) {
@@ -236,28 +239,37 @@ export default {
         padding: 0 0.1875rem /* 15/80 */ /* 11/80 */ /* 12/80 */;
 
         & > li {
-          width: 3.825rem /* 306/80 */ /* 403/80 */;
-          height: 2.3125rem /* 185/80 */ /* 246/80 */;
-          position: relative;
-          background: rgba(24, 50, 82, 0.73);
-          margin: 0 0.125rem /* 12/80 */ /* 14/80 */ 0.125rem /* 10/80 */
-            /* 15/80 */ 0;
-          color: #fff;
-          font-size: 0.2rem /* 16/80 */;
-          & > span:first-child {
-            position: absolute;
-            left: 0.225rem /* 18/80 */;
-            top: 0.325rem /* 26/80 */;
+          width: 100%;
+          height: 100%;
+          display: flex;
+          flex-wrap: wrap;
+          justify-content: space-between;
+          .video_player{
+                width: 3.825rem /* 306/80 */ /* 403/80 */;
+                height: 2.3125rem /* 185/80 */ /* 246/80 */;
+                background: rgba(24, 50, 82, 0.73);
+
           }
-          & > span:last-child {
-            position: absolute;
-            right: 0.1625rem /* 13/80 */;
-            bottom: 0.1875rem /* 15/80 */;
-          }
+          // width: 3.825rem /* 306/80 */ /* 403/80 */;
+          // height: 2.3125rem /* 185/80 */ /* 246/80 */;
+          // position: relative;
+          // background: rgba(24, 50, 82, 0.73);
+          // margin: 0 0.125rem /* 12/80 */ /* 14/80 */ 0.125rem /* 10/80 */
+          //   /* 15/80 */ 0;
+          // color: #fff;
+          // font-size: 0.2rem /* 16/80 */;
+          // & > span:first-child {
+          //   position: absolute;
+          //   left: 0.225rem /* 18/80 */;
+          //   top: 0.325rem /* 26/80 */;
+          // }
+          // & > span:last-child {
+          //   position: absolute;
+          //   right: 0.1625rem /* 13/80 */;
+          //   bottom: 0.1875rem /* 15/80 */;
+          // }
         }
-        & > li:nth-child(4n) {
-          margin-right: 0;
-        }
+        
       }
     }
     .slideshowBtn {
@@ -296,5 +308,11 @@ export default {
       }
     }
   }
+    .video_player{
+                width: 3.825rem /* 306/80 */ /* 403/80 */;
+          height: 2.3125rem /* 185/80 */ /* 246/80 */;
+          background: rgba(24, 50, 82, 0.73);
+
+          }
 }
 </style>
