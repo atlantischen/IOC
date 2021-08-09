@@ -1,77 +1,64 @@
 <template>
   <div class="companiesListAll">
     <div class="tittle">{{ title }}</div>
-    <div class="companiesList" ref="companiesListRef">
-      <!-- <el-carousel
-        class="enterprisesCarousel"
-        :interval="4000"
-        arrow="never"
-        indicator-position="none"
+    <div class="companiesList">
+      <div
+        class="companiesList_div"
+        ref="companiesListRef"
+        :class="{ mover_LEFT: isShowAn }"
       >
-        <el-carousel-item
-          v-for="(tt, ii) in Math.ceil(datas.companiesImgsListDatas.length / 8)"
+        <ul
+          class="companiesImgsList companiesImgsList4 companiesImgsList_over"
+          v-for="(tt, ii) in items"
           :key="ii"
-        > -->
-          <ul
-            class="companiesImgsList companiesImgsList4 companiesImgsList_over" 
-          v-for="(tt, ii) in Math.ceil(datas.companiesImgsListDatas.length / 8)"
-          :key="ii"
-          >
-            <li class="x_fs_rap">
-              <a
-                v-for="(t, i) in datas.companiesImgsListDatas.slice(
-                  ii * 8,
-                  ii * 8 + 8
-                )"
-                :key="i"
+        >
+          <li class="x_fs_rap">
+            <a v-for="(t, i) in items[ii]" :key="i">
+              <img
+                :src="t.src"
+                :alt="t.name"
+                @mouseenter="hoverItemFun($event, (ii + 1) * (ii * 8 + i))"
+                @mouseleave="leaveItemFun()"
+              />
+              <div
+                class="litInfo"
+                :style="returnStyle"
+                v-if="showItem == (ii + 1) * (ii * 8 + i)"
               >
-                <img
-                  :src="t.src"
-                  :alt="t.name"
-                  @mouseenter="hoverItemFun($event, (ii + 1) * (ii * 8 + i))"
-                  @mouseleave="leaveItemFun()"
-                />
-                <div
-                  class="litInfo"
-                  :style="returnStyle"
-                  v-if="showItem == (ii + 1) * (ii * 8 + i)"
-                >
-                  <div class="litInfo_title x_c">
-                    <img
-                      class="litInfo_img"
-                      :key="i"
-                      :src="t.src"
-                      :alt="t.name"
-                    />
-                    <span>{{ t.name }}</span>
-                  </div>
-                  <div class="litInfo_content">
-                    <p>
-                      <span>公司类型： </span
-                      ><span>
-                        {{ t.comType || "-" }}
-                      </span>
-                    </p>
-                    <p>
-                      <span>进驻日期：</span
-                      ><span>
-                        {{ t.inDate || "-" }}
-                      </span>
-                    </p>
-                    <p><span>公司简介：</span> <i v-html="t.comInfo"></i></p>
-                  </div>
+                <div class="litInfo_title x_c">
+                  <img
+                    class="litInfo_img"
+                    :key="i"
+                    :src="t.src"
+                    :alt="t.name"
+                  />
+                  <span>{{ t.name }}</span>
                 </div>
-              </a>
-            </li>
-          </ul>
-        <!-- </el-carousel-item>
-      </el-carousel> -->
+                <div class="litInfo_content">
+                  <p>
+                    <span>公司类型： </span
+                    ><span>
+                      {{ t.comType || "-" }}
+                    </span>
+                  </p>
+                  <p>
+                    <span>进驻日期：</span
+                    ><span>
+                      {{ t.inDate || "-" }}
+                    </span>
+                  </p>
+                  <p><span>公司简介：</span> <i v-html="t.comInfo"></i></p>
+                </div>
+              </div>
+            </a>
+          </li>
+        </ul>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
-import * as echarts from "echarts";
 export default {
   name: "theParkOutputValAll",
   props: {
@@ -79,27 +66,60 @@ export default {
       type: Object,
     },
   },
-  data() {
+  data () {
     return {
       ...this._data,
       ids: this.$uuid(),
       showItem: null,
+      timer: null,
       returnStyle: "",
+      items: [],
+      removeitem: null,
+      isShowAn: false
     };
   },
-  mounted() {
-    // this.$ScrolLeftARight("companiesListRef", 4);
-    // document.onclick = function() {
-    //   this.leaveItemFun();
-    // };
-    if (!this.datas.buldingList) {
-      this.$nextTick(() => {
-        this.getDatas();
-      });
+  watch: {
+    datas: {
+      handler (n, o) {
+        let _l = Math.ceil(n.companiesImgsListDatas.length / 8)
+        for (let i = 0; i < _l; i++) {
+          this.items[i] = n.companiesImgsListDatas.slice(i * 8, i * 8 + 8)
+        }
+        this.items.push(this.items[0])
+      },
+      deep: true,
+      immediate: true
     }
   },
+  mounted () {
+    this.animationFun()
+  },
+  destroyed () {
+    clearInterval(this.timer)
+    this.timer = null
+  },
   methods: {
-    selectBuldingFun(key, val) {
+    animationFun () {
+      let count = 6000
+      if (!this.timer) {
+        this.timer = setInterval(() => {
+          this.isShowAn = true
+          if (this.items.length > 1) {
+            this.remove()
+            setTimeout(() => {
+              this.add()
+              this.isShowAn = false
+            }, 500);
+          }
+        }, count)
+      }
+      if (!this.datas.buldingList) {
+        this.$nextTick(() => {
+          this.getDatas();
+        });
+      }
+    },
+    selectBuldingFun (key, val) {
       this.leaveItemFun();
       switch (key) {
         case "B":
@@ -110,18 +130,29 @@ export default {
           break;
       }
     },
-    hoverItemFun(e, i) {
+    hoverItemFun (e, i) {
       console.log(i);
       this.showItem = i;
       this.returnStyle = `right:${window.screen.width -
         e.clientX}px;top:${e.clientY - 300}px`;
     },
-    leaveItemFun() {
+    leaveItemFun () {
       this.showItem = null;
     },
-    getDatas() {
-      // this.$ScrolAnimationTop('companiesImgsListRef_' + this.ids, 3)
+    add () {
+      if (this.items && this.items.length) {
+        // console.log(this.removeitem)
+        // const item = { ...this.removeitem[0] }
+        // item.ix = this.nextNum++
+        // this.items.push(item)
+        this.items.push(this.items[0])
+      }
     },
+    remove () {
+      // this.removeitem = this.items.splice(0, 1)
+      this.items.splice(0, 1)
+      // console.log(this.removeitem)
+    }
   },
 };
 </script>
@@ -141,13 +172,18 @@ export default {
   .companiesList {
     display: flex;
     width: 4.3rem /* 344/80 */;
-    // height: 4.5rem /* 360/80 */;
+    height: 4.5rem /* 360/80 */;
     font-size: 0.2rem /* 16/80 */;
     overflow: hidden;
+    .companiesList_div {
+      white-space: nowrap;
+      height: 100%;
+      display: flex;
+    }
     .companiesImgsList {
       white-space: nowrap;
       flex-shrink: 0;
-      width: 100%;
+      width: 4.3rem /* 344/80 */;
       height: 2.25rem /* 180/80 */;
       li {
         width: 100%;
@@ -188,7 +224,7 @@ export default {
           }
         }
         .litInfo_img {
-          .ioc_img(0.625rem /* 50/80 */, 0.625rem /* 50/80 */, 50%) ;;
+          .ioc_img(0.625rem /* 50/80 */, 0.625rem /* 50/80 */, 50%);
           object-fit: cover;
           margin-right: 0.25rem /* 20/80 */;
         }

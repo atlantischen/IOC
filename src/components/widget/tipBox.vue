@@ -30,7 +30,7 @@ export default {
       type: Object,
     },
   },
-  data() {
+  data () {
     return {
       timer: null,
       isShow: this.$store.state.comState.showWarnTip,
@@ -38,7 +38,7 @@ export default {
   },
   watch: {
     "$store.state.comState.showWarnTip": {
-      handler(n, o) {
+      handler (n, o) {
         this.isShow = n;
         if (this.isShow) {
           setTimeout(() => {
@@ -54,8 +54,8 @@ export default {
     },
   },
   components: {},
-  created() {},
-  mounted() {
+  created () { },
+  mounted () {
     var _that = this;
     // document.querySelector(".tipBox_text").onmouseover = function() {
     //   _that.timer = null;
@@ -65,12 +65,12 @@ export default {
     //   _that.moveLeft();
     // };
   },
-  beforeDestroy() {
+  beforeDestroy () {
     clearInterval(this.timer);
   },
   methods: {
     // 警告框滑动
-    moveLeft() {
+    moveLeft () {
       // var _w = document.getElementById("pList").children[0],
       var _w = this.$refs.pList.children[0],
         _d = 0;
@@ -89,12 +89,12 @@ export default {
     },
 
     // 点击警告框3D出现警告位置
-    clickItem() {
+    clickItem () {
       this.$SendMessageToUnity("OnWarningNoticesBarClick", {});
       console.log("=================OnWarningNoticesBarClick");
     },
     // 关闭警告
-    closeTip() {
+    closeTip () {
       this.isShow = false;
       this.$store.dispatch("SET_SHOWWARNTIP", this.isShow);
       this.$SendMessageToUnity("PopUpWarningNoticesBar", {
