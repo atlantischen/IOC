@@ -150,19 +150,19 @@ export default {
         monitorList:[
        {
           id: this.$uuid(),
-          url: "http://10.10.7.27:8087/live?app=live&stream=cctv13",
+          url: "http://10.10.7.27:8085/live?app=live&stream=cctv13",
         },
         {
           id: this.$uuid(),
-          url: "http://10.10.7.27:8087/live?app=live&stream=cctv14",
+          url: "http://10.10.7.27:8085/live?app=live&stream=cctv14",
         },
         {
          id: this.$uuid(),
-          url: "http://10.10.7.27:8087/live?app=live&stream=cctv15",
+          url: "http://10.10.7.27:8085/live?app=live&stream=cctv15",
         },
         {
           id: this.$uuid(),
-          url: "http://10.10.7.27:8087/live?app=live&stream=cctv12",
+          url: "http://10.10.7.27:8085/live?app=live&stream=cctv12",
         },
       ] 
         

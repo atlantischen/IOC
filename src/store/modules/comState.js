@@ -20,16 +20,17 @@ export default {
     SET_CENTERDATAS(state, value) {
       localStorage.setItem('ENTERDATATAS', JSON.stringify(value))
       let _d = JSON.parse(localStorage.getItem('ENTERDATATAS'))
-      // console.log(_d)
       if (_d[0]) {
         state.centerDatas = _d[1]
       }
       state.showCenterDatas = _d[0]
+  
     },
     SET_LANG(state, val) {
       state.lang = val
       // location.reload()
       localStorage.setItem("language", val);
+      
       i18n.locale = val
     }
   },

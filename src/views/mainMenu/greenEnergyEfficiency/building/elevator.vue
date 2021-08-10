@@ -205,19 +205,19 @@ export default {
         monitorList1:[
        {
           id: this.$uuid(),
-          url: "http://10.10.7.27:8087/live?app=live&stream=cctv6",
+          url: "http://10.10.7.27:8085/live?app=live&stream=cctv6",
         },
         {
           id: this.$uuid(),
-          url: "http://10.10.7.27:8087/live?app=live&stream=cctv7",
+          url: "http://10.10.7.27:8085/live?app=live&stream=cctv7",
         },
         {
           id: this.$uuid(),
-          url: "http://10.10.7.27:8087/live?app=live&stream=cctv8",
+          url: "http://10.10.7.27:8085/live?app=live&stream=cctv8",
         },
         {
           id: this.$uuid(),
-          url: "http://10.10.7.27:8087/live?app=live&stream=cctv9",
+          url: "http://10.10.7.27:8085/live?app=live&stream=cctv9",
         },
          
       ]
@@ -311,6 +311,7 @@ export default {
 </script>
 
 <style lang="less" scoped>
+@import "~@/style/index.less";
 .box{
   // padding:0 .18rem /* 20/80 */;
   box-sizing: border-box;

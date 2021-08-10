@@ -85,6 +85,7 @@ var ScrolAnimationTop = function ScrolAnimationTop(dom, time) {
     }
     setTimeout(() => {
       clearInterval(timer)
+      timer = null
       box.style.transition = `none`
       box.style.transform = `translateY(0px)`;
       if (box.children[0]) {
@@ -93,6 +94,10 @@ var ScrolAnimationTop = function ScrolAnimationTop(dom, time) {
       timer = setInterval(scrol, _time)
     }, _time / 2);
   }
+  window.onbeforeunload = function (e) {
+    clearInterval(timer)
+    timer = null
+  };
 }
 /**
  * @author
@@ -129,6 +134,10 @@ var ScrolLeftARight = function ScrolLeftARight(dom, time) {
       timer = setInterval(scrol, _time)
     }, _time / 2);
   }
+  window.onbeforeunload = function (e) {
+    clearInterval(timer)
+    timer = null
+  };
 }
 
 /**

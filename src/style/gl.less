@@ -417,3 +417,18 @@ i {
     }
   }
 }
+.mover_LEFT {
+  // transition: all 1s;
+  // transform: translateX(-100%);
+  animation: marquee 1s ease-in-out;
+  // animation-play-state: paused;
+}
+
+@keyframes marquee {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}

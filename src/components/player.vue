@@ -17,7 +17,7 @@
 <script>
 import flvjs from "flv.js";
 export default {
-  data() {
+  data () {
     return {
       flvPlayer: null,
       arrList: [],
@@ -41,7 +41,7 @@ export default {
  
   },
   methods: {
-    createVideo() {
+    createVideo () {
       this.monitorList.forEach((item) => {
         if (flvjs.isSupported()) {
           var videoElement = document.getElementById("videoElement" + item.id);
@@ -84,10 +84,10 @@ export default {
         }
       });
     },
-    play() {
+    play () {
       this.flvPlayer.play();
     },
-    destoryVideo() {
+    destoryVideo () {
       this.arrList.forEach((item) => {
         item.pause();
         item.unload();

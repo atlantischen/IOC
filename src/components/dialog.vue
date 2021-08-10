@@ -100,27 +100,27 @@ export default {
         },
         {
            id: this.$uuid(),
-          url: "http://10.10.7.27:8087/live?app=live&stream=cctv7",
+          url: "http://10.10.7.27:8085/live?app=live&stream=cctv7",
         },
         {
            id: this.$uuid(),
-          url: "http://10.10.7.27:8087/live?app=live&stream=cctv8",
+          url: "http://10.10.7.27:8085/live?app=live&stream=cctv8",
         },
           {
            id: this.$uuid(),
-          url: "http://10.10.7.27:8087/live?app=live&stream=cctv9",
+          url: "http://10.10.7.27:8085/live?app=live&stream=cctv9",
         },
         {
            id: this.$uuid(),
-          url: "http://10.10.7.27:8087/live?app=live&stream=cctv10",
+          url: "http://10.10.7.27:8085/live?app=live&stream=cctv10",
         },
         {
            id: this.$uuid(),
-          url: "http://10.10.7.27:8087/live?app=live&stream=cctv11",
+          url: "http://10.10.7.27:8085/live?app=live&stream=cctv11",
         },
         {
            id: this.$uuid(),
-          url: "http://10.10.7.27:8087/live?app=live&stream=cctv12",
+          url: "http://10.10.7.27:8085/live?app=live&stream=cctv12",
         },
         // {
         //   id: 3,
