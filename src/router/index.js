@@ -70,12 +70,12 @@ const router = createRouter({
   routes,
 });
 
-router.beforeEach((to, from, next) => {
-  if (to.path != from.path) {
-    store.dispatch("SET_CENTERDATAS", [false, null]);
-  }
-  store.commit('clearToken')
-  next()
-})
+// router.beforeEach((to, from, next) => {
+//   if (to.path != from.path) {
+//     store.dispatch("SET_CENTERDATAS", [false, null]);
+//   }
+//   store.commit('clearToken')
+//   next()
+// })
 
 export default router

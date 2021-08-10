@@ -7,6 +7,7 @@
         v-model="dialogVideoVisible"
         @close="closeDialog"
         @open="openDialog"
+        :destroy-on-close="true"
       >
         <el-carousel height="150px" :autoplay="false" indicator-position="none">
           <!-- <el-carousel-item v-for="item in 1" :key="item"> -->
@@ -16,7 +17,7 @@
                 
                   @click="lookVideo(`${++index}号客梯`)"
                 >
-          <Player class="video_player" height='185'  width="24.5"  :monitorList="monitorList" ></Player>
+          <Player :dialogShow="$store.state.videoShow"  class="video_player" height='185'  width="24.5"  :monitorList="monitorList" ></Player>
 
                   <!-- <Vloading v-show="showIfame" /> -->
                   <!-- <iframe
@@ -60,7 +61,6 @@
 export default {
   data() {
     return {
-
       Visible: false,
       dialogTitle: "",
       active: 0,
@@ -75,12 +75,52 @@ export default {
       },
     monitorList: [
         {
-          id: 1,
-          url: "http://10.10.7.27:8085/live?app=live&stream=cctv4",
+          id: this.$uuid(),
+          url: "http://10.10.7.27:8086/live?app=live&stream=cctv1",
         },
         {
-          id: 2,
-          url: "http://10.10.7.27:8084/live?app=live&stream=cctv5",
+          id: this.$uuid(),
+          url: "http://10.10.7.27:8086/live?app=live&stream=cctv2",
+        },
+        {
+           id: this.$uuid(),
+          url: "http://10.10.7.27:8086/live?app=live&stream=cctv3",
+        },
+        {
+          id: this.$uuid(),
+          url: "http://10.10.7.27:8086/live?app=live&stream=cctv4",
+        },
+         {
+           id: this.$uuid(),
+          url: "http://10.10.7.27:8086/live?app=live&stream=cctv5",
+        },
+        {
+           id: this.$uuid(),
+          url: "http://10.10.7.27:8086/live?app=live&stream=cctv6",
+        },
+        {
+           id: this.$uuid(),
+          url: "http://10.10.7.27:8087/live?app=live&stream=cctv7",
+        },
+        {
+           id: this.$uuid(),
+          url: "http://10.10.7.27:8087/live?app=live&stream=cctv8",
+        },
+          {
+           id: this.$uuid(),
+          url: "http://10.10.7.27:8087/live?app=live&stream=cctv9",
+        },
+        {
+           id: this.$uuid(),
+          url: "http://10.10.7.27:8087/live?app=live&stream=cctv10",
+        },
+        {
+           id: this.$uuid(),
+          url: "http://10.10.7.27:8087/live?app=live&stream=cctv11",
+        },
+        {
+           id: this.$uuid(),
+          url: "http://10.10.7.27:8087/live?app=live&stream=cctv12",
         },
         // {
         //   id: 3,
@@ -134,27 +174,36 @@ export default {
     },
     dialogShow: {
       type: Boolean,
-      default: true,
     },
   },
   watch: {
     dialogShow(val) {
       this.dialogVideoVisible = val;
     },
+    
+  
   },
   methods: {
     closeDialog() {
-      console.log('我关闭了');
-
       this.$emit("dialogShowChange", false);
+      this.$store.commit('setVideoShow',false)
+      console.log(this.$store.state.videoShow,'this.$store.state.videoShow');
+      this.$store.commit('setDialogShow',true)
+      this.$store.commit('setVideoShow',false)
+
+
+
       // this.$emit("videoShow",true);
-      console.log('.wqedwqrdqwrwqrw');
       // this.$refs.player3.destoryVideo()
 
     },
     openDialog(){
-      console.log('我打开了');
-      this.$emit("videoShow",false);
+      this.$store.commit('setVideoShow',true)
+      this.$store.commit('setDialogShow',false)
+      // this.videoShow=true
+
+      // console.log('我打开了');
+      // this.$emit("videoShow",false);
       // this.$refs.player3.createVideo()
 
 

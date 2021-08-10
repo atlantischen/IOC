@@ -8,7 +8,9 @@ export default createStore({
   state: {
     unitySendData: {},
     activeIndex:0,
-    cancelTokenArr: []
+    videoShow:false,
+    dialogShow:false
+  
   },
   mutations: {
     setData(state, payload) {
@@ -17,12 +19,13 @@ export default createStore({
     setActiveIndex(state, payload) {
       state.activeIndex = payload
     },
-    clearToken ({ cancelTokenArr }) {
-      cancelTokenArr.forEach(item => {
-        item('路由跳转取消请求')
-      })
-      cancelTokenArr = []
-    }
+    setVideoShow(state, payload) {
+      state.videoShow = payload
+    },
+    setDialogShow(state, payload) {
+      state.dialogShow = payload
+    },
+  
   },
   actions: {},
   getters: {},

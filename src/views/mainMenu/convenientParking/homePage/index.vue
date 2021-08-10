@@ -727,10 +727,10 @@ export default {
         },
         xAxis: [
           {
-            // name: "辆",
-            // nameTextStyle: {
-            //   padding: [0, 0, -30, -18],
-            // },
+            name: "时间",
+            nameTextStyle: {
+              padding: [0, 0, -30, -18],
+            },
             type: "category",
             data: [
               "<0.5h",
@@ -1063,13 +1063,18 @@ export default {
         grid: {
           top: "70",
           left: "0",
-          x2: 15,
+          x2:25,
           y2: 20,
           containLabel: true,
         },
 
         xAxis: [
+            
           {
+            name: "时间",
+            nameTextStyle: {
+              padding: [0, 0, -30, -15],
+            },
             type: "category",
             data: val,
             axisLine: {
@@ -1091,7 +1096,7 @@ export default {
             axisLabel: {
               interval: 0,
               rotate: -30,
-              padding: [20, 30, 0, -10],
+              padding: [20, 30, 0, -20],
               formatter: function(value, index) {
                 if (index % 2) {
                   return value;
