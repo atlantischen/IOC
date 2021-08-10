@@ -1,10 +1,14 @@
 <template>
-  <div class="myVideo-video" :style=" 'width:'+width+'%'" v-for="item in monitorList" :key="item.id">
+  <div
+    class="myVideo-video"
+    :style="'width:' + width + '%'"
+    v-for="item in monitorList"
+    :key="item.id"
+  >
     <video
       muted
       controls
-     
-      :style=" 'height:'+height+'px'"
+      :style="'height:' + height + 'px'"
       class="video"
       :id="'videoElement' + item.id"
     ></video>
@@ -13,7 +17,7 @@
 <script>
 import flvjs from "../utils/flv/flv.js";
 export default {
-  data() {
+  data () {
     return {
       flvPlayer: null,
       arrList: [],
@@ -24,17 +28,17 @@ export default {
       type: Object,
       required: true,
     },
-    width:{
-         type: String,
+    width: {
+      type: String,
       required: true,
     },
-      height:{
-         type: String,
- 
+    height: {
+      type: String,
+
     }
   },
   methods: {
-    createVideo() {
+    createVideo () {
       this.monitorList.forEach((item) => {
         if (flvjs.isSupported()) {
           var videoElement = document.getElementById("videoElement" + item.id);
@@ -52,24 +56,24 @@ export default {
           //   console.log('err', err);
           // });
           flvPlayer.on(flvjs.Events.ERROR, (errorType, errorDetail, errorInfo) => {
-                // alert('wwwwwwwwwwwwwwwwwww')
+            // alert('wwwwwwwwwwwwwwwwwww')
             //视频出错后销毁重新创建
-             if (this.flvPlayer) {
+            if (this.flvPlayer) {
               this.flvPlayer.pause();
               this.flvPlayer.unload();
               this.flvPlayer.detachMediaElement();
               this.flvPlayer.destroy();
-              this.flvPlayer= null;
+              this.flvPlayer = null;
               this.createPlayer(videoElement, item.url);
             }
           });
         }
       });
     },
-    play() {
+    play () {
       this.flvPlayer.play();
     },
-    destoryVideo() {
+    destoryVideo () {
       this.arrList.forEach((item) => {
         item.pause();
         item.unload();
@@ -78,17 +82,17 @@ export default {
         item = null;
       });
     },
-    handleClick(){
+    handleClick () {
       // this.destoryVideo()
     }
   },
 
-  mounted() {
+  mounted () {
     this.$nextTick(() => {
       this.createVideo();
     });
   },
-  onUnmounted() {
+  onUnmounted () {
     this.destoryVideo();
   },
 
@@ -110,7 +114,7 @@ export default {
 .video {
   object-fit: fill;
   width: 100%;
-  height: 1.375rem ;
+  height: 1.375rem;
   /* width: 49%; */
   /* height:110px136/80156/80; */
 }

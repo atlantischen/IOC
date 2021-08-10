@@ -157,7 +157,7 @@ export default {
       default: false,
     },
   },
-  data() {
+  data () {
     return {
       showLeftRight: false,
       currentPage: 1,
@@ -187,7 +187,7 @@ export default {
           src: require("@/assets/img/datas/qy_zgf.png"),
         },
         {
-          name: "深圳奇信智能科技有限公司3333333333333333",
+          name: "深圳奇信智能科技有限公司",
           phone: "",
           info: "海纳百川B座16F",
           src: require("@/assets/img/datas/qy_qx.png"),
@@ -285,38 +285,38 @@ export default {
   },
   watch: {
     inputVal: {
-      handler(n, o) {
+      handler (n, o) {
         this.inputV = n;
       },
       deep: true,
     },
     _show: {
-      handler(n) {
+      handler (n) {
         this.showLeftRight = n;
         console.log(this.showLeftRight);
       },
     },
   },
-  mounted() {
+  mounted () {
     this.total = this.tableData2.length;
     this.changeDatasFun();
   },
   methods: {
     // 上传头像
-    changeFile(file, fileList) {
+    changeFile (file, fileList) {
       var _that = this;
       if (!file || !window.FileReader) return;
       var reader = new FileReader();
       reader.readAsDataURL(file.raw);
-      reader.onload = function(e) {
+      reader.onload = function (e) {
         _that.imageUrl = reader.result;
       };
     },
     //
-    showBlackListFun() {
+    showBlackListFun () {
       this.isFade = !this.isFade;
     },
-    searchList(val) {
+    searchList (val) {
       this.inputV = val;
       // if (!val) {
       //   return this.$message.error("请输入关键词！")
@@ -326,40 +326,53 @@ export default {
       this.isShowList = !this.isShowList;
     },
     // 搜索轨迹
-    SearchPath() {
+    SearchPath () {
       if (this.imageUrl) {
+        let _a = {
+          src: this.imageUrl
+        }
         this.$SendMessageToUnity("ShowLocationPin", {
-          Serial: 0,
+          searchType: 'people',
+          // isJson: _a
+          ..._a
         });
         console.log("ShowLocationPin---搜寻轨迹------------");
+      } else {
+        this.$message.info('请传入搜寻对象图片！');
       }
     },
-    searchOneItem(val) {
+    searchOneItem (val) {
+      let _a = this.slist2[val]
+      console.log(_a)
       this.$SendMessageToUnity("ShowLocationPin", {
         Serial: val,
+        searchType: 'shops',
+        // jsonString: _a
+        ..._a
       });
       console.log("ShowLocationPin--商家、企业------------", val);
     },
-    zhuizongFun(val, i) {
+    zhuizongFun (val, i) {
       console.log(this.currentPage > 1 ? (this.currentPage - 1) * 10 + i : i);
       this.$SendMessageToUnity("ShowLocationPin", {
         Serial: this.currentPage > 1 ? (this.currentPage - 1) * 10 + i : i,
+        ...val
       });
       console.log("ShowLocationPin-----跟踪------------");
     },
-    back() {
+    back () {
       this.$emit("_c", null);
     },
     // 模拟分页
-    changeDatasFun() {
+    changeDatasFun () {
       let _data = JSON.parse(JSON.stringify(this.tableData2));
       let _first = (this.currentPage - 1) * 10;
       this.tableData = _data.slice(_first, _first + 10);
     },
-    handleSizeChange(val) {
+    handleSizeChange (val) {
       console.log(`每页 ${val} 条`);
     },
-    handleCurrentChange(val) {
+    handleCurrentChange (val) {
       this.currentPage = val;
       this.changeDatasFun();
     },

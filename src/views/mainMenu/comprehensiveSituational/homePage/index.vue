@@ -34,7 +34,7 @@ import * as echarts from "echarts";
 export default {
   components: { RightContent },
   // name: "zhts",
-  data() {
+  data () {
     return {
       inputVal: null,
       inputV: null,
@@ -85,6 +85,7 @@ export default {
             //   [34, 2, 32, 32, 32, 23],
             // ],
             xData: this.$timeRangeArr(),
+            yMax: 50,
             datas: [
               [
                 0,
@@ -190,6 +191,7 @@ export default {
             //   "10:00",
             //   "12:00",
             // ],
+            yMax: 200,
             xData: this.$timeRangeArr(),
             datas: [
               [
@@ -325,12 +327,12 @@ export default {
     };
   },
   computed: {
-    lang() {
+    lang () {
       return this.$store.state.comState.lang;
     },
   },
   watch: {
-    "$store.state.comState.lang"(n, o) {
+    "$store.state.comState.lang" (n, o) {
       // this.lang = this.$t("lg.name", n);
       // this.leftInfo = JSON.parse(
       //   this.$t("comprehensiveSituational.homePage")
@@ -343,10 +345,8 @@ export default {
       // ).rightInfo;
     },
   },
-  created() {
+  created () {
     this.$store.dispatch("SET_CENTERDATAS", [true, this.centerDatasList]);
-    // (this.leftInfo = homePage.leftInfo),
-    //   (this.rightInfo = homePage.rightInfo)
     let _l = this.leftInfo[1].datas.xData.length;
     let _l2 = this.rightInfo[1].datas.xData.length;
     this.leftInfo[1].datas.datas[0] = this.leftInfo[1].datas.datas[0].slice(
@@ -362,7 +362,7 @@ export default {
       _l2
     );
   },
-  mounted() {
+  mounted () {
     // aaa().then(r=>{
     //   console.log(r)
     // })
@@ -370,15 +370,15 @@ export default {
     //   console.log('xxxxxxxxx', req)
     // })
   },
-  destroyed() {},
+  destroyed () { },
   methods: {
-    showTipBoxHandle(val) {},
-    clickSwitch(val) {
+    showTipBoxHandle (val) { },
+    clickSwitch (val) {
       this.inputVal = val;
       this.inputV = null;
       this.isShowRIght = !this.isShowRIght;
     },
-    cgLang() {
+    cgLang () {
       let a;
       if (localStorage.getItem("language") == "en" || i18n.locale == "en") {
         a = "zh";

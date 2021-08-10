@@ -2,7 +2,7 @@
   <!-- 视频模式 -->
   <div class="videoMode">
     <ul class="videoMode_Box x_sb_rap">
-      <li
+      <!-- <li
         v-for="(item, i) in videoDatas"
         @mouseenter="mouseFun(true, i)"
         @mouseleave="mouseFun(false, i)"
@@ -26,7 +26,8 @@
           allow="autoplay; fullscreen"
         ></iframe>
         <Vloading v-show="item.url && is404" :text="'无信号'" />
-      </li>
+      </li> -->
+      <Player ref="player" :monitorList="videoDatas"></Player>
     </ul>
     <LookVideo
       :Visible="Visible"
@@ -57,51 +58,63 @@ export default {
       videoDatas: [
         {
           local: '16楼C区铭筑',
-          url: 'http://47.119.172.151:10810/play.html?device=LiveNVR001&channel=1'
+          url: 'http://183.62.170.2:8084/live?app=live&stream=cctv1',
+          id: 1
         },
         {
           local: '16层C区女厕',
-          url: 'http://47.119.172.151:10810/play.html?device=LiveNVR001&channel=2',
+          url: 'http://183.62.170.2:8084/live?app=live&stream=cctv2',
+          id: 2
         },
         {
           local: '16楼前台',
-          url: 'http://47.119.172.151:10810/play.html?device=LiveNVR001&channel=3',
+          url: 'http://183.62.170.2:8084/live?app=live&stream=cctv3',
+          id: 3
         },
         {
           local: '16楼A区铭筑男厕',
-          url: 'http://47.119.172.151:10810/play.html?device=LiveNVR001&channel=4',
+          url: 'http://183.62.170.2:8085/live?app=live&stream=cctv4',
+          id: 4
         },
         {
           local: '16楼A区会议室',
-          url: 'http://47.119.172.151:10810/play.html?device=LiveNVR001&channel=5',
+          url: 'http://183.62.170.2:8085/live?app=live&stream=cctv5',
+          id: 5
         },
         {
           local: '14楼A区铭筑',
-          url: 'http://47.119.172.151:10810/play.html?device=LiveNVR001&channel=6',
+          url: 'http://183.62.170.2:8085/live?app=live&stream=cctv6',
+          id: 6
         },
         {
           local: '14楼D区吧台',
-          url: 'http://47.119.172.151:10810/play.html?device=LiveNVR001&channel=7',
+          url: 'http://10.10.7.27:8086/live?app=live&stream=cctv7',
+          id: 7
         },
         {
           local: '14楼C区女厕',
-          url: 'http://47.119.172.151:10810/play.html?device=LiveNVR001&channel=8',
+          url: 'http://10.10.7.27:8087/live?app=live&stream=cctv8',
+          id: 8
         },
         {
           local: '14楼A区大事记',
-          url: 'http://47.119.172.151:10810/play.html?device=LiveNVR001&channel=9',
+          url: 'http://10.10.7.27:8087/live?app=live&stream=cctv9',
+          id: 9
         },
         {
           local: '14层B区男厕',
-          url: 'http://47.119.172.151:10810/play.html?device=LiveNVR001&channel=10',
+          url: 'http://10.10.7.27:8086/live?app=live&stream=cctv14',
+          id: 10
         },
         {
           local: '14楼贵宾会议室外',
-          url: 'http://47.119.172.151:10810/play.html?device=LiveNVR001&channel=11',
+          url: 'http://10.10.7.27:8086/live?app=live&stream=cctv15',
+          id: 11
         },
         {
           local: '14楼B区机房外',
-          url: 'http://47.119.172.151:10810/play.html?device=LiveNVR001&channel=12',
+          url: 'http://10.10.7.27:8086/live?app=live&stream=cctv16',
+          id: 12
         },
       ],
       videoD: {},
@@ -109,6 +122,7 @@ export default {
   },
   components: {},
   mounted () {
+    this.$refs.player.createVideo();
     var IframeOnClick = {
       resolution: 200,
       iframes: [],
@@ -166,13 +180,19 @@ export default {
       this.showMaster = bool
       this.masterIndex = i
     }
-  }
+  },
+  beforeRouteLeave (to, from, next) {
+    if (to.path != from.path) {
+      this.$refs.player.destoryVideo();
+    }
+    next();
+  },
 }
 </script>
 
 <style lang='less' scoped>
 @import "~@/style/animation.less";
-.videoMode_Box {
+:deep(.videoMode_Box) {
   width: 20.45rem /* 1636/80 */;
   height: 8.55rem /* 684/80 */;
   position: fixed;
@@ -195,7 +215,9 @@ export default {
   .close_master {
     .toHide(5s, 5s);
   }
-  li {
+  li,
+  .myVideo-video,
+  video {
     position: relative;
     width: 5rem /* 400/80 */;
     height: 2.75rem /* 220/80 */;
