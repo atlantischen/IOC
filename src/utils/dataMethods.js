@@ -95,8 +95,8 @@ var arrAdd = function arrAdd(arr) {
  * 数字递增
  * @returns
  */
-// var numAdd = function numAdd(aa, num, speed) {
-var numAdd = function numAdd(num, speed) {
+var numAdd = function numAdd(aa, num, speed) {
+  // var numAdd = function numAdd(num, speed) {
   // const numD = document.getElementById(aa)
   // const numD = that.$refs[aa]
   // console.log(aa)
@@ -113,7 +113,7 @@ var numAdd = function numAdd(num, speed) {
       timer = null
     }
     // numD.innerHTML = i++;
-    console.log(i++)
+    // console.log(i++)
     return i++
   }, numTime)
   return i

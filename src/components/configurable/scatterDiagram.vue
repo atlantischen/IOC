@@ -20,7 +20,7 @@
         <span>{{ item.name }}</span> -->
         <span
           ><i :id="'scatterDiagram_num' + i" :ref="'scatterDiagram_num' + i">{{
-            numAdd(item.value, 1000) || "--"
+            numAdd("scatterDiagram_num" + i, item.value, 1000) || "--"
           }}</i
           ><i>{{ item.unit }}</i>
         </span>
@@ -57,8 +57,8 @@ export default {
     filterNumFun (val) {
       return this.$filterNum(val);
     },
-    numAdd (val, val2) {
-      return this.$numAdd(val, val2);
+    numAdd (aa, val, val2) {
+      return this.$numAdd(aa, val, val2);
     },
     scatterDiagramFun (val) {
       let { xAxisD, names, title, units, datas } = val;
