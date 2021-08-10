@@ -173,110 +173,131 @@ export default {
           phone: "",
           info: "梅龙路与金龙路交汇处",
           src: require("@/assets/img/datas/qy_ags.png"),
+          srcName: 'qy_ags.png'
         },
         {
           name: "麦丹劳",
           phone: "",
           info: "2栋B座1088号商铺",
           src: require("@/assets/img/datas/qy_kfc.png"),
+          srcName: 'qy_kfc.png'
         },
         {
           name: "真功夫",
           phone: "",
           info: "1栋A座3014号商铺",
           src: require("@/assets/img/datas/qy_zgf.png"),
+          srcName: 'qy_zgf.png'
         },
         {
           name: "深圳奇信智能科技有限公司",
           phone: "",
           info: "海纳百川B座16F",
           src: require("@/assets/img/datas/qy_qx.png"),
+          srcName: 'qy_qx.png'
         },
       ],
       tableData: [],
       tableData2: [
         {
           src: require("@/assets/img/datas/p_1.png"),
+          srcName: 'p_1.png',
           name: "李玲",
           info: "涉嫌诈骗",
         },
         {
           src: require("@/assets/img/datas/p_2.png"),
+          srcName: 'p_2.png',
           name: "陈新",
           info: "逃避缴费",
         },
         {
           src: require("@/assets/img/datas/p_3.png"),
+          srcName: 'p_3.png',
           name: "韦孟",
           info: "从事传销活动",
         },
         {
           src: require("@/assets/img/datas/p_4.png"),
+          srcName: 'p_4.png',
           name: "李建华",
           info: "散播谣言",
         },
         {
           src: require("@/assets/img/datas/p_5.png"),
+          srcName: 'p_5.png',
           name: "肖海辉",
           info: "涉嫌诈骗",
         },
         {
           src: require("@/assets/img/datas/p_6.png"),
+          srcName: 'p_6.png',
           name: "徐高鹏",
           info: "逃避缴费",
         },
         {
           src: require("@/assets/img/datas/p_7.png"),
+          srcName: 'p_7.png',
           name: "韦炳佐",
           info: "从事传销活动",
         },
         {
           src: require("@/assets/img/datas/p_8.png"),
+          srcName: 'p_8.png',
           name: "瞿德志",
           info: "散播谣言",
         },
         {
           src: require("@/assets/img/datas/p_9.png"),
+          srcName: 'p_9.png',
           name: "陈荣",
           info: "涉嫌诈骗",
         },
         {
           src: require("@/assets/img/datas/p_10.png"),
+          srcName: 'p_10.png',
           name: "周志军",
           info: "逃避缴费",
         },
         {
           src: require("@/assets/img/datas/p_11.png"),
+          srcName: 'p_11.png',
           name: "张颖",
           info: "从事传销活动",
         },
         {
           src: require("@/assets/img/datas/p_12.png"),
+          srcName: 'p_12.png',
           name: "杨靓",
           info: "散播谣言",
         },
         {
           src: require("@/assets/img/datas/p_13.png"),
+          srcName: 'p_13.png',
           name: "徐清",
           info: "涉嫌诈骗",
         },
         {
           src: require("@/assets/img/datas/p_14.png"),
+          srcName: 'p_14.png',
           name: "方明",
           info: "逃避缴费",
         },
         {
           src: require("@/assets/img/datas/p_15.png"),
+          srcName: 'p_15.png',
           name: "李景",
           info: "从事传销活动",
         },
         {
           src: require("@/assets/img/datas/p_16.png"),
+          srcName: 'p_16.png',
           name: "廖明",
           info: "散播谣言",
         },
         {
           src: require("@/assets/img/datas/p_17.png"),
+          srcName: 'p_17.png',
           name: "顾宇",
           info: "从事传销活动",
         },
@@ -333,7 +354,6 @@ export default {
         }
         this.$SendMessageToUnity("ShowLocationPin", {
           searchType: 'people',
-          // isJson: _a
           ..._a
         });
         console.log("ShowLocationPin---搜寻轨迹------------");
@@ -343,20 +363,22 @@ export default {
     },
     searchOneItem (val) {
       let _a = this.slist2[val]
+      _a.src = _a.srcName
       console.log(_a)
       this.$SendMessageToUnity("ShowLocationPin", {
         Serial: val,
         searchType: 'shops',
-        // jsonString: _a
         ..._a
       });
       console.log("ShowLocationPin--商家、企业------------", val);
     },
     zhuizongFun (val, i) {
+      let _a = val
+      _a.src = _a.srcName
       console.log(this.currentPage > 1 ? (this.currentPage - 1) * 10 + i : i);
       this.$SendMessageToUnity("ShowLocationPin", {
         Serial: this.currentPage > 1 ? (this.currentPage - 1) * 10 + i : i,
-        ...val
+        ..._a
       });
       console.log("ShowLocationPin-----跟踪------------");
     },

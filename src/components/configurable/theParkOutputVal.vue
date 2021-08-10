@@ -16,21 +16,22 @@ export default {
       type: Object,
     },
   },
-  data() {
+  data () {
     return {
       ...this._data,
       ids: this.$uuid(),
     };
   },
-  mounted() {
+  mounted () {
     this.outputValueFun(this.datas);
   },
   methods: {
     // 园区产值
-    outputValueFun(val) {
+    outputValueFun (val) {
       const { optionName, datas, data2 } = val;
       var option = {
         tooltip: {
+          show: true,
           trigger: "item",
           backgroundColor: "rgba(0,0,0,0.8)",
           borderWidth: 1,
@@ -78,7 +79,7 @@ export default {
           right: 8,
           y: "center",
           data: optionName,
-          formatter: function(name) {
+          formatter: function (name) {
             return "{a|" + name + "}";
           },
           textStyle: {
@@ -111,7 +112,7 @@ export default {
             type: "pie",
             radius: ["62%", "80%"],
             center: ["23%", "50%"],
-            avoidLabelOverlap: false,
+            // avoidLabelOverlap: false,
             label: {
               show: false,
             },

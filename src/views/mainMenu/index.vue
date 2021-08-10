@@ -14,7 +14,6 @@
     <AlarmAck :_isFade="showAlarmAck" @close="closeOpenItem" />
     <!-- 中心数据 -->
     <CenterDatas :list="centerDatas" />
-
     <!-- 查看所有告警 -->
     <AllAlert
       :Visible="showAllAlert"
@@ -32,7 +31,7 @@ export default {
   components: { AlarmAck, AllAlert },
   data () {
     return {
-      isShow: false,
+      isShow: true,
       showAlarmAck: false,
       showAllAlert: false,
       showEscHandler: false,
@@ -96,6 +95,7 @@ export default {
         (typeof event.data == "string" && event.data.indexOf("data") != -1) ||
         (typeof event.data == "object" && event.data.data != undefined)
       ) {
+        // this.$store.commit("SET_CENTERDATAS", [false, null]);
         let res = JSON.parse(event.data);
         console.log(res, "resShow");
         this.$store.commit("setData", res);
@@ -140,7 +140,7 @@ export default {
       window.debug = true;
     } else {
       this.url = process.env.VUE_APP_UNITY;
-      this.url = 'http://183.62.170.2:8110';
+      // this.url = 'http://183.62.170.2:8110';
     }
   },
   mounted () {

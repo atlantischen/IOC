@@ -128,9 +128,14 @@ export default {
       this.isFade = n
       if (this.isFade) {
         this.ruleForm = {
-          name: "中心广场摄像机",
-          type: "物品偷盗",
-          because: "摄像头侦测报警",
+          // name: "中心广场摄像机",
+          // type: "物品偷盗",
+          // because: "摄像头侦测报警",
+          // handler: "梁海山",
+          // result: "已派人通知查看",
+          name: "3期C座5楼电梯间",
+          type: "报警",
+          because: "发生陌生人报警",
           handler: "梁海山",
           result: "已派人通知查看",
         };
@@ -245,6 +250,8 @@ export default {
         height: 0.4375rem /* 35/80 */;
         background: transparent;
         border-radius: 0;
+        font-family: "Microsoft YaHei";
+        font-size: 0.175rem /* 14/80 */;
       }
       .inputTextarea {
         width: 100%;

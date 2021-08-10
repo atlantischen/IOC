@@ -8,13 +8,20 @@
             {{ filterNumFun(item.value) }}</i
           ><i>{{ item.unit }}</i>
         </span> -->
-        <span
+        <!-- <span
           ><i
             :id="'scatterDiagram_num' + i"
             :ref="'scatterDiagram_num' + i"
-            data-to="300"
+            :data-to="item.value"
             :data-speed="item.value"
             >{{ filterNumFun(item.value) }}</i
+          ><i>{{ item.unit }}</i>
+        </span>
+        <span>{{ item.name }}</span> -->
+        <span
+          ><i :id="'scatterDiagram_num' + i" :ref="'scatterDiagram_num' + i">{{
+            numAdd(item.value, 1000) || "--"
+          }}</i
           ><i>{{ item.unit }}</i>
         </span>
         <span>{{ item.name }}</span>
@@ -36,45 +43,47 @@ export default {
       type: Object,
     },
   },
-  data() {
+  data () {
     return {
       ...this._data,
       ids: this.$uuid(),
     };
   },
-  created() {},
-  mounted() {
-    this.$numAdd('scatterDiagram_num0')
+  created () { },
+  mounted () {
     this.scatterDiagramFun(this.datas);
   },
   methods: {
-    filterNumFun(val) {
+    filterNumFun (val) {
       return this.$filterNum(val);
     },
-    scatterDiagramFun(val) {
+    numAdd (val, val2) {
+      return this.$numAdd(val, val2);
+    },
+    scatterDiagramFun (val) {
       let { xAxisD, names, title, units, datas } = val;
       var data = [
         [
-          [200, 3000, 1234, 22, "零售商家", "2021"],
-          [150, 1800, 1123, 20, "信息技术", "2021"],
-          [250, 2560, 934, 18, "新能源", "2021"],
-          [350, 2803, 842, 12, "新材料", "2021"],
-          [350, 3452, 734, 8, "生物医药", "2021"],
-          [550, 4522, 634, 7, "智能制造", "2021"],
-          [650, 4237, 522, 6, "文化创意", "2021"],
-          [670, 5326, 423, 5, "现代服务", "2021"],
-          [680, 6520, 365, 2, "节能环保", "2021"],
+          [680, 6520, 1234, 22, "零售商家", "2021"],
+          [670, 5326, 1123, 20, "信息技术", "2021"],
+          [650, 4237, 934, 18, "新能源", "2021"],
+          [550, 4522, 842, 12, "新材料", "2021"],
+          [400, 4500, 734, 8, "生物医药", "2021"],
+          [350, 2803, 634, 7, "智能制造", "2021"],
+          [250, 4800, 522, 6, "文化创意", "2021"],
+          [220, 2000, 423, 5, "现代服务", "2021"],
+          [150, 1800, 365, 2, "节能环保", "2021"],
         ],
         [
-          [150, 1800, 1034, 30, "零售商家", "2020"],
-          [220, 2000, 985, 18, "信息技术", "2020"],
-          [230, 4800, 723, 12, "新能源", "2020"],
-          [400, 3000, 730, 11, "新材料", "2020"],
-          [400, 4500, 612, 10, "生物医药", "2020"],
-          [450, 4200, 455, 8, "智能制造", "2020"],
-          [490, 3000, 432, 6, "文化创意", "2020"],
-          [520, 5500, 312, 4, "现代服务", "2020"],
-          [550, 4255, 234, 1, "节能环保", "2020"],
+          [550, 4255, 1034, 30, "零售商家", "2020"],
+          [520, 5500, 985, 18, "信息技术", "2020"],
+          [490, 3000, 723, 12, "新能源", "2020"],
+          [450, 4200, 730, 11, "新材料", "2020"],
+          [350, 3452, 612, 10, "生物医药", "2020"],
+          [400, 3000, 455, 8, "智能制造", "2020"],
+          [230, 2560, 432, 6, "文化创意", "2020"],
+          [150, 1800, 312, 4, "现代服务", "2020"],
+          [200, 3000, 234, 1, "节能环保", "2020"],
         ],
       ];
       var option = {
@@ -194,7 +203,7 @@ export default {
             name: names[0],
             data: data[0],
             type: "scatter",
-            symbolSize: function(data) {
+            symbolSize: function (data) {
               return Math.sqrt(data[2]) * 0.5;
             },
             emphasis: {
@@ -227,7 +236,7 @@ export default {
             name: names[1],
             data: data[1],
             type: "scatter",
-            symbolSize: function(data) {
+            symbolSize: function (data) {
               // return Math.sqrt(data[2]) / 5e2;
               return Math.sqrt(data[2]) * 0.5;
             },
