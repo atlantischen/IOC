@@ -92,7 +92,6 @@
 
 <script>
 import * as echarts from "echarts";
-
 export default {
   data() {
     return {
@@ -148,52 +147,35 @@ export default {
           title: "2#冷却塔_供水温度低于下限值",
         },
       ],
-      monitorList: [
+       monitorList:[
         {
         id: this.$uuid(),
           url: "http://10.10.7.27:8084/live?app=live&stream=cctv1",
         },
         {
-       id: this.$uuid(),
+        id: this.$uuid(),
           url: "http://10.10.7.27:8084/live?app=live&stream=cctv2",
         },
         {
-         id: this.$uuid(),
+          id: this.$uuid(),
           url: "http://10.10.7.27:8084/live?app=live&stream=cctv3",
         },
         {
-          id: this.$uuid(),
+         id: this.$uuid(),
           url: "http://10.10.7.27:8084/live?app=live&stream=cctv4",
         },
         {
-          id: this.$uuid(),
+         id: this.$uuid(),
           url: "http://10.10.7.27:8084/live?app=live&stream=cctv5",
         },
         {
           id: this.$uuid(),
           url: "http://10.10.7.27:8084/live?app=live&stream=cctv6",
         },
-        // {
-        //   local: '16层C区女厕',
-        //   url: 'http://47.119.172.151:10810/play.html?device=LiveNVR001&channel=2&protocol=WS_FLV',
-        // },
-        // {
-        //   local: '16楼前台',
-        //   url: 'http://47.119.172.151:10810/play.html?device=LiveNVR001&channel=3&protocol=WS_FLV',
-        // },
-        // {
-        //   local: '16楼A区铭筑男厕',
-        //   url: 'http://47.119.172.151:10810/play.html?device=LiveNVR001&channel=4&protocol=WS_FLV',
-        // },
-        // {
-        //   local: '16楼A区会议室',
-        //   url: 'http://47.119.172.151:10810/play.html?device=LiveNVR001&channel=5&protocol=WS_FLV',
-        // },
-        // {
-        //   local: '14楼A区铭筑',
-        //   url: 'http://47.119.172.151:10810/play.html?device=LiveNVR001&channel=6&protocol=WS_FLV',
-        // },
-      ],
+   
+      ]
+     
+    
     };
   },
   methods: {
@@ -225,14 +207,15 @@ export default {
         grid: {
           top: "40",
           left: "10",
-          right: "10",
+          right: "20",
           bottom: "10",
           containLabel: true,
         },
         xAxis: {
           name: "时间",
-            nameTextStyle: {
-              padding: [0, 0, -30, -30],
+          nameTextStyle: {
+              padding: [0, 0, -30, -18],
+              color: "#fff",
             },
           type: "category",
           axisTick: {
@@ -248,6 +231,7 @@ export default {
           axisLabel: {
             interval: 0,
             fontSize: 11,
+            padding: [-30, 10, -30, -20],
             textStyle: {
               color: "#fff",
             },
@@ -642,7 +626,7 @@ export default {
     },
   },
   mounted() {
-    let that = this;
+ 
     this.RealTotalPower(this.$getNowTime());
     this.ElectricityStatistics(
       this.$fun_date(),

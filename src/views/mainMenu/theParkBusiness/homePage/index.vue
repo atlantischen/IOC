@@ -788,9 +788,14 @@ export default {
       );
       this.returnStyle = `right:${window.screen.width -
         e.clientX}px;top:${e.clientY - 250}px`;
+        clearInterval(this.Imgtimer);
+
     },
     leaveItemFun() {
       this.showItem = false;
+    this.Imgtimer = setInterval(this.scrollAnimateImg, 2000);
+
+
     },
   },
   created() {},

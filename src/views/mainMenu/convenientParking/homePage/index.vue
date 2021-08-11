@@ -46,8 +46,10 @@
     <Tips :fade="fade"  :list="list"></Tips>
     <div class="search_box ioc_animated fadeInDownTop" :style="posationTop">
       <LicensePlateSearch
-        @search="search"
+      
         :searchData="searchData"
+        @sevenCarNum="sevenCarNum"
+        @eightCarNum="eightCarNum"
         :posationTop="posationTop"
       ></LicensePlateSearch>
     </div>
@@ -323,11 +325,7 @@ export default {
           value: 1,
         },
       ],
-      searchData: {
-        region: "赣",
-        letter: "A",
-        number: "8720B",
-      },
+      searchData:'\xa0\xa0\xa0\xa0\xa0\xa0\xa0',
       timeArr: [
         "00:00",
         "01:00",
@@ -663,11 +661,17 @@ export default {
       this.fade = true;
       this.posationTop= "top:1.6rem"
     },
-
-    search(val) {
-      let value = JSON.stringify(val);
-      this.$router.push({ name: "SmartParking", params: { value: value } });
+    sevenCarNum(val){
+      this.searchData=val
     },
+    eightCarNum(val){
+      this.searchData=val
+    },
+
+    // search(val) {
+    //   // console.log(val,'val');
+    //   // let value = JSON.stringify(val);
+    // },
 
     AssetsAndEquipment(val) {
       const { max, data } = val;
