@@ -9,7 +9,8 @@ export default createStore({
     unitySendData: {},
     activeIndex:0,
     videoShow:false,
-    dialogShow:false
+    dialogShow:false,
+ 
   
   },
   mutations: {
@@ -25,6 +26,7 @@ export default createStore({
     setDialogShow(state, payload) {
       state.dialogShow = payload
     },
+
   
   },
   actions: {},

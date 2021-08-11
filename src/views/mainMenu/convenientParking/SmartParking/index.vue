@@ -4,8 +4,10 @@
           <LicensePlateSearch
       @search="search"
       :searchData="searchData"
+        @sevenCarNum="sevenCarNum"
+        @eightCarNum="eightCarNum"
     ></LicensePlateSearch>
-    <div class="search_box">
+    <div class="search_box" v-if="carListRes.length !=0">
       <ul class="scroll">
         <li v-for="(item, index) in carListRes" :key="index" @click="confirmClick(index)">
           <div>
@@ -63,10 +65,7 @@
 export default {
   data() {
     return {
-      searchData:{
-    
-
-      },
+      searchData:'\xa0\xa0\xa0\xa0\xa0\xa0\xa0',
       arrList:['车牌','姓名','拉黑事由','操作'],
       currentPage: 1,
       pageSize: 11,
@@ -86,7 +85,7 @@ export default {
           operation: "追踪",
         },
         {
-          idCar: "粤BD367",
+          idCar: "粤BD3671",
           name: "韦孟",
           reason: "多次违规停车",
           operation: "追踪",
@@ -97,173 +96,16 @@ export default {
           reason: "月卡欠费",
           operation: "追踪",
         },
-        // {
-        //   idCar: "粤BAS325",
-        //   name: "李玲",
-        //   reason: "涉嫌诈骗",
-        //   operation: "追踪",
-        // },
-        // {
-        //   idCar: "粤BAS325",
-        //   name: "李玲",
-        //   reason: "涉嫌诈骗",
-        //   operation: "追踪",
-        // },
-        // {
-        //   idCar: "粤BAS325",
-        //   name: "李玲",
-        //   reason: "涉嫌诈骗",
-        //   operation: "追踪",
-        // },
-        // {
-        //   idCar: "粤BAS325",
-        //   name: "李玲",
-        //   reason: "涉嫌诈骗",
-        //   operation: "追踪",
-        // },
-        // {
-        //   idCar: "粤BAS325",
-        //   name: "李玲",
-        //   reason: "涉嫌诈骗",
-        //   operation: "追踪",
-        // },
-        // {
-        //   idCar: "粤BAS325",
-        //   name: "李玲",
-        //   reason: "涉嫌诈骗",
-        //   operation: "追踪",
-        // },
-        // {
-        //   idCar: "粤BAS325",
-        //   name: "李玲",
-        //   reason: "涉嫌诈骗",
-        //   operation: "追踪",
-        // },
-        // {
-        //   idCar: "粤BAS325",
-        //   name: "李玲",
-        //   reason: "涉嫌诈骗",
-        //   operation: "追踪",
-        // },
-        // {
-        //   idCar: "粤BAS325",
-        //   name: "李玲",
-        //   reason: "涉嫌诈骗",
-        //   operation: "追踪",
-        // },
-        // {
-        //   idCar: "粤BAS325",
-        //   name: "李玲",
-        //   reason: "涉嫌诈骗",
-        //   operation: "追踪",
-        // },
-        // {
-        //   idCar: "粤BAS325",
-        //   name: "李玲",
-        //   reason: "涉嫌诈骗",
-        //   operation: "追踪",
-        // },
-        // {
-        //   idCar: "粤BAS325",
-        //   name: "李玲",
-        //   reason: "涉嫌诈骗",
-        //   operation: "追踪",
-        // },
-        // {
-        //   idCar: "粤BAS325",
-        //   name: "李玲",
-        //   reason: "涉嫌诈骗",
-        //   operation: "追踪",
-        // },
-        // {
-        //   idCar: "粤BAS325",
-        //   name: "李玲",
-        //   reason: "涉嫌诈骗",
-        //   operation: "追踪",
-        // },
-        // {
-        //   idCar: "粤BAS325",
-        //   name: "李玲",
-        //   reason: "涉嫌诈骗",
-        //   operation: "追踪",
-        // },
-        // {
-        //   idCar: "粤BAS325",
-        //   name: "李玲",
-        //   reason: "涉嫌诈骗",
-        //   operation: "追踪",
-        // },
-
-        // {
-        //   idCar: "粤BAS325",
-        //   name: "李玲",
-        //   reason: "涉嫌诈骗",
-        //   operation: "追踪",
-        // },
-        // {
-        //   idCar: "粤BAS325",
-        //   name: "李玲",
-        //   reason: "涉嫌诈骗",
-        //   operation: "追踪",
-        // },
-        // {
-        //   idCar: "粤BAS325",
-        //   name: "李玲",
-        //   reason: "涉嫌诈骗",
-        //   operation: "追踪",
-        // },
-        // {
-        //   idCar: "粤BAS325",
-        //   name: "李玲",
-        //   reason: "涉嫌诈骗",
-        //   operation: "追踪",
-        // },
-        // {
-        //   idCar: "粤BAS325",
-        //   name: "李玲",
-        //   reason: "涉嫌诈骗",
-        //   operation: "追踪",
-        // },
-        // {
-        //   idCar: "粤BAS325",
-        //   name: "李玲",
-        //   reason: "涉嫌诈骗",
-        //   operation: "追踪",
-        // },
-        // {
-        //   idCar: "粤BAS325",
-        //   name: "李玲",
-        //   reason: "涉嫌诈骗",
-        //   operation: "追踪",
-        // },
-        // {
-        //   idCar: "粤BAS325",
-        //   name: "李玲",
-        //   reason: "涉嫌诈骗",
-        //   operation: "追踪",
-        // },
-        // {
-        //   idCar: "粤BAS325",
-        //   name: "李玲",
-        //   reason: "涉嫌诈骗",
-        //   operation: "追踪",
-        // },
-        // {
-        //   idCar: "粤BAS325",
-        //   name: "李玲",
-        //   reason: "涉嫌诈骗",
-        //   operation: "追踪",
-        // },
+    
+       
+        
       ],
       carList:[
         {
           url:require('@/assets/img/car_pic.png'),
-          name:'陈新-粤BAS325',
+          name:'陈新-粤A00000',
           reason:'月卡欠费',
-          region:'粤',
-          letter:'B',
-          number:'AS325',
-          id:0
+          num:'粤A00000',
         },
        
         {
@@ -271,9 +113,7 @@ export default {
           name:'韦孟-粤AD367C',
           reason:'多次违规停车',
           reason:'月卡欠费',
-          region:'粤',
-          letter:'A',
-          number:'D367C',
+          num:'粤AD367C',
           id:2
           
         },
@@ -281,74 +121,64 @@ export default {
           url:require('@/assets/img/car_pic1.png'),
           name:'吴泉洋-赣A8720B',
           reason:'多次违规停车',
-          region:'赣',
-          letter:'A',
-          number:'8720B',
+          num:'赣A8720B',
+ 
           id:1
         },
         {
           url:require('@/assets/img/car_pic2.png'),
           name:'陶敏-赣B26354',
           reason:'多次违规停车',
-          region:'赣',
-          letter:'B',
-          number:'26354',
+          num:'赣B26354',
+  
           id:3
         },
          {
           url:require('@/assets/img/car_pic.png'),
           name:'罗灿-湘A45623',
           reason:'多次违规停车',
-          region:'湘',
-          letter:'A',
-          number:'45623',
+          num:'湘A45623',
           id:4
         },
         {
           url:require('@/assets/img/car_pic1.png'),
           name:'余振-鄂JF358B',
           reason:'月卡欠费',
-          region:'鄂',
-          letter:'J',
-          number:'F358B',
+          num:'鄂JF358B',
           id:5
         },
         {
           url:require('@/assets/img/car_pic2.png'),
           name:'赵伟-川AD367C',
           reason:'多次违规停车',
-          region:'川',
-          letter:'A',
-          number:'D367C',
+          num:'川AD367C',
           id:6
         },
         {
           url:require('@/assets/img/car_pic2.png'),
           name:'龚玲-鄂CD3675',
           reason:'多次违规停车',
-          region:'鄂',
-          letter:'C',
-          number:'D3675',
+          num:'鄂CD3675',
           id:7
         },
         {
           url:require('@/assets/img/car_pic2.png'),
           name:'黄智源-粤A23659',
           reason:'多次违规停车',
-          region:'粤',
-          letter:'A',
-          number:'23659',
+          num:'粤A23659',
           id:8
         }
 
       ],
       tableList: [],
-      carListRes:[]
+      carListRes:[],
+      resData:''
     };
   },
 
   methods: {
     search(val) {
+      this.resData=val
       this.getCarList(this.carList)
     },
     handleClick(val) {
@@ -361,7 +191,11 @@ export default {
     clickTrack(){
       this.$SendMessageToUnity("QueryCarExitRoute", {"index":8});
     },
-    handleSizeChange(val) {
+    sevenCarNum(val){
+      this.searchData=val
+    },
+    eightCarNum(val){
+      this.searchData=val
     },
     handleCurrentChange(val) {
       this.currentPage = val;
@@ -373,38 +207,45 @@ export default {
       this.tableList = _data.slice(i, i + this.pageSize);
     },
     getCarList(list){
-      var data = this.searchData
-      const {region,letter,number}=data
-      console.log(data);
-        if(region ==undefined && letter== undefined && number== undefined  ){
-          this.carListRes=list
-          console.log(this.carListRes);
-        }
-        else if(region !==undefined && letter== undefined && number==undefined){
-          this.carListRes=list.filter(item=>{
-              if(item.region===region){
+     
+      this.carListRes=list.filter(item=>{
+              if(item.num===this.resData){   
+                this.$SendMessageToUnity("QueryCarExitRoute", {"index":item.id});  
                 return item
               }
-        })
-        }else if(region !==undefined && letter !== undefined && (number==undefined||number=='')){
-          console.log('333355555');
-           this.carListRes=list.filter(item=>{
-              if(item.region===region&&item.letter===letter){
-                return item
-              }
-           })
-           console.log(this.carListRes);
-        }else if(region !==undefined && letter !== undefined && number !== undefined ){
-           this.carListRes=list.filter(item=>{
-              if(item.region===region&&item.letter===letter&&item.number===number){
-                return item
-              }
-           })
-           console.log(this.carListRes[0].id);
-            this.$SendMessageToUnity("QueryCarExitRoute", {"index":this.carListRes[0].id});
- 
+      })  
+      console.log(this.carListRes);
+      
+        // if(region ==undefined && letter== undefined && number== undefined  ){
+        //   this.carListRes=list
+        //   console.log(this.carListRes);
+        // }
+        // else if(region !==undefined && letter== undefined && number==undefined){
+        //   this.carListRes=list.filter(item=>{
+        //       if(item.region===region){
+        //         return item
+        //       }
+        // })
+        // }else if(region !==undefined && letter !== undefined && (number==undefined||number=='')){
+        //   console.log('333355555');
+        //    this.carListRes=list.filter(item=>{
+        //       if(item.region===region&&item.letter===letter){
+        //         return item
+        //       }
+        //    })
+        //    console.log(this.carListRes);
+        // }else if(region !==undefined && letter !== undefined && number !== undefined ){
+        //    this.carListRes=list.filter(item=>{
+        //       if(item.region===region&&item.letter===letter&&item.number===number){
+        //         return item
+        //       }
+        //    })
+        //    console.log(this.carListRes[0].id);
+  
 
-        }
+        // }
+        //         
+ 
         // console.log(this.carListRes,'this.carListRes');
    
       // }else{
@@ -414,11 +255,12 @@ export default {
   },
   created(){
     this.init();
+     this.getCarList(this.carList)
 
   },
   mounted() {
-    this.searchData = JSON.parse(this.$route.params.value);
-    this.getCarList(this.carList)
+    // this.searchData = JSON.parse(this.$route.params.value);
+   
 
     // console.log(this.$route.params.value,'searchData' );
     // this.init();

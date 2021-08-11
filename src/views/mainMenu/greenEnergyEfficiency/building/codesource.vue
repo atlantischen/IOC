@@ -225,14 +225,15 @@ export default {
         grid: {
           top: "40",
           left: "10",
-          right: "10",
+          right: "20",
           bottom: "10",
           containLabel: true,
         },
         xAxis: {
           name: "时间",
-            nameTextStyle: {
-              padding: [0, 0, -30, -30],
+          nameTextStyle: {
+              padding: [0, 0, -30, -18],
+              color: "#fff",
             },
           type: "category",
           axisTick: {
@@ -248,6 +249,7 @@ export default {
           axisLabel: {
             interval: 0,
             fontSize: 11,
+            padding: [-30, 10, -30, -20],
             textStyle: {
               color: "#fff",
             },
