@@ -20,6 +20,7 @@
             停止采播
           </div>
         </div>
+        <span class="desc" style="padding-left: 25px;">(通过耳麦等拾音设备实时采集音频数据，传输至音箱、音柱等终端，进行广播)</span>
       </div>
       <div class="file">
         <div class="tittle">文件广播</div>
@@ -84,10 +85,15 @@
               选择文件
             </div>
           </div>
-          <button @click="handleStar">开始播放</button>
+          <div class="btn">
+             <button @click="handleStar">开始播放</button>
           <button @click="handleStop">停止播放</button>
           <button @click="handleSuspend">暂停播放</button>
           <button @click="handleSContinue">继续播放</button>
+          </div>
+         
+        <span class="desc">(将MP3等音频文件传输至音箱、音柱等终端，进行播放)</span>
+
         </div>
       </div>
     </IOCLeft>
@@ -471,16 +477,20 @@ export default {
       }
     }
   }
-  button {
-    float: right;
-    width: 0.95rem /* 76/80 */;
+  .btn{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+     button {
+    width: 24%/* 76/80 */;
     height: 0.4rem /* 32/80 */;
     background: #101f32;
     border: 0px solid #4396f3;
     border-radius: 0.05rem /* 4/80 */;
     color: #fff;
-    margin-left: 0.075rem /* 6/80 */;
   }
+  }
+ 
 }
 .mask{
     position: fixed;
@@ -492,4 +502,8 @@ export default {
     // background-color: red;
   }
 
+.desc{
+  margin-top: .1875rem /* 15/80 */;
+  color: #FFC659;
+}
 </style>

@@ -51,7 +51,7 @@
           <li  @click="lookVideo(`${++index}号客梯`)">
              <!-- <Vloading v-show="showIfame" /> -->
 
-          <Player  width="49"  ref="player1" :monitorList="monitorList" ></Player>
+          <Player  width="49"  :dialogShow="$store.state.dialogShow"  ref="player1" :monitorList="monitorList" ></Player>
          <!-- <iframe
           v-show="!showIfame"
           scrolling="no"
@@ -87,7 +87,7 @@
             <span>{{item++}}号客梯</span> -->
            <!-- <Vloading v-show="showIfame" /> -->
 
-          <Player  width="49"  ref="player" :monitorList="monitorList1" ></Player>
+          <Player  width="49" :dialogShow="$store.state.dialogShow"  ref="player" :monitorList="monitorList1" ></Player>
          <!-- <iframe
           v-show="!showIfame"
           scrolling="no"
@@ -112,7 +112,7 @@
         
       </div>
     </IOCRight>
-    <Dialog :dialogShow="dialogShow" :title='title' @videoShow="videoShow" @dialogShowChange="dialogShowChange"></Dialog>
+    <Dialog :dialogShow="dialogShow"   :title='title'  @dialogShowChange="dialogShowChange"></Dialog>
     <VideoPlayback :title='title' :backShow="backShow" @videoShowChange="videoShowChange"></VideoPlayback>
   <LookVideo :Visible="Visible" :title="dialogTitle" @off="openCloseDialog" />
   <ElevatorMonitoring  :ElevatorVisible="ElevatorVisible"  :dataList="dataList"  @off="ElevatorCloseDialog" />
@@ -180,43 +180,44 @@ export default {
         },
       ],
       dialogShow:false,
+       videoShow:false,
       backShow:false,
       title:'轿厢监控',
        monitorList:[
        {
-          id: 1,
+          id: this.$uuid(),
           url: "http://10.10.7.27:8086/live?app=live&stream=cctv1",
         },
         {
-          id: 2,
+          id: this.$uuid(),
           url: "http://10.10.7.27:8086/live?app=live&stream=cctv2",
         },
         {
-          id: 3,
+          id: this.$uuid(),
           url: "http://10.10.7.27:8086/live?app=live&stream=cctv3",
         },
         {
-          id: 4,
+          id: this.$uuid(),
           url: "http://10.10.7.27:8086/live?app=live&stream=cctv4",
         },
          
       ],
         monitorList1:[
        {
-          id: 6,
-          url: "http://10.10.7.27:8087/live?app=live&stream=cctv6",
+          id: this.$uuid(),
+          url: "http://10.10.7.27:8085/live?app=live&stream=cctv6",
         },
         {
-          id: 7,
-          url: "http://10.10.7.27:8087/live?app=live&stream=cctv7",
+          id: this.$uuid(),
+          url: "http://10.10.7.27:8085/live?app=live&stream=cctv7",
         },
         {
-          id: 8,
-          url: "http://10.10.7.27:8087/live?app=live&stream=cctv8",
+          id: this.$uuid(),
+          url: "http://10.10.7.27:8085/live?app=live&stream=cctv8",
         },
         {
-          id: 9,
-          url: "http://10.10.7.27:8087/live?app=live&stream=cctv9",
+          id: this.$uuid(),
+          url: "http://10.10.7.27:8085/live?app=live&stream=cctv9",
         },
          
       ]
@@ -232,20 +233,23 @@ export default {
       //  this.$refs.player1.destoryVideo();
 
       this.dialogShow=val
-    },
-    videoShow(val){
-      if(val){
-        console.log('打开触发了');
+      // this.$store.commit('setDialogShow',false)
 
-        this.$refs.player1.createVideo();
-        this.$refs.player.createVideo();
-      }else{
-        console.log('关闭触发了');
-        this.$refs.player1.destoryVideo();
-        this.$refs.player.destoryVideo();
-      }
-        
+
     },
+    // videoShow(val){
+    //   if(val){
+    //     console.log('打开触发了');
+
+    //     this.$refs.player1.createVideo();
+    //     this.$refs.player.createVideo();
+    //   }else{
+    //     console.log('关闭触发了');
+    //     this.$refs.player1.destoryVideo();
+    //     this.$refs.player.destoryVideo();
+    //   }
+        
+    // },
     videoShowChange(val,name){
       if(name==='carData'){
         this.title='轿厢视频回放'
@@ -280,6 +284,11 @@ export default {
       }
     // },
   },
+  created(){
+      this.$store.commit('setDialogShow',true)
+      this.$store.commit('setVideoShow',false)
+
+  },
   mounted () {
     window.addEventListener("message", this.event, true);
     // this.$afterIframeOnload('iframeVideo0', () => {
@@ -289,7 +298,8 @@ export default {
   },
   beforeRouteLeave(to, from, next) {
     if (to.path != from.path) {
-      this.videoShow(false)
+      this.$store.commit('setVideoShow',false)
+      this.$store.commit('setDialogShow',false)
     }
     next();
   },
@@ -301,6 +311,7 @@ export default {
 </script>
 
 <style lang="less" scoped>
+@import "~@/style/index.less";
 .box{
   // padding:0 .18rem /* 20/80 */;
   box-sizing: border-box;

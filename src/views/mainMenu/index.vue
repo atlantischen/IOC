@@ -85,6 +85,7 @@ export default {
     }
   },
   created () {
+    this.$store.commit("SET_CENTERDATAS", [false, null]);
     if (window.vuplex) {
       this.addMessageListener();
     } else {
@@ -97,10 +98,12 @@ export default {
       ) {
         // this.$store.commit("SET_CENTERDATAS", [false, null]);
         let res = JSON.parse(event.data);
-        console.log(res, "resShow");
+
         this.$store.commit("setData", res);
         if (res.data === "IOCHOME") {
+
           this.isShow = true;
+
         } else if (res.action === "hide") {
           this.clearWarnTimeFun();
           this.isShow = false;
@@ -142,6 +145,7 @@ export default {
       this.url = process.env.VUE_APP_UNITY;
       // this.url = 'http://183.62.170.2:8110';
     }
+
   },
   mounted () {
     this.$nextTick(() => {
@@ -189,8 +193,6 @@ export default {
     },
 
     hideGlobal (bool) {
-      // this.fade = bool;
-      // this.deviceShow = bool;
       this.showAllAlert = bool;
       this.showAlarmAck = bool;
       this.$store.dispatch("SET_SHOWWARNTIP", bool);

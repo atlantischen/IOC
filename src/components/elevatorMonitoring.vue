@@ -9,7 +9,7 @@
         @open="openDialog"
       >
         <div class="videoBox" ref="videoBoxRef">
-          <iframe :src="`${dataList.IpAddress}&iframe=yes&aspect=640x360`" id="iframe" name='item' allowfullscreen allow="autoplay; fullscreen"></iframe>
+          <iframe :src="`${dataList.IpAddress}&iframe=yes&aspect=640x360&showConsole=no&autoplay=true`" id="iframe" name='item' allowfullscreen allow="autoplay; fullscreen"></iframe>
             <div class="iframe">
                 
             </div>
@@ -67,7 +67,7 @@ export default {
       dialogVisible:false,
       ElevatorList:{
             CurLoad: 500,
-            IpAddress: "http://172.21.71.225:10800/play.html?channel=3",
+            IpAddress: "http://10.10.7.27:10800/play.html?channel=1",
             LiftMonitorName: "5#1号电梯",
             Linkman: "王双",
             LockingLoad: 500,

@@ -65,6 +65,7 @@
 
           <Player
             ref="player"
+             :dialogShow="dialogShow"
             width="49"
             :monitorList="monitorList"
           ></Player>
@@ -96,6 +97,7 @@ export default {
   data() {
     return {
       showIfame: true,
+      dialogShow: true,
       Visible: false,
       flv_url: "",
       dialogTitle: "",
@@ -148,28 +150,28 @@ export default {
       ],
       monitorList: [
         {
-          id: 1,
-          url: "http://10.10.7.27:8087/live?app=live&stream=cctv1",
+        id: this.$uuid(),
+          url: "http://10.10.7.27:8084/live?app=live&stream=cctv1",
         },
         {
-          id: 2,
-          url: "http://10.10.7.27:8087/live?app=live&stream=cctv2",
+       id: this.$uuid(),
+          url: "http://10.10.7.27:8084/live?app=live&stream=cctv2",
         },
         {
-          id: 3,
-          url: "http://10.10.7.27:8087/live?app=live&stream=cctv3",
+         id: this.$uuid(),
+          url: "http://10.10.7.27:8084/live?app=live&stream=cctv3",
         },
         {
-          id: 4,
-          url: "http://10.10.7.27:8087/live?app=live&stream=cctv4",
+          id: this.$uuid(),
+          url: "http://10.10.7.27:8084/live?app=live&stream=cctv4",
         },
         {
-          id: 5,
-          url: "http://10.10.7.27:8087/live?app=live&stream=cctv5",
+          id: this.$uuid(),
+          url: "http://10.10.7.27:8084/live?app=live&stream=cctv5",
         },
         {
-          id: 6,
-          url: "http://10.10.7.27:8087/live?app=live&stream=cctv6",
+          id: this.$uuid(),
+          url: "http://10.10.7.27:8084/live?app=live&stream=cctv6",
         },
         // {
         //   local: '16层C区女厕',
@@ -195,51 +197,7 @@ export default {
     };
   },
   methods: {
-    // changeBtn (val) {
-    //   console.log(val);
-    //   this.activeIndex = val;
-    //   if (val == 1) {
-    //     this.ElectricityStatistics(
-    //       ["7.24", "7.25", "7.26", "7.27", "7.28", "7.29", "7.30"],
-    //   [2000, 3300, 3300, 4300, 3000, 3001, 4000],
-    //       {
-    //         name: "kw·h",
-    //         company:'日',
-    //         splitNumber: 3,
-    //         min: 0,
-    //         max: 4800,
-    //         interval: 1200,
-    //       }
-    //     );
-    //   } else if (val == 2) {
-    //     this.ElectricityStatistics(
-    //       ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"],
-    //       [3, 4, 4, 3, 2, 1, 2, 5, 4, 3, 6, 2],
-    //       {
-    //         name: "万kw·h",
-    //         company:'月',
-    //         splitNumber: 4,
-    //         min: 0,
-    //         max: 6.0,
-    //         interval: 1.5,
-    //       }
-    //     );
-    //   } else {
-    //     this.ElectricityStatistics(
-    //       ["2019年", "2020年", "2021年"],
-    //       [23, 41, 13],
-    //       {
-    //         name: "万kw·h",
-    //         company:'年',
-
-    //         splitNumber: 4,
-    //         min: 0,
-    //         max: 60,
-    //         interval: 20,
-    //       }
-    //     );
-    //   }
-    // },
+   
     RealTotalPower(data) {
       var y = [0, 25, 50, 75];
       var dom = this.$refs.RealTotalPower;
@@ -267,11 +225,15 @@ export default {
         grid: {
           top: "40",
           left: "10",
-          right: "0",
+          right: "10",
           bottom: "10",
           containLabel: true,
         },
         xAxis: {
+          name: "时间",
+            nameTextStyle: {
+              padding: [0, 0, -30, -30],
+            },
           type: "category",
           axisTick: {
             show: false,
@@ -722,7 +684,7 @@ export default {
   },
   beforeRouteLeave(to, from, next) {
     if (to.path != from.path) {
-      this.$refs.player.destoryVideo();
+       this.dialogShow = false;
     }
     next();
   },

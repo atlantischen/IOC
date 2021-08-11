@@ -69,7 +69,7 @@
             <span>{{item++}}号客梯</span> -->
            <!-- <Vloading v-show="showIfame" /> -->
 
-          <Player ref="player"   width="49" :monitorList="monitorList" ></Player>
+          <Player ref="player"  :dialogShow="dialogShow"  width="49" :monitorList="monitorList" ></Player>
          <!-- <iframe
           v-show="!showIfame"
           scrolling="no"
@@ -98,6 +98,7 @@ export default {
   data(){
     return{
       showIfame: true,
+      dialogShow:true,
       Visible: false,
       dialogTitle:'',
       activeIndex:1,
@@ -148,20 +149,20 @@ export default {
         ],
         monitorList:[
        {
-          id: 1,
-          url: "http://10.10.7.27:8087/live?app=live&stream=cctv13",
+          id: this.$uuid(),
+          url: "http://10.10.7.27:8085/live?app=live&stream=cctv13",
         },
         {
-          id: 2,
-          url: "http://10.10.7.27:8087/live?app=live&stream=cctv14",
+          id: this.$uuid(),
+          url: "http://10.10.7.27:8085/live?app=live&stream=cctv14",
         },
         {
-          id: 3,
-          url: "http://10.10.7.27:8087/live?app=live&stream=cctv15",
+         id: this.$uuid(),
+          url: "http://10.10.7.27:8085/live?app=live&stream=cctv15",
         },
         {
-          id: 4,
-          url: "http://10.10.7.27:8087/live?app=live&stream=cctv12",
+          id: this.$uuid(),
+          url: "http://10.10.7.27:8085/live?app=live&stream=cctv12",
         },
       ] 
         
@@ -415,7 +416,7 @@ export default {
   },
   beforeRouteLeave(to, from, next) {
     if (to.path != from.path) {
-      this.$refs.player.destoryVideo();
+        this.dialogShow = false;
     }
     next();
   },

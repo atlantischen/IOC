@@ -353,14 +353,17 @@ export default {
         grid: {
           top: "70",
           left: "0",
-          x2: 20,
+          x2: 25,
           y2: 20,
           containLabel: true,
         },
 
         xAxis: [
           {
-            name: "",
+             name: "时间",
+            nameTextStyle: {
+              padding: [0, 0, -30, -15],
+            },
             type: "category",
             data: data,
             axisLine: {
@@ -382,7 +385,7 @@ export default {
             axisLabel: {
               interval: 0,
               rotate: -30,
-              padding: [10, 25, 0, 0],
+              padding: [10, 25, -10, -20],
                formatter: function(value, index) {
                 if (index % 2) {
                   return value;
