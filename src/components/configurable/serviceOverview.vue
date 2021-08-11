@@ -18,12 +18,23 @@
         </tr>
         <tr>
           <td></td>
-          <td v-for="(item, i) in datas.return" :key="i">
+          <td v-for="(item, i) in datas.tabList[0].data" :key="i">
             <i
               class="tb_arrows"
-              :class="item.state == 'up' ? 'arrows_up' : 'arrows_down'"
+              :class="
+                datas.tabList[0].data[i] - datas.tabList[1].data[i] > 0
+                  ? 'arrows_up'
+                  : 'arrows_down'
+              "
             ></i
-            >{{ item.data }}
+            >{{
+              (
+                Math.abs(
+                  (datas.tabList[0].data[i] - datas.tabList[1].data[i]) /
+                    datas.tabList[1].data[i]
+                ) * 100
+              ).toFixed(2)
+            }}%
           </td>
         </tr>
       </table>

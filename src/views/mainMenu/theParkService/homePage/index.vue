@@ -17,7 +17,7 @@
 <script>
 export default {
   name: "homePage",
-  data() {
+  data () {
     return {
       leftInfo: [
         {
@@ -30,26 +30,26 @@ export default {
             tabList: [
               {
                 name: "本月",
-                data: [390, 478, 300],
+                data: [390, 478, 260],
               },
               {
                 name: "上月",
-                data: [268, 292, 568],
+                data: [380, 470, 280],
               },
             ],
             return: [
-              {
-                state: "up",
-                data: this.$randomNumer(1, 5, 2) + "%",
-              },
-              {
-                state: "up",
-                data: this.$randomNumer(1, 5, 2) + "%",
-              },
-              {
-                state: "down",
-                data: this.$randomNumer(1, 5, 2) + "%",
-              },
+              // {
+              //   state: "up",
+              //   data: this.$randomNumer(1, 5, 2) + "%",
+              // },
+              // {
+              //   state: "up",
+              //   data: this.$randomNumer(1, 5, 2) + "%",
+              // },
+              // {
+              //   state: "down",
+              //   data: this.$randomNumer(1, 5, 2) + "%",
+              // },
             ],
           },
         },
@@ -225,8 +225,8 @@ export default {
     };
   },
   components: {},
-  created() {},
-  mounted() {},
+  created () { },
+  mounted () { },
   methods: {},
 };
 </script>

@@ -2,7 +2,7 @@
   <ul
     class="centerData_c x_c ioc_animated"
     :class="{ fadeInDownTop: isShow }"
-    v-if="this.$store.state.comState.showCenterDatas"
+    v-if="isShow"
   >
     <li v-for="(item, i) in centerlist" :key="i" class="y_c">
       <span><NumCounter :value="item.val"></NumCounter></span>
@@ -24,13 +24,11 @@ export default {
     };
   },
   watch: {
-    // "$store.state.comState.showCenterDatas": function (n, o) {
-    //   this.isShow = n;
-     
-    // },
-   
-
+    "$store.state.comState.showCenterDatas": function (n, o) {
+      this.isShow = n;
+    },
     list: function (n, o) {
+      // console.log(n, o)
       this.centerlist = n;
     },
   },

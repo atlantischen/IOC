@@ -13,8 +13,7 @@
     <!-- 右侧警告框 -->
     <AlarmAck :_isFade="showAlarmAck" @close="closeOpenItem" />
     <!-- 中心数据 -->
-    <CenterDatas  :list="centerDatas" />
-
+    <CenterDatas :list="centerDatas" />
     <!-- 查看所有告警 -->
     <AllAlert
       :Visible="showAllAlert"
@@ -86,7 +85,7 @@ export default {
     }
   },
   created () {
-    this.$store.commit("SET_CENTERDATAS", [false, null]);
+    this.$store.commit("SET_CENTERDATAS", [false, null]);
     if (window.vuplex) {
       this.addMessageListener();
     } else {
@@ -97,11 +96,12 @@ export default {
         (typeof event.data == "string" && event.data.indexOf("data") != -1) ||
         (typeof event.data == "object" && event.data.data != undefined)
       ) {
+        // this.$store.commit("SET_CENTERDATAS", [false, null]);
         let res = JSON.parse(event.data);
-      
+
         this.$store.commit("setData", res);
         if (res.data === "IOCHOME") {
-          
+
           this.isShow = true;
 
         } else if (res.action === "hide") {

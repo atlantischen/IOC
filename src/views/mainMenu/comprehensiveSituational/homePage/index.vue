@@ -142,11 +142,11 @@ export default {
               "节能环保",
               "商家",
             ],
-            datas: [24, 16, 13, 15, 15, 12, 2, 2, 1],
+            datas: [24, 16, 13, 15, 15, 9, 4, 3, 2],
             data2: {
               value: 164,
               name: "税收总数",
-              unit: "(亿元)",
+              unit: "(亿元)"
             },
           },
         },
@@ -257,7 +257,7 @@ export default {
                 name: "总车位",
               },
               {
-                value: 381,
+                value: 236,
                 name: "剩余车位",
               },
               {
@@ -307,7 +307,7 @@ export default {
         },
         {
           name: "剩余车位数",
-          val: 381,
+          val: 236,
         },
         {
           name: "未处理告警数",

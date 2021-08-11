@@ -32,6 +32,8 @@
 
 <script>
 import mainMenus from "@/router/mainMenus/index";
+import {urlArry} from '@/utils/flv_url.js'
+
 export default {
   name: "url",
   data () {
@@ -41,6 +43,7 @@ export default {
     };
   },
   mounted () {
+    console.log(urlArry);
     console.log(mainMenus);
   },
   methods: {

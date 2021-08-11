@@ -95,23 +95,28 @@ var arrAdd = function arrAdd(arr) {
  * 数字递增
  * @returns
  */
-var numAdd = function numAdd(aa) {
-  var that = this
-  const numD = document.getElementById(aa)
+var numAdd = function numAdd(aa, num, speed) {
+  // var numAdd = function numAdd(num, speed) {
+  // const numD = document.getElementById(aa)
   // const numD = that.$refs[aa]
-  console.log(aa)
-  console.log(numD)
-  var num = numD.getAttribute("data-to")
-  var time = numD.getAttribute("data-speed")
-  var numTime = num / time
-  var i = 1
+  // console.log(aa)
+  // console.log(numD)
+  // var num = numD.getAttribute("data-to")
+  // var time = numD.getAttribute("data-speed")
+  var num = Number(num)
+  var time = Number(speed)
+  var numTime = time / num
+  var i = num - 10000
   var timer = setInterval(function () {
     if (i == num) {
       clearInterval(timer)
+      timer = null
     }
     // numD.innerHTML = i++;
-    return filterNum(i++)
+    // console.log(i++)
+    return i++
   }, numTime)
+  return i
 }
 const fun = {
   uuid,
