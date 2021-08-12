@@ -92,6 +92,7 @@
 
 <script>
 import * as echarts from "echarts";
+import {urlArry} from '@/utils/flv_url.js'
 export default {
   data() {
     return {
@@ -147,33 +148,7 @@ export default {
           title: "2#冷却塔_供水温度低于下限值",
         },
       ],
-       monitorList:[
-        {
-        id: this.$uuid(),
-          url: "http://10.10.7.27:8084/live?app=live&stream=cctv1",
-        },
-        {
-        id: this.$uuid(),
-          url: "http://10.10.7.27:8084/live?app=live&stream=cctv2",
-        },
-        {
-          id: this.$uuid(),
-          url: "http://10.10.7.27:8084/live?app=live&stream=cctv3",
-        },
-        {
-         id: this.$uuid(),
-          url: "http://10.10.7.27:8084/live?app=live&stream=cctv4",
-        },
-        {
-         id: this.$uuid(),
-          url: "http://10.10.7.27:8084/live?app=live&stream=cctv5",
-        },
-        {
-          id: this.$uuid(),
-          url: "http://10.10.7.27:8084/live?app=live&stream=cctv6",
-        },
-   
-      ]
+       monitorList:urlArry.codesourceList
      
     
     };

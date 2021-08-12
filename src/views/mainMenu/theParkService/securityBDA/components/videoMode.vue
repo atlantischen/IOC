@@ -160,9 +160,9 @@ export default {
       //   this.lookVideo(this.videoDatas[i])
       // });
     }
-    this.$afterIframeOnload('iframeVideo0', () => {
-      this.showIfame = false
-    })
+    // this.$afterIframeOnload('iframeVideo0', () => {
+    //   this.showIfame = false
+    // })
 
   },
   methods: {

@@ -122,46 +122,6 @@ export default {
            id: this.$uuid(),
           url: "http://10.10.7.27:8085/live?app=live&stream=cctv12",
         },
-        // {
-        //   id: 3,
-        //   url: "http://10.10.7.27:8084/live?app=live&stream=cctv6",
-        // },
-        // {
-        //   id: 4,
-        //   url: "http://10.10.7.27:8084/live?app=live&stream=cctv4",
-        // },
-        // {
-        //   id: 5,
-        //   url: "http://10.10.7.27:8084/live?app=live&stream=cctv5",
-        // },
-        // {
-        //   id: 6,
-        //   url: "http://10.10.7.27:8084/live?app=live&stream=cctv6",
-        // },
-        //  {
-        //   id: 7,
-        //   url: "http://10.10.7.27:8085/live?app=live&stream=cctv1",
-        // },
-        // {
-        //   id: 8,
-        //   url: "http://10.10.7.27:8085/live?app=live&stream=cctv2",
-        // },
-        // {
-        //   id: 9,
-        //   url: "http://10.10.7.27:8085/live?app=live&stream=cctv3",
-        // },
-        // {
-        //   id: 10,
-        //   url: "http://10.10.7.27:8085/live?app=live&stream=cctv4",
-        // },
-        // {
-        //   id: 11,
-        //   url: "http://10.10.7.27:8085/live?app=live&stream=cctv5",
-        // },
-        // {
-        //   id: 12,
-        //   url: "http://10.10.7.27:8085/live?app=live&stream=cctv6",
-        // },
       
       ],
       dialogVideoVisible: this.dialogShow,
