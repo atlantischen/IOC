@@ -7,19 +7,20 @@
       type="card"
       @tab-click="handleClick"
     >
-      <el-tab-pane name="first">
+      <el-tab-pane label="数据模式" name="dataMode">
         <template #label>
           <span><i class="iconfont icon-shuju"></i> 数据模式</span>
         </template>
       </el-tab-pane>
-      <el-tab-pane label="视频模式" name="second">
+      <el-tab-pane label="视频模式" name="videoMode">
         <template #label>
           <span><i class="iconfont icon-shipin-tianchong"></i> 视频模式</span>
-        </template></el-tab-pane
-      >
+        </template>
+      </el-tab-pane>
     </el-tabs>
-    <DataMode v-if="activeName == 'first'" />
-    <VideoMode v-else />
+    <!-- <DataMode v-if="activeName == 'first'" />
+    <VideoMode v-else /> -->
+    <router-view></router-view>
   </div>
 </template>
 
@@ -31,10 +32,20 @@ export default {
   components: { DataMode, VideoMode },
   data () {
     return {
-      activeName: 'first'
+      activeName: 'dataMode'
     }
   },
+  created() {
+    if(this.$route.name == this.activeName){return}
+    this.activeName= this.$route.name
+  },
+  mounted () {
+  },
   methods: {
+    handleClick (a) {
+      this.activeName = a.props.name
+      this.$router.push('/theParkService/securityBDA/' + this.activeName)
+    }
   }
 }
 </script>
@@ -100,6 +111,9 @@ export default {
           }
         }
       }
+    }
+    .el-tabs__content {
+      position: relative;
     }
   }
 }

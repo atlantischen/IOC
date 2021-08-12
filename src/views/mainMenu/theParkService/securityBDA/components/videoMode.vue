@@ -27,7 +27,11 @@
         ></iframe>
         <Vloading v-show="item.url && is404" :text="'无信号'" />
       </li> -->
-      <Player ref="player" :monitorList="videoDatas"></Player>
+      <Player
+        ref="player"
+        :dialogShow="$store.state.dialogShow"
+        :monitorList="videoDatas"
+      ></Player>
     </ul>
     <LookVideo
       :Visible="Visible"
@@ -41,8 +45,15 @@
 <script>
 export default {
   name: 'videoMode',
+  props: {
+    _showVideo: {
+      type: Boolean,
+      default: false
+    }
+  },
   data () {
     return {
+      showVideo: false,
       showIfame: true,
       Visible: false,
       is404: false,
@@ -58,32 +69,32 @@ export default {
       videoDatas: [
         {
           local: '16楼C区铭筑',
-          url: 'http://183.62.170.2:8084/live?app=live&stream=cctv1',
+          url: 'http://183.62.170.2:8086/live?app=live&stream=cctv1',
           id: 1
         },
         {
           local: '16层C区女厕',
-          url: 'http://183.62.170.2:8084/live?app=live&stream=cctv2',
+          url: 'http://183.62.170.2:8086/live?app=live&stream=cctv2',
           id: 2
         },
         {
           local: '16楼前台',
-          url: 'http://183.62.170.2:8084/live?app=live&stream=cctv3',
+          url: 'http://183.62.170.2:8086/live?app=live&stream=cctv3',
           id: 3
         },
         {
           local: '16楼A区铭筑男厕',
-          url: 'http://183.62.170.2:8085/live?app=live&stream=cctv4',
+          url: 'http://183.62.170.2:8087/live?app=live&stream=cctv4',
           id: 4
         },
         {
           local: '16楼A区会议室',
-          url: 'http://183.62.170.2:8085/live?app=live&stream=cctv5',
+          url: 'http://183.62.170.2:8087/live?app=live&stream=cctv5',
           id: 5
         },
         {
           local: '14楼A区铭筑',
-          url: 'http://183.62.170.2:8085/live?app=live&stream=cctv6',
+          url: 'http://183.62.170.2:8087/live?app=live&stream=cctv6',
           id: 6
         },
         {
@@ -120,55 +131,68 @@ export default {
       videoD: {},
     }
   },
+
+  // watch: {
+  //   _showVideo: {
+  //     handler (n, o) {
+  //       this.showVideo = n
+  //     },
+  //     immediate: true
+  //   }
+  // },
   components: {},
   mounted () {
-    this.$refs.player.createVideo();
-    var IframeOnClick = {
-      resolution: 200,
-      iframes: [],
-      interval: null,
-      Iframe: function () {
-        this.element = arguments[0];
-        this.cb = arguments[1];
-        this.hasTracked = false;
-      },
-      track: function (element, cb) {
-        this.iframes.push(new this.Iframe(element, cb));
-        if (!this.interval) {
-          var _this = this
-          this.interval = setInterval(function () { _this.checkClick(); }, this.resolution);
-        }
-      },
-      checkClick: function () {
-        if (document.activeElement) {
-          var activeElement = document.activeElement;
-          for (var i in this.iframes) {
-            if (activeElement === this.iframes[i].element) {
-              if (this.iframes[i].hasTracked == false) {
-                this.iframes[i].cb.apply(window, []);
-                this.iframes[i].hasTracked = true;
-              }
-            } else {
-              this.iframes[i].hasTracked = false;
-            }
-          }
-        }
-      }
-    };
-    for (var i = 0; i < this.videoDatas.length; i++) {
-      // IframeOnClick.track(document.getElementById("iframeVideo" + i), function (i) {
-      //   this.lookVideo(this.videoDatas[i])
-      // });
+    if (!this.$store.state.dialogShow) {
+      this.$store.commit('setDialogShow', true)
     }
+    // this.showVideo = true
+    // var IframeOnClick = {
+    //   resolution: 200,
+    //   iframes: [],
+    //   interval: null,
+    //   Iframe: function () {
+    //     this.element = arguments[0];
+    //     this.cb = arguments[1];
+    //     this.hasTracked = false;
+    //   },
+    //   track: function (element, cb) {
+    //     this.iframes.push(new this.Iframe(element, cb));
+    //     if (!this.interval) {
+    //       var _this = this
+    //       this.interval = setInterval(function () { _this.checkClick(); }, this.resolution);
+    //     }
+    //   },
+    //   checkClick: function () {
+    //     if (document.activeElement) {
+    //       var activeElement = document.activeElement;
+    //       for (var i in this.iframes) {
+    //         if (activeElement === this.iframes[i].element) {
+    //           if (this.iframes[i].hasTracked == false) {
+    //             this.iframes[i].cb.apply(window, []);
+    //             this.iframes[i].hasTracked = true;
+    //           }
+    //         } else {
+    //           this.iframes[i].hasTracked = false;
+    //         }
+    //       }
+    //     }
+    //   }
+    // };
+    // for (var i = 0; i < this.videoDatas.length; i++) {
+    // IframeOnClick.track(document.getElementById("iframeVideo" + i), function (i) {
+    //   this.lookVideo(this.videoDatas[i])
+    // });
+    // }
     // this.$afterIframeOnload('iframeVideo0', () => {
     //   this.showIfame = false
     // })
-
+  },
+  beforeDestroy () {
+    this.$store.commit('setDialogShow', false)
   },
   methods: {
     openCloseDialog (val) {
       this.Visible = val
-
     },
     lookVideo (val) {
       this.dialogTitle = val.deviceName = val.local
@@ -180,13 +204,7 @@ export default {
       this.showMaster = bool
       this.masterIndex = i
     }
-  },
-  beforeRouteLeave (to, from, next) {
-    if (to.path != from.path) {
-      this.$refs.player.destoryVideo();
-    }
-    next();
-  },
+  }
 }
 </script>
 
