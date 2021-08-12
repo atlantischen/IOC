@@ -35,119 +35,146 @@ export default {
       const { optionName, datas, data2 } = val;
       var colors = ["rgba(30, 57, 87, 0.5)", "#cda857", "#4396f3", "#0ff"];
       var option = {
-        tooltip: {
-          trigger: "item",
-          backgroundColor: "rgba(0,0,0,0.8)",
-          borderWidth: 1,
-          borderColor: "#4396f3",
-          padding: [5, 10],
-          extraCssText: "box-shadow:inset 0 0 8px rgba(67, 149, 243, 0.6);",
-          textStyle: {
-            color: "#fff",
+        baseOption: {
+          timeline: {
+            show: false,
+            axisType: 'category',
+            // orient: 'vertical',
+            loop: false,
+            autoPlay: true,
+            inverse: true,
+            playInterval: this.$retutnZero(data2[0].value) / data2[0].value,
+            // left: null,
+            // right: 0,
+            // top: 20,
+            // bottom: 20,
+            // width: 0,
+            // height: 0,
+            // symbol: 'none',
+            // checkpointStyle: {
+            //   borderWidth: 0
+            // },
+            // controlStyle: {
+            //   showNextBtn: false,
+            //   showPrevBtn: false
+            // },
+            data: []
           },
-          formatter: (v) => {
-            return optionName[v.dataIndex] + ':' + v.value + '%'
-          }
-        },
-        title: [
-          {
-            show: data2 && data2[0],
-            text: data2[0].value,
-            link: "",
-            target: null,
-            subtext: data2[0].name,
-            sublink: "",
-            subtarget: null,
-            right: "18%",
-            top: "0",
-            textAlign: "center",
+          tooltip: {
+            trigger: "item",
+            backgroundColor: "rgba(0,0,0,0.8)",
+            borderWidth: 1,
+            borderColor: "#4396f3",
+            padding: [5, 10],
+            extraCssText: "box-shadow:inset 0 0 8px rgba(67, 149, 243, 0.6);",
             textStyle: {
-              fontFamily: "BYfont",
-              fontSize: 24,
-              padding: [2, 0],
-              fontWeight: 550,
               color: "#fff",
             },
-            subtextStyle: {
-              fontSize: 12,
-              color: "rgb(255,255,255,.7)",
-            },
+            formatter: (v) => {
+              return optionName[v.dataIndex] + ':' + v.value + '%'
+            }
           },
-          {
-            show: data2 && data2[1],
-            text: data2[1].value,
-            link: "",
-            target: null,
-            subtext: data2[1].name,
-            sublink: "",
-            subtarget: null,
-            right: "-7%",
-            top: "0",
-            textAlign: "center",
-            textStyle: {
-              fontFamily: "BYfont",
-              fontSize: 24,
-              padding: [2, 0],
-              fontWeight: 550,
-              color: "#fff",
-            },
-            subtextStyle: {
-              fontSize: 12,
-              color: "rgb(255,255,255,.7)",
-            },
-          },
-        ],
-        legend: {
-          selectedMode: true,
-          show: true,
-          orient: "vertical", // 'horizontal'
-          left: "50%",
-          top: "35%",
-          data: optionName,
-          formatter: function (name) {
-            var index = 0;
-            optionName.forEach(function (value, i) {
-              if (value == name) index = i;
-            });
-            return "{a|" + name + "}" + datas[index] + "%";
-          },
-          textStyle: {
-            color: "#fff",
-            fontSize: 12,
-            padding: [0, 15, 0, 2],
-            rich: {
-              a: {
+          title: [
+            {
+              show: data2 && data2[0],
+              text: data2[0].value,
+              link: "",
+              target: null,
+              subtext: data2[0].name,
+              sublink: "",
+              subtarget: null,
+              right: "18%",
+              top: "0",
+              textAlign: "center",
+              textStyle: {
+                fontFamily: "BYfont",
+                fontSize: 24,
+                padding: [2, 0],
+                fontWeight: 550,
+                color: "#fff",
+              },
+              subtextStyle: {
+                fontSize: 12,
                 color: "rgb(255,255,255,.7)",
-                padding: [0, 10, 0, 0],
               },
             },
+            {
+              show: data2 && data2[1],
+              text: data2[1].value,
+              link: "",
+              target: null,
+              subtext: data2[1].name,
+              sublink: "",
+              subtarget: null,
+              right: "-7%",
+              top: "0",
+              textAlign: "center",
+              textStyle: {
+                fontFamily: "BYfont",
+                fontSize: 24,
+                padding: [2, 0],
+                fontWeight: 550,
+                color: "#fff",
+              },
+              subtextStyle: {
+                fontSize: 12,
+                color: "rgb(255,255,255,.7)",
+              },
+            },
+          ],
+          legend: {
+            selectedMode: true,
+            show: true,
+            orient: "vertical", // 'horizontal'
+            left: "50%",
+            top: "35%",
+            data: optionName,
+            formatter: function (name) {
+              var index = 0;
+              optionName.forEach(function (value, i) {
+                if (value == name) index = i;
+              });
+              return "{a|" + name + "}" + datas[index] + "%";
+            },
+            textStyle: {
+              color: "#fff",
+              fontSize: 12,
+              padding: [0, 15, 0, 2],
+              rich: {
+                a: {
+                  color: "rgb(255,255,255,.7)",
+                  padding: [0, 10, 0, 0],
+                },
+              },
+            },
+            icon: "circle",
+            itemWidth: 6,
+            itemHeight: 6,
+            itemGap: 12,
           },
-          icon: "circle",
-          itemWidth: 6,
-          itemHeight: 6,
-          itemGap: 12,
+          series: [
+            {
+              name: "",
+              type: "pie",
+              radius: ["0", 90 - (optionName.length + 1) * 8 + "%"],
+              center: ["20%", "50%"],
+              color: "rgba(0, 0, 0, 0.4)",
+              avoidLabelOverlap: false,
+              animationType: "scale",
+              label: {
+                show: false,
+              },
+              labelLine: {
+                show: false,
+              },
+              data: [100],
+            },
+          ]
         },
-        series: [
-          {
-            name: "",
-            type: "pie",
-            radius: ["0", 90 - (optionName.length + 1) * 8 + "%"],
-            center: ["20%", "50%"],
-            color: "rgba(0, 0, 0, 0.4)",
-            avoidLabelOverlap: false,
-            animationType: "scale",
-            label: {
-              show: false,
-            },
-            labelLine: {
-              show: false,
-            },
-            data: [100],
-          },
-        ],
+        options: []
       };
       for (var i = 0; i < optionName.length; i++) {
-        option.series[i + 1] = {
+        option.baseOption.series[i + 1] = {
           // z: optionName.length - i,
           name: "",
           type: "pie",
@@ -193,6 +220,21 @@ export default {
             };
           }),
         };
+      }
+      let _title = []
+      for (var j = 0; j < data2.length; j++) {
+        for (var n = Math.ceil(8 * data2[j].value / 10); n <= data2[j].value; n++) {
+          if (n <= data2[j].value) {
+            option.baseOption.timeline.data.push(n);
+            _title[j] = {
+              show: true,
+              'text': n + ''
+            }
+            option.options.push({
+              title: [..._title]
+            });
+          }
+        }
       }
       this.$redomEchart(this.$refs["floorSpaceEchart_" + this.ids], option);
     },

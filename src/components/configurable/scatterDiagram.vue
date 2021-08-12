@@ -8,7 +8,7 @@
             {{ filterNumFun(item.value) }}</i
           ><i>{{ item.unit }}</i>
         </span> -->
-        <!-- <span
+        <span
           ><i
             :id="'scatterDiagram_num' + i"
             :ref="'scatterDiagram_num' + i"
@@ -17,13 +17,12 @@
             >{{ filterNumFun(item.value) }}</i
           ><i>{{ item.unit }}</i>
         </span>
-        <span>{{ item.name }}</span> -->
-        <span
+        <!-- <span
           ><i :id="'scatterDiagram_num' + i" :ref="'scatterDiagram_num' + i">{{
             numAdd("scatterDiagram_num" + i, item.value, 1000) || "--"
           }}</i
           ><i>{{ item.unit }}</i>
-        </span>
+        </span> -->
         <span>{{ item.name }}</span>
       </li>
     </ul>

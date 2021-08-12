@@ -38,7 +38,7 @@ export default {
             loop: false,
             autoPlay: true,
             inverse: true,
-            playInterval: 1000 / data2.value,
+            playInterval: this.$retutnZero(data2.value) / data2.value,
             // left: null,
             // right: 0,
             // top: 20,
@@ -156,7 +156,7 @@ export default {
           name: optionName[i],
         };
       }
-      for (var n = Math.ceil(8 * data2.value / 10); n < data2.value; n++) {
+      for (var n = Math.ceil(8 * data2.value / 10); n <= data2.value; n++) {
         if (n <= data2.value) {
           option.baseOption.timeline.data.push(n);
           option.options.push({
@@ -167,7 +167,6 @@ export default {
           });
         }
       }
-      console.log(option.options)
       this.$redomEchart(this.$refs["outputValueEchart_" + this.ids], option);
     },
   },

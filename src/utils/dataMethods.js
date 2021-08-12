@@ -90,6 +90,18 @@ var arrAdd = function arrAdd(arr) {
   }
   return sum
 }
+/**
+ * 根据长度返回几位数
+ * @returns
+ */
+var retutnZero = function retutnZero(value) {
+  var num = (value + '').length
+  var _a = '1'
+  for (let i = 0; i < num; i++) {
+    _a += '0'
+  }
+  return Number(_a)
+}
 
 /**
  * 数字递增
@@ -125,6 +137,7 @@ const fun = {
   randomNumer,
   filterNum,
   arrAdd,
-  numAdd
+  numAdd,
+  retutnZero
 }
 export default fun

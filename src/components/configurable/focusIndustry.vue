@@ -41,7 +41,7 @@ export default {
             loop: false,
             autoPlay: true,
             inverse: true,
-            playInterval: 1000 / keyD.value,
+            playInterval: keyD ? this.$retutnZero(keyD.value) / keyD.value : '',
             // left: null,
             // right: 0,
             // top: 20,
@@ -226,15 +226,17 @@ export default {
           };
         }
       }
-      for (var n = Math.ceil(9 * keyD.value / 10); n < keyD.value; n++) {
-        if (n <= keyD.value) {
-          option.baseOption.timeline.data.push(n);
-          option.options.push({
-            title: {
-              show: true,
-              'text': n + ''
-            },
-          });
+      if (keyD) {
+        for (var n = Math.ceil(9 * keyD.value / 10); n <= keyD.value; n++) {
+          if (n <= keyD.value) {
+            option.baseOption.timeline.data.push(n);
+            option.options.push({
+              title: {
+                show: true,
+                'text': n + ''
+              },
+            });
+          }
         }
       }
       this.$redomEchart(this.$refs["focusIndustryEchart_" + this.ids], option);
