@@ -98,7 +98,7 @@ export default {
       ) {
         // this.$store.commit("SET_CENTERDATAS", [false, null]);
         let res = JSON.parse(event.data);
-
+         
         this.$store.commit("setData", res);
         if (res.data === "IOCHOME") {
 

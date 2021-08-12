@@ -50,7 +50,7 @@
       :idArry="idArry"
       @chageFade="chageFade($event)"
     ></Device>
-    <div v-if="fade" class="mask" @mouseenter="deviceChangeShow"></div>
+    <div  class="mask" @mouseenter="deviceChangeShow"></div>
   </div>
 </template>
 
@@ -60,7 +60,8 @@ export default {
   name: "homePage",
   data() {
     return {
-      idArry:[6,7,8,9],
+      // idArry:[6,7,8,9],
+      idArry:[0,1,2,3,4,5,10],
       flag: false,
       deviceShow: false,
       _fade:false,
@@ -156,7 +157,7 @@ export default {
       this._fade = val;
     },
     deviceChangeShow(){
-      console.log('进入！');
+   
       this.deviceShow=true
        this._fade=false
     },
@@ -684,7 +685,9 @@ export default {
       try {
        if(val.action ==='ME_ZHYLSingle' && val.data==='1' ){
          this.fade =true
-           this.$SendMessageToUnity("ShowIoTDevice_IOCMap",{strList:'6,7,8,9'});
+         this.idArry=[6,7,8,9],
+         console.log(this.idArry,"单层打开");
+        this.$SendMessageToUnity("ShowIoTDevice_IOCMap",{strList:'6,7,8,9'});
        }else if(val.action ==='ME_ZHYLSingle' && val.data==='0'){
          this.fade =false
        }

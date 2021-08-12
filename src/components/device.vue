@@ -94,7 +94,8 @@ export default {
           isShow: false,
         },
       ],
-      arrList:[...this.idArry]
+      arrList:null,
+      a:[]
     };
   },
   props: {
@@ -110,6 +111,19 @@ export default {
     _fade: function(n, o) {
       this.fade = n;
     },
+
+     idArry: {
+      handler (n, o) {
+        if(n){
+          this.cancelClick()
+         this.allClick()
+        }
+        
+        
+   
+      },
+      immediate: true
+    }
   },
   methods: {
     handleClick(val) {
@@ -139,13 +153,15 @@ export default {
       })
     },
     init(){
+      
       this.equipmentList.forEach((item) => {
         this.idArry.forEach((element) => {
           if (item.id == element) {
             item.isShow = true;
-          } 
+          }
         });
       });
+      console.log(this.equipmentList,'this.equipmentList');
     },
     allClick(){
       this.arrList= [...this.idArry]
@@ -156,7 +172,6 @@ export default {
     },
     cancelClick(){
       this.arrList= []
-
       this.equipmentList.forEach(item=>{
           item.isShow = false
       })
@@ -166,6 +181,7 @@ export default {
   },
   created() {
     this.init()
+    this.allClick()
 
   },
 };

@@ -43,7 +43,7 @@ export default {
     };
   },
   mounted () {
-    console.log(urlArry);
+    console.log(urlArry.monitorList);
     console.log(mainMenus);
   },
   methods: {
