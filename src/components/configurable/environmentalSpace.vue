@@ -92,8 +92,10 @@
 </template>
 
 <script>
+import BMap from 'BMap'
 import * as echarts from "echarts";
 import { getWeather } from "@/api/com";
+var nowCity = new BMap.LocalCity()
 export default {
   name: "theParkIsAll",
   props: {
@@ -178,10 +180,15 @@ export default {
     }
   },
   created () {
-    getWeather({ city: "深圳" }).then((r) => {
-      this.weatherDatas = r.data.data;
-      this.returnIconFun(r.data.data.forecast[0].type)
-    });
+    let cityName = ''
+    nowCity.get(bdGetPosition)
+      var _that = this
+    function bdGetPosition (d) {
+      getWeather({ city: d.name }).then((r) => {
+        _that.weatherDatas = r.data.data;
+        _that.returnIconFun(r.data.data.forecast[0].type)
+      });
+    }
   },
   mounted () {
     this.environmentalSpaceFun(this.datas)
