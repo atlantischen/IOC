@@ -105,7 +105,7 @@ export default {
               },
               {
                 name: "本月会议预约数",
-                value: this.$randomNumer(50, 90) * this.$getDayNums('m'),
+                value: this.$randomNumer(50, 90),
                 unit: "",
               },
             ],
@@ -163,7 +163,9 @@ export default {
       ],
     };
   },
-  components: {},
+  created () {
+    this.rightInfo[1].datas.datas[1].value = this.rightInfo[1].datas.datas[0].value * this.$getDayNums('m')
+  },
   methods: {},
 };
 </script>

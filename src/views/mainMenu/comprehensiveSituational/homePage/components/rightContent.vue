@@ -362,9 +362,9 @@ export default {
       }
     },
     searchOneItem (val) {
-      let _a = this.slist2[val]
+      let _a = JSON.parse(JSON.stringify(this.slist2[val]))
       _a.src = _a.srcName
-      console.log(_a)
+      // console.log(_a)
       this.$SendMessageToUnity("ShowLocationPin", {
         Serial: val,
         searchType: 'shops',
@@ -373,7 +373,7 @@ export default {
       console.log("ShowLocationPin--商家、企业------------", val);
     },
     zhuizongFun (val, i) {
-      let _a = val
+      let _a = JSON.parse(JSON.stringify(val))
       _a.src = _a.srcName
       console.log(this.currentPage > 1 ? (this.currentPage - 1) * 10 + i : i);
       this.$SendMessageToUnity("ShowLocationPin", {

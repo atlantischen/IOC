@@ -157,7 +157,7 @@ export default {
           level: '五级',
           typeAcolor: {
             typeText: '重度污染',
-            color: '#990056',
+            color: '#eb2b97',
             text: '紫色'
           },
           affect: '心脏病和肺病患者症状显著加剧，运动耐受力降低，健康人群普遍出现症状',
@@ -168,7 +168,7 @@ export default {
           level: '六级',
           typeAcolor: {
             typeText: '严重污染',
-            color: '#7b0128',
+            color: '#ff0051',
             text: '褐红色'
           },
           affect: '健康人群运动耐受力减低，有明显强烈症状，提前出现某些疾病',
@@ -275,7 +275,7 @@ export default {
     },
     environmentalSpaceFun (val) {
       var datas = [53, 300],
-        colors = ["#00ffff", "yellow", "orange", "red", "#990056", "#7b0128"],
+        colors = ["#00ffff", "yellow", "orange", "red", "#eb2b97", "#ff0051"],
         selectedColor = ''
       datas[0] = this.$randomNumer(40, 70)
       switch (true) {
@@ -432,7 +432,7 @@ export default {
             data: [datas[1] / 6],
             itemStyle: {
               normal: {
-                color: '#990056'
+                color: '#eb2b97'
               },
             },
             z: 0,
@@ -447,7 +447,7 @@ export default {
             itemStyle: {
               normal: {
                 barBorderRadius: [0, 10, 10, 0],
-                color: '#7b0128'
+                color: '#ff0051'
               },
             },
             z: 0,
@@ -468,8 +468,8 @@ export default {
           //         { offset: 0.2, color: "yellow" },
           //         { offset: 0.4, color: "orange" },
           //         { offset: 0.6, color: "red" },
-          //         { offset: 0.8, color: "#990056" },
-          //         { offset: 1, color: "#7b0128" },
+          //         { offset: 0.8, color: "#eb2b97" },
+          //         { offset: 1, color: "#ff0051" },
           //       ]),
           //     },
           //   },

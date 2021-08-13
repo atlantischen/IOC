@@ -30,116 +30,143 @@ export default {
     outputValueFun (val) {
       const { optionName, datas, data2 } = val;
       var option = {
-        tooltip: {
-          show: true,
-          trigger: "item",
-          backgroundColor: "rgba(0,0,0,0.8)",
-          borderWidth: 1,
-          borderColor: "#4396f3",
-          padding: [5, 10],
-          extraCssText: "box-shadow:inset 0 0 8px rgba(67, 149, 243, 0.6);",
-          textStyle: {
-            color: "#fff",
+        baseOption: {
+          timeline: {
+            show: false,
+            axisType: 'category',
+            // orient: 'vertical',
+            loop: false,
+            autoPlay: true,
+            inverse: true,
+            playInterval: this.$retutnZero(data2.value) / data2.value,
+            // left: null,
+            // right: 0,
+            // top: 20,
+            // bottom: 20,
+            // width: 0,
+            // height: 0,
+            // symbol: 'none',
+            // checkpointStyle: {
+            //   borderWidth: 0
+            // },
+            // controlStyle: {
+            //   showNextBtn: false,
+            //   showPrevBtn: false
+            // },
+            data: []
           },
-          formatter: (v) => {
-            return v.name + ":" + v.value + "%";
-          },
-        },
-        title: {
-          show: true,
-          text: data2.value,
-          link: "",
-          target: null,
-          subtext: data2.name + "\n" + data2.unit,
-          sublink: "",
-          subtarget: null,
-          left: "22%",
-          bottom: "32%",
-          textAlign: "center",
-          // backgroundColor:
-          // borderColor: '#ccc',
-          // borderWidth: 0,
-          // padding: 5,
-          itemGap: 6,
-          textStyle: {
-            fontFamily: "BYfont",
-            fontSize: 24,
-            color: "#fff",
-            fontWeight: 550,
-          },
-          subtextStyle: {
-            fontSize: 12,
-            color: "#fff",
-          },
-        },
-        legend: {
-          selectedMode: false,
-          show: true,
-          orient: "vertical", // 'horizontal'
-          right: 8,
-          y: "center",
-          data: optionName,
-          formatter: function (name) {
-            return "{a|" + name + "}";
-          },
-          textStyle: {
-            color: "#fff",
-            fontSize: 12,
-            padding: [0, 15, 0, 2],
-            rich: {
-              a: {},
+          tooltip: {
+            show: true,
+            trigger: "item",
+            backgroundColor: "rgba(0,0,0,0.8)",
+            borderWidth: 1,
+            borderColor: "#4396f3",
+            padding: [5, 10],
+            extraCssText: "box-shadow:inset 0 0 8px rgba(67, 149, 243, 0.6);",
+            textStyle: {
+              color: "#fff",
+            },
+            formatter: (v) => {
+              return v.name + ":" + v.value + "%";
             },
           },
-          icon: "circle",
-          itemWidth: 6,
-          itemHeight: 6,
-          itemGap: 18,
-        },
-        color: [
-          "#4396f3",
-          "#95c7ff",
-          "#456af3",
-          "#0ff",
-          "#236390",
-          "#ffdd8d",
-          "#9a866a",
-          "#c9a555",
-          "#fff",
-        ],
-        series: [
-          {
-            name: "",
-            type: "pie",
-            radius: ["62%", "80%"],
-            center: ["23%", "50%"],
-            // avoidLabelOverlap: false,
-            label: {
-              show: false,
+          title: {
+            show: true,
+            text: data2.value,
+            link: "",
+            target: null,
+            subtext: data2.name + "\n" + data2.unit,
+            sublink: "",
+            subtarget: null,
+            left: "22%",
+            bottom: "32%",
+            textAlign: "center",
+            // backgroundColor:
+            // borderColor: '#ccc',
+            // borderWidth: 0,
+            // padding: 5,
+            itemGap: 6,
+            textStyle: {
+              fontFamily: "BYfont",
+              fontSize: 24,
+              color: "#fff",
+              fontWeight: 550,
             },
-            labelLine: {
-              show: false,
+            subtextStyle: {
+              fontSize: 12,
+              color: "#fff",
             },
-            data: [],
           },
-        ],
+          legend: {
+            selectedMode: false,
+            show: true,
+            orient: "vertical", // 'horizontal'
+            right: 8,
+            y: "center",
+            data: optionName,
+            formatter: function (name) {
+              return "{a|" + name + "}";
+            },
+            textStyle: {
+              color: "#fff",
+              fontSize: 12,
+              padding: [0, 15, 0, 2],
+              rich: {
+                a: {},
+              },
+            },
+            icon: "circle",
+            itemWidth: 6,
+            itemHeight: 6,
+            itemGap: 18,
+          },
+          color: [
+            "#4396f3",
+            "#95c7ff",
+            "#456af3",
+            "#0ff",
+            "#236390",
+            "#ffdd8d",
+            "#9a866a",
+            "#c9a555",
+            "#fff",
+          ],
+          series: [
+            {
+              name: "",
+              type: "pie",
+              radius: ["62%", "80%"],
+              center: ["23%", "50%"],
+              // avoidLabelOverlap: false,
+              label: {
+                show: false,
+              },
+              labelLine: {
+                show: false,
+              },
+              data: [],
+            },
+          ],
+        },
+        options: []
       };
       for (var i = 0; i < optionName.length; i++) {
-        option.series[0].data[i] = {
+        option.baseOption.series[0].data[i] = {
           value: datas[i],
           name: optionName[i],
         };
       }
-      // var time = data2.value - 10,
-      //   timer = null;
-      // timer = setInterval(() => {
-      //   time += 1;
-      //   option.title.text = time;
-      //   this.$redomEchart(this.$refs["outputValueEchart_" + this.ids], option);
-      //   if (time == data2.value) {
-      //     clearInterval(timer);
-      //     return;
-      //   }
-      // }, 1000);
+      for (var n = Math.ceil(8 * data2.value / 10); n <= data2.value; n++) {
+        if (n <= data2.value) {
+          option.baseOption.timeline.data.push(n);
+          option.options.push({
+            title: {
+              show: true,
+              'text': n + ''
+            },
+          });
+        }
+      }
       this.$redomEchart(this.$refs["outputValueEchart_" + this.ids], option);
     },
   },

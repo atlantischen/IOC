@@ -3,14 +3,11 @@
     <div class="tittle">{{ title }}</div>
     <ul class="sd_top">
       <li class="y_c" v-for="(item, i) in datas.datas" :key="i">
-        <!-- <span
-          >{{ item.value }} <i>{{ item.unit }}</i>
+        <!-- <span v-if="item.name == '今日会议预约数'"
+          ><NumCounter :value="thisDay || item.value"></NumCounter><i>{{ item.unit }}</i>
         </span> -->
-        <span v-if="item.name == '今日会议预约数'"
-          >{{ thisDay || item.value }} <i>{{ item.unit }}</i>
-        </span>
-        <span v-else
-          >{{ thisDay * $getDayNums("m") || item.value }}
+        <span
+          ><NumCounter :value="item.value"></NumCounter>
           <i>{{ item.unit }}</i>
         </span>
         <span>{{ item.name }}</span>

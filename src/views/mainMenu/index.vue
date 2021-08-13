@@ -34,7 +34,7 @@ export default {
   components: { AlarmAck, AllAlert },
   data () {
     return {
-      isShow: true,
+      isShow: false,
       showAlarmAck: false,
       showAllAlert: false,
       showEscHandler: false,
@@ -107,7 +107,6 @@ export default {
         (typeof event.data == "string" && event.data.indexOf("data") != -1) ||
         (typeof event.data == "object" && event.data.data != undefined)
       ) {
-        // this.$store.commit("SET_CENTERDATAS", [false, null]);
         let res = JSON.parse(event.data);
         this.$store.commit("setData", res);
         if (res.data === "IOCHOME") {

@@ -16,7 +16,7 @@
 <script>
 export default {
   name: "rentBDA",
-  data() {
+  data () {
     return {
       leftInfo: [
         {
