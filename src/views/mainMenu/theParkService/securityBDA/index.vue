@@ -35,11 +35,9 @@ export default {
       activeName: 'dataMode'
     }
   },
-  created() {
-    if(this.$route.name == this.activeName){return}
-    this.activeName= this.$route.name
-  },
-  mounted () {
+  created () {
+    if (this.$route.name == this.activeName) { return }
+    this.activeName = this.$route.name
   },
   methods: {
     handleClick (a) {

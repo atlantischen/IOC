@@ -41,6 +41,8 @@ export default {
       ...this._data,
       ids: this.$uuid(),
       fDatas: [],
+      timer: null,
+      isShowAn: false,
     };
   },
   watch: {
@@ -56,9 +58,32 @@ export default {
     }
   },
   mounted () {
-    this.$ScrolAnimationTop('favorablePolicy_ul' + this.ids, 3)
+    // this.$ScrolAnimationTop('favorablePolicy_ul' + this.ids, 3)
+    // this.fDatas = [...this.fDatas, ...this.fDatas]
+    this.animationFun()
+  },
+  destroyed () {
+    clearInterval(this.timer)
+    this.timer = null
   },
   methods: {
+    animationFun () {
+      let count = 4000
+      if (!this.timer) {
+        this.timer = setInterval(() => {
+          this.isShowAn = true
+          if (this.fDatas.length > 1) {
+            if (this.fDatas && this.fDatas.length) {
+              this.fDatas.push(this.fDatas[0])
+            }
+            setTimeout(() => {
+              this.fDatas.splice(0, 1)
+              this.isShowAn = false
+            }, 500);
+          }
+        }, count)
+      }
+    }
   },
 };
 </script>
@@ -95,10 +120,7 @@ export default {
   }
 }
 .mover_TOP {
-  // transition: all 1s;
-  // transform: translateX(-100%);
-  animation: marquee 2s ease-in-out;
-  // animation-play-state: paused;
+  animation: marquee 1s ease-in-out;
 }
 
 @keyframes marquee {

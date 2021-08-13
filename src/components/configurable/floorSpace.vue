@@ -33,7 +33,7 @@ export default {
   methods: {
     floorSpaceFun (val) {
       const { optionName, datas, data2 } = val;
-      var colors = ["rgba(30, 57, 87, 0.5)", "#cda857", "#4396f3", "#0ff"];
+      var colors = ["rgba(38, 108, 158, 0.5)", "#cda857", "#4396f3", "#0ff"];
       var option = {
         baseOption: {
           timeline: {

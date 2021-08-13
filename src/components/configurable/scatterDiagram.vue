@@ -3,26 +3,11 @@
     <div class="tittle">{{ title }}</div>
     <ul class="sd_top">
       <li class="y_c" v-for="(item, i) in datas.datas" :key="i">
-        <!-- <span
-          ><i id="kk_num" data-to="300" data-speed="1500">
-            {{ filterNumFun(item.value) }}</i
-          ><i>{{ item.unit }}</i>
-        </span> -->
         <span
-          ><i
-            :id="'scatterDiagram_num' + i"
-            :ref="'scatterDiagram_num' + i"
-            :data-to="item.value"
-            :data-speed="item.value"
-            >{{ filterNumFun(item.value) }}</i
+          ><i :id="'scatterDiagram_num' + i" :ref="'scatterDiagram_num' + i"
+            ><NumCounter _filter="f" :value="item.value"></NumCounter></i
           ><i>{{ item.unit }}</i>
         </span>
-        <!-- <span
-          ><i :id="'scatterDiagram_num' + i" :ref="'scatterDiagram_num' + i">{{
-            numAdd("scatterDiagram_num" + i, item.value, 1000) || "--"
-          }}</i
-          ><i>{{ item.unit }}</i>
-        </span> -->
         <span>{{ item.name }}</span>
       </li>
     </ul>
@@ -284,11 +269,14 @@ export default {
     li {
       flex: 1;
       span {
+        display: flex;
+        align-items: center;
         white-space: nowrap;
       }
       span:nth-child(1) {
         // letter-spacing: .025rem /* 2/80 */;
         .datas_s();
+        padding-left:.025rem /* 2/80 */;
         i {
           &:nth-child(2) {
             .text_s();

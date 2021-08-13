@@ -99,34 +99,39 @@ export default {
         },
         {
           local: '14楼D区吧台',
-          url: 'http://10.10.7.27:8086/live?app=live&stream=cctv7',
+          url: 'http://183.62.170.2:8086/live?app=live&stream=cctv7',
           id: 7
         },
         {
           local: '14楼C区女厕',
-          url: 'http://10.10.7.27:8087/live?app=live&stream=cctv8',
+          url: 'http://183.62.170.2:8087/live?app=live&stream=cctv8',
           id: 8
         },
         {
           local: '14楼A区大事记',
-          url: 'http://10.10.7.27:8087/live?app=live&stream=cctv9',
+          url: 'http://183.62.170.2:8087/live?app=live&stream=cctv9',
           id: 9
         },
         {
           local: '14层B区男厕',
-          url: 'http://10.10.7.27:8086/live?app=live&stream=cctv14',
+          url: 'http://183.62.170.2:8086/live?app=live&stream=cctv14',
           id: 10
         },
         {
           local: '14楼贵宾会议室外',
-          url: 'http://10.10.7.27:8086/live?app=live&stream=cctv15',
+          url: 'http://183.62.170.2:8086/live?app=live&stream=cctv15',
           id: 11
         },
         {
           local: '14楼B区机房外',
-          url: 'http://10.10.7.27:8086/live?app=live&stream=cctv16',
+          url: 'http://183.62.170.2:8086/live?app=live&stream=cctv16',
           id: 12
         },
+        // {
+        //   local: '14楼B区机房外',
+        //   url: 'http://10.10.7.27:8086/live?app=live&stream=cctv16',
+        //   id: 12
+        // },
       ],
       videoD: {},
     }

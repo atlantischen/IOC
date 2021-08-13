@@ -215,7 +215,7 @@ export default {
           name: optionName[i],
         };
       }
-      for (var n = Math.ceil(9 * data.value / 10); n <= data.value; n++) {
+      for (var n = Math.ceil(9.5 * data.value / 10); n <= data.value; n++) {
         if (n <= data.value) {
           option.baseOption.timeline.data.push(n);
           option.options.push({

@@ -7,6 +7,7 @@
         :id="'currentTrendsRef_' + ids"
         :ref="'currentTrendsRef_' + ids"
         :style="$paddingFun(datas.padding)"
+        :class="{ mover_Top: isShowAn }"
       >
         <li class="currentTrends_li" v-for="(t, i) in OutputValList" :key="i">
           <span class="LineBeyond x_c">{{ t.title }}</span>
@@ -32,17 +33,41 @@ export default {
       ...this._data,
       ids: this.$uuid(),
       OutputValList: null,
+      timer: null,
+      isShowAn: false,
     };
   },
   mounted () {
-    this.OutputValList = this.datas.currentTrendsDatas;
+    this.OutputValList = this.datas.currentTrendsDatas
     this.$nextTick(() => {
-      this.getDatas();
+      // this.getDatas();
+      this.animationFun()
     });
+  },
+  destroyed () {
+    clearInterval(this.timer)
+    this.timer = null
   },
   methods: {
     getDatas () {
       this.$ScrolAnimationTop('currentTrendsRef_' + this.ids, 2)
+    },
+    animationFun () {
+      let count = 3000
+      if (!this.timer) {
+        this.timer = setInterval(() => {
+          this.isShowAn = true
+          if (this.OutputValList.length > 1) {
+            if (this.OutputValList && this.OutputValList.length) {
+              this.OutputValList.push(this.OutputValList[0])
+            }
+            setTimeout(() => {
+              this.OutputValList.splice(0, 1)
+              this.isShowAn = false
+            }, 500);
+          }
+        }, count)
+      }
     }
   }
 };
@@ -83,6 +108,18 @@ export default {
     &:last-child {
       margin: 0;
     }
+  }
+}
+.mover_Top {
+  animation: marquee 0.5s ease-in-out;
+}
+
+@keyframes marquee {
+  0% {
+    transform: translateY(0%);
+  }
+  100% {
+    transform: translateY(-55px);
   }
 }
 </style>
