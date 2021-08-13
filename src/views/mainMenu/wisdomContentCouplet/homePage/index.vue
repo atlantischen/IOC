@@ -692,6 +692,7 @@ export default {
          this.fade =false
        }
       } catch (e) { }
+      console.log(val);
     }
   },
   mounted() {
@@ -701,7 +702,7 @@ export default {
     this.equipmentComparisonInit([-2.54, 4.74, 2.54]);
   },
   created(){
-       this.$SendMessageToUnity("ShowIoTDevice_IOCMap",{strList:'0,1,2,3,4,5,10'});
+    this.$SendMessageToUnity("ShowIoTDevice_IOCMap",{strList:'0,1,2,3,4,5,10'});
   
 
   }

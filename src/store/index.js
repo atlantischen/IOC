@@ -10,6 +10,7 @@ export default createStore({
     activeIndex:0,
     videoShow:false,
     dialogShow:false,
+    flag:false
  
   
   },
@@ -26,6 +27,10 @@ export default createStore({
     setDialogShow(state, payload) {
       state.dialogShow = payload
     },
+    setFlag(state, payload) {
+      state.flag = payload
+    },
+
 
   
   },

@@ -1042,7 +1042,8 @@ export default {
     },
   },
   mounted () {
-    this.ElectricityStatistics(
+    this.$nextTick(()=>{
+      this.ElectricityStatistics(
      this.$fun_date(),
       [2056, 2511, 2932, 3126, 3412, 3612, 3759,],
       {
@@ -1060,6 +1061,8 @@ export default {
         this.airPanelList[i].tem.targetTem
       );
     }
+    })
+    
   },
 };
 </script>

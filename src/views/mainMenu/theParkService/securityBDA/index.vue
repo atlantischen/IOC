@@ -7,7 +7,7 @@
       type="card"
       @tab-click="handleClick"
     >
-      <el-tab-pane name="first">
+      <el-tab-pane label="数据模式" name="first">
         <template #label>
           <span><i class="iconfont icon-shuju"></i> 数据模式</span>
         </template>
@@ -19,7 +19,7 @@
       >
     </el-tabs>
     <DataMode v-if="activeName == 'first'" />
-    <VideoMode v-else />
+    <VideoMode v-else  />
   </div>
 </template>
 
@@ -28,14 +28,18 @@ import DataMode from './components/dataMode.vue'
 import VideoMode from './components/videoMode.vue'
 export default {
   name: 'securityBDA',
+  
   components: { DataMode, VideoMode },
   data () {
     return {
-      activeName: 'first'
+      activeName: 'first',
+    
     }
   },
   methods: {
-  }
+
+  },
+
 }
 </script>
 

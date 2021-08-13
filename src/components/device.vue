@@ -115,12 +115,10 @@ export default {
      idArry: {
       handler (n, o) {
         if(n){
-          this.cancelClick()
-         this.allClick()
+           this.init()
+        //   this.cancelClick()
+        //  this.allClick()
         }
-        
-        
-   
       },
       immediate: true
     }
@@ -130,7 +128,6 @@ export default {
       this.$emit("chageFade", true);
     },
     setClick(i){
-      console.log(i);
       this.equipmentList.forEach(item=>{
         if(item.id ===i){
           item.isShow = !item.isShow
@@ -153,7 +150,9 @@ export default {
       })
     },
     init(){
-      
+      this.equipmentList.forEach(item=>{
+        item.isShow=false
+      })
       this.equipmentList.forEach((item) => {
         this.idArry.forEach((element) => {
           if (item.id == element) {
@@ -161,7 +160,7 @@ export default {
           }
         });
       });
-      console.log(this.equipmentList,'this.equipmentList');
+      console.log(this.equipmentList);
     },
     allClick(){
       this.arrList= [...this.idArry]
@@ -180,8 +179,8 @@ export default {
   
   },
   created() {
-    this.init()
-    this.allClick()
+    // this.init()
+    // this.allClick()
 
   },
 };

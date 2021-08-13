@@ -26,6 +26,7 @@ import Player from '../components/player.vue'  //flv视频流
 // import Rtps from '../components/rtps.vue'
 // import Device from '../components/device.vue'
 import Vloading from '../components/widget/vLoading.vue' // loading
+import MonitorVideo from '../components/monitorVideo.vue' // 监控 摄像头
 
 const global = {
   ...configurable,
@@ -53,6 +54,7 @@ const global = {
   Device,
   ElevatorMonitoring,
   Player,
-  Vloading
+  Vloading,
+  MonitorVideo
 }
 export default global

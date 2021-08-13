@@ -58,6 +58,8 @@
   </div>
 </template>
 <script>
+import {urlArry} from '@/utils/flv_url.js'
+
 export default {
   data() {
     return {
@@ -73,57 +75,7 @@ export default {
         66: "15S",
         99: "20S",
       },
-    monitorList: [
-        {
-          id: this.$uuid(),
-          url: "http://10.10.7.27:8086/live?app=live&stream=cctv1",
-        },
-        {
-          id: this.$uuid(),
-          url: "http://10.10.7.27:8086/live?app=live&stream=cctv2",
-        },
-        {
-           id: this.$uuid(),
-          url: "http://10.10.7.27:8086/live?app=live&stream=cctv3",
-        },
-        {
-          id: this.$uuid(),
-          url: "http://10.10.7.27:8086/live?app=live&stream=cctv4",
-        },
-         {
-           id: this.$uuid(),
-          url: "http://10.10.7.27:8086/live?app=live&stream=cctv5",
-        },
-        {
-           id: this.$uuid(),
-          url: "http://10.10.7.27:8086/live?app=live&stream=cctv6",
-        },
-        {
-           id: this.$uuid(),
-          url: "http://10.10.7.27:8085/live?app=live&stream=cctv7",
-        },
-        {
-           id: this.$uuid(),
-          url: "http://10.10.7.27:8085/live?app=live&stream=cctv8",
-        },
-          {
-           id: this.$uuid(),
-          url: "http://10.10.7.27:8085/live?app=live&stream=cctv9",
-        },
-        {
-           id: this.$uuid(),
-          url: "http://10.10.7.27:8085/live?app=live&stream=cctv10",
-        },
-        {
-           id: this.$uuid(),
-          url: "http://10.10.7.27:8085/live?app=live&stream=cctv11",
-        },
-        {
-           id: this.$uuid(),
-          url: "http://10.10.7.27:8085/live?app=live&stream=cctv12",
-        },
-      
-      ],
+    monitorList:urlArry.moreVideoList ,
       dialogVideoVisible: this.dialogShow,
     };
   },

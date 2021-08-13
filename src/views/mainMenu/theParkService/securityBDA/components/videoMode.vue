@@ -2,32 +2,7 @@
   <!-- 视频模式 -->
   <div class="videoMode">
     <ul class="videoMode_Box x_sb_rap">
-      <!-- <li
-        v-for="(item, i) in videoDatas"
-        @mouseenter="mouseFun(true, i)"
-        @mouseleave="mouseFun(false, i)"
-        :key="i"
-      >
-        <div
-          :class="['box_master', showMaster ? 'show_master' : 'close_master']"
-          v-if="showMaster && masterIndex == i"
-          @click="lookVideo(item)"
-        ></div>
-        <Vloading v-show="showIfame" />
-        <iframe
-          v-show="!showIfame"
-          v-if="item.url"
-          class="iframeVideo"
-          :id="'iframeVideo' + i"
-          :ref="'iframeVideo' + i"
-          style="width: 100%; height: 100%"
-          :src="item.url + '&iframe=yes'"
-          allowfullscreen
-          allow="autoplay; fullscreen"
-        ></iframe>
-        <Vloading v-show="item.url && is404" :text="'无信号'" />
-      </li> -->
-      <Player ref="player" :monitorList="videoDatas"></Player>
+      <Player ref="player"  :monitorList="videoDatas"></Player>
     </ul>
     <LookVideo
       :Visible="Visible"
@@ -39,6 +14,8 @@
 </template>
 
 <script>
+import {urlArry} from '@/utils/flv_url.js'
+
 export default {
   name: 'videoMode',
   data () {
@@ -49,78 +26,16 @@ export default {
       dialogTitle: '',
       showMaster: false,
       masterIndex: null,
-      // videoDatas: [
-      //   {
-      //     local: '16楼C区铭筑',
-      //     url: 'http://172.21.71.225:10800/play.html?channel=5'
-      //   },
-      // ],
-      videoDatas: [
-        {
-          local: '16楼C区铭筑',
-          url: 'http://183.62.170.2:8084/live?app=live&stream=cctv1',
-          id: 1
-        },
-        {
-          local: '16层C区女厕',
-          url: 'http://183.62.170.2:8084/live?app=live&stream=cctv2',
-          id: 2
-        },
-        {
-          local: '16楼前台',
-          url: 'http://183.62.170.2:8084/live?app=live&stream=cctv3',
-          id: 3
-        },
-        {
-          local: '16楼A区铭筑男厕',
-          url: 'http://183.62.170.2:8085/live?app=live&stream=cctv4',
-          id: 4
-        },
-        {
-          local: '16楼A区会议室',
-          url: 'http://183.62.170.2:8085/live?app=live&stream=cctv5',
-          id: 5
-        },
-        {
-          local: '14楼A区铭筑',
-          url: 'http://183.62.170.2:8085/live?app=live&stream=cctv6',
-          id: 6
-        },
-        {
-          local: '14楼D区吧台',
-          url: 'http://10.10.7.27:8086/live?app=live&stream=cctv7',
-          id: 7
-        },
-        {
-          local: '14楼C区女厕',
-          url: 'http://10.10.7.27:8087/live?app=live&stream=cctv8',
-          id: 8
-        },
-        {
-          local: '14楼A区大事记',
-          url: 'http://10.10.7.27:8087/live?app=live&stream=cctv9',
-          id: 9
-        },
-        {
-          local: '14层B区男厕',
-          url: 'http://10.10.7.27:8086/live?app=live&stream=cctv14',
-          id: 10
-        },
-        {
-          local: '14楼贵宾会议室外',
-          url: 'http://10.10.7.27:8086/live?app=live&stream=cctv15',
-          id: 11
-        },
-        {
-          local: '14楼B区机房外',
-          url: 'http://10.10.7.27:8086/live?app=live&stream=cctv16',
-          id: 12
-        },
-      ],
+      videoDatas:urlArry.theParkServiceList,
       videoD: {},
     }
   },
   components: {},
+  watch:{
+    '$store.state.flag':function (n,o) {
+        console.log(n,o);
+    }
+  },
   mounted () {
     this.$refs.player.createVideo();
     var IframeOnClick = {
@@ -184,6 +99,7 @@ export default {
   beforeRouteLeave (to, from, next) {
     if (to.path != from.path) {
       this.$refs.player.destoryVideo();
+
     }
     next();
   },

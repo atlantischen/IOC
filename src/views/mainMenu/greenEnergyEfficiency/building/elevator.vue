@@ -121,6 +121,8 @@
 </template>
 
 <script>
+import {urlArry} from '@/utils/flv_url.js'
+
 export default {
   data(){
     return{
@@ -149,7 +151,7 @@ export default {
           state:1
         },
         {
-          text:'4号客梯',
+          text:'4号货梯',
           up:'电梯上行',
           behavior:'Upward',
           state:0
@@ -183,44 +185,8 @@ export default {
        videoShow:false,
       backShow:false,
       title:'轿厢监控',
-       monitorList:[
-       {
-          id: this.$uuid(),
-          url: "http://10.10.7.27:8086/live?app=live&stream=cctv1",
-        },
-        {
-          id: this.$uuid(),
-          url: "http://10.10.7.27:8086/live?app=live&stream=cctv2",
-        },
-        {
-          id: this.$uuid(),
-          url: "http://10.10.7.27:8086/live?app=live&stream=cctv3",
-        },
-        {
-          id: this.$uuid(),
-          url: "http://10.10.7.27:8086/live?app=live&stream=cctv4",
-        },
-         
-      ],
-        monitorList1:[
-       {
-          id: this.$uuid(),
-          url: "http://10.10.7.27:8085/live?app=live&stream=cctv6",
-        },
-        {
-          id: this.$uuid(),
-          url: "http://10.10.7.27:8085/live?app=live&stream=cctv7",
-        },
-        {
-          id: this.$uuid(),
-          url: "http://10.10.7.27:8085/live?app=live&stream=cctv8",
-        },
-        {
-          id: this.$uuid(),
-          url: "http://10.10.7.27:8085/live?app=live&stream=cctv9",
-        },
-         
-      ]
+       monitorList:urlArry.monitorList1,
+       monitorList1:urlArry.monitorList2
     }
   },
   methods:{
@@ -230,26 +196,9 @@ export default {
       }else if(name==='elevatorData'){
         this.title='电梯间监控'
       }
-      //  this.$refs.player1.destoryVideo();
-
       this.dialogShow=val
-      // this.$store.commit('setDialogShow',false)
-
-
     },
-    // videoShow(val){
-    //   if(val){
-    //     console.log('打开触发了');
 
-    //     this.$refs.player1.createVideo();
-    //     this.$refs.player.createVideo();
-    //   }else{
-    //     console.log('关闭触发了');
-    //     this.$refs.player1.destoryVideo();
-    //     this.$refs.player.destoryVideo();
-    //   }
-        
-    // },
     videoShowChange(val,name){
       if(name==='carData'){
         this.title='轿厢视频回放'
@@ -262,7 +211,6 @@ export default {
      lookVideo (val) {
       this.dialogTitle = val
       this.openCloseDialog(true)
-
     },
     openCloseDialog (val) {
       this.Visible = val
@@ -276,13 +224,7 @@ export default {
             this.ElevatorVisible=true
             this.dataList=res.data
         }
-
-
-      // if ((typeof event.data == 'string' && event.data.indexOf('data') != -1) || (typeof event.data == 'object' && event.data.data != undefined)) {
-        // let res = JSON.parse(event.data)
-        // console.log(res,'电梯');
       }
-    // },
   },
   created(){
       this.$store.commit('setDialogShow',true)
@@ -291,9 +233,6 @@ export default {
   },
   mounted () {
     window.addEventListener("message", this.event, true);
-    // this.$afterIframeOnload('iframeVideo0', () => {
-    //   this.showIfame = false 
-    // })
     
   },
   beforeRouteLeave(to, from, next) {

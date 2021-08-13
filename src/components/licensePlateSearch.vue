@@ -539,7 +539,6 @@ export default {
       }
       this.activeIndex = null;
       this.num = this.carNum;
-      console.log(this.num, "this.num");
       this.$emit("search", this.num);
       this.$router.push({ name: "SmartParking" });
     },
@@ -572,7 +571,6 @@ export default {
     let that = this;
     document.addEventListener("click", function(e) {
       if (e.target.className === "") {
-        // console.log("隐藏");
         that.activeIndex = null;
       }
     });

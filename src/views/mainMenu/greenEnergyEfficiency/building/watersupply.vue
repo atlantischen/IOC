@@ -69,7 +69,7 @@
             <span>{{item++}}号客梯</span> -->
            <!-- <Vloading v-show="showIfame" /> -->
 
-          <Player ref="player"  :dialogShow="dialogShow"  width="49" :monitorList="monitorList" ></Player>
+          <Player :dialogShow="dialogShow"  width="49" :monitorList="monitorList" ></Player>
          <!-- <iframe
           v-show="!showIfame"
           scrolling="no"
@@ -94,6 +94,8 @@
 
 <script>
 import * as echarts from "echarts";
+import {urlArry} from '@/utils/flv_url.js'
+
 export default {
   data(){
     return{
@@ -147,24 +149,7 @@ export default {
             status: 1
           },
         ],
-        monitorList:[
-       {
-          id: this.$uuid(),
-          url: "http://10.10.7.27:8085/live?app=live&stream=cctv13",
-        },
-        {
-          id: this.$uuid(),
-          url: "http://10.10.7.27:8085/live?app=live&stream=cctv14",
-        },
-        {
-         id: this.$uuid(),
-          url: "http://10.10.7.27:8085/live?app=live&stream=cctv15",
-        },
-        {
-          id: this.$uuid(),
-          url: "http://10.10.7.27:8085/live?app=live&stream=cctv12",
-        },
-      ] 
+        monitorList:urlArry.watersupplyList
         
     }
   },

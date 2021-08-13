@@ -45,7 +45,6 @@ export default {
       this.monitorList.forEach((item) => {
         if (flvjs.isSupported()) {
           var videoElement = document.getElementById("videoElement" + item.id);
-          console.log(item.id);
           let flvPlayer = flvjs.createPlayer({
             type: "flv",
             isLive: true,
@@ -117,6 +116,7 @@ export default {
   },
 
   mounted() {
+    console.log(this.dialogShow,'dialogShow');
     // setTimeout(() => {
     //   this.createVideo();
     // }, 3000);

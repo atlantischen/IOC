@@ -20,6 +20,9 @@
       :_data="allAlertDatas"
       @off="closeOpenItem"
     />
+    <!-- 监控  摄像头 -->
+    <MonitorVideo :monitorVisible="monitorVisible"  :dataList="videoList"  @off="MonitorCloseDialog"/>
+
   </div>
 </template>
 
@@ -40,6 +43,14 @@ export default {
       warnTimer: null,
       tipList: null,
       centerDatas: [],
+      monitorVisible:false,
+      videoList:[
+        {
+          id:this.$uuid(),
+          url:''
+        }
+      ]
+
     };
   },
   computed: {
@@ -98,17 +109,17 @@ export default {
       ) {
         // this.$store.commit("SET_CENTERDATAS", [false, null]);
         let res = JSON.parse(event.data);
-         
         this.$store.commit("setData", res);
         if (res.data === "IOCHOME") {
-
           this.isShow = true;
-
         } else if (res.action === "hide") {
           this.clearWarnTimeFun();
           this.isShow = false;
           this.hideGlobal(false);
-        } else if (res.action === "ShowUserInterface") {
+        } else if (res.action === "OpenMonitorOrCamera") {
+          this.monitorVisible=true
+          this.videoList[0].url=res.data
+          console.log(this.monitorVisible,this.videoList,'this.videoList');
           // 设备
           // this.fade = false;
           // this.deviceShow = true;
@@ -250,6 +261,9 @@ export default {
       if (isFull == undefined) isFull = false;
       if (isFull) isFull = true;
       return isFull;
+    },
+    MonitorCloseDialog(val) {
+      this.monitorVisible = val
     },
   },
 };

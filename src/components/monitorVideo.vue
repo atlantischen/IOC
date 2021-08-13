@@ -3,7 +3,6 @@
     <div class="qDialog">
       <el-dialog
         custom-class="hd_scrollbar"
-        :title="dataList.LiftMonitorName"
         v-model="dialogVisible"
         @close="openClose(false)"
         @open="openDialog"
@@ -11,37 +10,9 @@
         <div class="videoBox" ref="videoBoxRef">
         
             <div class="video">
-              <Player :dialogShow="dialogShow"   :monitorList="theParkServiceList" ></Player>
+              <Player :dialogShow="dialogShow"   :monitorList="dataList" ></Player>
             </div>
-            <div class="desc">
-                <ul>
-                    <li>
-                        <div>型号:</div>
-                        <div>{{dataList.TypeNum}}</div>
-                    </li>
-                     <li>
-                        <div>当前载重:</div>
-                        <div>{{dataList.CurLoad}}</div>
-                    </li>
-                     <li>
-                        <div>锁定载重:</div>
-                        <div>{{dataList.LockingLoad}}</div>
-                    </li>
-                     <li>
-                        <div>厂家:</div>
-                        <div>{{dataList.Manufacturers}}</div>
-                    </li>
-                     <li>
-                        <div>联系人:</div>
-                        <div>{{dataList.Linkman}}</div>
-                    </li>
-                     <li>
-                        <div>联系电话:</div>
-                        <div>{{dataList.PhoneNum}}</div>
-                    </li>
-                   
-                </ul>
-            </div>
+           
     
         </div>
       </el-dialog>
@@ -51,16 +22,18 @@
 
 <script>
 
-import {urlArry} from '@/utils/flv_url.js'
 
 export default {
   name: "LookVideo",
   props: {
-  ElevatorVisible: {
+  monitorVisible: {
       type: Boolean,
+      require:true
+
     },
    dataList:{
       type: Object,
+      require:true
 
    } 
   },
@@ -79,25 +52,25 @@ export default {
             TypeNum: "GPS30K",
       },
       dialogShow:true,
-      theParkServiceList: urlArry.elevatorList
+      // theParkServiceList: urlArry.elevatorList
     };
   },
   components: {},
   watch: {
-    ElevatorVisible: {
+    monitorVisible: {
       handler(newVal) {
         this.dialogVisible = newVal;
       },
     },
   },
   mounted() {
-  
+    console.log(this.dataList);
+    
   },
   beforeDestroy() {
   
   },
   methods: {
-
     openClose(val) {
       this.dialogShow=false
       this.dialogVisible = val;
@@ -162,9 +135,8 @@ export default {
   :deep(.hd_scrollbar){
     // top:50% !important;
     // transform: translateY(-50%) !important;
-    margin-top:25vh !important;
+    margin-top:30vh !important;
   }
-
 
 }
 </style>
