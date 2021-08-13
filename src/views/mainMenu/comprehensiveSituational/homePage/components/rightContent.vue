@@ -78,7 +78,11 @@
       </template>
     </LeftRight>
     <!-- 黑名单 -->
-    <div class="rightBtn" v-show="!isFade" @click="showBlackListFun"></div>
+    <div
+      class="rightBtn"
+      v-if="showLeftRight && !isFade"
+      @click="showBlackListFun"
+    ></div>
     <RightAlert :fade="isFade" class="rightblacklist">
       <div class="allBlacklist bigBar">
         <i class="rightArrow el-icon-arrow-right" @click="showBlackListFun"></i>

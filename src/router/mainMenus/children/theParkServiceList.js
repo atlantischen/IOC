@@ -1,3 +1,4 @@
+import SecurityBDA_c from './child/securityBDA_c'
 export default [{
     path: 'homePage',
     name: 'theParkService0',
@@ -44,6 +45,7 @@ export default [{
   },
   {
     path: 'securityBDA',
+    redirect: "/theParkService/securityBDA/dataMode",
     name: 'securityBDA',
     component: () => import('@/views/mainMenu/theParkService/securityBDA/index.vue'),
     meta: {
@@ -51,6 +53,9 @@ export default [{
       name: '安保大数据分析',
       title: '安保大数据分析',
       isShow: true
-    }
-  }
+    },
+    children: [
+      ...SecurityBDA_c
+    ]
+  },
 ]

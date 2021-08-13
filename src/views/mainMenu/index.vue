@@ -230,26 +230,26 @@ export default {
     },
     // 随机触发警告
     warnTimeFun () {
-      // this.warnTimer = setInterval(() => {
-      this.tipList = [
-        {
-          text: "告警！2021-05-11 15:41:47 3期C座5楼电梯间发生陌生人报警",
-        },
-      ];
-      // {
-      //   SerialNum: 0,
-      //   EquipmentNum: "534080",
-      //   AlarmLocation: "实验车间",
-      //   AlarmType: "火警",
-      //   AlarmTime: "2021-05-27 15:28:30",
-      // }
-      this.$store.dispatch("SET_SHOWWARNTIP", true);
-      // }, this.$randomNumer(3000, 30000));
+      this.warnTimer = setInterval(() => {
+        this.tipList = [
+          {
+            text: "告警！2021-05-11 15:41:47 3期C座5楼电梯间发生陌生人报警",
+          },
+        ];
+        // {
+        //   SerialNum: 0,
+        //   EquipmentNum: "534080",
+        //   AlarmLocation: "实验车间",
+        //   AlarmType: "火警",
+        //   AlarmTime: "2021-05-27 15:28:30",
+        // }
+        this.$store.dispatch("SET_SHOWWARNTIP", true);
+      }, this.$randomNumer(3000, 30000));
     },
     clearWarnTimeFun () {
-      // clearInterval(this.warnTimer);
-      // this.warnTimer = null;
-      // this.$store.dispatch("SET_SHOWWARNTIP", false);
+      clearInterval(this.warnTimer);
+      this.warnTimer = null;
+      this.$store.dispatch("SET_SHOWWARNTIP", false);
     },
     //监测是否按下esc键
     checkFull () {

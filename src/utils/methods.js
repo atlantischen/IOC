@@ -71,15 +71,17 @@ var Fullscreen = function Fullscreen(val, bool) {
  */
 var ScrolAnimationTop = function ScrolAnimationTop(dom, time) {
   var that = this,
-    _time = time * 1000
-  var box = that.$refs[dom] // document.getElementById(dom)
-  let timer = setInterval(scrol, _time);
-
+    _time = time * 1000,
+    timer = null,
+    timer2 = null,
+    _d = null,
+    box = that.$refs[dom] // document.getElementById(dom)
+    scrol()
   function scrol() {
     var _s = box.children[1].offsetTop - box.children[0].offsetTop
     box.style.transition = `all 0.5s ease`
     box.style.transform = `translateY(-${_s}px)`;
-    let _d = box.cloneNode(true)
+    _d = box.cloneNode(true)
     if (box.children[0]) {
       box.children[0].parentNode.appendChild(_d.children[0])
     }
