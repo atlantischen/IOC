@@ -2,6 +2,7 @@
   <!-- 视频模式 -->
   <div class="videoMode">
     <ul class="videoMode_Box x_sb_rap">
+<<<<<<< HEAD
       <!-- <li
         v-for="(item, i) in videoDatas"
         @mouseenter="mouseFun(true, i)"
@@ -32,6 +33,9 @@
         :dialogShow="$store.state.dialogShow"
         :monitorList="videoDatas"
       ></Player>
+=======
+      <Player ref="player"  :monitorList="videoDatas"></Player>
+>>>>>>> 12293735e09ceab28bc57e57620eb3e35d81af44
     </ul>
     <LookVideo
       :Visible="Visible"
@@ -43,6 +47,8 @@
 </template>
 
 <script>
+import {urlArry} from '@/utils/flv_url.js'
+
 export default {
   name: 'videoMode',
   props: {
@@ -60,6 +66,7 @@ export default {
       dialogTitle: '',
       showMaster: false,
       masterIndex: null,
+<<<<<<< HEAD
       // videoDatas: [
       //   {
       //     local: '16楼C区铭筑',
@@ -133,6 +140,9 @@ export default {
         //   id: 12
         // },
       ],
+=======
+      videoDatas:urlArry.theParkServiceList,
+>>>>>>> 12293735e09ceab28bc57e57620eb3e35d81af44
       videoD: {},
     }
   },
@@ -146,6 +156,11 @@ export default {
   //   }
   // },
   components: {},
+  watch:{
+    '$store.state.flag':function (n,o) {
+        console.log(n,o);
+    }
+  },
   mounted () {
     if (!this.$store.state.dialogShow) {
       this.$store.commit('setDialogShow', true)
@@ -209,7 +224,18 @@ export default {
       this.showMaster = bool
       this.masterIndex = i
     }
+<<<<<<< HEAD
   }
+=======
+  },
+  beforeRouteLeave (to, from, next) {
+    if (to.path != from.path) {
+      this.$refs.player.destoryVideo();
+
+    }
+    next();
+  },
+>>>>>>> 12293735e09ceab28bc57e57620eb3e35d81af44
 }
 </script>
 

@@ -602,44 +602,23 @@ export default {
   },
   mounted() {
  
-    this.RealTotalPower(this.$getNowTime());
-    this.ElectricityStatistics(
-      this.$fun_date(),
-      [2000, 3300, 3300, 4300, 3000, 3001, 4000],
-      {
-        name: "kw·h",
-        company: "日",
-        splitNumber: 3,
-        min: 0,
-        max: 4800,
-        interval: 1200,
-      }
-    );
-    //  this.$afterIframeOnload('iframeVideo0', () => {
-    //   this.showIfame = false
-    // })
-    // window.onload = function() {
-    //   that.$nextTick(() => {
-    //     //  const iframe = window.frames['iFrame']
-    //     // const handleLoad = () => {
-    //     //   setTimeout(() => {
-    //     //     const Do = (iframe.contentWindow || iframe.contentDocument)
-    //     //     console.log(Do,'do');
-    //     //     Do.document.document.getElementById('ascrail2000').style.display = 'none'
-    //     //   }, 500)
-    //     // }
-    //     // iframe.addEventListener('load', handleLoad, true)
-    //     var _iframe = document.getElementById("iframe");
-    //     var a = this.$refs.iframeVideo0;
-    //     //  _iframe.style.overflow= "hidden";
-    //     console.log(_iframe, a, "_iframe");
-    //   });
-
-    //   // var _iframe = document.getElementById('iframe').contentWindow
-
-    //   // console.log(_iframe,'_iframe');
-    //   // _iframe.style.display= "none";  //修改样式
-    // };
+    this.$nextTick(()=>{
+      this.RealTotalPower(this.$getNowTime());
+      this.ElectricityStatistics(
+          this.$fun_date(),
+          [2000, 3300, 3300, 4300, 3000, 3001, 4000],
+          {
+            name: "kw·h",
+            company: "日",
+            splitNumber: 3,
+            min: 0,
+            max: 4800,
+            interval: 1200,
+          }
+        );
+    })
+    
+   
   },
   beforeRouteLeave(to, from, next) {
     if (to.path != from.path) {
@@ -752,8 +731,7 @@ export default {
 .total_power {
   margin-top: 0.125rem /* 10/80 */;
 }
-.KWH {
-}
+
 .new_air {
   margin-top: 0.4375rem /* 35/80 */ /* 45/80 */ /* 15/80 */;
   & > ul {

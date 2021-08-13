@@ -3,6 +3,7 @@
 <template>
   <div class="wisdomContentCouplet">
     <router-view></router-view>
+
   </div>
 </template>
 

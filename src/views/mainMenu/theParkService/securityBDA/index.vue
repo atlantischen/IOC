@@ -7,7 +7,11 @@
       type="card"
       @tab-click="handleClick"
     >
+<<<<<<< HEAD
       <el-tab-pane label="数据模式" name="dataMode">
+=======
+      <el-tab-pane label="数据模式" name="first">
+>>>>>>> 12293735e09ceab28bc57e57620eb3e35d81af44
         <template #label>
           <span><i class="iconfont icon-shuju"></i> 数据模式</span>
         </template>
@@ -18,9 +22,14 @@
         </template>
       </el-tab-pane>
     </el-tabs>
+<<<<<<< HEAD
     <!-- <DataMode v-if="activeName == 'first'" />
     <VideoMode v-else /> -->
     <router-view></router-view>
+=======
+    <DataMode v-if="activeName == 'first'" />
+    <VideoMode v-else  />
+>>>>>>> 12293735e09ceab28bc57e57620eb3e35d81af44
   </div>
 </template>
 
@@ -29,10 +38,16 @@ import DataMode from './components/dataMode.vue'
 import VideoMode from './components/videoMode.vue'
 export default {
   name: 'securityBDA',
+  
   components: { DataMode, VideoMode },
   data () {
     return {
+<<<<<<< HEAD
       activeName: 'dataMode'
+=======
+      activeName: 'first',
+    
+>>>>>>> 12293735e09ceab28bc57e57620eb3e35d81af44
     }
   },
   created () {
@@ -40,11 +55,17 @@ export default {
     this.activeName = this.$route.name
   },
   methods: {
+<<<<<<< HEAD
     handleClick (a) {
       this.activeName = a.props.name
       this.$router.push('/theParkService/securityBDA/' + this.activeName)
     }
   }
+=======
+
+  },
+
+>>>>>>> 12293735e09ceab28bc57e57620eb3e35d81af44
 }
 </script>
 
