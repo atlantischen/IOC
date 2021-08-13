@@ -85,7 +85,6 @@ export default {
         for (let i = 0; i < _l; i++) {
           this.items[i] = n.companiesImgsListDatas.slice(i * 8, i * 8 + 8)
         }
-        this.items.push(this.items[0])
       },
       deep: true,
       immediate: true
@@ -104,10 +103,10 @@ export default {
       if (!this.timer) {
         this.timer = setInterval(() => {
           this.isShowAn = true
+          this.add()
           if (this.items.length > 1) {
-            this.remove()
             setTimeout(() => {
-              this.add()
+              this.remove()
               this.isShowAn = false
             }, 500);
           }
@@ -253,6 +252,21 @@ export default {
     .companiesImgsList_over {
       // overflow: hidden;
     }
+  }
+}
+.mover_LEFT {
+  // transition: all 1s;
+  // transform: translateX(-100%);
+  animation: marquee 1s ease-in-out;
+  // animation-play-state: paused;
+}
+
+@keyframes marquee {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-4.5rem /* 360/80 */);
   }
 }
 </style>

@@ -68,7 +68,7 @@ export default {
   },
   methods: {
     animationFun () {
-      let count = 4000
+      let count = 6000
       if (!this.timer) {
         this.timer = setInterval(() => {
           this.isShowAn = true
@@ -79,7 +79,7 @@ export default {
             setTimeout(() => {
               this.fDatas.splice(0, 1)
               this.isShowAn = false
-            }, 500);
+            }, 1000);
           }
         }, count)
       }
@@ -128,7 +128,7 @@ export default {
     transform: translateY(0%);
   }
   100% {
-    transform: translateY(-160px);
+    transform: translateY(-1.65rem /* 132/80 */);
   }
 }
 </style>

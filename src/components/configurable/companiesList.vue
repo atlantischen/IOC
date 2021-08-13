@@ -166,7 +166,7 @@ export default {
       for (let i = 0; i < _l; i++) {
         this.comListDatas[i] = _a.slice(i * 4, i * 4 + 4)
       }
-      this.comListDatas.push(this.comListDatas[0])
+      this.comListDatas = [...this.comListDatas, ...this.comListDatas]
     },
     animationFun () {
       let count = 4000
@@ -174,13 +174,13 @@ export default {
         this.timer = setInterval(() => {
           this.isShowAn = true
           if (this.comListDatas.length > 1) {
-            this.comListDatas.splice(0, 1)
+            if (this.comListDatas && this.comListDatas.length) {
+              this.comListDatas.push(this.comListDatas[0])
+            }
             setTimeout(() => {
-              if (this.comListDatas && this.comListDatas.length) {
-                this.comListDatas.push(this.comListDatas[0])
-              }
+              this.comListDatas.splice(0, 1)
               this.isShowAn = false
-            }, 500);
+            }, 1000);
           }
         }, count)
       }
@@ -338,7 +338,7 @@ export default {
       transform: translateX(0%);
     }
     100% {
-      transform: translateX(-334px);
+      transform: translateX(-4.3rem /* 344/80 */);
     }
   }
 }
