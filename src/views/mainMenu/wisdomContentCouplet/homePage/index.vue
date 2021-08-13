@@ -652,7 +652,6 @@ export default {
                   // formatter: "{img1|}{c}%",
                   formatter:function (params) {
                     let c = Math.abs(params.data.value);
-                    console.log(c,'c');
                     return `{img1|}${c}%`;
                   },
                   

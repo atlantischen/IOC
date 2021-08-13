@@ -164,6 +164,7 @@ export default {
     },
     allClick(){
       this.arrList= [...this.idArry]
+      console.log(this.arrList,'arrList');
       let arr = this.idArry.toString()
       this.init()
       this.$SendMessageToUnity("ShowIoTDevice_IOCMap",{strList:arr});

@@ -146,7 +146,7 @@ export default {
     return {
        deviceShow: false,
       _fade:false,
-      idArry:[5],
+      idArry:[0,1,2,3,4,5,10],
       activeIndex: null,
       text: "",
       audio: {
