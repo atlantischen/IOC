@@ -2,7 +2,6 @@
   <!-- 视频模式 -->
   <div class="videoMode">
     <ul class="videoMode_Box x_sb_rap">
-<<<<<<< HEAD
       <!-- <li
         v-for="(item, i) in videoDatas"
         @mouseenter="mouseFun(true, i)"
@@ -30,12 +29,9 @@
       </li> -->
       <Player
         ref="player"
-        :dialogShow="$store.state.dialogShow"
+        :dialogShow="showVideo"
         :monitorList="videoDatas"
       ></Player>
-=======
-      <Player ref="player"  :monitorList="videoDatas"></Player>
->>>>>>> 12293735e09ceab28bc57e57620eb3e35d81af44
     </ul>
     <LookVideo
       :Visible="Visible"
@@ -47,104 +43,28 @@
 </template>
 
 <script>
-import {urlArry} from '@/utils/flv_url.js'
+import { urlArry } from "@/utils/flv_url.js";
 
 export default {
-  name: 'videoMode',
+  name: "videoMode",
   props: {
     _showVideo: {
       type: Boolean,
-      default: false
-    }
+      default: false,
+    },
   },
-  data () {
+  data() {
     return {
       showVideo: false,
       showIfame: true,
       Visible: false,
       is404: false,
-      dialogTitle: '',
+      dialogTitle: "",
       showMaster: false,
       masterIndex: null,
-<<<<<<< HEAD
-      // videoDatas: [
-      //   {
-      //     local: '16楼C区铭筑',
-      //     url: 'http://172.21.71.225:10800/play.html?channel=5'
-      //   },
-      // ],
-      videoDatas: [
-        {
-          local: '16楼C区铭筑',
-          url: 'http://183.62.170.2:8086/live?app=live&stream=cctv1',
-          id: 1
-        },
-        {
-          local: '16层C区女厕',
-          url: 'http://183.62.170.2:8086/live?app=live&stream=cctv2',
-          id: 2
-        },
-        {
-          local: '16楼前台',
-          url: 'http://183.62.170.2:8086/live?app=live&stream=cctv3',
-          id: 3
-        },
-        {
-          local: '16楼A区铭筑男厕',
-          url: 'http://183.62.170.2:8087/live?app=live&stream=cctv4',
-          id: 4
-        },
-        {
-          local: '16楼A区会议室',
-          url: 'http://183.62.170.2:8087/live?app=live&stream=cctv5',
-          id: 5
-        },
-        {
-          local: '14楼A区铭筑',
-          url: 'http://183.62.170.2:8087/live?app=live&stream=cctv6',
-          id: 6
-        },
-        {
-          local: '14楼D区吧台',
-          url: 'http://183.62.170.2:8086/live?app=live&stream=cctv7',
-          id: 7
-        },
-        {
-          local: '14楼C区女厕',
-          url: 'http://183.62.170.2:8087/live?app=live&stream=cctv8',
-          id: 8
-        },
-        {
-          local: '14楼A区大事记',
-          url: 'http://183.62.170.2:8087/live?app=live&stream=cctv9',
-          id: 9
-        },
-        {
-          local: '14层B区男厕',
-          url: 'http://183.62.170.2:8086/live?app=live&stream=cctv14',
-          id: 10
-        },
-        {
-          local: '14楼贵宾会议室外',
-          url: 'http://183.62.170.2:8086/live?app=live&stream=cctv15',
-          id: 11
-        },
-        {
-          local: '14楼B区机房外',
-          url: 'http://183.62.170.2:8086/live?app=live&stream=cctv16',
-          id: 12
-        },
-        // {
-        //   local: '14楼B区机房外',
-        //   url: 'http://10.10.7.27:8086/live?app=live&stream=cctv16',
-        //   id: 12
-        // },
-      ],
-=======
-      videoDatas:urlArry.theParkServiceList,
->>>>>>> 12293735e09ceab28bc57e57620eb3e35d81af44
+      videoDatas: urlArry.theParkServiceList,
       videoD: {},
-    }
+    };
   },
 
   // watch: {
@@ -156,14 +76,15 @@ export default {
   //   }
   // },
   components: {},
-  watch:{
-    '$store.state.flag':function (n,o) {
-        console.log(n,o);
-    }
+  watch: {
+    "$store.state.flag": function(n, o) {
+      console.log(n, o);
+    },
   },
-  mounted () {
+  mounted() {
     if (!this.$store.state.dialogShow) {
-      this.$store.commit('setDialogShow', true)
+      // this.$store.commit('setDialogShow', true)
+      this.showVideo = true;
     }
     // this.showVideo = true
     // var IframeOnClick = {
@@ -207,39 +128,34 @@ export default {
     //   this.showIfame = false
     // })
   },
-  beforeDestroy () {
-    this.$store.commit('setDialogShow', false)
-  },
-  methods: {
-    openCloseDialog (val) {
-      this.Visible = val
-    },
-    lookVideo (val) {
-      this.dialogTitle = val.deviceName = val.local
-      this.videoD = val
-      console.log(val)
-      this.openCloseDialog(true)
-    },
-    mouseFun (bool, i) {
-      this.showMaster = bool
-      this.masterIndex = i
-    }
-<<<<<<< HEAD
-  }
-=======
-  },
-  beforeRouteLeave (to, from, next) {
-    if (to.path != from.path) {
-      this.$refs.player.destoryVideo();
+  beforeDestroy() {},
 
+  beforeRouteLeave(to, from, next) {
+    if (to.path != from.path) {
+      this.showVideo = false;
+      //  this.$store.commit('setDialogShow', false)
     }
     next();
   },
->>>>>>> 12293735e09ceab28bc57e57620eb3e35d81af44
-}
+  methods: {
+    openCloseDialog(val) {
+      this.Visible = val;
+    },
+    lookVideo(val) {
+      this.dialogTitle = val.deviceName = val.local;
+      this.videoD = val;
+      console.log(val);
+      this.openCloseDialog(true);
+    },
+    mouseFun(bool, i) {
+      this.showMaster = bool;
+      this.masterIndex = i;
+    },
+  },
+};
 </script>
 
-<style lang='less' scoped>
+<style lang="less" scoped>
 @import "~@/style/animation.less";
 :deep(.videoMode_Box) {
   width: 20.45rem /* 1636/80 */;
