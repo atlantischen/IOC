@@ -28,6 +28,9 @@ module.exports = {
     open: true // 配置自动启动浏览器
   },
   configureWebpack: config => {
+    config.externals = {
+      BMap: 'BMap'
+    }
     config.optimization = {
       minimizer: [
         new UglifyJsPlugin({

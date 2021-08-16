@@ -108,7 +108,7 @@ export default {
             setTimeout(() => {
               this.remove()
               this.isShowAn = false
-            }, 500);
+            }, 1000);
           }
         }, count)
       }
@@ -255,10 +255,7 @@ export default {
   }
 }
 .mover_LEFT {
-  // transition: all 1s;
-  // transform: translateX(-100%);
   animation: marquee 1s ease-in-out;
-  // animation-play-state: paused;
 }
 
 @keyframes marquee {
@@ -266,7 +263,7 @@ export default {
     transform: translateX(0%);
   }
   100% {
-    transform: translateX(-4.5rem /* 360/80 */);
+    transform: translateX(-4.3rem /* 344/80 */);
   }
 }
 </style>
