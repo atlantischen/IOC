@@ -34,7 +34,7 @@ export default {
   components: { AlarmAck, AllAlert },
   data () {
     return {
-      isShow: true,
+      isShow: false,
       showAlarmAck: false,
       showAllAlert: false,
       showEscHandler: false,
@@ -68,12 +68,11 @@ export default {
             this.$store.commit("setActiveIndex", 0);
           }
           this.$router.push(res.action);
-        } else {
         }
-      } catch (e) { }
+      } catch (e) {}
     },
     "$store.state.comState.centerDatas": {
-      handler (n, o) {
+      handler (n) {
         if (n) {
           this.centerDatas = n;
         }
@@ -81,7 +80,7 @@ export default {
       immediate: true,
     },
     isShow: {
-      handler (n, o) {
+      handler (n) {
         if (n) {
           this.warnTimeFun();
         }
@@ -233,7 +232,7 @@ export default {
       this.warnTimer = setInterval(() => {
         this.tipList = [
           {
-            text: "告警！2021-05-11 15:41:47 3期C座5楼电梯间发生陌生人报警",
+            text: "告警！2021-08-07 15:28:30 1期A座14F实验室",
           },
         ];
         // {

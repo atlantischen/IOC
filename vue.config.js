@@ -69,7 +69,7 @@ module.exports = {
     if (process.env.NODE_ENV === 'production') {
       if (process.env.VUE_APP_FLAG === 'pro') {
         config.plugins.push = [...pluginsPro]
-      } else {}
+      } 
     } else {
       // dev 开发环境
     }
