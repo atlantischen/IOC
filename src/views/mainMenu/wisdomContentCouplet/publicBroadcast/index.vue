@@ -118,6 +118,7 @@
       v-show="deviceShow"
       :_fade="_fade"
       :idArry="idArry"
+      :disabled="disabled"
       @chageFade="chageFade($event)"
     ></Device>
   <div class="mask" @mouseenter="deviceChangeShow"></div>
@@ -144,6 +145,7 @@ export default {
   name: "publicBroadcast",
   data() {
     return {
+      disabled:false,
        deviceShow: false,
       _fade:false,
       idArry:[5],

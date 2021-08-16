@@ -5,9 +5,10 @@
       <i class="el-icon-close close" @click="handleClick(true)"></i>
       <ul class="sb_list">
         <li
-          :class="item.isShow ? '' : 'toGrey'"
-          v-for="item in equipmentList"
-          :key="item"
+          :class="{'toGrey':!item.isShow}"
+          ref="item"
+          v-for="(item,index) in equipmentList"
+          :key="index"
           @click="setClick(item.id)"
         >
           <img :src="item.url" alt="" />
@@ -95,7 +96,7 @@ export default {
         },
       ],
       arrList:null,
-      a:[]
+      
     };
   },
   props: {
@@ -106,6 +107,9 @@ export default {
       type: Array,
       require:true
     },
+    // disabeld: {
+    //   type: Boolean,
+    // },
   },
   watch: {
     _fade: function(n, o) {
@@ -128,6 +132,7 @@ export default {
       this.$emit("chageFade", true);
     },
     setClick(i){
+      // this.arrList= this.idArry
       this.equipmentList.forEach(item=>{
         if(item.id ===i){
           item.isShow = !item.isShow
@@ -135,10 +140,12 @@ export default {
           case true:
            this.arrList.push(i)
            let arr = this.arrList.toString()
+          
           this.$SendMessageToUnity("ShowIoTDevice_IOCMap",{strList:arr});
           break;
           case false:
-            this.arrList.splice(this.arrList.findIndex(item => item === i), 1)
+            this.arrList.splice(this.arrList.findIndex(item => item === i), 1)            
+            console.log(this.arrList);
             let res=this.arrList.toString()
             this.$SendMessageToUnity("ShowIoTDevice_IOCMap",{strList:res});
             break;  
@@ -148,6 +155,8 @@ export default {
         }
         
       })
+      console.log(this.equipmentList,'equipmentList~~~~~~~');
+
     },
     init(){
       this.equipmentList.forEach(item=>{
@@ -160,11 +169,12 @@ export default {
           }
         });
       });
-      console.log(this.equipmentList);
+      this.arrList= [...this.idArry]
+
     },
     allClick(){
+    
       this.arrList= [...this.idArry]
-      console.log(this.arrList,'arrList');
       let arr = this.idArry.toString()
       this.init()
       this.$SendMessageToUnity("ShowIoTDevice_IOCMap",{strList:arr});
@@ -180,7 +190,8 @@ export default {
   
   },
   created() {
-    // this.init()
+
+    this.init()
     // this.allClick()
 
   },
