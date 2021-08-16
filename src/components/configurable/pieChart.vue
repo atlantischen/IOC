@@ -17,26 +17,26 @@ export default {
       type: Object,
     },
   },
-  data () {
+  data() {
     return {
       ...this._data,
       ids: this.$uuid(),
     };
   },
-  created () { },
-  mounted () {
+  created() {},
+  mounted() {
     this.pieChartFun(this.datas);
   },
   methods: {
-    pieChartFun (val) {
-      var dom = this.$refs["pieChartEchart_" + this.ids]
-      var myChart = echarts.init(dom)
+    pieChartFun(val) {
+      var dom = this.$refs["pieChartEchart_" + this.ids];
+      var myChart = echarts.init(dom);
       let { optionName, datas, data, nums } = val;
       var option = {
         baseOption: {
           timeline: {
             show: false,
-            axisType: 'category',
+            axisType: "category",
             // orient: 'vertical',
             loop: false,
             autoPlay: true,
@@ -56,7 +56,7 @@ export default {
             //   showNextBtn: false,
             //   showPrevBtn: false
             // },
-            data: []
+            data: [],
           },
           tooltip: {
             trigger: "item",
@@ -69,11 +69,10 @@ export default {
               color: "#fff",
             },
             formatter: (v) => {
-              return v.name + ':' + v.value + '%'
-            }
+              return v.name + ":" + v.value + "%";
+            },
           },
-          title: [
-          ],
+          title: [],
           legend: {
             selectedMode: false,
             show: true,
@@ -81,9 +80,9 @@ export default {
             left: "50%",
             top: "40%",
             data: optionName,
-            formatter: function (name) {
+            formatter: function(name) {
               var index = 0;
-              optionName.forEach(function (value, i) {
+              optionName.forEach(function(value, i) {
                 if (value == name) index = i;
               });
               return (
@@ -126,7 +125,7 @@ export default {
               animation: false,
               hoverAnimation: false,
               dispatchAction: {
-                type: 'highlight',
+                type: "highlight",
                 // seriesIndex: 1,
                 // dataIndex: 0
               },
@@ -143,8 +142,8 @@ export default {
               },
               emphasis: {
                 itemStyle: {
-                  color: '#fff'
-                }
+                  color: "#fff",
+                },
               },
               labelLine: {
                 show: false,
@@ -169,8 +168,8 @@ export default {
               },
               emphasis: {
                 itemStyle: {
-                  color: '#fff'
-                }
+                  color: "#fff",
+                },
               },
               labelLine: {
                 show: false,
@@ -187,7 +186,7 @@ export default {
               itemStyle: {
                 normal: {
                   // borderWidth: 2,
-                  borderColor: 'rgba(0, 0, 0, 0)',
+                  borderColor: "rgba(0, 0, 0, 0)",
                   // opacity: 0.75,
                   shadowBlur: 10,
                   shadowOffsetX: 0,
@@ -207,7 +206,7 @@ export default {
             },
           ],
         },
-        options: []
+        options: [],
       };
       for (var i = 0; i < optionName.length; i++) {
         option.baseOption.series[2].data[i] = {
@@ -215,7 +214,7 @@ export default {
           name: optionName[i],
         };
       }
-      for (var n = Math.ceil(9.5 * data.value / 10); n <= data.value; n++) {
+      for (var n = data.value - 10; n <= data.value; n++) {
         if (n <= data.value) {
           option.baseOption.timeline.data.push(n);
           option.options.push({
@@ -255,10 +254,12 @@ export default {
         }
       }
       this.$redomEchart(dom, option);
-      myChart.dispatchAction({
-        type: 'highlight',
-        seriesIndex: 2,
-        dataIndex: 0
+      this.$nextTick().then(() => {
+        myChart.dispatchAction({
+          type: "highlight",
+          seriesIndex: 2,
+          dataIndex: 0,
+        });
       });
     },
   },

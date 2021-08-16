@@ -78,10 +78,10 @@ export default {
   name: "alarmAck",
   props: {
     _isFade: {
-      type: Boolean
-    }
+      type: Boolean,
+    },
   },
-  data () {
+  data() {
     return {
       isFade: false,
       ruleForm: {
@@ -93,7 +93,11 @@ export default {
       },
       rules: {
         name: [
-          { required: true, message: "请输入报警对象", trigger: ["blur", "change"] },
+          {
+            required: true,
+            message: "请输入报警对象",
+            trigger: ["blur", "change"],
+          },
           {
             min: 1,
             max: 10,
@@ -101,7 +105,13 @@ export default {
             trigger: "blur",
           },
         ],
-        type: [{ required: true, message: "请输入报警类型", trigger: ["blur", "change"] }],
+        type: [
+          {
+            required: true,
+            message: "请输入报警类型",
+            trigger: ["blur", "change"],
+          },
+        ],
         because: [
           {
             required: true,
@@ -117,41 +127,40 @@ export default {
           },
         ],
         result: [
-          { required: true, message: "请输入处理结果", trigger: ["blur", "change"] },
+          {
+            required: true,
+            message: "请输入处理结果",
+            trigger: ["blur", "change"],
+          },
         ],
       },
     };
   },
   components: {},
   watch: {
-    _isFade: function (n, o) {
-      this.isFade = n
+    _isFade: function(n, o) {
+      this.isFade = n;
       if (this.isFade) {
         this.ruleForm = {
-          // name: "中心广场摄像机",
-          // type: "物品偷盗",
-          // because: "摄像头侦测报警",
-          // handler: "梁海山",
-          // result: "已派人通知查看",
-          name: "3期C座5楼电梯间",
-          type: "报警",
-          because: "发生陌生人报警",
+          name: "1期A座14F实验室",
+          type: "消防报警",
+          because: "1期A座14F实验室发生报警",
           handler: "梁海山",
           result: "已派人通知查看",
         };
       }
     },
   },
-  mounted () {
+  mounted() {
     // window.addEventListener("message", this.sureAlarmFun, true);
   },
   methods: {
-    submitForm (formName) {
+    submitForm(formName) {
       this.$refs[formName].validate((valid) => {
         if (valid) {
           // this.sureAlarmFun();
           this.isFade = !this.isFade;
-          this.$emit('close', 'AlarmAck', this.isFade)
+          this.$emit("close", "AlarmAck", this.isFade);
           this.$message.success("已确认警报！");
           this.resetForm("ruleForm");
         } else {
@@ -159,7 +168,7 @@ export default {
         }
       });
     },
-    resetForm (formName) {
+    resetForm(formName) {
       this.$refs[formName].resetFields();
     },
     // sureAlarmFun (v) {
@@ -252,6 +261,7 @@ export default {
         border-radius: 0;
         font-family: "Microsoft YaHei";
         font-size: 0.175rem /* 14/80 */;
+        padding: .25rem /* 20/80 */ 0;
       }
       .inputTextarea {
         width: 100%;

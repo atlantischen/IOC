@@ -7,13 +7,35 @@
         <div class="leftSearch">
           <i class="iconfont icon-fanhui" @click="back"></i>
           <div class="theSearchPath y_c">
+            <!-- <el-upload
+              class="upload-demo uploadPhoto"
+              action="139.9.26.115:28003/api/v1/admin/upload/upload_object"
+              drag
+              :show-file-list="false"
+              :auto-upload="true"
+              :on-change="changeFile"
+              multiple
+            >
+              <img
+                v-if="!imageUrl"
+                class="upload_av"
+                src="~@/assets/img/datas/sc_av.png"
+              />
+              <img
+                v-if="!imageUrl"
+                class="upload_up"
+                src="~@/assets/img/datas/sc_up.png"
+              />
+              <img v-else :src="imageUrl" class="avatar" />
+            </el-upload> -->
             <el-upload
               class="upload-demo uploadPhoto"
               action="#"
+              :headers="myHeaders"
               drag
-              :show-file-list="false"
-              :auto-upload="false"
+              :http-request="uploadImg"
               :on-change="changeFile"
+              :show-file-list="false"
               multiple
             >
               <img
@@ -29,6 +51,7 @@
               <img v-else :src="imageUrl" class="avatar" />
             </el-upload>
             <button :class="{ m_disabled: !imageUrl }" @click="SearchPath()">
+              <!-- <button @click="SearchPath()"> -->
               搜寻轨迹
             </button>
           </div>
@@ -150,6 +173,8 @@
 </template>
 
 <script>
+import { uploadImgApi } from "@/api/upload.js";
+import axios from "axios";
 export default {
   name: "rightContent",
   props: {
@@ -161,13 +186,17 @@ export default {
       default: false,
     },
   },
-  data () {
+  data() {
     return {
+      myHeaders: {
+        "Access-Control-Allow-Origin": "*",
+      },
       showLeftRight: false,
       currentPage: 1,
       total: 1,
       isFade: false,
       imageUrl: null,
+      img_src: null,
       inputV: "",
       isShowList: false,
       slist: null,
@@ -177,131 +206,131 @@ export default {
           phone: "",
           info: "梅龙路与金龙路交汇处",
           src: require("@/assets/img/datas/qy_ags.png"),
-          srcName: 'qy_ags.png'
+          srcName: "qy_ags.png",
         },
         {
           name: "麦丹劳",
           phone: "",
           info: "2栋B座1088号商铺",
           src: require("@/assets/img/datas/qy_kfc.png"),
-          srcName: 'qy_kfc.png'
+          srcName: "qy_kfc.png",
         },
         {
           name: "真功夫",
           phone: "",
           info: "1栋A座3014号商铺",
           src: require("@/assets/img/datas/qy_zgf.png"),
-          srcName: 'qy_zgf.png'
+          srcName: "qy_zgf.png",
         },
         {
           name: "深圳奇信智能科技有限公司",
           phone: "",
           info: "海纳百川B座16F",
           src: require("@/assets/img/datas/qy_qx.png"),
-          srcName: 'qy_qx.png'
+          srcName: "qy_qx.png",
         },
       ],
       tableData: [],
       tableData2: [
         {
           src: require("@/assets/img/datas/p_1.png"),
-          srcName: 'p_1.png',
+          srcName: "p_1.png",
           name: "李玲",
           info: "涉嫌诈骗",
         },
         {
           src: require("@/assets/img/datas/p_2.png"),
-          srcName: 'p_2.png',
+          srcName: "p_2.png",
           name: "陈新",
           info: "逃避缴费",
         },
         {
           src: require("@/assets/img/datas/p_3.png"),
-          srcName: 'p_3.png',
+          srcName: "p_3.png",
           name: "韦孟",
           info: "从事传销活动",
         },
         {
           src: require("@/assets/img/datas/p_4.png"),
-          srcName: 'p_4.png',
+          srcName: "p_4.png",
           name: "李建华",
           info: "散播谣言",
         },
         {
           src: require("@/assets/img/datas/p_5.png"),
-          srcName: 'p_5.png',
+          srcName: "p_5.png",
           name: "肖海辉",
           info: "涉嫌诈骗",
         },
         {
           src: require("@/assets/img/datas/p_6.png"),
-          srcName: 'p_6.png',
+          srcName: "p_6.png",
           name: "徐高鹏",
           info: "逃避缴费",
         },
         {
           src: require("@/assets/img/datas/p_7.png"),
-          srcName: 'p_7.png',
+          srcName: "p_7.png",
           name: "韦炳佐",
           info: "从事传销活动",
         },
         {
           src: require("@/assets/img/datas/p_8.png"),
-          srcName: 'p_8.png',
+          srcName: "p_8.png",
           name: "瞿德志",
           info: "散播谣言",
         },
         {
           src: require("@/assets/img/datas/p_9.png"),
-          srcName: 'p_9.png',
+          srcName: "p_9.png",
           name: "陈荣",
           info: "涉嫌诈骗",
         },
         {
           src: require("@/assets/img/datas/p_10.png"),
-          srcName: 'p_10.png',
+          srcName: "p_10.png",
           name: "周志军",
           info: "逃避缴费",
         },
         {
           src: require("@/assets/img/datas/p_11.png"),
-          srcName: 'p_11.png',
+          srcName: "p_11.png",
           name: "张颖",
           info: "从事传销活动",
         },
         {
           src: require("@/assets/img/datas/p_12.png"),
-          srcName: 'p_12.png',
+          srcName: "p_12.png",
           name: "杨靓",
           info: "散播谣言",
         },
         {
           src: require("@/assets/img/datas/p_13.png"),
-          srcName: 'p_13.png',
+          srcName: "p_13.png",
           name: "徐清",
           info: "涉嫌诈骗",
         },
         {
           src: require("@/assets/img/datas/p_14.png"),
-          srcName: 'p_14.png',
+          srcName: "p_14.png",
           name: "方明",
           info: "逃避缴费",
         },
         {
           src: require("@/assets/img/datas/p_15.png"),
-          srcName: 'p_15.png',
+          srcName: "p_15.png",
           name: "李景",
           info: "从事传销活动",
         },
         {
           src: require("@/assets/img/datas/p_16.png"),
-          srcName: 'p_16.png',
+          srcName: "p_16.png",
           name: "廖明",
           info: "散播谣言",
         },
         {
           src: require("@/assets/img/datas/p_17.png"),
-          srcName: 'p_17.png',
+          srcName: "p_17.png",
           name: "顾宇",
           info: "从事传销活动",
         },
@@ -310,38 +339,110 @@ export default {
   },
   watch: {
     inputVal: {
-      handler (n, o) {
+      handler(n) {
         this.inputV = n;
       },
       deep: true,
     },
     _show: {
-      handler (n) {
+      handler(n) {
         this.showLeftRight = n;
-        console.log(this.showLeftRight);
       },
     },
   },
-  mounted () {
+  mounted() {
     this.total = this.tableData2.length;
     this.changeDatasFun();
   },
   methods: {
+    uploadImg(p) {
+      // const file = p.file,
+      //   fileType = file.type,
+      //   isImage = fileType.indexOf('image') != -1,
+      //   isLt2M = file.size / 1024 / 1024 < 2
+      // if (!isImage) {
+      //   this.$message.error('只能上传图片格式png、jpg、gif!')
+      //   return
+      // }
+      // if (!isLt2M) {
+      //   this.$message.error('只能上传图片大小小于2M')
+      //   return
+      // }
+
+      // let fd = new FormData()
+      // fd.append('multipartFile', p.file)
+      // uploadImgApi(fd).then((r) => {
+      //   console.log(r)
+      // })
+
+      const form = new FormData();
+      form.append("multipartFile", p.file);
+      this.imageUpload(form)
+        .then((res) => {
+          if (parseInt(res.data.code) === 200) {
+            this.img_src = "http://139.9.26.115:9999" + res.data.data;
+            console.log(this.img_src);
+          }
+        })
+        .catch(() => {});
+
+      // var url = 'http://139.9.26.115:28003/api/v1/admin/upload/upload_object'
+      // var form = new FormData()
+      // form.append('multipartFile', file)
+      // var xhr = new XMLHttpRequest()
+      // xhr.open('post', url, true)
+      // xhr.onload = uploadComplete //请求完成
+      // xhr.onerror = uploadFailed //请求失败
+      // xhr.upload.onprogress = progressFunction //上传进度
+      // xhr.upload.onloadstart = function() {
+      //   ot = new Date().getTime() //设置上传开始时间
+      //   oloaded = 0 //设置上传开始时，以上传的文件大小为0
+      // }
+      // xhr.send(form)
+      // xhr.onreadystatechange = function() {
+      //   console.log(xhr)
+      // if (xhr.readyState === 4 && xhr.status === 200) {
+      //   alert(xhr.responseText)
+      // }
+      // }
+    },
+    imageUpload(param) {
+      axios.defaults.baseURL = "http://139.9.26.115:28003/api/";
+      const url = "v1/admin/upload/upload_object";
+      return axios.post(url, param, {
+        headers: {
+          "content-type": "multipart/form-data",
+          // 'Access-Control-Allow-Origin': '*',
+        },
+      });
+    },
     // 上传头像
-    changeFile (file, fileList) {
+    changeFile(file, fileList) {
+      // var url = 'http://139.9.26.115:28003/api/v1/admin/upload/upload_object'
+      // var form = new FormData()
+      // form.append('multipartFile', file)
+      // var xhr = new XMLHttpRequest()
+      // xhr.open('post', url, true)
+      // xhr.send(form)
+      // xhr.onreadystatechange = function() {
+      //   console.log(xhr)
+      //   if (xhr.readyState === 4 && xhr.status === 200) {
+      //     alert(xhr.responseText)
+      //   }
+      // }
       var _that = this;
       if (!file || !window.FileReader) return;
       var reader = new FileReader();
       reader.readAsDataURL(file.raw);
-      reader.onload = function (e) {
+      reader.onload = function(e) {
         _that.imageUrl = reader.result;
       };
     },
     //
-    showBlackListFun () {
+    showBlackListFun() {
       this.isFade = !this.isFade;
     },
-    searchList (val) {
+    searchList(val) {
       this.inputV = val;
       // if (!val) {
       //   return this.$message.error("请输入关键词！")
@@ -351,54 +452,54 @@ export default {
       this.isShowList = !this.isShowList;
     },
     // 搜索轨迹
-    SearchPath () {
+    SearchPath() {
       if (this.imageUrl) {
         let _a = {
-          src: this.imageUrl
-        }
+          src: this.img_src,
+        };
         this.$SendMessageToUnity("ShowLocationPin", {
-          searchType: 'people',
-          ..._a
+          searchType: "custom",
+          ..._a,
         });
         console.log("ShowLocationPin---搜寻轨迹------------");
       } else {
-        this.$message.info('请传入搜寻对象图片！');
+        this.$message.info("请传入搜寻对象图片！");
       }
     },
-    searchOneItem (val) {
-      let _a = JSON.parse(JSON.stringify(this.slist2[val]))
-      _a.src = _a.srcName
+    searchOneItem(val) {
+      let _a = JSON.parse(JSON.stringify(this.slist2[val]));
+      _a.src = _a.srcName;
       // console.log(_a)
       this.$SendMessageToUnity("ShowLocationPin", {
         Serial: val,
-        searchType: 'shops',
-        ..._a
+        searchType: "shops",
+        ..._a,
       });
       console.log("ShowLocationPin--商家、企业------------", val);
     },
-    zhuizongFun (val, i) {
-      let _a = JSON.parse(JSON.stringify(val))
-      _a.src = _a.srcName
+    zhuizongFun(val, i) {
+      let _a = JSON.parse(JSON.stringify(val));
+      _a.src = _a.srcName;
       console.log(this.currentPage > 1 ? (this.currentPage - 1) * 10 + i : i);
       this.$SendMessageToUnity("ShowLocationPin", {
         Serial: this.currentPage > 1 ? (this.currentPage - 1) * 10 + i : i,
-        ..._a
+        ..._a,
       });
       console.log("ShowLocationPin-----跟踪------------");
     },
-    back () {
+    back() {
       this.$emit("_c", null);
     },
     // 模拟分页
-    changeDatasFun () {
+    changeDatasFun() {
       let _data = JSON.parse(JSON.stringify(this.tableData2));
       let _first = (this.currentPage - 1) * 10;
       this.tableData = _data.slice(_first, _first + 10);
     },
-    handleSizeChange (val) {
+    handleSizeChange(val) {
       console.log(`每页 ${val} 条`);
     },
-    handleCurrentChange (val) {
+    handleCurrentChange(val) {
       this.currentPage = val;
       this.changeDatasFun();
     },
