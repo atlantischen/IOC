@@ -539,6 +539,12 @@ export default {
       }
       this.activeIndex = null;
       this.num = this.carNum;
+       if(this.num.indexOf("&") !=-1 ){
+          this.$message({ message: "请输入正确的车牌号", type: "error" });
+           return
+          
+      }
+      this.$store.commit('setCarNum',this.num)
       this.$emit("search", this.num);
       this.$router.push({ name: "SmartParking" });
     },
