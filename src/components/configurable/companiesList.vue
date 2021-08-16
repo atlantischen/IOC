@@ -125,7 +125,7 @@ export default {
       type: Object,
     },
   },
-  data () {
+  data() {
     return {
       ...this._data,
       ids: this.$uuid(),
@@ -141,53 +141,53 @@ export default {
   },
   watch: {
     datas: {
-      handler (n, o) {
-        this.getDatas2()
+      handler(n, o) {
+        this.getDatas2();
       },
       deep: true,
-      immediate: true
-    }
+      immediate: true,
+    },
   },
-  mounted () {
+  mounted() {
     // this.$ScrolLeftARight('companiesImgsListRef_' + this.ids, 1)
-    this.animationFun()
+    this.animationFun();
   },
-  destroyed () {
-    clearInterval(this.timer)
-    this.timer = null
+  destroyed() {
+    clearInterval(this.timer);
+    this.timer = null;
   },
   methods: {
-    getDatas2 () {
-      this.comListDatas = []
+    getDatas2() {
+      this.comListDatas = [];
       let _a = this.datas.buldingList[this.datas.selectedNum - 1].nums[
         this.datas.selectedNum2
-      ].buildings
-      let _l = Math.ceil(_a.length / 4)
+      ].buildings;
+      let _l = Math.ceil(_a.length / 4);
       for (let i = 0; i < _l; i++) {
-        this.comListDatas[i] = _a.slice(i * 4, i * 4 + 4)
+        this.comListDatas[i] = _a.slice(i * 4, i * 4 + 4);
       }
-      this.comListDatas = [...this.comListDatas, ...this.comListDatas]
+      this.comListDatas = [...this.comListDatas, ...this.comListDatas];
     },
-    animationFun () {
-      let count = 4000
+    animationFun() {
+      let count = 4000;
       if (!this.timer) {
         this.timer = setInterval(() => {
-          this.isShowAn = true
+          this.isShowAn = true;
           if (this.comListDatas.length > 1) {
             if (this.comListDatas && this.comListDatas.length) {
-              this.comListDatas.push(this.comListDatas[0])
+              this.comListDatas.push(this.comListDatas[0]);
             }
             setTimeout(() => {
-              this.comListDatas.splice(0, 1)
-              this.isShowAn = false
+              this.comListDatas.splice(0, 1);
+              this.isShowAn = false;
             }, 1000);
           }
-        }, count)
+        }, count);
       }
     },
-    selectBuldingFun (key, val) {
-      clearInterval(this.timer)
-      this.timer = null
+    selectBuldingFun(key, val) {
+      clearInterval(this.timer);
+      this.timer = null;
       this.leaveItemFun();
       switch (key) {
         case "B":
@@ -197,18 +197,18 @@ export default {
           this.datas.selectedNum2 = val;
           break;
       }
-      this.animationFun()
+      this.animationFun();
     },
-    hoverItemFun (e, i) {
-      clearInterval(this.timer)
-      this.timer = null
+    hoverItemFun(e, i) {
+      clearInterval(this.timer);
+      this.timer = null;
       this.showItem = i;
       this.returnStyle = `right:${window.screen.width -
         e.clientX}px;top:${e.clientY - 300}px`;
     },
-    leaveItemFun () {
+    leaveItemFun() {
       this.showItem = null;
-      this.animationFun()
+      this.animationFun();
     },
   },
 };
@@ -293,8 +293,10 @@ export default {
       -moz-box-shadow: inset 0 1px 10px 0.1px rgb(67, 149, 243, 0.1);
       -webkit-box-shadow: inset 0 1px 10px 0.1px rgb(67, 149, 243, 0.1);
       z-index: 20;
+      font-size: 0.175rem /* 14/80 */;
       .litInfo_title {
         justify-content: flex-start;
+        font-size: 0.2rem /* 16/80 */;
       }
       .litInfo_content {
         padding-top: 0.125rem /* 10/80 */;
@@ -314,7 +316,7 @@ export default {
         }
       }
       .litInfo_img {
-        .ioc_img(0.625rem /* 50/80 */, 0.625rem /* 50/80 */, 50%);
+        .ioc_img(0.625rem /* 50/80 */, 0.625rem /* 50/80 */, 50%) ;;
         object-fit: cover;
         margin-right: 0.25rem /* 20/80 */;
       }

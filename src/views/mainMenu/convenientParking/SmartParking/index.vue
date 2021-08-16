@@ -65,7 +65,7 @@
 export default {
   data() {
     return {
-      searchData:'\xa0\xa0\xa0\xa0\xa0\xa0\xa0',
+      searchData:'',
       arrList:['车牌','姓名','拉黑事由','操作'],
       currentPage: 1,
       pageSize: 11,
@@ -106,6 +106,8 @@ export default {
           name:'陈新-粤A00000',
           reason:'月卡欠费',
           num:'粤A00000',
+          id:0,
+          floor:'1'
         },
        
         {
@@ -114,7 +116,9 @@ export default {
           reason:'多次违规停车',
           reason:'月卡欠费',
           num:'粤AD367C',
-          id:2
+          id:2,
+          floor:'2'
+
           
         },
          {
@@ -122,8 +126,8 @@ export default {
           name:'吴泉洋-赣A8720B',
           reason:'多次违规停车',
           num:'赣A8720B',
- 
-          id:1
+          id:1,
+           floor:'3'
         },
         {
           url:require('@/assets/img/car_pic2.png'),
@@ -131,42 +135,54 @@ export default {
           reason:'多次违规停车',
           num:'赣B26354',
   
-          id:3
+          id:3,
+           floor:'1'
+
         },
          {
           url:require('@/assets/img/car_pic.png'),
           name:'罗灿-湘A45623',
           reason:'多次违规停车',
           num:'湘A45623',
-          id:4
+          id:4,
+           floor:'2'
+
         },
         {
           url:require('@/assets/img/car_pic1.png'),
           name:'余振-鄂JF358B',
           reason:'月卡欠费',
           num:'鄂JF358B',
-          id:5
+          id:5,
+           floor:'3'
+
         },
         {
           url:require('@/assets/img/car_pic2.png'),
           name:'赵伟-川AD367C',
           reason:'多次违规停车',
           num:'川AD367C',
-          id:6
+          id:6,
+           floor:'1'
+
         },
         {
           url:require('@/assets/img/car_pic2.png'),
           name:'龚玲-鄂CD3675',
           reason:'多次违规停车',
           num:'鄂CD3675',
-          id:7
+          id:7,
+           floor:'2'
+
         },
         {
           url:require('@/assets/img/car_pic2.png'),
           name:'黄智源-粤A23659',
           reason:'多次违规停车',
           num:'粤A23659',
-          id:8
+          id:8,
+           floor:'3'
+
         }
 
       ],
@@ -178,7 +194,6 @@ export default {
 
   methods: {
     search(val) {
-      this.resData=val
       this.getCarList(this.carList)
     },
     handleClick(val) {
@@ -207,49 +222,15 @@ export default {
       this.tableList = _data.slice(i, i + this.pageSize);
     },
     getCarList(list){
-     
+      this.searchData=this.$store.state.carNum
       this.carListRes=list.filter(item=>{
-              if(item.num===this.resData){   
-                this.$SendMessageToUnity("QueryCarExitRoute", {"index":item.id});  
-                return item
-              }
+        if(item.num===this.searchData){   
+            this.$SendMessageToUnity("QueryCarExitRoute", {"index":item.id,"floor":item.floor});  
+            return item
+        }
       })  
-      console.log(this.carListRes);
-      
-        // if(region ==undefined && letter== undefined && number== undefined  ){
-        //   this.carListRes=list
-        //   console.log(this.carListRes);
-        // }
-        // else if(region !==undefined && letter== undefined && number==undefined){
-        //   this.carListRes=list.filter(item=>{
-        //       if(item.region===region){
-        //         return item
-        //       }
-        // })
-        // }else if(region !==undefined && letter !== undefined && (number==undefined||number=='')){
-        //   console.log('333355555');
-        //    this.carListRes=list.filter(item=>{
-        //       if(item.region===region&&item.letter===letter){
-        //         return item
-        //       }
-        //    })
-        //    console.log(this.carListRes);
-        // }else if(region !==undefined && letter !== undefined && number !== undefined ){
-        //    this.carListRes=list.filter(item=>{
-        //       if(item.region===region&&item.letter===letter&&item.number===number){
-        //         return item
-        //       }
-        //    })
-        //    console.log(this.carListRes[0].id);
-  
-
-        // }
-        //         
- 
-        // console.log(this.carListRes,'this.carListRes');
-   
-      // }else{
-      // }
+     if(this.carListRes.length===0)
+        this.$message({ message: "未查询到车牌号", type: "error" });
 
     }
   },

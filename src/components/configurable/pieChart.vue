@@ -214,7 +214,7 @@ export default {
           name: optionName[i],
         };
       }
-      for (var n = data.value - 10; n <= data.value; n++) {
+      for (var n = data.value - 5; n <= data.value; n++) {
         if (n <= data.value) {
           option.baseOption.timeline.data.push(n);
           option.options.push({

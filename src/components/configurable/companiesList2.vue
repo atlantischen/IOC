@@ -66,7 +66,7 @@ export default {
       type: Object,
     },
   },
-  data () {
+  data() {
     return {
       ...this._data,
       ids: this.$uuid(),
@@ -75,42 +75,42 @@ export default {
       returnStyle: "",
       items: [],
       removeitem: null,
-      isShowAn: false
+      isShowAn: false,
     };
   },
   watch: {
     datas: {
-      handler (n, o) {
-        let _l = Math.ceil(n.companiesImgsListDatas.length / 8)
+      handler(n, o) {
+        let _l = Math.ceil(n.companiesImgsListDatas.length / 8);
         for (let i = 0; i < _l; i++) {
-          this.items[i] = n.companiesImgsListDatas.slice(i * 8, i * 8 + 8)
+          this.items[i] = n.companiesImgsListDatas.slice(i * 8, i * 8 + 8);
         }
       },
       deep: true,
-      immediate: true
-    }
+      immediate: true,
+    },
   },
-  mounted () {
-    this.animationFun()
+  mounted() {
+    this.animationFun();
   },
-  destroyed () {
-    clearInterval(this.timer)
-    this.timer = null
+  destroyed() {
+    clearInterval(this.timer);
+    this.timer = null;
   },
   methods: {
-    animationFun () {
-      let count = 6000
+    animationFun() {
+      let count = 6000;
       if (!this.timer) {
         this.timer = setInterval(() => {
-          this.isShowAn = true
-          this.add()
+          this.isShowAn = true;
+          this.add();
           if (this.items.length > 1) {
             setTimeout(() => {
-              this.remove()
-              this.isShowAn = false
+              this.remove();
+              this.isShowAn = false;
             }, 1000);
           }
-        }, count)
+        }, count);
       }
       if (!this.datas.buldingList) {
         this.$nextTick(() => {
@@ -118,7 +118,7 @@ export default {
         });
       }
     },
-    selectBuldingFun (key, val) {
+    selectBuldingFun(key, val) {
       this.leaveItemFun();
       switch (key) {
         case "B":
@@ -129,29 +129,29 @@ export default {
           break;
       }
     },
-    hoverItemFun (e, i) {
+    hoverItemFun(e, i) {
       console.log(i);
       this.showItem = i;
       this.returnStyle = `right:${window.screen.width -
         e.clientX}px;top:${e.clientY - 300}px`;
     },
-    leaveItemFun () {
+    leaveItemFun() {
       this.showItem = null;
     },
-    add () {
+    add() {
       if (this.items && this.items.length) {
         // console.log(this.removeitem)
         // const item = { ...this.removeitem[0] }
         // item.ix = this.nextNum++
         // this.items.push(item)
-        this.items.push(this.items[0])
+        this.items.push(this.items[0]);
       }
     },
-    remove () {
+    remove() {
       // this.removeitem = this.items.splice(0, 1)
-      this.items.splice(0, 1)
+      this.items.splice(0, 1);
       // console.log(this.removeitem)
-    }
+    },
   },
 };
 </script>
@@ -202,8 +202,10 @@ export default {
         -moz-box-shadow: inset 0 1px 10px 0.1px rgb(67, 149, 243, 0.1);
         -webkit-box-shadow: inset 0 1px 10px 0.1px rgb(67, 149, 243, 0.1);
         z-index: 3000;
+        font-size: 0.175rem /* 14/80 */;
         .litInfo_title {
           justify-content: flex-start;
+          font-size: 0.2rem /* 16/80 */;
         }
         .litInfo_content {
           padding-top: 0.125rem /* 10/80 */;
@@ -223,7 +225,7 @@ export default {
           }
         }
         .litInfo_img {
-          .ioc_img(0.625rem /* 50/80 */, 0.625rem /* 50/80 */, 50%);
+          .ioc_img(0.625rem /* 50/80 */, 0.625rem /* 50/80 */, 50%) ;;
           object-fit: cover;
           margin-right: 0.25rem /* 20/80 */;
         }

@@ -46,7 +46,6 @@
     <Tips :fade="fade"  :list="list"></Tips>
     <div class="search_box ioc_animated fadeInDownTop" :style="posationTop">
       <LicensePlateSearch
-      
         :searchData="searchData"
         @sevenCarNum="sevenCarNum"
         @eightCarNum="eightCarNum"
@@ -667,12 +666,17 @@ export default {
     eightCarNum(val){
       this.searchData=val
     },
-
+    // search(val){
+    //   if(val.substr(0, 1) == "&"){
+    //       this.$message({ message: "请输入车牌号", type: "error" });
+    //       return
+    //   }
+    //   // console.log(val,'search');
+    // },
     // search(val) {
     //   // console.log(val,'val');
     //   // let value = JSON.stringify(val);
     // },
-
     AssetsAndEquipment(val) {
       const { max, data } = val;
       const total = data.reduce((x, y) => x + y, 0);

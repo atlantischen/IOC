@@ -9,7 +9,6 @@
         @open="openDialog"
       >
         <div class="videoBox" ref="videoBoxRef">
-        
             <div class="video">
               <Player :dialogShow="dialogShow"   :monitorList="theParkServiceList" ></Player>
             </div>
