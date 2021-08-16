@@ -974,6 +974,7 @@ export default {
       -moz-box-shadow: inset 0 1px 10px 0.1px rgb(67, 149, 243, 0.1);
       -webkit-box-shadow: inset 0 1px 10px 0.1px rgb(67, 149, 243, 0.1);
       z-index: 20;
+      font-size: .175rem /* 14/80 */;
       .litInfo_title {
         justify-content: flex-start;
       }
