@@ -2,7 +2,7 @@ import axios from 'axios'
 import {
   ElMessage
 } from 'element-plus'
-
+import { setToken, getToken, removeToken } from '@/utils/token.js'
 import router from '../router'
 
 // import store from '../store'
@@ -18,14 +18,12 @@ const instance = axios.create({
 
 instance.interceptors.request.use(
   config => {
-
-    // let Bearer = getToken() || getCookie()
-    // let Bearer
-    // if (getToken()) Bearer = 'Bearer ' + getToken()
-    // config.headers['version'] = process.env.VUE_APP_Version;
-    // if (Bearer) {
-    //   config.headers.Authorization = Bearer
-    // }
+    let Bearer
+    if (getToken()) Bearer = 'bearer ' + getToken()
+    config.headers['version'] = process.env.VUE_APP_Version;
+    if (Bearer) {
+      config.headers.Authorization = Bearer
+    }
     return config
   },
   error => {

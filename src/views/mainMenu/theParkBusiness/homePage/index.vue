@@ -87,13 +87,17 @@
             <img
               :src="item.imgT"
               alt=""
-              @mouseenter="hoverItemFun($event, index, item.imgT,item.imgTDesc)"
+              @mouseenter="
+                hoverItemFun($event, index, item.imgT, item.imgTDesc)
+              "
               @mouseleave="leaveItemFun()"
             />
             <img
               :src="item.imgB"
               alt=""
-              @mouseenter="hoverItemFun($event, index, item.imgB,item.imgBDesc)"
+              @mouseenter="
+                hoverItemFun($event, index, item.imgB, item.imgBDesc)
+              "
               @mouseleave="leaveItemFun()"
             />
           </li>
@@ -101,22 +105,24 @@
         <div class="litInfo" :style="returnStyle" v-if="showItem">
           <div class="litInfo_title x_c">
             <img class="litInfo_img" :src="img_src" />
-            <span>{{imgDesc.name}}</span>
+            <span>{{ imgDesc.name }}</span>
           </div>
           <div class="litInfo_content">
             <p>
               <span>公司类型： </span
               ><span>
-               {{imgDesc.type}}
+                {{ imgDesc.type }}
               </span>
             </p>
             <p>
               <span>进驻日期：</span
               ><span>
-                {{imgDesc.time}}
+                {{ imgDesc.time }}
               </span>
             </p>
-            <p><span>公司简介：</span> <i>{{imgDesc.describe}}</i></p>
+            <p>
+              <span>公司简介：</span> <i>{{ imgDesc.describe }}</i>
+            </p>
           </div>
         </div>
       </div>
@@ -349,7 +355,7 @@ export default {
           },
         },
       ],
-      imgDesc:'',
+      imgDesc: "",
       waitList: [
         require("../../../../assets/img/入驻商家1.png"),
         require("../../../../assets/img/入驻商家2.png"),
@@ -778,24 +784,21 @@ export default {
       };
       this.$redomEchart(dom, option);
     },
-    hoverItemFun(e, i, src,desc) {
+    hoverItemFun(e, i, src, desc) {
       this.showItem = true;
       this.img_src = src;
-      this.imgDesc = desc
+      this.imgDesc = desc;
       console.log(
         window.screen.width - e.clientX,
         "window.screen.width -e.clientX"
       );
       this.returnStyle = `right:${window.screen.width -
         e.clientX}px;top:${e.clientY - 250}px`;
-        clearInterval(this.Imgtimer);
-
+      clearInterval(this.Imgtimer);
     },
     leaveItemFun() {
       this.showItem = false;
-    this.Imgtimer = setInterval(this.scrollAnimateImg, 2000);
-
-
+      this.Imgtimer = setInterval(this.scrollAnimateImg, 2000);
     },
   },
   created() {},
@@ -974,8 +977,10 @@ export default {
       -moz-box-shadow: inset 0 1px 10px 0.1px rgb(67, 149, 243, 0.1);
       -webkit-box-shadow: inset 0 1px 10px 0.1px rgb(67, 149, 243, 0.1);
       z-index: 20;
+      font-size: 0.175rem /* 14/80 */;
       .litInfo_title {
         justify-content: flex-start;
+        font-size: 0.2rem /* 16/80 */;
       }
       .litInfo_content {
         padding-top: 0.125rem /* 10/80 */;

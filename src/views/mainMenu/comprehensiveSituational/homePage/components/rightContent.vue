@@ -51,7 +51,6 @@
               <img v-else :src="imageUrl" class="avatar" />
             </el-upload>
             <button :class="{ m_disabled: !imageUrl }" @click="SearchPath()">
-              <!-- <button @click="SearchPath()"> -->
               搜寻轨迹
             </button>
           </div>
@@ -356,7 +355,7 @@ export default {
   },
   methods: {
     uploadImg(p) {
-      // const file = p.file,
+      const file = p.file;
       //   fileType = file.type,
       //   isImage = fileType.indexOf('image') != -1,
       //   isLt2M = file.size / 1024 / 1024 < 2
@@ -369,76 +368,27 @@ export default {
       //   return
       // }
 
-      // let fd = new FormData()
-      // fd.append('multipartFile', p.file)
-      // uploadImgApi(fd).then((r) => {
-      //   console.log(r)
-      // })
-
       const form = new FormData();
-      form.append("multipartFile", p.file);
-      this.imageUpload(form)
+      form.append("multipartFile", file);
+      uploadImgApi(form)
         .then((res) => {
           if (parseInt(res.data.code) === 200) {
-            this.img_src = "http://139.9.26.115:9999" + res.data.data;
-            console.log(this.img_src);
+            this.imageUrl = this.img_src =
+              "http://139.9.26.115:9999" + res.data.data;
           }
         })
         .catch(() => {});
-
-      // var url = 'http://139.9.26.115:28003/api/v1/admin/upload/upload_object'
-      // var form = new FormData()
-      // form.append('multipartFile', file)
-      // var xhr = new XMLHttpRequest()
-      // xhr.open('post', url, true)
-      // xhr.onload = uploadComplete //请求完成
-      // xhr.onerror = uploadFailed //请求失败
-      // xhr.upload.onprogress = progressFunction //上传进度
-      // xhr.upload.onloadstart = function() {
-      //   ot = new Date().getTime() //设置上传开始时间
-      //   oloaded = 0 //设置上传开始时，以上传的文件大小为0
-      // }
-      // xhr.send(form)
-      // xhr.onreadystatechange = function() {
-      //   console.log(xhr)
-      // if (xhr.readyState === 4 && xhr.status === 200) {
-      //   alert(xhr.responseText)
-      // }
-      // }
-    },
-    imageUpload(param) {
-      axios.defaults.baseURL = "http://139.9.26.115:28003/api/";
-      const url = "v1/admin/upload/upload_object";
-      return axios.post(url, param, {
-        headers: {
-          "content-type": "multipart/form-data",
-          // 'Access-Control-Allow-Origin': '*',
-        },
-      });
     },
     // 上传头像
     changeFile(file, fileList) {
-      // var url = 'http://139.9.26.115:28003/api/v1/admin/upload/upload_object'
-      // var form = new FormData()
-      // form.append('multipartFile', file)
-      // var xhr = new XMLHttpRequest()
-      // xhr.open('post', url, true)
-      // xhr.send(form)
-      // xhr.onreadystatechange = function() {
-      //   console.log(xhr)
-      //   if (xhr.readyState === 4 && xhr.status === 200) {
-      //     alert(xhr.responseText)
-      //   }
-      // }
-      var _that = this;
-      if (!file || !window.FileReader) return;
-      var reader = new FileReader();
-      reader.readAsDataURL(file.raw);
-      reader.onload = function(e) {
-        _that.imageUrl = reader.result;
-      };
+      // var _that = this;
+      // if (!file || !window.FileReader) return;
+      // var reader = new FileReader();
+      // reader.readAsDataURL(file.raw);
+      // reader.onload = function(e) {
+      //   _that.imageUrl = reader.result;
+      // };
     },
-    //
     showBlackListFun() {
       this.isFade = !this.isFade;
     },
@@ -455,12 +405,11 @@ export default {
     SearchPath() {
       if (this.imageUrl) {
         let _a = {
+          searchType: "custom",
           src: this.img_src,
         };
-        this.$SendMessageToUnity("ShowLocationPin", {
-          searchType: "custom",
-          ..._a,
-        });
+        this.$SendMessageToUnity("ShowLocationPin", _a);
+        console.log(_a.src);
         console.log("ShowLocationPin---搜寻轨迹------------");
       } else {
         this.$message.info("请传入搜寻对象图片！");

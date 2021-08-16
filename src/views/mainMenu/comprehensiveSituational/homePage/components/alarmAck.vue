@@ -261,7 +261,6 @@ export default {
         border-radius: 0;
         font-family: "Microsoft YaHei";
         font-size: 0.175rem /* 14/80 */;
-        padding: .25rem /* 20/80 */ 0;
       }
       .inputTextarea {
         width: 100%;
@@ -269,6 +268,7 @@ export default {
         padding: 0 15px;
         font-size: 0.175rem /* 14/80 */;
         resize: vertical;
+        padding: .1rem /* 8/80 */ .1875rem /* 15/80 */;
       }
     }
   }
