@@ -4,6 +4,8 @@
     <IOCLeft style="top:35%">
       <div class="play">
         <div class="tittle">实时采播</div>
+        <span class="desc" style="padding-left: 25px;margin-bottom:15px">(通过耳麦等拾音设备实时采集音频数据，传输至音箱、音柱等终端，进行广播)</span>
+
         <div class="btn">
           <div
             class="item"
@@ -20,10 +22,11 @@
             停止采播
           </div>
         </div>
-        <span class="desc" style="padding-left: 25px;">(通过耳麦等拾音设备实时采集音频数据，传输至音箱、音柱等终端，进行广播)</span>
       </div>
       <div class="file">
         <div class="tittle">文件广播</div>
+        <span class="desc" style="padding-left: 25px;">(将MP3等音频文件传输至音箱、音柱等终端，进行播放)</span>
+
         <div class="outline">
           <audio
             class="dn"
@@ -92,7 +95,6 @@
           <button @click="handleSContinue">继续播放</button>
           </div>
          
-        <span class="desc">(将MP3等音频文件传输至音箱、音柱等终端，进行播放)</span>
 
         </div>
       </div>
@@ -345,7 +347,7 @@ export default {
     display: flex;
     justify-content: space-around;
     .item {
-      width: 1.7625rem /* 141/80 */;
+      width: 2rem /* 160/80 */ /* 150/80 */ /* 141/80 */;
       height: 0.7125rem /* 57/80 */;
       background-color: #192939;
       border: 1px solid #4396f3;
@@ -505,7 +507,6 @@ export default {
   }
 
 .desc{
-  margin-top: .1875rem /* 15/80 */;
   color: #FFC659;
 }
 </style>

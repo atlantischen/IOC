@@ -4,8 +4,6 @@
 
 <script>
 import screenfull from "screenfull";
-import { loginApi } from "@/api/user";
-import { setToken } from "@/utils/token.js";
 export default {
   name: "App",
   data: function() {
@@ -50,17 +48,6 @@ export default {
     },
   },
   created() {
-    loginApi({
-      username: "17621210366",
-      password: "919999",
-      grant_type: "password",
-      client_id: "qxsmartcity-admin",
-      client_secret: "123456",
-    }).then((r) => {
-      if (r.data.code == 200) {
-        setToken(r.data.data.token);
-      }
-    });
   },
   mounted() {
     this.init();
