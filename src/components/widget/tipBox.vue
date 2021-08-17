@@ -43,8 +43,11 @@ export default {
   data() {
     return {
       timer: null,
+      timer2: null,
+      timerOut: null,
       isShow: this.$store.state.comState.showWarnTip,
-      audioSrc: require('@/assets/mp3/bing.mp3'),
+      // audioSrc: require('@/assets/mp3/消防警报.mp3'),
+      audioSrc: require('@/assets/mp3/叮叮警报.mp3'),
     }
   },
   watch: {
@@ -52,11 +55,7 @@ export default {
       handler(n) {
         this.isShow = n
         if (this.isShow) {
-          this.$nextTick(() => {
-            if (this.$refs.playMusic) {
-              this.onPlay()
-            }
-          })
+          this.openWran()
           setTimeout(() => {
             this.moveLeft()
           }, 500)
@@ -66,9 +65,7 @@ export default {
           )
         } else {
           this.$nextTick(() => {
-            if (this.$refs.playMusic) {
-              this.onPause()
-            }
+            this.onPause()
           })
         }
       },
@@ -132,6 +129,27 @@ export default {
     },
     onPause() {
       this.$refs.playMusic.pause()
+    },
+    openWran() {
+      this.timer2 = setInterval(() => {
+        this.$nextTick(() => {
+          if (this.$refs.playMusic) {
+            this.onPlay()
+          }
+        })
+        this.timerOut = setTimeout(() => {
+          clearInterval(this.timer2)
+          this.timer2 = null
+          this.$nextTick(() => {
+            if (this.$refs.playMusic) {
+              this.onPause()
+              clearTimeout(this.timerOut)
+              this.timerOut = null
+              this.openWran()
+            }
+          })
+        }, 30000)
+      }, 180000)
     },
   },
 }

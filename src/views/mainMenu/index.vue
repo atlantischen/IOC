@@ -37,7 +37,7 @@ export default {
   components: { AlarmAck, AllAlert },
   data() {
     return {
-      isShow: true,
+      isShow: false,
       showAlarmAck: false,
       showAllAlert: false,
       showEscHandler: false,
@@ -236,21 +236,14 @@ export default {
             text: '告警！2021-08-07 15:28:30 1期A座14F实验室',
           },
         ]
-        // {
-        //   SerialNum: 0,
-        //   EquipmentNum: "534080",
-        //   AlarmLocation: "实验车间",
-        //   AlarmType: "火警",
-        //   AlarmTime: "2021-05-27 15:28:30",
-        // }
         this.$store.dispatch('SET_SHOWWARNTIP', true)
         // }, this.$randomNumer(3000, 30000))
-        var timerOut = null
-        timerOut = setTimeout(() => {
-          this.clearWarnTimeFun()
-          this.warnTimeFun()
-        }, 15000)
-      }, 180000)
+        // var timerOut = null
+        // timerOut = setTimeout(() => {
+        //   this.clearWarnTimeFun()
+        //   this.warnTimeFun()
+        // }, 15000)
+      }, 120000)
     },
     clearWarnTimeFun() {
       clearInterval(this.warnTimer)
