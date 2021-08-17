@@ -19,9 +19,9 @@
 </template>
 
 <script>
-import * as echarts from "echarts";
+import * as echarts from 'echarts'
 export default {
-  name: "pedestrianPosture2All",
+  name: 'pedestrianPosture2All',
   props: {
     _data: {
       type: Object,
@@ -31,30 +31,30 @@ export default {
     return {
       ...this._data,
       ids: this.$uuid(),
-    };
+    }
   },
   created() {},
   mounted() {
-    this.pedestrianPosture2Fun(this.datas);
+    this.pedestrianPosture2Fun(this.datas)
   },
   methods: {
     // 人行态势
     pedestrianPosture2Fun(val) {
-      let { names, xData, datas, smooth, unit } = val;
+      let { names, xData, datas, smooth, unit } = val
       var allD = [],
         Linear = {
           0: [
-            { offset: 0, color: "rgb(255, 255, 255, 0.2)" },
-            { offset: 1, color: "rgb(255, 255, 255, 0)" },
+            { offset: 0, color: 'rgb(255, 255, 255, 0.2)' },
+            { offset: 1, color: 'rgb(255, 255, 255, 0)' },
           ],
           1: [
-            { offset: 0, color: "rgb(255, 180, 0, 0.2)" },
-            { offset: 1, color: "rgb(255, 221, 141, 0)" },
+            { offset: 0, color: 'rgb(255, 180, 0, 0.2)' },
+            { offset: 1, color: 'rgb(255, 221, 141, 0)' },
           ],
-        };
+        }
       for (var i = 0; i < datas.length; i++) {
         allD[i] = {
-          name: names ? names[i] : "",
+          name: names ? names[i] : '',
           data: datas[i],
           areaStyle: {
             show: false,
@@ -64,44 +64,44 @@ export default {
               ]),
             },
           },
-        };
+        }
       }
       var option = {
         tooltip: {
-          trigger: "axis",
+          trigger: 'axis',
           axisPointer: {
-            type: "line",
+            type: 'line',
             lineStyle: {
-              type: "dashed",
+              type: 'dashed',
               width: 0.5,
-              color: "rgba(255,255,255,0.8)",
+              color: 'rgba(255,255,255,0.8)',
             },
           },
-          backgroundColor: "rgba(0,0,0,0.8)",
+          backgroundColor: 'rgba(0,0,0,0.8)',
           borderWidth: 1,
-          borderColor: "#4396f3",
+          borderColor: '#4396f3',
           padding: [5, 10],
-          extraCssText: "box-shadow:inset 0 0 8px rgba(67, 149, 243, 0.6);",
+          extraCssText: 'box-shadow:inset 0 0 8px rgba(67, 149, 243, 0.6);',
           textStyle: {
-            color: "#fff",
+            color: '#fff',
           },
           formatter: (params) => {
-            console.log(params);
-            let dataStr = `<p style="font-weight:bold;text-align:center;">${params[0].name}</p>`;
+            console.log(params)
+            let dataStr = `<p style="font-weight:bold;text-align:center;">${params[0].name}</p>`
             params.forEach((item) => {
               dataStr += `<div>
                   <span style=" vertical-align: middle;margin-right:0.0625rem;width:0.15rem;height:0.025rem;background-color:${
                     item.color
                   };"></span>
                   <span> ${
-                    item.seriesName ? item.seriesName + ":" : item.seriesName
+                    item.seriesName ? item.seriesName + ':' : item.seriesName
                   } ${item.value}</span>
-                </div>`;
-            });
-            return dataStr;
+                </div>`
+            })
+            return dataStr
           },
         },
-        color: ["#fff", "#ffb400"],
+        color: ['#fff', '#ffb400'],
         grid: {
           x: 10,
           y: 30,
@@ -113,11 +113,11 @@ export default {
           show: names,
           right: 20,
           top: 0,
-          orient: "horizontal",
+          orient: 'horizontal',
           data: names,
-          icon: "rect", // circle, rect , roundRect, triangle, diamond, pin, arrow, none
+          icon: 'rect', // circle, rect , roundRect, triangle, diamond, pin, arrow, none
           textStyle: {
-            color: "#fff",
+            color: '#fff',
             fontSize: 12,
           },
           itemWidth: 15,
@@ -125,14 +125,14 @@ export default {
           itemGap: 20,
         },
         xAxis: {
-          type: "category",
-          name: "{a|" + unit[0] + "}",
+          type: 'category',
+          name: '{a|' + unit[0] + '}',
           nameGap: 20,
           nameTextStyle: {
             rich: {
               a: {
                 padding: [-30, 0, 0, -40],
-                color: "#fff",
+                color: '#fff',
               },
             },
           },
@@ -143,18 +143,18 @@ export default {
           },
           axisLine: {
             lineStyle: {
-              color: "rgb(255,255,255,0)",
+              color: 'rgb(255,255,255,0)',
             },
           },
           axisLabel: {
             fontSize: 12,
             padding: [15, 0, 0, 0],
             rotate: -35,
-            interval: "auto",
+            interval: 'auto',
             margin: 25,
             textStyle: {
-              color: "#fff",
-              align: "center",
+              color: '#fff',
+              align: 'center',
             },
           },
         },
@@ -170,25 +170,26 @@ export default {
             },
             splitLine: {
               lineStyle: {
-                type: "dashed",
-                color: "rgb(255,255,255,.5)",
+                type: 'dashed',
+                color: 'rgb(255,255,255,.5)',
                 width: 0.5,
               },
             },
             axisLine: {
               show: false,
               lineStyle: {
-                color: "#fff",
-                type: "dashed",
+                color: '#fff',
+                type: 'dashed',
               },
             },
           },
         ],
-        color: ["#fff", "#ffdd8d"],
+        color: ['#fff', '#ffdd8d'],
         series: allD.map((e) => {
           return {
             ...e,
-            type: "line",
+            type: 'line',
+            animationDuration: 3000,
             smooth: smooth ? smooth : true,
             itemStyle: {
               normal: {
@@ -199,23 +200,23 @@ export default {
             },
             symbolSize: 6,
             data: e.data,
-          };
+          }
         }),
-      };
+      }
       this.$redomEchart(
-        this.$refs["pedestrianPosture2Echart_" + this.ids],
+        this.$refs['pedestrianPosture2Echart_' + this.ids],
         option
-      );
+      )
     },
   },
-};
+}
 </script>
 
 <style lang="less" scoped>
-@import "~@/style/gl.less";
+@import '~@/style/gl.less';
 .pedestrianPosture2All {
   #pedestrianPosture2Echart_,
-  [id^="pedestrianPosture2Echart_"] {
+  [id^='pedestrianPosture2Echart_'] {
     width: 100%;
     height: 2.125rem /* 170/80 */;
   }

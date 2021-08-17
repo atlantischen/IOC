@@ -36,22 +36,23 @@ instance.interceptors.request.use(
 // 响应拦截
 instance.interceptors.response.use(
   response => {
-    const status = response.data.code
-    const msg = response.data.msg
-    switch (status) {
-      case '200':
-        return response
-      default:
-        // if (response.data.status == 1000) {
-        //   return response
-        // } else {
-        //   ElMessage.error({
-        //     dangerouslyUseHTMLString: true,
-        //     message: msg
-        //   })
-        // }
-        return response
-    }
+    // const status = response.data.code
+    // const msg = response.data.msg
+    // switch (status) {
+    //   case '200':
+    //     return response
+    //   default:
+    //     // if (response.data.status == 1000) {
+    //     //   return response
+    //     // } else {
+    //     //   ElMessage.error({
+    //     //     dangerouslyUseHTMLString: true,
+    //     //     message: msg
+    //     //   })
+    //     // }
+    //     return response
+    // }
+    return response
   },
   error => {
     console.log(error)

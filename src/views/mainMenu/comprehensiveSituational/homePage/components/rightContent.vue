@@ -83,10 +83,10 @@
                   ></div>
                   <div class="y_sa_rap">
                     <p class="LineBeyond">
-                      {{ item.name || "-" }}{{ item.phone ? "-" : ""
+                      {{ item.name || '-' }}{{ item.phone ? '-' : ''
                       }}{{ item.phone }}
                     </p>
-                    <p class="LineBeyond">{{ item.info || "-" }}</p>
+                    <p class="LineBeyond">{{ item.info || '-' }}</p>
                   </div>
                 </li>
               </ul>
@@ -101,10 +101,12 @@
     </LeftRight>
     <!-- 黑名单 -->
     <div
-      class="rightBtn"
+      class="rightBtn x_c"
       v-if="showLeftRight && !isFade"
       @click="showBlackListFun"
-    ></div>
+    >
+      <i class="el-icon-arrow-left"></i>
+    </div>
     <RightAlert :fade="isFade" class="rightblacklist">
       <div class="allBlacklist bigBar">
         <i class="rightArrow el-icon-arrow-right" @click="showBlackListFun"></i>
@@ -172,10 +174,10 @@
 </template>
 
 <script>
-import { uploadImgApi } from "@/api/upload.js";
-import axios from "axios";
+import { uploadImgApi } from '@/api/upload.js'
+import axios from 'axios'
 export default {
-  name: "rightContent",
+  name: 'rightContent',
   props: {
     inputVal: {
       type: String,
@@ -188,7 +190,7 @@ export default {
   data() {
     return {
       myHeaders: {
-        "Access-Control-Allow-Origin": "*",
+        'Access-Control-Allow-Origin': '*',
       },
       showLeftRight: false,
       currentPage: 1,
@@ -196,166 +198,166 @@ export default {
       isFade: false,
       imageUrl: null,
       img_src: null,
-      inputV: "",
+      inputV: '',
       isShowList: false,
       slist: null,
       slist2: [
         {
-          name: "阿桂嫂",
-          phone: "",
-          info: "梅龙路与金龙路交汇处",
-          src: require("@/assets/img/datas/qy_ags.png"),
-          srcName: "qy_ags.png",
+          name: '阿桂嫂',
+          phone: '',
+          info: '梅龙路与金龙路交汇处',
+          src: require('@/assets/img/datas/qy_ags.png'),
+          srcName: 'qy_ags.png',
         },
         {
-          name: "麦丹劳",
-          phone: "",
-          info: "2栋B座1088号商铺",
-          src: require("@/assets/img/datas/qy_kfc.png"),
-          srcName: "qy_kfc.png",
+          name: '麦丹劳',
+          phone: '',
+          info: '2栋B座1088号商铺',
+          src: require('@/assets/img/datas/qy_kfc.png'),
+          srcName: 'qy_kfc.png',
         },
         {
-          name: "真功夫",
-          phone: "",
-          info: "1栋A座3014号商铺",
-          src: require("@/assets/img/datas/qy_zgf.png"),
-          srcName: "qy_zgf.png",
+          name: '真功夫',
+          phone: '',
+          info: '1栋A座3014号商铺',
+          src: require('@/assets/img/datas/qy_zgf.png'),
+          srcName: 'qy_zgf.png',
         },
         {
-          name: "深圳奇信智能科技有限公司",
-          phone: "",
-          info: "海纳百川B座16F",
-          src: require("@/assets/img/datas/qy_qx.png"),
-          srcName: "qy_qx.png",
+          name: '深圳奇信智能科技有限公司',
+          phone: '',
+          info: '海纳百川B座16F',
+          src: require('@/assets/img/datas/qy_qx.png'),
+          srcName: 'qy_qx.png',
         },
       ],
       tableData: [],
       tableData2: [
         {
-          src: require("@/assets/img/datas/p_1.png"),
-          srcName: "p_1.png",
-          name: "李玲",
-          info: "涉嫌诈骗",
+          src: require('@/assets/img/datas/p_1.png'),
+          srcName: 'p_1.png',
+          name: '李玲',
+          info: '涉嫌诈骗',
         },
         {
-          src: require("@/assets/img/datas/p_2.png"),
-          srcName: "p_2.png",
-          name: "陈新",
-          info: "逃避缴费",
+          src: require('@/assets/img/datas/p_2.png'),
+          srcName: 'p_2.png',
+          name: '陈新',
+          info: '逃避缴费',
         },
         {
-          src: require("@/assets/img/datas/p_3.png"),
-          srcName: "p_3.png",
-          name: "韦孟",
-          info: "从事传销活动",
+          src: require('@/assets/img/datas/p_3.png'),
+          srcName: 'p_3.png',
+          name: '韦孟',
+          info: '从事传销活动',
         },
         {
-          src: require("@/assets/img/datas/p_4.png"),
-          srcName: "p_4.png",
-          name: "李建华",
-          info: "散播谣言",
+          src: require('@/assets/img/datas/p_4.png'),
+          srcName: 'p_4.png',
+          name: '李建华',
+          info: '散播谣言',
         },
         {
-          src: require("@/assets/img/datas/p_5.png"),
-          srcName: "p_5.png",
-          name: "肖海辉",
-          info: "涉嫌诈骗",
+          src: require('@/assets/img/datas/p_5.png'),
+          srcName: 'p_5.png',
+          name: '肖海辉',
+          info: '涉嫌诈骗',
         },
         {
-          src: require("@/assets/img/datas/p_6.png"),
-          srcName: "p_6.png",
-          name: "徐高鹏",
-          info: "逃避缴费",
+          src: require('@/assets/img/datas/p_6.png'),
+          srcName: 'p_6.png',
+          name: '徐高鹏',
+          info: '逃避缴费',
         },
         {
-          src: require("@/assets/img/datas/p_7.png"),
-          srcName: "p_7.png",
-          name: "韦炳佐",
-          info: "从事传销活动",
+          src: require('@/assets/img/datas/p_7.png'),
+          srcName: 'p_7.png',
+          name: '韦炳佐',
+          info: '从事传销活动',
         },
         {
-          src: require("@/assets/img/datas/p_8.png"),
-          srcName: "p_8.png",
-          name: "瞿德志",
-          info: "散播谣言",
+          src: require('@/assets/img/datas/p_8.png'),
+          srcName: 'p_8.png',
+          name: '瞿德志',
+          info: '散播谣言',
         },
         {
-          src: require("@/assets/img/datas/p_9.png"),
-          srcName: "p_9.png",
-          name: "陈荣",
-          info: "涉嫌诈骗",
+          src: require('@/assets/img/datas/p_9.png'),
+          srcName: 'p_9.png',
+          name: '陈荣',
+          info: '涉嫌诈骗',
         },
         {
-          src: require("@/assets/img/datas/p_10.png"),
-          srcName: "p_10.png",
-          name: "周志军",
-          info: "逃避缴费",
+          src: require('@/assets/img/datas/p_10.png'),
+          srcName: 'p_10.png',
+          name: '周志军',
+          info: '逃避缴费',
         },
         {
-          src: require("@/assets/img/datas/p_11.png"),
-          srcName: "p_11.png",
-          name: "张颖",
-          info: "从事传销活动",
+          src: require('@/assets/img/datas/p_11.png'),
+          srcName: 'p_11.png',
+          name: '张颖',
+          info: '从事传销活动',
         },
         {
-          src: require("@/assets/img/datas/p_12.png"),
-          srcName: "p_12.png",
-          name: "杨靓",
-          info: "散播谣言",
+          src: require('@/assets/img/datas/p_12.png'),
+          srcName: 'p_12.png',
+          name: '杨靓',
+          info: '散播谣言',
         },
         {
-          src: require("@/assets/img/datas/p_13.png"),
-          srcName: "p_13.png",
-          name: "徐清",
-          info: "涉嫌诈骗",
+          src: require('@/assets/img/datas/p_13.png'),
+          srcName: 'p_13.png',
+          name: '徐清',
+          info: '涉嫌诈骗',
         },
         {
-          src: require("@/assets/img/datas/p_14.png"),
-          srcName: "p_14.png",
-          name: "方明",
-          info: "逃避缴费",
+          src: require('@/assets/img/datas/p_14.png'),
+          srcName: 'p_14.png',
+          name: '方明',
+          info: '逃避缴费',
         },
         {
-          src: require("@/assets/img/datas/p_15.png"),
-          srcName: "p_15.png",
-          name: "李景",
-          info: "从事传销活动",
+          src: require('@/assets/img/datas/p_15.png'),
+          srcName: 'p_15.png',
+          name: '李景',
+          info: '从事传销活动',
         },
         {
-          src: require("@/assets/img/datas/p_16.png"),
-          srcName: "p_16.png",
-          name: "廖明",
-          info: "散播谣言",
+          src: require('@/assets/img/datas/p_16.png'),
+          srcName: 'p_16.png',
+          name: '廖明',
+          info: '散播谣言',
         },
         {
-          src: require("@/assets/img/datas/p_17.png"),
-          srcName: "p_17.png",
-          name: "顾宇",
-          info: "从事传销活动",
+          src: require('@/assets/img/datas/p_17.png'),
+          srcName: 'p_17.png',
+          name: '顾宇',
+          info: '从事传销活动',
         },
       ],
-    };
+    }
   },
   watch: {
     inputVal: {
       handler(n) {
-        this.inputV = n;
+        this.inputV = n
       },
       deep: true,
     },
     _show: {
       handler(n) {
-        this.showLeftRight = n;
+        this.showLeftRight = n
       },
     },
   },
   mounted() {
-    this.total = this.tableData2.length;
-    this.changeDatasFun();
+    this.total = this.tableData2.length
+    this.changeDatasFun()
   },
   methods: {
     uploadImg(p) {
-      const file = p.file;
+      const file = p.file
       //   fileType = file.type,
       //   isImage = fileType.indexOf('image') != -1,
       //   isLt2M = file.size / 1024 / 1024 < 2
@@ -368,16 +370,16 @@ export default {
       //   return
       // }
 
-      const form = new FormData();
-      form.append("multipartFile", file);
+      const form = new FormData()
+      form.append('multipartFile', file)
       uploadImgApi(form)
         .then((res) => {
           if (parseInt(res.data.code) === 200) {
             this.imageUrl = this.img_src =
-              "http://139.9.26.115:9999" + res.data.data;
+              'http://139.9.26.115:9999' + res.data.data
           }
         })
-        .catch(() => {});
+        .catch(() => {})
     },
     // 上传头像
     changeFile(file, fileList) {
@@ -390,74 +392,76 @@ export default {
       // };
     },
     showBlackListFun() {
-      this.isFade = !this.isFade;
+      this.isFade = !this.isFade
     },
     searchList(val) {
-      this.inputV = val;
+      this.inputV = val
       // if (!val) {
       //   return this.$message.error("请输入关键词！")
       // } else {
-      this.slist = this.slist2;
+      this.slist = this.slist2
       // }
-      this.isShowList = !this.isShowList;
+      this.isShowList = !this.isShowList
     },
     // 搜索轨迹
     SearchPath() {
       if (this.imageUrl) {
         let _a = {
-          searchType: "custom",
+          searchType: 'custom',
           src: this.img_src,
-        };
-        this.$SendMessageToUnity("ShowLocationPin", _a);
-        console.log(_a.src);
-        console.log("ShowLocationPin---搜寻轨迹------------");
+        }
+        this.$SendMessageToUnity('ShowLocationPin', _a)
+        console.log(_a.src)
+        console.log('ShowLocationPin---搜寻轨迹------------')
       } else {
-        this.$message.info("请传入搜寻对象图片！");
+        this.$message.info('请传入搜寻对象图片！')
       }
     },
     searchOneItem(val) {
-      let _a = JSON.parse(JSON.stringify(this.slist2[val]));
-      _a.src = _a.srcName;
+      let _a = JSON.parse(JSON.stringify(this.slist2[val]))
+      _a.src = _a.srcName
       // console.log(_a)
-      this.$SendMessageToUnity("ShowLocationPin", {
+      this.$SendMessageToUnity('ShowLocationPin', {
         Serial: val,
-        searchType: "shops",
+        searchType: 'shops',
         ..._a,
-      });
-      console.log("ShowLocationPin--商家、企业------------", val);
+      })
+      console.log('ShowLocationPin--商家、企业------------', val)
     },
     zhuizongFun(val, i) {
-      let _a = JSON.parse(JSON.stringify(val));
-      _a.src = _a.srcName;
-      console.log(this.currentPage > 1 ? (this.currentPage - 1) * 10 + i : i);
-      this.$SendMessageToUnity("ShowLocationPin", {
+      let _a = JSON.parse(JSON.stringify(val))
+      _a.src = _a.srcName
+      console.log(this.currentPage > 1 ? (this.currentPage - 1) * 10 + i : i)
+      this.$SendMessageToUnity('ShowLocationPin', {
         Serial: this.currentPage > 1 ? (this.currentPage - 1) * 10 + i : i,
         ..._a,
-      });
-      console.log("ShowLocationPin-----跟踪------------");
+      })
+      console.log('ShowLocationPin-----跟踪------------')
     },
     back() {
-      this.$emit("_c", null);
+      this.$SendMessageToUnity('OnBackBtnClick', {})
+      console.log('OnBackBtnClick-----退出追踪------------')
+      this.$emit('_c', null)
     },
     // 模拟分页
     changeDatasFun() {
-      let _data = JSON.parse(JSON.stringify(this.tableData2));
-      let _first = (this.currentPage - 1) * 10;
-      this.tableData = _data.slice(_first, _first + 10);
+      let _data = JSON.parse(JSON.stringify(this.tableData2))
+      let _first = (this.currentPage - 1) * 10
+      this.tableData = _data.slice(_first, _first + 10)
     },
     handleSizeChange(val) {
-      console.log(`每页 ${val} 条`);
+      console.log(`每页 ${val} 条`)
     },
     handleCurrentChange(val) {
-      this.currentPage = val;
-      this.changeDatasFun();
+      this.currentPage = val
+      this.changeDatasFun()
     },
   },
-};
+}
 </script>
 
 <style lang="less" scoped>
-@import "~@/style/gl.less";
+@import '~@/style/gl.less';
 .rightContent {
   .leftSearch {
     width: 4.15rem /* 332/80 */;
@@ -620,13 +624,17 @@ export default {
     position: fixed;
     right: 0;
     top: 30%;
-    width: 0.125rem /* 10/80 */;
+    width: 0.1875rem /* 15/80 */;
     height: 2.5rem /* 200/80 */;
-    background: rgba(0, 0, 0, 0.2);
+    // background: rgba(0, 0, 0, 0.2);
+    background: #4395f3;
+    opacity: 0.3;
     z-index: 103;
     cursor: pointer;
+    border-radius: 0.0625rem /* 5/80 */ 0 0 0.0625rem /* 5/80 */;
     &:hover {
-      background: rgba(0, 0, 0, 0.8);
+      // background: rgba(0, 0, 0, 0.8);
+      opacity: 0.8;
     }
   }
   .rightblacklist {

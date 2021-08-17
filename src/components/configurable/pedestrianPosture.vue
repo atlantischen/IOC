@@ -21,61 +21,61 @@
 </template>
 
 <script>
-import * as echarts from "echarts";
+import * as echarts from 'echarts'
 export default {
-  name: "pedestrianPostureAll",
+  name: 'pedestrianPostureAll',
   props: {
     _data: {
       type: Object,
     },
   },
-  data () {
+  data() {
     return {
       ...this._data,
       ids: this.$uuid(),
-    };
+    }
   },
-  created () { },
-  mounted () {
-    this.pedestrianPostureFun(this.datas);
+  created() {},
+  mounted() {
+    this.pedestrianPostureFun(this.datas)
   },
   methods: {
-    changePSYears2 (val) {
-      console.log(val);
-      this.pedestrianPostureFun(this.datas);
+    changePSYears2(val) {
+      console.log(val)
+      this.pedestrianPostureFun(this.datas)
     },
     // 人行态势
-    pedestrianPostureFun (val) {
-      if (this.title == "服务办理总数") {
-        let _l = this.datas.xData.length;
-        this.datas.datas[0] = [];
+    pedestrianPostureFun(val) {
+      if (this.title == '服务办理总数') {
+        let _l = this.datas.xData.length
+        this.datas.datas[0] = []
         for (let i = 0; i < _l; i++) {
-          this.datas.datas[0].push(this.$randomNumer(400, 700));
+          this.datas.datas[0].push(this.$randomNumer(400, 700))
         }
-        this.datas.leftTip.value = this.$arrAdd(this.datas.datas[0]);
+        this.datas.leftTip.value = this.$arrAdd(this.datas.datas[0])
       }
-      let { names, xData, datas, smooth, unit, rightTip, leftTip, yMax } = val;
+      let { names, xData, datas, smooth, unit, rightTip, leftTip, yMax } = val
       var allD = [],
-        color = ["#97c8ff", "#ffdd8d"],
-        color2 = ["#fff", "#ffdd8d"],
+        color = ['#97c8ff', '#ffdd8d'],
+        color2 = ['#fff', '#ffdd8d'],
         Linear = [
           [
-            { offset: 0, color: "rgb(255, 255, 255, 0.2)" },
-            { offset: 1, color: "rgb(255, 255, 255, 0)" },
+            { offset: 0, color: 'rgb(255, 255, 255, 0.2)' },
+            { offset: 1, color: 'rgb(255, 255, 255, 0)' },
           ],
           [
-            { offset: 0, color: "rgb(255, 180, 0, 0.2)" },
-            { offset: 1, color: "rgb(255, 221, 141, 0)" },
+            { offset: 0, color: 'rgb(255, 180, 0, 0.2)' },
+            { offset: 1, color: 'rgb(255, 221, 141, 0)' },
           ],
-        ];
+        ]
       if (!names) {
-        color = color.reverse();
-        color2 = color2.reverse();
-        Linear = Linear.reverse();
+        color = color.reverse()
+        color2 = color2.reverse()
+        Linear = Linear.reverse()
       }
       for (var i = 0; i < datas.length; i++) {
         allD[i] = {
-          name: names ? names[i] : "",
+          name: names ? names[i] : '',
           smooth: smooth,
           areaStyle: {
             normal: {
@@ -92,99 +92,103 @@ export default {
           data: datas[i].map((e, j) => {
             return {
               value: xData[j] ? e : null,
-              symbol: j != datas[i].length - 1 ? "none" : "",
+              symbol: j != datas[i].length - 1 ? 'none' : '',
               itemStyle: {
                 normal: {
                   color: color[i],
                 },
               },
-            };
+            }
           }),
-        };
+        }
       }
       var option = {
         tooltip: {
-          trigger: "axis",
+          trigger: 'axis',
           axisPointer: {
-            type: "line",
+            type: 'line',
             lineStyle: {
-              type: "dashed",
+              type: 'dashed',
               width: 0.5,
-              color: "rgba(255,255,255,0.8)",
+              color: 'rgba(255,255,255,0.8)',
             },
           },
-          backgroundColor: "rgba(0,0,0,0.8)",
+          backgroundColor: 'rgba(0,0,0,0.8)',
           borderWidth: 1,
-          borderColor: "#4396f3",
+          borderColor: '#4396f3',
           padding: [5, 10],
-          extraCssText: "box-shadow:inset 0 0 8px rgba(67, 149, 243, 0.6);",
+          extraCssText: 'box-shadow:inset 0 0 8px rgba(67, 149, 243, 0.6);',
           textStyle: {
-            color: "#fff",
+            color: '#fff',
           },
           formatter: (params) => {
-            let dataStr = `<p style="font-weight:bold;text-align:center;">${params[0].name}</p>`;
+            let dataStr = `<p style="font-weight:bold;text-align:center;">${params[0].name}</p>`
             params.forEach((item) => {
               dataStr += `<div>
-                  <span style=" vertical-align: middle;margin-right:0.0625rem;width:0.15rem;height:0.025rem;background-color:${item.color
-                };"></span>
-                  <span> ${item.seriesName ? item.seriesName + ":" : item.seriesName
-                }${item.data.value}</span>
-                </div>`;
-            });
-            return dataStr;
+                  <span style=" vertical-align: middle;margin-right:0.0625rem;width:0.15rem;height:0.025rem;background-color:${
+                    item.color
+                  };"></span>
+                  <span> ${
+                    item.seriesName ? item.seriesName + ':' : item.seriesName
+                  }${item.data.value}</span>
+                </div>`
+            })
+            return dataStr
           },
         },
         title: [
           {
             show: rightTip ? true : false,
-            text: "",
-            link: "",
+            text: '',
+            link: '',
             target: null,
-            subtext: `${rightTip ? rightTip.name : ""}${rightTip ? rightTip.value : ""
-              }`,
-            sublink: "",
+            subtext: `${rightTip ? rightTip.name : ''}${
+              rightTip ? rightTip.value : ''
+            }`,
+            sublink: '',
             subtarget: null,
-            right: "-10",
-            top: "-10",
-            textAlign: "center",
+            right: '-10',
+            top: '-10',
+            textAlign: 'center',
             textStyle: {
-              fontFamily: "BYfont",
+              fontFamily: 'BYfont',
               fontSize: 24,
               padding: [2, 0],
               fontWeight: 550,
-              color: "#fff",
+              color: '#fff',
             },
             subtextStyle: {
               fontSize: 12,
-              color: "#fff",
+              color: '#fff',
             },
           },
           {
             show: leftTip ? true : false,
-            text: `{c|${leftTip ? leftTip.name : ""}}{a|${leftTip ? leftTip.value : ""
-              }}{b|${leftTip ? leftTip.unit : ""}}`,
-            link: "",
+            text: `{c|${leftTip ? leftTip.name : ''}}{a|${
+              leftTip ? leftTip.value : ''
+            }}{b|${leftTip ? leftTip.unit : ''}}`,
+            link: '',
             target: null,
-            subtext: "",
-            sublink: "",
+            subtext: '',
+            sublink: '',
             subtarget: null,
-            left: "1%",
-            top: "0%",
-            textAlign: "left",
+            left: '1%',
+            top: '0%',
+            textAlign: 'left',
             itemGap: 6,
             textStyle: {
               rich: {
                 c: {
                   fontSize: 14,
-                  color: "rgb(255,255,255,.7)",
+                  color: 'rgb(255,255,255,.7)',
                 },
                 a: {
-                  color: "#fff",
-                  fontFamily: "BYfont",
+                  color: '#fff',
+                  fontFamily: 'BYfont',
                   fontSize: 20,
                 },
                 b: {
-                  color: "#fff",
+                  color: '#fff',
                   padding: [0, 0, 8, 3],
                   fontSize: 12,
                 },
@@ -203,11 +207,11 @@ export default {
           show: names,
           right: 20,
           top: 0,
-          orient: "horizontal",
+          orient: 'horizontal',
           data: names,
-          icon: "rect", // circle, rect , roundRect, triangle, diamond, pin, arrow, none
+          icon: 'rect', // circle, rect , roundRect, triangle, diamond, pin, arrow, none
           textStyle: {
-            color: "#fff",
+            color: '#fff',
             fontSize: 12,
           },
           itemWidth: 15,
@@ -216,14 +220,14 @@ export default {
         },
         color: color2,
         xAxis: {
-          type: "category",
-          name: "{a|" + unit[0] + "}",
+          type: 'category',
+          name: '{a|' + (unit ? unit[0] : '') + '}',
           // nameGap: 20,
           nameTextStyle: {
             rich: {
               a: {
                 padding: [-30, 0, 0, -40],
-                color: "#fff",
+                color: '#fff',
               },
             },
           },
@@ -234,7 +238,7 @@ export default {
           },
           axisLine: {
             lineStyle: {
-              color: "rgb(255,255,255,0)",
+              color: 'rgb(255,255,255,0)',
             },
           },
           axisLabel: {
@@ -244,14 +248,14 @@ export default {
             // interval: "auto",
             margin: xData[0].length <= 3 ? 15 : 35,
             textStyle: {
-              color: "#fff",
-              align: "center",
+              color: '#fff',
+              align: 'center',
             },
           },
         },
         yAxis: [
           {
-            name: unit[1],
+            name: unit ? unit[1] : '',
             nameTextStyle: {
               padding: [5, 0, 0, -30],
             },
@@ -262,44 +266,44 @@ export default {
             max: yMax ? yMax : null,
             splitLine: {
               lineStyle: {
-                type: "dashed",
-                color: "rgb(255,255,255,.5)",
+                type: 'dashed',
+                color: 'rgb(255,255,255,.5)',
                 width: 0.5,
               },
             },
             axisLine: {
               show: false,
               lineStyle: {
-                color: "#fff",
-                type: "dashed",
+                color: '#fff',
+                type: 'dashed',
               },
             },
           },
         ],
         series: allD.map((e) => {
           return {
-            type: "line",
+            type: 'line',
             symbolSize: 6,
             ...e,
             animationDuration: 2000,
-          };
+          }
         }),
-      };
+      }
       this.$redomEchart(
-        this.$refs["pedestrianPostureEchart_" + this.ids],
+        this.$refs['pedestrianPostureEchart_' + this.ids],
         option
-      );
+      )
     },
   },
-};
+}
 </script>
 
 <style lang="less" scoped>
-@import "~@/style/gl.less";
+@import '~@/style/gl.less';
 // 人行态势
 .pedestrianPostureAll {
   #pedestrianPostureEchart_,
-  [id^="pedestrianPostureEchart_"] {
+  [id^='pedestrianPostureEchart_'] {
     width: 100%;
     height: 2.125rem /* 170/80 */;
   }

@@ -30,19 +30,19 @@
 </template>
 
 <script>
-import AllAlert from "@/components/widget/allAlert.vue";
-import AlarmAck from "@/views/mainMenu/comprehensiveSituational/homePage/components/alarmAck.vue";
+import AllAlert from '@/components/widget/allAlert.vue'
+import AlarmAck from '@/views/mainMenu/comprehensiveSituational/homePage/components/alarmAck.vue'
 export default {
-  name: "MainMenu",
+  name: 'MainMenu',
   components: { AlarmAck, AllAlert },
   data() {
     return {
-      isShow: false,
+      isShow: true,
       showAlarmAck: false,
       showAllAlert: false,
       showEscHandler: false,
       allAlertDatas: null,
-      url: "",
+      url: '',
       warnTimer: null,
       tipList: null,
       centerDatas: [],
@@ -50,33 +50,33 @@ export default {
       videoList: [
         {
           id: this.$uuid(),
-          url: "",
+          url: '',
         },
       ],
-    };
+    }
   },
   computed: {
     getUnityData() {
-      return this.$store.state.unitySendData;
+      return this.$store.state.unitySendData
     },
   },
   watch: {
     getUnityData(val) {
       // debugger;
-      let res = val;
+      let res = val
       try {
-        if (res.action.indexOf("/") === 0) {
-          if (res.action === "/greenEnergyEfficiency/building/codesource") {
-            this.$store.commit("setActiveIndex", 0);
+        if (res.action.indexOf('/') === 0) {
+          if (res.action === '/greenEnergyEfficiency/building/codesource') {
+            this.$store.commit('setActiveIndex', 0)
           }
-          this.$router.push(res.action);
+          this.$router.push(res.action)
         }
       } catch (e) {}
     },
-    "$store.state.comState.centerDatas": {
+    '$store.state.comState.centerDatas': {
       handler(n) {
         if (n) {
-          this.centerDatas = n;
+          this.centerDatas = n
         }
       },
       immediate: true,
@@ -84,158 +84,158 @@ export default {
     isShow: {
       handler(n) {
         if (n) {
-          this.warnTimeFun();
+          this.warnTimeFun()
         }
       },
       immediate: true,
     },
   },
   beforeCreate() {
-    this.$store.dispatch("SET_SHOWWARNTIP", false);
-    if (process.env.NODE_ENV === "production") {
-      this.$router.push("/comprehensiveSituational/homePage");
+    this.$store.dispatch('SET_SHOWWARNTIP', false)
+    if (process.env.NODE_ENV === 'production') {
+      this.$router.push('/comprehensiveSituational/homePage')
     }
   },
   created() {
-    this.$store.commit("SET_CENTERDATAS", [false, null]);
+    this.$store.commit('SET_CENTERDATAS', [false, null])
     if (window.vuplex) {
-      this.addMessageListener();
+      this.addMessageListener()
     } else {
-      window.addEventListener("vuplexready", this.addMessageListener);
+      window.addEventListener('vuplexready', this.addMessageListener)
     }
-    window.addEventListener("message", (event) => {
+    window.addEventListener('message', (event) => {
       if (
-        (typeof event.data == "string" && event.data.indexOf("data") != -1) ||
-        (typeof event.data == "object" && event.data.data != undefined)
+        (typeof event.data == 'string' && event.data.indexOf('data') != -1) ||
+        (typeof event.data == 'object' && event.data.data != undefined)
       ) {
-        let res = JSON.parse(event.data);
-        this.$store.commit("setData", res);
-        if (res.data === "IOCHOME") {
-          this.isShow = true;
-        } else if (res.action === "hide") {
-          this.clearWarnTimeFun();
-          this.isShow = false;
-          this.hideGlobal(false);
-        } else if (res.action === "OpenMonitorOrCamera") {
-          this.monitorVisible = true;
-          this.videoList[0].url = res.data;
-          console.log(this.monitorVisible, this.videoList, "this.videoList");
+        let res = JSON.parse(event.data)
+        this.$store.commit('setData', res)
+        if (res.data === 'IOCHOME') {
+          this.isShow = true
+        } else if (res.action === 'hide') {
+          this.clearWarnTimeFun()
+          this.isShow = false
+          this.hideGlobal(false)
+        } else if (res.action === 'OpenMonitorOrCamera') {
+          this.monitorVisible = true
+          this.videoList[0].url = res.data
+          console.log(this.monitorVisible, this.videoList, 'this.videoList')
           // 设备
           // this.fade = false;
           // this.deviceShow = true;
-        } else if (res.action === "OnAlarmProcessingBtnClick") {
+        } else if (res.action === 'OnAlarmProcessingBtnClick') {
           // 确认报警
-          this.showAlarmAck = true;
-        } else if (res.action === "OpenWarningMessagePage") {
+          this.showAlarmAck = true
+        } else if (res.action === 'OpenWarningMessagePage') {
           // 报警列表
-          this.showAllAlert = true;
-          this.allAlertDatas = res.data.Datas;
-        } else if (res.action === "Enter3DFullScreen") {
+          this.showAllAlert = true
+          this.allAlertDatas = res.data.Datas
+        } else if (res.action === 'Enter3DFullScreen') {
           // 3D全屏
-          this.showEscHandler = true;
+          this.showEscHandler = true
           if (this.checkFull()) {
-            this.hideGlobal(false);
-            this.clearWarnTimeFun();
-            this.isShow = false;
-            return;
+            this.hideGlobal(false)
+            this.clearWarnTimeFun()
+            this.isShow = false
+            return
           }
-          this.clearWarnTimeFun();
-          this.$handleFullScreen();
-          this.hideGlobal(false);
-          this.isShow = false;
-        } else if (res.data === "esc") {
+          this.clearWarnTimeFun()
+          this.$handleFullScreen()
+          this.hideGlobal(false)
+          this.isShow = false
+        } else if (res.data === 'esc') {
           // 退出3D全屏
           // this.Exit3DFullScreen()
         }
       }
-    });
-    if (this.getQueryString("debug")) {
-      this.url = "";
-      window.debug = true;
+    })
+    if (this.getQueryString('debug')) {
+      this.url = ''
+      window.debug = true
     } else {
-      this.url = process.env.VUE_APP_UNITY;
+      this.url = process.env.VUE_APP_UNITY
       // this.url = 'http://183.62.170.2:8110';
     }
   },
   mounted() {
     this.$nextTick(() => {
-      window.iframe = this.$refs.iframe;
-      var _that = this;
-      window.addEventListener("resize", function() {
+      window.iframe = this.$refs.iframe
+      var _that = this
+      window.addEventListener('resize', function() {
         // var isFull =
         //   document.fullscreenElement ||
         //   document.mozFullScreenElement ||
         //   document.webkitFullscreenElement;
         // if (isFull == undefined) isFull = false;
-        console.log("isFull", _that.checkFull());
-        var isFull = _that.checkFull();
+        console.log('isFull', _that.checkFull())
+        var isFull = _that.checkFull()
         // console.log(!isFull, _that.showEscHandler);
         if (!isFull && _that.showEscHandler) {
           // 全屏下按键esc
-          _that.Exit3DFullScreen();
+          _that.Exit3DFullScreen()
         }
-      });
-    });
+      })
+    })
   },
   beforeDestroy() {
-    this.clearWarnTimeFun();
+    this.clearWarnTimeFun()
   },
   methods: {
     getQueryString(name) {
-      var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
-      var r = window.location.search.substr(1).match(reg);
-      if (r != null) return unescape(r[2]);
-      return null;
+      var reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)', 'i')
+      var r = window.location.search.substr(1).match(reg)
+      if (r != null) return unescape(r[2])
+      return null
     },
     addMessageListener() {
-      window.vuplex.addEventListener("message", (event) => {
-        console.log(event.data);
-        let res = JSON.parse(event.data);
-        this.$store.commit("setData", res);
+      window.vuplex.addEventListener('message', (event) => {
+        console.log(event.data)
+        let res = JSON.parse(event.data)
+        this.$store.commit('setData', res)
         if (res && res.lenght != 0) {
-          if (res.action == "hide") {
-            this.isShow = false;
+          if (res.action == 'hide') {
+            this.isShow = false
           } else {
-            this.isShow = true;
+            this.isShow = true
           }
         }
-      });
+      })
     },
 
     hideGlobal(bool) {
-      this.showAllAlert = bool;
-      this.showAlarmAck = bool;
-      this.$store.dispatch("SET_SHOWWARNTIP", bool);
-      this.$store.commit("SET_CENTERDATAS", [bool, null]);
+      this.showAllAlert = bool
+      this.showAlarmAck = bool
+      this.$store.dispatch('SET_SHOWWARNTIP', bool)
+      this.$store.commit('SET_CENTERDATAS', [bool, null])
     },
     closeOpenItem(name, bool) {
       switch (name) {
-        case "allAlarm":
-          this.showAllAlert = bool;
-          break;
-        case "AlarmAck":
-          this.showAlarmAck = bool;
-          break;
+        case 'allAlarm':
+          this.showAllAlert = bool
+          break
+        case 'AlarmAck':
+          this.showAlarmAck = bool
+          break
         default:
-          this.hideGlobal(false);
-          break;
+          this.hideGlobal(false)
+          break
       }
     },
     // 退出3D全屏
     Exit3DFullScreen() {
-      this.clearWarnTimeFun();
-      this.isShow = true;
-      this.$SendMessageToUnity("Exit3DFullScreen", {});
-      this.showEscHandler = false;
+      this.clearWarnTimeFun()
+      this.isShow = true
+      this.$SendMessageToUnity('Exit3DFullScreen', {})
+      this.showEscHandler = false
     },
     // 随机触发警告
     warnTimeFun() {
       this.warnTimer = setInterval(() => {
         this.tipList = [
           {
-            text: "告警！2021-08-07 15:28:30 1期A座14F实验室",
+            text: '告警！2021-08-07 15:28:30 1期A座14F实验室',
           },
-        ];
+        ]
         // {
         //   SerialNum: 0,
         //   EquipmentNum: "534080",
@@ -243,29 +243,35 @@ export default {
         //   AlarmType: "火警",
         //   AlarmTime: "2021-05-27 15:28:30",
         // }
-        this.$store.dispatch("SET_SHOWWARNTIP", true);
-      }, this.$randomNumer(3000, 30000));
+        this.$store.dispatch('SET_SHOWWARNTIP', true)
+        // }, this.$randomNumer(3000, 30000))
+        var timerOut = null
+        timerOut = setTimeout(() => {
+          this.clearWarnTimeFun()
+          this.warnTimeFun()
+        }, 15000)
+      }, 180000)
     },
     clearWarnTimeFun() {
-      clearInterval(this.warnTimer);
-      this.warnTimer = null;
-      this.$store.dispatch("SET_SHOWWARNTIP", false);
+      clearInterval(this.warnTimer)
+      this.warnTimer = null
+      this.$store.dispatch('SET_SHOWWARNTIP', false)
     },
     //监测是否按下esc键
     checkFull() {
       var isFull =
         document.fullscreenElement ||
         document.mozFullScreenElement ||
-        document.webkitFullscreenElement;
-      if (isFull == undefined) isFull = false;
-      if (isFull) isFull = true;
-      return isFull;
+        document.webkitFullscreenElement
+      if (isFull == undefined) isFull = false
+      if (isFull) isFull = true
+      return isFull
     },
     MonitorCloseDialog(val) {
-      this.monitorVisible = val;
+      this.monitorVisible = val
     },
   },
-};
+}
 </script>
 
 <style lang="less" scoped>
