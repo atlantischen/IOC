@@ -25,68 +25,73 @@
 </template>
 
 <script>
-import * as echarts from "echarts";
+import * as echarts from 'echarts'
 export default {
-  name: "theParkOutputValAll",
+  name: 'theParkOutputValAll',
   props: {
     _data: {
       type: Object,
     },
   },
-  data () {
+  data() {
     return {
       ...this._data,
       ids: this.$uuid(),
-    };
+    }
   },
-  mounted () {
-    this.energyTrendFun(this.datas);
+  mounted() {
+    this.energyTrendFun(this.datas)
   },
   methods: {
     // 能耗态势
-    energyTrendFun (val) {
-      var _data = val.energyTrendData;
+    energyTrendFun(val) {
+      var _data = val.energyTrendData
       for (var i = 0; i < _data.length; i++) {
         var option = {
           xAxis: {
             show: false,
           },
           grid: {
-            left: "30",
-            top: "0",
-            right: "0",
-            bottom: "0",
+            left: '30',
+            top: '0',
+            right: '0',
+            bottom: '0',
             containLabel: true,
           },
           yAxis: {
-            type: "category",
+            type: 'category',
             show: false,
           },
           series: [
             {
-              type: "bar",
+              type: 'bar',
               barWidth: 8,
-              barGap: "400%",
+              animationDuration: 3000,
+              barGap: '400%',
               // barCategoryGap:'0%',
               showBackground: false,
               label: {
                 show: true,
                 animation: false,
-                position: "left",
+                position: 'left',
                 offset: [120, 16],
                 formatter:
-                  "本月" +
-                  _data[i].text + ":{a| " + _data[i].monthPower + "}" + _data[i].unit,
+                  '本月' +
+                  _data[i].text +
+                  ':{a| ' +
+                  _data[i].monthPower +
+                  '}' +
+                  _data[i].unit,
                 textStyle: {
-                  color: "rgb(255,255,255,.7)",
+                  color: 'rgb(255,255,255,.7)',
                   fontSize: 14,
-                  width: "115",
+                  width: '115',
                   rich: {
                     a: {
-                      fontFamily: "BYfont",
-                      color: "#fff",
+                      fontFamily: 'BYfont',
+                      color: '#fff',
                       fontSize: 16,
-                      padding: [0, 2, -3, 8]
+                      padding: [0, 2, -3, 8],
                     },
                   },
                 },
@@ -95,39 +100,40 @@ export default {
                 normal: {
                   barBorderRadius: 2,
                   color: new echarts.graphic.LinearGradient(0, 0, 1, 0, [
-                    { offset: 0, color: "#1e3957" },
-                    { offset: 1, color: "#4396f3" },
+                    { offset: 0, color: '#1e3957' },
+                    { offset: 1, color: '#4396f3' },
                   ]),
                 },
               },
               data: [_data[i].monthPower],
             },
             {
-              type: "bar",
+              type: 'bar',
               barWidth: 8,
+              animationDuration: 3000,
               showBackground: false,
               label: {
                 show: true,
                 animation: false,
-                position: "left",
+                position: 'left',
                 offset: [120, 16],
                 formatter:
-                  "本年" +
+                  '本年' +
                   _data[i].text +
-                  ":{a| " +
+                  ':{a| ' +
                   _data[i].yearPower +
-                  "}" +
+                  '}' +
                   _data[i].unit,
                 textStyle: {
-                  color: "rgb(255,255,255,.7)",
+                  color: 'rgb(255,255,255,.7)',
                   fontSize: 14,
-                  width: "115",
+                  width: '115',
                   rich: {
                     a: {
-                      fontFamily: "BYfont",
-                      color: "#fff",
+                      fontFamily: 'BYfont',
+                      color: '#fff',
                       fontSize: 16,
-                      padding: [0, 2, -3, 8]
+                      padding: [0, 2, -3, 8],
                     },
                   },
                 },
@@ -136,31 +142,31 @@ export default {
                 normal: {
                   barBorderRadius: 2,
                   color: new echarts.graphic.LinearGradient(0, 0, 1, 0, [
-                    { offset: 0, color: "#1e3957" },
-                    { offset: 1, color: "#4396f3" },
+                    { offset: 0, color: '#1e3957' },
+                    { offset: 1, color: '#4396f3' },
                   ]),
                 },
               },
               data: [_data[i].yearPower],
             },
           ],
-        };
+        }
         this.$redomEchart(
-          this.$refs["energyTrendEchart_" + i + this.ids],
+          this.$refs['energyTrendEchart_' + i + this.ids],
           option
-        );
+        )
       }
     },
   },
-};
+}
 </script>
 
 <style lang="less" scoped>
-@import "~@/style/gl.less";
+@import '~@/style/gl.less';
 // 能耗态势
 .energyTrendAll {
   #energyTrendEchart_,
-  [id^="energyTrendEchart_"] {
+  [id^='energyTrendEchart_'] {
     width: 100%;
     height: 100%;
   }

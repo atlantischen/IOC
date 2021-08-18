@@ -1,8 +1,8 @@
 <template>
   <div
     class="tipBox ioc_animated"
-    :class="{ fadeInDownTop: isShow }"
-    v-if="isShow"
+    :class="isShow ? 'fadeInDownTop' : 'fadeOutDownTop'"
+    v-show="isShow"
     @click="clickItem"
   >
     <div class="tipBox_text x_c" :class="'tipBox_warn'">
@@ -16,12 +16,22 @@
       </div>
       <i class="el-icon-circle-close" @click.stop="closeTip"></i>
     </div>
+    <audio
+      :src="audioSrc"
+      loop
+      ref="playMusic"
+      id="playMusic"
+      autoplay="false"
+      @play="onPlay"
+      @pause="onPause"
+      hidden
+    ></audio>
   </div>
 </template>
 
 <script>
 export default {
-  name: "tipBox",
+  name: 'tipBox',
   props: {
     _data: {
       typeof: Array,
@@ -30,33 +40,42 @@ export default {
       type: Object,
     },
   },
-  data () {
+  data() {
     return {
       timer: null,
+      timer2: null,
+      timerOut: null,
       isShow: this.$store.state.comState.showWarnTip,
-    };
+      // audioSrc: require('@/assets/mp3/消防警报.mp3'),
+      audioSrc: require('@/assets/mp3/叮叮警报.mp3'),
+    }
   },
   watch: {
-    "$store.state.comState.showWarnTip": {
-      handler (n, o) {
-        this.isShow = n;
+    '$store.state.comState.showWarnTip': {
+      handler(n) {
+        this.isShow = n
         if (this.isShow) {
+          this.openWran()
           setTimeout(() => {
-            this.moveLeft();
-          }, 500);
-          this.$SendMessageToUnity("PopUpWarningNoticesBar", { isOpen: true });
+            this.moveLeft()
+          }, 500)
+          this.$SendMessageToUnity('PopUpWarningNoticesBar', { isOpen: true })
           console.log(
-            "=================PopUpWarningNoticesBar, { isOpen: true })"
-          );
+            '=================PopUpWarningNoticesBar, { isOpen: true })'
+          )
+        } else {
+          this.$nextTick(() => {
+            this.onPause()
+          })
         }
       },
       immediate: true,
     },
   },
   components: {},
-  created () { },
-  mounted () {
-    var _that = this;
+  created() {},
+  mounted() {
+    var _that = this
     // document.querySelector(".tipBox_text").onmouseover = function() {
     //   _that.timer = null;
     //   clearInterval(_that.timer);
@@ -65,52 +84,79 @@ export default {
     //   _that.moveLeft();
     // };
   },
-  beforeDestroy () {
-    clearInterval(this.timer);
+  beforeDestroy() {
+    clearInterval(this.timer)
   },
   methods: {
     // 警告框滑动
-    moveLeft () {
+    moveLeft() {
       // var _w = document.getElementById("pList").children[0],
       var _w = this.$refs.pList.children[0],
-        _d = 0;
-      var _wc = _w.children;
-      var _l = _wc.length;
-      _w.appendChild(_wc[0]);
+        _d = 0
+      var _wc = _w.children
+      var _l = _wc.length
+      _w.appendChild(_wc[0])
       this.timer = setInterval(() => {
-        _d--;
+        _d--
         if (-_d >= _w.getBoundingClientRect().width) {
-          _d = 10;
-          _w.insertBefore(_wc[_l - 1], _wc[0]);
+          _d = 10
+          _w.insertBefore(_wc[_l - 1], _wc[0])
         }
         // _w[0].style.transform = 'translateX(-' + _d + 'px)'
-        _w.style.left = _d + "px";
-      }, 25);
+        _w.style.left = _d + 'px'
+      }, 25)
     },
 
     // 点击警告框3D出现警告位置
-    clickItem () {
-      this.$SendMessageToUnity("OnWarningNoticesBarClick", {});
-      console.log("=================OnWarningNoticesBarClick");
+    clickItem() {
+      this.$SendMessageToUnity('OnWarningNoticesBarClick', {})
+      console.log('=================OnWarningNoticesBarClick')
     },
     // 关闭警告
-    closeTip () {
-      this.isShow = false;
-      this.$store.dispatch("SET_SHOWWARNTIP", this.isShow);
-      this.$SendMessageToUnity("PopUpWarningNoticesBar", {
+    closeTip() {
+      this.isShow = false
+      this.onPause()
+      this.$store.dispatch('SET_SHOWWARNTIP', this.isShow)
+      this.$SendMessageToUnity('PopUpWarningNoticesBar', {
         isOpen: this.isShow,
-      });
-      console.log(
-        "=================PopUpWarningNoticesBar, { isOpen: false })"
-      );
+      })
+      console.log('=================PopUpWarningNoticesBar, { isOpen: false })')
       // this.$emit("close", this.isShow);
     },
+    onPlay() {
+      this.$refs.playMusic.play()
+      // this.$refs.playMusic.loading()
+    },
+    onPause() {
+      this.$refs.playMusic.pause()
+    },
+    openWran() {
+      this.timer2 = setInterval(() => {
+        this.$nextTick(() => {
+          if (this.$refs.playMusic) {
+            this.onPlay()
+          }
+        })
+        this.timerOut = setTimeout(() => {
+          clearInterval(this.timer2)
+          this.timer2 = null
+          this.$nextTick(() => {
+            if (this.$refs.playMusic) {
+              this.onPause()
+              clearTimeout(this.timerOut)
+              this.timerOut = null
+              this.openWran()
+            }
+          })
+        }, 30000)
+      }, 180000)
+    },
   },
-};
+}
 </script>
 
 <style lang="less">
-@import "~@/style/gl.less";
+@import '~@/style/gl.less';
 .tipBox {
   position: fixed;
   top: 0.75rem /* 60/80 */;
@@ -129,7 +175,7 @@ export default {
     white-space: nowrap;
     padding: 0 0.4375rem /* 35/80 */;
     width: 100%;
-    background: url("~@/assets/img/tip_warn.png") center no-repeat;
+    background: url('~@/assets/img/tip_warn.png') center no-repeat;
     background-size: 100% 100%;
     #pList {
       width: 100%;

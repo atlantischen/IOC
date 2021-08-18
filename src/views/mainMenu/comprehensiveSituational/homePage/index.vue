@@ -1,6 +1,7 @@
 <template>
   <!-- 综合态势home -->
   <div class="zhts_Home">
+    <RightContent :_show="isShowRIght" :inputVal="inputV" @_c="clickSwitch" />
     <!-- <button @click="cgLang" class="cgLang">{{ $t("lg.name", lang) }}</button> -->
     <LeftRight :_show="isShowRIght">
       <template #left>
@@ -19,65 +20,64 @@
         <Allcom :_Info="rightInfo" />
       </template>
     </LeftRight>
-    <RightContent :_show="isShowRIght" :inputVal="inputV" @_c="clickSwitch" />
   </div>
 </template>
 
 <script>
-import data from "@/utils/falseData.js";
-import { homePage } from "@/lang/data/comprehensiveSituational/index";
-import i18n from "@/lang/index";
-import RightContent from "./components/rightContent.vue";
-import * as echarts from "echarts";
+import data from '@/utils/falseData.js'
+import { homePage } from '@/lang/data/comprehensiveSituational/index'
+import i18n from '@/lang/index'
+import RightContent from './components/rightContent.vue'
+import * as echarts from 'echarts'
 // import { aaa } from "@/api/mockApi";
 // import axios from "axios";
 export default {
   components: { RightContent },
   // name: "zhts",
-  data () {
+  data() {
     return {
       inputVal: null,
       inputV: null,
       // 左侧组件info
       leftInfo: [
         {
-          title: "园区情况",
-          type: "TheParkIs",
+          title: '园区情况',
+          type: 'TheParkIs',
           datas: {
             datas1: [
               [
                 {
                   data: [79],
-                  name: "待入驻企业",
+                  name: '待入驻企业',
                 },
                 {
                   data: [168],
-                  name: "已入驻企业",
+                  name: '已入驻企业',
                 },
               ],
               [
                 {
                   data: [36],
-                  name: "装修中企业",
+                  name: '装修中企业',
                 },
                 {
                   data: [132],
-                  name: "已办公企业",
+                  name: '已办公企业',
                 },
               ],
             ],
             datas2: {
               datas: [2.57, 25, 78.3],
-              names: ["占地面积", "绿化率", "入驻率"],
+              names: ['占地面积', '绿化率', '入驻率'],
             },
           },
         },
         {
-          title: "人行态势",
-          type: "PedestrianPosture",
+          title: '人行态势',
+          type: 'PedestrianPosture',
           datas: {
-            unit: ["时间", "人"],
-            names: ["访客"],
+            unit: ['时间', '人'],
+            names: ['访客'],
             // names: ["办公人员", "访客"],
             // xData: ["05:00", "06:00", "07:00", "08:00", "09:00", "10:00"],
             // datas: [
@@ -117,36 +117,36 @@ export default {
             ],
             datas2: [
               {
-                name: "今日总人流量",
+                name: '今日总人流量',
                 value: 342543,
               },
               {
-                name: "今日总访客",
+                name: '今日总访客',
                 value: data.VisitorsToday,
               },
             ],
           },
         },
         {
-          title: "园区产值",
-          type: "TheParkOutputVal",
+          title: '园区产值',
+          type: 'TheParkOutputVal',
           datas: {
             optionName: [
-              "新能源",
-              "新材料",
-              "生物医药",
-              "智能制造",
-              "信息技术",
-              "文化创意",
-              "现代服务",
-              "节能环保",
-              "商家",
+              '新能源',
+              '新材料',
+              '生物医药',
+              '智能制造',
+              '信息技术',
+              '文化创意',
+              '现代服务',
+              '节能环保',
+              '商家',
             ],
             datas: [24, 16, 13, 15, 15, 9, 4, 3, 2],
             data2: {
               value: 164,
-              name: "税收总数",
-              unit: "(亿元)"
+              name: '税收总数',
+              unit: '(亿元)',
             },
           },
         },
@@ -154,34 +154,34 @@ export default {
       // 右侧
       rightInfo: [
         {
-          title: "能耗态势",
-          type: "EnergyTrend",
+          title: '能耗态势',
+          type: 'EnergyTrend',
           datas: {
             energyTrendData: [
               {
-                unit: "kW.h",
-                text: "电耗",
+                unit: 'kW.h',
+                text: '电耗',
                 todayPower: 1296,
-                monthPower: this.$getDayNums("m") * 1296,
-                yearPower: this.$getDayNums("y") * 1296,
+                monthPower: this.$getDayNums('m') * 1296,
+                yearPower: this.$getDayNums('y') * 1296,
               },
               {
-                unit: "m³",
-                text: "水耗",
+                unit: 'm³',
+                text: '水耗',
                 todayPower: 205,
-                monthPower: this.$getDayNums("m") * 205,
-                yearPower: this.$getDayNums("y") * 205,
+                monthPower: this.$getDayNums('m') * 205,
+                yearPower: this.$getDayNums('y') * 205,
               },
             ],
           },
         },
         {
-          title: "车行态势",
-          type: "PedestrianPosture",
+          title: '车行态势',
+          type: 'PedestrianPosture',
           datas: {
             smooth: true,
-            names: ["进", "出"],
-            unit: ["时间", "辆"],
+            names: ['进', '出'],
+            unit: ['时间', '辆'],
             // xData: [
             //   "00:00",
             //   "02:00",
@@ -254,43 +254,43 @@ export default {
             datas2: [
               {
                 value: 2465,
-                name: "总车位",
+                name: '总车位',
               },
               {
                 value: 236,
-                name: "剩余车位",
+                name: '剩余车位',
               },
               {
                 value: 2084,
-                name: "在场车辆",
+                name: '在场车辆',
               },
             ],
           },
         },
         {
-          title: "设备态势",
-          type: "equipmentSituation",
+          title: '设备态势',
+          type: 'equipmentSituation',
           datas: {
             equipmentSDatas: [
               {
                 value: 1168,
-                name: "安防",
+                name: '安防',
               },
               {
                 value: 936,
-                name: "能耗",
+                name: '能耗',
               },
               {
                 value: 1009,
-                name: "网络",
+                name: '网络',
               },
               {
                 value: 1027,
-                name: "消防",
+                name: '消防',
               },
             ],
-            names: ["正常", "故障"],
-            xAxisName: ["安防", "能耗", "网络", "消防"],
+            names: ['正常', '故障'],
+            xAxisName: ['安防', '能耗', '网络', '消防'],
             datas: [
               [1123, 924, 1000, 1014],
               [45, 12, 9, 13],
@@ -302,37 +302,37 @@ export default {
       isShowTipBox: true,
       centerDatasList: [
         {
-          name: "园区总人数",
+          name: '园区总人数',
           val: 32856,
         },
         {
-          name: "剩余车位数",
+          name: '剩余车位数',
           val: 236,
         },
         {
-          name: "未处理告警数",
+          name: '未处理告警数',
           val: this.$randomNumer(0, 9),
         },
         {
-          name: "设备异常数",
+          name: '设备异常数',
           val: 16,
         },
       ],
       tipList: [
         {
-          text: "告警！2021-04-30 15:00{李玲}在{公寓广场}发生了{黑名单告警}",
+          text: '告警！2021-04-30 15:00{李玲}在{公寓广场}发生了{黑名单告警}',
         },
       ],
       lang: null,
-    };
+    }
   },
   computed: {
-    lang () {
-      return this.$store.state.comState.lang;
+    lang() {
+      return this.$store.state.comState.lang
     },
   },
   watch: {
-    "$store.state.comState.lang" (n, o) {
+    '$store.state.comState.lang'(n, o) {
       // this.lang = this.$t("lg.name", n);
       // this.leftInfo = JSON.parse(
       //   this.$t("comprehensiveSituational.homePage")
@@ -345,24 +345,24 @@ export default {
       // ).rightInfo;
     },
   },
-  created () {
-    this.$store.dispatch("SET_CENTERDATAS", [true, this.centerDatasList]);
-    let _l = this.leftInfo[1].datas.xData.length;
-    let _l2 = this.rightInfo[1].datas.xData.length;
+  created() {
+    this.$store.dispatch('SET_CENTERDATAS', [true, this.centerDatasList])
+    let _l = this.leftInfo[1].datas.xData.length
+    let _l2 = this.rightInfo[1].datas.xData.length
     this.leftInfo[1].datas.datas[0] = this.leftInfo[1].datas.datas[0].slice(
       0,
       _l
-    );
+    )
     this.rightInfo[1].datas.datas[0] = this.rightInfo[1].datas.datas[0].slice(
       0,
       _l2
-    );
+    )
     this.rightInfo[1].datas.datas[1] = this.rightInfo[1].datas.datas[1].slice(
       0,
       _l2
-    );
+    )
   },
-  mounted () {
+  mounted() {
     // aaa().then(r=>{
     //   console.log(r)
     // })
@@ -370,29 +370,29 @@ export default {
     //   console.log('xxxxxxxxx', req)
     // })
   },
-  destroyed () { },
+  destroyed() {},
   methods: {
-    showTipBoxHandle (val) { },
-    clickSwitch (val) {
-      this.inputVal = val;
-      this.inputV = null;
-      this.isShowRIght = !this.isShowRIght;
+    showTipBoxHandle(val) {},
+    clickSwitch(val) {
+      this.inputVal = val
+      this.inputV = null
+      this.isShowRIght = !this.isShowRIght
     },
-    cgLang () {
-      let a;
-      if (localStorage.getItem("language") == "en" || i18n.locale == "en") {
-        a = "zh";
+    cgLang() {
+      let a
+      if (localStorage.getItem('language') == 'en' || i18n.locale == 'en') {
+        a = 'zh'
       } else {
-        a = "en";
+        a = 'en'
       }
-      this.$store.dispatch("SET_LANG", a);
+      this.$store.dispatch('SET_LANG', a)
     },
   },
-};
+}
 </script>
 
 <style lang="less" scoped>
-@import "~@/style/gl.less";
+@import '~@/style/gl.less';
 .zhts_Home {
   // position: relative;
 }

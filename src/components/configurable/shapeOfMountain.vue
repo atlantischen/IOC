@@ -9,9 +9,9 @@
 </template>
 
 <script>
-import * as echarts from "echarts";
+import * as echarts from 'echarts'
 export default {
-  name: "shapeOfMountainAll",
+  name: 'shapeOfMountainAll',
   props: {
     _data: {
       type: Object,
@@ -21,63 +21,63 @@ export default {
     return {
       ...this._data,
       ids: this.$uuid(),
-    };
+    }
   },
   created() {},
   mounted() {
-    this.shapeOfMountainFun(this.datas);
+    this.shapeOfMountainFun(this.datas)
   },
   methods: {
     shapeOfMountainFun(val) {
-      const { xData, datas, proportion } = val;
+      const { xData, datas, proportion } = val
       var option = {
         grid: {
-          left: "10",
-          top: "-10",
-          right: "10",
-          bottom: "-10",
+          left: '10',
+          top: '-10',
+          right: '10',
+          bottom: '-10',
           containLabel: true,
         },
         legend: {
           show: false,
           data: xData,
-          top: "92%",
-          icon: "circle",
+          top: '92%',
+          icon: 'circle',
           textStyle: {
-            color: "#0DCAD2",
+            color: '#0DCAD2',
           },
         },
         tooltip: {
-          trigger: "axis",
+          trigger: 'axis',
           axisPointer: {
-            type: "line",
+            type: 'line',
             lineStyle: {
-              type: "dashed",
+              type: 'dashed',
               width: 0.5,
-              color: "rgba(255,255,255,0.8)",
+              color: 'rgba(255,255,255,0.8)',
             },
           },
-          backgroundColor: "rgba(0,0,0,0.8)",
+          backgroundColor: 'rgba(0,0,0,0.8)',
           borderWidth: 1,
-          borderColor: "#4396f3",
+          borderColor: '#4396f3',
           padding: [5, 15],
-          extraCssText: "box-shadow:inset 0 0 8px rgba(67, 149, 243, 0.6);",
+          extraCssText: 'box-shadow:inset 0 0 8px rgba(67, 149, 243, 0.6);',
           textStyle: {
-            color: "#fff",
+            color: '#fff',
           },
           formatter: (params) => {
-            let dataStr = `<p style="font-weight:bold;text-align:center;">${params[0].name}</p>`;
+            let dataStr = `<p style="font-weight:bold;text-align:center;">${params[0].name}</p>`
             params.forEach((item) => {
               dataStr += `<div>
                 <span> 数量 :  ${item.data}</span><br/>
                 <span> 占比 :  ${proportion[item.dataIndex]}% </span>
-                </div>`;
-            });
-            return dataStr;
+                </div>`
+            })
+            return dataStr
           },
         },
         xAxis: {
-          type: "category",
+          type: 'category',
           data: xData,
           axisLabel: {
             fontSize: 12,
@@ -86,7 +86,7 @@ export default {
             interval: 0,
             margin: 10,
             textStyle: {
-              color: "#fff",
+              color: '#fff',
             },
           },
           axisTick: {
@@ -94,12 +94,12 @@ export default {
           },
           axisLine: {
             lineStyle: {
-              color: "rgb(255,255,255,.5)",
+              color: 'rgb(255,255,255,.5)',
             },
           },
         },
         yAxis: {
-          type: "value",
+          type: 'value',
           axisLabel: {
             show: false,
           },
@@ -115,32 +115,33 @@ export default {
         },
         series: [
           {
-            type: "pictorialBar",
-            name: "提示框值",
+            type: 'pictorialBar',
+            name: '提示框值',
+            animationDuration: 3000,
             label: {
               show: false,
-              position: "top",
+              position: 'top',
               formatter: function(params) {
-                var index = params.dataIndex;
-                var str = "{a|" + params.value + "}\n{c|" + params.value + "}";
-                return str;
+                var index = params.dataIndex
+                var str = '{a|' + params.value + '}\n{c|' + params.value + '}'
+                return str
               },
               rich: {
                 a: {
                   fontSize: 18,
-                  color: "#534EE1",
-                  align: "center",
+                  color: '#534EE1',
+                  align: 'center',
                   height: 40,
                 },
                 c: {
                   fontSize: 18,
-                  color: "#fff",
+                  color: '#fff',
                   padding: [-2, 0, 2, 0],
                   // backgroundColor: {
                   //   image: labelimg
                   // },
-                  align: "center",
-                  verticalAlign: "bottom",
+                  align: 'center',
+                  verticalAlign: 'bottom',
                   height: 50,
                   lineHeight: 40,
                   width: 100,
@@ -150,7 +151,7 @@ export default {
             itemStyle: {
               normal: {
                 color: {
-                  type: "linear",
+                  type: 'linear',
                   x: 0,
                   y: 0,
                   x2: 0,
@@ -158,11 +159,11 @@ export default {
                   colorStops: [
                     {
                       offset: 0,
-                      color: "rgba(67, 149, 243, 1)",
+                      color: 'rgba(67, 149, 243, 1)',
                     },
                     {
                       offset: 1,
-                      color: "rgba(67, 149, 243, 0.2)",
+                      color: 'rgba(67, 149, 243, 0.2)',
                     },
                   ],
                   global: false,
@@ -170,26 +171,23 @@ export default {
               },
             },
             data: datas,
-            symbol: "path://M0,10 L10,10 C5.5,10 5.5,5 5,0 C5,5 4.5,10 0,10 z",
-            barCategoryGap: "-50%",
+            symbol: 'path://M0,10 L10,10 C5.5,10 5.5,5 5,0 C5,5 4.5,10 0,10 z',
+            barCategoryGap: '-50%',
           },
         ],
-      };
-      this.$redomEchart(
-        this.$refs["shapeOfMountainEchart_" + this.ids],
-        option
-      );
+      }
+      this.$redomEchart(this.$refs['shapeOfMountainEchart_' + this.ids], option)
     },
   },
-};
+}
 </script>
 
 <style lang="less" scoped>
-@import "~@/style/gl.less";
+@import '~@/style/gl.less';
 // 人行态势
 .shapeOfMountainAll {
   #shapeOfMountainEchart_,
-  [id^="shapeOfMountainEchart_"] {
+  [id^='shapeOfMountainEchart_'] {
     width: 100%;
     height: 3.625rem /* 290/80 */;
   }

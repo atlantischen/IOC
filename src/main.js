@@ -45,6 +45,7 @@ import './style/animation.less'
 import './style/index.less' //公共样式文件
 import 'animate.css' //引入动画
 import './utils/moveIt.js' // 待修改
+
 for (var key in globalComponents) {
   app.component(key, globalComponents[key])
 }

@@ -4,7 +4,6 @@
 
 <script>
 import screenfull from "screenfull";
-
 export default {
   name: "App",
   data: function() {
@@ -48,7 +47,8 @@ export default {
       }
     },
   },
-
+  created() {
+  },
   mounted() {
     this.init();
     window.addEventListener("message", this.event, true);

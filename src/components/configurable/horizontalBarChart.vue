@@ -23,9 +23,9 @@
 </template>
 
 <script>
-import * as echarts from "echarts";
+import * as echarts from 'echarts'
 export default {
-  name: "horizontalBarChart",
+  name: 'horizontalBarChart',
   props: {
     _data: {
       type: Object,
@@ -35,38 +35,38 @@ export default {
     return {
       ...this._data,
       ids: this.$uuid(),
-    };
+    }
   },
   created() {},
   mounted() {
-    this.horizontalBarChartFun(this.datas);
+    this.horizontalBarChartFun(this.datas)
   },
   methods: {
     horizontalBarChartFun(val) {
-      var _datas = val.data;
+      var _datas = val.data
       for (var i = 0; i < _datas.length; i++) {
         var option = {
           xAxis: {
             show: false,
           },
           grid: {
-            left: "15",
-            top: "30",
-            right: "0",
-            bottom: "0",
+            left: '15',
+            top: '30',
+            right: '0',
+            bottom: '0',
             containLabel: true,
           },
           yAxis: {
-            type: "category",
+            type: 'category',
             show: false,
           },
-          color: ["red"],
+          color: ['red'],
           series: [
             {
-              type: "bar",
+              type: 'bar',
               barWidth: 22,
-              barGap: "-100%",
-              barCategoryGap: "100%",
+              barGap: '-100%',
+              barCategoryGap: '100%',
               animation: false,
               hoverAnimation: false,
               label: {
@@ -81,7 +81,7 @@ export default {
                 {
                   itemStyle: {
                     normal: {
-                      color: "#0e1c36",
+                      color: '#0e1c36',
                     },
                   },
                   value: val.datas2 ? val.datas2[0].value : 100,
@@ -90,24 +90,25 @@ export default {
               z: 1,
             },
             {
-              type: "bar",
+              type: 'bar',
               barWidth: 22,
-              barGap: "-100%",
-              barCategoryGap: "-100%",
+              animationDuration: 3000,
+              barGap: '-100%',
+              barCategoryGap: '-100%',
               label: {
                 show: true,
-                position: "left",
+                position: 'left',
                 offset: [120, -20],
-                formatter: _datas[i].name + "{a| " + _datas[i].value + " }",
+                formatter: _datas[i].name + '{a| ' + _datas[i].value + ' }',
                 textStyle: {
-                  color: "rgb(255,255,255,.7)",
+                  color: 'rgb(255,255,255,.7)',
                   fontSize: 14,
-                  width: "115",
-                  textAlign: "bottom",
+                  width: '115',
+                  textAlign: 'bottom',
                   rich: {
                     a: {
-                      fontFamily: "BYfont",
-                      color: "#fff",
+                      fontFamily: 'BYfont',
+                      color: '#fff',
                       fontSize: 18,
                       padding: [0, 0, -8, 8],
                     },
@@ -124,30 +125,35 @@ export default {
                   itemStyle: {
                     normal: {
                       color: new echarts.graphic.LinearGradient(0, 0, 1, 0, [
-                        { offset: 0, color: "#1e3957" },
-                        { offset: 1, color: "#4396f3" },
+                        { offset: 0, color: '#1e3957' },
+                        { offset: 1, color: '#4396f3' },
                       ]),
                     },
                   },
-                  value: typeof _datas[i].value == 'string'?(_datas[i].value.indexOf("%") != -1? _datas[i].value.split("%")[0]: _datas[i].value):_datas[i].value,
+                  value:
+                    typeof _datas[i].value == 'string'
+                      ? _datas[i].value.indexOf('%') != -1
+                        ? _datas[i].value.split('%')[0]
+                        : _datas[i].value
+                      : _datas[i].value,
                   z: 1,
                 },
               ],
             },
           ],
-        };
+        }
         this.$redomEchart(
-          this.$refs["horizontalBarChartEchart_" + i + this.ids],
+          this.$refs['horizontalBarChartEchart_' + i + this.ids],
           option
-        );
+        )
       }
     },
   },
-};
+}
 </script>
 
 <style lang="less" scoped>
-@import "~@/style/gl.less";
+@import '~@/style/gl.less';
 //
 .horizontalBarChartAll {
   .horizontalBarChart {
@@ -163,7 +169,7 @@ export default {
     }
   }
   #horizontalBarChartEchart_,
-  [id^="horizontalBarChartEchart_"] {
+  [id^='horizontalBarChartEchart_'] {
     width: 100%;
     height: 0.8125rem /* 65/80 */;
   }
