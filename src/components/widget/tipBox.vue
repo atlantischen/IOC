@@ -8,10 +8,8 @@
     <div class="tipBox_text x_c" :class="'tipBox_warn'">
       <div id="pList" ref="pList">
         <!--  class="text_animate" -->
-        <ul>
-          <li v-for="(item, i) in _data" :key="i">{{ item.text }}</li>
-          <li v-for="(item, i) in _data" :key="i">{{ item.text }}</li>
-          <li v-for="(item, i) in _data" :key="i">{{ item.text }}</li>
+        <ul id="pList_c" ref="pList_c">
+          <li v-for="(item, i) in tipDataList" :key="i">{{ item.text }}</li>
         </ul>
       </div>
       <i class="el-icon-circle-close" @click.stop="closeTip"></i>
@@ -46,8 +44,8 @@ export default {
       timer2: null,
       timerOut: null,
       isShow: this.$store.state.comState.showWarnTip,
-      // audioSrc: require('@/assets/mp3/消防警报.mp3'),
-      audioSrc: require('@/assets/mp3/叮叮警报.mp3'),
+      audioSrc: require('@/assets/mp3/消防警报.mp3'),
+      // audioSrc: require('@/assets/mp3/叮叮警报.mp3'),
     };
   },
   watch: {
@@ -57,6 +55,10 @@ export default {
         if (this.isShow) {
           this.openWran();
           setTimeout(() => {
+            if (this.timer) {
+              clearInterval(this.timer);
+              this.timer = null;
+            }
             this.moveLeft();
           }, 500);
           this.$SendMessageToUnity('PopUpWarningNoticesBar', { isOpen: true });
@@ -69,33 +71,36 @@ export default {
           });
         }
       },
+    },
+    _data: {
+      handler(n) {
+        if (n) {
+          this.tipDataList = n.length < 3 ? [...n, ...n, ...n] : n;
+        }
+      },
       immediate: true,
     },
   },
   components: {},
   created() {},
-  mounted() {
-    var _that = this;
-    // document.querySelector(".tipBox_text").onmouseover = function() {
-    //   _that.timer = null;
-    //   clearInterval(_that.timer);
-    // };
-    // document.querySelector(".tipBox_text").onmouseout = function() {
-    //   _that.moveLeft();
-    // };
-  },
+  mounted() {},
   beforeDestroy() {
     clearInterval(this.timer);
+    this.timer = null;
   },
   methods: {
     // 警告框滑动
     moveLeft() {
-      // var _w = document.getElementById("pList").children[0],
-      var _w = this.$refs.pList.children[0],
+      var _w = document.getElementById('pList').children[0],
+        _w = this.$refs.pList.children[0],
         _d = 0;
       var _wc = _w.children;
       var _l = _wc.length;
       _w.appendChild(_wc[0]);
+      if (this.timer) {
+        clearInterval(this.timer);
+        this.timer = null;
+      }
       this.timer = setInterval(() => {
         _d--;
         if (-_d >= _w.getBoundingClientRect().width) {
@@ -210,26 +215,4 @@ export default {
 .tipBox_warn {
   color: #e5181e;
 }
-
-// @keyframes wordsLoop {
-//   0% {
-//     transform: translateX(0);
-//     -webkit-transform: translateX(0);
-//   }
-//   100% {
-//     transform: translateX(-100%);
-//     -webkit-transform: translateX(-100%);
-//   }
-// }
-
-// @-webkit-keyframes wordsLoop {
-//   0% {
-//     transform: translateX(0);
-//     -webkit-transform: translateX(0);
-//   }
-//   100% {
-//     transform: translateX(-100%);
-//     -webkit-transform: translateX(-100%);
-//   }
-// }
 </style>
