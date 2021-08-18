@@ -249,6 +249,7 @@ export default {
         },
         series: [
           {
+            animationDuration: 2000,
             name: "中餐",
             type: "bar",
             stack: "total",
@@ -267,6 +268,8 @@ export default {
             data: [10, 9, 13, 10],
           },
           {
+            animationDuration: 2000,
+
             name: "西餐",
             type: "bar",
             stack: "total",
@@ -284,6 +287,8 @@ export default {
             data: [10, 9, 11, 7],
           },
           {
+            animationDuration: 2000,
+
             name: "料理",
             type: "bar",
             stack: "total",
@@ -301,6 +306,8 @@ export default {
             data: [8, 8, 9, 8],
           },
           {
+            animationDuration: 2000,
+
             name: "烧烤",
             type: "bar",
             stack: "total",
@@ -318,6 +325,8 @@ export default {
             data: [6, 8, 5, 9],
           },
           {
+            animationDuration: 2000,
+
             name: "自助餐",
             type: "bar",
             stack: "total",

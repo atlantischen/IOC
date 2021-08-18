@@ -8,6 +8,7 @@
     <video
       muted
       controls
+      disablePictureInPicture
       :style="'height:' + height + 'px'"
       class="video"
       :id="'videoElement' + item.id"

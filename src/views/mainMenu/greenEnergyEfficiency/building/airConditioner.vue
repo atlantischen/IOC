@@ -41,7 +41,7 @@
           </li>
         </ul> -->
       </div>
-      <div id="ElectricityStatistics" ref="ElectricityStatistics"></div>
+      <div id="ElectricityStatistics" :ref="'ElectricityStatistics'+ids"></div>
     </div>
   </IOCLeft>
   <IOCRight>
@@ -163,6 +163,7 @@ import * as echarts from "echarts";
 export default {
   data () {
     return {
+      ids: this.$uuid(),
       activeIndex: 1,
       airPanelList: [
         {
@@ -728,7 +729,9 @@ export default {
     ElectricityStatistics (data, data2, yData) {
       let { name,company, splitNumber, min, max, interval } = yData;
       // var dom = "ElectricityStatistics";
-      var dom = this.$refs.ElectricityStatistics;
+      var dom = this.$refs['ElectricityStatistics'+this.ids];
+      console.log(dom);
+      console.log(dom,'dom',undefined);
 
       var option = {
         color: ["#ffea00", "#0df8fc", "#fff"],
@@ -889,7 +892,10 @@ export default {
           },
         ],
       };
-      this.$redomEchart(dom, option);
+      if(dom && dom != undefined){
+         this.$redomEchart(dom, option);
+      }
+
     },
     // 改变目标温度
     changeTemper (name, i) {
@@ -1041,27 +1047,32 @@ export default {
       this.$redomEchart(dom, option);
     },
   },
+  created(){
+    
+  },
   mounted () {
-    this.$nextTick(()=>{
-      this.ElectricityStatistics(
-     this.$fun_date(),
-      [2056, 2511, 2932, 3126, 3412, 3612, 3759,],
-      {
-        name: "kw·h",
-        company:'日',
-        splitNumber: 3,
-        min: 0,
-        max: 4800,
-        interval: 1200,
-      }
+    this.$nextTick(()=> {
+          this.ElectricityStatistics(
+         this.$fun_date(),
+       [2056, 2511, 2932, 3126, 3412, 3612, 3759,],
+          {
+            name: "kw·h",
+            company:'日',
+            splitNumber: 3,
+            min: 0,
+            max: 4800,
+            interval: 1200,
+          }
     );
     for (var i = 0; i < this.airPanelList.length; i++) {
-      this.EnergyEfficiency(
-        this.$refs["EnergyEfficiency" + i],
-        this.airPanelList[i].tem.targetTem
-      );
-    }
+          this.EnergyEfficiency(
+            this.$refs["EnergyEfficiency" + i],
+            this.airPanelList[i].tem.targetTem
+          );
+        }  
     })
+     
+    
     
   },
 };

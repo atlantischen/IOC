@@ -60,7 +60,7 @@
     <div class="new_air">
       <div class="tittle">冷源监控</div>
       <ul class="scroll">
-        <li @click="lookVideo(`${++index}号客梯`)">
+        <li >
           <!-- <Vloading v-show="showIfame" /> -->
 
           <Player
@@ -413,7 +413,9 @@ export default {
           },
         ],
       };
-      this.$redomEchart(dom, option);
+        if(dom && dom !== undefined){
+           this.$redomEchart(dom, option);
+      }
     },
     ElectricityStatistics(data, data2, yData) {
       let { name, company, splitNumber, min, max, interval } = yData;
@@ -589,7 +591,9 @@ export default {
           },
         ],
       };
-      this.$redomEchart(dom, option);
+         if(dom && dom !== undefined){
+           this.$redomEchart(dom, option);
+      }
     },
     lookVideo(val) {
       console.log();

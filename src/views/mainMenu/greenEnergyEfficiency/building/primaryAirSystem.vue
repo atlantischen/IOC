@@ -68,7 +68,7 @@
           </li>
         </ul> -->
       </div>
-        <div id="ElectricityStatistics" ref="ElectricityStatistics"></div>
+        <div id="ElectricityStatistics" :ref="'ElectricityStatistics'+ids"></div>
 
       </div>
     </div>
@@ -178,6 +178,8 @@ import * as echarts from "echarts";
 export default {
   data() {
     return {
+      ids: this.$uuid(),
+
       activeIndex: 1,
 
       airDataList: [
@@ -245,8 +247,7 @@ export default {
     ElectricityStatistics(data, data2, yData) {
       let { name,company, splitNumber, min, max, interval } = yData;
       // var dom = "ElectricityStatistics";
-      var dom = this.$refs.ElectricityStatistics;
-
+      var dom = this.$refs['ElectricityStatistics'+this.ids];
       var option = {
         color: ["#ffea00", "#0df8fc", "#fff"],
         grid: {
@@ -413,53 +414,7 @@ export default {
       };
       this.$redomEchart(dom, option);
     },
-    //   changeBtn(val) {
-
-    //   this.activeIndex = val;
-    //   if (val == 1) {
-    //     this.ElectricityStatistics(
-    //       ["7.24", "7.25", "7.26", "7.27", "7.28", "7.29", "7.30"],
-    //   [1200, 1500, 1300, 1400, 1600, 1700, 1900,],
-    //       {
-    //         name: "kw·h",
-    //         company:'日',
-
-    //         splitNumber: 3,
-    //         min: 0,
-    //         max: 4800,
-    //         interval: 1200,
-    //       }
-    //     );
-    //   } else if (val == 2) {
-    //     this.ElectricityStatistics(
-    //       ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"],
-    //       [3, 4, 4, 3, 2, 1, 2, 5, 4, 3, 6, 2],
-    //       {
-    //         name: "万kw·h",
-    //         company:'月',
-
-    //         splitNumber: 4,
-    //         min: 0,
-    //         max: 6.0,
-    //         interval: 1.5,
-    //       }
-    //     );
-    //   } else {
-    //     this.ElectricityStatistics(
-    //       ["2019年", "2020年", "2021年"],
-    //       [23, 41, 13],
-    //       {
-    //         name: "万kw·h",
-    //         company:'年',
-
-    //         splitNumber: 4,
-    //         min: 0,
-    //         max: 60,
-    //         interval: 20,
-    //       }
-    //     );
-    //   }
-    // },
+  
       // 改变风速
         changeWinSpeed(name, i){
           if(name == 'speed1'){

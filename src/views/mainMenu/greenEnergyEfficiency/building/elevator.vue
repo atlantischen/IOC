@@ -48,7 +48,7 @@
           <span class="font_text">视频回放</span>
         </div>
         <ul>
-          <li  @click="lookVideo(`${++index}号客梯`)">
+          <li >
              <!-- <Vloading v-show="showIfame" /> -->
 
           <Player  width="49"  :dialogShow="$store.state.dialogShow"  ref="player1" :monitorList="monitorList" ></Player>
@@ -82,7 +82,7 @@
           <span class="font_text">视频回放</span>
         </div>
         <ul>
-          <li  @click="lookVideo(`${++index}号客梯`)">
+          <li  >
             <!-- <span>2020-12-31    14:40</span>
             <span>{{item++}}号客梯</span> -->
            <!-- <Vloading v-show="showIfame" /> -->
@@ -114,7 +114,7 @@
     </IOCRight>
     <Dialog :dialogShow="dialogShow"   :title='title'  @dialogShowChange="dialogShowChange"></Dialog>
     <VideoPlayback :title='title' :backShow="backShow" @videoShowChange="videoShowChange"></VideoPlayback>
-  <LookVideo :Visible="Visible" :title="dialogTitle" @off="openCloseDialog" />
+  <!-- <LookVideo :Visible="Visible" :title="dialogTitle" @off="openCloseDialog" /> -->
   <ElevatorMonitoring  :ElevatorVisible="ElevatorVisible"  :dataList="dataList"  @off="ElevatorCloseDialog" />
 
 

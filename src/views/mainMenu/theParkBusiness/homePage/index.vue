@@ -641,6 +641,7 @@ export default {
               { value: 1091, name: "文化" },
               { value: 727, name: "购物" },
             ],
+            animationDuration: 3000,
           },
         ],
       };
@@ -773,6 +774,7 @@ export default {
               },
             },
             data: data,
+            animationDuration: 2000,
           },
         ],
       };
@@ -961,7 +963,6 @@ export default {
 
     .litInfo {
       position: fixed;
-      // height: 6.25rem /* 500/80 */;
       top: 0;
       right: 0;
       width: 3.8125rem /* 305/80 */;
