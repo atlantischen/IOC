@@ -174,8 +174,8 @@
 </template>
 
 <script>
-import { uploadImgApi } from '@/api/upload.js'
-import axios from 'axios'
+import { uploadImgApi2 } from '@/api/upload.js';
+import axios from 'axios';
 export default {
   name: 'rightContent',
   props: {
@@ -210,7 +210,7 @@ export default {
           srcName: 'qy_ags.png',
         },
         {
-          name: '麦丹劳',
+          name: '肯德基',
           phone: '',
           info: '2栋B座1088号商铺',
           src: require('@/assets/img/datas/qy_kfc.png'),
@@ -336,50 +336,51 @@ export default {
           info: '从事传销活动',
         },
       ],
-    }
+    };
   },
   watch: {
     inputVal: {
       handler(n) {
-        this.inputV = n
+        this.inputV = n;
       },
       deep: true,
     },
     _show: {
       handler(n) {
-        this.showLeftRight = n
+        this.showLeftRight = n;
       },
     },
   },
   mounted() {
-    this.total = this.tableData2.length
-    this.changeDatasFun()
+    this.total = this.tableData2.length;
+    this.changeDatasFun();
   },
   methods: {
     uploadImg(p) {
-      const file = p.file
-      //   fileType = file.type,
-      //   isImage = fileType.indexOf('image') != -1,
-      //   isLt2M = file.size / 1024 / 1024 < 2
-      // if (!isImage) {
-      //   this.$message.error('只能上传图片格式png、jpg、gif!')
-      //   return
-      // }
-      // if (!isLt2M) {
-      //   this.$message.error('只能上传图片大小小于2M')
-      //   return
-      // }
-
-      const form = new FormData()
-      form.append('multipartFile', file)
-      uploadImgApi(form)
+      const file = p.file,
+        isLt2M = file.size / 1024 / 1024 < 5;
+      if (!isLt2M) {
+        this.$message.error('只能上传图片大小小于5M');
+        return;
+      }
+      const form = new FormData();
+      form.append('uploadfile', file);
+      uploadImgApi2(form)
         .then((res) => {
-          if (parseInt(res.data.code) === 200) {
-            this.imageUrl = this.img_src =
-              'http://139.9.26.115:9999' + res.data.data
+          if (parseInt(res.status) === 200) {
+            this.imageUrl = this.img_src = res.data.file_url;
           }
         })
-        .catch(() => {})
+        .catch(() => {});
+      // form.append('multipartFile', file);
+      // uploadImgApi(form)
+      //   .then((res) => {
+      //     if (parseInt(res.data.code) === 200) {
+      //       this.imageUrl = this.img_src =
+      //         'http://139.9.26.115:9999' + res.data.data;
+      //     }
+      //   })
+      //   .catch(() => {});
     },
     // 上传头像
     changeFile(file, fileList) {
@@ -392,16 +393,16 @@ export default {
       // };
     },
     showBlackListFun() {
-      this.isFade = !this.isFade
+      this.isFade = !this.isFade;
     },
     searchList(val) {
-      this.inputV = val
+      this.inputV = val;
       // if (!val) {
       //   return this.$message.error("请输入关键词！")
       // } else {
-      this.slist = this.slist2
+      this.slist = this.slist2;
       // }
-      this.isShowList = !this.isShowList
+      this.isShowList = !this.isShowList;
     },
     // 搜索轨迹
     SearchPath() {
@@ -409,55 +410,55 @@ export default {
         let _a = {
           searchType: 'custom',
           src: this.img_src,
-        }
-        this.$SendMessageToUnity('ShowLocationPin', _a)
-        console.log(_a.src)
-        console.log('ShowLocationPin---搜寻轨迹------------')
+        };
+        this.$SendMessageToUnity('ShowLocationPin', _a);
+        console.log(_a.src);
+        console.log('ShowLocationPin---搜寻轨迹------------');
       } else {
-        this.$message.info('请传入搜寻对象图片！')
+        this.$message.info('请传入搜寻对象图片！');
       }
     },
     searchOneItem(val) {
-      let _a = JSON.parse(JSON.stringify(this.slist2[val]))
-      _a.src = _a.srcName
+      let _a = JSON.parse(JSON.stringify(this.slist2[val]));
+      _a.src = _a.srcName;
       // console.log(_a)
       this.$SendMessageToUnity('ShowLocationPin', {
         Serial: val,
         searchType: 'shops',
         ..._a,
-      })
-      console.log('ShowLocationPin--商家、企业------------', val)
+      });
+      console.log('ShowLocationPin--商家、企业------------', val);
     },
     zhuizongFun(val, i) {
-      let _a = JSON.parse(JSON.stringify(val))
-      _a.src = _a.srcName
-      console.log(this.currentPage > 1 ? (this.currentPage - 1) * 10 + i : i)
+      let _a = JSON.parse(JSON.stringify(val));
+      _a.src = _a.srcName;
+      console.log(this.currentPage > 1 ? (this.currentPage - 1) * 10 + i : i);
       this.$SendMessageToUnity('ShowLocationPin', {
         Serial: this.currentPage > 1 ? (this.currentPage - 1) * 10 + i : i,
         ..._a,
-      })
-      console.log('ShowLocationPin-----跟踪------------')
+      });
+      console.log('ShowLocationPin-----跟踪------------');
     },
     back() {
-      this.$SendMessageToUnity('OnBackBtnClick', {})
-      console.log('OnBackBtnClick-----退出追踪------------')
-      this.$emit('_c', null)
+      this.$SendMessageToUnity('OnBackBtnClick', {});
+      console.log('OnBackBtnClick-----退出追踪------------');
+      this.$emit('_c', null);
     },
     // 模拟分页
     changeDatasFun() {
-      let _data = JSON.parse(JSON.stringify(this.tableData2))
-      let _first = (this.currentPage - 1) * 10
-      this.tableData = _data.slice(_first, _first + 10)
+      let _data = JSON.parse(JSON.stringify(this.tableData2));
+      let _first = (this.currentPage - 1) * 10;
+      this.tableData = _data.slice(_first, _first + 10);
     },
     handleSizeChange(val) {
-      console.log(`每页 ${val} 条`)
+      console.log(`每页 ${val} 条`);
     },
     handleCurrentChange(val) {
-      this.currentPage = val
-      this.changeDatasFun()
+      this.currentPage = val;
+      this.changeDatasFun();
     },
   },
-}
+};
 </script>
 
 <style lang="less" scoped>
