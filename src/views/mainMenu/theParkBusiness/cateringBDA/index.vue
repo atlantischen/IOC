@@ -250,6 +250,8 @@ export default {
         series: [
           {
             animationDuration: 2000,
+            animationEasing:'linear',
+
             name: "中餐",
             type: "bar",
             stack: "total",
@@ -269,6 +271,7 @@ export default {
           },
           {
             animationDuration: 2000,
+            animationEasing:'linear',
 
             name: "西餐",
             type: "bar",
@@ -288,6 +291,8 @@ export default {
           },
           {
             animationDuration: 2000,
+            animationEasing:'linear',
+
 
             name: "料理",
             type: "bar",
@@ -307,6 +312,8 @@ export default {
           },
           {
             animationDuration: 2000,
+            animationEasing:'linear',
+
 
             name: "烧烤",
             type: "bar",
@@ -326,6 +333,8 @@ export default {
           },
           {
             animationDuration: 2000,
+            animationEasing:'linear',
+
 
             name: "自助餐",
             type: "bar",

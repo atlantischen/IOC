@@ -280,6 +280,8 @@ export default {
         ],
         series: [
           {
+            animationDuration: 3000,
+
             name: "",
             type: "line",
             // smooth: true,

@@ -19,7 +19,6 @@ var redomEchart = function redomEchart(dom, option) {
   // let resizeDiv = that.refs[dom] // document.getElementById(dom)
   if(dom && dom !== undefined){
    let resizeDiv = dom
-   console.log(resizeDiv,'resizeDiv'); 
    let myChart = null
    myChart = echarts.init(resizeDiv)
    myChart.clear()

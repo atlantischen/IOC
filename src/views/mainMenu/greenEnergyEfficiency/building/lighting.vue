@@ -345,6 +345,8 @@ export default {
         ],
         series: [
           {
+            animationDuration: 3000,
+
             name: "公共区",
             type: "bar",
             barWidth: 12,
@@ -356,6 +358,8 @@ export default {
             data: data1[1],
           },
           {
+            animationDuration: 3000,
+
             name: "办公区",
             type: "bar",
             barWidth: 12,
@@ -364,6 +368,8 @@ export default {
             data: data1[0],
           },
           {
+            animationDuration: 3000,
+
             name: "停车场",
             type: "bar",
             barWidth: 12,
@@ -375,6 +381,8 @@ export default {
             data: data1[2],
           },
           {
+            animationDuration: 3000,
+
             name: "设备层",
             type: "bar",
             barWidth: 12,

@@ -272,7 +272,7 @@ export default {
         yAxis: [
           {
             min: 0,
-            max: 30000,
+            max: 15000,
             splitNumber: 4,
             interval: 5000,
             name: "个",
@@ -309,6 +309,9 @@ export default {
         ],
         series: [
           {
+            animationDuration: 3000,
+            animationEasing:'linear',
+
             name: "",
             type: "bar",
             barWidth: 14,
@@ -372,6 +375,7 @@ export default {
         series: datas.map(function(data, idx) {
           var top = idx * 33.3;
           return {
+            
             type: "pie",
             radius: [50, 70],
             top: top + "%",
@@ -528,6 +532,9 @@ export default {
         ],
         series: [
           {
+            animationDuration: 3000,
+            animationEasing:'linear',
+
             name: "",
             type: "bar",
             barWidth: 14,
@@ -629,6 +636,9 @@ export default {
         ],
         series: [
           {
+            animationDuration: 3000,
+            animationEasing:'linear',
+
             name: "",
             barWidth: 40,
             type: "bar",

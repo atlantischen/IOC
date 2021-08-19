@@ -37,7 +37,7 @@
 
         <ul>
           <li v-for="(item, index) in topList" :key="index">
-            <span :style="'width:' + item.value + '%'"></span>
+            <span class="animation_m"   v-style="{width:item.value+'%'}"></span>
             <span>{{ item.name }}</span>
           </li>
         </ul>
@@ -125,6 +125,19 @@ export default {
     };
   },
   components: {},
+  directives:{
+    style:{
+      mounted(el,binding){
+        console.log(el,binding);
+        setTimeout(() => {
+        for(let attr in binding.value){
+          el.style[attr]=binding.value[attr]
+        }
+          }, 0);
+
+      }
+    }
+  },
   methods: {
     AssetsAndEquipment() {
       var dom = this.$refs["park_time"];
@@ -252,6 +265,10 @@ export default {
         ],
         series: [
           {
+            animationDuration: 3000,
+            animationEasing:'linear',
+
+
             name: "",
             type: "bar",
             barWidth: 14,
@@ -292,6 +309,10 @@ export default {
       var option = {
         series: [
           {
+            animationDuration: 3000,
+            animationEasing:'linear',
+
+
             type: "gauge",
             // center:['50%','50%'],
             min: 0,
@@ -359,6 +380,9 @@ export default {
       var option = {
         series: [
           {
+            animationDuration: 3000,
+            animationEasing:'linear',
+
             type: "gauge",
             // center:['50%','50%'],
             min: 0,
@@ -437,6 +461,9 @@ export default {
        var option = {
         series: [
           {
+            animationDuration: 3000,
+            animationEasing:'linear',
+
             type: "gauge",
             // center:['50%','50%'],
             min: 0,
@@ -633,6 +660,9 @@ export default {
         ],
         series: [
           {
+            animationDuration: 3000,
+            animationEasing:'linear',
+
             name: "",
             type: "bar",
             barWidth: 14,
@@ -736,7 +766,8 @@ export default {
         justify-content: space-between;
         margin-bottom: 0.125rem /* 10/80 */ /* 15/80 */;
         span:first-child {
-          width: 70%;
+          // width: 70%;
+          width: 0;
           height: 0.1rem /* 8/80 */;
           background: linear-gradient(90deg, #1e3957, #4395f3);
           border-radius: 0.05rem /* 4/80 */;

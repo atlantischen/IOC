@@ -217,6 +217,9 @@ export default {
               focus: "series",
             },
             data: [7, 9, 6, 5],
+            animationEasing:'linear',
+            animationDuration: 2000,
+
 
           },
           {
@@ -235,6 +238,10 @@ export default {
               focus: "series",
             },
             data: [8, 9, 8, 7],
+            animationDuration: 2000,
+            animationEasing:'linear',
+
+
           },
           {
             name: "书吧",
@@ -252,6 +259,10 @@ export default {
               focus: "series",
             },
             data: [8, 8, 9, 8],
+            animationDuration: 2000,
+            animationEasing:'linear',
+
+
           },
           {
             name: "文化",
@@ -269,6 +280,10 @@ export default {
               focus: "series",
             },
             data:[6, 8, 5, 9],
+            animationDuration: 2000,
+            animationEasing:'linear',
+
+
           },
           {
             name: "影院",
@@ -286,6 +301,10 @@ export default {
               focus: "series",
             },
             data: [5, 4, 6, 9],
+            animationDuration: 2000,
+            animationEasing:'linear',
+
+
           },
         ],
       };

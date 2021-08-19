@@ -263,6 +263,7 @@ export default {
         },
         series: [
           {
+            animationDuration: 3000,
             name: "功率",
             data: [
               {
@@ -544,6 +545,8 @@ export default {
         ],
         series: [
           {
+            animationDuration: 3000,
+
             name: "",
             type: "line",
             // smooth: true,
@@ -610,7 +613,7 @@ export default {
       this.RealTotalPower(this.$getNowTime());
       this.ElectricityStatistics(
           this.$fun_date(),
-          [2000, 3300, 3300, 4300, 3000, 3001, 4000],
+          [1956, 2136, 2463, 2314, 2513, 2510, 2703],
           {
             name: "kw·h",
             company: "日",

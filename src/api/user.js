@@ -4,7 +4,7 @@ import qs from 'qs'
 
 export function loginApi(data) {
   return instance({
-    url: '/campus-auth/oauth/token?' + qs.stringify(data),
+    url: 'campus-auth/oauth/token?' + qs.stringify(data),
     method: 'post'
   })
 }

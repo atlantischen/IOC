@@ -160,6 +160,9 @@ export default {
         ],
         series: [
           {
+            animationDuration: 3000,
+            animationEasing:'linear',
+
             name: "",
             type: "bar",
             barWidth: 14,
@@ -450,6 +453,9 @@ export default {
         ],
         series: [
           {
+            animationDuration: 3000,
+            animationEasing:'linear',
+
             // name: "其他",
             type: "bar",
             barWidth: 14,

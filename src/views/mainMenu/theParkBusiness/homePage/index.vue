@@ -647,7 +647,7 @@ export default {
               { value: 1091, name: "文化" },
               { value: 727, name: "购物" },
             ],
-            animationDuration: 3000,
+           
           },
         ],
       };
@@ -780,7 +780,9 @@ export default {
               },
             },
             data: data,
-            animationDuration: 2000,
+            animationDuration: 3000,
+            animationEasing:'linear',
+
           },
         ],
       };
