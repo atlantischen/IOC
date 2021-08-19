@@ -8,24 +8,22 @@
     <div class="tipBox_text x_c" :class="'tipBox_warn'">
       <div id="pList" ref="pList">
         <!--  class="text_animate" -->
-        <ul>
-          <li v-for="(item, i) in _data" :key="i">{{ item.text }}</li>
-          <li v-for="(item, i) in _data" :key="i">{{ item.text }}</li>
-          <li v-for="(item, i) in _data" :key="i">{{ item.text }}</li>
+        <ul id="pList_c" ref="pList_c">
+          <li v-for="(item, i) in tipDataList" :key="i">{{ item.text }}</li>
         </ul>
       </div>
       <i class="el-icon-circle-close" @click.stop="closeTip"></i>
     </div>
     <audio
-      :src="audioSrc"
       loop
       ref="playMusic"
       id="playMusic"
-      autoplay="false"
       @play="onPlay"
       @pause="onPause"
       hidden
-    ></audio>
+    >
+      <source :src="audioSrc" type="audio/mpeg" />
+    </audio>
   </div>
 </template>
 
@@ -46,27 +44,38 @@ export default {
       timer2: null,
       timerOut: null,
       isShow: this.$store.state.comState.showWarnTip,
-      // audioSrc: require('@/assets/mp3/消防警报.mp3'),
-      audioSrc: require('@/assets/mp3/叮叮警报.mp3'),
-    }
+      audioSrc: require('@/assets/mp3/消防警报.mp3'),
+      // audioSrc: require('@/assets/mp3/叮叮警报.mp3'),
+    };
   },
   watch: {
     '$store.state.comState.showWarnTip': {
       handler(n) {
-        this.isShow = n
+        this.isShow = n;
         if (this.isShow) {
-          this.openWran()
+          this.openWran();
           setTimeout(() => {
-            this.moveLeft()
-          }, 500)
-          this.$SendMessageToUnity('PopUpWarningNoticesBar', { isOpen: true })
+            if (this.timer) {
+              clearInterval(this.timer);
+              this.timer = null;
+            }
+            this.moveLeft();
+          }, 500);
+          this.$SendMessageToUnity('PopUpWarningNoticesBar', { isOpen: true });
           console.log(
             '=================PopUpWarningNoticesBar, { isOpen: true })'
-          )
+          );
         } else {
           this.$nextTick(() => {
-            this.onPause()
-          })
+            this.onPause();
+          });
+        }
+      },
+    },
+    _data: {
+      handler(n) {
+        if (n) {
+          this.tipDataList = n.length < 3 ? [...n, ...n, ...n] : n;
         }
       },
       immediate: true,
@@ -74,85 +83,83 @@ export default {
   },
   components: {},
   created() {},
-  mounted() {
-    var _that = this
-    // document.querySelector(".tipBox_text").onmouseover = function() {
-    //   _that.timer = null;
-    //   clearInterval(_that.timer);
-    // };
-    // document.querySelector(".tipBox_text").onmouseout = function() {
-    //   _that.moveLeft();
-    // };
-  },
+  mounted() {},
   beforeDestroy() {
-    clearInterval(this.timer)
+    clearInterval(this.timer);
+    this.timer = null;
   },
   methods: {
     // 警告框滑动
     moveLeft() {
-      // var _w = document.getElementById("pList").children[0],
-      var _w = this.$refs.pList.children[0],
-        _d = 0
-      var _wc = _w.children
-      var _l = _wc.length
-      _w.appendChild(_wc[0])
+      var _w = document.getElementById('pList').children[0],
+        _w = this.$refs.pList.children[0],
+        _d = 0;
+      var _wc = _w.children;
+      var _l = _wc.length;
+      _w.appendChild(_wc[0]);
+      if (this.timer) {
+        clearInterval(this.timer);
+        this.timer = null;
+      }
       this.timer = setInterval(() => {
-        _d--
+        _d--;
         if (-_d >= _w.getBoundingClientRect().width) {
-          _d = 10
-          _w.insertBefore(_wc[_l - 1], _wc[0])
+          _d = 10;
+          _w.insertBefore(_wc[_l - 1], _wc[0]);
         }
         // _w[0].style.transform = 'translateX(-' + _d + 'px)'
-        _w.style.left = _d + 'px'
-      }, 25)
+        _w.style.left = _d + 'px';
+      }, 25);
     },
 
     // 点击警告框3D出现警告位置
     clickItem() {
-      this.$SendMessageToUnity('OnWarningNoticesBarClick', {})
-      console.log('=================OnWarningNoticesBarClick')
+      this.$SendMessageToUnity('OnWarningNoticesBarClick', {});
+      console.log('=================OnWarningNoticesBarClick');
     },
     // 关闭警告
     closeTip() {
-      this.isShow = false
-      this.onPause()
-      this.$store.dispatch('SET_SHOWWARNTIP', this.isShow)
+      this.isShow = false;
+      this.onPause();
+      this.$store.dispatch('SET_SHOWWARNTIP', this.isShow);
       this.$SendMessageToUnity('PopUpWarningNoticesBar', {
         isOpen: this.isShow,
-      })
-      console.log('=================PopUpWarningNoticesBar, { isOpen: false })')
+      });
+      console.log(
+        '=================PopUpWarningNoticesBar, { isOpen: false })'
+      );
       // this.$emit("close", this.isShow);
     },
     onPlay() {
-      this.$refs.playMusic.play()
+      this.$refs.playMusic.play();
       // this.$refs.playMusic.loading()
     },
     onPause() {
-      this.$refs.playMusic.pause()
+      this.$refs.playMusic.pause();
     },
     openWran() {
       this.timer2 = setInterval(() => {
         this.$nextTick(() => {
           if (this.$refs.playMusic) {
-            this.onPlay()
+            this.onPlay();
           }
-        })
+        });
         this.timerOut = setTimeout(() => {
-          clearInterval(this.timer2)
-          this.timer2 = null
+          clearInterval(this.timer2);
+          this.timer2 = null;
           this.$nextTick(() => {
             if (this.$refs.playMusic) {
-              this.onPause()
-              clearTimeout(this.timerOut)
-              this.timerOut = null
-              this.openWran()
+              this.onPause();
+              clearTimeout(this.timerOut);
+              this.timerOut = null;
+              this.openWran();
             }
-          })
-        }, 30000)
-      }, 180000)
+          });
+        }, 30000);
+      }, 180000);
     },
   },
-}
+};
 </script>
 
 <style lang="less">
@@ -208,26 +215,4 @@ export default {
 .tipBox_warn {
   color: #e5181e;
 }
-
-// @keyframes wordsLoop {
-//   0% {
-//     transform: translateX(0);
-//     -webkit-transform: translateX(0);
-//   }
-//   100% {
-//     transform: translateX(-100%);
-//     -webkit-transform: translateX(-100%);
-//   }
-// }
-
-// @-webkit-keyframes wordsLoop {
-//   0% {
-//     transform: translateX(0);
-//     -webkit-transform: translateX(0);
-//   }
-//   100% {
-//     transform: translateX(-100%);
-//     -webkit-transform: translateX(-100%);
-//   }
-// }
 </style>

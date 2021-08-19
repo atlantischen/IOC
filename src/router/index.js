@@ -48,7 +48,7 @@ const routes = [{
           title: 'url',
           isShow: true
         }
-      },
+      }
     ]
   },
   {

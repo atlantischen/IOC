@@ -13,21 +13,18 @@
 
 <script>
 export default {
-  name: "allcom",
+  name: 'allcom',
   props: ['_Info'],
-  data () {
-    return {
-    }
+  data() {
+    return {};
   },
-  mounted () {
-  },
-  methods: {
-  }
+  mounted() {},
+  methods: {},
 };
 </script>
 
 <style lang="less" scoped>
-@import "~@/style/gl.less";
+@import '~@/style/gl.less';
 .allcom {
 }
 </style>
