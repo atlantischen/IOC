@@ -17,15 +17,18 @@ import screenfull from "screenfull";
 var redomEchart = function redomEchart(dom, option) {
   // let that = this
   // let resizeDiv = that.refs[dom] // document.getElementById(dom)
-  let resizeDiv = dom
-  let myChart = null
-  myChart = echarts.init(resizeDiv)
-  myChart.clear()
-  myChart.setOption(option, true)
-  let listener = function () {
-    myChart.resize()
-  }
-  EleResize.on(resizeDiv, listener)
+  if(dom && dom !== undefined){
+   let resizeDiv = dom
+   let myChart = null
+   myChart = echarts.init(resizeDiv)
+   myChart.clear()
+   myChart.setOption(option, true)
+   let listener = function () {
+     myChart.resize()
+   }
+   EleResize.on(resizeDiv, listener)
+ }
+ 
 }
 
 /**

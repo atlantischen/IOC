@@ -75,7 +75,7 @@ instance.interceptors.response.use(
       }
     } else {
       if (error == 'Error: Network Error') {
-        alert(error)
+        // alert(error)
       } else {
         ElMessage.error(error.response)
         // removeToken()

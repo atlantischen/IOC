@@ -90,7 +90,7 @@
             <li v-for="i in dateList" :key="i">
               <div class="date">{{ i.dateType }}</div>
               <div class="use">
-                <i :style="'width:' + i.percentage + '%'"></i>
+                  <i class="animation_m" v-style="{width:i.percentage+'%'}" ></i>
                 <div>
                   <span>{{i.desc}}用电量：</span>
                   <span class="font_text">
@@ -119,7 +119,7 @@
             <li v-for="i in WdateList" :key="i">
               <div class="date">{{ i.dateType }}</div>
               <div class="use">
-                <i :style="'width:' + i.percentage + '%'"></i>
+                <i  class="animation_m"  v-style="{width:i.percentage+'%'}" ></i>
                 <div>
                   <span>{{i.desc}}用水量：</span>
                   <span class="font_text">
@@ -161,7 +161,8 @@
           <li>
             <img src="../../../../assets/img/electirc.png" alt="" />
             <div class="middle">
-              <i :style="'width:90%'"></i>
+             
+              <i  class="animation_m"  v-style="{width:num*3+'%'}" ></i>
               <div>
                 <span>本月电能耗：</span>
                 <span class="font_text">
@@ -175,7 +176,9 @@
           <li>
             <img src="../../../../assets/img/water.png" alt="" />
             <div class="middle">
-              <i :style="'width:80%'"></i>
+            <i  class="animation_m"  v-style="{width:num*2+'%'}" ></i>
+
+
               <div>
                 <span>本月水能耗：</span>
                 <span class="font_text">
@@ -189,7 +192,8 @@
           <li>
             <img src="../../../../assets/img/gas.png" alt="" />
             <div class="middle">
-              <i :style="'width:70%'"></i>
+          <i  class="animation_m"  v-style="{width:num*1+'%'}" ></i>
+
               <div>
                 <span>本月气能耗：</span>
                 <span class="font_text">
@@ -214,6 +218,7 @@ export default {
   name: "homePage",
   data () {
     return {
+      ids: this.$uuid(),
       Visible: false,
       dialogTitle:'',
       activeType:'电',
@@ -462,6 +467,8 @@ export default {
 
         series: [
           {
+            animationDuration: 3000,
+
             name: "电能源",
             yAxisIndex:0 ,
             symbol: "none",
@@ -513,6 +520,8 @@ export default {
             },
           },
           {
+            animationDuration: 3000,
+
             name: "水能源",
             symbol: "none",
             yAxisIndex:1 ,
@@ -581,6 +590,7 @@ export default {
         },
         series: [
           {
+            animationDuration:3000,
             type: "pie",
             radius: ["90%", "75%"],
             center: ["25%", "53%"],
@@ -630,6 +640,19 @@ export default {
       this.$redomEchart(dom, option);
     },
   },
+  directives:{
+    style:{
+      mounted(el,binding){
+        console.log(el,binding);
+        setTimeout(() => {
+        for(let attr in binding.value){
+          el.style[attr]=binding.value[attr]
+        }
+          }, 0);
+
+      }
+    }
+  },
   mounted () {
     this.trendInit( this.$getNowTime());
     this.KPIint();
@@ -641,6 +664,7 @@ export default {
 
 <style lang="less" scoped>
 .container {
+  
   .energy {
     .energy_total {
       margin-top: 0.125rem /* 10/80 */;
@@ -838,7 +862,8 @@ export default {
             width: 2.5rem /* 200/80 */;
             i {
               // width: 78px;
-              height: 8px;
+              width: 0%;
+              height: .1rem /* 8/80 */;
               display: inline-block;
               background: linear-gradient(90deg, #1e3957, #4395f3);
               border-radius: 4px;
@@ -917,45 +942,56 @@ export default {
     & > ul {
       & > li {
         display: flex;
-        width: 100%;
+        align-items: center;
+         justify-content: space-around;
+        // width: 100%;
         margin: 0.125rem 0;
         img {
           width: 0.5rem /* 40/80 */;
           height: 0.5rem /* 40/80 */;
         }
-        .middle {
-          display: flex;
-          flex-direction: column;
-          width: 100%;
-          justify-content: center;
-          margin-left: 0.25rem /* 20/80 */;
+         .middle {
+            display: flex;
+            flex-direction: column;
+            width: 2.5rem /* 200/80 */;
+            i {
+              width: 0%;
+              height: .1rem /* 8/80 */;
+              display: inline-block;
+              background: linear-gradient(90deg, #1e3957, #4395f3);
+              border-radius: 4px;
+              margin-bottom: 0.0625rem /* 5/80 */;
+            }
+            & > div {
+              color: #fff;
+              white-space: nowrap;
 
-          & > i {
-            height: 8px;
-            display: inline-block;
-            background: linear-gradient(90deg, #1e3957, #4395f3);
-            border-radius: 4px;
-            margin-bottom: 0.0625rem /* 5/80 */;
-          }
-          & > div {
-            color: #fff;
-            & > span:nth-child(1) {
+              & > span:nth-child(1) {
+                // display: block;
+                font-size: 0.175rem /* 14/80 */;
+                opacity: 0.7;
+                // margin-bottom: 0.1875rem /* 15/80 */;
+              }
+              & > span:nth-child(2) {
+                font-size: 0.25rem /* 20/80 */;
+              }
+              & > span:nth-child(3) {
+                margin-left: 0.0875rem /* 7/80 */;
+              }
+            }
+            & > span {
+              color: #fff;
               font-size: 0.175rem /* 14/80 */;
-              opacity: 0.7;
-            }
-            & > span:nth-child(2) {
-              font-size: 0.2rem /* 16/80 */;
-            }
-            & > span:nth-child(3) {
-              font-size: 0.15rem /* 12/80 */;
-              margin-left: 0.0625rem /* 5/80 */;
-              opacity: 0.7;
+              white-space: nowrap;
+              & > span {
+                font-size: 0.2rem /* 16/80 */;
+              }
             }
           }
-        }
         .bottom {
           font-size: 0.175rem /* 14/80 */;
           color: #fff;
+          padding-left: .125rem /* 10/80 */ /* 5/80 */;
         }
       }
     }

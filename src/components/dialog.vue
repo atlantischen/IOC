@@ -15,7 +15,6 @@
               <ul>
                 <li
                 
-                  @click="lookVideo(`${++index}号客梯`)"
                 >
           <Player :dialogShow="$store.state.videoShow"  class="video_player" height='185'  width="24.5"  :monitorList="monitorList" ></Player>
 

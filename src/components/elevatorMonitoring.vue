@@ -10,7 +10,8 @@
       >
         <div class="videoBox" ref="videoBoxRef">
             <div class="video">
-              <Player :dialogShow="dialogShow"   :monitorList="theParkServiceList" ></Player>
+              <!-- <Player :dialogShow="dialogShow"   :monitorList="theParkServiceList" ></Player> -->
+              <video   src="../assets/video/楼梯间视频1.mp4" disablePictureInPicture controls muted autoplay></video>
             </div>
             <div class="desc">
                 <ul>

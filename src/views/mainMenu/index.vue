@@ -7,7 +7,7 @@
       allowfullscreen="true"
       frameborder="0"
     ></iframe>
-    <router-view v-if="isShow" class="comEntry"></router-view>
+    <router-view v-show="isShow" class="comEntry"></router-view>
     <!-- 告警框 -->
     <TipBox :_data="tipList" />
     <!-- 右侧警告框 -->
@@ -37,7 +37,7 @@ export default {
   components: { AlarmAck, AllAlert },
   data() {
     return {
-      isShow: false,
+      isShow: true,
       showAlarmAck: false,
       showAllAlert: false,
       showEscHandler: false,

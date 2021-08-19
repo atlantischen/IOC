@@ -64,7 +64,7 @@
     <div class="pump ">
       <div class="tittle">泵房监控</div>
         <ul>
-          <li  @click="lookVideo(`${++index}号客梯`)">
+          <li  >
             <!-- <span>2020-12-31    14:40</span>
             <span>{{item++}}号客梯</span> -->
            <!-- <Vloading v-show="showIfame" /> -->
@@ -280,6 +280,8 @@ export default {
         ],
         series: [
           {
+            animationDuration: 3000,
+
             name: "",
             type: "line",
             // smooth: true,

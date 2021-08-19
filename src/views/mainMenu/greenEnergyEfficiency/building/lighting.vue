@@ -69,27 +69,7 @@
     <div class="useKWH">
       <div class="tittle">照明用电</div>
       <div class="btn">
-        <!-- <ul>
-          <li
-            :class="{ active: activeIndex === 1 }"
-            @click="clickUsedEchart(1)"
-          >
-            近7天
-          </li>
-          <li
-            :class="{ active: activeIndex === 2 }"
-            @click="clickUsedEchart(2)"
-          >
-            近12月
-          </li>
-          <li
-            :class="{ active: activeIndex === 3 }"
-            @click="clickUsedEchart(3)"
-          >
-            近3年
-          </li>
-        </ul> -->
-        <div id="ElectricityStatistics" ref="ElectricityStatistics"></div>
+        <div id="ElectricityStatistics" :ref="'ElectricityStatistics'+ids"></div>
       </div>
     </div>
     <div class="scene">
@@ -121,6 +101,7 @@
 export default {
   data() {
      return {
+      ids: this.$uuid(),
       activeIndex: 1,
       floorList: [
         {
@@ -258,42 +239,9 @@ export default {
        
       }
     },
-    // clickUsedEchart(num) {
-    //   this.activeIndex = num;
-    //   if (num == 1) {
-    //     this.ElectricityStatistics(
-    //       ["12.5", "12.6", "12.7", "12.8", "12.9", "12.10", "12.11"],
-    //       [
-    //         [2, 2, 0.6, 0.8, 1, 2, 3],
-    //         [1, 3, 0.3, 0.5, 1, 1, 0.8],
-    //         [2, 0.8, 3, 3, 2, 0.5, 0.6],
-    //         [0.5, 0.5, 1, 2, 0.7, 1, 0.2],
-    //       ]
-    //     );
-    //   } else if (num == 2) {
-    //     this.ElectricityStatistics(
-    //       ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"],
-    //       [
-    //         [3, 4, 3, 2.8, 3, 4, 3, 2,3, 2.2, 1.3, 3],
-    //         [3, 3, 4, 2.2, 2, 1.3, 2.5, 2.1, 1.2, 1.8, 1.2, 1.2],
-    //         [2, 3, 2, 1.5, 1.6, 1.5, 3, 1.3, 1.1, 1.3, 1.4, 1.6],
-    //         [2, 1, 1, 1.8, 1.5, 1.2, 1.3, 1.1, 1.2, 1.3, 1.2, 1.2],
-    //       ]
-    //     );
-    //   } else if (num == 3) {
-    //     this.ElectricityStatistics(
-    //       ["2019年", "2020年", "2021年"],
-    //       [
-    //         [4, 4, 3],
-    //         [2, 4, 2],
-    //         [1, 1, 4],
-    //         [2, 2, 1],
-    //       ]
-    //     );
-    //   }
-    // },
+   
     ElectricityStatistics(data, data1) {
-      var dom = this.$refs.ElectricityStatistics;
+      var dom = this.$refs['ElectricityStatistics'+this.ids];
       var option = {
         title: {
           text: "",
@@ -397,6 +345,8 @@ export default {
         ],
         series: [
           {
+            animationDuration: 3000,
+
             name: "公共区",
             type: "bar",
             barWidth: 12,
@@ -408,6 +358,8 @@ export default {
             data: data1[1],
           },
           {
+            animationDuration: 3000,
+
             name: "办公区",
             type: "bar",
             barWidth: 12,
@@ -416,6 +368,8 @@ export default {
             data: data1[0],
           },
           {
+            animationDuration: 3000,
+
             name: "停车场",
             type: "bar",
             barWidth: 12,
@@ -427,6 +381,8 @@ export default {
             data: data1[2],
           },
           {
+            animationDuration: 3000,
+
             name: "设备层",
             type: "bar",
             barWidth: 12,
@@ -443,7 +399,8 @@ export default {
     },
   },
   mounted(){
-     this.ElectricityStatistics(
+    this.$nextTick(()=>{
+      this.ElectricityStatistics(
                        this.$fun_date(),
                          [
             [2, 2, 0.6, 0.8, 1, 2, 3],
@@ -452,6 +409,8 @@ export default {
             [0.5, 0.5, 1, 2, 0.7, 1, 0.2],
           ]
             );
+    })
+     
   }
 };
 </script>
