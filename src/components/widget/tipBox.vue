@@ -28,6 +28,8 @@
 </template>
 
 <script>
+import audioSrc2 from "@/assets/mp3/消防警报.mp3"
+// import audioSrc2 from "@/assets/mp3/叮叮警报.mp3"
 export default {
   name: 'tipBox',
   props: {
@@ -44,7 +46,8 @@ export default {
       timer2: null,
       timerOut: null,
       isShow: this.$store.state.comState.showWarnTip,
-      audioSrc: require('@/assets/mp3/消防警报.mp3'),
+      audioSrc: audioSrc2,
+      // audioSrc: require('@/assets/mp3/消防警报.mp3'),
       // audioSrc: require('@/assets/mp3/叮叮警报.mp3'),
     };
   },
@@ -54,6 +57,7 @@ export default {
         this.isShow = n;
         if (this.isShow) {
           this.openWran();
+          console.log('111===')
           setTimeout(() => {
             if (this.timer) {
               clearInterval(this.timer);
@@ -66,9 +70,8 @@ export default {
             '=================PopUpWarningNoticesBar, { isOpen: true })'
           );
         } else {
-          this.$nextTick(() => {
+          console.log('222===')
             this.onPause();
-          });
         }
       },
     },
@@ -131,32 +134,56 @@ export default {
       // this.$emit("close", this.isShow);
     },
     onPlay() {
-      this.$refs.playMusic.play();
-      // this.$refs.playMusic.loading()
+      // const dom =  document.getElementById("playMusic")
+      // this.$nextTick(() => {
+      //   if(dom){
+      //     const playPromise = dom.play()
+      //     if (playPromise !== null){
+      //       playPromise.catch(() => { dom.play(); })
+      //     }
+      //   }
+      // })
+      this.$nextTick(() => {
+        if(this.$refs.playMusic){
+          const playPromise = this.$refs.playMusic.play()
+          if (playPromise !== null){
+            console.log('paly===')
+            playPromise.catch(() => { playPromise.play(); })
+          }
+          // this.$refs.playMusic.src = this.audioSrc
+          // this.$refs.playMusic.load()
+          // this.$refs.playMusic.play();
+        }
+      })
     },
     onPause() {
-      this.$refs.playMusic.pause();
+      this.$nextTick(() => {
+        if(this.$refs.playMusic){
+            console.log('pause===')
+          this.$refs.playMusic.pause();
+        }
+      });
     },
     openWran() {
+      if(this.timerOut){
+        clearInterval(this.timerOut);
+        this.timerOut = null;
+      }
       this.timer2 = setInterval(() => {
-        this.$nextTick(() => {
-          if (this.$refs.playMusic) {
-            this.onPlay();
-          }
-        });
+        this.onPlay();
         this.timerOut = setTimeout(() => {
-          clearInterval(this.timer2);
-          this.timer2 = null;
-          this.$nextTick(() => {
-            if (this.$refs.playMusic) {
-              this.onPause();
-              clearTimeout(this.timerOut);
-              this.timerOut = null;
-              this.openWran();
-            }
-          });
-        }, 30000);
-      }, 180000);
+          if(this.timer2){
+            clearInterval(this.timer2);
+            this.timer2 = null;
+          }
+          this.onPause();
+          clearTimeout(this.timerOut);
+          this.timerOut = null;
+          // this.openWran();
+      //   }, 30000);
+      // }, 180000);
+        }, 5000);
+      }, 10000);
     },
   },
 };

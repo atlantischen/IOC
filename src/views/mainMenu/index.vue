@@ -243,7 +243,7 @@ export default {
         //   this.clearWarnTimeFun()
         //   this.warnTimeFun()
         // }, 15000)
-      }, 60000);
+      }, 0);
     },
     clearWarnTimeFun() {
       clearInterval(this.warnTimer);
