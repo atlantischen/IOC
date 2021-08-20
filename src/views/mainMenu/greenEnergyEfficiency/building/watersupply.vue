@@ -22,13 +22,13 @@
     <div class="cold_row_b">
       <div class="tittle">今日告警</div>
       <ul class="warning scroll">
-        <li v-for="item in 19" :key="item">
-          <div class="tips">严重</div>
+        <li v-for="(item,index) in errorList" :key="index">
+          <div class="tips">{{item.status}}</div>
           <div class="warning_m">
-            <span>15:06</span>
-            <span>1#冷却水泵_发生故障</span>
+            <span>{{item.time}}</span>
+            <span>{{item.desc}}</span>
           </div>
-          <div class="warning_r">待处理</div>
+          <div class="warning_r">{{item.type}}</div>
         </li>
       </ul>
     </div>
@@ -104,6 +104,42 @@ export default {
       Visible: false,
       dialogTitle:'',
       activeIndex:1,
+      errorList:[
+        {
+          time:'09:56',
+          desc:'1#冷却水泵_发生故障',
+          type:'待处理',
+          status:"严重"
+        },
+         {
+          time:'10:04',
+          desc:'2#冷却水泵_发生故障',
+          type:'待处理',
+          status:"严重"
+
+        },
+         {
+          time:'10:32',
+          desc:'1#冷却水泵_运行异常',
+          type:'待处理',
+          status:"严重"
+        },
+         {
+          time:'12:13',
+          desc:'2#冷却水泵_运行异常',
+          type:'待处理',
+          status:"严重"
+
+        },
+         {
+          time:'16:36',
+          desc:'3#冷却水泵_断电',
+          type:'待处理',
+          status:"严重"
+
+        }
+        
+      ],
        SolenoidSwitchesDatas: [{
             time: '2021-03-01 12:22:03',
             status: 0
@@ -280,8 +316,8 @@ export default {
         ],
         series: [
           {
-            animationDuration: 3000,
-
+            animationDuration: 2000,
+            animationEasing:'linear',
             name: "",
             type: "line",
             // smooth: true,

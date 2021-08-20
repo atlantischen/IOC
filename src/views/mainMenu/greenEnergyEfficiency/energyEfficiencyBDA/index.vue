@@ -128,7 +128,6 @@ export default {
   directives:{
     style:{
       mounted(el,binding){
-        console.log(el,binding);
         setTimeout(() => {
         for(let attr in binding.value){
           el.style[attr]=binding.value[attr]
@@ -265,7 +264,7 @@ export default {
         ],
         series: [
           {
-            animationDuration: 3000,
+            animationDuration: 2000,
             animationEasing:'linear',
 
 
@@ -309,7 +308,7 @@ export default {
       var option = {
         series: [
           {
-            animationDuration: 3000,
+            animationDuration: 2000,
             animationEasing:'linear',
 
 
@@ -380,7 +379,7 @@ export default {
       var option = {
         series: [
           {
-            animationDuration: 3000,
+            animationDuration: 2000,
             animationEasing:'linear',
 
             type: "gauge",
@@ -461,7 +460,7 @@ export default {
        var option = {
         series: [
           {
-            animationDuration: 3000,
+            animationDuration: 2000,
             animationEasing:'linear',
 
             type: "gauge",
@@ -660,7 +659,7 @@ export default {
         ],
         series: [
           {
-            animationDuration: 3000,
+            animationDuration: 2000,
             animationEasing:'linear',
 
             name: "",

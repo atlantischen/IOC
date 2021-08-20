@@ -8,7 +8,7 @@
       frameborder="0"
     ></iframe>
     <router-view v-if="isShow" name="aa" class="comEntry"></router-view>
-    <router-view v-show="isShow" class="comEntry"></router-view>
+    <router-view v-if="isShow" class="comEntry"></router-view>
     <!-- 告警框 -->
     <TipBox :_data="tipList" />
     <!-- 右侧警告框 -->

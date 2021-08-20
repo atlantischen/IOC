@@ -5,13 +5,14 @@
         custom-class="hd_scrollbar"
         :title="dataList.LiftMonitorName"
         v-model="dialogVisible"
+        :destroy-on-close="true"
         @close="openClose(false)"
         @open="openDialog"
       >
         <div class="videoBox" ref="videoBoxRef">
             <div class="video">
               <!-- <Player :dialogShow="dialogShow"   :monitorList="theParkServiceList" ></Player> -->
-              <video   src="../assets/video/楼梯间视频1.mp4" disablePictureInPicture controls muted autoplay></video>
+              <video   class="vodeo_url" src="@/assets/video/楼梯间视频1.mp4" muted="true"  disablePictureInPicture="true" controls="true" autoplay="true"></video>
             </div>
             <div class="desc">
                 <ul>
@@ -67,6 +68,7 @@ export default {
   data() {
     return {
       dialogVisible:false,
+      // url:require('@/assets/video/楼梯间视频1.mp4')
       ElevatorList:{
             CurLoad: 500,
             IpAddress: "http://10.10.7.27:10800/play.html?channel=1",
@@ -163,6 +165,9 @@ export default {
     // top:50% !important;
     // transform: translateY(-50%) !important;
     margin-top:25vh !important;
+  }
+  .vodeo_url{
+    width: 100%;
   }
 
 
