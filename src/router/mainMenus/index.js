@@ -10,7 +10,10 @@ export default [{
     path: 'comprehensiveSituational',
     redirect: "/comprehensiveSituational/homePage",
     name: 'comprehensiveSituational',
-    component: () => import('@/views/mainMenu/comprehensiveSituational/index.vue'),
+    // component: ,
+    components: {
+      aa: () => import('@/views/mainMenu/comprehensiveSituational/index.vue')
+    },
     meta: {
       icon: 'icon-zonghe',
       name: '综合态势',

@@ -14,22 +14,16 @@
       </div>
       <i class="el-icon-circle-close" @click.stop="closeTip"></i>
     </div>
-    <audio
-      loop
-      ref="playMusic"
-      id="playMusic"
-      @play="onPlay"
-      @pause="onPause"
-      hidden
-    >
+    <audio loop controls style="opacity: 0" ref="playMusic" id="playMusic" >
       <source :src="audioSrc" type="audio/mpeg" />
     </audio>
   </div>
 </template>
 
 <script>
-import audioSrc2 from "@/assets/mp3/消防警报.mp3"
-// import audioSrc2 from "@/assets/mp3/叮叮警报.mp3"
+// import audioSrc2 from '@/assets/mp3/消防警报.mp3';
+import audioSrc2 from "@/assets/mp3/叮叮警报.mp3"
+
 export default {
   name: 'tipBox',
   props: {
@@ -47,8 +41,7 @@ export default {
       timerOut: null,
       isShow: this.$store.state.comState.showWarnTip,
       audioSrc: audioSrc2,
-      // audioSrc: require('@/assets/mp3/消防警报.mp3'),
-      // audioSrc: require('@/assets/mp3/叮叮警报.mp3'),
+      setMuted: true,
     };
   },
   watch: {
@@ -57,7 +50,6 @@ export default {
         this.isShow = n;
         if (this.isShow) {
           this.openWran();
-          console.log('111===')
           setTimeout(() => {
             if (this.timer) {
               clearInterval(this.timer);
@@ -70,8 +62,8 @@ export default {
             '=================PopUpWarningNoticesBar, { isOpen: true })'
           );
         } else {
-          console.log('222===')
-            this.onPause();
+          console.log('222===');
+          this.onPause();
         }
       },
     },
@@ -134,56 +126,44 @@ export default {
       // this.$emit("close", this.isShow);
     },
     onPlay() {
-      // const dom =  document.getElementById("playMusic")
-      // this.$nextTick(() => {
-      //   if(dom){
-      //     const playPromise = dom.play()
-      //     if (playPromise !== null){
-      //       playPromise.catch(() => { dom.play(); })
-      //     }
-      //   }
-      // })
       this.$nextTick(() => {
-        if(this.$refs.playMusic){
-          const playPromise = this.$refs.playMusic.play()
-          if (playPromise !== null){
-            console.log('paly===')
-            playPromise.catch(() => { playPromise.play(); })
-          }
-          // this.$refs.playMusic.src = this.audioSrc
-          // this.$refs.playMusic.load()
-          // this.$refs.playMusic.play();
+        if (document.getElementById('playMusic')) {
+          document.getElementById('playMusic').volume = 1
+          document.getElementById('playMusic').play();
         }
-      })
+      });
     },
     onPause() {
       this.$nextTick(() => {
-        if(this.$refs.playMusic){
-            console.log('pause===')
-          this.$refs.playMusic.pause();
+        let playPromise = document.getElementById('playMusic');
+        if (playPromise) {
+          console.log('pause===');
+          playPromise.pause();
         }
       });
     },
     openWran() {
-      if(this.timerOut){
+      if (this.timerOut) {
         clearInterval(this.timerOut);
         this.timerOut = null;
       }
       this.timer2 = setInterval(() => {
         this.onPlay();
         this.timerOut = setTimeout(() => {
-          if(this.timer2){
-            clearInterval(this.timer2);
-            this.timer2 = null;
-          }
+        if (this.timer2) {
+          clearInterval(this.timer2);
+          this.timer2 = null;
+        }
           this.onPause();
           clearTimeout(this.timerOut);
           this.timerOut = null;
-          // this.openWran();
-      //   }, 30000);
-      // }, 180000);
-        }, 5000);
-      }, 10000);
+          this.openWran();
+        }, 30000);
+      }, 180000);
+    },
+    openClose() {
+      this.setMuted = !this.setMuted;
+      document.getElementById('playMusic').muted = setMuted;
     },
   },
 };
@@ -241,5 +221,13 @@ export default {
 }
 .tipBox_warn {
   color: #e5181e;
+}
+#playMusic{
+  position: fixed;
+  width: 0;
+  height: 0;
+  left: 30%;
+  top: 30%;
+  z-index: -1;
 }
 </style>
