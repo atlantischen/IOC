@@ -281,6 +281,7 @@ export default {
             {
               type: 'bar',
               animationDuration: 2000,
+              animationEasing: 'linear',
               data: [
                 {
                   value: datas[i],

@@ -189,7 +189,8 @@ export default {
           return {
             ...e,
             type: 'line',
-            animationDuration: 3000,
+            animationDuration: 2000,
+            animationEasing: 'linear',
             smooth: smooth ? smooth : true,
             itemStyle: {
               normal: {

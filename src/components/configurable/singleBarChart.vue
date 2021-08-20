@@ -281,7 +281,8 @@ export default {
         series: allD.map((e) => {
           return {
             type: 'bar',
-            animationDuration: 3000,
+            animationDuration: 2000,
+            animationEasing: 'linear',
             ...e,
           }
         }),

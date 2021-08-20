@@ -145,7 +145,8 @@ export default {
             name: names[0],
             type: 'bar',
             barWidth: 14,
-            animationDuration: 3000,
+            animationDuration: 2000,
+            animationEasing: 'linear',
             itemStyle: {
               color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
                 { offset: 0, color: '#4396f3' },
@@ -158,7 +159,8 @@ export default {
             name: names[1],
             type: 'bar',
             barWidth: 14,
-            animationDuration: 3000,
+            animationDuration: 2000,
+            animationEasing: 'linear',
             itemStyle: {
               color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
                 { offset: 0, color: '#97C8FF' },

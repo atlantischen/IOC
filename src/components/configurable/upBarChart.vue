@@ -148,7 +148,8 @@ export default {
         series: [
           {
             name: names[1],
-            animationDuration: 3000,
+            animationDuration: 2000,
+            animationEasing: 'linear',
             type: 'bar',
             stack: 'one',
             barGap: '0',
@@ -163,7 +164,8 @@ export default {
           },
           {
             name: names[0],
-            animationDuration: 3000,
+            animationDuration: 2000,
+            animationEasing: 'linear',
             type: 'bar',
             stack: 'one',
             emphasis: comStyle,
@@ -177,7 +179,8 @@ export default {
           },
           {
             name: names[2],
-            animationDuration: 3000,
+            animationDuration: 2000,
+            animationEasing: 'linear',
             type: 'bar',
             stack: 'two',
             emphasis: comStyle,
@@ -191,7 +194,8 @@ export default {
           },
           {
             name: names[3],
-            animationDuration: 3000,
+            animationDuration: 2000,
+            animationEasing: 'linear',
             type: 'bar',
             stack: 'two',
             emphasis: comStyle,

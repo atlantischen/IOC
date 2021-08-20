@@ -66,7 +66,8 @@ export default {
             {
               type: 'bar',
               barWidth: 8,
-              animationDuration: 3000,
+              animationDuration: 2000,
+              animationEasing: 'linear',
               barGap: '400%',
               // barCategoryGap:'0%',
               showBackground: false,
@@ -110,7 +111,8 @@ export default {
             {
               type: 'bar',
               barWidth: 8,
-              animationDuration: 3000,
+              animationDuration: 2000,
+              animationEasing: 'linear',
               showBackground: false,
               label: {
                 show: true,

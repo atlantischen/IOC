@@ -286,6 +286,7 @@ export default {
             symbolSize: 6,
             ...e,
             animationDuration: 2000,
+            animationEasing: 'linear',
           }
         }),
       }
