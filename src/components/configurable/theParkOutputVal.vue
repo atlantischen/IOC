@@ -23,7 +23,10 @@ export default {
     };
   },
   mounted() {
+    this.$nextTick(()=>{
     this.outputValueFun(this.datas);
+
+    })
   },
   methods: {
     // 园区产值

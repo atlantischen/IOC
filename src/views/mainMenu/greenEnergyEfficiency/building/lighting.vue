@@ -346,6 +346,7 @@ export default {
         series: [
           {
             animationDuration: 3000,
+            animationEasing:'linear',
 
             name: "公共区",
             type: "bar",
@@ -359,6 +360,7 @@ export default {
           },
           {
             animationDuration: 3000,
+            animationEasing:'linear',
 
             name: "办公区",
             type: "bar",
@@ -369,7 +371,7 @@ export default {
           },
           {
             animationDuration: 3000,
-
+            animationEasing:'linear',
             name: "停车场",
             type: "bar",
             barWidth: 12,
@@ -382,7 +384,7 @@ export default {
           },
           {
             animationDuration: 3000,
-
+            animationEasing:'linear',
             name: "设备层",
             type: "bar",
             barWidth: 12,

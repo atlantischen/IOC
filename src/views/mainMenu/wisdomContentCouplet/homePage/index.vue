@@ -699,6 +699,7 @@ export default {
         this.$SendMessageToUnity("ShowIoTDevice_IOCMap",{strList:'6,7,8,9'});
        }else if(val.action ==='ME_ZHYLSingle' && val.data==='0'){
          this.fade =false
+        this.$SendMessageToUnity("ShowIoTDevice_IOCMap",{strList:'0,1,2,3,4,5,10'});
        }
       } catch (e) { }
       console.log(val);

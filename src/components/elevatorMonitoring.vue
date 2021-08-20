@@ -5,6 +5,7 @@
         custom-class="hd_scrollbar"
         :title="dataList.LiftMonitorName"
         v-model="dialogVisible"
+        :destroy-on-close="true"
         @close="openClose(false)"
         @open="openDialog"
       >
