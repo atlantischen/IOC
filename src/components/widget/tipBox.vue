@@ -46,10 +46,15 @@ export default {
   watch: {
     "$store.state.comState.showWarnTip": {
       handler(n) {
+        let timer
+        if(timer){
+          clearTimeout(timer)
+          timer = null
+        }
         this.isShow = n;
         if (this.isShow) {
           // this.openWran();
-          setTimeout(() => {
+          timer = setTimeout(() => {
             if (this.timer) {
               clearInterval(this.timer);
               this.timer = null;
@@ -62,10 +67,7 @@ export default {
             "=================PopUpWarningNoticesBar, { isOpen: true })"
           );
         } else {
-          if (!document.getElementById("playMusic").paused) {
-            this.onPause();
-            console.log('====音乐已暂停');
-          }
+          this.onPause();
         }
       },
     },
@@ -117,7 +119,7 @@ export default {
     // 关闭警告
     closeTip() {
       this.isShow = false;
-      this.onPause();
+      // this.onPause();
       this.$store.dispatch("SET_SHOWWARNTIP", this.isShow);
       this.$SendMessageToUnity("PopUpWarningNoticesBar", {
         isOpen: this.isShow,
@@ -129,20 +131,31 @@ export default {
     },
     onPlay() {
       this.$nextTick(() => {
-        if (document.getElementById("playMusic")) {
-          document.getElementById("playMusic").volume = 1;
-          document.getElementById("playMusic").play();
+        let dom = document.getElementById("playMusic")
+        if (dom && dom.paused) {
+          dom.volume = 1;
+          dom.play();
+          console.log('====音乐播放');
         }
       });
+      return false
     },
     onPause() {
-      this.$nextTick(() => {
-        let playPromise = document.getElementById("playMusic");
-        if (playPromise) {
-          console.log("pause===");
-          playPromise.pause();
-        }
-      });
+      let tim
+      if(tim){
+        tim = null
+        clearTimeout(tim)
+      }
+      tim = setTimeout(() => {
+        this.$nextTick(() => {
+          let dom = document.getElementById("playMusic");
+          if (dom && !dom.paused) {
+            dom.pause();
+            console.log("pause===");
+          }
+        });
+      }, 100);
+      return false
     },
     openWran() {
       if (this.timerOut) {

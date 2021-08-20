@@ -204,31 +204,39 @@ export default {
       slist2: [
         {
           name: '阿桂嫂',
-          phone: '',
+          phone: '0755-45725674',
           info: '梅龙路与金龙路交汇处',
           src: require('@/assets/img/datas/qy_ags.png'),
           srcName: 'qy_ags.png',
+          ShopType: "餐饮",
+          ShopSize: "117㎡"
         },
         {
-          name: '肯德基',
-          phone: '',
+          name: 'KFC(肯德基)',
+          phone: '0755-45795637',
           info: '2栋B座1088号商铺',
           src: require('@/assets/img/datas/qy_kfc.png'),
           srcName: 'qy_kfc.png',
+          ShopType: "餐饮",
+          ShopSize: "208㎡"
         },
         {
           name: '真功夫',
-          phone: '',
+          phone: '0755-45325141',
           info: '1栋A座3014号商铺',
           src: require('@/assets/img/datas/qy_zgf.png'),
           srcName: 'qy_zgf.png',
+          ShopType: "餐饮",
+          ShopSize: "123㎡"
         },
         {
           name: '深圳奇信智能科技有限公司',
-          phone: '',
-          info: '海纳百川B座16F',
+          phone: '0755-23912999',
+          info: '海纳百川B座16楼',
           src: require('@/assets/img/datas/qy_qx.png'),
           srcName: 'qy_qx.png',
+          ShopType: "企业",
+          ShopSize: "423㎡"
         },
       ],
       tableData: [],

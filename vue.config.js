@@ -31,25 +31,25 @@ module.exports = {
     config.externals = {
       BMap: 'BMap'
     }
-    config.optimization = {
-      minimizer: [
-        new UglifyJsPlugin({
-          uglifyOptions: {
-            output: { // 删除注释
-              comments: false
-            },
-            compress: {
-              //warnings: false, // 若打包错误，则注释这行
-              drop_debugger: true,
-              drop_console: true,
-              pure_funcs: ['console.log']
-            }
-          },
-          sourceMap: false,
-          parallel: true
-        })
-      ]
-    }
+    // config.optimization = {
+    //   minimizer: [
+    //     new UglifyJsPlugin({
+    //       uglifyOptions: {
+    //         output: { // 删除注释
+    //           comments: false
+    //         },
+    //         compress: {
+    //           //warnings: false, // 若打包错误，则注释这行
+    //           drop_debugger: true,
+    //           drop_console: true,
+    //           pure_funcs: ['console.log']
+    //         }
+    //       },
+    //       sourceMap: false,
+    //       parallel: true
+    //     })
+    //   ]
+    // }
     config.output.filename = `js/[name].${process.env.VUE_APP_Version}.${Timestamp}.js`
     config.output.chunkFilename = `js/[name].${process.env.VUE_APP_Version}.${Timestamp}.js`
     const pluginsPro = [
