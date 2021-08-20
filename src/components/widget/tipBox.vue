@@ -14,7 +14,7 @@
       </div>
       <i class="el-icon-circle-close" @click.stop="closeTip"></i>
     </div>
-    <audio loop controls style="opacity: 0" ref="playMusic" id="playMusic" >
+    <audio loop controls style="opacity: 0" ref="playMusic" id="playMusic">
       <source :src="audioSrc" type="audio/mpeg" />
     </audio>
   </div>
@@ -22,10 +22,10 @@
 
 <script>
 // import audioSrc2 from '@/assets/mp3/消防警报.mp3';
-import audioSrc2 from "@/assets/mp3/叮叮警报.mp3"
+import audioSrc2 from "@/assets/mp3/叮叮警报.mp3";
 
 export default {
-  name: 'tipBox',
+  name: "tipBox",
   props: {
     _data: {
       typeof: Array,
@@ -41,29 +41,31 @@ export default {
       timerOut: null,
       isShow: this.$store.state.comState.showWarnTip,
       audioSrc: audioSrc2,
-      setMuted: true,
     };
   },
   watch: {
-    '$store.state.comState.showWarnTip': {
+    "$store.state.comState.showWarnTip": {
       handler(n) {
         this.isShow = n;
         if (this.isShow) {
-          this.openWran();
+          // this.openWran();
           setTimeout(() => {
             if (this.timer) {
               clearInterval(this.timer);
               this.timer = null;
             }
             this.moveLeft();
+            this.onPlay();
           }, 500);
-          this.$SendMessageToUnity('PopUpWarningNoticesBar', { isOpen: true });
+          this.$SendMessageToUnity("PopUpWarningNoticesBar", { isOpen: true });
           console.log(
-            '=================PopUpWarningNoticesBar, { isOpen: true })'
+            "=================PopUpWarningNoticesBar, { isOpen: true })"
           );
         } else {
-          console.log('222===');
-          this.onPause();
+          if (!document.getElementById("playMusic").paused) {
+            this.onPause();
+            console.log('====音乐已暂停');
+          }
         }
       },
     },
@@ -86,7 +88,7 @@ export default {
   methods: {
     // 警告框滑动
     moveLeft() {
-      var _w = document.getElementById('pList').children[0],
+      var _w = document.getElementById("pList").children[0],
         _w = this.$refs.pList.children[0],
         _d = 0;
       var _wc = _w.children;
@@ -103,41 +105,41 @@ export default {
           _w.insertBefore(_wc[_l - 1], _wc[0]);
         }
         // _w[0].style.transform = 'translateX(-' + _d + 'px)'
-        _w.style.left = _d + 'px';
+        _w.style.left = _d + "px";
       }, 25);
     },
 
     // 点击警告框3D出现警告位置
     clickItem() {
-      this.$SendMessageToUnity('OnWarningNoticesBarClick', {});
-      console.log('=================OnWarningNoticesBarClick');
+      this.$SendMessageToUnity("OnWarningNoticesBarClick", {});
+      console.log("=================OnWarningNoticesBarClick");
     },
     // 关闭警告
     closeTip() {
       this.isShow = false;
       this.onPause();
-      this.$store.dispatch('SET_SHOWWARNTIP', this.isShow);
-      this.$SendMessageToUnity('PopUpWarningNoticesBar', {
+      this.$store.dispatch("SET_SHOWWARNTIP", this.isShow);
+      this.$SendMessageToUnity("PopUpWarningNoticesBar", {
         isOpen: this.isShow,
       });
       console.log(
-        '=================PopUpWarningNoticesBar, { isOpen: false })'
+        "=================PopUpWarningNoticesBar, { isOpen: false })"
       );
       // this.$emit("close", this.isShow);
     },
     onPlay() {
       this.$nextTick(() => {
-        if (document.getElementById('playMusic')) {
-          document.getElementById('playMusic').volume = 1
-          document.getElementById('playMusic').play();
+        if (document.getElementById("playMusic")) {
+          document.getElementById("playMusic").volume = 1;
+          document.getElementById("playMusic").play();
         }
       });
     },
     onPause() {
       this.$nextTick(() => {
-        let playPromise = document.getElementById('playMusic');
+        let playPromise = document.getElementById("playMusic");
         if (playPromise) {
-          console.log('pause===');
+          console.log("pause===");
           playPromise.pause();
         }
       });
@@ -150,10 +152,10 @@ export default {
       this.timer2 = setInterval(() => {
         this.onPlay();
         this.timerOut = setTimeout(() => {
-        if (this.timer2) {
-          clearInterval(this.timer2);
-          this.timer2 = null;
-        }
+          if (this.timer2) {
+            clearInterval(this.timer2);
+            this.timer2 = null;
+          }
           this.onPause();
           clearTimeout(this.timerOut);
           this.timerOut = null;
@@ -161,16 +163,12 @@ export default {
         }, 30000);
       }, 180000);
     },
-    openClose() {
-      this.setMuted = !this.setMuted;
-      document.getElementById('playMusic').muted = setMuted;
-    },
   },
 };
 </script>
 
 <style lang="less">
-@import '~@/style/gl.less';
+@import "~@/style/gl.less";
 .tipBox {
   position: fixed;
   top: 0.75rem /* 60/80 */;
@@ -189,7 +187,7 @@ export default {
     white-space: nowrap;
     padding: 0 0.4375rem /* 35/80 */;
     width: 100%;
-    background: url('~@/assets/img/tip_warn.png') center no-repeat;
+    background: url("~@/assets/img/tip_warn.png") center no-repeat;
     background-size: 100% 100%;
     #pList {
       width: 100%;
@@ -222,7 +220,7 @@ export default {
 .tipBox_warn {
   color: #e5181e;
 }
-#playMusic{
+#playMusic {
   position: fixed;
   width: 0;
   height: 0;
