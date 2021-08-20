@@ -467,7 +467,7 @@ export default {
 
         series: [
           {
-            animationDuration: 3000,
+            animationDuration: 2000,
 
             name: "电能源",
             yAxisIndex:0 ,
@@ -520,7 +520,7 @@ export default {
             },
           },
           {
-            animationDuration: 3000,
+            animationDuration: 2000,
 
             name: "水能源",
             symbol: "none",
@@ -643,7 +643,6 @@ export default {
   directives:{
     style:{
       mounted(el,binding){
-        console.log(el,binding);
         setTimeout(() => {
         for(let attr in binding.value){
           el.style[attr]=binding.value[attr]

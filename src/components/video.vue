@@ -11,7 +11,7 @@
           <video
             class="video"
             ref="myVideo"
-            src="../assets/video/v.mp4"
+            :src="url"
             @timeupdate="timeupdate"
             @canplay="getTotal"
           ></video>
@@ -98,6 +98,7 @@ export default {
         },
       ], // 倍速设置
       initPlaySpeed: 1.0,
+      url:require('@/assets/video/v.mp4')
     };
   },
   props: {

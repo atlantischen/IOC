@@ -14,20 +14,16 @@
       </div>
       <i class="el-icon-circle-close" @click.stop="closeTip"></i>
     </div>
-    <audio
-      loop
-      ref="playMusic"
-      id="playMusic"
-      @play="onPlay"
-      @pause="onPause"
-      hidden
-    >
+    <audio loop controls style="opacity: 0" ref="playMusic" id="playMusic" >
       <source :src="audioSrc" type="audio/mpeg" />
     </audio>
   </div>
 </template>
 
 <script>
+// import audioSrc2 from '@/assets/mp3/消防警报.mp3';
+import audioSrc2 from "@/assets/mp3/叮叮警报.mp3"
+
 export default {
   name: 'tipBox',
   props: {
@@ -44,8 +40,8 @@ export default {
       timer2: null,
       timerOut: null,
       isShow: this.$store.state.comState.showWarnTip,
-      audioSrc: require('@/assets/mp3/消防警报.mp3'),
-      // audioSrc: require('@/assets/mp3/叮叮警报.mp3'),
+      audioSrc: audioSrc2,
+      setMuted: true,
     };
   },
   watch: {
@@ -66,9 +62,8 @@ export default {
             '=================PopUpWarningNoticesBar, { isOpen: true })'
           );
         } else {
-          this.$nextTick(() => {
-            this.onPause();
-          });
+          console.log('222===');
+          this.onPause();
         }
       },
     },
@@ -131,32 +126,44 @@ export default {
       // this.$emit("close", this.isShow);
     },
     onPlay() {
-      this.$refs.playMusic.play();
-      // this.$refs.playMusic.loading()
+      this.$nextTick(() => {
+        if (document.getElementById('playMusic')) {
+          document.getElementById('playMusic').volume = 1
+          document.getElementById('playMusic').play();
+        }
+      });
     },
     onPause() {
-      this.$refs.playMusic.pause();
+      this.$nextTick(() => {
+        let playPromise = document.getElementById('playMusic');
+        if (playPromise) {
+          console.log('pause===');
+          playPromise.pause();
+        }
+      });
     },
     openWran() {
+      if (this.timerOut) {
+        clearInterval(this.timerOut);
+        this.timerOut = null;
+      }
       this.timer2 = setInterval(() => {
-        this.$nextTick(() => {
-          if (this.$refs.playMusic) {
-            this.onPlay();
-          }
-        });
+        this.onPlay();
         this.timerOut = setTimeout(() => {
+        if (this.timer2) {
           clearInterval(this.timer2);
           this.timer2 = null;
-          this.$nextTick(() => {
-            if (this.$refs.playMusic) {
-              this.onPause();
-              clearTimeout(this.timerOut);
-              this.timerOut = null;
-              this.openWran();
-            }
-          });
+        }
+          this.onPause();
+          clearTimeout(this.timerOut);
+          this.timerOut = null;
+          this.openWran();
         }, 30000);
       }, 180000);
+    },
+    openClose() {
+      this.setMuted = !this.setMuted;
+      document.getElementById('playMusic').muted = setMuted;
     },
   },
 };
@@ -214,5 +221,13 @@ export default {
 }
 .tipBox_warn {
   color: #e5181e;
+}
+#playMusic{
+  position: fixed;
+  width: 0;
+  height: 0;
+  left: 30%;
+  top: 30%;
+  z-index: -1;
 }
 </style>

@@ -309,7 +309,7 @@ export default {
         ],
         series: [
           {
-            animationDuration: 3000,
+            animationDuration: 2000,
             animationEasing:'linear',
 
             name: "",
@@ -532,7 +532,7 @@ export default {
         ],
         series: [
           {
-            animationDuration: 3000,
+            animationDuration: 2000,
             animationEasing:'linear',
 
             name: "",
@@ -636,7 +636,7 @@ export default {
         ],
         series: [
           {
-            animationDuration: 3000,
+            animationDuration: 2000,
             animationEasing:'linear',
 
             name: "",
@@ -698,6 +698,8 @@ export default {
          console.log(this.idArry,"单层打开");
         this.$SendMessageToUnity("ShowIoTDevice_IOCMap",{strList:'6,7,8,9'});
        }else if(val.action ==='ME_ZHYLSingle' && val.data==='0'){
+         this.idArry=[0,1,2,3,4,5,10],
+
          this.fade =false
         this.$SendMessageToUnity("ShowIoTDevice_IOCMap",{strList:'0,1,2,3,4,5,10'});
        }

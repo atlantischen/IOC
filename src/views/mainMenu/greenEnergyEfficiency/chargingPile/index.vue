@@ -160,7 +160,7 @@ export default {
         ],
         series: [
           {
-            animationDuration: 3000,
+            animationDuration: 2000,
             animationEasing:'linear',
 
             name: "",
@@ -453,7 +453,7 @@ export default {
         ],
         series: [
           {
-            animationDuration: 3000,
+            animationDuration: 2000,
             animationEasing:'linear',
 
             // name: "其他",

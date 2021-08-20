@@ -24,11 +24,11 @@
 </template>
 
 <script>
-import data from '@/utils/falseData.js'
-import { homePage } from '@/lang/data/comprehensiveSituational/index'
-import i18n from '@/lang/index'
-import RightContent from './components/rightContent.vue'
-import * as echarts from 'echarts'
+import data from '@/utils/falseData.js';
+import { homePage } from '@/lang/data/comprehensiveSituational/index';
+import i18n from '@/lang/index';
+import RightContent from './components/rightContent.vue';
+import * as echarts from 'echarts';
 // import { aaa } from "@/api/mockApi";
 // import axios from "axios";
 export default {
@@ -324,11 +324,11 @@ export default {
         },
       ],
       lang: null,
-    }
+    };
   },
   computed: {
     lang() {
-      return this.$store.state.comState.lang
+      return this.$store.state.comState.lang;
     },
   },
   watch: {
@@ -346,21 +346,21 @@ export default {
     },
   },
   created() {
-    this.$store.dispatch('SET_CENTERDATAS', [true, this.centerDatasList])
-    let _l = this.leftInfo[1].datas.xData.length
-    let _l2 = this.rightInfo[1].datas.xData.length
+    this.$store.dispatch('SET_CENTERDATAS', [true, this.centerDatasList]);
+    let _l = this.leftInfo[1].datas.xData.length;
+    let _l2 = this.rightInfo[1].datas.xData.length;
     this.leftInfo[1].datas.datas[0] = this.leftInfo[1].datas.datas[0].slice(
       0,
       _l
-    )
+    );
     this.rightInfo[1].datas.datas[0] = this.rightInfo[1].datas.datas[0].slice(
       0,
       _l2
-    )
+    );
     this.rightInfo[1].datas.datas[1] = this.rightInfo[1].datas.datas[1].slice(
       0,
       _l2
-    )
+    );
   },
   mounted() {
     // aaa().then(r=>{
@@ -374,21 +374,21 @@ export default {
   methods: {
     showTipBoxHandle(val) {},
     clickSwitch(val) {
-      this.inputVal = val
-      this.inputV = null
-      this.isShowRIght = !this.isShowRIght
+      this.inputVal = val;
+      this.inputV = null;
+      this.isShowRIght = !this.isShowRIght;
     },
     cgLang() {
-      let a
+      let a;
       if (localStorage.getItem('language') == 'en' || i18n.locale == 'en') {
-        a = 'zh'
+        a = 'zh';
       } else {
-        a = 'en'
+        a = 'en';
       }
-      this.$store.dispatch('SET_LANG', a)
+      this.$store.dispatch('SET_LANG', a);
     },
   },
-}
+};
 </script>
 
 <style lang="less" scoped>
