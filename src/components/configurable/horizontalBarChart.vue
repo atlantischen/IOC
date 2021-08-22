@@ -92,7 +92,8 @@ export default {
             {
               type: 'bar',
               barWidth: 22,
-              animationDuration: 3000,
+              animationDuration: 2000,
+              animationEasing: 'linear',
               barGap: '-100%',
               barCategoryGap: '-100%',
               label: {

@@ -117,7 +117,6 @@ export default {
           {
             type: 'pictorialBar',
             name: '提示框值',
-            animationDuration: 3000,
             label: {
               show: false,
               position: 'top',
