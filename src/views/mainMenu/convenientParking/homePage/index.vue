@@ -681,6 +681,7 @@ export default {
       const { max, data } = val;
       const total = data.reduce((x, y) => x + y, 0);
       var dom = this.$refs["park_time"];
+    
       var option = {
         grid: {
           top: "60",
@@ -849,9 +850,11 @@ export default {
       this.$redomEchart(dom, option);
     },
     revenueInit(val) {
-      const { max, Monthly, Temporary, month } = val;
+      const { max, Monthly, Temporary, month} = val;
       const  total= [...Monthly, ...Temporary].reduce((x, y) => x + y, 0);
       var dom = this.$refs["revenue_total"];
+    
+
       var option = {
         title: {
           text: `{c|停车场营收合计:}{a|${total}}{b|元}`,
@@ -979,8 +982,6 @@ export default {
           {
             animationDuration: 2000,
             animationEasing:'linear',
-
-
             name: "月卡",
             type: "bar",
             barWidth: 14,
@@ -1011,7 +1012,6 @@ export default {
           {
             animationDuration: 2000,
             animationEasing:'linear',
-
             name: "临时卡",
             type: "bar",
             barWidth: 14,
@@ -1213,7 +1213,7 @@ export default {
           },
           {
             animationDuration: 2000,
-                        animationEasing:'linear',
+            animationEasing:'linear',
 
 
             name: "出",
@@ -1272,7 +1272,6 @@ export default {
 
   },
   created() {
-    
   },
     computed: {
     getUnityData () {
@@ -1303,6 +1302,7 @@ export default {
       data: [5, 10, 22, 32, 44, 28, 15],
     });
     this.revenueInit({
+      
             max: 1000000,
             Monthly: [220000, 335000, 430000, 340000, 456000, 560000, 540000],
             Temporary: [92000, 93200, 90100, 103400, 209000, 113000, 112000],
