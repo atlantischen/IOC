@@ -249,7 +249,7 @@ export default {
         },
         series: [
           {
-            animationDuration: 2000,
+            animationDuration: 1000,
             animationEasing:'linear',
 
             name: "中餐",
@@ -270,7 +270,7 @@ export default {
             data: [10, 9, 13, 10],
           },
           {
-            animationDuration: 2000,
+            animationDuration: 1000,
             animationEasing:'linear',
 
             name: "西餐",
@@ -290,7 +290,7 @@ export default {
             data: [10, 9, 11, 7],
           },
           {
-            animationDuration: 2000,
+            animationDuration: 1000,
             animationEasing:'linear',
 
 
@@ -311,7 +311,7 @@ export default {
             data: [8, 8, 9, 8],
           },
           {
-            animationDuration: 2000,
+            animationDuration: 1000,
             animationEasing:'linear',
 
 
@@ -332,7 +332,7 @@ export default {
             data: [6, 8, 5, 9],
           },
           {
-            animationDuration: 2000,
+            animationDuration: 1000,
             animationEasing:'linear',
 
 

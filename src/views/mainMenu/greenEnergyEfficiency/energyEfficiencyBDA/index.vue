@@ -48,9 +48,9 @@
         <div class="tittle">能耗指标</div>
         <div class="outer">
           <div id="energy" ref="energy"></div>
-          <div class="desc">
+          <!-- <div class="desc">
             总耗能指标 <span class="font_text">180</span> TCE
-          </div>
+          </div> -->
         </div>
         <div class="outer2">
           <div id="energy2" ref="energy2"></div>
@@ -264,7 +264,7 @@ export default {
         ],
         series: [
           {
-            animationDuration: 2000,
+            animationDuration: 1000,
             animationEasing:'linear',
 
 
@@ -308,12 +308,10 @@ export default {
       var option = {
         series: [
           {
-            animationDuration: 2000,
+            animationDuration: 1000,
             animationEasing:'linear',
-
-
             type: "gauge",
-            // center:['50%','50%'],
+            center:['50%','50%'],
             min: 0,
             max: 200,
             radius: "95%",
@@ -362,6 +360,19 @@ export default {
               fontSize: 12,
               color:'transparent',
               offsetCenter: [0, "70%"],
+              formatter: function(value) {
+                return "{value|" + value + "}\n{unit|耗电指标}\n{unit|TCE}";
+              },
+              rich: {
+                value: {
+                  fontSize: 22,
+                  color: "#fff",
+                },
+                unit: {
+                  fontSize: 12,
+                  color: "#999",
+                },
+              },
         
             },
             data: [
@@ -379,7 +390,7 @@ export default {
       var option = {
         series: [
           {
-            animationDuration: 2000,
+            animationDuration: 1000,
             animationEasing:'linear',
 
             type: "gauge",
@@ -460,7 +471,7 @@ export default {
        var option = {
         series: [
           {
-            animationDuration: 2000,
+            animationDuration: 1000,
             animationEasing:'linear',
 
             type: "gauge",
@@ -659,7 +670,7 @@ export default {
         ],
         series: [
           {
-            animationDuration: 2000,
+            animationDuration: 1000,
             animationEasing:'linear',
 
             name: "",
@@ -781,7 +792,7 @@ export default {
   .outer {
     position: relative;
     #energy {
-      width: 2.75rem /* 220/80 */ /* 250/80 */ /* 300/80 */ /* 200/80 */;
+      // width: 2.75rem /* 220/80 */ /* 250/80 */ /* 300/80 */ /* 200/80 */;
       height: 2.75rem /* 300/80 */ /* 150/80 */;
     }
     .desc {

@@ -813,7 +813,7 @@ export default {
         series: [
           {
             // name: "其他",
-            animationDuration: 2000,
+            animationDuration: 1000,
             animationEasing:'linear',
 
             type: "bar",
@@ -980,7 +980,7 @@ export default {
         ],
         series: [
           {
-            animationDuration: 2000,
+            animationDuration: 1000,
             animationEasing:'linear',
             name: "月卡",
             type: "bar",
@@ -1010,7 +1010,7 @@ export default {
             data: Monthly,
           },
           {
-            animationDuration: 2000,
+            animationDuration: 1000,
             animationEasing:'linear',
             name: "临时卡",
             type: "bar",
@@ -1160,7 +1160,7 @@ export default {
 
         series: [
           {
-            animationDuration: 2000,
+            animationDuration: 1000,
             animationEasing:'linear',
             name: "进",
             symbol: "none",
@@ -1212,7 +1212,7 @@ export default {
             },
           },
           {
-            animationDuration: 2000,
+            animationDuration: 1000,
             animationEasing:'linear',
 
 

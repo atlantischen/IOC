@@ -316,7 +316,7 @@ export default {
         ],
         series: [
           {
-            animationDuration: 2000,
+            animationDuration: 1000,
             animationEasing:'linear',
             name: "",
             type: "line",

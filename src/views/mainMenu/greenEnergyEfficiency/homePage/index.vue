@@ -467,7 +467,7 @@ export default {
 
         series: [
           {
-            animationDuration: 2000,
+            animationDuration: 1000,
 
             name: "电能源",
             yAxisIndex:0 ,
@@ -520,7 +520,7 @@ export default {
             },
           },
           {
-            animationDuration: 2000,
+            animationDuration: 1000,
 
             name: "水能源",
             symbol: "none",

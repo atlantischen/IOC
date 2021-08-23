@@ -5,7 +5,9 @@
         center
         :title="title"
         v-model="dialogVideoVisible"
-        @close="closeDialog"
+        
+        
+
         @open="openDialog"
         :destroy-on-close="true"
       >
@@ -53,6 +55,8 @@
         </div>
       </el-dialog>
     </div>
+
+
     <LookVideo :Visible="Visible" :title="dialogTitle" @off="openCloseDialog" />
   </div>
 </template>
@@ -91,8 +95,6 @@ export default {
     dialogShow(val) {
       this.dialogVideoVisible = val;
     },
-    
-  
   },
   methods: {
     closeDialog() {
@@ -100,9 +102,6 @@ export default {
       this.$store.commit('setVideoShow',false)
       console.log(this.$store.state.videoShow,'this.$store.state.videoShow');
       this.$store.commit('setDialogShow',true)
-      this.$store.commit('setVideoShow',false)
-
-
 
       // this.$emit("videoShow",true);
       // this.$refs.player3.destoryVideo()
