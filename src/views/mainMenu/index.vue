@@ -38,7 +38,7 @@ export default {
   components: { AlarmAck, AllAlert },
   data() {
     return {
-      isShow: true,
+      isShow: false,
       showAlarmAck: false,
       showAllAlert: false,
       showEscHandler: false,
@@ -155,7 +155,7 @@ export default {
       window.debug = true;
     } else {
       this.url = process.env.VUE_APP_UNITY;
-      // this.url = 'http://10.10.7.22:1234/index.html';
+      this.url = 'http://10.10.7.22:1234/index.html';
       // this.url = 'http://183.62.170.2:8110';
     }
   },
@@ -217,7 +217,7 @@ export default {
           break;
         case 'AlarmAck':
           this.showAlarmAck = bool;
-          this.clearWarnTimeFun()
+          this.clearWarnTimeFun();
           break;
         default:
           this.hideGlobal(false);
@@ -233,10 +233,10 @@ export default {
     },
     // 随机触发警告
     warnTimeFun() {
-      var timerOut
-      if(timerOut){
-        timerOut = null
-        clearTimeout(timerOut)
+      var timerOut;
+      if (timerOut) {
+        timerOut = null;
+        clearTimeout(timerOut);
       }
       this.warnTimer = setInterval(() => {
         this.tipList = [
@@ -246,10 +246,10 @@ export default {
         ];
         this.$store.dispatch('SET_SHOWWARNTIP', true);
         timerOut = setTimeout(() => {
-          this.clearWarnTimeFun()
-          this.warnTimeFun()
-        }, 30000)
-      }, 180000);
+          this.clearWarnTimeFun();
+          this.warnTimeFun();
+        }, 30000);
+      }, 300000);
       // }, this.$randomNumer(3000, 30000))
     },
     clearWarnTimeFun() {

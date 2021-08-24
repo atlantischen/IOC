@@ -100,7 +100,7 @@ export default {
         },
       ], // 倍速设置
       initPlaySpeed: 1.0,
-      url:require('@/assets/video/楼梯间视频1.mp4')
+      url:require('@/assets/video/轿厢内视频2.mp4')
     };
   },
   props: {

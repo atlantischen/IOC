@@ -22,44 +22,43 @@
 
 <script>
 import 'echarts-liquidfill';
-import * as echarts from "echarts";
+import * as echarts from 'echarts';
 export default {
-  name: "waterLevel",
+  name: 'waterLevel',
   props: {
     _data: {
       type: Object,
     },
   },
-  data () {
+  data() {
     return {
       ...this._data,
       ids: this.$uuid(),
     };
   },
-  created () { },
-  mounted () {
+  created() {},
+  mounted() {
     this.waterLevelFun(this.datas);
   },
   methods: {
-    waterLevelFun (val) {
+    waterLevelFun(val) {
       let { data, tipD } = val;
-      var _color = [
-        '#0ff', '#cda857', '#cf1b1b',
-      ]
+      var _color = ['#0ff', '#cda857', '#cf1b1b'];
       const createColorStops = (rgbColorString) => {
         const opacity = [0.9, 0.8, 0.4, 0.3, 0.2, 0.3, 0.4, 0.8, 0.9];
         let colorStops = [];
         for (let i = 0; i < 9; i++) {
           colorStops.push({
             offset: i / 8,
-            color: 'rgba(' + rgbColorString + ',' + opacity[i] + ')'
-          })
+            color: 'rgba(' + rgbColorString + ',' + opacity[i] + ')',
+          });
         }
         return colorStops;
       };
 
       for (let i = 0; i < data.length; i++) {
-        var svgPath = 'path://M 11 7 L 11 7 L 11 1 C 11 0 12 0 12 0 L 12 0 C 12 0 12 0 12 0 Q 13 0 13 1 L 13 7 L 13 7 C 13 8 12 8 12 8 C 12 8 11 8 11 7 Z';
+        var svgPath =
+          'path://M 11 7 L 11 7 L 11 1 C 11 0 12 0 12 0 L 12 0 C 12 0 12 0 12 0 Q 13 0 13 1 L 13 7 L 13 7 C 13 8 12 8 12 8 C 12 8 11 8 11 7 Z';
         var option = {
           grid: {
             top: 0,
@@ -87,95 +86,100 @@ export default {
           },
           tooltip: {
             show: false,
-            backgroundColor: "rgba(0,0,0,0.8)",
+            backgroundColor: 'rgba(0,0,0,0.8)',
             borderWidth: 1,
-            borderColor: "#4396f3",
+            borderColor: '#4396f3',
             padding: [5, 10],
             extraCssText: 'box-shadow:inset 0 0 8px rgba(67, 149, 243, 0.6);',
             textStyle: {
-              color: "#fff",
+              color: '#fff',
             },
             transitionDuration: 0.8,
-            formatter: function (item) {
-              return parseInt(item.value * parseInt(tipD.value))
-            }
+            formatter: function(item) {
+              return parseInt(item.value * parseInt(tipD.value));
+            },
           },
-          series: [{
-            name: '',
-            type: 'liquidFill',
-            shape: svgPath,
-            center: ['50%', '50%'],
-            radius: '120%',
-            amplitude: 5,
-            waveLength: '50%',
-            phase: 0,
-            direction: 'left',
-            waveAnimation: true,
-            animationEasing: 'linear',
-            animationEasingUpdate: 'quarticInOut',
-            animationDuration: 2000,
-            animationDurationUpdate: 200,
-            data: [{
+          series: [
+            {
               name: '',
-              value: parseInt(data[i].value) / parseInt(tipD.value)
-            }],
-            label: {
-              show: false,
-              normal: {
-                formatter: ''
-              }
-            },
-            outline: {
-              show: true,
-              borderDistance: 0,
-              itemStyle: {
-                borderColor: _color[i],
-                borderWidth: 1.5,
-                shadowBlur: 8,
-                shadowColor: _color[i],
-                shadowOffsetY: 4
-              }
-            },
-            backgroundStyle: {
-              color: 'transparent',
-              shadowColor: _color[i],
-              shadowOffsetY: 4
-              // color: {
-              //   type: 'linear',
-              //   x: 0,
-              //   y: 0,
-              //   x2: 1,
-              //   y2: 0,
-              //   colorStops: createColorStops('60,136,198')
-              // }
-            },
-            color: [
-              new echarts.graphic.LinearGradient(
-                0, 0, 0, 1,
-                [{
-                  offset: 0,
-                  color: _color[i]
-                },
+              type: 'liquidFill',
+              shape: svgPath,
+              center: ['50%', '50%'],
+              radius: '120%',
+              amplitude: 5,
+              waveLength: '50%',
+              phase: 0,
+              direction: 'left',
+              waveAnimation: true,
+              animationEasing: 'linear',
+              animationEasingUpdate: 'quarticInOut',
+              animationDuration: 2000,
+              animationDurationUpdate: 200,
+              data: [
                 {
-                  offset: 1,
-                  color: _color[i]
-                }
-                ]
-              )
-            ],
-            itemStyle: {
-              opacity: 0.9,
-              shadowBlur: 10,
-              shadowColor: _color[i]
-            },
-            emphasis: {
+                  name: '',
+                  value: parseInt(data[i].value) / parseInt(tipD.value),
+                },
+              ],
+              label: {
+                show: false,
+                normal: {
+                  formatter: '',
+                },
+              },
+              outline: {
+                show: true,
+                borderDistance: 0,
+                itemStyle: {
+                  borderColor: _color[i],
+                  borderWidth: 1.5,
+                  shadowBlur: 8,
+                  shadowColor: _color[i],
+                  shadowOffsetY: 4,
+                },
+              },
+              backgroundStyle: {
+                color: 'transparent',
+                shadowColor: _color[i],
+                shadowOffsetY: 4,
+                // color: {
+                //   type: 'linear',
+                //   x: 0,
+                //   y: 0,
+                //   x2: 1,
+                //   y2: 0,
+                //   colorStops: createColorStops('60,136,198')
+                // }
+              },
+              color: [
+                new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+                  {
+                    offset: 0,
+                    color: _color[i],
+                  },
+                  {
+                    offset: 1,
+                    color: _color[i],
+                  },
+                ]),
+              ],
               itemStyle: {
-                opacity: 1 //鼠标经过波浪颜色的透明度
-              }
-            }
-          }]
-        }
-        this.$redomEchart(this.$refs["waterLevelEchart_" + i + this.ids], option);
+                opacity: 0.9,
+                shadowBlur: 10,
+                shadowColor: _color[i],
+              },
+              emphasis: {
+                itemStyle: {
+                  opacity: 1, //鼠标经过波浪颜色的透明度
+                },
+              },
+            },
+          ],
+        };
+        this.$redomEchart(
+          this.$refs['waterLevelEchart_' + i + this.ids],
+          option
+        );
       }
     },
   },
@@ -183,7 +187,7 @@ export default {
 </script>
 
 <style lang="less" scoped>
-@import "~@/style/gl.less";
+@import '~@/style/gl.less';
 //
 .waterLevelAll {
   .waterLevel {
@@ -197,7 +201,7 @@ export default {
       font-size: 0.175rem /* 14/80 */;
     }
     .w_value {
-      .datas_s(0.25rem /* 20/80 */);
+      .datas_s(0.25rem /* 20/80 */) ;;
       padding: 0 0.1rem /* 8/80 */;
     }
     .w_unit {
@@ -206,7 +210,7 @@ export default {
     }
   }
   #waterLevelEchart_,
-  [id^="waterLevelEchart_"] {
+  [id^='waterLevelEchart_'] {
     width: 28%;
     height: 2.625rem /* 210/80 */;
   }

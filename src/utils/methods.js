@@ -23,6 +23,7 @@ var redomEchart = function redomEchart(dom, option) {
    myChart = echarts.init(resizeDiv)
    myChart.clear()
    myChart.setOption(option, true)
+   console.log(myChart.getOption() ,'myChart.getOption()  ');
    let listener = function () {
      myChart.resize()
    }

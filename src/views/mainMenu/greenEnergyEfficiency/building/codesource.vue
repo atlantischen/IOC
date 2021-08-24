@@ -60,12 +60,12 @@
     <div class="new_air">
       <div class="tittle">冷源监控</div>
       <ul class="scroll">
-        <li >
+        <li>
           <!-- <Vloading v-show="showIfame" /> -->
 
           <Player
             ref="player"
-             :dialogShow="dialogShow"
+            :dialogShow="dialogShow"
             width="49"
             :monitorList="monitorList"
           ></Player>
@@ -91,115 +91,112 @@
 </template>
 
 <script>
-import * as echarts from "echarts";
-import {urlArry} from '@/utils/flv_url.js'
+import * as echarts from 'echarts';
+import { urlArry } from '@/utils/flv_url.js';
 export default {
   data() {
     return {
       showIfame: true,
       dialogShow: true,
       Visible: false,
-      flv_url: "",
-      dialogTitle: "",
+      flv_url: '',
+      dialogTitle: '',
       activeIndex: 1,
       percentageList: [
         {
-          desc: "空调足迹COP平均值",
-          val: "6.0",
+          desc: '空调足迹COP平均值',
+          val: '6.0',
         },
         {
-          desc: "平均节能率",
-          val: "10%",
+          desc: '平均节能率',
+          val: '10%',
         },
         {
-          desc: "能耗费用(元)",
-          val: "786",
+          desc: '能耗费用(元)',
+          val: '786',
         },
       ],
       warningList: [
         {
           status: 0,
-          time: "10:00",
-          title: "1#冷却塔_供水温度低于下限值",
+          time: '10:00',
+          title: '1#冷却塔_供水温度低于下限值',
         },
         {
           status: 1,
-          time: "11:09",
-          title: "1#冷却水泵_发生故障",
+          time: '11:09',
+          title: '1#冷却水泵_发生故障',
         },
         {
           status: 0,
-          time: "15:06",
-          title: "2#冷却泵_发生故障",
+          time: '15:06',
+          title: '2#冷却泵_发生故障',
         },
         {
           status: 0,
-          time: "16:13",
-          title: "3#冷冻泵_供水温度低于下限值",
+          time: '16:13',
+          title: '3#冷冻泵_供水温度低于下限值',
         },
         {
           status: 0,
-          time: "15:55",
-          title: "4#冷却水泵_温度异常",
+          time: '15:55',
+          title: '4#冷却水泵_温度异常',
         },
         {
           status: 1,
-          time: "19:05",
-          title: "2#冷却塔_供水温度低于下限值",
+          time: '19:05',
+          title: '2#冷却塔_供水温度低于下限值',
         },
       ],
-       monitorList:urlArry.codesourceList
-     
-    
+      monitorList: urlArry.codesourceList,
     };
   },
   methods: {
-   
     RealTotalPower(data) {
       var y = [0, 25, 50, 75];
       var dom = this.$refs.RealTotalPower;
       var option = {
         title: {
-          text: "",
-          subtext: "",
+          text: '',
+          subtext: '',
           subtextStyle: {
-            color: "#fff",
+            color: '#fff',
           },
           textStyle: {
-            color: "#fff",
+            color: '#fff',
           },
         },
         tooltip: {
           // show: false,
           // trigger: 'item',
-          trigger: "axis",
+          trigger: 'axis',
           axisPointer: {
             lineStyle: {
-              color: "transparent",
+              color: 'transparent',
             },
           },
         },
         grid: {
-          top: "40",
-          left: "10",
-          right: "20",
-          bottom: "10",
+          top: '40',
+          left: '10',
+          right: '20',
+          bottom: '10',
           containLabel: true,
         },
         xAxis: {
-          name: "时间",
+          name: '时间',
           nameTextStyle: {
-              padding: [0, 0, -30, -18],
-              color: "#fff",
-            },
-          type: "category",
+            padding: [0, 0, -30, -18],
+            color: '#fff',
+          },
+          type: 'category',
           axisTick: {
             show: false,
           },
           axisLine: {
             show: true,
             lineStyle: {
-              color: "rgb(255,255,255,0.5)",
+              color: 'rgb(255,255,255,0.5)',
               width: 0,
             },
           },
@@ -208,27 +205,27 @@ export default {
             fontSize: 11,
             padding: [-30, 10, -30, -20],
             textStyle: {
-              color: "#fff",
+              color: '#fff',
             },
             rotate: 40,
             formatter: function(value, index) {
               if (index % 2) {
                 return value;
               }
-              return "";
+              return '';
             },
           },
           data: data,
         },
         yAxis: {
-          name: "kw",
-          type: "value",
+          name: 'kw',
+          type: 'value',
           splitNumber: 3,
           min: 0,
           max: 75,
           interval: 25,
           nameTextStyle: {
-            color: "#fff",
+            color: '#fff',
           },
           axisTick: {
             show: false,
@@ -237,8 +234,8 @@ export default {
           splitLine: {
             lineStyle: {
               width: 0.5,
-              type: "dashed",
-              color: "rgb(255,255,255,1)",
+              type: 'dashed',
+              color: 'rgb(255,255,255,1)',
             },
           },
 
@@ -250,13 +247,13 @@ export default {
             },
             fontSize: 12,
             textStyle: {
-              color: "#fff",
+              color: '#fff',
             },
           },
           axisLine: {
             show: false,
             lineStyle: {
-              color: "rgb(255,255,255,0.5)",
+              color: 'rgb(255,255,255,0.5)',
               width: 1,
             },
           },
@@ -266,95 +263,95 @@ export default {
             animationDuration: 1000,
             animationEasing:'linear',
 
-            name: "功率",
+            name: '功率',
             data: [
               {
                 value: 2,
-                symbol: "none",
+                symbol: 'none',
               },
               {
                 value: 5,
-                symbol: "none",
+                symbol: 'none',
               },
               {
                 value: 8,
-                symbol: "none",
+                symbol: 'none',
               },
               {
                 value: 11,
-                symbol: "none",
+                symbol: 'none',
               },
               {
                 value: 13,
-                symbol: "none",
+                symbol: 'none',
               },
               {
                 value: 15,
-                symbol: "none",
+                symbol: 'none',
               },
               {
                 value: 16,
-                symbol: "none",
+                symbol: 'none',
               },
               {
                 value: 21,
-                symbol: "none",
+                symbol: 'none',
               },
               {
                 value: 34,
-                symbol: "none",
+                symbol: 'none',
               },
               {
                 value: 39,
-                symbol: "none",
+                symbol: 'none',
               },
               {
                 value: 42,
-                symbol: "none",
+                symbol: 'none',
               },
               {
                 value: 48,
-                symbol: "none",
+                symbol: 'none',
               },
               {
                 value: 50,
-                symbol: "none",
+                symbol: 'none',
               },
               {
                 value: 52,
-                symbol: "none",
+                symbol: 'none',
               },
               {
                 value: 55,
-                symbol: "none",
+                symbol: 'none',
               },
               {
                 value: 60,
-                symbol: "none",
+                symbol: 'none',
               },
               {
                 value: 61,
-                symbol: "none",
+                symbol: 'none',
               },
               {
                 value: 63,
-                symbol: "none",
+                symbol: 'none',
               },
               {
                 value: 65,
-                symbol: "none",
+                symbol: 'none',
               },
               {
                 value: 67,
-                symbol: "none",
+                symbol: 'none',
               },
               {
                 value: 60,
-                symbol: "none",
+                symbol: 'none',
               },
               {
                 value: 40,
-                symbol: "none",
+                symbol: 'none',
 
                 // itemStyle: {
                 //   color: "#FFB400",
@@ -362,14 +359,14 @@ export default {
               },
               {
                 value: 22,
-                symbol: "none",
+                symbol: 'none',
 
                 // itemStyle: {
                 //   color: "#FFB400",
                 // },
               },
             ],
-            type: "line",
+            type: 'line',
             symbolSize: 6,
             smooth: true,
             itemStyle: {
@@ -379,11 +376,11 @@ export default {
                 color: new echarts.graphic.LinearGradient(0, 0, 1, 0, [
                   {
                     offset: 0,
-                    color: "#FFB400",
+                    color: '#FFB400',
                   },
                   {
                     offset: 1,
-                    color: "#FFDD8D",
+                    color: '#FFDD8D',
                   },
                 ]),
               },
@@ -391,12 +388,12 @@ export default {
             endLabel: {
               show: false,
               offset: [0, -30],
-              overflow: "break",
+              overflow: 'break',
               distance: -90,
-              color: "#fff",
-              fontSize: "12",
+              color: '#fff',
+              fontSize: '12',
               formatter: function(_) {
-                return "实时访客: " + _.value;
+                return '实时访客: ' + _.value;
               },
             },
             areaStyle: {
@@ -404,11 +401,11 @@ export default {
                 color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
                   {
                     offset: 0,
-                    color: "rgba(255, 180, 0, .2)",
+                    color: 'rgba(255, 180, 0, .2)',
                   },
                   {
                     offset: 1,
-                    color: "rgba(255, 221, 141, .2)",
+                    color: 'rgba(255, 221, 141, .2)',
                   },
                 ]),
               },
@@ -416,8 +413,8 @@ export default {
           },
         ],
       };
-        if(dom && dom !== undefined){
-           this.$redomEchart(dom, option);
+      if (dom && dom !== undefined) {
+        this.$redomEchart(dom, option);
       }
     },
     ElectricityStatistics(data, data2, yData) {
@@ -425,43 +422,43 @@ export default {
       // var dom = "ElectricityStatistics";
       var dom = this.$refs.ElectricityStatistics;
       var option = {
-        color: ["#ffea00", "#0df8fc", "#fff"],
+        color: ['#ffea00', '#0df8fc', '#fff'],
         grid: {
-          top: "40",
-          left: "10",
-          right: "20",
-          bottom: "10",
+          top: '40',
+          left: '10',
+          right: '20',
+          bottom: '10',
           containLabel: true,
-          backgroundColor: "rgba(0,0,0,0)",
+          backgroundColor: 'rgba(0,0,0,0)',
           borderWidth: 1,
-          borderColor: "#ccc",
+          borderColor: '#ccc',
         },
         tooltip: {
           // show: false,
           // trigger: 'item',
-          trigger: "axis",
+          trigger: 'axis',
           axisPointer: {
             lineStyle: {
-              color: "transparent",
+              color: 'transparent',
             },
           },
         },
         legend: {
           show: false,
-          x: "center",
-          y: "0",
-          data: ["预定", "实际使用"],
+          x: 'center',
+          y: '0',
+          data: ['预定', '实际使用'],
           itemWidth: 8, // 图例的宽度
           itemHeight: 8, // 图例的高度
-          icon: "circle",
+          icon: 'circle',
           textStyle: {
-            color: "#fff",
+            color: '#fff',
             fontSize: 12,
           },
           itemGap: 40, // 设置间距
         },
         xAxis: {
-          type: "category",
+          type: 'category',
           name: company,
           nameTextStyle: {
             padding: [20, 0, 0, -10], // 四个数字分别为上右下左与原位置距离
@@ -480,7 +477,7 @@ export default {
           },
           axisLine: {
             lineStyle: {
-              color: "#fff", // 纵坐标轴和字体颜色
+              color: '#fff', // 纵坐标轴和字体颜色
               width: 0,
             },
           },
@@ -488,7 +485,7 @@ export default {
             fontSize: 11,
             rotate: 40,
             textStyle: {
-              color: "#fff",
+              color: '#fff',
             },
           },
         },
@@ -500,7 +497,7 @@ export default {
             max: max,
             interval: interval,
             nameTextStyle: {
-              color: "#fff",
+              color: '#fff',
             },
             axisTick: {
               show: false,
@@ -508,8 +505,8 @@ export default {
             splitLine: {
               lineStyle: {
                 width: 0.5,
-                type: "dashed",
-                color: "rgb(255,255,255,1)",
+                type: 'dashed',
+                color: 'rgb(255,255,255,1)',
               },
             },
             axisLine: {
@@ -519,10 +516,10 @@ export default {
               fontSize: 12,
               showMinLabel: false,
               textStyle: {
-                color: "#fff",
+                color: '#fff',
               },
               formatter: function(value, index) {
-                if (company == "月") {
+                if (company == '月') {
                   return value.toFixed(1);
                 }
                 return value;
@@ -531,15 +528,15 @@ export default {
           },
           {
             show: false,
-            name: "",
+            name: '',
             interval: 10,
             axisLabel: {
               show: false,
-              formatter: "{value} %",
+              formatter: '{value} %',
             },
             axisLine: {
               lineStyle: {
-                color: "#fff",
+                color: '#fff',
                 width: 2,
               },
             },
@@ -555,22 +552,22 @@ export default {
             // smooth: true,
             label: {
               show: false,
-              color: "#fff",
-              position: ["0", "-20"],
+              color: '#fff',
+              position: ['0', '-20'],
             },
-            color: "#00ffff",
+            color: '#00ffff',
             symbolSize: 6,
-            symbol: "none",
+            symbol: 'none',
             itemStyle: {
               normal: {
                 color: new echarts.graphic.LinearGradient(0, 0, 1, 0, [
                   {
                     offset: 0,
-                    color: "#FFB400",
+                    color: '#FFB400',
                   },
                   {
                     offset: 1,
-                    color: "#FFDD8D",
+                    color: '#FFDD8D',
                   },
                 ]),
                 // lineStyle: {
@@ -583,11 +580,11 @@ export default {
                 color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
                   {
                     offset: 0,
-                    color: "rgba(255, 180, 0, .2)",
+                    color: 'rgba(255, 180, 0, .2)',
                   },
                   {
                     offset: 1,
-                    color: "rgba(255, 221, 141, .2)",
+                    color: 'rgba(255, 221, 141, .2)',
                   },
                 ]),
               },
@@ -597,8 +594,8 @@ export default {
           },
         ],
       };
-         if(dom && dom !== undefined){
-           this.$redomEchart(dom, option);
+      if (dom && dom !== undefined) {
+        this.$redomEchart(dom, option);
       }
     },
     lookVideo(val) {
@@ -611,28 +608,25 @@ export default {
     },
   },
   mounted() {
- 
-    this.$nextTick(()=>{
+    this.$nextTick(() => {
       this.RealTotalPower(this.$getNowTime());
       this.ElectricityStatistics(
-          this.$fun_date(),
-          [1956, 2136, 2463, 2314, 2513, 2510, 2703],
-          {
-            name: "kw·h",
-            company: "日",
-            splitNumber: 3,
-            min: 0,
-            max: 4800,
-            interval: 1200,
-          }
-        );
-    })
-    
-   
+        this.$fun_date(),
+        [1956, 2136, 2463, 2314, 2513, 2510, 2703],
+        {
+          name: 'kw·h',
+          company: '日',
+          splitNumber: 3,
+          min: 0,
+          max: 4800,
+          interval: 1200,
+        }
+      );
+    });
   },
   beforeRouteLeave(to, from, next) {
     if (to.path != from.path) {
-       this.dialogShow = false;
+      this.dialogShow = false;
     }
     next();
   },
@@ -671,7 +665,7 @@ export default {
     position: relative;
     // border-bottom: 1px dashed #fff;
     &::before {
-      content: "";
+      content: '';
       position: absolute;
       left: 0;
       bottom: 0;

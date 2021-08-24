@@ -48,22 +48,11 @@
           <span class="font_text">视频回放</span>
         </div>
         <ul>
-          <li >
-             <!-- <Vloading v-show="showIfame" /> -->
+          <li  v-for="(item,index) in monitorList " :key="index">
+          <FrequencyVideo :url="item.url"></FrequencyVideo>
+            
 
-          <Player  width="49"  :dialogShow="$store.state.dialogShow"  ref="player1" :monitorList="monitorList" ></Player>
-         <!-- <iframe
-          v-show="!showIfame"
-          scrolling="no"
-          v-if="item.url"
-          class="iframeVideo"
-          id="iframe"
-          :ref="'iframeVideo' +index"
-          style="width: 100%; height: 100%"
-          :src="item.url + '&protocol=FLV&iframe=yes'"
-          allowfullscreen
-          allow="autoplay; fullscreen"
-        ></iframe>   -->
+          <!-- <Player  width="49"  :dialogShow="$store.state.dialogShow"  ref="player1" :monitorList="monitorList" ></Player> -->
 
           </li>
         </ul>
@@ -82,25 +71,12 @@
           <span class="font_text">视频回放</span>
         </div>
         <ul>
-          <li  >
-            <!-- <span>2020-12-31    14:40</span>
-            <span>{{item++}}号客梯</span> -->
-           <!-- <Vloading v-show="showIfame" /> -->
+           <li  v-for="(item,index) in monitorList1 " :key="index">
+          <FrequencyVideo :url="item.url"></FrequencyVideo>
+            
+          <!-- <FrequencyVideo :url=""></FrequencyVideo> -->
+          <!-- <Player  width="49" :dialogShow="$store.state.dialogShow"  ref="player" :monitorList="monitorList1" ></Player> -->
 
-          <Player  width="49" :dialogShow="$store.state.dialogShow"  ref="player" :monitorList="monitorList1" ></Player>
-         <!-- <iframe
-          v-show="!showIfame"
-          scrolling="no"
-          v-if="item.url"
-          class="iframeVideo"
-          name="iFrame"
-          id="iframe"
-          :ref="'iframeVideo' +index"
-          style="width: 100%; height: 100%"
-          :src="item.url + '&protocol=FLV&iframe=yes'"
-          allowfullscreen
-          allow="autoplay; fullscreen"
-        ></iframe>   -->
             
           </li>
         </ul>
@@ -112,7 +88,7 @@
         
       </div>
     </IOCRight>
-    <Dialog :dialogShow="dialogShow"   :title='title'  @dialogShowChange="dialogShowChange"></Dialog>
+    <Dialog :dialogShow="dialogShow"   :title='title'  @dialogShowChange="dialogShowChange" :monitorLists="monitorLists"></Dialog>
     <VideoPlayback :title='title' :backShow="backShow" @videoShowChange="videoShowChange"></VideoPlayback>
   <!-- <LookVideo :Visible="Visible" :title="dialogTitle" @off="openCloseDialog" /> -->
   <ElevatorMonitoring  :ElevatorVisible="ElevatorVisible"  :dataList="dataList"  @off="ElevatorCloseDialog" />
@@ -185,16 +161,128 @@ export default {
        videoShow:false,
       backShow:false,
       title:'轿厢监控',
-       monitorList:urlArry.monitorList1,
-       monitorList1:urlArry.monitorList2
+      monitorList:[
+        {
+          url:require('@/assets/video/轿厢内视频3.mp4')
+        }
+        ,
+         {
+          url:require('@/assets/video/轿厢内视频2.mp4')
+        },
+        {
+          url:require('@/assets/video/轿厢内视频3.mp4')
+        },
+         {
+          url:require('@/assets/video/轿厢内视频2.mp4')
+        }
+      ],
+      monitorList1:[
+        {
+          url:require('@/assets/video/楼梯间视频1.mp4')
+        }
+        ,
+         {
+          url:require('@/assets/video/楼梯间视频2.mp4')
+        },
+        {
+          url:require('@/assets/video/楼梯间视频3.mp4')
+        },
+         {
+          url:require('@/assets/video/楼梯间视频4.mp4')
+        }
+      ],
+      monitorLists:[]
     }
   },
   methods:{
     dialogShowChange(val,name){
       if(name==='carData'){
         this.title='轿厢监控'
+        this.monitorLists=[
+          {
+          url:require('@/assets/video/轿厢内视频3.mp4')
+        }
+        ,
+         {
+          url:require('@/assets/video/轿厢内视频2.mp4')
+        },
+        {
+          url:require('@/assets/video/轿厢内视频3.mp4')
+        },
+         {
+          url:require('@/assets/video/轿厢内视频2.mp4')
+        },
+        {
+          url:require('@/assets/video/轿厢内视频3.mp4')
+        }
+        ,
+         {
+          url:require('@/assets/video/轿厢内视频2.mp4')
+        },
+        {
+          url:require('@/assets/video/轿厢内视频3.mp4')
+        },
+         {
+          url:require('@/assets/video/轿厢内视频2.mp4')
+        }
+        ,
+        {
+          url:require('@/assets/video/轿厢内视频3.mp4')
+        }
+        ,
+         {
+          url:require('@/assets/video/轿厢内视频2.mp4')
+        },
+        {
+          url:require('@/assets/video/轿厢内视频3.mp4')
+        },
+         {
+          url:require('@/assets/video/轿厢内视频2.mp4')
+        }
+        ]
       }else if(name==='elevatorData'){
         this.title='电梯间监控'
+         this.monitorLists=[
+            {
+          url:require('@/assets/video/楼梯间视频1.mp4')
+        }
+        ,
+         {
+          url:require('@/assets/video/楼梯间视频2.mp4')
+        },
+        {
+          url:require('@/assets/video/楼梯间视频3.mp4')
+        },
+         {
+          url:require('@/assets/video/楼梯间视频4.mp4')
+        },
+         {
+          url:require('@/assets/video/楼梯间视频1.mp4')
+        }
+        ,
+         {
+          url:require('@/assets/video/楼梯间视频2.mp4')
+        },
+        {
+          url:require('@/assets/video/楼梯间视频3.mp4')
+        },
+         {
+          url:require('@/assets/video/楼梯间视频4.mp4')
+        },
+         {
+          url:require('@/assets/video/楼梯间视频1.mp4')
+        }
+        ,
+         {
+          url:require('@/assets/video/楼梯间视频2.mp4')
+        },
+        {
+          url:require('@/assets/video/楼梯间视频3.mp4')
+        },
+         {
+          url:require('@/assets/video/楼梯间视频4.mp4')
+        }
+         ]
       }
       this.dialogShow=val
     },
@@ -351,11 +439,13 @@ export default {
 
 
     li{
-      width: 100% /* 174/80 */ /* 112/80 */;
-      height: 100% /* 112/80 */;
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
+      width: 49.5% /* 174/80 */ /* 112/80 */;
+      height: 1.375rem /* 112/80 */;
+       margin-bottom: 5px;
+
+      // display: flex;
+      // flex-wrap: wrap;
+      // justify-content: space-between;
       //  #iframe{
       //     width: 100% /* 174/80 *//* 112/80 */;
       //     height: 1.4rem !important /* 112/80 *//* 112/80 */;

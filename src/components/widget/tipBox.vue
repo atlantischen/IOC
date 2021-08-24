@@ -22,10 +22,10 @@
 
 <script>
 // import audioSrc2 from '@/assets/mp3/消防警报.mp3';
-import audioSrc2 from "@/assets/mp3/叮叮警报.mp3";
+import audioSrc2 from '@/assets/mp3/叮叮警报.mp3';
 
 export default {
-  name: "tipBox",
+  name: 'tipBox',
   props: {
     _data: {
       typeof: Array,
@@ -44,12 +44,12 @@ export default {
     };
   },
   watch: {
-    "$store.state.comState.showWarnTip": {
+    '$store.state.comState.showWarnTip': {
       handler(n) {
-        let timer
-        if(timer){
-          clearTimeout(timer)
-          timer = null
+        let timer;
+        if (timer) {
+          clearTimeout(timer);
+          timer = null;
         }
         this.isShow = n;
         if (this.isShow) {
@@ -62,9 +62,9 @@ export default {
             this.moveLeft();
             this.onPlay();
           }, 500);
-          this.$SendMessageToUnity("PopUpWarningNoticesBar", { isOpen: true });
+          this.$SendMessageToUnity('PopUpWarningNoticesBar', { isOpen: true });
           console.log(
-            "=================PopUpWarningNoticesBar, { isOpen: true })"
+            '=================PopUpWarningNoticesBar, { isOpen: true })'
           );
         } else {
           this.onPause();
@@ -90,7 +90,7 @@ export default {
   methods: {
     // 警告框滑动
     moveLeft() {
-      var _w = document.getElementById("pList").children[0],
+      var _w = document.getElementById('pList').children[0],
         _w = this.$refs.pList.children[0],
         _d = 0;
       var _wc = _w.children;
@@ -107,55 +107,46 @@ export default {
           _w.insertBefore(_wc[_l - 1], _wc[0]);
         }
         // _w[0].style.transform = 'translateX(-' + _d + 'px)'
-        _w.style.left = _d + "px";
+        _w.style.left = _d + 'px';
       }, 25);
     },
 
     // 点击警告框3D出现警告位置
     clickItem() {
-      this.$SendMessageToUnity("OnWarningNoticesBarClick", {});
-      console.log("=================OnWarningNoticesBarClick");
+      this.$SendMessageToUnity('OnWarningNoticesBarClick', {});
+      console.log('=================OnWarningNoticesBarClick');
     },
     // 关闭警告
     closeTip() {
       this.isShow = false;
       // this.onPause();
-      this.$store.dispatch("SET_SHOWWARNTIP", this.isShow);
-      this.$SendMessageToUnity("PopUpWarningNoticesBar", {
+      this.$store.dispatch('SET_SHOWWARNTIP', this.isShow);
+      this.$SendMessageToUnity('PopUpWarningNoticesBar', {
         isOpen: this.isShow,
       });
       console.log(
-        "=================PopUpWarningNoticesBar, { isOpen: false })"
+        '=================PopUpWarningNoticesBar, { isOpen: false })'
       );
       // this.$emit("close", this.isShow);
     },
     onPlay() {
       this.$nextTick(() => {
-        let dom = document.getElementById("playMusic")
+        let dom = document.getElementById('playMusic');
         if (dom && dom.paused) {
           dom.volume = 1;
           dom.play();
           console.log('====音乐播放');
         }
       });
-      return false
     },
     onPause() {
-      let tim
-      if(tim){
-        tim = null
-        clearTimeout(tim)
-      }
-      tim = setTimeout(() => {
-        this.$nextTick(() => {
-          let dom = document.getElementById("playMusic");
-          if (dom && !dom.paused) {
-            dom.pause();
-            console.log("pause===");
-          }
-        });
-      }, 100);
-      return false
+      this.$nextTick(() => {
+        let dom = document.getElementById('playMusic');
+        if (dom && !dom.paused) {
+          dom.pause();
+          console.log('pause===');
+        }
+      });
     },
     openWran() {
       if (this.timerOut) {
@@ -174,14 +165,14 @@ export default {
           this.timerOut = null;
           this.openWran();
         }, 30000);
-      }, 180000);
+      }, 300000);
     },
   },
 };
 </script>
 
 <style lang="less">
-@import "~@/style/gl.less";
+@import '~@/style/gl.less';
 .tipBox {
   position: fixed;
   top: 0.75rem /* 60/80 */;
@@ -200,7 +191,7 @@ export default {
     white-space: nowrap;
     padding: 0 0.4375rem /* 35/80 */;
     width: 100%;
-    background: url("~@/assets/img/tip_warn.png") center no-repeat;
+    background: url('~@/assets/img/tip_warn.png') center no-repeat;
     background-size: 100% 100%;
     #pList {
       width: 100%;

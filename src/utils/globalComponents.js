@@ -19,7 +19,6 @@ import VideoPlayback from '../components/videoPlayback.vue' //视频回放
 import Video from '../components/video.vue' //视频
 import AddScene from '../components/addScene.vue' //视频
 import SvgIcon from '../components/widget/svgIcon.vue' // svg 图标
-import Rtps from '../components/rtps.vue' 
 import Device from '../components/device.vue' 
 import ElevatorMonitoring from '../components/elevatorMonitoring.vue'  //电梯监控
 import Player from '../components/player.vue'  //flv视频流
@@ -27,6 +26,7 @@ import Player from '../components/player.vue'  //flv视频流
 // import Device from '../components/device.vue'
 import Vloading from '../components/widget/vLoading.vue' // loading
 import MonitorVideo from '../components/monitorVideo.vue' // 监控 摄像头
+import FrequencyVideo from '../components/frequencyVideo.vue' // 轿厢监控
 
 const global = {
   ...configurable,
@@ -50,11 +50,11 @@ const global = {
   LookVideo,
   MoveDialog,
   SvgIcon,
-  Rtps,
   Device,
   ElevatorMonitoring,
   Player,
   Vloading,
-  MonitorVideo
+  MonitorVideo,
+  FrequencyVideo
 }
 export default global

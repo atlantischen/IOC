@@ -1,34 +1,34 @@
 <template>
   <IOCLeft>
     <div class="today">
-      <div class="tittle" >今日一览</div>
-       <div class="total">
-          <ul>
-            <li>
-              <span class="font_text">21.26</span>
-              <span>总功率(kw)</span>
-            </li>
-            <li>
-              <span class="font_text">786</span>
-              <span>总能耗(kw·h)</span>
-            </li>
-            <li>
-              <span class="font_text">789</span>
-              <span>能耗费用(元)</span>
-            </li>
-          </ul>
-        </div>
+      <div class="tittle">今日一览</div>
+      <div class="total">
+        <ul>
+          <li>
+            <span class="font_text">21.26</span>
+            <span>总功率(kw)</span>
+          </li>
+          <li>
+            <span class="font_text">786</span>
+            <span>总能耗(kw·h)</span>
+          </li>
+          <li>
+            <span class="font_text">789</span>
+            <span>能耗费用(元)</span>
+          </li>
+        </ul>
+      </div>
     </div>
     <div class="cold_row_b">
       <div class="tittle">今日告警</div>
       <ul class="warning scroll">
-        <li v-for="(item,index) in errorList" :key="index">
-          <div class="tips">{{item.status}}</div>
+        <li v-for="(item, index) in errorList" :key="index">
+          <div class="tips">{{ item.status }}</div>
           <div class="warning_m">
-            <span>{{item.time}}</span>
-            <span>{{item.desc}}</span>
+            <span>{{ item.time }}</span>
+            <span>{{ item.desc }}</span>
           </div>
-          <div class="warning_r">{{item.type}}</div>
+          <div class="warning_r">{{ item.type }}</div>
         </li>
       </ul>
     </div>
@@ -48,29 +48,34 @@
         </ul> -->
       </div>
       <div id="ElectricityStatistics" ref="ElectricityStatistics"></div>
-
     </div>
   </IOCLeft>
   <IOCRight>
     <div class="KWH_control">
       <div class="tittle">今日电磁阀开关</div>
-       <ul class="SolenoidSwitches scroll">
-          <li v-for="(item,i) in SolenoidSwitchesDatas" :key="i">
-            <span><i>开关时间： </i>{{item.time}}</span>
-            <span :class="{'active':item.status==1}">{{item.status==1?'开启':'关闭'}}</span>
-          </li>
-        </ul>
+      <ul class="SolenoidSwitches scroll">
+        <li v-for="(item, i) in SolenoidSwitchesDatas" :key="i">
+          <span><i>开关时间： </i>{{ item.time }}</span>
+          <span :class="{ active: item.status == 1 }">{{
+            item.status == 1 ? '开启' : '关闭'
+          }}</span>
+        </li>
+      </ul>
     </div>
     <div class="pump ">
       <div class="tittle">泵房监控</div>
-        <ul>
-          <li  >
-            <!-- <span>2020-12-31    14:40</span>
+      <ul>
+        <li>
+          <!-- <span>2020-12-31    14:40</span>
             <span>{{item++}}号客梯</span> -->
-           <!-- <Vloading v-show="showIfame" /> -->
+          <!-- <Vloading v-show="showIfame" /> -->
 
-          <Player :dialogShow="dialogShow"  width="49" :monitorList="monitorList" ></Player>
-         <!-- <iframe
+          <Player
+            :dialogShow="dialogShow"
+            width="49"
+            :monitorList="monitorList"
+          ></Player>
+          <!-- <iframe
           v-show="!showIfame"
           scrolling="no"
           v-if="item.url"
@@ -83,172 +88,165 @@
           allowfullscreen
           allow="autoplay; fullscreen"
         ></iframe>       -->
-          </li>
-        </ul>
-
+        </li>
+      </ul>
     </div>
   </IOCRight>
   <LookVideo :Visible="Visible" :title="dialogTitle" @off="openCloseDialog" />
-
 </template>
 
 <script>
-import * as echarts from "echarts";
-import {urlArry} from '@/utils/flv_url.js'
+import * as echarts from 'echarts';
+import { urlArry } from '@/utils/flv_url.js';
 
 export default {
-  data(){
-    return{
+  data() {
+    return {
       showIfame: true,
-      dialogShow:true,
+      dialogShow: true,
       Visible: false,
-      dialogTitle:'',
-      activeIndex:1,
-      errorList:[
+      dialogTitle: '',
+      activeIndex: 1,
+      errorList: [
         {
-          time:'09:56',
-          desc:'1#冷却水泵_发生故障',
-          type:'待处理',
-          status:"严重"
+          time: '09:56',
+          desc: '1#冷却水泵_发生故障',
+          type: '待处理',
+          status: '严重',
         },
-         {
-          time:'10:04',
-          desc:'2#冷却水泵_发生故障',
-          type:'待处理',
-          status:"严重"
-
+        {
+          time: '10:04',
+          desc: '2#冷却水泵_发生故障',
+          type: '待处理',
+          status: '严重',
         },
-         {
-          time:'10:32',
-          desc:'1#冷却水泵_运行异常',
-          type:'待处理',
-          status:"严重"
+        {
+          time: '10:32',
+          desc: '1#冷却水泵_运行异常',
+          type: '待处理',
+          status: '严重',
         },
-         {
-          time:'12:13',
-          desc:'2#冷却水泵_运行异常',
-          type:'待处理',
-          status:"严重"
-
+        {
+          time: '12:13',
+          desc: '2#冷却水泵_运行异常',
+          type: '待处理',
+          status: '严重',
         },
-         {
-          time:'16:36',
-          desc:'3#冷却水泵_断电',
-          type:'待处理',
-          status:"严重"
-
-        }
-        
+        {
+          time: '16:36',
+          desc: '3#冷却水泵_断电',
+          type: '待处理',
+          status: '严重',
+        },
       ],
-       SolenoidSwitchesDatas: [{
-            time: '2021-03-01 12:22:03',
-            status: 0
-          },
-          {
-            time: '2021-03-02 11:03:00',
-            status: 1
-          },
-          {
-            time: '2021-03-02 13:00:03',
-            status: 0
-          },
-          {
-            time: '2021-03-02 15:15:15',
-            status: 1
-          },
-          {
-            time: '2021-03-02 15:30:20',
-            status: 0
-          },
-          {
-            time: '2021-03-03 12:21:00',
-            status: 1
-          },
-          {
-            time: '2021-03-03 12:45:00',
-            status: 0
-          },
-          {
-            time: '2021-03-03 13:40:23',
-            status: 1
-          },
-          {
-            time: '2021-03-03 16:22:03',
-            status: 0
-          },
-          {
-            time: '2021-03-04 15:55:11',
-            status: 1
-          },
-          {
-            time: '2021-03-04 16:16:28',
-            status: 1
-          },
-        ],
-        monitorList:urlArry.watersupplyList
-        
-    }
+      SolenoidSwitchesDatas: [
+        {
+          time: '2021-03-01 12:22:03',
+          status: 0,
+        },
+        {
+          time: '2021-03-02 11:03:00',
+          status: 1,
+        },
+        {
+          time: '2021-03-02 13:00:03',
+          status: 0,
+        },
+        {
+          time: '2021-03-02 15:15:15',
+          status: 1,
+        },
+        {
+          time: '2021-03-02 15:30:20',
+          status: 0,
+        },
+        {
+          time: '2021-03-03 12:21:00',
+          status: 1,
+        },
+        {
+          time: '2021-03-03 12:45:00',
+          status: 0,
+        },
+        {
+          time: '2021-03-03 13:40:23',
+          status: 1,
+        },
+        {
+          time: '2021-03-03 16:22:03',
+          status: 0,
+        },
+        {
+          time: '2021-03-04 15:55:11',
+          status: 1,
+        },
+        {
+          time: '2021-03-04 16:16:28',
+          status: 1,
+        },
+      ],
+      monitorList: urlArry.watersupplyList,
+    };
   },
-  methods:{
-  
-     ElectricityStatistics(data, data2, yData) {
-      let { name,company, splitNumber, min, max, interval } = yData;
+  methods: {
+    ElectricityStatistics(data, data2, yData) {
+      let { name, company, splitNumber, min, max, interval } = yData;
       var dom = this.$refs.ElectricityStatistics;
 
       var option = {
         tooltip: {
-          trigger: "axis",
+          trigger: 'axis',
           // formatter: '{b0}({a0}): {c0}<br />{b1}({a1}): {c1}%'
         },
-        color: ["#ffea00", "#0df8fc", "#fff"],
+        color: ['#ffea00', '#0df8fc', '#fff'],
         grid: {
-          top: "40",
-          left: "10",
-          right: "20",
-          bottom: "10",
+          top: '40',
+          left: '10',
+          right: '20',
+          bottom: '10',
           containLabel: true,
-          backgroundColor: "rgba(0,0,0,0)",
+          backgroundColor: 'rgba(0,0,0,0)',
           borderWidth: 1,
-          borderColor: "#ccc",
+          borderColor: '#ccc',
         },
         tooltip: {
           // show: false,
           // trigger: 'item',
-          trigger: "axis",
+          trigger: 'axis',
           axisPointer: {
             lineStyle: {
-              color: "transparent",
+              color: 'transparent',
             },
           },
         },
 
         legend: {
           show: false,
-          x: "center",
-          y: "0",
-          data: ["预定", "实际使用"],
+          x: 'center',
+          y: '0',
+          data: ['预定', '实际使用'],
           itemWidth: 8, // 图例的宽度
           itemHeight: 8, // 图例的高度
-          icon: "circle",
+          icon: 'circle',
           textStyle: {
-            color: "#fff",
+            color: '#fff',
             fontSize: 12,
           },
           itemGap: 40, // 设置间距
         },
         xAxis: {
-          type: "category",
-         name: company,
+          type: 'category',
+          name: company,
           nameTextStyle: {
-            padding: [20, 0, 0, -10]    // 四个数字分别为上右下左与原位置距离
-        },
+            padding: [20, 0, 0, -10], // 四个数字分别为上右下左与原位置距离
+          },
           data: data,
           axisTick: {
             show: false,
           },
           axisLine: {
             lineStyle: {
-              color: "#fff", // 纵坐标轴和字体颜色
+              color: '#fff', // 纵坐标轴和字体颜色
               width: 0,
             },
           },
@@ -256,7 +254,7 @@ export default {
             fontSize: 11,
             rotate: 40,
             textStyle: {
-              color: "#fff",
+              color: '#fff',
             },
           },
         },
@@ -268,16 +266,16 @@ export default {
             max: max,
             interval: interval,
             nameTextStyle: {
-              color: "#fff",
+              color: '#fff',
             },
             axisTick: {
               show: false,
             },
-             splitLine: {
+            splitLine: {
               lineStyle: {
                 width: 0.5,
-                type: "dashed",
-                color: "rgb(255,255,255,1)",
+                type: 'dashed',
+                color: 'rgb(255,255,255,1)',
               },
             },
             axisLine: {
@@ -288,27 +286,27 @@ export default {
               fontSize: 12,
               showMinLabel: false,
               textStyle: {
-                color: "#fff",
+                color: '#fff',
               },
-               formatter:function (value, index) {   
-              if(company=='月'){
-					    	 return value.toFixed(1);      
-              }
-               return value
-						}
+              formatter: function(value, index) {
+                if (company == '月') {
+                  return value.toFixed(1);
+                }
+                return value;
+              },
             },
           },
           {
             show: false,
-            name: "",
+            name: '',
             interval: 10,
             axisLabel: {
               show: false,
-              formatter: "{value} %",
+              formatter: '{value} %',
             },
             axisLine: {
               lineStyle: {
-                color: "#fff",
+                color: '#fff',
                 width: 2,
               },
             },
@@ -323,35 +321,35 @@ export default {
             // smooth: true,
             label: {
               show: false,
-              color: "#fff",
-              position: ["0", "-20"],
+              color: '#fff',
+              position: ['0', '-20'],
             },
-            color: "#00ffff",
+            color: '#00ffff',
             symbolSize: 10,
-            symbol: "circle",
+            symbol: 'circle',
             itemStyle: {
               normal: {
-                  color: new echarts.graphic.LinearGradient(0, 0, 1, 0, [
+                color: new echarts.graphic.LinearGradient(0, 0, 1, 0, [
                   {
                     offset: 0,
-                    color: "#FFB400",
+                    color: '#FFB400',
                   },
                   {
                     offset: 1,
-                    color: "#FFDD8D",
+                    color: '#FFDD8D',
                   },
                 ]),
                 lineStyle: {
-                    color: new echarts.graphic.LinearGradient(0, 0, 1, 0, [
-                  {
-                    offset: 0,
-                    color: "#FFB400",
-                  },
-                  {
-                    offset: 1,
-                    color: "#FFDD8D",
-                  },
-                ]),
+                  color: new echarts.graphic.LinearGradient(0, 0, 1, 0, [
+                    {
+                      offset: 0,
+                      color: '#FFB400',
+                    },
+                    {
+                      offset: 1,
+                      color: '#FFDD8D',
+                    },
+                  ]),
                 },
               },
             },
@@ -367,11 +365,11 @@ export default {
       this.activeIndex = val;
       if (val == 1) {
         this.ElectricityStatistics(
-         ["7.24", "7.25", "7.26", "7.27", "7.28", "7.29", "7.30"],
-      [700, 1000, 1300, 1800, 2000, 2300, 1300,],
+          ['7.24', '7.25', '7.26', '7.27', '7.28', '7.29', '7.30'],
+          [700, 1000, 1300, 1800, 2000, 2300, 1300],
           {
-            name: "kw·h",
-        company:'日',
+            name: 'kw·h',
+            company: '日',
 
             splitNumber: 3,
             min: 0,
@@ -381,11 +379,11 @@ export default {
         );
       } else if (val == 2) {
         this.ElectricityStatistics(
-          ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"],
+          ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'],
           [3, 4, 4, 3, 2, 1, 2, 5, 4, 3, 6, 2],
           {
-            name: "万kw·h",
-        company:'月',
+            name: '万kw·h',
+            company: '月',
 
             splitNumber: 4,
             min: 0,
@@ -395,11 +393,11 @@ export default {
         );
       } else {
         this.ElectricityStatistics(
-          ["2019年", "2020年", "2021年"],
+          ['2019年', '2020年', '2021年'],
           [23, 41, 13],
           {
-            name: "万kw·h",
-        company:'年',
+            name: '万kw·h',
+            company: '年',
 
             splitNumber: 4,
             min: 0,
@@ -409,23 +407,22 @@ export default {
         );
       }
     },
-      lookVideo (val) {
-        console.log(val);
-      this.dialogTitle = val
-      this.openCloseDialog(true)
-
+    lookVideo(val) {
+      console.log(val);
+      this.dialogTitle = val;
+      this.openCloseDialog(true);
     },
-    openCloseDialog (val) {
-      this.Visible = val
+    openCloseDialog(val) {
+      this.Visible = val;
     },
   },
-  mounted(){
+  mounted() {
     this.ElectricityStatistics(
-       this.$fun_date(),
-      [2019, 2323, 2436, 2536, 2831, 2912, 3122,],
+      this.$fun_date(),
+      [2019, 2323, 2436, 2536, 2831, 2912, 3122],
       {
-        name: "kw·h",
-        company:'日',
+        name: 'kw·h',
+        company: '日',
 
         splitNumber: 3,
         min: 0,
@@ -434,16 +431,16 @@ export default {
       }
     );
     //    this.$afterIframeOnload('iframeVideo0', () => {
-    //   this.showIfame = false 
+    //   this.showIfame = false
     // })
   },
   beforeRouteLeave(to, from, next) {
     if (to.path != from.path) {
-        this.dialogShow = false;
+      this.dialogShow = false;
     }
     next();
   },
-}
+};
 </script>
 
 <style lang="less" scoped>
@@ -452,22 +449,22 @@ export default {
   margin-top: 0.125rem /* 10/80 */ /* 15/80 */ /* 10/80 */;
   height: 3.125rem;
 }
-.today{
-   .total{
-    &>ul{
+.today {
+  .total {
+    & > ul {
       display: flex;
       justify-content: space-around;
-      margin: .25rem /* 20/80 */ 0;
-      &>li{
+      margin: 0.25rem /* 20/80 */ 0;
+      & > li {
         display: flex;
         flex-direction: column;
         text-align: center;
-        span:first-child{
-          font-size: .25rem /* 20/80 */;
-          margin-bottom: .125rem /* 10/80 */;
+        span:first-child {
+          font-size: 0.25rem /* 20/80 */;
+          margin-bottom: 0.125rem /* 10/80 */;
         }
-        span:last-child{
-          font-size: .15rem /* 12/80 */;
+        span:last-child {
+          font-size: 0.15rem /* 12/80 */;
         }
       }
     }
@@ -513,54 +510,51 @@ export default {
     }
   }
 }
-.KWH_control{
-    // 今日电磁阀开关
-  .SolenoidSwitches{
+.KWH_control {
+  // 今日电磁阀开关
+  .SolenoidSwitches {
     height: 4.75rem /* 380/80 */;
     overflow-y: auto;
-    font-size: .175rem /* 14/80 */;
+    font-size: 0.175rem /* 14/80 */;
     color: #fff;
     // margin-left: .125rem /* 10/80 */;
     // padding: 0 20px;
-    li{
+    li {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: .1875rem /* 15/80 */ .25rem /* 20/80 */ ;
-      span{
-        i{
-          font-size: .15rem /* 12/80 */;
-          font-family:'Microsoft YaHei';
+      padding: 0.1875rem /* 15/80 */ 0.25rem /* 20/80 */;
+      span {
+        i {
+          font-size: 0.15rem /* 12/80 */;
+          font-family: 'Microsoft YaHei';
         }
-        &:nth-child(2){
-          color: #4396F3;
+        &:nth-child(2) {
+          color: #4396f3;
           cursor: pointer;
         }
       }
-      &:nth-child(even){
-        background: rgba(67, 150, 243, .2);
+      &:nth-child(even) {
+        background: rgba(67, 150, 243, 0.2);
       }
     }
-
   }
-
 }
-.pump{
-  ul{
-      // display: flex;
-      // flex-wrap: wrap;
-      // justify-content: space-between;
-      // padding: 0 .175rem /* 14/80 */;
+.pump {
+  ul {
+    // display: flex;
+    // flex-wrap: wrap;
+    // justify-content: space-between;
+    // padding: 0 .175rem /* 14/80 */;
 
-
-    li{
-       width: 100% /* 174/80 */ /* 112/80 */;
+    li {
+      width: 100% /* 174/80 */ /* 112/80 */;
       height: 100% /* 112/80 */;
       display: flex;
       flex-wrap: wrap;
       justify-content: space-between;
       // margin: 0 .1rem /* 8/80 */ .1rem /* 8/80 */ 0;
-      
+
       // span:first-child{}
       // span:last-child{
       //   position: absolute;

@@ -25,7 +25,7 @@
 </template>
 
 <script>
-import * as echarts from 'echarts'
+import * as echarts from 'echarts';
 export default {
   name: 'theParkOutputValAll',
   props: {
@@ -37,15 +37,15 @@ export default {
     return {
       ...this._data,
       ids: this.$uuid(),
-    }
+    };
   },
   mounted() {
-    this.energyTrendFun(this.datas)
+    this.energyTrendFun(this.datas);
   },
   methods: {
     // 能耗态势
     energyTrendFun(val) {
-      var _data = val.energyTrendData
+      var _data = val.energyTrendData;
       for (var i = 0; i < _data.length; i++) {
         var option = {
           xAxis: {
@@ -66,7 +66,7 @@ export default {
             {
               type: 'bar',
               barWidth: 8,
-              animationDuration: 2000,
+              animationDuration: 1000,
               animationEasing: 'linear',
               barGap: '400%',
               // barCategoryGap:'0%',
@@ -111,7 +111,7 @@ export default {
             {
               type: 'bar',
               barWidth: 8,
-              animationDuration: 2000,
+              animationDuration: 1000,
               animationEasing: 'linear',
               showBackground: false,
               label: {
@@ -152,15 +152,15 @@ export default {
               data: [_data[i].yearPower],
             },
           ],
-        }
+        };
         this.$redomEchart(
           this.$refs['energyTrendEchart_' + i + this.ids],
           option
-        )
+        );
       }
     },
   },
-}
+};
 </script>
 
 <style lang="less" scoped>

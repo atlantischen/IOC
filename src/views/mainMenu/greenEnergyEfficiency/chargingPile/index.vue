@@ -61,17 +61,17 @@
 </template>
 
 <script>
-import * as echarts from "echarts";
+import * as echarts from 'echarts';
 
 export default {
-  name: "chargingPile",
+  name: 'chargingPile',
   data() {
     return {};
   },
   components: {},
   methods: {
     equipmentInit() {
-      var dom = this.$refs["equipment"];
+      var dom = this.$refs['equipment'];
       var option = {
         grid: {
           x: 10,
@@ -81,33 +81,33 @@ export default {
           containLabel: true,
         },
         tooltip: {
-           backgroundColor: "rgba(0,0,0,0.8)",
+          backgroundColor: 'rgba(0,0,0,0.8)',
           borderWidth: 1,
-          borderColor: "#4396f3",
+          borderColor: '#4396f3',
           padding: [5, 10],
           extraCssText: 'box-shadow:inset 0 0 8px rgba(67, 149, 243, 0.6);',
-          trigger: "axis",
+          trigger: 'axis',
           axisPointer: {
             lineStyle: {
-              color: "transparent",
+              color: 'transparent',
             },
           },
         },
         xAxis: [
           {
-            name: "",
-            type: "category",
-            data: ["生产区", "商业区", "停车场"],
+            name: '',
+            type: 'category',
+            data: ['生产区', '商业区', '停车场'],
             axisLine: {
               lineStyle: {
                 width: 0,
-                color: "#fff",
+                color: '#fff',
               },
             },
             axisLabel: {
               interval: 0,
               // rotate: 40,
-              textStyle: "#fff",
+              textStyle: '#fff',
             },
             axisTick: {
               show: false,
@@ -126,14 +126,14 @@ export default {
             max: 50,
             splitNumber: 4,
             interval: 10,
-            name: "个",
+            name: '个',
             nameTextStyle: {
-              align: "right",
+              align: 'right',
             },
             //               nameTextStyle: {
             //     padding: [-10, 0, 0, -10]    // 四个数字分别为上右下左与原位置距离
             // },
-            type: "value",
+            type: 'value',
             splitNumber: 2,
             axisLabel: {
               formatter: function(value) {
@@ -143,7 +143,7 @@ export default {
             axisLine: {
               show: false,
               lineStyle: {
-                color: "#fff",
+                color: '#fff',
               },
             },
             axisTick: {
@@ -152,8 +152,8 @@ export default {
             splitLine: {
               lineStyle: {
                 width: 0.5,
-                type: "dashed",
-                color: "rgb(255,255,255,1)",
+                type: 'dashed',
+                color: 'rgb(255,255,255,1)',
               },
             },
           },
@@ -161,14 +161,14 @@ export default {
         series: [
           {
             animationDuration: 1000,
-            animationEasing:'linear',
+            animationEasing: 'linear',
 
-            name: "",
-            type: "bar",
+            name: '',
+            type: 'bar',
             barWidth: 14,
-            color: "#0090FF",
+            color: '#0090FF',
             emphasis: {
-              focus: "series",
+              focus: 'series',
             },
             itemStyle: {
               normal: {
@@ -180,11 +180,11 @@ export default {
                   [
                     {
                       offset: 0.2,
-                      color: "rgba(67, 149, 243, 0.2)", // 0% 处的颜色
+                      color: 'rgba(67, 149, 243, 0.2)', // 0% 处的颜色
                     },
                     {
                       offset: 1,
-                      color: "rgba(67, 149, 243, 1)", // 100% 处的颜色
+                      color: 'rgba(67, 149, 243, 1)', // 100% 处的颜色
                     },
                   ],
                   false
@@ -198,56 +198,51 @@ export default {
       this.$redomEchart(dom, option);
     },
     online() {
-      var dom = this.$refs["online"];
-      var data= [
-              { value: 92, name: "在线" },
-              { value: 4, name: "离线" },
-              { value: 4, name: "故障" },
-            ];
+      var dom = this.$refs['online'];
+      var data = [
+        { value: 92, name: '在线' },
+        { value: 4, name: '离线' },
+        { value: 4, name: '故障' },
+      ];
       var option = {
         tooltip: {
-          trigger: "item",
-           backgroundColor: "rgba(0,0,0,0.8)",
+          trigger: 'item',
+          backgroundColor: 'rgba(0,0,0,0.8)',
           borderWidth: 1,
-          borderColor: "#4396f3",
+          borderColor: '#4396f3',
           padding: [5, 10],
           extraCssText: 'box-shadow:inset 0 0 8px rgba(67, 149, 243, 0.6);',
-          formatter:function(param){
-            return param.marker+param.name+"："+ param.value + "%<br>";
-        },
+          formatter: function(param) {
+            return param.marker + param.name + '：' + param.value + '%<br>';
+          },
         },
         legend: {
-          orient: "horizontal",
-          bottom: "0",
-          icon: "circle",
+          orient: 'horizontal',
+          bottom: '0',
+          icon: 'circle',
           itemWidth: 10,
           itemHeight: 10,
           formatter: function(name) {
             var target;
             for (var i = 0, l = data.length; i < l; i++) {
-    
               if (data[i].name == name) {
                 target = data[i].value;
               }
             }
-            var arr = [
-              "{a|" +name +" :}{b|" + target + "%}",
-            ];
-            return arr.join("\n");
+            var arr = ['{a|' + name + ' :}{b|' + target + '%}'];
+            return arr.join('\n');
           },
           textStyle: {
             //图例文字的样式
-            color: "#fff",
+            color: '#fff',
             fontSize: 12,
             rich: {
               a: {
-              
-                align: "left",
+                align: 'left',
                 padding: [0, 0, 0, 5],
               },
               b: {
-               
-                align: "right",
+                align: 'right',
                 padding: [0, 0, 0, 10],
               },
             },
@@ -256,8 +251,8 @@ export default {
 
         series: [
           {
-            type: "pie",
-            radius: "50%",
+            type: 'pie',
+            radius: '50%',
             itemStyle: {
               normal: {
                 label: {
@@ -268,14 +263,14 @@ export default {
                 },
               },
             },
-            
-            color: ["#4695ED", "#05E3FF", "#CD8C57"],
+
+            color: ['#4695ED', '#05E3FF', '#CD8C57'],
             data: data,
             emphasis: {
               itemStyle: {
                 shadowBlur: 10,
                 shadowOffsetX: 0,
-                shadowColor: "rgba(0, 0, 0, 0.5)",
+                shadowColor: 'rgba(0, 0, 0, 0.5)',
               },
             },
           },
@@ -284,55 +279,60 @@ export default {
       this.$redomEchart(dom, option);
     },
     use() {
-      var dom = this.$refs["use"];
+      var dom = this.$refs['use'];
       var data = [
-              { value: 36, name: "正在使用" },
-              { value: 24, name: "闲置" },
-              { value: 4, name: "报损" },
-            ]
+        { value: 36, name: '正在使用' },
+        { value: 24, name: '闲置' },
+        { value: 4, name: '报损' },
+      ];
       var option = {
-         tooltip: {
-          trigger: "item",
-           backgroundColor: "rgba(0,0,0,0.8)",
+        tooltip: {
+          trigger: 'item',
+          backgroundColor: 'rgba(0,0,0,0.8)',
           borderWidth: 1,
-          borderColor: "#4396f3",
+          borderColor: '#4396f3',
           padding: [5, 10],
           extraCssText: 'box-shadow:inset 0 0 8px rgba(67, 149, 243, 0.6);',
-           formatter:'{b} : {d}%',
+          formatter: '{b} : {d}%',
         },
         legend: {
-          top: "45%",
-          left: "60%",
-          orient: "vertical",
-          icon: "circle",
+          top: '45%',
+          left: '60%',
+          orient: 'vertical',
+          icon: 'circle',
           itemWidth: 10,
           itemHeight: 10,
           formatter: function(name) {
             var total = 0;
             var target;
             for (var i = 0, l = data.length; i < l; i++) {
-              total+=data[i].value;
+              total += data[i].value;
               if (data[i].name == name) {
                 target = data[i].value;
               }
             }
-            var arr = ["{a|" +name +" }{b|" + ((target/total)*100).toFixed(2) + "%}"];
-            return arr.join("\n");
+            var arr = [
+              '{a|' +
+                name +
+                ' }{b|' +
+                ((target / total) * 100).toFixed(2) +
+                '%}',
+            ];
+            return arr.join('\n');
           },
           textStyle: {
             //图例文字的样式
-            color: "#fff",
+            color: '#fff',
             fontSize: 12,
             rich: {
               a: {
                 width: 55,
                 padding: [0, 0, 0, 5],
-
               },
               b: {
-              verticalAlign: 'top',
-              align: 'center',
-              padding: [0, 0, 0, 15],
+                verticalAlign: 'top',
+                align: 'center',
+                padding: [0, 0, 0, 15],
               },
             },
           },
@@ -340,11 +340,11 @@ export default {
 
         series: [
           {
-            name: "面积模式",
-            type: "pie",
-            radius:[50,100],
-            center: ["30%", "60%"],
-            roseType: "area",
+            name: '面积模式',
+            type: 'pie',
+            radius: [50, 100],
+            center: ['30%', '60%'],
+            roseType: 'area',
             itemStyle: {
               normal: {
                 label: {
@@ -355,16 +355,16 @@ export default {
                 },
               },
             },
-            color: ["#4695ED", "#05E3FF", "#CD8C57"],
+            color: ['#4695ED', '#05E3FF', '#CD8C57'],
 
-            data:data ,
+            data: data,
           },
         ],
       };
       this.$redomEchart(dom, option);
     },
     use_kwh() {
-      var dom = this.$refs["use_kwh"];
+      var dom = this.$refs['use_kwh'];
       var option = {
         grid: {
           x: 10,
@@ -374,33 +374,33 @@ export default {
           containLabel: true,
         },
         tooltip: {
-           backgroundColor: "rgba(0,0,0,0.8)",
+          backgroundColor: 'rgba(0,0,0,0.8)',
           borderWidth: 1,
-          borderColor: "#4396f3",
+          borderColor: '#4396f3',
           padding: [5, 10],
           extraCssText: 'box-shadow:inset 0 0 8px rgba(67, 149, 243, 0.6);',
-          trigger: "axis",
+          trigger: 'axis',
           axisPointer: {
             lineStyle: {
-              color: "transparent",
+              color: 'transparent',
             },
           },
         },
         xAxis: [
           {
-            name: "",
-            type: "category",
-            data: ["生产区", "商业区", "停车场"],
+            name: '',
+            type: 'category',
+            data: ['生产区', '商业区', '停车场'],
             axisLine: {
               lineStyle: {
                 width: 0,
-                color: "#fff",
+                color: '#fff',
               },
             },
             axisLabel: {
               interval: 0,
               // rotate: 40,
-              textStyle: "#fff",
+              textStyle: '#fff',
             },
             axisTick: {
               show: false,
@@ -419,14 +419,14 @@ export default {
             max: 18000,
             splitNumber: 4,
             interval: 3000,
-            name: "kwh",
+            name: 'kwh',
             nameTextStyle: {
-              align: "right",
+              align: 'right',
             },
             //               nameTextStyle: {
             //     padding: [-10, 0, 0, -10]    // 四个数字分别为上右下左与原位置距离
             // },
-            type: "value",
+            type: 'value',
             splitNumber: 2,
             axisLabel: {
               formatter: function(value) {
@@ -436,7 +436,7 @@ export default {
             axisLine: {
               show: false,
               lineStyle: {
-                color: "#fff",
+                color: '#fff',
               },
             },
             axisTick: {
@@ -445,8 +445,8 @@ export default {
             splitLine: {
               lineStyle: {
                 width: 0.5,
-                type: "dashed",
-                color: "rgb(255,255,255,1)",
+                type: 'dashed',
+                color: 'rgb(255,255,255,1)',
               },
             },
           },
@@ -457,11 +457,11 @@ export default {
             animationEasing:'linear',
 
             // name: "其他",
-            type: "bar",
+            type: 'bar',
             barWidth: 14,
-            color: "#0090FF",
+            color: '#0090FF',
             emphasis: {
-              focus: "series",
+              focus: 'series',
             },
             itemStyle: {
               normal: {
@@ -473,11 +473,11 @@ export default {
                   [
                     {
                       offset: 0.2,
-                      color: "rgba(67, 149, 243, 0.2)", // 0% 处的颜色
+                      color: 'rgba(67, 149, 243, 0.2)', // 0% 处的颜色
                     },
                     {
                       offset: 1,
-                      color: "rgba(67, 149, 243, 1)", // 100% 处的颜色
+                      color: 'rgba(67, 149, 243, 1)', // 100% 处的颜色
                     },
                   ],
                   false

@@ -16,11 +16,13 @@
     <div class="cold_row_b">
       <div class="tittle">今日告警</div>
       <ul class="warning scroll">
-        <li v-for="(item,index) in warningList" :key="index">
-          <div class="tips" :class="item.status===0?'_red':'_yellow'">严重</div>
+        <li v-for="(item, index) in warningList" :key="index">
+          <div class="tips" :class="item.status === 0 ? '_red' : '_yellow'">
+            严重
+          </div>
           <div class="warning_m">
-            <span>{{item.time}}</span>
-            <span>{{item.title}}</span>
+            <span>{{ item.time }}</span>
+            <span>{{ item.title }}</span>
           </div>
           <div class="warning_r">待处理</div>
         </li>
@@ -41,7 +43,10 @@
           </li>
         </ul> -->
       </div>
-      <div id="ElectricityStatistics" :ref="'ElectricityStatistics'+ids"></div>
+      <div
+        id="ElectricityStatistics"
+        :ref="'ElectricityStatistics' + ids"
+      ></div>
     </div>
   </IOCLeft>
   <IOCRight>
@@ -63,10 +68,7 @@
         <div class="airPanel_ct" :class="_it.states == 1 ? '' : 'disable'">
           <div class="childBox temperature" v-show="_it.airPanelV == 1">
             <p>
-              当前温度：<i
-                
-                v-text="_it.tem.currentTem"
-              ></i>
+              当前温度：<i v-text="_it.tem.currentTem"></i>
               ℃
             </p>
             <div class="showTemper">
@@ -158,10 +160,10 @@
 </template>
 
 <script>
-import * as echarts from "echarts";
+import * as echarts from 'echarts';
 
 export default {
-  data () {
+  data() {
     return {
       ids: this.$uuid(),
       activeIndex: 1,
@@ -169,7 +171,7 @@ export default {
         {
           states: 1,
           airPanelV: 1,
-          localName: "1601_会议室",
+          localName: '1601_会议室',
           tem: {
             targetTem: 20,
             currentTem: 24,
@@ -184,7 +186,7 @@ export default {
         {
           states: 0,
           airPanelV: 1,
-          localName: "1601_洽谈室",
+          localName: '1601_洽谈室',
           tem: {
             targetTem: 28,
             currentTem: 26,
@@ -199,7 +201,7 @@ export default {
         {
           states: 1,
           airPanelV: 1,
-          localName: "研发一部",
+          localName: '研发一部',
           tem: {
             targetTem: 20,
             currentTem: 24,
@@ -214,7 +216,7 @@ export default {
         {
           states: 0,
           airPanelV: 1,
-          localName: "市场一部",
+          localName: '市场一部',
           tem: {
             targetTem: 20,
             currentTem: 24,
@@ -229,7 +231,7 @@ export default {
         {
           states: 1,
           airPanelV: 1,
-          localName: "研发二部",
+          localName: '研发二部',
           tem: {
             targetTem: 20,
             currentTem: 24,
@@ -244,7 +246,7 @@ export default {
         {
           states: 1,
           airPanelV: 1,
-          localName: "市场二部",
+          localName: '市场二部',
           tem: {
             targetTem: 20,
             currentTem: 24,
@@ -259,7 +261,7 @@ export default {
         {
           states: 0,
           airPanelV: 1,
-          localName: "总经理办公室",
+          localName: '总经理办公室',
           tem: {
             targetTem: 20,
             currentTem: 24,
@@ -274,7 +276,7 @@ export default {
         {
           states: 1,
           airPanelV: 1,
-          localName: "财务办公室",
+          localName: '财务办公室',
           tem: {
             targetTem: 20,
             currentTem: 24,
@@ -289,7 +291,7 @@ export default {
         {
           states: 1,
           airPanelV: 1,
-          localName: "杂物间",
+          localName: '杂物间',
           tem: {
             targetTem: 20,
             currentTem: 24,
@@ -304,7 +306,7 @@ export default {
         {
           states: 1,
           airPanelV: 1,
-          localName: "餐厅室",
+          localName: '餐厅室',
           tem: {
             targetTem: 20,
             currentTem: 24,
@@ -319,7 +321,7 @@ export default {
         {
           states: 1,
           airPanelV: 1,
-          localName: "1601_会议室",
+          localName: '1601_会议室',
           tem: {
             targetTem: 20,
             currentTem: 24,
@@ -334,7 +336,7 @@ export default {
         {
           states: 0,
           airPanelV: 1,
-          localName: "1601_洽谈室",
+          localName: '1601_洽谈室',
           tem: {
             targetTem: 28,
             currentTem: 26,
@@ -349,7 +351,7 @@ export default {
         {
           states: 1,
           airPanelV: 1,
-          localName: "研发一部",
+          localName: '研发一部',
           tem: {
             targetTem: 20,
             currentTem: 24,
@@ -364,7 +366,7 @@ export default {
         {
           states: 0,
           airPanelV: 1,
-          localName: "市场一部",
+          localName: '市场一部',
           tem: {
             targetTem: 20,
             currentTem: 24,
@@ -379,7 +381,7 @@ export default {
         {
           states: 1,
           airPanelV: 1,
-          localName: "研发二部",
+          localName: '研发二部',
           tem: {
             targetTem: 20,
             currentTem: 24,
@@ -394,7 +396,7 @@ export default {
         {
           states: 1,
           airPanelV: 1,
-          localName: "市场二部",
+          localName: '市场二部',
           tem: {
             targetTem: 20,
             currentTem: 24,
@@ -409,7 +411,7 @@ export default {
         {
           states: 0,
           airPanelV: 1,
-          localName: "总经理办公室",
+          localName: '总经理办公室',
           tem: {
             targetTem: 20,
             currentTem: 24,
@@ -424,7 +426,7 @@ export default {
         {
           states: 1,
           airPanelV: 1,
-          localName: "财务办公室",
+          localName: '财务办公室',
           tem: {
             targetTem: 20,
             currentTem: 24,
@@ -439,7 +441,7 @@ export default {
         {
           states: 1,
           airPanelV: 1,
-          localName: "杂物间",
+          localName: '杂物间',
           tem: {
             targetTem: 20,
             currentTem: 24,
@@ -454,7 +456,7 @@ export default {
         {
           states: 1,
           airPanelV: 1,
-          localName: "餐厅室",
+          localName: '餐厅室',
           tem: {
             targetTem: 20,
             currentTem: 24,
@@ -469,7 +471,7 @@ export default {
         {
           states: 1,
           airPanelV: 1,
-          localName: "1601_会议室",
+          localName: '1601_会议室',
           tem: {
             targetTem: 20,
             currentTem: 24,
@@ -484,7 +486,7 @@ export default {
         {
           states: 0,
           airPanelV: 1,
-          localName: "1601_洽谈室",
+          localName: '1601_洽谈室',
           tem: {
             targetTem: 28,
             currentTem: 26,
@@ -499,7 +501,7 @@ export default {
         {
           states: 1,
           airPanelV: 1,
-          localName: "研发一部",
+          localName: '研发一部',
           tem: {
             targetTem: 20,
             currentTem: 24,
@@ -514,7 +516,7 @@ export default {
         {
           states: 0,
           airPanelV: 1,
-          localName: "市场一部",
+          localName: '市场一部',
           tem: {
             targetTem: 20,
             currentTem: 24,
@@ -529,7 +531,7 @@ export default {
         {
           states: 1,
           airPanelV: 1,
-          localName: "研发二部",
+          localName: '研发二部',
           tem: {
             targetTem: 20,
             currentTem: 24,
@@ -544,7 +546,7 @@ export default {
         {
           states: 1,
           airPanelV: 1,
-          localName: "市场二部",
+          localName: '市场二部',
           tem: {
             targetTem: 20,
             currentTem: 24,
@@ -559,7 +561,7 @@ export default {
         {
           states: 0,
           airPanelV: 1,
-          localName: "总经理办公室",
+          localName: '总经理办公室',
           tem: {
             targetTem: 20,
             currentTem: 24,
@@ -574,7 +576,7 @@ export default {
         {
           states: 1,
           airPanelV: 1,
-          localName: "财务办公室",
+          localName: '财务办公室',
           tem: {
             targetTem: 20,
             currentTem: 24,
@@ -589,7 +591,7 @@ export default {
         {
           states: 1,
           airPanelV: 1,
-          localName: "杂物间",
+          localName: '杂物间',
           tem: {
             targetTem: 20,
             currentTem: 24,
@@ -604,7 +606,7 @@ export default {
         {
           states: 1,
           airPanelV: 1,
-          localName: "餐厅室",
+          localName: '餐厅室',
           tem: {
             targetTem: 20,
             currentTem: 24,
@@ -617,78 +619,71 @@ export default {
           },
         },
       ],
-       warningList:[
+      warningList: [
         {
-          status:0,
-          time:'10:00',
-          title:'16F-市场一部_压缩机损坏'
+          status: 0,
+          time: '10:00',
+          title: '16F-市场一部_压缩机损坏',
         },
         {
-          status:1,
-          time:'11:09',
-          title:'16F-市场二部_温控器超高温'
-        }
-        ,
-        {
-          status:0,
-          time:'15:06',
-          title:'14F-财务室_空调机运转异常'
-        }
-        ,
-        {
-          status:0,
-          time:'16:13',
-          title:'14F-财务室_压缩机启动不良'
-        }
-        ,
-        {
-          status:0,
-          time:'15:55',
-          title:'14F-1601_室内风扇故障'
-        }
-        ,
-        {
-          status:1,
-          time:'19:05',
-          title:'14F-财务室_空调机运转异常'
+          status: 1,
+          time: '11:09',
+          title: '16F-市场二部_温控器超高温',
         },
         {
-          status:0,
-          time:'15:55',
-          title:'15F-财务室_空调机运转异常'
-        }
-        ,
-        {
-          status:1,
-          time:'19:05',
-          title:'16F-财务室_空调机运转异常'
+          status: 0,
+          time: '15:06',
+          title: '14F-财务室_空调机运转异常',
         },
         {
-          status:0,
-          time:'15:55',
-          title:'16F-财务室_压缩机启动不良'
-        }
-        ,
+          status: 0,
+          time: '16:13',
+          title: '14F-财务室_压缩机启动不良',
+        },
         {
-          status:1,
-          time:'19:05',
-          title:'14F-财务室_空调机运转异常'
-        }
-
-      ]
+          status: 0,
+          time: '15:55',
+          title: '14F-1601_室内风扇故障',
+        },
+        {
+          status: 1,
+          time: '19:05',
+          title: '14F-财务室_空调机运转异常',
+        },
+        {
+          status: 0,
+          time: '15:55',
+          title: '15F-财务室_空调机运转异常',
+        },
+        {
+          status: 1,
+          time: '19:05',
+          title: '16F-财务室_空调机运转异常',
+        },
+        {
+          status: 0,
+          time: '15:55',
+          title: '16F-财务室_压缩机启动不良',
+        },
+        {
+          status: 1,
+          time: '19:05',
+          title: '14F-财务室_空调机运转异常',
+        },
+      ],
     };
   },
   methods: {
-    changeBtn (val) {
+    changeBtn(val) {
       console.log(val);
       this.activeIndex = val;
       if (val == 1) {
         this.ElectricityStatistics(
-        ["7.24", "7.25", "7.26", "7.27", "7.28", "7.29", "7.30"],
-      [2500, 3000, 2800, 4000, 3000, 2900, 3900,],
+          ['7.24', '7.25', '7.26', '7.27', '7.28', '7.29', '7.30'],
+          [2500, 3000, 2800, 4000, 3000, 2900, 3900],
           {
-            name: "kw·h",
-            company:'日',
+            name: 'kw·h',
+            company: '日',
             splitNumber: 3,
             min: 0,
             max: 4800,
@@ -697,11 +692,11 @@ export default {
         );
       } else if (val == 2) {
         this.ElectricityStatistics(
-          ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"],
+          ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'],
           [3, 4, 4, 3, 2, 1, 2, 5, 4, 3, 6, 2],
           {
-            name: "万kw·h",
-            company:'月',
+            name: '万kw·h',
+            company: '月',
 
             splitNumber: 4,
             min: 0,
@@ -711,12 +706,12 @@ export default {
         );
       } else {
         this.ElectricityStatistics(
-          ["2019年", "2020年", "2021年"],
+          ['2019年', '2020年', '2021年'],
           [23, 41, 13],
           {
-            name: "万kw·h",
-            company:'年',
-          
+            name: '万kw·h',
+            company: '年',
+
             splitNumber: 4,
             min: 0,
             max: 60,
@@ -726,63 +721,63 @@ export default {
       }
     },
 
-    ElectricityStatistics (data, data2, yData) {
-      let { name,company, splitNumber, min, max, interval } = yData;
+    ElectricityStatistics(data, data2, yData) {
+      let { name, company, splitNumber, min, max, interval } = yData;
       // var dom = "ElectricityStatistics";
-      var dom = this.$refs['ElectricityStatistics'+this.ids];
+      var dom = this.$refs['ElectricityStatistics' + this.ids];
       console.log(dom);
-      console.log(dom,'dom',undefined);
+      console.log(dom, 'dom', undefined);
 
       var option = {
-        color: ["#ffea00", "#0df8fc", "#fff"],
+        color: ['#ffea00', '#0df8fc', '#fff'],
         grid: {
-          top: "40",
-          left: "10",
-          right: "20",
-          bottom: "10",
+          top: '40',
+          left: '10',
+          right: '20',
+          bottom: '10',
           containLabel: true,
-          backgroundColor: "rgba(0,0,0,0)",
+          backgroundColor: 'rgba(0,0,0,0)',
           borderWidth: 1,
-          borderColor: "#ccc",
+          borderColor: '#ccc',
         },
         tooltip: {
           // show: false,
           // trigger: 'item',
-          trigger: "axis",
+          trigger: 'axis',
           axisPointer: {
             lineStyle: {
-              color: "transparent",
+              color: 'transparent',
             },
           },
         },
 
         legend: {
           show: false,
-          x: "center",
-          y: "0",
-          data: ["预定", "实际使用"],
+          x: 'center',
+          y: '0',
+          data: ['预定', '实际使用'],
           itemWidth: 8, // 图例的宽度
           itemHeight: 8, // 图例的高度
-          icon: "circle",
+          icon: 'circle',
           textStyle: {
-            color: "#fff",
+            color: '#fff',
             fontSize: 12,
           },
           itemGap: 40, // 设置间距
         },
         xAxis: {
-          type: "category",
-           name: company,
+          type: 'category',
+          name: company,
           nameTextStyle: {
-            padding: [20, 0, 0, -10]    // 四个数字分别为上右下左与原位置距离
-        },
+            padding: [20, 0, 0, -10], // 四个数字分别为上右下左与原位置距离
+          },
           data: data,
           axisTick: {
             show: false,
           },
           axisLine: {
             lineStyle: {
-              color: "#fff", // 纵坐标轴和字体颜色
+              color: '#fff', // 纵坐标轴和字体颜色
               width: 0,
             },
           },
@@ -790,7 +785,7 @@ export default {
             fontSize: 11,
             rotate: 40,
             textStyle: {
-              color: "#fff",
+              color: '#fff',
             },
           },
         },
@@ -802,16 +797,16 @@ export default {
             max: max,
             interval: interval,
             nameTextStyle: {
-              color: "#fff",
+              color: '#fff',
             },
             axisTick: {
               show: false,
             },
-           splitLine: {
+            splitLine: {
               lineStyle: {
                 width: 0.5,
-                type: "dashed",
-                color: "rgb(255,255,255,1)",
+                type: 'dashed',
+                color: 'rgb(255,255,255,1)',
               },
             },
             axisLine: {
@@ -822,21 +817,21 @@ export default {
               fontSize: 12,
               showMinLabel: false,
               textStyle: {
-                color: "#fff",
+                color: '#fff',
               },
             },
           },
           {
             show: false,
-            name: "",
+            name: '',
             interval: 10,
             axisLabel: {
               show: false,
-              formatter: "{value} %",
+              formatter: '{value} %',
             },
             axisLine: {
               lineStyle: {
-                color: "#fff",
+                color: '#fff',
                 width: 2,
               },
             },
@@ -847,42 +842,42 @@ export default {
             animationDuration: 1000,
             animationEasing:'linear',
 
-            name: "",
-            type: "line",
+            name: '',
+            type: 'line',
             // smooth: true,
             label: {
               show: false,
-              color: "#fff",
-              position: ["0", "-20"],
+              color: '#fff',
+              position: ['0', '-20'],
             },
-            color: "#00ffff",
+            color: '#00ffff',
             symbolSize: 6,
             smooth: true,
-            symbol: "none",
-             areaStyle: {
+            symbol: 'none',
+            areaStyle: {
               normal: {
                 color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
                   {
                     offset: 0,
-                    color: "rgba(255, 180, 0, .2)",
+                    color: 'rgba(255, 180, 0, .2)',
                   },
                   {
                     offset: 1,
-                    color: "rgba(255, 221, 141, .2)",
+                    color: 'rgba(255, 221, 141, .2)',
                   },
                 ]),
               },
             },
             itemStyle: {
               normal: {
-                 color: new echarts.graphic.LinearGradient(0, 0, 1, 0, [
+                color: new echarts.graphic.LinearGradient(0, 0, 1, 0, [
                   {
                     offset: 0,
-                    color: "#FFB400",
+                    color: '#FFB400',
                   },
                   {
                     offset: 1,
-                    color: "#FFDD8D",
+                    color: '#FFDD8D',
                   },
                 ]),
                 // lineStyle: {
@@ -895,55 +890,53 @@ export default {
           },
         ],
       };
-      if(dom && dom != undefined){
-         this.$redomEchart(dom, option);
+      if (dom && dom != undefined) {
+        this.$redomEchart(dom, option);
       }
-
     },
     // 改变目标温度
-    changeTemper (name, i) {
+    changeTemper(name, i) {
       if (name === 'up') {
-        if (this.airPanelList[i].tem.targetTem >= 30) return false
+        if (this.airPanelList[i].tem.targetTem >= 30) return false;
         console.log(this.airPanelList[i].tem.targetTem);
         this.EnergyEfficiency(
-          this.$refs["EnergyEfficiency" + i],
-          this.airPanelList[i].tem.targetTem += 1
+          this.$refs['EnergyEfficiency' + i],
+          (this.airPanelList[i].tem.targetTem += 1)
         );
       } else if (name === 'down') {
         // this.airPanelList[i].tem.targetTem--
-        if (this.airPanelList[i].tem.targetTem <= 0) return false
+        if (this.airPanelList[i].tem.targetTem <= 0) return false;
         this.EnergyEfficiency(
-          this.$refs["EnergyEfficiency" + i],
-          this.airPanelList[i].tem.targetTem -= 1
+          this.$refs['EnergyEfficiency' + i],
+          (this.airPanelList[i].tem.targetTem -= 1)
         );
-
       }
     },
     // 改变模式
-    changeMode (val, i) {
+    changeMode(val, i) {
       this.airPanelList[i].mode.value = val;
     },
     // 改变风速
-    changeSpeeds (val, i) {
+    changeSpeeds(val, i) {
       console.log(val, i);
       this.airPanelList[i].speed.value = val;
     },
-    changeAirPanel (val, i) {
+    changeAirPanel(val, i) {
       this.airPanelList[i].airPanelV = val;
     },
-    closeOpen (val, i) {
+    closeOpen(val, i) {
       this.airPanelList[i].states = val == 1 ? 0 : 1;
     },
 
-    EnergyEfficiency (val, data) {
+    EnergyEfficiency(val, data) {
       var dom = val;
-      
+
       var option = {
         series: [
           {
-            type: "gauge",
-            radius: "140%",
-            center: ["50%", "100%"],
+            type: 'gauge',
+            radius: '140%',
+            center: ['50%', '100%'],
             startAngle: 180,
             endAngle: 0,
             min: 0,
@@ -951,8 +944,8 @@ export default {
             splitNumber: 4,
 
             itemStyle: {
-                color: 'red',
-                 shadowColor: 'rgba(0,138,255,0.45)',
+              color: 'red',
+              shadowColor: 'rgba(0,138,255,0.45)',
               // color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
               //   {
               //     offset: 0,
@@ -974,12 +967,14 @@ export default {
             axisLine: {
               lineStyle: {
                 width: 6,
-                color: [[data / 30, '#4396f3'],[30/ data, '#fff']],
-                shadowColor: "rgba(0, 0, 0, 0.4)",
+                color: [
+                  [data / 30, '#4396f3'],
+                  [30 / data, '#fff'],
+                ],
+                shadowColor: 'rgba(0, 0, 0, 0.4)',
                 shadowBlur: 8,
                 shadowOffsetX: 1,
                 shadowOffsetY: 2,
-
               },
             },
             axisTick: {
@@ -988,7 +983,7 @@ export default {
               splitNumber: 5,
               lineStyle: {
                 width: 2,
-                color: "#999",
+                color: '#999',
               },
             },
             splitLine: {
@@ -997,8 +992,8 @@ export default {
               length: 8,
               lineStyle: {
                 width: 1,
-                color: "#fff",
-                formatter: function (value) {
+                color: '#fff',
+                formatter: function(value) {
                   return value;
                 },
               },
@@ -1006,32 +1001,32 @@ export default {
             axisLabel: {
               show: false,
               distance: 13,
-              color: "#fff",
+              color: '#fff',
               fontSize: 12,
-              formatter: function (value) {
-                if (value != 2 && value != 6) return value + ".0";
+              formatter: function(value) {
+                if (value != 2 && value != 6) return value + '.0';
               },
             },
             anchor: {
               show: false,
             },
             title: {
-              offsetCenter: [0, "-10%"],
+              offsetCenter: [0, '-10%'],
               fontSize: 12,
-              color: "#fff",
+              color: '#fff',
             },
             detail: {
               valueAnimation: true,
-              width: "60%",
+              width: '60%',
               lineHeight: 40,
-              height: "15%",
+              height: '15%',
               borderRadius: 8,
-              offsetCenter: [0, "-50%"],
+              offsetCenter: [0, '-50%'],
               fontSize: 20,
-              fontWeight: "500",
-              formatter: "{value} ",
-              color: "#fff",
-              formatter: function (value) {
+              fontWeight: '500',
+              formatter: '{value} ',
+              color: '#fff',
+              formatter: function(value) {
                 return value;
               },
             },
@@ -1039,44 +1034,38 @@ export default {
               {
                 value: data,
 
-                name: "目标温度",
+                name: '目标温度',
               },
             ],
           },
         ],
       };
 
-
       this.$redomEchart(dom, option);
     },
   },
-  created(){
-    
-  },
-  mounted () {
-    this.$nextTick(()=> {
-          this.ElectricityStatistics(
-         this.$fun_date(),
-       [2056, 2511, 2932, 3126, 3412, 3612, 3759,],
-          {
-            name: "kw·h",
-            company:'日',
-            splitNumber: 3,
-            min: 0,
-            max: 4800,
-            interval: 1200,
-          }
-    );
-    for (var i = 0; i < this.airPanelList.length; i++) {
-          this.EnergyEfficiency(
-            this.$refs["EnergyEfficiency" + i],
-            this.airPanelList[i].tem.targetTem
-          );
-        }  
-    })
-     
-    
-    
+  created() {},
+  mounted() {
+    this.$nextTick(() => {
+      this.ElectricityStatistics(
+        this.$fun_date(),
+        [2056, 2511, 2932, 3126, 3412, 3612, 3759],
+        {
+          name: 'kw·h',
+          company: '日',
+          splitNumber: 3,
+          min: 0,
+          max: 4800,
+          interval: 1200,
+        }
+      );
+      for (var i = 0; i < this.airPanelList.length; i++) {
+        this.EnergyEfficiency(
+          this.$refs['EnergyEfficiency' + i],
+          this.airPanelList[i].tem.targetTem
+        );
+      }
+    });
   },
 };
 </script>
@@ -1106,7 +1095,7 @@ export default {
     position: relative;
     // border-bottom: 1px dashed #fff;
     &::before {
-      content: "";
+      content: '';
       position: absolute;
       left: 0;
       bottom: 0;
@@ -1165,7 +1154,7 @@ export default {
   // margin: 10px 0 0 10px;
   li {
     position: relative;
-    width: 2.0625rem /* 165/80 */ ;
+    width: 2.0625rem /* 165/80 */;
     background: rgba(255, 255, 255, 0.1);
     border-radius: 6px;
     margin: 0 0.125rem /* 10/80 */ 0.15rem /* 12/80 */ 0;

@@ -6,7 +6,9 @@
         <div class="tittle">今日分项用电分析</div>
         <ul>
           <li v-for="(item, index) in todayList" :key="index">
-            <span class="font_text"><NumCounter :value="item.kwh"></NumCounter>kwh</span>
+            <span class="font_text"
+              ><NumCounter :value="item.kwh"></NumCounter>kwh</span
+            >
             <span>{{ item.text }}</span>
             <div>
               <div class="left">
@@ -37,7 +39,10 @@
 
         <ul>
           <li v-for="(item, index) in topList" :key="index">
-            <span class="animation_m"   v-style="{width:item.value+'%'}"></span>
+            <span
+              class="animation_m"
+              v-style="{ width: item.value + '%' }"
+            ></span>
             <span>{{ item.name }}</span>
           </li>
         </ul>
@@ -56,119 +61,117 @@
           <div id="energy2" ref="energy2"></div>
           <div id="energy3" ref="energy3"></div>
         </div>
-         <div class="month_use_w">
+        <div class="month_use_w">
           <div class="tittle">本月建筑用水分析</div>
-        <!-- <div class="count">月能耗总计:<NumCounter class="num" :value="9245.94"></NumCounter>m³</div> -->
+          <!-- <div class="count">月能耗总计:<NumCounter class="num" :value="9245.94"></NumCounter>m³</div> -->
 
           <div id="use_W" ref="use_W"></div>
-      </div>
+        </div>
       </div>
     </IOCRight>
   </div>
 </template>
 
 <script>
-import * as echarts from "echarts";
+import * as echarts from 'echarts';
 
 export default {
-  name: "energyEfficiencyBDA",
+  name: 'energyEfficiencyBDA',
   data() {
     return {
       todayList: [
         {
           kwh: 4802.78,
-          text: "照明插座用电",
-          percentage: this.$randomNumer(1,5,2),
+          text: '照明插座用电',
+          percentage: this.$randomNumer(1, 5, 2),
           state: 1,
         },
         {
           kwh: 2659.16,
-          text: "动力用电",
-          percentage:  this.$randomNumer(1,5,2),
+          text: '动力用电',
+          percentage: this.$randomNumer(1, 5, 2),
           state: 1,
         },
         {
           kwh: 9615.09,
-          text: "空调用电",
-          percentage:  this.$randomNumer(1,5,2),
+          text: '空调用电',
+          percentage: this.$randomNumer(1, 5, 2),
           state: 0,
         },
         {
-          kwh: 784.60,
-          text: "其他用电",
-          percentage:  this.$randomNumer(1,5,2),
+          kwh: 784.6,
+          text: '其他用电',
+          percentage: this.$randomNumer(1, 5, 2),
           state: 0,
         },
       ],
       topList: [
         {
-          name: "纵横国际影城",
+          name: '纵横国际影城',
           value: 70,
         },
         {
-          name: "卓然睿和自动化",
+          name: '卓然睿和自动化',
           value: 60,
         },
         {
-          name: "威信科技",
+          name: '威信科技',
           value: 50,
         },
         {
-          name: "格瑞能源",
+          name: '格瑞能源',
           value: 40,
         },
         {
-          name: "思码软件",
+          name: '思码软件',
           value: 30,
         },
       ],
     };
   },
   components: {},
-  directives:{
-    style:{
-      mounted(el,binding){
+  directives: {
+    style: {
+      mounted(el, binding) {
         setTimeout(() => {
-        for(let attr in binding.value){
-          el.style[attr]=binding.value[attr]
-        }
-          }, 0);
-
-      }
-    }
+          for (let attr in binding.value) {
+            el.style[attr] = binding.value[attr];
+          }
+        }, 0);
+      },
+    },
   },
   methods: {
     AssetsAndEquipment() {
-      var dom = this.$refs["park_time"];
-      const data=[12369, 9823, 10345, 13245, 10236];
+      var dom = this.$refs['park_time'];
+      const data = [12369, 9823, 10345, 13245, 10236];
       const total = data.reduce((x, y) => x + y, 0);
 
       var option = {
-        
-         title: {
+        title: {
           show: true,
           text: `{c|月能总耗计:}{a|${total}}{b|kw.h}`,
-          link: "",
+          link: '',
           target: null,
-          left: "1%",
-          top: "-10",
-          textAlign: "left",
+          left: '1%',
+          top: '-10',
+          textAlign: 'left',
           itemGap: 6,
           textStyle: {
             rich: {
               c: {
                 fontSize: 14,
-                color: "rgb(255,255,255,1)",
+                color: 'rgb(255,255,255,1)',
                 padding: [0, 0, 10, 0],
               },
               a: {
-                color: "#fff",
-                fontFamily: "BYfont",
+                color: '#fff',
+                fontFamily: 'BYfont',
                 fontSize: 20,
                 padding: [0, 0, 5, 5],
               },
               b: {
-                color: "#fff",
+                color: '#fff',
                 padding: [0, 0, 10, 0],
 
                 fontSize: 12,
@@ -177,41 +180,40 @@ export default {
           },
         },
         grid: {
-          top: "60",
-          left: "0",
-          right: "0",
-          bottom: "20",
+          top: '60',
+          left: '0',
+          right: '0',
+          bottom: '20',
           containLabel: true,
         },
         tooltip: {
-          backgroundColor: "rgba(0,0,0,0.8)",
+          backgroundColor: 'rgba(0,0,0,0.8)',
           borderWidth: 1,
-          borderColor: "#4396f3",
+          borderColor: '#4396f3',
           padding: [5, 10],
-          extraCssText: 'box-shadow:inset 0 0 8px rgba(67, 149, 243, 0.6);', 
+          extraCssText: 'box-shadow:inset 0 0 8px rgba(67, 149, 243, 0.6);',
           trigger: 'axis',
-          axisPointer:{
-            lineStyle:{
-            color:'transparent'
-          }
-          }
-        
+          axisPointer: {
+            lineStyle: {
+              color: 'transparent',
+            },
+          },
         },
         xAxis: [
           {
-            name: "",
-            type: "category",
-            data: ["1期", "2期", "3期", "生产楼", "宿舍楼"],
+            name: '',
+            type: 'category',
+            data: ['1期', '2期', '3期', '生产楼', '宿舍楼'],
             axisLine: {
               lineStyle: {
                 width: 0,
-                color: "#fff",
+                color: '#fff',
               },
             },
             axisLabel: {
               interval: 0,
               // rotate: 40,
-              textStyle: "#fff",
+              textStyle: '#fff',
             },
             axisTick: {
               show: false,
@@ -230,14 +232,14 @@ export default {
             max: 18000,
             // splitNumber: 4,
             interval: 3000,
-            name: "kw.h",
+            name: 'kw.h',
             nameTextStyle: {
-              align: "right",
+              align: 'right',
             },
             //               nameTextStyle: {
             //     padding: [-10, 0, 0, -10]    // 四个数字分别为上右下左与原位置距离
             // },
-            type: "value",
+            type: 'value',
             splitNumber: 2,
             axisLabel: {
               formatter: function(value) {
@@ -247,17 +249,17 @@ export default {
             axisLine: {
               show: false,
               lineStyle: {
-                color: "#fff",
+                color: '#fff',
               },
             },
             axisTick: {
               show: false,
             },
-             splitLine: {
+            splitLine: {
               lineStyle: {
                 width: 0.5,
-                type: "dashed",
-                color: "rgb(255,255,255,1)",
+                type: 'dashed',
+                color: 'rgb(255,255,255,1)',
               },
             },
           },
@@ -268,12 +270,12 @@ export default {
             animationEasing:'linear',
 
 
-            name: "",
-            type: "bar",
+            name: '',
+            type: 'bar',
             barWidth: 14,
-            color: "#0090FF",
+            color: '#0090FF',
             emphasis: {
-              focus: "series",
+              focus: 'series',
             },
             itemStyle: {
               normal: {
@@ -285,11 +287,11 @@ export default {
                   [
                     {
                       offset: 0.2,
-                      color: "rgba(67, 149, 243, 0.2)", // 0% 处的颜色
+                      color: 'rgba(67, 149, 243, 0.2)', // 0% 处的颜色
                     },
                     {
                       offset: 1,
-                      color: "rgba(67, 149, 243, 1)", // 100% 处的颜色
+                      color: 'rgba(67, 149, 243, 1)', // 100% 处的颜色
                     },
                   ],
                   false
@@ -304,7 +306,7 @@ export default {
     },
 
     Energy() {
-      var dom = this.$refs["energy"];
+      var dom = this.$refs['energy'];
       var option = {
         series: [
           {
@@ -314,7 +316,7 @@ export default {
             center:['50%','50%'],
             min: 0,
             max: 200,
-            radius: "95%",
+            radius: '95%',
             progress: {
               show: true,
               width: 16,
@@ -323,22 +325,22 @@ export default {
               lineStyle: {
                 width: 14,
                 color: [
-                  [0.2, "#05E3FF"],
-                  [0.8, "#4695ED"],
-                  [1, "#E21C1C"],
+                  [0.2, '#05E3FF'],
+                  [0.8, '#4695ED'],
+                  [1, '#E21C1C'],
                 ],
               },
             },
             axisTick: {
-              distance: 0,
-              length: 6,
+              distance: 5,
+              length: 5,
             },
             splitLine: {
               show: false,
             },
             axisLabel: {
-              distance: 0,
-              color: "#999",
+              distance: -10,
+              color: '#999',
               fontSize: 12,
             },
             pointer: {
@@ -349,7 +351,7 @@ export default {
               showAbove: true,
               size: 12,
               itemStyle: {
-                borderWidth: 10,
+                borderWidth: 8,
               },
             },
             title: {
@@ -386,42 +388,42 @@ export default {
       this.$redomEchart(dom, option);
     },
     Energy2() {
-      var dom = this.$refs["energy2"];
+      var dom = this.$refs['energy2'];
       var option = {
         series: [
           {
             animationDuration: 1000,
-            animationEasing:'linear',
+            animationEasing: 'linear',
 
-            type: "gauge",
+            type: 'gauge',
             // center:['50%','50%'],
             min: 0,
             max: 200,
-            radius: "95%",
+            radius: '95%',
             progress: {
               show: true,
               width: 16,
             },
             axisLine: {
               lineStyle: {
-                width:10,
+                width: 10,
                 color: [
-                  [0.2, "#05E3FF"],
-                  [0.8, "#4695ED"],
-                  [1, "#E21C1C"],
+                  [0.2, '#05E3FF'],
+                  [0.8, '#4695ED'],
+                  [1, '#E21C1C'],
                 ],
               },
             },
             axisTick: {
               distance: 0,
-              length: 6,
+              length: 5,
             },
             splitLine: {
               show: false,
             },
             axisLabel: {
               distance: -10,
-              color: "#999",
+              color: '#999',
               fontSize: 12,
             },
             pointer: {
@@ -441,18 +443,18 @@ export default {
             detail: {
               valueAnimation: true,
               fontSize: 12,
-              offsetCenter: [0, "75%"],
+              offsetCenter: [0, '75%'],
               formatter: function(value) {
-                return "{value|" + value + "}\n{unit|耗电指标}\n{unit|TCE}";
+                return '{value|' + value + '}\n{unit|耗电指标}\n{unit|TCE}';
               },
               rich: {
                 value: {
                   fontSize: 22,
-                  color: "#fff",
+                  color: '#fff',
                 },
                 unit: {
                   fontSize: 12,
-                  color: "#999",
+                  color: '#999',
                 },
               },
             },
@@ -467,42 +469,42 @@ export default {
       this.$redomEchart(dom, option);
     },
     Energy3() {
-      var dom = this.$refs["energy3"];
-       var option = {
+      var dom = this.$refs['energy3'];
+      var option = {
         series: [
           {
             animationDuration: 1000,
-            animationEasing:'linear',
+            animationEasing: 'linear',
 
-            type: "gauge",
+            type: 'gauge',
             // center:['50%','50%'],
             min: 0,
             max: 200,
-            radius: "95%",
+            radius: '95%',
             progress: {
               show: true,
               width: 16,
             },
             axisLine: {
               lineStyle: {
-                width:10,
+                width: 10,
                 color: [
-                  [0.2, "#05E3FF"],
-                  [0.8, "#4695ED"],
-                  [1, "#E21C1C"],
+                  [0.2, '#05E3FF'],
+                  [0.8, '#4695ED'],
+                  [1, '#E21C1C'],
                 ],
               },
             },
             axisTick: {
               distance: 0,
-              length: 6,
+              length: 5,
             },
             splitLine: {
               show: false,
             },
             axisLabel: {
               distance: -10,
-              color: "#999",
+              color: '#999',
               fontSize: 12,
             },
             pointer: {
@@ -522,18 +524,18 @@ export default {
             detail: {
               valueAnimation: true,
               fontSize: 12,
-              offsetCenter: [0, "70%"],
+              offsetCenter: [0, '70%'],
               formatter: function(value) {
-                return "{value|" + value + "}\n{unit|耗水指标}\n{unit|TCE}";
+                return '{value|' + value + '}\n{unit|耗水指标}\n{unit|TCE}';
               },
               rich: {
                 value: {
                   fontSize: 22,
-                  color: "#fff",
+                  color: '#fff',
                 },
                 unit: {
                   fontSize: 12,
-                  color: "#999",
+                  color: '#999',
                 },
               },
             },
@@ -547,36 +549,36 @@ export default {
       };
       this.$redomEchart(dom, option);
     },
-     use_W() {
-       const data = [2659, 2963, 2314, 1124, 1436]
+    use_W() {
+      const data = [2659, 2963, 2314, 1124, 1436];
       const total = data.reduce((x, y) => x + y, 0);
 
-      var dom = this.$refs["use_W"];
+      var dom = this.$refs['use_W'];
       var option = {
-         title: {
+        title: {
           show: true,
           text: `{c|月能耗总计:}{a|${total}}{b|m³}`,
-          link: "",
+          link: '',
           target: null,
-          left: "1%",
-          top: "-10",
-          textAlign: "left",
+          left: '1%',
+          top: '-10',
+          textAlign: 'left',
           itemGap: 6,
           textStyle: {
             rich: {
               c: {
                 fontSize: 14,
-                color: "rgb(255,255,255,1)",
+                color: 'rgb(255,255,255,1)',
                 padding: [0, 0, 10, 0],
               },
               a: {
-                color: "#fff",
-                fontFamily: "BYfont",
+                color: '#fff',
+                fontFamily: 'BYfont',
                 fontSize: 20,
                 padding: [0, 0, 5, 5],
               },
               b: {
-                color: "#fff",
+                color: '#fff',
                 padding: [0, 0, 10, 0],
 
                 fontSize: 12,
@@ -585,41 +587,40 @@ export default {
           },
         },
         grid: {
-          top: "60",
-          left: "0",
-          right: "0",
-          bottom: "20",
+          top: '60',
+          left: '0',
+          right: '0',
+          bottom: '20',
           containLabel: true,
         },
-          tooltip: {
-           backgroundColor: "rgba(0,0,0,0.8)",
+        tooltip: {
+          backgroundColor: 'rgba(0,0,0,0.8)',
           borderWidth: 1,
-          borderColor: "#4396f3",
+          borderColor: '#4396f3',
           padding: [5, 10],
           extraCssText: 'box-shadow:inset 0 0 8px rgba(67, 149, 243, 0.6);',
           trigger: 'axis',
-          axisPointer:{
-            lineStyle:{
-            color:'transparent'
-          }
-          }
-        
+          axisPointer: {
+            lineStyle: {
+              color: 'transparent',
+            },
+          },
         },
         xAxis: [
           {
-            name: "",
-            type: "category",
-            data: ["1期", "2期", "3期", "生产楼", "宿舍楼"],
+            name: '',
+            type: 'category',
+            data: ['1期', '2期', '3期', '生产楼', '宿舍楼'],
             axisLine: {
               lineStyle: {
                 width: 0,
-                color: "#fff",
+                color: '#fff',
               },
             },
             axisLabel: {
               interval: 0,
               // rotate: 40,
-              textStyle: "#fff",
+              textStyle: '#fff',
             },
             axisTick: {
               show: false,
@@ -638,12 +639,12 @@ export default {
             max: 3500,
             // splitNumber: 4,
             interval: 500,
-            name: "m³",
+            name: 'm³',
             nameTextStyle: {
-              align: "right",
+              align: 'right',
             },
 
-            type: "value",
+            type: 'value',
             splitNumber: 2,
             axisLabel: {
               formatter: function(value) {
@@ -653,17 +654,17 @@ export default {
             axisLine: {
               show: false,
               lineStyle: {
-                color: "#fff",
+                color: '#fff',
               },
             },
             axisTick: {
               show: false,
             },
-             splitLine: {
+            splitLine: {
               lineStyle: {
                 width: 0.5,
-                type: "dashed",
-                color: "rgb(255,255,255,1)",
+                type: 'dashed',
+                color: 'rgb(255,255,255,1)',
               },
             },
           },
@@ -671,14 +672,14 @@ export default {
         series: [
           {
             animationDuration: 1000,
-            animationEasing:'linear',
+            animationEasing: 'linear',
 
-            name: "",
-            type: "bar",
+            name: '',
+            type: 'bar',
             barWidth: 14,
-            color: "#0090FF",
+            color: '#0090FF',
             emphasis: {
-              focus: "series",
+              focus: 'series',
             },
             itemStyle: {
               normal: {
@@ -690,18 +691,18 @@ export default {
                   [
                     {
                       offset: 0.2,
-                      color: "rgba(67, 149, 243, 0.2)", // 0% 处的颜色
+                      color: 'rgba(67, 149, 243, 0.2)', // 0% 处的颜色
                     },
                     {
                       offset: 1,
-                      color: "rgba(67, 149, 243, 1)", // 100% 处的颜色
+                      color: 'rgba(67, 149, 243, 1)', // 100% 处的颜色
                     },
                   ],
                   false
                 ),
               },
             },
-            data:data,
+            data: data,
           },
         ],
       };
@@ -806,16 +807,18 @@ export default {
       }
     }
   }
-  .outer2{
+  .outer2 {
     display: flex;
-    #energy2,#energy3{
+    #energy2,
+    #energy3 {
       width: 100%;
       height: 2.2rem;
     }
   }
-   #use_W {
-      width: 100%/* 250/80 */;
-      height: 3.5rem /* 280/80 *//* 250/80 */ /* 280/80 */ /* 300/80 */ /* 160/80 */;
-    }
+  #use_W {
+    width: 100% /* 250/80 */;
+    height: 3.5rem /* 280/80 */ /* 250/80 */ /* 280/80 */ /* 300/80 */
+      /* 160/80 */;
+  }
 }
 </style>

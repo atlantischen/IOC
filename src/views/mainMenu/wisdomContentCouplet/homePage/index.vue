@@ -43,108 +43,108 @@
         <div id="equipment_warning" ref="equipment_warning"></div>
       </div>
     </IOCRight>
-      <!-- 设备管理 -->
+    <!-- 设备管理 -->
     <Device
       v-show="deviceShow"
       :_fade="_fade"
       :idArry="idArry"
       @chageFade="chageFade($event)"
     ></Device>
-    <div  class="mask" @mouseenter="deviceChangeShow"></div>
+    <div class="mask" @mouseenter="deviceChangeShow"></div>
   </div>
 </template>
 
 <script>
-import * as echarts from "echarts";
+import * as echarts from 'echarts';
 export default {
-  name: "homePage",
+  name: 'homePage',
   data() {
     return {
       // idArry:[6,7,8,9],
-      idArry:[0,1,2,3,4,5,10],
+      idArry: [0, 1, 2, 3, 4, 5, 10],
       flag: false,
       deviceShow: false,
-      _fade:false,
-      fade:false,
+      _fade: false,
+      fade: false,
       list: [
         {
           num: 33526,
-          describe: "设备总数",
+          describe: '设备总数',
         },
         {
           num: 33423,
-          describe: "在线设备数",
+          describe: '在线设备数',
         },
         {
           num: 78,
-          describe: "离线设备数",
+          describe: '离线设备数',
         },
         {
           num: 25,
-          describe: "告警设备数",
+          describe: '告警设备数',
         },
       ],
       yearsList: [
         {
-          label: "2021",
+          label: '2021',
           value: 2021,
         },
         {
-          label: "2020",
+          label: '2020',
           value: 2020,
         },
         {
-          label: "2019",
+          label: '2019',
           value: 2019,
         },
       ],
       momthsList: [
         {
-          label: "12月",
+          label: '12月',
           value: 12,
         },
         {
-          label: "11月",
+          label: '11月',
           value: 11,
         },
         {
-          label: "10月",
+          label: '10月',
           value: 10,
         },
         {
-          label: "9月",
+          label: '9月',
           value: 9,
         },
         {
-          label: "8月",
+          label: '8月',
           value: 8,
         },
         {
-          label: "7月",
+          label: '7月',
           value: 7,
         },
         {
-          label: "6月",
+          label: '6月',
           value: 6,
         },
         {
-          label: "5月",
+          label: '5月',
           value: 5,
         },
         {
-          label: "4月",
+          label: '4月',
           value: 4,
         },
         {
-          label: "3月",
+          label: '3月',
           value: 3,
         },
         {
-          label: "2月",
+          label: '2月',
           value: 2,
         },
         {
-          label: "1月",
+          label: '1月',
           value: 1,
         },
       ],
@@ -153,13 +153,12 @@ export default {
   },
   components: {},
   methods: {
-      chageFade (val) {
+    chageFade(val) {
       this._fade = val;
     },
-    deviceChangeShow(){
-   
-      this.deviceShow=true
-       this._fade=false
+    deviceChangeShow() {
+      this.deviceShow = true;
+      this._fade = false;
     },
     changePSMonths(val) {
       switch (val) {
@@ -220,7 +219,7 @@ export default {
       }
     },
     equipmentInit() {
-      var dom = this.$refs["equipment"];
+      var dom = this.$refs['equipment'];
       var option = {
         grid: {
           x: 10,
@@ -230,33 +229,33 @@ export default {
           containLabel: true,
         },
         tooltip: {
-          backgroundColor: "rgba(0,0,0,0.8)",
+          backgroundColor: 'rgba(0,0,0,0.8)',
           borderWidth: 1,
-          borderColor: "#4396f3",
+          borderColor: '#4396f3',
           padding: [5, 10],
-          extraCssText: "box-shadow:inset 0 0 8px rgba(67, 149, 243, 0.6);",
-          trigger: "axis",
+          extraCssText: 'box-shadow:inset 0 0 8px rgba(67, 149, 243, 0.6);',
+          trigger: 'axis',
           axisPointer: {
             lineStyle: {
-              color: "transparent",
+              color: 'transparent',
             },
           },
         },
         xAxis: [
           {
-            name: "",
-            type: "category",
-            data: ["视频", "门禁", "能源", "照明", "BA", "消防", "电梯"],
+            name: '',
+            type: 'category',
+            data: ['视频', '门禁', '能源', '照明', 'BA', '消防', '电梯'],
             axisLine: {
               lineStyle: {
                 width: 0,
-                color: "#fff",
+                color: '#fff',
               },
             },
             axisLabel: {
               interval: 0,
               // rotate: 40,
-              textStyle: "#fff",
+              textStyle: '#fff',
             },
             axisTick: {
               show: false,
@@ -275,14 +274,14 @@ export default {
             max: 15000,
             splitNumber: 4,
             interval: 5000,
-            name: "个",
+            name: '个',
             nameTextStyle: {
-              align: "right",
+              align: 'right',
             },
             //               nameTextStyle: {
             //     padding: [-10, 0, 0, -10]    // 四个数字分别为上右下左与原位置距离
             // },
-            type: "value",
+            type: 'value',
             splitNumber: 2,
             axisLabel: {
               formatter: function(value) {
@@ -292,7 +291,7 @@ export default {
             axisLine: {
               show: false,
               lineStyle: {
-                color: "#fff",
+                color: '#fff',
               },
             },
             axisTick: {
@@ -301,8 +300,8 @@ export default {
             splitLine: {
               lineStyle: {
                 width: 0.5,
-                type: "dashed",
-                color: "rgb(255,255,255,1)",
+                type: 'dashed',
+                color: 'rgb(255,255,255,1)',
               },
             },
           },
@@ -310,14 +309,14 @@ export default {
         series: [
           {
             animationDuration: 1000,
-            animationEasing:'linear',
+            animationEasing: 'linear',
 
-            name: "",
-            type: "bar",
+            name: '',
+            type: 'bar',
             barWidth: 14,
-            color: "#0090FF",
+            color: '#0090FF',
             emphasis: {
-              focus: "series",
+              focus: 'series',
             },
             itemStyle: {
               normal: {
@@ -329,11 +328,11 @@ export default {
                   [
                     {
                       offset: 0.2,
-                      color: "rgba(67, 149, 243, 0.2)", // 0% 处的颜色
+                      color: 'rgba(67, 149, 243, 0.2)', // 0% 处的颜色
                     },
                     {
                       offset: 1,
-                      color: "rgba(67, 149, 243, 1)", // 100% 处的颜色
+                      color: 'rgba(67, 149, 243, 1)', // 100% 处的颜色
                     },
                   ],
                   false
@@ -347,16 +346,16 @@ export default {
       this.$redomEchart(dom, option);
     },
     equipmentFaultyInit() {
-      var dom = this.$refs["equipment_faulty"];
+      var dom = this.$refs['equipment_faulty'];
       var datas = [
         [
-          { name: "电梯", value: 6.3, itemStyle: { color: "#fff" } },
-          { name: "门禁", value: 22.05, itemStyle: { color: "#4396F3" } },
-          { name: "视频", value: 25.02, itemStyle: { color: "#95C7FF" } },
-          { name: "能源", value: 9.45, itemStyle: { color: "#08E2FF" } },
-          { name: "照明", value: 11.05, itemStyle: { color: "#236390" } },
-          { name: "BA", value: 12.6, itemStyle: { color: "#C7D392" } },
-          { name: "消防", value: 13.39, itemStyle: { color: "#9A866A" } },
+          { name: '电梯', value: 6.3, itemStyle: { color: '#fff' } },
+          { name: '门禁', value: 22.05, itemStyle: { color: '#4396F3' } },
+          { name: '视频', value: 25.02, itemStyle: { color: '#95C7FF' } },
+          { name: '能源', value: 9.45, itemStyle: { color: '#08E2FF' } },
+          { name: '照明', value: 11.05, itemStyle: { color: '#236390' } },
+          { name: 'BA', value: 12.6, itemStyle: { color: '#C7D392' } },
+          { name: '消防', value: 13.39, itemStyle: { color: '#9A866A' } },
         ],
       ];
 
@@ -375,15 +374,14 @@ export default {
         series: datas.map(function(data, idx) {
           var top = idx * 33.3;
           return {
-            
-            type: "pie",
+            type: 'pie',
             radius: [50, 70],
-            top: top + "%",
+            top: top + '%',
             // height: "33.33%",
-            left: "center",
+            left: 'center',
             width: 550,
             itemStyle: {
-              borderColor: "#fff",
+              borderColor: '#fff',
               borderWidth: 1,
             },
             itemStyle: {
@@ -393,8 +391,8 @@ export default {
               },
             },
             label: {
-              alignTo: "edge",
-              formatter: "{name|{b}}\n{time|{c}%}",
+              alignTo: 'edge',
+              formatter: '{name|{b}}\n{time|{c}%}',
               minMargin: 5,
               edgeDistance: 10,
               lineHeight: 15,
@@ -402,11 +400,11 @@ export default {
               rich: {
                 name: {
                   fontSize: 14,
-                  color: "#fff",
+                  color: '#fff',
                 },
                 time: {
                   fontSize: 10,
-                  color: "#fff",
+                  color: '#fff',
                 },
               },
             },
@@ -434,7 +432,7 @@ export default {
       this.$redomEchart(dom, option);
     },
     equipmentWarningInit() {
-      var dom = this.$refs["equipment_warning"];
+      var dom = this.$refs['equipment_warning'];
       var option = {
         grid: {
           x: 10,
@@ -444,41 +442,41 @@ export default {
           containLabel: true,
         },
         tooltip: {
-          backgroundColor: "rgba(0,0,0,0.8)",
+          backgroundColor: 'rgba(0,0,0,0.8)',
           borderWidth: 1,
-          borderColor: "#4396f3",
+          borderColor: '#4396f3',
           padding: [5, 10],
-          extraCssText: "box-shadow:inset 0 0 8px rgba(67, 149, 243, 0.6);",
-          trigger: "axis",
+          extraCssText: 'box-shadow:inset 0 0 8px rgba(67, 149, 243, 0.6);',
+          trigger: 'axis',
           axisPointer: {
             lineStyle: {
-              color: "transparent",
+              color: 'transparent',
             },
           },
         },
         xAxis: [
           {
-            name: "",
-            type: "category",
+            name: '',
+            type: 'category',
             data: [
-              "周界入侵",
-              "人员黑名单",
-              "车辆黑名单",
-              "BA系统",
-              "消防告警",
-              "违规停车",
-              "故障离线",
+              '周界入侵',
+              '人员黑名单',
+              '车辆黑名单',
+              'BA系统',
+              '消防告警',
+              '违规停车',
+              '故障离线',
             ],
             axisLine: {
               lineStyle: {
                 width: 0,
-                color: "#fff",
+                color: '#fff',
               },
             },
             axisLabel: {
               interval: 0,
               // rotate: 40,
-              textStyle: "#fff",
+              textStyle: '#fff',
             },
             axisTick: {
               show: false,
@@ -498,14 +496,14 @@ export default {
             max: 250,
             splitNumber: 4,
             interval: 50,
-            name: "个",
+            name: '个',
             nameTextStyle: {
-              align: "right",
+              align: 'right',
             },
             //               nameTextStyle: {
             //     padding: [-10, 0, 0, -10]    // 四个数字分别为上右下左与原位置距离
             // },
-            type: "value",
+            type: 'value',
             splitNumber: 2,
             axisLabel: {
               formatter: function(value) {
@@ -515,7 +513,7 @@ export default {
             axisLine: {
               show: false,
               lineStyle: {
-                color: "#fff",
+                color: '#fff',
               },
             },
             axisTick: {
@@ -524,8 +522,8 @@ export default {
             splitLine: {
               lineStyle: {
                 width: 0.5,
-                type: "dashed",
-                color: "rgb(255,255,255,1)",
+                type: 'dashed',
+                color: 'rgb(255,255,255,1)',
               },
             },
           },
@@ -533,14 +531,14 @@ export default {
         series: [
           {
             animationDuration: 1000,
-            animationEasing:'linear',
+            animationEasing: 'linear',
 
-            name: "",
-            type: "bar",
+            name: '',
+            type: 'bar',
             barWidth: 14,
-            color: "#0090FF",
+            color: '#0090FF',
             emphasis: {
-              focus: "series",
+              focus: 'series',
             },
             itemStyle: {
               normal: {
@@ -552,11 +550,11 @@ export default {
                   [
                     {
                       offset: 0.2,
-                      color: "rgba(67, 149, 243, 0.2)", // 0% 处的颜色
+                      color: 'rgba(67, 149, 243, 0.2)', // 0% 处的颜色
                     },
                     {
                       offset: 1,
-                      color: "rgba(67, 149, 243, 1)", // 100% 处的颜色
+                      color: 'rgba(67, 149, 243, 1)', // 100% 处的颜色
                     },
                   ],
                   false
@@ -570,7 +568,7 @@ export default {
       this.$redomEchart(dom, option);
     },
     equipmentComparisonInit(data) {
-      var dom = this.$refs["equipment_comparison"];
+      var dom = this.$refs['equipment_comparison'];
       // var data = [2.54, -4.74, 2.54];
       var option = {
         grid: {
@@ -582,15 +580,15 @@ export default {
         },
 
         tooltip: {
-          backgroundColor: "rgba(0,0,0,0.8)",
+          backgroundColor: 'rgba(0,0,0,0.8)',
           borderWidth: 1,
-          borderColor: "#4396f3",
+          borderColor: '#4396f3',
           padding: [5, 10],
-          extraCssText: "box-shadow:inset 0 0 8px rgba(67, 149, 243, 0.6);",
-          trigger: "axis",
+          extraCssText: 'box-shadow:inset 0 0 8px rgba(67, 149, 243, 0.6);',
+          trigger: 'axis',
           axisPointer: {
             lineStyle: {
-              color: "transparent",
+              color: 'transparent',
             },
           },
         },
@@ -603,26 +601,26 @@ export default {
           [
             {
               offset: 0,
-              color: "rgba(67, 149, 243, 0.5)", // 0% 处的颜色
+              color: 'rgba(67, 149, 243, 0.5)', // 0% 处的颜色
             },
             {
               offset: 1,
-              color: "rgba(67, 149, 243, 1)", // 100% 处的颜色
+              color: 'rgba(67, 149, 243, 1)', // 100% 处的颜色
             },
           ],
           false
         ),
         xAxis: [
           {
-            type: "category",
+            type: 'category',
             axisTick: {
               alignWithLabel: true,
             },
             axisLine: {
               lineStyle: {
-                color: "#FFFF",
+                color: '#FFFF',
                 dashOffset: 30,
-                type: "dashed",
+                type: 'dashed',
               },
             },
           },
@@ -631,26 +629,26 @@ export default {
           {
             max: 20,
             show: false,
-            type: "value",
+            type: 'value',
           },
         ],
         series: [
           {
             animationDuration: 1000,
-            animationEasing:'linear',
+            animationEasing: 'linear',
 
-            name: "",
+            name: '',
             barWidth: 40,
-            type: "bar",
+            type: 'bar',
             itemStyle: {
               normal: {
                 label: {
                   show: true,
                   // position: (data) => (1 > 0 ? "top" : "bottom"),
                   textStyle: {
-                    fontFamily: "BYfont",
-                    fontSize: "16",
-                    color: "#fff",
+                    fontFamily: 'BYfont',
+                    fontSize: '16',
+                    color: '#fff',
                   },
                 },
               },
@@ -660,21 +658,21 @@ export default {
                 value: item,
                 label: {
                   // formatter: "{img1|}{c}%",
-                  formatter:function (params) {
+                  formatter: function(params) {
                     let c = Math.abs(params.data.value);
                     return `{img1|}${c}%`;
                   },
-                  
+
                   rich: {
                     img1: {
                       width: 17,
                       height: 27,
                       backgroundColor: {
-                        image: item > 0 ? "/img/1.png" : "/img/2.png",
+                        image: item > 0 ? '/img/1.png' : '/img/2.png',
                       },
                     },
                   },
-                  position: item > 0 ? "top" : "bottom",
+                  position: item > 0 ? 'top' : 'bottom',
                 },
               };
             }),
@@ -685,27 +683,28 @@ export default {
     },
   },
   computed: {
-    getUnityData () {
+    getUnityData() {
       return this.$store.state.unitySendData;
     },
   },
-  watch:{
-    getUnityData(val){
+  watch: {
+    getUnityData(val) {
       try {
-       if(val.action ==='ME_ZHYLSingle' && val.data==='1' ){
-         this.fade =true
-         this.idArry=[6,7,8,9],
-         console.log(this.idArry,"单层打开");
-        this.$SendMessageToUnity("ShowIoTDevice_IOCMap",{strList:'6,7,8,9'});
-       }else if(val.action ==='ME_ZHYLSingle' && val.data==='0'){
-         this.idArry=[0,1,2,3,4,5,10],
-
-         this.fade =false
-        this.$SendMessageToUnity("ShowIoTDevice_IOCMap",{strList:'0,1,2,3,4,5,10'});
-       }
-      } catch (e) { }
+        if (val.action === 'ME_ZHYLSingle' && val.data === '1') {
+          this.fade = true;
+          (this.idArry = [6, 7, 8, 9]), console.log(this.idArry, '单层打开');
+          this.$SendMessageToUnity('ShowIoTDevice_IOCMap', {
+            strList: '6,7,8,9',
+          });
+        } else if (val.action === 'ME_ZHYLSingle' && val.data === '0') {
+          (this.idArry = [0, 1, 2, 3, 4, 5, 10]), (this.fade = false);
+          this.$SendMessageToUnity('ShowIoTDevice_IOCMap', {
+            strList: '0,1,2,3,4,5,10',
+          });
+        }
+      } catch (e) {}
       console.log(val);
-    }
+    },
   },
   mounted() {
     this.equipmentInit();
@@ -713,11 +712,11 @@ export default {
     this.equipmentWarningInit();
     this.equipmentComparisonInit([-2.54, 4.74, 2.54]);
   },
-  created(){
-    this.$SendMessageToUnity("ShowIoTDevice_IOCMap",{strList:'0,1,2,3,4,5,10'});
-  
-
-  }
+  created() {
+    this.$SendMessageToUnity('ShowIoTDevice_IOCMap', {
+      strList: '0,1,2,3,4,5,10',
+    });
+  },
 };
 </script>
 
@@ -771,12 +770,12 @@ export default {
       height: 3.75rem /* 300/80 */;
     }
   }
-  .mask{
+  .mask {
     position: fixed;
     right: 0;
     top: 50%;
     transform: translateY(-50%);
-    width: .75rem /* 60/80 */ /* 100/80 */ /* 300/80 */;
+    width: 0.75rem /* 60/80 */ /* 100/80 */ /* 300/80 */;
     height: 6.25rem /* 500/80 */ /* 300/80 */;
     // background-color: red;
   }
