@@ -23,11 +23,11 @@
             label-width="100px"
             class="demo-ruleForm"
           >
-            <el-form-item label="警报对象：" prop="name">
-              <el-input v-model="ruleForm.name"></el-input>
+            <el-form-item label="警报对象：" prop="AlarmLocation">
+              <el-input v-model="ruleForm.AlarmLocation"></el-input>
             </el-form-item>
-            <el-form-item label="警报类型：" prop="type">
-              <el-input v-model="ruleForm.type"></el-input>
+            <el-form-item label="警报类型：" prop="AlarmType">
+              <el-input v-model="ruleForm.AlarmType"></el-input>
             </el-form-item>
             <el-form-item label="报警原因：" prop="because">
               <textarea
@@ -75,62 +75,68 @@
 
 <script>
 export default {
-  name: "alarmAck",
+  name: 'alarmAck',
   props: {
     _isFade: {
       type: Boolean,
+    },
+    _datas: {
+      type: Object,
     },
   },
   data() {
     return {
       isFade: false,
       ruleForm: {
-        name: "",
-        type: "",
-        because: "",
-        handler: "",
-        result: "",
+        SerialNum: 0,
+        AlarmLocation: '',
+        AlarmType: '',
+        EquipmentNum: '',
+        because: '',
+        handler: '',
+        result: '',
+        AlarmTime: '',
       },
       rules: {
-        name: [
+        AlarmLocation: [
           {
             required: true,
-            message: "请输入报警对象",
-            trigger: ["blur", "change"],
+            message: '请输入报警对象',
+            trigger: ['blur', 'change'],
           },
-          {
-            min: 1,
-            max: 10,
-            message: "长度在 1 到 10 个字符",
-            trigger: "blur",
-          },
+          // {
+          //   min: 1,
+          //   max: 20,
+          //   message: '长度在 1 到 20 个字符',
+          //   trigger: 'blur',
+          // },
         ],
-        type: [
+        AlarmType: [
           {
             required: true,
-            message: "请输入报警类型",
-            trigger: ["blur", "change"],
+            message: '请输入报警类型',
+            trigger: ['blur', 'change'],
           },
         ],
         because: [
           {
             required: true,
-            message: "请输入报警原因",
-            trigger: ["blur", "change"],
+            message: '请输入报警原因',
+            trigger: ['blur', 'change'],
           },
         ],
         handler: [
           {
             required: true,
-            message: "请输入处理人",
-            trigger: ["blur", "change"],
+            message: '请输入处理人',
+            trigger: ['blur', 'change'],
           },
         ],
         result: [
           {
             required: true,
-            message: "请输入处理结果",
-            trigger: ["blur", "change"],
+            message: '请输入处理结果',
+            trigger: ['blur', 'change'],
           },
         ],
       },
@@ -140,29 +146,25 @@ export default {
   watch: {
     _isFade: function(n, o) {
       this.isFade = n;
-      if (this.isFade) {
-        this.ruleForm = {
-          name: "1期A座14F实验室",
-          type: "消防报警",
-          because: "1期A座14F实验室发生报警",
-          handler: "梁海山",
-          result: "已派人通知查看",
-        };
-      }
+    },
+    _datas: function(n, o) {
+      this.ruleForm = {
+        ...n,
+        because: this.ruleForm.AlarmLocation + '-' + this.ruleForm.AlarmType,
+        handler: '梁海山',
+        result: '已派人通知查看',
+      };
     },
   },
-  mounted() {
-    // window.addEventListener("message", this.sureAlarmFun, true);
-  },
+  mounted() {},
   methods: {
     submitForm(formName) {
       this.$refs[formName].validate((valid) => {
         if (valid) {
-          // this.sureAlarmFun();
           this.isFade = !this.isFade;
-          this.$emit("close", "AlarmAck", this.isFade);
-          this.$message.success("已确认警报！");
-          this.resetForm("ruleForm");
+          this.$emit('close', 'AlarmAck', this.isFade);
+          this.$message.success('已确认警报！');
+          this.resetForm('ruleForm');
         } else {
           return false;
         }
@@ -171,26 +173,12 @@ export default {
     resetForm(formName) {
       this.$refs[formName].resetFields();
     },
-    // sureAlarmFun (v) {
-    //   if (this.$store.state.unitySendData.action == 'OnAlarmProcessingBtnClick') {
-    //     this.isFade = !this.isFade;
-    //   }
-    //   if (this.isFade) {
-    //     this.ruleForm = {
-    //       name: "中心广场摄像机",
-    //       type: "物品偷盗",
-    //       because: "摄像头侦测报警",
-    //       handler: "梁海山",
-    //       result: "已派人通知查看",
-    //     };
-    //   }
-    // },
   },
 };
 </script>
 
 <style lang="less" scoped>
-@import "~@/style/gl.less";
+@import '~@/style/gl.less';
 .testBtn {
   position: fixed;
   right: 0;
@@ -259,7 +247,7 @@ export default {
         height: 0.4375rem /* 35/80 */;
         background: transparent;
         border-radius: 0;
-        font-family: "Microsoft YaHei";
+        font-family: 'Microsoft YaHei';
         font-size: 0.175rem /* 14/80 */;
       }
       .inputTextarea {
@@ -268,7 +256,7 @@ export default {
         padding: 0 15px;
         font-size: 0.175rem /* 14/80 */;
         resize: vertical;
-        padding: .1rem /* 8/80 */ .1875rem /* 15/80 */;
+        padding: 0.1rem /* 8/80 */ 0.1875rem /* 15/80 */;
       }
     }
   }

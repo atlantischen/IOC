@@ -9,7 +9,9 @@
       <div id="pList" ref="pList">
         <!--  class="text_animate" -->
         <ul id="pList_c" ref="pList_c">
-          <li v-for="(item, i) in tipDataList" :key="i">{{ item.text }}</li>
+          <li v-for="(item, i) in tipDataList" :key="i">
+            告警！{{ item.AlarmTime }} {{ item.AlarmLocation }}
+          </li>
         </ul>
       </div>
       <i class="el-icon-circle-close" @click.stop="closeTip"></i>
@@ -74,7 +76,7 @@ export default {
     _data: {
       handler(n) {
         if (n) {
-          this.tipDataList = n.length < 3 ? [...n, ...n, ...n] : n;
+          this.tipDataList = [n, n, n];
         }
       },
       immediate: true,
@@ -113,8 +115,12 @@ export default {
 
     // 点击警告框3D出现警告位置
     clickItem() {
-      this.$SendMessageToUnity('OnWarningNoticesBarClick', {});
-      console.log('=================OnWarningNoticesBarClick');
+      this.$SendMessageToUnity('OnWarningNoticesBarClick', {
+        mSerial: this._data.SerialNum,
+      });
+      console.log(
+        '=================OnWarningNoticesBarClick===' + this._data.SerialNum
+      );
     },
     // 关闭警告
     closeTip() {
