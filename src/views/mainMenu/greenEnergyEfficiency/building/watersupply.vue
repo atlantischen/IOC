@@ -315,9 +315,9 @@ export default {
         series: [
           {
             animationDuration: 1000,
-            animationEasing: 'linear',
-            name: '',
-            type: 'line',
+            animationEasing:'linear',
+            name: "",
+            type: "line",
             // smooth: true,
             label: {
               show: false,

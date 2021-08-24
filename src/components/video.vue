@@ -5,6 +5,7 @@
         center
         :title="videoTitle"
         v-model="dialogVideoVisible"
+        :destroy-on-close="true"
         @close="closeDialog"
       >
         <div class="box">
@@ -14,6 +15,7 @@
             :src="url"
             @timeupdate="timeupdate"
             @canplay="getTotal"
+        
           ></video>
           <div class="controls">
             <div class="play_btn" @click="play()">
@@ -98,7 +100,7 @@ export default {
         },
       ], // 倍速设置
       initPlaySpeed: 1.0,
-      url:require('@/assets/video/v.mp4')
+      url:require('@/assets/video/轿厢内视频2.mp4')
     };
   },
   props: {
@@ -124,6 +126,8 @@ export default {
   methods: {
     closeDialog() {
       this.$emit("videoShowChange", false);
+      this.isPaused=false;
+      this.myvideo.currentTime=0
     },
     play() {
       //修改当前的播放状态

@@ -840,7 +840,7 @@ export default {
         series: [
           {
             animationDuration: 1000,
-            animationEasing: 'linear',
+            animationEasing:'linear',
 
             name: '',
             type: 'line',

@@ -1598,7 +1598,8 @@ export default {
     AssetsAndEquipment(val) {
       const { max, data } = val;
       const total = data.reduce((x, y) => x + y, 0);
-      var dom = this.$refs['park_time'];
+      var dom = this.$refs["park_time"];
+    
       var option = {
         grid: {
           top: '60',
@@ -1731,7 +1732,7 @@ export default {
           {
             // name: "其他",
             animationDuration: 1000,
-            animationEasing: 'linear',
+            animationEasing:'linear',
 
             type: 'bar',
             barWidth: 14,
@@ -1767,9 +1768,11 @@ export default {
       this.$redomEchart(dom, option);
     },
     revenueInit(val) {
-      const { max, Monthly, Temporary, month } = val;
-      const total = [...Monthly, ...Temporary].reduce((x, y) => x + y, 0);
-      var dom = this.$refs['revenue_total'];
+      const { max, Monthly, Temporary, month} = val;
+      const  total= [...Monthly, ...Temporary].reduce((x, y) => x + y, 0);
+      var dom = this.$refs["revenue_total"];
+    
+
       var option = {
         title: {
           text: `{c|停车场营收合计:}{a|${total}}{b|元}`,
@@ -1896,10 +1899,9 @@ export default {
         series: [
           {
             animationDuration: 1000,
-            animationEasing: 'linear',
-
-            name: '月卡',
-            type: 'bar',
+            animationEasing:'linear',
+            name: "月卡",
+            type: "bar",
             barWidth: 14,
             stack: 'a',
             itemStyle: {
@@ -1927,10 +1929,9 @@ export default {
           },
           {
             animationDuration: 1000,
-            animationEasing: 'linear',
-
-            name: '临时卡',
-            type: 'bar',
+            animationEasing:'linear',
+            name: "临时卡",
+            type: "bar",
             barWidth: 14,
             stack: 'a',
             itemStyle: {
@@ -2077,9 +2078,9 @@ export default {
         series: [
           {
             animationDuration: 1000,
-            animationEasing: 'linear',
-            name: '进',
-            symbol: 'none',
+            animationEasing:'linear',
+            name: "进",
+            symbol: "none",
             data: enterData,
             type: 'line',
             endLabel: {
@@ -2129,7 +2130,8 @@ export default {
           },
           {
             animationDuration: 1000,
-            animationEasing: 'linear',
+            animationEasing:'linear',
+
 
             name: '出',
             symbol: 'none',
@@ -2184,6 +2186,9 @@ export default {
       };
       this.$redomEchart(dom, option);
     },
+
+  },
+  created() {
   },
   created() {},
   computed: {
@@ -2215,66 +2220,18 @@ export default {
       data: [5, 10, 22, 32, 44, 28, 15],
     });
     this.revenueInit({
-      max: 1000000,
-      Monthly: [220000, 335000, 430000, 340000, 456000, 560000, 540000],
-      Temporary: [92000, 93200, 90100, 103400, 209000, 113000, 112000],
-      month: this.$monthRangeArr(),
-    });
-    this.trendInit(
-      this.$getNowTime(),
-      [
-        102,
-        89,
-        20,
-        1,
-        5,
-        5,
-        80,
-        100,
-        120,
-        220,
-        330,
-        400,
-        550,
-        650,
-        800,
-        905,
-        1020,
-        1300,
-        1600,
-        1680,
-        1700,
-        1500,
-        1380,
-        260,
-      ],
-      [
-        112,
-        90,
-        56,
-        6,
-        12,
-        23,
-        120,
-        110,
-        150,
-        250,
-        430,
-        490,
-        589,
-        670,
-        810,
-        965,
-        1120,
-        1400,
-        1600,
-        1680,
-        1750,
-        1563,
-        1206,
-        236,
-      ]
-    );
+      
+            max: 1000000,
+            Monthly: [220000, 335000, 430000, 340000, 456000, 560000, 540000],
+            Temporary: [92000, 93200, 90100, 103400, 209000, 113000, 112000],
+            month: this.$monthRangeArr(),
+          });
+    this.trendInit(this.$getNowTime(),[102,89,20,1,5,5,80,100,120,220,330,400,550,650,800,905,1020,1300,1600,1680,1700,1500,1380,260],[112,90,56,6,12,23,120,110,150,250,430,490,589,670,810,965,1120,1400,1600,1680,1750,1563,1206,236]);
+  },
+   destroyed() {
+
+
+
   },
   destroyed() {},
 };

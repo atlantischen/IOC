@@ -454,7 +454,7 @@ export default {
         series: [
           {
             animationDuration: 1000,
-            animationEasing: 'linear',
+            animationEasing:'linear',
 
             // name: "其他",
             type: 'bar',

@@ -13,22 +13,10 @@
           <!-- <el-carousel-item v-for="item in 1" :key="item"> -->
             <div class="box">
               <ul>
-                <li
-                
-                >
-          <Player :dialogShow="$store.state.videoShow"  class="video_player" height='185'  width="24.5"  :monitorList="monitorList" ></Player>
+                <li v-for="(item,index) in monitorLists " :key="index">
+                   <FrequencyVideo :url="item.url"></FrequencyVideo>
 
-                  <!-- <Vloading v-show="showIfame" /> -->
-                  <!-- <iframe
-                    v-if="item.url"
-                    class="iframeVideo"
-                    id="iframeVideo"
-                    ref="iframeVideo"
-                    style="width: 100%; height: 100%"
-                    :src="item.url + '&protocol=FLV&iframe=yes'"
-                    allowfullscreen
-                    allow="autoplay; fullscreen"
-                  ></iframe> -->
+          <!-- <Player :dialogShow="$store.state.videoShow"  class="video_player" height='185'  width="24.5"  :monitorList="monitorList" ></Player> -->
                 </li>
               </ul>
             </div>
@@ -53,6 +41,8 @@
         </div>
       </el-dialog>
     </div>
+
+
     <LookVideo :Visible="Visible" :title="dialogTitle" @off="openCloseDialog" />
   </div>
 </template>
@@ -86,13 +76,15 @@ export default {
     dialogShow: {
       type: Boolean,
     },
+    monitorLists:{
+      type: Array,
+
+    }
   },
   watch: {
     dialogShow(val) {
       this.dialogVideoVisible = val;
     },
-    
-  
   },
   methods: {
     closeDialog() {
@@ -100,9 +92,6 @@ export default {
       this.$store.commit('setVideoShow',false)
       console.log(this.$store.state.videoShow,'this.$store.state.videoShow');
       this.$store.commit('setDialogShow',true)
-      this.$store.commit('setVideoShow',false)
-
-
 
       // this.$emit("videoShow",true);
       // this.$refs.player3.destoryVideo()
@@ -196,14 +185,15 @@ export default {
       & > ul {
         display: flex;
         flex-wrap: wrap;
+        justify-content: space-around;
         padding: 0 0.1875rem /* 15/80 */ /* 11/80 */ /* 12/80 */;
-
         & > li {
-          width: 100%;
-          height: 100%;
+          width: 24.7%;
+          height: 2.3125rem /* 185/80 */;
+          margin-bottom: .0625rem /* 5/80 */;
           display: flex;
           flex-wrap: wrap;
-          justify-content: space-between;
+          justify-content: space-around;
           .video_player{
                 width: 3.825rem /* 306/80 */ /* 403/80 */;
                 height: 2.3125rem /* 185/80 */ /* 246/80 */;

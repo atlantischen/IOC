@@ -261,7 +261,7 @@ export default {
         series: [
           {
             animationDuration: 1000,
-            animationEasing: 'linear',
+            animationEasing:'linear',
 
             name: '功率',
             data: [
@@ -545,10 +545,10 @@ export default {
         series: [
           {
             animationDuration: 1000,
-            animationEasing: 'linear',
-
-            name: '',
-            type: 'line',
+            animationEasing:'linear',
+            
+            name: "",
+            type: "line",
             // smooth: true,
             label: {
               show: false,

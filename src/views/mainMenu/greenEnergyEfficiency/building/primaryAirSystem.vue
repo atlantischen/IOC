@@ -365,8 +365,8 @@ export default {
         ],
         series: [
           {
-            animationDuration: 3000,
-
+            animationEasing:'linear',
+            animationDuration: 1000,
             name: "",
             type: "line",
             smooth: true,

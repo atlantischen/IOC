@@ -14,8 +14,10 @@
             <img :src="item.url" alt="" />
           </div>
           <div>
-            <span>{{ item.name }}</span>
-            <span>{{ item.reason }}</span>
+            <span>车位号: {{ item.name }}</span>
+            <span>车位编号: {{ item.identifier }}</span>
+            <span>楼层信息: {{ item.storey }}</span>
+            <span>入场时间: {{ item.time }}</span>
           </div>
         </li>
       </ul>
@@ -103,37 +105,46 @@ export default {
       carList:[
         {
           url:require('@/assets/img/car_pic.png'),
-          name:'陈新-粤A00000',
+          name:'粤A00000',
           reason:'月卡欠费',
           num:'粤A00000',
+          identifier:'NO014523',
+          storey:'地下室二楼',
+          time:'2021-10-16 10:45:54',
           id:0,
           floor:'1'
         },
        
         {
           url:require('@/assets/img/car_pic2.png'),
-          name:'韦孟-粤AD367C',
+          name:'粤AD367C',
           reason:'多次违规停车',
-          reason:'月卡欠费',
           num:'粤AD367C',
+          identifier:'NO017465',
+          storey:'地下室一楼',
+          time:'2021-10-18 16:30:06',
           id:2,
-          floor:'2'
-
-          
+          floor:'2'  
         },
          {
           url:require('@/assets/img/car_pic1.png'),
-          name:'吴泉洋-赣A8720B',
+          name:'赣A8720B',
           reason:'多次违规停车',
+          identifier:'NO017465',
+          storey:'地下室一楼',
+          time:'2021-10-18 16:30:06',
           num:'赣A8720B',
           id:1,
            floor:'3'
         },
         {
           url:require('@/assets/img/car_pic2.png'),
-          name:'陶敏-赣B26354',
+          name:'赣B26354',
           reason:'多次违规停车',
           num:'赣B26354',
+          identifier:'NO017465',
+          storey:'地下室一楼',
+          time:'2021-10-18 16:30:06',
   
           id:3,
            floor:'1'
@@ -141,45 +152,60 @@ export default {
         },
          {
           url:require('@/assets/img/car_pic.png'),
-          name:'罗灿-湘A45623',
+          name:'湘A45623',
           reason:'多次违规停车',
           num:'湘A45623',
+          identifier:'NO017465',
+          storey:'地下室一楼',
+          time:'2021-10-18 16:30:06',
           id:4,
            floor:'2'
 
         },
         {
           url:require('@/assets/img/car_pic1.png'),
-          name:'余振-鄂JF358B',
+          name:'鄂JF358B',
           reason:'月卡欠费',
           num:'鄂JF358B',
+          identifier:'NO017465',
+          storey:'地下室一楼',
+          time:'2021-10-18 16:30:06',
           id:5,
            floor:'3'
 
         },
         {
           url:require('@/assets/img/car_pic2.png'),
-          name:'赵伟-川AD367C',
+          name:'川AD367C',
           reason:'多次违规停车',
           num:'川AD367C',
+          identifier:'NO017465',
+          storey:'地下室一楼',
+          time:'2021-10-18 16:30:06',
           id:6,
            floor:'1'
 
         },
         {
           url:require('@/assets/img/car_pic2.png'),
-          name:'龚玲-鄂CD3675',
+          name:'鄂CD3675',
           reason:'多次违规停车',
           num:'鄂CD3675',
+          identifier:'NO017465',
+          storey:'地下室一楼',
+          time:'2021-10-18 16:30:06',
           id:7,
            floor:'2'
 
         },
         {
           url:require('@/assets/img/car_pic2.png'),
-          name:'黄智源-粤A23659',
+          name:'粤A23659',
           reason:'多次违规停车',
           num:'粤A23659',
+          identifier:'NO017465',
+          storey:'地下室一楼',
+          time:'2021-10-18 16:30:06',
           id:8,
            floor:'3'
 
@@ -265,31 +291,38 @@ export default {
   
 }
 .search_box {
-  width: 3.35rem /* 268/80 */;
+  width: 3.9375rem /* 315/80 */ /* 268/80 */;
   border: 1px solid #4396f3;
   border-radius: 0 0 0.075rem 0.075rem;
   background-color: rgba(0, 17, 26, 0.7);
   & > ul {
-    max-height: 4.65rem /* 372/80 */;
+    width: 100%;
+    max-height: 5.925rem /* 474/80 */;
     overflow-y: scroll;
+    display: flex;
+    justify-content: center;
     & > li {
-      height: 1.1625rem /* 93/80 */;
+      padding: 10px 0;
       border-bottom: 1px solid rgba(67, 150, 243, 0.3);
-      // display: flex;
-      // justify-content: center;
-      // align-items: center;
-      padding: 0.3125rem 0.4375rem 0 /* 35/80 */;
+      display: flex;
+      align-items: center;
       display: flex;
       & > div:first-child {
-        width: 0.675rem /* 54/80 */;
-        height: 0.675rem /* 54/80 */;
+        width: .925rem /* 74/80 *//* 54/80 */;
+        height: .925rem /* 54/80 */;
         margin-right: 0.2rem /* 16/80 */;
+        &>img{
+          width: 100%;
+          height: 100%;
+        }
       }
       & > div:last-child {
         display: flex;
         flex-direction: column;
-        & > span:first-child {
-          margin-bottom: 0.1625rem /* 13/80 */;
+        & > span {
+          white-space: nowrap;
+          margin-bottom: .1rem /* 8/80 */;
+          // margin-bottom: 0.1625rem /* 13/80 */;
         }
       }
     }

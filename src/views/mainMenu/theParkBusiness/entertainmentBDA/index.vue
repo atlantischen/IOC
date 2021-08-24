@@ -18,8 +18,8 @@
       <div class="top">
         <div class="tittle">最受欢迎文娱Top8</div>
         <ul>
-          <li v-for="(item, index) in topList" :key="index">
-            <span class="font_text">{{ ++index }} .</span>
+          <li v-for="(item, index) in topList" :key="index" @click="sendClick(item)">
+            <span class="font_text">{{ item.id }} .</span>
             <img :src="item.src" alt="" />
             <span>{{ item.name }}</span>
           </li>
@@ -39,34 +39,49 @@ export default {
         {
           src: require('../../../../assets/img/wy_pic.png'),
           name: 'ZERO健身俱乐部',
+          id:1
         },
         {
           src: require('../../../../assets/img/wy_pic1.png'),
           name: '明星俱乐部',
+          id:2
+
         },
         {
           src: require('../../../../assets/img/wy_pic3.png'),
           name: 'The Dockers工人码头 Champagne Cocktail',
+          id:3
+
         },
         {
           src: require('../../../../assets/img/wy_pic4.png'),
           name: '宫廷采耳阁',
+          id:4
+
         },
         {
           src: require('../../../../assets/img/wy_pic5.png'),
           name: '魔方CUBE剧情密室逃脱',
+          id:5
+
         },
         {
           src: require('../../../../assets/img/wy_pic6.png'),
           name: '非凡KTV会所',
+          id:6
+
         },
         {
           src: require('../../../../assets/img/wy_pic7.png'),
           name: '白梧桐· 高端派对·团建轰趴',
+          id:7
+
         },
         {
           src: require('../../../../assets/img/wy_pic8.png'),
           name: '白梧桐· 高端派对·团建轰趴',
+          id:8
+
         },
       ],
     };
@@ -294,6 +309,14 @@ export default {
       };
       this.$redomEchart(dom, option);
     },
+   sendClick(i){
+    this.$SendMessageToUnity("OnBusinessIconClick",{
+      mSerial:i.id,
+      mType:'文娱',
+      info:i.name
+
+    });
+  }
   },
   mounted() {
     this.distributionServicesFun();

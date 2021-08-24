@@ -354,7 +354,7 @@ export default {
         series: [
           {
             animationDuration: 1000,
-            animationEasing: 'linear',
+            animationEasing:'linear',
 
             name: '公共区',
             type: 'bar',
@@ -368,7 +368,7 @@ export default {
           },
           {
             animationDuration: 1000,
-            animationEasing: 'linear',
+            animationEasing:'linear',
 
             name: '办公区',
             type: 'bar',
@@ -379,9 +379,9 @@ export default {
           },
           {
             animationDuration: 1000,
-            animationEasing: 'linear',
-            name: '停车场',
-            type: 'bar',
+            animationEasing:'linear',
+            name: "停车场",
+            type: "bar",
             barWidth: 12,
             stack: 'a',
             color: '#CDA857',
@@ -392,9 +392,9 @@ export default {
           },
           {
             animationDuration: 1000,
-            animationEasing: 'linear',
-            name: '设备层',
-            type: 'bar',
+            animationEasing:'linear',
+            name: "设备层",
+            type: "bar",
             barWidth: 12,
             color: '#95C7FF',
             stack: 'a',

@@ -18,8 +18,8 @@
       <div class="top">
         <div class="tittle">最受欢迎餐饮Top8</div>
         <ul>
-          <li v-for="(item, index) in topList" :key="index">
-            <span class="font_text">{{ ++index }} .</span>
+          <li v-for="(item, index) in topList" :key="index" @click="sendClick(item)">
+            <span class="font_text">{{ item.id}} .</span>
             <img :src="item.src" alt="" />
             <span>{{ item.name }}</span>
           </li>
@@ -39,34 +39,47 @@ export default {
         {
           src: require('../../../../assets/img/qqsy_pic.png'),
           name: '优选自助称重快餐',
+          id:1
         },
         {
           src: require('../../../../assets/img/qqsy_pic1.png'),
           name: '嘉乐快餐',
+          id:2
         },
         {
           src: require('../../../../assets/img/qqsy_pic2.png'),
           name: '喜茶',
+          id:3
         },
         {
           src: require('../../../../assets/img/qqsy_pic4.png'),
           name: '奈雪的茶',
+          id:4
+
         },
         {
           src: require('../../../../assets/img/qqsy_pic5.png'),
           name: '醉鲜居酒屋',
+          id:5
+
+          
         },
         {
           src: require('../../../../assets/img/qqsy_pic6.png'),
           name: '点都德',
+          id:6
         },
         {
           src: require('../../../../assets/img/qqsy_pic7.png'),
           name: '遇见小面',
+          id:7
+
         },
         {
           src: require('../../../../assets/img/qqsy_pic8.png'),
           name: '红掌柜（湘）',
+          id:8
+
         },
       ],
     };
@@ -249,7 +262,7 @@ export default {
         series: [
           {
             animationDuration: 1000,
-            animationEasing: 'linear',
+            animationEasing:'linear',
 
             name: '中餐',
             type: 'bar',
@@ -270,7 +283,7 @@ export default {
           },
           {
             animationDuration: 1000,
-            animationEasing: 'linear',
+            animationEasing:'linear',
 
             name: '西餐',
             type: 'bar',
@@ -290,7 +303,8 @@ export default {
           },
           {
             animationDuration: 1000,
-            animationEasing: 'linear',
+            animationEasing:'linear',
+
 
             name: '料理',
             type: 'bar',
@@ -310,7 +324,7 @@ export default {
           },
           {
             animationDuration: 1000,
-            animationEasing: 'linear',
+            animationEasing:'linear',
 
             name: '烧烤',
             type: 'bar',
@@ -330,7 +344,8 @@ export default {
           },
           {
             animationDuration: 1000,
-            animationEasing: 'linear',
+            animationEasing:'linear',
+
 
             name: '自助餐',
             type: 'bar',
@@ -352,11 +367,19 @@ export default {
       };
       this.$redomEchart(dom, option);
     },
+    sendClick(i){
+    this.$SendMessageToUnity("OnBusinessIconClick",{
+      mSerial:i.id,
+      mType:'餐饮',
+      info:i.name
+    });
+  }
   },
   mounted() {
     this.distributionServicesFun();
     this.distribution();
   },
+  
 };
 </script>
 

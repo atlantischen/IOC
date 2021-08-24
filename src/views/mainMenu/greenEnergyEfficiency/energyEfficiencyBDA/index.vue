@@ -53,9 +53,9 @@
         <div class="tittle">能耗指标</div>
         <div class="outer">
           <div id="energy" ref="energy"></div>
-          <div class="desc">
+          <!-- <div class="desc">
             总耗能指标 <span class="font_text">180</span> TCE
-          </div>
+          </div> -->
         </div>
         <div class="outer2">
           <div id="energy2" ref="energy2"></div>
@@ -267,7 +267,8 @@ export default {
         series: [
           {
             animationDuration: 1000,
-            animationEasing: 'linear',
+            animationEasing:'linear',
+
 
             name: '',
             type: 'bar',
@@ -310,10 +311,9 @@ export default {
         series: [
           {
             animationDuration: 1000,
-            animationEasing: 'linear',
-
-            type: 'gauge',
-            // center:['50%','50%'],
+            animationEasing:'linear',
+            type: "gauge",
+            center:['50%','50%'],
             min: 0,
             max: 200,
             radius: '95%',
@@ -332,14 +332,14 @@ export default {
               },
             },
             axisTick: {
-              distance: 0,
-              length: 6,
+              distance: 5,
+              length: 5,
             },
             splitLine: {
               show: false,
             },
             axisLabel: {
-              distance: 0,
+              distance: -10,
               color: '#999',
               fontSize: 12,
             },
@@ -351,7 +351,7 @@ export default {
               showAbove: true,
               size: 12,
               itemStyle: {
-                borderWidth: 10,
+                borderWidth: 8,
               },
             },
             title: {
@@ -360,8 +360,22 @@ export default {
             detail: {
               valueAnimation: true,
               fontSize: 12,
-              color: 'transparent',
-              offsetCenter: [0, '70%'],
+              color:'transparent',
+              offsetCenter: [0, "70%"],
+              formatter: function(value) {
+                return "{value|" + value + "}\n{unit|耗电指标}\n{unit|TCE}";
+              },
+              rich: {
+                value: {
+                  fontSize: 22,
+                  color: "#fff",
+                },
+                unit: {
+                  fontSize: 12,
+                  color: "#999",
+                },
+              },
+        
             },
             data: [
               {
@@ -402,7 +416,7 @@ export default {
             },
             axisTick: {
               distance: 0,
-              length: 6,
+              length: 5,
             },
             splitLine: {
               show: false,
@@ -483,7 +497,7 @@ export default {
             },
             axisTick: {
               distance: 0,
-              length: 6,
+              length: 5,
             },
             splitLine: {
               show: false,
@@ -779,7 +793,7 @@ export default {
   .outer {
     position: relative;
     #energy {
-      width: 2.75rem /* 220/80 */ /* 250/80 */ /* 300/80 */ /* 200/80 */;
+      // width: 2.75rem /* 220/80 */ /* 250/80 */ /* 300/80 */ /* 200/80 */;
       height: 2.75rem /* 300/80 */ /* 150/80 */;
     }
     .desc {
