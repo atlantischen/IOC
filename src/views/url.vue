@@ -43,8 +43,7 @@ export default {
     };
   },
   mounted () {
-    console.log(urlArry.monitorList);
-    console.log(mainMenus);
+
   },
   methods: {
     handleOpen: function (val) {
