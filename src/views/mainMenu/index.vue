@@ -12,7 +12,11 @@
     <!-- 告警框 -->
     <TipBox :_data="tipList" />
     <!-- 右侧警告框 -->
-    <AlarmAck :_isFade="showAlarmAck" @close="closeOpenItem" />
+    <AlarmAck
+      :_isFade="showAlarmAck"
+      :_datas="tipList"
+      @close="closeOpenItem"
+    />
     <!-- 中心数据 -->
     <CenterDatas :list="centerDatas" />
     <!-- 查看所有告警 -->
@@ -31,6 +35,7 @@
 </template>
 
 <script>
+import falseD from '@/datas/falseDatas';
 import AllAlert from '@/components/widget/allAlert.vue';
 import AlarmAck from '@/views/mainMenu/comprehensiveSituational/homePage/components/alarmAck.vue';
 export default {
@@ -46,6 +51,7 @@ export default {
       url: '',
       warnTimer: null,
       tipList: null,
+      tipNum: 0,
       centerDatas: [],
       monitorVisible: false,
       videoList: [
@@ -164,14 +170,8 @@ export default {
       window.iframe = this.$refs.iframe;
       var _that = this;
       window.addEventListener('resize', function() {
-        // var isFull =
-        //   document.fullscreenElement ||
-        //   document.mozFullScreenElement ||
-        //   document.webkitFullscreenElement;
-        // if (isFull == undefined) isFull = false;
-        console.log('isFull', _that.checkFull());
+        // console.log('isFull', _that.checkFull());
         var isFull = _that.checkFull();
-        // console.log(!isFull, _that.showEscHandler);
         if (!isFull && _that.showEscHandler) {
           // 全屏下按键esc
           _that.Exit3DFullScreen();
@@ -235,16 +235,16 @@ export default {
     warnTimeFun() {
       var timerOut;
       if (timerOut) {
-        timerOut = null;
         clearTimeout(timerOut);
+        timerOut = null;
       }
       this.warnTimer = setInterval(() => {
-        this.tipList = [
-          {
-            text: '告警！2021-08-07 15:28:30 1期A座14F实验室',
-          },
-        ];
+        this.tipList =
+          falseD.warnDatas[
+            this.tipNum >= falseD.warnDatas.length ? 0 : this.tipNum
+          ];
         this.$store.dispatch('SET_SHOWWARNTIP', true);
+        this.tipNum++;
         timerOut = setTimeout(() => {
           this.clearWarnTimeFun();
           this.warnTimeFun();
