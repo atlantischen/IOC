@@ -5,6 +5,7 @@
         center
         :title="title"
         v-model="dialogVideoVisible"
+        :destroy-on-close="true"
         @close="closeDialog"
       >
         <div class="btn_box">

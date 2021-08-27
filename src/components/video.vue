@@ -118,7 +118,9 @@ export default {
       this.dialogVideoVisible = val;
     },
   },
-  created() {},
+  created() {
+   
+  },
   mounted() {},
   updated() {
     this.myvideo = this.$refs.myVideo;

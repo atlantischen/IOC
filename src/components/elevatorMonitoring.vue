@@ -12,7 +12,7 @@
         <div class="videoBox" ref="videoBoxRef">
             <div class="video">
               <!-- <Player :dialogShow="dialogShow"   :monitorList="theParkServiceList" ></Player> -->
-              <video   class="vodeo_url" src="@/assets/video/轿厢内视频2.mp4" muted="true"  disablePictureInPicture="true" controls="true" autoplay="true"></video>
+              <video   class="vodeo_url" src="@/assets/video/轿厢内视频2.mp4" controls controlslist="nodownload  noremoteplayback" autoplay loop  muted  disablePictureInPicture></video>
             </div>
             <div class="desc">
                 <ul>

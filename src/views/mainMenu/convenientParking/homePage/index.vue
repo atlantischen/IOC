@@ -114,7 +114,7 @@ export default {
       ],
       parkList: [
         {
-          floor: 'B1',
+          floor: 'B3',
           presencePark: 553,
           freePark: 72,
           totalPark: 625,
@@ -126,7 +126,7 @@ export default {
           totalPark: 856,
         },
         {
-          floor: 'B3',
+          floor: 'B1',
           presencePark: 903,
           freePark: 63,
           totalPark: 966,
