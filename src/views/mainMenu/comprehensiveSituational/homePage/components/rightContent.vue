@@ -432,6 +432,7 @@ export default {
       this.$SendMessageToUnity('OnBackBtnClick', {});
       console.log('OnBackBtnClick-----退出追踪------------');
       this.$emit('_c', null);
+      this.imageUrl = this.img_src = null;
     },
     // 模拟分页
     changeDatasFun() {
