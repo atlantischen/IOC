@@ -280,7 +280,7 @@ export default {
             // 第二层：数据以进度条的形式展示
             {
               type: 'bar',
-              animationDuration: 2000,
+              animationDuration: 1000,
               animationEasing: 'linear',
               data: [
                 {

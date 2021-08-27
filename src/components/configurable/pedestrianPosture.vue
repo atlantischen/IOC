@@ -21,7 +21,7 @@
 </template>
 
 <script>
-import * as echarts from 'echarts'
+import * as echarts from 'echarts';
 export default {
   name: 'pedestrianPostureAll',
   props: {
@@ -33,28 +33,28 @@ export default {
     return {
       ...this._data,
       ids: this.$uuid(),
-    }
+    };
   },
   created() {},
   mounted() {
-    this.pedestrianPostureFun(this.datas)
+    this.pedestrianPostureFun(this.datas);
   },
   methods: {
     changePSYears2(val) {
-      console.log(val)
-      this.pedestrianPostureFun(this.datas)
+      console.log(val);
+      this.pedestrianPostureFun(this.datas);
     },
     // 人行态势
     pedestrianPostureFun(val) {
       if (this.title == '服务办理总数') {
-        let _l = this.datas.xData.length
-        this.datas.datas[0] = []
+        let _l = this.datas.xData.length;
+        this.datas.datas[0] = [];
         for (let i = 0; i < _l; i++) {
-          this.datas.datas[0].push(this.$randomNumer(400, 700))
+          this.datas.datas[0].push(this.$randomNumer(400, 700));
         }
-        this.datas.leftTip.value = this.$arrAdd(this.datas.datas[0])
+        this.datas.leftTip.value = this.$arrAdd(this.datas.datas[0]);
       }
-      let { names, xData, datas, smooth, unit, rightTip, leftTip, yMax } = val
+      let { names, xData, datas, smooth, unit, rightTip, leftTip, yMax } = val;
       var allD = [],
         color = ['#97c8ff', '#ffdd8d'],
         color2 = ['#fff', '#ffdd8d'],
@@ -67,11 +67,11 @@ export default {
             { offset: 0, color: 'rgb(255, 180, 0, 0.2)' },
             { offset: 1, color: 'rgb(255, 221, 141, 0)' },
           ],
-        ]
+        ];
       if (!names) {
-        color = color.reverse()
-        color2 = color2.reverse()
-        Linear = Linear.reverse()
+        color = color.reverse();
+        color2 = color2.reverse();
+        Linear = Linear.reverse();
       }
       for (var i = 0; i < datas.length; i++) {
         allD[i] = {
@@ -98,9 +98,9 @@ export default {
                   color: color[i],
                 },
               },
-            }
+            };
           }),
-        }
+        };
       }
       var option = {
         tooltip: {
@@ -122,7 +122,7 @@ export default {
             color: '#fff',
           },
           formatter: (params) => {
-            let dataStr = `<p style="font-weight:bold;text-align:center;">${params[0].name}</p>`
+            let dataStr = `<p style="font-weight:bold;text-align:center;">${params[0].name}</p>`;
             params.forEach((item) => {
               dataStr += `<div>
                   <span style=" vertical-align: middle;margin-right:0.0625rem;width:0.15rem;height:0.025rem;background-color:${
@@ -131,9 +131,9 @@ export default {
                   <span> ${
                     item.seriesName ? item.seriesName + ':' : item.seriesName
                   }${item.data.value}</span>
-                </div>`
-            })
-            return dataStr
+                </div>`;
+            });
+            return dataStr;
           },
         },
         title: [
@@ -285,18 +285,18 @@ export default {
             type: 'line',
             symbolSize: 6,
             ...e,
-            animationDuration: 2000,
+            animationDuration: 1000,
             animationEasing: 'linear',
-          }
+          };
         }),
-      }
+      };
       this.$redomEchart(
         this.$refs['pedestrianPostureEchart_' + this.ids],
         option
-      )
+      );
     },
   },
-}
+};
 </script>
 
 <style lang="less" scoped>

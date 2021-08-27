@@ -23,7 +23,7 @@
 </template>
 
 <script>
-import * as echarts from 'echarts'
+import * as echarts from 'echarts';
 export default {
   name: 'horizontalBarChart',
   props: {
@@ -35,15 +35,15 @@ export default {
     return {
       ...this._data,
       ids: this.$uuid(),
-    }
+    };
   },
   created() {},
   mounted() {
-    this.horizontalBarChartFun(this.datas)
+    this.horizontalBarChartFun(this.datas);
   },
   methods: {
     horizontalBarChartFun(val) {
-      var _datas = val.data
+      var _datas = val.data;
       for (var i = 0; i < _datas.length; i++) {
         var option = {
           xAxis: {
@@ -92,7 +92,7 @@ export default {
             {
               type: 'bar',
               barWidth: 22,
-              animationDuration: 2000,
+              animationDuration: 1000,
               animationEasing: 'linear',
               barGap: '-100%',
               barCategoryGap: '-100%',
@@ -142,15 +142,15 @@ export default {
               ],
             },
           ],
-        }
+        };
         this.$redomEchart(
           this.$refs['horizontalBarChartEchart_' + i + this.ids],
           option
-        )
+        );
       }
     },
   },
-}
+};
 </script>
 
 <style lang="less" scoped>

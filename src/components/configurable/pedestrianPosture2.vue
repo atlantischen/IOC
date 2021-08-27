@@ -19,7 +19,7 @@
 </template>
 
 <script>
-import * as echarts from 'echarts'
+import * as echarts from 'echarts';
 export default {
   name: 'pedestrianPosture2All',
   props: {
@@ -31,16 +31,16 @@ export default {
     return {
       ...this._data,
       ids: this.$uuid(),
-    }
+    };
   },
   created() {},
   mounted() {
-    this.pedestrianPosture2Fun(this.datas)
+    this.pedestrianPosture2Fun(this.datas);
   },
   methods: {
     // 人行态势
     pedestrianPosture2Fun(val) {
-      let { names, xData, datas, smooth, unit } = val
+      let { names, xData, datas, smooth, unit } = val;
       var allD = [],
         Linear = {
           0: [
@@ -51,7 +51,7 @@ export default {
             { offset: 0, color: 'rgb(255, 180, 0, 0.2)' },
             { offset: 1, color: 'rgb(255, 221, 141, 0)' },
           ],
-        }
+        };
       for (var i = 0; i < datas.length; i++) {
         allD[i] = {
           name: names ? names[i] : '',
@@ -64,7 +64,7 @@ export default {
               ]),
             },
           },
-        }
+        };
       }
       var option = {
         tooltip: {
@@ -86,8 +86,8 @@ export default {
             color: '#fff',
           },
           formatter: (params) => {
-            console.log(params)
-            let dataStr = `<p style="font-weight:bold;text-align:center;">${params[0].name}</p>`
+            console.log(params);
+            let dataStr = `<p style="font-weight:bold;text-align:center;">${params[0].name}</p>`;
             params.forEach((item) => {
               dataStr += `<div>
                   <span style=" vertical-align: middle;margin-right:0.0625rem;width:0.15rem;height:0.025rem;background-color:${
@@ -96,9 +96,9 @@ export default {
                   <span> ${
                     item.seriesName ? item.seriesName + ':' : item.seriesName
                   } ${item.value}</span>
-                </div>`
-            })
-            return dataStr
+                </div>`;
+            });
+            return dataStr;
           },
         },
         color: ['#fff', '#ffb400'],
@@ -189,7 +189,7 @@ export default {
           return {
             ...e,
             type: 'line',
-            animationDuration: 2000,
+            animationDuration: 1000,
             animationEasing: 'linear',
             smooth: smooth ? smooth : true,
             itemStyle: {
@@ -201,16 +201,16 @@ export default {
             },
             symbolSize: 6,
             data: e.data,
-          }
+          };
         }),
-      }
+      };
       this.$redomEchart(
         this.$refs['pedestrianPosture2Echart_' + this.ids],
         option
-      )
+      );
     },
   },
-}
+};
 </script>
 
 <style lang="less" scoped>

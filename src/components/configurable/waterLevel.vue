@@ -113,7 +113,7 @@ export default {
               waveAnimation: true,
               animationEasing: 'linear',
               animationEasingUpdate: 'quarticInOut',
-              animationDuration: 2000,
+              animationDuration: 1000,
               animationDurationUpdate: 200,
               data: [
                 {
