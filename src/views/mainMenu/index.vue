@@ -239,17 +239,16 @@ export default {
         timerOut = null;
       }
       this.warnTimer = setInterval(() => {
-        this.tipList =
-          falseD.warnDatas[
-            this.tipNum >= falseD.warnDatas.length ? 0 : this.tipNum
-          ];
+        console.log(this.tipNum);
+        this.tipNum = this.tipNum >= falseD.warnDatas.length ? 0 : this.tipNum;
+        this.tipList = falseD.warnDatas[this.tipNum];
         this.$store.dispatch('SET_SHOWWARNTIP', true);
         this.tipNum++;
         timerOut = setTimeout(() => {
           this.clearWarnTimeFun();
           this.warnTimeFun();
         }, 30000);
-      }, 300000);
+      }, 60000);
       // }, this.$randomNumer(3000, 30000))
     },
     clearWarnTimeFun() {
