@@ -33,7 +33,7 @@
 </template>
 
 <script>
-import * as echarts from 'echarts'
+import * as echarts from 'echarts';
 export default {
   name: 'singleBarChart',
   props: {
@@ -48,20 +48,20 @@ export default {
         ? this.$getYearMonth(this._data.datas.yearsList[0].value)
         : null,
       ids: this.$uuid(),
-    }
+    };
   },
   created() {},
   mounted() {
-    this.singleBarChartFun(this.datas)
-    this.changePSMonths()
+    this.singleBarChartFun(this.datas);
+    this.changePSMonths();
   },
   methods: {
     changePSMonths(val) {
-      this.singleBarChartFun(this.datas)
+      this.singleBarChartFun(this.datas);
     },
     changePSYears(val) {
-      this.singleBarChartFun(this.datas)
-      this.momthsList = this.$getYearMonth(val)
+      this.singleBarChartFun(this.datas);
+      this.momthsList = this.$getYearMonth(val);
     },
     singleBarChartFun(val) {
       if (this.title == '热门服务TOP5') {
@@ -71,10 +71,10 @@ export default {
           this.$randomNumer(100, 150),
           this.$randomNumer(50, 100),
           this.$randomNumer(0, 50),
-        ]
-        this.datas.leftTip.value = this.$arrAdd(this.datas.datas[0])
+        ];
+        this.datas.leftTip.value = this.$arrAdd(this.datas.datas[0]);
       }
-      let { xAxisD, datas, units, names, leftTip } = val
+      let { xAxisD, datas, units, names, leftTip } = val;
       var allD = [],
         showLb = {
           rotate: -(datas[0].length > 4 ? 20 : 50),
@@ -97,9 +97,9 @@ export default {
             { offset: 0, color: 'rgba(226, 28, 28, 1)' },
             { offset: 1, color: 'rgba(226, 28, 28, .1)' },
           ],
-        ]
+        ];
       if (names && names.indexOf('次要') != -1) {
-        colorRange.splice(0, 1)
+        colorRange.splice(0, 1);
       }
       for (let i = 0; i < datas.length; i++) {
         allD[i] = {
@@ -117,7 +117,7 @@ export default {
             ),
           },
           data: datas[i],
-        }
+        };
       }
 
       var option = {
@@ -176,7 +176,7 @@ export default {
             color: '#fff',
           },
           formatter: (params) => {
-            let dataStr = `<p style="font-weight:bold;font-size:.2rem;text-align:center;padding-bottom:.0625rem;">${params[0].name}</p>`
+            let dataStr = `<p style="font-weight:bold;font-size:.2rem;text-align:center;padding-bottom:.0625rem;">${params[0].name}</p>`;
             params.forEach((item) => {
               dataStr += `<div>
                     <span style=" vertical-align: middle;margin-right:0.0625rem;width:0.15rem;height:0.12rem;border-radius:0.02rem;background:linear-gradient(to bottom, ${
@@ -185,9 +185,9 @@ export default {
                     <span> ${
                       item.seriesName ? item.seriesName + ':' : item.seriesName
                     }  ${item.value}</span>
-                  </div>`
-            })
-            return dataStr
+                  </div>`;
+            });
+            return dataStr;
           },
         },
         grid: {
@@ -281,21 +281,21 @@ export default {
         series: allD.map((e) => {
           return {
             type: 'bar',
-            animationDuration: 2000,
+            animationDuration: 1000,
             animationEasing: 'linear',
             ...e,
-          }
+          };
         }),
-      }
+      };
       if (units && units[0]) {
         for (let key in showLb) {
           // option.xAxis[0].axisLabel[key] = showLb[key];
         }
       }
-      this.$redomEchart(this.$refs['singleBarChartEchart_' + this.ids], option)
+      this.$redomEchart(this.$refs['singleBarChartEchart_' + this.ids], option);
     },
   },
-}
+};
 </script>
 
 <style lang="less" scoped>

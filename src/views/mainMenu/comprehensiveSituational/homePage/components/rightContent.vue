@@ -7,27 +7,6 @@
         <div class="leftSearch">
           <i class="iconfont icon-fanhui" @click="back"></i>
           <div class="theSearchPath y_c">
-            <!-- <el-upload
-              class="upload-demo uploadPhoto"
-              action="139.9.26.115:28003/api/v1/admin/upload/upload_object"
-              drag
-              :show-file-list="false"
-              :auto-upload="true"
-              :on-change="changeFile"
-              multiple
-            >
-              <img
-                v-if="!imageUrl"
-                class="upload_av"
-                src="~@/assets/img/datas/sc_av.png"
-              />
-              <img
-                v-if="!imageUrl"
-                class="upload_up"
-                src="~@/assets/img/datas/sc_up.png"
-              />
-              <img v-else :src="imageUrl" class="avatar" />
-            </el-upload> -->
             <el-upload
               class="upload-demo uploadPhoto"
               action="#"
@@ -208,8 +187,8 @@ export default {
           info: '梅龙路与金龙路交汇处',
           src: require('@/assets/img/datas/qy_ags.png'),
           srcName: 'qy_ags.png',
-          ShopType: "餐饮",
-          ShopSize: "117㎡"
+          ShopType: '餐饮',
+          ShopSize: '117㎡',
         },
         {
           name: 'KFC(肯德基)',
@@ -217,8 +196,8 @@ export default {
           info: '2栋B座1088号商铺',
           src: require('@/assets/img/datas/qy_kfc.png'),
           srcName: 'qy_kfc.png',
-          ShopType: "餐饮",
-          ShopSize: "208㎡"
+          ShopType: '餐饮',
+          ShopSize: '208㎡',
         },
         {
           name: '真功夫',
@@ -226,8 +205,8 @@ export default {
           info: '1栋A座3014号商铺',
           src: require('@/assets/img/datas/qy_zgf.png'),
           srcName: 'qy_zgf.png',
-          ShopType: "餐饮",
-          ShopSize: "123㎡"
+          ShopType: '餐饮',
+          ShopSize: '123㎡',
         },
         {
           name: '深圳奇信智能科技有限公司',
@@ -235,8 +214,8 @@ export default {
           info: '海纳百川B座16楼',
           src: require('@/assets/img/datas/qy_qx.png'),
           srcName: 'qy_qx.png',
-          ShopType: "企业",
-          ShopSize: "423㎡"
+          ShopType: '企业',
+          ShopSize: '423㎡',
         },
       ],
       tableData: [],
@@ -379,7 +358,9 @@ export default {
             this.imageUrl = this.img_src = res.data.file_url;
           }
         })
-        .catch(() => {});
+        .catch(() => {
+          this.$message.error('上传失败！');
+        });
       // form.append('multipartFile', file);
       // uploadImgApi(form)
       //   .then((res) => {

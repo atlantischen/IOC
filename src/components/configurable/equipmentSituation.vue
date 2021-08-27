@@ -19,7 +19,7 @@
 </template>
 
 <script>
-import * as echarts from 'echarts'
+import * as echarts from 'echarts';
 export default {
   name: 'theParkOutputValAll',
   props: {
@@ -31,15 +31,15 @@ export default {
     return {
       ...this._data,
       ids: this.$uuid(),
-    }
+    };
   },
   mounted() {
-    this.equipmentSituationFun(this.datas)
+    this.equipmentSituationFun(this.datas);
   },
   methods: {
     // 设备态势
     equipmentSituationFun(val) {
-      const { names, xAxisName, datas } = val
+      const { names, xAxisName, datas } = val;
       var option = {
         tooltip: {
           trigger: 'item',
@@ -60,12 +60,12 @@ export default {
             color: '#fff',
           },
           formatter: (params) => {
-            let dataStr = `<p style="font-weight:bold;font-size:.2rem;text-align:center;padding-bottom:.0625rem;">${params.name}</p>`
+            let dataStr = `<p style="font-weight:bold;font-size:.2rem;text-align:center;padding-bottom:.0625rem;">${params.name}</p>`;
             dataStr += `<div>
                   <span style=" vertical-align: middle;margin-right:0.0625rem;width:0.15rem;height:0.12rem;border-radius:0.02rem;background:linear-gradient(to bottom, ${params.color.colorStops[0].color},${params.color.colorStops[1].color}"></span>
                   <span> ${params.seriesName}: ${params.value}</span>
-                </div>`
-            return dataStr
+                </div>`;
+            return dataStr;
           },
         },
         grid: {
@@ -145,7 +145,7 @@ export default {
             name: names[0],
             type: 'bar',
             barWidth: 14,
-            animationDuration: 2000,
+            animationDuration: 1000,
             animationEasing: 'linear',
             itemStyle: {
               color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
@@ -159,7 +159,7 @@ export default {
             name: names[1],
             type: 'bar',
             barWidth: 14,
-            animationDuration: 2000,
+            animationDuration: 1000,
             animationEasing: 'linear',
             itemStyle: {
               color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
@@ -170,14 +170,14 @@ export default {
             data: datas[1],
           },
         ],
-      }
+      };
       this.$redomEchart(
         this.$refs['equipmentSituationEchart_' + this.ids],
         option
-      )
+      );
     },
   },
-}
+};
 </script>
 
 <style lang="less" scoped>

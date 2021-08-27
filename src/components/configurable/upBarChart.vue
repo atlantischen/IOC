@@ -13,7 +13,7 @@
 </template>
 
 <script>
-import * as echarts from 'echarts'
+import * as echarts from 'echarts';
 export default {
   name: 'upBarChart',
   props: {
@@ -25,21 +25,21 @@ export default {
     return {
       ...this._data,
       ids: this.$uuid(),
-    }
+    };
   },
   created() {},
   mounted() {
-    this.upBarChartFun(this.datas)
+    this.upBarChartFun(this.datas);
   },
   methods: {
     upBarChartFun(val) {
-      const { names, xAxisData, yAxisData, units } = val
+      const { names, xAxisData, yAxisData, units } = val;
       var comStyle = {
         itemStyle: {
           shadowBlur: 12,
           shadowColor: 'rgba(0,0,0,0.3)',
         },
-      }
+      };
       var option = {
         tooltip: {
           show: true,
@@ -61,7 +61,7 @@ export default {
             color: '#fff',
           },
           formatter: (params) => {
-            let dataStr = `<p style="font-weight:bold;font-size:.2rem;text-align:center;padding-bottom:.0625rem;">${params.name}</p>`
+            let dataStr = `<p style="font-weight:bold;font-size:.2rem;text-align:center;padding-bottom:.0625rem;">${params.name}</p>`;
             dataStr += `<div>
                   <span style=" vertical-align: middle;margin-right:0.0625rem;width:0.15rem;height:0.12rem;border-radius:0.02rem;background:linear-gradient(to bottom, ${
                     params.color.colorStops[0].color
@@ -71,8 +71,8 @@ export default {
                       ? params.seriesName + ':'
                       : params.seriesName
                   } ${params.value}</span>
-                </div>`
-            return dataStr
+                </div>`;
+            return dataStr;
           },
         },
         legend: {
@@ -148,7 +148,7 @@ export default {
         series: [
           {
             name: names[1],
-            animationDuration: 2000,
+            animationDuration: 1000,
             animationEasing: 'linear',
             type: 'bar',
             stack: 'one',
@@ -164,7 +164,7 @@ export default {
           },
           {
             name: names[0],
-            animationDuration: 2000,
+            animationDuration: 1000,
             animationEasing: 'linear',
             type: 'bar',
             stack: 'one',
@@ -179,7 +179,7 @@ export default {
           },
           {
             name: names[2],
-            animationDuration: 2000,
+            animationDuration: 1000,
             animationEasing: 'linear',
             type: 'bar',
             stack: 'two',
@@ -194,13 +194,13 @@ export default {
           },
           {
             name: names[3],
-            animationDuration: 2000,
+            animationDuration: 1000,
             animationEasing: 'linear',
             type: 'bar',
             stack: 'two',
             emphasis: comStyle,
             data: yAxisData[3].map((t) => {
-              return -t
+              return -t;
             }),
             itemStyle: {
               color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
@@ -210,11 +210,11 @@ export default {
             },
           },
         ],
-      }
-      this.$redomEchart(this.$refs['upBarChartEchart_' + this.ids], option)
+      };
+      this.$redomEchart(this.$refs['upBarChartEchart_' + this.ids], option);
     },
   },
-}
+};
 </script>
 
 <style lang="less" scoped>
