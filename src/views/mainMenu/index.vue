@@ -248,7 +248,7 @@ export default {
           this.clearWarnTimeFun();
           this.warnTimeFun();
         }, 30000);
-      }, 60000);
+      }, 300000);
       // }, this.$randomNumer(3000, 30000))
     },
     clearWarnTimeFun() {
