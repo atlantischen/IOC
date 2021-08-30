@@ -24,7 +24,7 @@
 </template>
 
 <script>
-import data from '@/utils/falseData.js';
+import data from '@/datas/falseDatas.js';
 import { homePage } from '@/lang/data/comprehensiveSituational/index';
 import i18n from '@/lang/index';
 import RightContent from './components/rightContent.vue';

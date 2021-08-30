@@ -433,6 +433,8 @@ export default {
       console.log('OnBackBtnClick-----退出追踪------------');
       this.$emit('_c', null);
       this.imageUrl = this.img_src = null;
+      this.isShowList = false;
+      this.isFade = false;
     },
     // 模拟分页
     changeDatasFun() {
