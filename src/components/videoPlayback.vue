@@ -76,7 +76,7 @@ export default {
   data() {
     return {
       videoShow:false,
-      videoTitle:'视频回放_1号梯轿厢_2020年12月18日',
+      videoTitle:'111',
       dialogVideoVisible: this.backShow,
       activeIndex: 0,
       FormData: {
@@ -106,6 +106,10 @@ export default {
   methods: {
     closeDialog() {
       this.$emit("videoShowChange", false);
+      this.FormData={}
+      this.activeIndex=null
+
+
     },
     videoShowChange(val){
       this.videoShow=val
@@ -138,6 +142,13 @@ export default {
           this.$message({ message: "请选择结束时间", type: "error" });
           return;
         } else {
+
+          if(this.title=='轿厢视频回放'){
+            this.videoTitle ="视频回放_1号梯轿厢_2020年12月18日"
+
+          }else if(this.title=='电梯间视频回放'){
+            this.videoTitle="视频回放_1号梯电梯间_2020年10月14日"
+          }
             this.videoShowChange(true)
            this.closeDialog()
         }

@@ -12,7 +12,7 @@
           <video
             class="video"
             ref="myVideo"
-            :src="url"
+            :src="videoTitle=='视频回放_1号梯轿厢_2020年12月18日'?url1:url2"
             @timeupdate="timeupdate"
             @canplay="getTotal"
         
@@ -100,7 +100,8 @@ export default {
         },
       ], // 倍速设置
       initPlaySpeed: 1.0,
-      url:require('@/assets/video/轿厢内视频2.mp4')
+      url1:require('@/assets/video/轿厢内视频2.mp4'),
+      url2:require('@/assets/video/楼梯间视频1.mp4')
     };
   },
   props: {
