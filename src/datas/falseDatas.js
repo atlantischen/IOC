@@ -1,6 +1,7 @@
-
+import dm from '@/utils/dataMethods'
 export default {
-  "warnDatas": [
+  "VisitorsToday": dm.randomNumer(200, 300), // 今日访客总人数
+  "warnDatas": [ // 循环告警info
     {
       "SerialNum": 0,
       "EquipmentNum": "534080",
