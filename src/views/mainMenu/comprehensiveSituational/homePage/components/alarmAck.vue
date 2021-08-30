@@ -148,8 +148,8 @@ export default {
       this.isFade = n;
     },
     _datas: function(n, o) {
-      console.log(n);
-      console.log(this._datas);
+      // console.log(n);
+      // console.log(this._datas);
       this.ruleForm = {
         ...this._datas,
         because: this.ruleForm.AlarmLocation + '-' + this.ruleForm.AlarmType,
