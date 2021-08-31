@@ -163,32 +163,32 @@ export default {
       title:'轿厢监控',
       monitorList:[
         {
-          url:require('@/assets/video/轿厢内视频3.mp4')
+          url:require('@/assets/video/1.mp4')
         }
         ,
          {
-          url:require('@/assets/video/轿厢内视频2.mp4')
+          url:require('@/assets/video/2.mp4')
         },
         {
-          url:require('@/assets/video/轿厢内视频3.mp4')
+          url:require('@/assets/video/3.mp4')
         },
          {
-          url:require('@/assets/video/轿厢内视频2.mp4')
+          url:require('@/assets/video/2.mp4')
         }
       ],
       monitorList1:[
         {
-          url:require('@/assets/video/楼梯间视频1.mp4')
+          url:require('@/assets/video/4.mp4')
         }
         ,
          {
-          url:require('@/assets/video/楼梯间视频2.mp4')
+          url:require('@/assets/video/5.mp4')
         },
         {
-          url:require('@/assets/video/楼梯间视频3.mp4')
+          url:require('@/assets/video/6.mp4')
         },
          {
-          url:require('@/assets/video/楼梯间视频4.mp4')
+          url:require('@/assets/video/7.mp4')
         }
       ],
       monitorLists:[]
@@ -200,87 +200,87 @@ export default {
         this.title='轿厢监控'
         this.monitorLists=[
           {
-          url:require('@/assets/video/轿厢内视频3.mp4')
+          url:require('@/assets/video/1.mp4')
         }
         ,
          {
-          url:require('@/assets/video/轿厢内视频2.mp4')
+          url:require('@/assets/video/2.mp4')
         },
         {
-          url:require('@/assets/video/轿厢内视频3.mp4')
+          url:require('@/assets/video/3.mp4')
         },
          {
-          url:require('@/assets/video/轿厢内视频2.mp4')
+          url:require('@/assets/video/1.mp4')
         },
         {
-          url:require('@/assets/video/轿厢内视频3.mp4')
+          url:require('@/assets/video/2.mp4')
         }
         ,
          {
-          url:require('@/assets/video/轿厢内视频2.mp4')
+          url:require('@/assets/video/3.mp4')
         },
         {
-          url:require('@/assets/video/轿厢内视频3.mp4')
+          url:require('@/assets/video/1.mp4')
         },
          {
-          url:require('@/assets/video/轿厢内视频2.mp4')
+          url:require('@/assets/video/2.mp4')
         }
         ,
         {
-          url:require('@/assets/video/轿厢内视频3.mp4')
+          url:require('@/assets/video/3.mp4')
         }
         ,
          {
-          url:require('@/assets/video/轿厢内视频2.mp4')
+          url:require('@/assets/video/1.mp4')
         },
         {
-          url:require('@/assets/video/轿厢内视频3.mp4')
+          url:require('@/assets/video/2.mp4')
         },
          {
-          url:require('@/assets/video/轿厢内视频2.mp4')
+          url:require('@/assets/video/3.mp4')
         }
         ]
       }else if(name==='elevatorData'){
         this.title='电梯间监控'
          this.monitorLists=[
             {
-          url:require('@/assets/video/楼梯间视频1.mp4')
+          url:require('@/assets/video/4.mp4')
         }
         ,
          {
-          url:require('@/assets/video/楼梯间视频2.mp4')
+          url:require('@/assets/video/5.mp4')
         },
         {
-          url:require('@/assets/video/楼梯间视频3.mp4')
+          url:require('@/assets/video/6.mp4')
         },
          {
-          url:require('@/assets/video/楼梯间视频4.mp4')
+          url:require('@/assets/video/7.mp4')
         },
          {
-          url:require('@/assets/video/楼梯间视频1.mp4')
+          url:require('@/assets/video/4.mp4')
         }
         ,
          {
-          url:require('@/assets/video/楼梯间视频2.mp4')
+          url:require('@/assets/video/5.mp4')
         },
         {
-          url:require('@/assets/video/楼梯间视频3.mp4')
+          url:require('@/assets/video/6.mp4')
         },
          {
-          url:require('@/assets/video/楼梯间视频4.mp4')
+          url:require('@/assets/video/7.mp4')
         },
          {
-          url:require('@/assets/video/楼梯间视频1.mp4')
+          url:require('@/assets/video/4.mp4')
         }
         ,
          {
-          url:require('@/assets/video/楼梯间视频2.mp4')
+          url:require('@/assets/video/5.mp4')
         },
         {
-          url:require('@/assets/video/楼梯间视频3.mp4')
+          url:require('@/assets/video/6.mp4')
         },
          {
-          url:require('@/assets/video/楼梯间视频4.mp4')
+          url:require('@/assets/video/7.mp4')
         }
          ]
       }

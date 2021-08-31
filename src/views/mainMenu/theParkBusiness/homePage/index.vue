@@ -169,18 +169,18 @@ export default {
       Imgtimer: null,
       businessList: [
         {
-          src: require('../../../../assets/img/真功夫.png'),
+          src: require('../../../../assets/img/zgf.png'),
           title: '真功夫',
           desc: '2021.06.01-2021.08.31期间，所有菜品8折优惠。',
         },
         {
-          src: require('../../../../assets/img/星巴克.png'),
+          src: require('../../../../assets/img/xbk.png'),
           title: '星巴克',
           desc:
             ' 2021年星巴克春季买一送一活动，活动时间：2021.5.12-6.15每天！下午！3:00!',
         },
         {
-          src: require('../../../../assets/img/面点王.png'),
+          src: require('../../../../assets/img/mdw.png'),
           title: '面点王',
           desc:
             '回馈新老用户，凡是在本店消费满99元可赠送20元代金券，2021.04.31前有效！',
@@ -357,12 +357,12 @@ export default {
       ],
       imgDesc: '',
       waitList: [
-        require('../../../../assets/img/入驻商家1.png'),
-        require('../../../../assets/img/入驻商家2.png'),
-        require('../../../../assets/img/入驻商家3.png'),
-        require('../../../../assets/img/入驻商家4.png'),
-        require('../../../../assets/img/入驻商家5.png'),
-        require('../../../../assets/img/入驻商家6.png'),
+        require('../../../../assets/img/r1.png'),
+        require('../../../../assets/img/r2.png'),
+        require('../../../../assets/img/r3.png'),
+        require('../../../../assets/img/r4.png'),
+        require('../../../../assets/img/r5.png'),
+        require('../../../../assets/img/r6.png'),
         require('../../../../assets/img/yqsy_pic9.png'),
         require('../../../../assets/img/yqsy_pic10.png'),
         require('../../../../assets/img/yqsy_pic11.png'),
