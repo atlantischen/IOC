@@ -689,21 +689,23 @@ export default {
   },
   watch: {
     getUnityData(val) {
+      console.log(val,'val');
       try {
         if (val.action === 'ME_ZHYLSingle' && val.data === '1') {
           this.fade = true;
           (this.idArry = [6, 7, 8, 9]), console.log(this.idArry, '单层打开');
-          this.$SendMessageToUnity('ShowIoTDevice_IOCMap', {
-            strList: '6,7,8,9',
-          });
+          // this.$SendMessageToUnity('ShowIoTDevice_IOCMap', {
+          //   strList: '6,7,8,9',
+          // });
+          // this.$router.push('/wisdomContentCouplet/deviceControl')
         } else if (val.action === 'ME_ZHYLSingle' && val.data === '0') {
           (this.idArry = [0, 1, 2, 3, 4, 5, 10]), (this.fade = false);
-          this.$SendMessageToUnity('ShowIoTDevice_IOCMap', {
-            strList: '0,1,2,3,4,5,10',
-          });
+          // this.$SendMessageToUnity('ShowIoTDevice_IOCMap', {
+          //   strList: '0,1,2,3,4,5,10',
+          // });
         }
       } catch (e) {}
-      console.log(val);
+
     },
   },
   mounted() {

@@ -43,7 +43,7 @@ export default {
   components: { AlarmAck, AllAlert },
   data() {
     return {
-      isShow: false,
+      isShow:false ,
       showAlarmAck: false,
       showAllAlert: false,
       showEscHandler: false,
@@ -71,6 +71,8 @@ export default {
     getUnityData(val) {
       // debugger;
       let res = val;
+      console.log(res,'路由');
+
       try {
         if (res.action.indexOf('/') === 0) {
           if (res.action === '/greenEnergyEfficiency/building/codesource') {
@@ -116,6 +118,7 @@ export default {
         (typeof event.data == 'object' && event.data.data != undefined)
       ) {
         let res = JSON.parse(event.data);
+        console.log(res,'所有消息');
         this.$store.commit('setData', res);
         if (res.data === 'IOCHOME') {
           this.isShow = true;
@@ -146,10 +149,10 @@ export default {
             this.isShow = false;
             return;
           }
+          this.isShow = false;
           this.clearWarnTimeFun();
           this.$handleFullScreen();
           this.hideGlobal(false);
-          this.isShow = false;
         } else if (res.data === 'esc') {
           // 退出3D全屏
           // this.Exit3DFullScreen()
@@ -161,8 +164,7 @@ export default {
       window.debug = true;
     } else {
       this.url = process.env.VUE_APP_UNITY;
-      // this.url = 'http://10.10.7.22:1234/index.html';
-      // this.url = 'http://183.62.170.2:8110';
+      // this.url = 'http://172.21.70.246:8110';
     }
   },
   mounted() {
@@ -194,10 +196,24 @@ export default {
         console.log(event.data);
         let res = JSON.parse(event.data);
         this.$store.commit('setData', res);
+        console.log(res,'debug');
         if (res && res.lenght != 0) {
           if (res.action == 'hide') {
             this.isShow = false;
-          } else {
+          } else if (res.action === 'Enter3DFullScreen') {
+          // 3D全屏
+          this.showEscHandler = true;
+          if (this.checkFull()) {
+            this.hideGlobal(false);
+            this.clearWarnTimeFun();
+            this.isShow = false;
+            return;
+          }
+          this.isShow = false;
+          this.clearWarnTimeFun();
+          this.$handleFullScreen();
+          this.hideGlobal(false);
+        }else {
             this.isShow = true;
           }
         }
@@ -248,7 +264,7 @@ export default {
           this.clearWarnTimeFun();
           this.warnTimeFun();
         }, 30000);
-      }, 300000);
+      }, 600);
       // }, this.$randomNumer(3000, 30000))
     },
     clearWarnTimeFun() {

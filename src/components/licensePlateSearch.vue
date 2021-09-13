@@ -56,7 +56,7 @@
       </div>
     </div>
     <div class="select_c">
-      <el-checkbox @change="selectChange" class="set_select" v-model="checked"
+      <el-checkbox @change="selectChange" class="set_select"  v-model="checked"
         >8位新能源车牌</el-checkbox
       >
     </div>
@@ -519,6 +519,117 @@ export default {
       activeIndex: null,
       carNum: "",
       checked: false,
+      carList:[
+        {
+          url:require('@/assets/img/car_pic.png'),
+          name:'粤A00000',
+          reason:'月卡欠费',
+          num:'粤A00000',
+          identifier:'NO014523',
+          storey:'地下室一楼',
+          time:'2021-10-16 10:45:54',
+          id:0,
+          floor:'1'
+        },
+       
+        {
+          url:require('@/assets/img/car_pic2.png'),
+          name:'粤AD367C',
+          reason:'多次违规停车',
+          num:'粤AD367C',
+          identifier:'NO017465',
+          storey:'地下室二楼',
+          time:'2021-10-18 16:30:06',
+          id:2,
+          floor:'2'  
+        },
+         {
+          url:require('@/assets/img/car_pic1.png'),
+          name:'赣A8720B',
+          reason:'多次违规停车',
+          identifier:'NO017465',
+          storey:'地下室三楼',
+          time:'2021-10-18 16:30:06',
+          num:'赣A8720B',
+          id:1,
+           floor:'3'
+        },
+        {
+          url:require('@/assets/img/car_pic2.png'),
+          name:'赣B26354',
+          reason:'多次违规停车',
+          num:'赣B26354',
+          identifier:'NO017465',
+          storey:'地下室一楼',
+          time:'2021-10-18 16:30:06',
+  
+          id:3,
+           floor:'1'
+
+        },
+         {
+          url:require('@/assets/img/car_pic.png'),
+          name:'湘A45623',
+          reason:'多次违规停车',
+          num:'湘A45623',
+          identifier:'NO017465',
+          storey:'地下室二楼',
+          time:'2021-10-18 16:30:06',
+          id:4,
+           floor:'2'
+
+        },
+        {
+          url:require('@/assets/img/car_pic1.png'),
+          name:'鄂JF358B',
+          reason:'月卡欠费',
+          num:'鄂JF358B',
+          identifier:'NO017465',
+          storey:'地下室三楼',
+          time:'2021-10-18 16:30:06',
+          id:5,
+           floor:'3'
+
+        },
+        {
+          url:require('@/assets/img/car_pic2.png'),
+          name:'川AD367C',
+          reason:'多次违规停车',
+          num:'川AD367C',
+          identifier:'NO017465',
+          storey:'地下室一楼',
+          time:'2021-10-18 16:30:06',
+          id:6,
+           floor:'1'
+
+        },
+        {
+          url:require('@/assets/img/car_pic2.png'),
+          name:'鄂CD3675',
+          reason:'多次违规停车',
+          num:'鄂CD3675',
+          identifier:'NO017465',
+          storey:'地下室二楼',
+          time:'2021-10-18 16:30:06',
+          id:7,
+           floor:'2'
+
+        },
+        {
+          url:require('@/assets/img/car_pic2.png'),
+          name:'粤A23659',
+          reason:'多次违规停车',
+          num:'粤A23659',
+          identifier:'NO017465',
+          storey:'地下室三楼',
+          time:'2021-10-18 16:30:06',
+          id:8,
+           floor:'3'
+
+        }
+
+      ],
+
     };
   },
   props: {
@@ -528,6 +639,21 @@ export default {
     posationTop: {
       type: String,
     },
+  },
+  watch:{
+
+    searchData:{
+      handler: function(n) {
+         console.log(n.length,'nnnnnnnnn');
+         if(n.length>8){
+           this.checked=false
+           this.searchData.length=8
+
+         }
+      },
+          immediate: true
+    }
+
   },
   methods: {
     handleClick() {
@@ -541,12 +667,27 @@ export default {
       this.num = this.carNum;
        if(this.num.indexOf("&") !=-1 ){
           this.$message({ message: "请输入正确的车牌号", type: "error" });
-           return
-          
+          return  
       }
-      this.$store.commit('setCarNum',this.num)
-      this.$emit("search", this.num);
+      let arr=[];
+      console.log(this.carList,this.num);
+      this.carList.forEach(item=>{
+        if(item.num===this.num){
+            this.$SendMessageToUnity("QueryCarExitRoute", {"index":item.id,"floor":item.floor});  
+            arr.push(item)
+        }
+      })  
+      console.log(arr.length);
+      if(arr.length==0){
+        this.$message({ message: "未查询到车牌号", type: "error" });
+        return 
+     }else{
+      this.$store.commit('setCarNum',this.num )
+      this.$store.commit('getSearchList',arr)
       this.$router.push({ name: "SmartParking" });
+      this.$emit("search", arr);
+     }
+      
     },
     clcikSelect(i) {
       this.activeIndex = i;

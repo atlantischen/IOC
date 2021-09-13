@@ -15,7 +15,7 @@ export default {
     },
   },
   mounted () {
-    this.animateValue(this.$refs.numberGrow, this.value, 3000);
+    this.animateValue(this.$refs.numberGrow, this.value, 2000);
 
   },
   methods: {

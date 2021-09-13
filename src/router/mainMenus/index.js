@@ -112,5 +112,11 @@ export default [{
       isShow: true
     },
     children: [...wisdomContentCoupletList]
-  }
+  },
+  {
+    path: "/empty",
+    name: 'empty',
+    // redirect: "/debug/comprehensiveSituational/homePage",
+    component: () => import('@/views/mainMenu/empty.vue'),
+  },
 ]

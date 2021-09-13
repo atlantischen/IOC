@@ -14,12 +14,7 @@ const routes = [{
     component: () => import('@/views/mainMenu/index.vue'),
     children: [...MainMenus]
   },
-  // {
-  //   path: "/empty",
-  //   name: 'empty',
-  //   // redirect: "/debug/comprehensiveSituational/homePage",
-  //   component: () => import('@/views/mainMenu/empty.vue'),
-  // },
+
   {
     // path: "",
     component: () => import('@/views/index.vue'),

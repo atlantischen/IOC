@@ -20,17 +20,17 @@ export default [{
       isShow: true
     }
   },
-  {
-    path: 'infoPublish',
-    name: 'infoPublish',
-    component: () => import('@/views/mainMenu/wisdomContentCouplet/infoPublish/index.vue'),
-    meta: {
-      icon: 'icon-zonghe',
-      name: '信息发布',
-      title: '信息发布',
-      isShow: true
-    }
-  },
+  // {
+  //   path: 'infoPublish',
+  //   name: 'infoPublish',
+  //   component: () => import('@/views/mainMenu/wisdomContentCouplet/infoPublish/index.vue'),
+  //   meta: {
+  //     icon: 'icon-zonghe',
+  //     name: '信息发布',
+  //     title: '信息发布',
+  //     isShow: true
+  //   }
+  // },
   {
     path: 'publicBroadcast',
     name: 'publicBroadcast',

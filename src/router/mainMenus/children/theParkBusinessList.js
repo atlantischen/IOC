@@ -30,5 +30,6 @@ export default [{
       title: '文娱大数据分析',
       isShow: true
     }
-  }
+  },
+  
 ]

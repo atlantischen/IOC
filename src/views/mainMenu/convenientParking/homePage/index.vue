@@ -44,7 +44,7 @@
       </div>
     </IOCLeft>
     <Tips :fade="fade" :list="list"></Tips>
-    <div class="search_box ioc_animated fadeInDownTop" :style="posationTop">
+    <div class="search_box ioc_animated fadeInDownTop"  :style="posationTop">
       <LicensePlateSearch
         :searchData="searchData"
         @sevenCarNum="sevenCarNum"
@@ -352,6 +352,7 @@ export default {
         '23:00',
       ],
       posationTop: '',
+      animationShow:true
     };
   },
   components: {},
@@ -2187,8 +2188,6 @@ export default {
       this.$redomEchart(dom, option);
     },
 
-  },
-  created() {
   },
   created() {},
   computed: {

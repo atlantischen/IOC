@@ -10,7 +10,8 @@ export default createStore({
     activeIndex:0,
     videoShow:false,
     dialogShow:false,
-    carNum:''
+    carNum:'',
+    searchList:[]
  
   
   },
@@ -29,6 +30,9 @@ export default createStore({
     },
     setCarNum(state, payload) {
       state.carNum = payload
+    },
+    getSearchList(state, payload) {
+      state.searchList = payload
     },
 
 
